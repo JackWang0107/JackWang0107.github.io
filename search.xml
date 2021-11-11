@@ -5,8 +5,8 @@
     
     <entry>
       <title>我的第一篇博客文章</title>
-      <link href="/2021/11/12/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/"/>
-      <url>/2021/11/12/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/</url>
+      <link href="/2021/11/12/wo-de-di-yi-pian-bo-ke-wen-zhang/"/>
+      <url>/2021/11/12/wo-de-di-yi-pian-bo-ke-wen-zhang/</url>
       
         <content type="html"><![CDATA[<h1 id="如何在hexo中写文章？"><a href="#如何在hexo中写文章？" class="headerlink" title="如何在hexo中写文章？"></a>如何在hexo中写文章？</h1><p>hexo支持markdown的文章，所有的文章都在<code>&lt;path-to-blog&gt;/source/_post</code>文件夹下，并且全部都是md文档，因此使用<code>Typora</code>、<code>Vscode</code>等编辑器编辑即可</p>]]></content>
       
