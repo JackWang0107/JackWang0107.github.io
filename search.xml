@@ -4,13 +4,25 @@
   
     
     <entry>
-      <title>我的第一篇博客文章</title>
-      <link href="/2021/11/12/wo-de-di-yi-pian-bo-ke-wen-zhang/"/>
-      <url>/2021/11/12/wo-de-di-yi-pian-bo-ke-wen-zhang/</url>
+      <title>基于Hexo的个人技术博客搭建 —— Part 0 概述</title>
+      <link href="/2021/11/12/ji-yu-hexo-de-ge-ren-ji-zhu-bo-ke-da-jian-part-0-gai-shu/"/>
+      <url>/2021/11/12/ji-yu-hexo-de-ge-ren-ji-zhu-bo-ke-da-jian-part-0-gai-shu/</url>
       
-        <content type="html"><![CDATA[<h1 id="如何在hexo中写文章？"><a href="#如何在hexo中写文章？" class="headerlink" title="如何在hexo中写文章？"></a>如何在hexo中写文章？</h1><p>hexo支持markdown的文章，所有的文章都在<code>&lt;path-to-blog&gt;/source/_post</code>文件夹下，并且全部都是md文档，因此使用<code>Typora</code>、<code>Vscode</code>等编辑器编辑即可</p>]]></content>
+        <content type="html"><![CDATA[<blockquote><p>本系列文章面向前端小白，希望以尽量简单而又不啰嗦的语言介绍如何搭建<code>基于Hexo的个人技术博客</code></p></blockquote><span id="more"></span><h1 id="基于Hexo的个人技术博客搭建-——-Part-0-概述"><a href="#基于Hexo的个人技术博客搭建-——-Part-0-概述" class="headerlink" title="基于Hexo的个人技术博客搭建 —— Part 0 概述"></a>基于Hexo的个人技术博客搭建 —— Part 0 概述</h1><p>作为一个热爱开源的技术爱好者，我热爱学习新的技术、也热衷分享自己掌握的技术。然而分享却并非易事，想要将你的开源技术以个人技术博客的形式分享到互联网上需要有以下的诸多步骤：</p><ol><li>掌握HTML、CSS、JavaScript、Vue.js、Node.js等前端技术，至少能够写出来一个静态网站；或者在静态网页的基础上掌握Nginx、Apache等等后端技术，为前端提供登陆等功能以实现一个动态网站。</li><li>购买具有公网IP的服务器以运行你的网站，使得任何想要访问你网站的人都能够通过公网上的服务器来访问你的网站。</li><li>购买一个域名并为其添加DNS解析、安装SSL证书</li><li>Optional：中国域名<strong>xxxx.xxxx.cn</strong>下的网站需要进行备案</li><li>配置你的服务器以避免来自公网上的攻击</li><li>……</li></ol><p>完成了以上诸多步骤，你的技术网站才能够被其他人访问，别人才能够正常的来阅读你的技术博客。<strong>如此繁琐的程序，往往在前几步就吓退了不少人</strong>。也正是因为如此，就出现了不少帮助我们分享技术的工具，例如：帮助我们快速搭建博客而不需要自己掌握前端技术的<code>WordPress</code>、帮助我们维护文章的<code>CSDN</code>、<code>知乎</code>、<code>简书</code>等等；然而这些工具，也有他们的缺点</p><ul><li><code>WordPress</code>：尽管<code>WordPress</code>使得我们可以可视化的建立、管理前端页面。但是首先，上面的流程中诸多步骤仍然需要自己来完成，购买公网服务器、购买域名等等都是不小的开销；其次<code>WordPress</code>类似于<code>Vscode</code>，具有一个强大的插件系统，即软件本身只具有一定的功能，更多的功能需要靠插件来实现。然而和<code>Vscode</code>不同的是<code>WordPress</code>上好用的插件是要收费的，而且价格不菲（<del>忽略掉万能的淘宝</del>）</li><li><code>CSDN</code>、<code>简书</code>、<code>博客园</code>：尽管类似于<code>CSDN</code>、<code>简书</code>、<code>博客园</code>等这类博客网站已经帮助我们完成了网站安全防护、搜索引擎优化、文章编辑发布和管理等功能，他们的问题存在于盗帖实在太过于严重，很多时候搜索自己需要解决的问题，结果搜出来的全都是一模一样的、爬虫复制粘贴的文章，对解决问题毫无帮助，自己的文章和这些垃圾文章在一起，实在是于心不忍；其次，作为<strong>一名优秀的程序员，拥有自己的技术博客网站将会极大地帮助自己的未来，无论是求职也好亦或是求学……</strong></li></ul><p>因此自己搭建一个博客就非常有必要了。</p><p>本系列最终将通过一系列文章，来帮助你低成本（<strong>可能也就几块钱</strong>）的构建出属于你自己的、美观的个人技术博客</p><p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211112180102412.png" alt="最终效果展示"></p>]]></content>
       
       
+      <categories>
+          
+          <category> Hexo博客搭建 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Hexo </tag>
+            
+        </tags>
       
     </entry>
     
