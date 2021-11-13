@@ -4,8 +4,14 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="friends, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
-    <meta name="description" content="friends | JackWang&#39;s Bolg">
+    <meta name="keywords" content="基于Hexo的个人技术博客搭建-Part 1 Hexo介绍以及环境搭建, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
+    <meta name="description" content="
+本文主要介绍什么是Hexo，为什么我们要使用Hexo搭建我们的博客以及Hexo环境搭建
+
+
+
+
+基于Hexo的个人技术博客搭建-Part 1 Hexo介绍以及环境搭建.md在前一章概述中，我们讲解了为什么我认为一个Geek需要一个个人技术">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +23,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>friends | JackWang&#39;s Bolg</title>
+    <title>基于Hexo的个人技术博客搭建-Part 1 Hexo介绍以及环境搭建 | JackWang&#39;s Bolg</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -244,12 +250,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/19.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211113024418805.png')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">friends</h1>
+                    <h1 class="description center-align post-title">基于Hexo的个人技术博客搭建-Part 1 Hexo介绍以及环境搭建</h1>
                 </div>
             </div>
         </div>
@@ -363,12 +369,25 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Hexo/">
+                                <span class="chip bg-color">Hexo</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" class="post-category">
+                                Hexo博客搭建
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -377,28 +396,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-11-12
+                    2021-11-13
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-11-12
+                    2021-11-13
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    0
+                    3.6k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    13 分
                 </div>
                 
 
@@ -418,7 +437,145 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <blockquote>
+<p>本文主要介绍什么是Hexo，为什么我们要使用Hexo搭建我们的博客以及Hexo环境搭建</p>
+</blockquote>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211113024418805.png" alt="Hexo官网"></p>
+<span id="more"></span>
+
+<h1 id="基于Hexo的个人技术博客搭建-Part-1-Hexo介绍以及环境搭建-md"><a href="#基于Hexo的个人技术博客搭建-Part-1-Hexo介绍以及环境搭建-md" class="headerlink" title="基于Hexo的个人技术博客搭建-Part 1 Hexo介绍以及环境搭建.md"></a>基于Hexo的个人技术博客搭建-Part 1 Hexo介绍以及环境搭建.md</h1><p>在前一章概述中，我们讲解了为什么我认为一个Geek需要一个个人技术博客，并且简单的展示了最终效果，在接下来的章节里，我将一步步的介绍如何打造这样的效果。</p>
+<h2 id="1-What-is-Hexo"><a href="#1-What-is-Hexo" class="headerlink" title="1. What is Hexo"></a>1. What is Hexo</h2><blockquote>
+<p>等等，什么是<code>Hexo</code>？</p>
+</blockquote>
+<p>在开始学习前，我们需要<strong>首先</strong>知道我们将要学的东西是什么以及学习它能带来的好处（为什么要学他），这样我们学起来会轻松很多。因为这样做我们首先对需要学的东西搭建了一个大的框架，后续的学习都是在填充它，不断丰满这个框架，并且也有了充足的动力去学习。</p>
+<ul>
+<li>正如<code>Hexo</code>官网上所说：<strong>Hexo是一个快速、简洁且高效的博客框架</strong>。（<del>虽然这个官网充满了不少广告</del>）</li>
+</ul>
+<p>所谓框架，即指已经为我们构建了基本的博客工具和博客结构（框架），我们后续只需要在这个框架上不断的填充（发布自己的文章）、修改（修改<code>Hexo</code>的代码）。因为<code>Hexo</code>开源，因此我们实际上可以针对<code>Hexo</code>进行任意程度的自定义修改，只有你想不到，没有你改不了。非常庆幸的是，<code>Hexo</code>的作者是台湾人，因此他的官方文档的中文支持是非常好的，这也为我们使用<code>Hexo</code>提供了便利。</p>
+<ol>
+<li><code>Hexo</code>是基于<code>Node.js</code>开发的应用（因此我们稍后在安装的时候会安装<code>Node.js</code>的环境）。借助于<code>Node.js</code>，<code>Hexo</code>可以快速的渲染出漂亮的文章</li>
+</ol>
+<blockquote>
+<p><strong>什么是<code>Node.js</code></strong></p>
+<p>说清这个问题，要说的可不少。接触过网络的人都应该知道，前端页面是由<code>HTML</code>、<code>CSS</code>、<code>JavaScript</code>三大技术/三件套支持的，其中<code>HTML</code>负责定义网页改在哪个地方显示什么内容，<code>CSS</code>定义哪个地方的哪个内容该以什么样的方式显示，<code>JavaScript</code>则定义当你与这个内容交互的时候会有什么样的效果。</p>
+<p>举个简单例子，在<a target="_blank" rel="noopener" href="https://www.baidu.com/">百度</a>的首页，</p>
+<ol>
+<li>为什么百度的Logo会显示在中间，而备案等网站信息显示在底部？–&gt; <code>HTML</code></li>
+<li>为什么百度的背景是白色的，而不是黑色？  –&gt; <code>CSS</code></li>
+<li>为什么鼠标悬停在左上角的更多的时候会弹出来浮窗？  –&gt; <code>JavaScript</code></li>
+</ol>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211113031023828.png" alt="百度的首页"></p>
+<p>正是因为有了这三件套，我们的网页变得多姿多彩了起来，有有价值的信息(<code>HTML</code>)、漂亮的页面(<code>CSS</code>)和友好的交互(<code>JavaScript</code>)。</p>
+<p>然而，渐渐地，<strong>本来地位平等的三件套逐渐开始出现区别</strong>。<code>HTML</code>和<code>CSS</code>都是静态的，在编写结束之后用户能看到的内容就已经固定（关于模板稍后再说），当用户访问这个网页，看到的就是其中的内容；然而<code>JavaScript</code>却由于需要处理的用户的操作不同而做不同的处理，例如在百度的页面中，如果我不是悬浮而是右击怎么办？如果我不是悬浮而是掠过怎么办？正是由于需要处理诸多用户导致的多种多样的Event，<code>JavaScript</code>也具有了if-else等编程语言常见的语句。<strong>渐渐地，随着技术的进步，JavaScript需要处理的问题越来越多，在其能力变强的同时，JavaScript也变得越来越像一门编程语言</strong>。</p>
+<p>然而，这个时候的<code>JavaScript</code>还并不能独当一面。因为在最早的网页中，<code>JavaScript</code>、<code>HTML</code>、<code>CSS</code>是绑定的三件套，当用户访问某个网页，服务器会将该网页的三件套发送给用户，然后由<strong>用户的浏览器解析、渲染、执行HTML、CSS、JavaScript三件套</strong>，从而显示网页。因此这个时候的<code>JavaScript</code>是无法脱离浏览器的。我们从另一个角度考虑，由于JavaScript是由浏览器解析执行的，因此其可以看做是一门解释性语言，在执行<code>JavaScript</code>的时候，CPU执行的机器码来自于其<code>解释器</code>——浏览器。</p>
+<p>后来随着，<code>JavaScript</code>的功能越来越强大，简单的在网页中进行交互已经完全发挥其能力了。因此就出现了诸多项目，这些项目独立于传统浏览器，基于浏览器的<code>JavaScript</code>解析器内核（学名：引擎）亦或是自己编写了<code>JavaScript</code>的解析器来执行<code>JavaScript</code>。至此，<code>JavaScript</code>已经能够独立于浏览器被单独执行了，而非必须在浏览器中以网页的形式打开。</p>
+<p>在前面介绍了那么多之后，终于，到了我们的主角，<code>Node.js</code>。大名鼎鼎的<code>Node.js</code>其实就是基于<code>Chrome V8</code> 引擎的 <code>JavaScript</code> 运行时环境。简单的来说，它能够利用<code>Chrome V8</code>引擎来解析、执行<code>JavaScript</code>。<code>Node.js</code>可以粗暴的理解成<code>JavaScript</code>的解释器。基于此，<code>JavaScript</code>在很多方面都很像<code>Python</code>，包括包管理器、解释器等等</p>
+</blockquote>
+<ol start="2">
+<li><code>Hexo</code>利用<code>Markdown</code>来作为源文章，其内置<code>Markdown</code>的渲染引擎，我们只需要书写Markdown，而后通过<code>Hexo</code>就能够生成<code>HTML</code>等前端文件，非常方便</li>
+</ol>
+<blockquote>
+<p>正如下面这张图，这篇文章也是我用Markdown写出来的，在后续部分除了网站搭建以外，还会讲讲如何搭建写作环境，以实现畅快写作</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211113110048831.png" alt="我的Markdown写作环境：Typora+腾讯云图床+Dracula主题"></p>
+</blockquote>
+<ol start="3">
+<li>Hexo搭建出的博客网站是一个静态网站，这就意味着单纯<code>Hexo</code>本身只能提供博客的显示、有限的交互，如果需要登录、发表评论这类需要后端程序支持的运用，就需要第三方插件了。如果非常需要这些功能，要么使用<code>WordPress</code>，要么折腾<code>Hexo</code>的插件</li>
+</ol>
+<p>到这里，你应该明白了<code>Hexo</code>是一个基于<code>Node.js</code>的程序，他帮助我们渲染文章、管理文章，通过这个<code>Hexo</code>我们可以快速、低成本的部署自己的博客</p>
+<h2 id="2-Why-is-Hexo"><a href="#2-Why-is-Hexo" class="headerlink" title="2. Why is Hexo"></a>2. Why is Hexo</h2><blockquote>
+<p>Ok，我知道了什么<code>Hexo</code>，可是为什么要用它它？</p>
+</blockquote>
+<p>事实上，选取<code>Hexo</code>作为我们的博客网站框架来帮助我们搭建技术博客有很多好处：</p>
+<ol>
+<li><code>Hexo</code>框架的学习成本非常低，学起来非常快速，命令行几条语句就能够学会。在整个<code>博客搭建过程</code>中，学习<code>Hexo</code>可能只占很少的时间，主要时间在于挑选一个好看的主题并自己修改、添加自己的个人信息</li>
+<li><code>Hexo</code>搭建的博客非常易于管理。<code>Hexo</code>管理的博客本质上是一个文件夹。因为Hexo搭建出的只是静态博客网站，因此不需要后端程序，所以网站所有的资源（<code>HTML</code>、<code>CSS</code>、<code>JavaScript</code>）都放在一个文件夹里就行。如果中间配置出问题了，那么直接删掉整个文件夹就行。</li>
+<li><code>Hexo</code>搭建的博客部署、迁移非常方便。同样是由于Hexo管理的博客网站是一个文件夹，因此我们可利用Git<code>来保存</code>、同步你的博客。此外，由于<code>Github</code>和<code>Gitee</code>提供静态网页的<code>Page</code>服务，所以我们其实可以利用<code>Github</code>和<code>Gitee</code>等<code>Git</code>托管网站来托管我们的网站。防止网络攻击这些都由他们帮我们做好了。</li>
+<li><code>Hexo</code>搭建的博客成本非常低。正是因为我们利用<code>Github</code>和<code>Gitee</code>来托管我们的网站，因此我们只需要花钱买域名和图床即可，买公网服务器什么的全部省掉了。</li>
+<li><code>Hexo</code>具有非常多美观的主题。通过这些主题，我们只需要进行配置和有限的修改就能够做出来非常美观的博客网站。</li>
+</ol>
+<blockquote>
+<p><code>Hexo</code>的官网上提供了非常多的主题（<a target="_blank" rel="noopener" href="https://hexo.io/themes/">点击查看</a>），截止我写这篇文章的时候一共有348个官方收录的主题。除此以外还有非常多的未被收录的主题，强推我现在正在用的由<code>闪烁之狐</code>制作的<code>Matery</code>主题，后面也会讲解如何配置<code>Matery</code>主题，这是Matery主题的<a target="_blank" rel="noopener" href="http://blinkfox.com/">展示网站</a></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211113112326777.png" alt="Hexo官网收录的主题"></p>
+</blockquote>
+<ol start="6">
+<li>……（暂时只想到这几个点）</li>
+</ol>
+<h2 id="3-Hexo环境搭建"><a href="#3-Hexo环境搭建" class="headerlink" title="3. Hexo环境搭建"></a>3. Hexo环境搭建</h2><blockquote>
+<p>开发第一步：搭建环境</p>
+</blockquote>
+<p>注意，由于我本人长期使用<code>Debian/Ubuntu</code>来做开发，因此以下教程都将是基于<code>Ubuntu</code>编写的教程。如果你是其他<code>Linux</code>发行版用户，适度修改即可；如果你是<code>Windows</code>用户，那么你还需要配置不少东西，知乎、简书上你还得查查。</p>
+<p>下面我们就将一步步搭建Hexo环境出来</p>
+<h3 id="1-安装Node-js环境"><a href="#1-安装Node-js环境" class="headerlink" title="1. 安装Node.js环境"></a>1. 安装Node.js环境</h3><p>前面说道，<code>Hexo</code>是基于<code>Node.js</code>开发的程序，因此其运行就需要<code>Node.js</code>，所以我们第一步就是安装<code>Node.js</code></p>
+<blockquote>
+<p>注意：官网上说明，<code>Hexo</code>需要的<code>Node.js</code>的版本不低于<strong>10.13</strong>，强烈建议<code>Node.js</code><strong>12.0</strong>以上的版本</p>
+</blockquote>
+<p>我们首先用<code>apt</code>查一下Ubuntu的仓库里的nodejs的版本</p>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~$ <span class="token function">sudo</span> apt search nodejs
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211113124733292.png" alt="apt搜索nodejs的结果"></p>
+<p>不难看出来，<code>apt</code>仓库里的<code>nodejs</code>的版本过低，因此我们需要自己从<code>nodejs</code>官网上下载新版本的<code>nodejs</code>，<a target="_blank" rel="noopener" href="https://nodejs.org/zh-cn/">官网传送门</a></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211113124918179.png" alt="Node.js的官网"></p>
+<p>在我写这篇文章的时候最新版是16.13，由于遵循Linux的传统，双数版本是LTS（Long Time Supported）版本，而单数版本都是尝鲜（Beta）版本，所以选择<strong>稳定版即可</strong></p>
+<p>下载之后解压会得到一个文件夹，这个文件夹里<code>bin</code>目录放的就是官方替我们已经编译好了的二进制可执行文件，可以看到除了node，别的都是软连接</p>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/桌面/node-v16.13.0-linux-x64$ tree -L 2
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<blockquote>
+<p>注意，我这里是已经安装过了<code>Node.js</code>，正常情况下是没有<code>cnpm</code>的，稍后会安装<code>cnpm</code></p>
+</blockquote>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211113125500195.png" alt="解压之后的文件夹"></p>
+<p>由于后续需要在命令行中调用<code>Node.js</code>，因此还要把这个<code>bin</code>文件的路径加入到<code>Shell</code>搜索可执行文件路径的<code>PATH</code>环境变量中，这里图方便直接在.<code>bashrc</code>中添加了</p>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/桌面/node-v16.13.0-linux-x64$ vim ~/.bashrc  
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211113125903583.png" alt="添加了Node.js的PATH"></p>
+<p>这样未来在命令行就可以正常的调用<code>node.js</code>和附带的<code>npm</code>了，测试一波</p>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/桌面/node-v16.13.0-linux-x64$ node 
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211113130048060.png" alt="测试Node.js"></p>
+<p>OK，装完了<code>Node.js</code>，下一步</p>
+<h3 id="2-安装cnpm"><a href="#2-安装cnpm" class="headerlink" title="2. 安装cnpm"></a>2. 安装cnpm</h3><p>前面讲到，Node.js中利用了Chrome V8引擎从而实现了JavaScript的运行时环境，从而做到了类似于解释器的效果。做过<code>Python</code>的人应该都会知道<code>pip</code>和<code>conda</code>，他们都是<code>Python</code>的包管理器（当然conda还可以管理环境）。通过<code>pip install xxx</code>或者<code>conda install xxx</code>就能安装Python的第三方库。</p>
+<p><code>Node.js</code>也提供了类似的包管理工具，即<code>npm（Node.js Package Management）</code>，通过npm我们就能够安装<code>Node.js</code>的第三方库。</p>
+<p>但是这些包管理工具的共性就是下载的这些库都是在包管理工具官网上维护的包，我们使用<code>xxx install xxx</code>的时候，会去<code>xxx</code>的包管理网站上搜索<code>xxx</code>包，然后下载。问题的关键就出在了下载这一步，由于这些包管理网站服务器都在国外，因此国内下载就会很慢。为此，我们通过换源来解决，即指定去国内的包管理网站上下载。在<code>pip</code>中我们可以指定<code>-i</code>参数，从而指定去清华源或者中科大源下载<code>Python</code>第三方包。而<code>npm</code>我们同样也可以指定<code>--registry</code>参数，从而指定国内的源（一般都是淘宝源）。</p>
+<p>但是每次都使用<code>--registry</code>参数有点蠢，我们直接使用淘宝做好的<code>cnpm</code>包管理工具就行。<code>cnpm</code>和<code>npm</code>在作用上是一样的，不过对国内用户做了很不错的优化。</p>
+<p>我们首先通过npm指定<code>--registry</code>参数来安装<code>cnpm</code></p>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/桌面/node-v16.13.0-linux-x64$ <span class="token function">npm</span> <span class="token function">install</span> -g cnpm --registry<span class="token operator">=</span><span class="token string">"https://registry.npm.taobao.org"</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>稍等片刻即可，警告是已经安装的别的包报的错，都后面没啥影响，因为我已经安装过了cnpm，所以下面的截图和你的可能不一样</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211113131609169.png" alt="安装cnpm"></p>
+<p>安装之后检查下安装是否成功，当然由于路径等环境不一样，输出结果也不太一样，但是能够正常输出就表示安装对了</p>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/桌面/node-v16.13.0-linux-x64$ cnpm --version
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211113131849887.png" alt="检查cnpm是否安装成功"></p>
+<p>OK，下一步安装Git</p>
+<h3 id="3-安装git"><a href="#3-安装git" class="headerlink" title="3. 安装git"></a>3. 安装git</h3><p>由于<code>Hexo</code>内置了博客的同步、部署等功能，因此<code>Hexo</code>依赖于<code>git</code>，所以我们首先需要安装<code>git</code></p>
+<p>安装git就简单了，直接<code>apt</code>安装即可，同样由于我已经安装过了，所以输出会不一样</p>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/桌面/node-v16.13.0-linux-x64$ <span class="token function">sudo</span> apt <span class="token function">install</span> <span class="token function">git</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211113132146054.png" alt="apt安装git"></p>
+<p>同样，查看下<code>git</code>的版本确认安装成功</p>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/桌面/node-v16.13.0-linux-x64$ <span class="token function">git</span> --version
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211113132257442.png" alt="确认git安装成功"></p>
+<h3 id="4-安装Hexo"><a href="#4-安装Hexo" class="headerlink" title="4. 安装Hexo"></a>4. 安装Hexo</h3><p>在前面所有必备的环境安装成功后，下面将安装<code>Hexo</code></p>
+<p>前面由于已经安装了<code>cnpm</code>，因此我们直接使用<code>cnpm</code>来安装<code>Hexo</code></p>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/桌面/node-v16.13.0-linux-x64$ cnpm <span class="token function">install</span> -g hexo-cli
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>稍等片刻就安装好了</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211113132546043.png" alt="安装hexo"></p>
+<p>为了后续我们能够直接在命令行调用<code>hexo</code>的命令，我们把<code>hexo</code>的可执行文件添加到<code>PATH</code>中去</p>
+<p>注意，<code>npm</code>和<code>cnpm</code>的工作原理都是把下载的包放到<code>node.js</code>所在的根目录的<code>lib</code>中，和<code>pip</code>是异曲同工之秒，我们打开之前node.js在的文件夹就能看到</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211113133034708.png" alt="hexo的安装位置"></p>
+<p>同样用<code>vim</code>编辑<code>.bashrc</code></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211113133331507.png" alt="添加hexo可执行文件"></p>
+<p>最后命令行查看下hexo的版本确认成功</p>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/桌面/node-v16.13.0-linux-x64$ hexo --version
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211113133455333.png" alt="确认hexo安装成功"></p>
+<p>至此，我们已经成功搭建了Hexo的环境。</p>
+<p>本章结束~</p>
+<p>本章我们首先讲解了什么是<code>hexo</code>，然后讲解了为什么我们要使用<code>hexo</code>，最后讲解了如何安装<code>hexo</code>。</p>
+<p>下一节预告：<code>Hexo使用以及配置</code></p>
+<p>码字不易，4000字，欢迎打赏~，一起为开源事业做贡献~</p>
+
                 
             </div>
             <hr/>
@@ -444,7 +601,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://jackwang0107.github.io/friends/index.html">https://jackwang0107.github.io/friends/index.html</a>
+                    <a href="https://jackwang0107.github.io/2021/11/13/ji-yu-hexo-de-ge-ren-ji-zhu-bo-ke-da-jian-part-1-hexo-jie-shao-yi-ji-huan-jing-da-jian-md/">https://jackwang0107.github.io/2021/11/13/ji-yu-hexo-de-ge-ren-ji-zhu-bo-ke-da-jian-part-1-hexo-jie-shao-yi-ji-huan-jing-da-jian-md/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -481,7 +638,11 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/Hexo/">
+                                    <span class="chip bg-color">Hexo</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -656,34 +817,48 @@
                 <i class="far fa-dot-circle"></i>&nbsp;本篇
             </div>
             <div class="card">
-                <a href="/friends/index.html">
+                <a href="/2021/11/13/ji-yu-hexo-de-ge-ren-ji-zhu-bo-ke-da-jian-part-1-hexo-jie-shao-yi-ji-huan-jing-da-jian-md/">
                     <div class="card-image">
                         
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211113024418805.png" class="responsive-img" alt="基于Hexo的个人技术博客搭建-Part 1 Hexo介绍以及环境搭建">
                         
-                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="friends">
-                        
-                        <span class="card-title">friends</span>
+                        <span class="card-title">基于Hexo的个人技术博客搭建-Part 1 Hexo介绍以及环境搭建</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
                             
+本文主要介绍什么是Hexo，为什么我们要使用Hexo搭建我们的博客以及Hexo环境搭建
+
+
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-12
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-13
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            Jack Wang
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" class="post-category">
+                                    Hexo博客搭建
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
 
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Hexo/">
+                        <span class="chip bg-color">Hexo</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
@@ -691,22 +866,23 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/friends/index.html">
+                <a href="/2021/11/12/ji-yu-hexo-de-ge-ren-ji-zhu-bo-ke-da-jian-part-0-gai-shu/">
                     <div class="card-image">
                         
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211112180102412.png" class="responsive-img" alt="基于Hexo的个人技术博客搭建 —— Part 0 概述">
                         
-                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="friends">
-                        
-                        <span class="card-title">friends</span>
+                        <span class="card-title">基于Hexo的个人技术博客搭建 —— Part 0 概述</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
                             
+本系列文章面向前端小白，希望以尽量简单而又不啰嗦的语言介绍如何搭建基于Hexo的个人技术博客
+
                         
                     </div>
                     <div class="publish-info">
@@ -715,13 +891,24 @@
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            Jack Wang
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" class="post-category">
+                                    Hexo博客搭建
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
-
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Hexo/">
+                        <span class="chip bg-color">Hexo</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
