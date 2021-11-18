@@ -558,7 +558,8 @@ ROS杂篇 ROS中使用Kinect V2：安装+使用
 <h4 id="4-设置USB规则"><a href="#4-设置USB规则" class="headerlink" title="4. 设置USB规则"></a>4. 设置USB规则</h4><p>由于<code>libfreenect2</code>是一个驱动，因此他需要和底层的硬件做交互，所以需要设置一下<code>USB</code>规则。在<code>Linux</code>中所有的串口都是由一个叫<code>udev</code>的程序负责的，他相当于<code>Windows</code>的设备管理器。这里挖个坑，以后补上关于<code>udev</code>的内容。更多细节可以参考<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/dd6cecd7755a">这篇简书的博客</a></p>
 <blockquote>
 <p><strong>以下内容引用自简书博客</strong></p>
-<h4 id="三、udev在linux的那个位置"><a href="#三、udev在linux的那个位置" class="headerlink" title="三、udev在linux的那个位置"></a>三、udev在linux的那个位置</h4><p>udev的守护进程在linux的位置在systemd中的位置如下所示，举个例子：如果向pc中插入一个usb设备，kernel在总线上发现这个设备，使用dirver初始化，在sysfs创建device目录等操作之后，将通知用户空间的udev，然后上层的显示层才能看到这个usb设备，并最终将它显示在desktop上：</p>
+<p><strong>udev在linux的那个位置</strong></p>
+<p>udev的守护进程在linux的位置在systemd中的位置如下所示，举个例子：如果向pc中插入一个usb设备，kernel在总线上发现这个设备，使用dirver初始化，在sysfs创建device目录等操作之后，将通知用户空间的udev，然后上层的显示层才能看到这个usb设备，并最终将它显示在desktop上：</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/330043-6ecf51d6a519b4fe.png" alt="Systemd守护进程所处的位置"></p>
 </blockquote>
 <p>我们直接把规则文件复制到<code>udev</code>的配置文件夹下即可</p>
