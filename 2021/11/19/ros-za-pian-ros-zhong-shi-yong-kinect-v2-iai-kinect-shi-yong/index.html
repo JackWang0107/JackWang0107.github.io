@@ -4,8 +4,22 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="friends, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
-    <meta name="description" content="friends | JackWang&#39;s Bolg">
+    <meta name="keywords" content="ROS杂篇 ROS中使用Kinect V2 Part2：iai-kinect使用, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
+    <meta name="description" content="
+本篇详细介绍了iai-kinect功能包，在此基础上通过iai-kinect获取深度图像，从而进行ROS中的开发。
+
+
+
+
+
+
+
+
+
+
+
+ROS杂篇 ROS中使用Kinect V2 Part2：iai-kinect使用
+前言：为什么要写这">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +31,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>friends | JackWang&#39;s Bolg</title>
+    <title>ROS杂篇 ROS中使用Kinect V2 Part2：iai-kinect使用 | JackWang&#39;s Bolg</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -244,12 +258,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/19.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/5.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">friends</h1>
+                    <h1 class="description center-align post-title">ROS杂篇 ROS中使用Kinect V2 Part2：iai-kinect使用</h1>
                 </div>
             </div>
         </div>
@@ -363,12 +377,37 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/ROS/">
+                                <span class="chip bg-color">ROS</span>
+                            </a>
+                        
+                            <a href="/tags/Kinect-V2/">
+                                <span class="chip bg-color">Kinect V2</span>
+                            </a>
+                        
+                            <a href="/tags/Ubuntu/">
+                                <span class="chip bg-color">Ubuntu</span>
+                            </a>
+                        
+                            <a href="/tags/melodic/">
+                                <span class="chip bg-color">melodic</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/ROS%E6%9D%82%E7%AF%87/" class="post-category">
+                                ROS杂篇
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -377,21 +416,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-11-12
+                    2021-11-19
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-11-12
+                    2021-11-19
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    0
+                    162
                 </div>
                 
 
@@ -418,7 +457,25 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <blockquote>
+<p>本篇详细介绍了iai-kinect功能包，在此基础上通过iai-kinect获取深度图像，从而进行ROS中的开发。</p>
+</blockquote>
+<span id="more"></span>
+
+
+
+
+
+
+
+
+
+<h1 id="ROS杂篇-ROS中使用Kinect-V2-Part2：iai-kinect使用"><a href="#ROS杂篇-ROS中使用Kinect-V2-Part2：iai-kinect使用" class="headerlink" title="ROS杂篇 ROS中使用Kinect V2 Part2：iai-kinect使用"></a>ROS杂篇 ROS中使用Kinect V2 Part2：iai-kinect使用</h1><blockquote>
+<p>前言：为什么要写这篇博客</p>
+</blockquote>
+<p>在上一篇中，我们介绍了如何在Ubuntu上安装Kinect V2的开原驱动：libfrenect2，以及如何安装在ROS中使用libfrenect2获取深度图像的功能包iai-kinect2。本节将在上一篇的基础上，介绍如何使用iai-kinect2进行开发。</p>
+<p>如果没有看过第一篇文章、没有配置好环境，先按照第一篇文章中的教程跟着来，</p>
+
                 
             </div>
             <hr/>
@@ -444,7 +501,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://jackwang0107.github.io/friends/index.html">https://jackwang0107.github.io/friends/index.html</a>
+                    <a href="https://jackwang0107.github.io/2021/11/19/ros-za-pian-ros-zhong-shi-yong-kinect-v2-iai-kinect-shi-yong/">https://jackwang0107.github.io/2021/11/19/ros-za-pian-ros-zhong-shi-yong-kinect-v2-iai-kinect-shi-yong/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -481,7 +538,23 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/ROS/">
+                                    <span class="chip bg-color">ROS</span>
+                                </a>
+                            
+                                <a href="/tags/Kinect-V2/">
+                                    <span class="chip bg-color">Kinect V2</span>
+                                </a>
+                            
+                                <a href="/tags/Ubuntu/">
+                                    <span class="chip bg-color">Ubuntu</span>
+                                </a>
+                            
+                                <a href="/tags/melodic/">
+                                    <span class="chip bg-color">melodic</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -656,34 +729,60 @@
                 <i class="far fa-dot-circle"></i>&nbsp;本篇
             </div>
             <div class="card">
-                <a href="/friends/index.html">
+                <a href="/2021/11/19/ros-za-pian-ros-zhong-shi-yong-kinect-v2-iai-kinect-shi-yong/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="friends">
+                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="ROS杂篇 ROS中使用Kinect V2 Part2：iai-kinect使用">
                         
-                        <span class="card-title">friends</span>
+                        <span class="card-title">ROS杂篇 ROS中使用Kinect V2 Part2：iai-kinect使用</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
                             
+本篇详细介绍了iai-kinect功能包，在此基础上通过iai-kinect获取深度图像，从而进行ROS中的开发。
+
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-12
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-19
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            Jack Wang
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/ROS%E6%9D%82%E7%AF%87/" class="post-category">
+                                    ROS杂篇
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
 
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/ROS/">
+                        <span class="chip bg-color">ROS</span>
+                    </a>
+                    
+                    <a href="/tags/Kinect-V2/">
+                        <span class="chip bg-color">Kinect V2</span>
+                    </a>
+                    
+                    <a href="/tags/Ubuntu/">
+                        <span class="chip bg-color">Ubuntu</span>
+                    </a>
+                    
+                    <a href="/tags/melodic/">
+                        <span class="chip bg-color">melodic</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
@@ -691,37 +790,62 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/friends/index.html">
+                <a href="/2021/11/18/ros-za-pian-an-zhuang-kinect-v2-qu-dong/">
                     <div class="card-image">
                         
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211118214830894.png" class="responsive-img" alt="ROS杂篇 ROS中使用Kinect V2 Part1：安装+使用">
                         
-                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="friends">
-                        
-                        <span class="card-title">friends</span>
+                        <span class="card-title">ROS杂篇 ROS中使用Kinect V2 Part1：安装+使用</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
                             
+Kinect是非常流行的获取深度、彩色、点云的相机。本文介绍了Kinect相机的具体性能，以及如何在ROS调用Kinect相机。
+
+
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-12
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-18
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            Jack Wang
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/ROS%E6%9D%82%E7%AF%87/" class="post-category">
+                                    ROS杂篇
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
-
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/ROS/">
+                        <span class="chip bg-color">ROS</span>
+                    </a>
+                    
+                    <a href="/tags/Kinect-V2/">
+                        <span class="chip bg-color">Kinect V2</span>
+                    </a>
+                    
+                    <a href="/tags/Ubuntu/">
+                        <span class="chip bg-color">Ubuntu</span>
+                    </a>
+                    
+                    <a href="/tags/melodic/">
+                        <span class="chip bg-color">melodic</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>

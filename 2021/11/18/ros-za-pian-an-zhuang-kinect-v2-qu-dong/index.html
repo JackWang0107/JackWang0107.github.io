@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="ROS杂篇 ROS中使用Kinect V2：安装+使用, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
+    <meta name="keywords" content="ROS杂篇 ROS中使用Kinect V2 Part1：安装+使用, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
     <meta name="description" content="
 Kinect是非常流行的获取深度、彩色、点云的相机。本文介绍了Kinect相机的具体性能，以及如何在ROS调用Kinect相机。
 
@@ -13,10 +13,10 @@ Kinect是非常流行的获取深度、彩色、点云的相机。本文介绍�
 
 
 
-ROS杂篇 ROS中使用Kinect V2：安装+使用
+ROS杂篇 ROS中使用Kinect V2 Part1：安装+使用
 前言：为什么要写这篇博客
 
-由于我目前的">
+">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -28,7 +28,7 @@ ROS杂篇 ROS中使用Kinect V2：安装+使用
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>ROS杂篇 ROS中使用Kinect V2：安装+使用 | JackWang&#39;s Bolg</title>
+    <title>ROS杂篇 ROS中使用Kinect V2 Part1：安装+使用 | JackWang&#39;s Bolg</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -260,7 +260,7 @@ ROS杂篇 ROS中使用Kinect V2：安装+使用
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">ROS杂篇 ROS中使用Kinect V2：安装+使用</h1>
+                    <h1 class="description center-align post-title">ROS杂篇 ROS中使用Kinect V2 Part1：安装+使用</h1>
                 </div>
             </div>
         </div>
@@ -420,14 +420,14 @@ ROS杂篇 ROS中使用Kinect V2：安装+使用
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-11-18
+                    2021-11-19
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    5.8k
+                    5.9k
                 </div>
                 
 
@@ -462,7 +462,7 @@ ROS杂篇 ROS中使用Kinect V2：安装+使用
 
 
 
-<h1 id="ROS杂篇-ROS中使用Kinect-V2：安装-使用"><a href="#ROS杂篇-ROS中使用Kinect-V2：安装-使用" class="headerlink" title="ROS杂篇 ROS中使用Kinect V2：安装+使用"></a>ROS杂篇 ROS中使用Kinect V2：安装+使用</h1><blockquote>
+<h1 id="ROS杂篇-ROS中使用Kinect-V2-Part1：安装-使用"><a href="#ROS杂篇-ROS中使用Kinect-V2-Part1：安装-使用" class="headerlink" title="ROS杂篇 ROS中使用Kinect V2 Part1：安装+使用"></a>ROS杂篇 ROS中使用Kinect V2 Part1：安装+使用</h1><blockquote>
 <p>前言：为什么要写这篇博客</p>
 </blockquote>
 <p>由于我目前的工作需要我编写服务机器人的代码，而服务机器人就免不了需要视觉信息来指导机器人完成服务。包括RGB彩色相机获得的彩色图像、深度相机获得的深度图像等等各种视觉传感器。对于简单的RGB相机拍摄到的RGB彩色图像，由于全球统一的接口，因此有很多工具都可以帮助我们从<code>/dev/video*</code>中读取到彩色图像。通过OpenCV的<code>VideoCapture</code>就可以读到。然而问题的关键在于，针对一些特定的设备，例如深度相机，目前全球尚无统一的标准，因此在数据流中图像的格式各个厂家都是不一样的。因此这个时候想要读取到这些特殊相机的图像就需要花一番功夫了。尤其是在硬件厂商不提供Linux的驱动的时候更难受。</p>
@@ -640,9 +640,9 @@ ROS杂篇 ROS中使用Kinect V2：安装+使用
 <p>然后再进行编译即可</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211118202028422.png" alt="功能包可以正常编译"></p>
 </blockquote>
-<h2 id="4-使用kinect-bridge"><a href="#4-使用kinect-bridge" class="headerlink" title="4. 使用kinect_bridge"></a>4. 使用kinect_bridge</h2><p>使用<code>kinect_bridge</code>其实特别简单，就是订阅话题而已，为此我们快速写一个<code>Python</code>脚本测试，注意测试时候新建的功能包的依赖要不要加<code>iai_kinect2</code>都行，因为<code>kinect_bridge</code>实现了低耦合性，所有的消息全部都是<code>ROS</code>中的标准消息类型，我这里加了。（挖个坑，以后出一个关于<code>Vscode</code>开发<code>ROS</code>的环境搭建，真的<code>VScode</code>越用越爽）</p>
+<h2 id="4-使用kinect-bridge"><a href="#4-使用kinect-bridge" class="headerlink" title="4. 使用kinect_bridge"></a>4. 使用kinect_bridge</h2><p>使用<code>kinect_bridge</code>其实特别简单，就是订阅话题而已，为此我们快速写一个<code>Python</code>脚本测试，注意测试时候新建的功能包的依赖不要加<code>iai_kinect2</code>，因为<code>kinect_bridge</code>实现了低耦合性，所有的消息全部都是<code>ROS</code>中的标准消息类型，因此没有提供任何ROS编译之后可以引用的库。<strong>下面是是一个错误的示例</strong>。（挖个坑，以后出一个关于<code>Vscode</code>开发<code>ROS</code>的环境搭建，真的<code>VScode</code>越用越爽）</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211118210715487.png" alt="功能包的依赖"></p>
-<p>正因为<code>kinect_bridge</code>中的消息全部都是<code>ROS</code>的标准消息，所有的图像都是<code>sensor_msgs/Image</code>或者<code>sensor_msgs/CompressedImage</code>。而点云则是<code>sensor_msgs/PointCloud2</code>，我们可以非常快速的写一个测试代码，代码见下（<strong>注意如果你要写C++的话不要在iai_bridge的工作空间中编译，会报错，因为Kinect_Bridge没有提供</strong>）</p>
+<p>正因为<code>kinect_bridge</code>中的消息全部都是<code>ROS</code>的标准消息，所有的图像都是<code>sensor_msgs/Image</code>或者<code>sensor_msgs/CompressedImage</code>。而点云则是<code>sensor_msgs/PointCloud2</code>，我们可以非常快速的写一个测试代码，代码见下（<strong>注意如果你要写C++的话不要在iai_bridge的工作空间中编译，会报错，因为Kinect_Bridge没有提供ROS编译、安装相关的CMake指令</strong>）</p>
 <p>关于<code>ROS</code>中使用<code>conda</code>、还有<code>cv_bridge</code>、<code>ROS</code>使用<code>Python</code>等问题先挖个坑，后面补上文章</p>
 <pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true">#! /home/jack/anaconda3/envs/ros/bin/python</span>
 
@@ -955,32 +955,31 @@ sys<span class="token punctuation">.</span>path<span class="token punctuation">.
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/11/18/ros-za-pian-an-zhuang-kinect-v2-qu-dong/">
+                <a href="/2021/11/19/ros-za-pian-ros-zhong-shi-yong-kinect-v2-iai-kinect-shi-yong/">
                     <div class="card-image">
                         
-                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211118214830894.png" class="responsive-img" alt="ROS杂篇 ROS中使用Kinect V2：安装+使用">
                         
-                        <span class="card-title">ROS杂篇 ROS中使用Kinect V2：安装+使用</span>
+                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="ROS杂篇 ROS中使用Kinect V2 Part2：iai-kinect使用">
+                        
+                        <span class="card-title">ROS杂篇 ROS中使用Kinect V2 Part2：iai-kinect使用</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
                             
-Kinect是非常流行的获取深度、彩色、点云的相机。本文介绍了Kinect相机的具体性能，以及如何在ROS调用Kinect相机。
-
+本篇详细介绍了iai-kinect功能包，在此基础上通过iai-kinect获取深度图像，从而进行ROS中的开发。
 
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-18
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-11-19
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -993,7 +992,6 @@ Kinect是非常流行的获取深度、彩色、点云的相机。本文介绍�
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
@@ -1248,7 +1246,7 @@ hexo本身只是提供了一个博客的框架，博客网站的美化和优化�
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">15.3k</span>
+                        class="white-color">15.5k</span>
             
             
             
