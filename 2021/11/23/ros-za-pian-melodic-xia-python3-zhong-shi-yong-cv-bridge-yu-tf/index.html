@@ -4,8 +4,9 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Hello World, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hex">
+    <meta name="keywords" content="ROS杂篇 Melodic下Python3中使用CV_Bridge与TF, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
+    <meta name="description" content="
+TF与CV_Bridge是ROS中非常好用的工具，前者用于帮助我们进行坐标转换，后者帮助我们在ROS中使用OpenCV。然而在Melodic版本中Python3下使用这两个包却会报错，本文将解决这Python3CV_Bridge与TF的使">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +18,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Hello World | JackWang&#39;s Bolg</title>
+    <title>ROS杂篇 Melodic下Python3中使用CV_Bridge与TF | JackWang&#39;s Bolg</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -244,12 +245,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/9.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Hello World</h1>
+                    <h1 class="description center-align post-title">ROS杂篇 Melodic下Python3中使用CV_Bridge与TF</h1>
                 </div>
             </div>
         </div>
@@ -363,12 +364,53 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/ROS/">
+                                <span class="chip bg-color">ROS</span>
+                            </a>
+                        
+                            <a href="/tags/Ubuntu/">
+                                <span class="chip bg-color">Ubuntu</span>
+                            </a>
+                        
+                            <a href="/tags/melodic/">
+                                <span class="chip bg-color">melodic</span>
+                            </a>
+                        
+                            <a href="/tags/OpenCv/">
+                                <span class="chip bg-color">OpenCv</span>
+                            </a>
+                        
+                            <a href="/tags/cv-bridge/">
+                                <span class="chip bg-color">cv_bridge</span>
+                            </a>
+                        
+                            <a href="/tags/sensor-msgs/">
+                                <span class="chip bg-color">sensor_msgs</span>
+                            </a>
+                        
+                            <a href="/tags/roslaunch/">
+                                <span class="chip bg-color">roslaunch</span>
+                            </a>
+                        
+                            <a href="/tags/tf2/">
+                                <span class="chip bg-color">tf2</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/ROS%E6%9D%82%E7%AF%87/" class="post-category">
+                                ROS杂篇
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -377,21 +419,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-11-12
+                    2021-11-23
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-11-12
+                    2021-12-10
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    73
+                    200
                 </div>
                 
 
@@ -418,19 +460,20 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class="line-numbers language-bash"><code class="language-bash">$ hexo new <span class="token string">"My New Post"</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class="line-numbers language-bash"><code class="language-bash">$ hexo server
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class="line-numbers language-bash"><code class="language-bash">$ hexo generate
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class="line-numbers language-bash"><code class="language-bash">$ hexo deploy
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+                <blockquote>
+<p>TF与CV_Bridge是ROS中非常好用的工具，前者用于帮助我们进行坐标转换，后者帮助我们在ROS中使用OpenCV。然而在Melodic版本中Python3下使用这两个包却会报错，本文将解决这Python3CV_Bridge与TF的使用问题。</p>
+</blockquote>
+<span id="more"></span>
+
+
+
+
+
+<h1 id="ROS杂篇-Melodic下Python3中使用CV-Bridge与TF"><a href="#ROS杂篇-Melodic下Python3中使用CV-Bridge与TF" class="headerlink" title="ROS杂篇 Melodic下Python3中使用CV_Bridge与TF"></a>ROS杂篇 Melodic下Python3中使用CV_Bridge与TF</h1><blockquote>
+<p>前言：为什么要写这篇博客</p>
+</blockquote>
+<p>在使用ROS驱动机器人的时候，经常遇到的一个问题就是我们需要使用摄像头来获得视觉信息，并且在此基础上，指导机器人进行操作。</p>
+<h2 id="Updates"><a href="#Updates" class="headerlink" title="Updates ! ! !"></a>Updates ! ! !</h2><p>由于最近一个周我的工作变动，目前需要在Ubuntu 20.04 LTS进行ROS开发，20.04中TF和CV_Bridge默认都支持Python3，因此目前我不需要解决这个问题。这篇文章以后更完</p>
 
                 
             </div>
@@ -457,7 +500,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://jackwang0107.github.io/2021/11/12/hello-world/">https://jackwang0107.github.io/2021/11/12/hello-world/</a>
+                    <a href="https://jackwang0107.github.io/2021/11/23/ros-za-pian-melodic-xia-python3-zhong-shi-yong-cv-bridge-yu-tf/">https://jackwang0107.github.io/2021/11/23/ros-za-pian-melodic-xia-python3-zhong-shi-yong-cv-bridge-yu-tf/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -494,7 +537,39 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/ROS/">
+                                    <span class="chip bg-color">ROS</span>
+                                </a>
+                            
+                                <a href="/tags/Ubuntu/">
+                                    <span class="chip bg-color">Ubuntu</span>
+                                </a>
+                            
+                                <a href="/tags/melodic/">
+                                    <span class="chip bg-color">melodic</span>
+                                </a>
+                            
+                                <a href="/tags/OpenCv/">
+                                    <span class="chip bg-color">OpenCv</span>
+                                </a>
+                            
+                                <a href="/tags/cv-bridge/">
+                                    <span class="chip bg-color">cv_bridge</span>
+                                </a>
+                            
+                                <a href="/tags/sensor-msgs/">
+                                    <span class="chip bg-color">sensor_msgs</span>
+                                </a>
+                            
+                                <a href="/tags/roslaunch/">
+                                    <span class="chip bg-color">roslaunch</span>
+                                </a>
+                            
+                                <a href="/tags/tf2/">
+                                    <span class="chip bg-color">tf2</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -668,25 +743,26 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/11/12/ji-yu-hexo-de-ge-ren-ji-zhu-bo-ke-da-jian-part-0-gai-shu/">
+                <a href="/2021/12/10/ji-yu-hexo-de-ge-ren-ji-zhu-bo-ke-da-jian-part-4-markdown-bian-ji-qi-typora-de-she-zhi-yi-ji-teng-xun-yun-tu-chuang-she-zhi/">
                     <div class="card-image">
                         
-                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211112180102412.png" class="responsive-img" alt="基于Hexo的个人技术博客搭建 —— Part 0 概述">
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211211015803341.png" class="responsive-img" alt="基于hexo的个人技术博客搭建 Part 4 Markdown编辑器Typora的设置以及腾讯云图床设置">
                         
-                        <span class="card-title">基于Hexo的个人技术博客搭建 —— Part 0 概述</span>
+                        <span class="card-title">基于hexo的个人技术博客搭建 Part 4 Markdown编辑器Typora的设置以及腾讯云图床设置</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
                             
-本系列文章面向前端小白，希望以尽量简单而又不啰嗦的语言介绍如何搭建基于Hexo的个人技术博客
+前面我们通过hexo在本地搭建出了静态博客网站的框架，那么我们还需要一个合适的Markdown编辑器来帮助我们快乐的写博客
+
 
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-11-12
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-12-10
                         </span>
                         <span class="publish-author">
                             
@@ -715,37 +791,82 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/11/12/hello-world/">
+                <a href="/2021/11/19/ros-za-pian-ros-zhong-shi-yong-kinect-v2-iai-kinect-shi-yong/">
                     <div class="card-image">
                         
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211121155602208.png" class="responsive-img" alt="ROS杂篇 ROS中使用Kinect V2 Part2：iai-kinect使用">
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
-                        
-                        <span class="card-title">Hello World</span>
+                        <span class="card-title">ROS杂篇 ROS中使用Kinect V2 Part2：iai-kinect使用</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
                             
+本篇详细介绍了iai-kinect2功能包，在此基础上通过iai-kinect2获取深度图像，从而进行ROS中的开发。
+
+
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-12
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-19
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            Jack Wang
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/ROS%E6%9D%82%E7%AF%87/" class="post-category">
+                                    ROS杂篇
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
-
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/ROS/">
+                        <span class="chip bg-color">ROS</span>
+                    </a>
+                    
+                    <a href="/tags/Kinect-V2/">
+                        <span class="chip bg-color">Kinect V2</span>
+                    </a>
+                    
+                    <a href="/tags/Ubuntu/">
+                        <span class="chip bg-color">Ubuntu</span>
+                    </a>
+                    
+                    <a href="/tags/melodic/">
+                        <span class="chip bg-color">melodic</span>
+                    </a>
+                    
+                    <a href="/tags/OpenCv/">
+                        <span class="chip bg-color">OpenCv</span>
+                    </a>
+                    
+                    <a href="/tags/cv-bridge/">
+                        <span class="chip bg-color">cv_bridge</span>
+                    </a>
+                    
+                    <a href="/tags/sensor-msgs/">
+                        <span class="chip bg-color">sensor_msgs</span>
+                    </a>
+                    
+                    <a href="/tags/iai-kinect2/">
+                        <span class="chip bg-color">iai-kinect2</span>
+                    </a>
+                    
+                    <a href="/tags/roslaunch/">
+                        <span class="chip bg-color">roslaunch</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
@@ -929,7 +1050,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">22.5k</span>
+                        class="white-color">24.9k</span>
             
             
             
