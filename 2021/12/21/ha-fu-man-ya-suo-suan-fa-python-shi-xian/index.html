@@ -425,7 +425,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-12-22
+                    2021-12-25
                 </div>
                 
 
@@ -464,9 +464,9 @@
 </blockquote>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/all.gif" alt="完整效果"></p>
 <h1 id="哈夫曼（Huffman-Encoding）压缩算法-Python实现"><a href="#哈夫曼（Huffman-Encoding）压缩算法-Python实现" class="headerlink" title="哈夫曼（Huffman Encoding）压缩算法-Python实现"></a>哈夫曼（Huffman Encoding）压缩算法-Python实现</h1><p>哈夫曼编码作为计算机届非常底层的算法，不少领域都会出现该算法的身影，例如在MPEG图片压缩算法中等等。因此掌握哈夫曼算法以及相关的哈弗曼编码、哈弗曼树实现还是比较必要的。</p>
-<p>我目前是一个大二的计算机系学生，最近数据结构课程的配套实验要求学生从十四个题中选择四个来做。刚好最近学习了PyQt的相关内容，于是本着学习的目的把我完成的成果记录下来，希望我的这篇博客能够帮助大家学习与理解。</p>
+<h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><p>我目前是一个大二的计算机系学生，最近数据结构课程的配套实验要求学生从十四个题中选择四个来做。刚好最近学习了PyQt的相关内容，于是本着学习的目的把我完成的成果记录下来，希望我的这篇博客能够帮助大家学习与理解。</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211221220005902.png" alt="数据结构算法实验"></p>
-<h1 id="1-编码"><a href="#1-编码" class="headerlink" title="1. 编码"></a>1. 编码</h1><p>所有的文件，包括MP3音频、MP4视频、PDF文档、乃至于可执行文件（Windows上的.EXE、Linux中的.O等ELF格式文件），对于计算机来说都是二进制数据流，即由0101的比特构成的流（Stream）。</p>
+<h2 id="1-编码"><a href="#1-编码" class="headerlink" title="1. 编码"></a>1. 编码</h2><p>所有的文件，包括MP3音频、MP4视频、PDF文档、乃至于可执行文件（Windows上的.EXE、Linux中的.O等ELF格式文件），对于计算机来说都是二进制数据流，即由0101的比特构成的流（Stream）。</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211221222101136.png" alt="计算机底层以二进制形式存储文件"></p>
 <p>然而二进制流对于计算机而言是有意义的，对人而言却没有多大的意义了，因为人看不懂二进制的字节流。于是为了解决这个问题，就出现了编码。所谓<strong>编码即指将信息从一种格式转换为另外一种格式而不改变其内容</strong>，更详细的介绍，参考下面百度百科和维基百科的介绍。</p>
 <blockquote>
@@ -483,7 +483,7 @@
 <p>话说回来，要进行编码，就需要一张编码表。例如学C语言时候的ASCII表。我们通过编码表构建了两种不同编码之间的映射关系，因此单纯的ASCII字符的转换，就是数值的映射关系，从而通过数值-字符的转换，实现了编码与解码。其实从语言的角度来看，语言的编码不仅仅是单词的映射，还涉及语法的转换等等更加复杂的关系。</p>
 <p>然而单纯的使用ASCII编码或者UTF8这种编码方式其实虽然很不错，计算机能够理解，但是他们的问题就是太浪费空间了。例如针对ASCII编码，每一个字符需要8个比特位（0-255）。因此哈夫曼编码除了方便计算机理解以外，更大的好处是能够节约空间。</p>
 <p>说了这么久，总算是说到了哈夫曼编码，哈夫曼编码其实就是一种编码，和ASCII编码在本质上没有区别的。</p>
-<h1 id="2-哈夫曼算法-Huffman-Coding"><a href="#2-哈夫曼算法-Huffman-Coding" class="headerlink" title="2. 哈夫曼算法 / Huffman Coding"></a>2. 哈夫曼算法 / Huffman Coding</h1><p>关于哈夫曼编码和对应的哈夫曼算法就不赘述了，在数据结构的课本上其实讲得非常好也非常的透彻。下面就放一下百度百科和维基百科的介绍</p>
+<h2 id="2-哈夫曼算法-Huffman-Coding"><a href="#2-哈夫曼算法-Huffman-Coding" class="headerlink" title="2. 哈夫曼算法 / Huffman Coding"></a>2. 哈夫曼算法 / Huffman Coding</h2><p>关于哈夫曼编码和对应的哈夫曼算法就不赘述了，在数据结构的课本上其实讲得非常好也非常的透彻。下面就放一下百度百科和维基百科的介绍</p>
 <blockquote>
 <p><strong>From Wikipedia</strong>：</p>
 <p>霍夫曼编码（英语：Huffman Coding），又译为哈夫曼编码、赫夫曼编码，是一种用于无损数据压缩的熵编码（权编码）算法。由美国计算机科学家大卫·霍夫曼（David Albert Huffman）在1952年发明。</p>
@@ -492,16 +492,16 @@
 <p>哈夫曼编码(Huffman Coding)，又称霍夫曼编码，是一种编码方式，哈夫曼编码是可变字长编码(VLC)的一种。Huffman于1952年提出一种编码方法，该方法完全依据字符出现概率来构造异字头的平均长度最短的码字，有时称之为最佳编码，一般就叫做Huffman编码（有时也称为霍夫曼编码）。</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211221231927090.png" alt="百度百科上哈夫曼编码的介绍"></p>
 </blockquote>
-<h1 id="3-实现思路"><a href="#3-实现思路" class="headerlink" title="3. 实现思路"></a>3. 实现思路</h1><p>针对不同的功能，整个程序的实现，主要分为三个层面：</p>
+<h2 id="3-实现思路"><a href="#3-实现思路" class="headerlink" title="3. 实现思路"></a>3. 实现思路</h2><p>针对不同的功能，整个程序的实现，主要分为三个层面：</p>
 <ol>
 <li><strong>核心层</strong>：负责哈夫曼算法的实现</li>
 <li><strong>数据存取层</strong>：负责任意形式数据的读取、保存</li>
 <li><strong>用户界面层</strong>：负责提供命令行用户界面以及图形用户接口，从而实现<del>高级感</del>（逼格）</li>
 </ol>
-<h2 id="A-核心层"><a href="#A-核心层" class="headerlink" title="A. 核心层"></a>A. 核心层</h2><p>核心层的任务其实就是构建哈弗曼树、得到哈夫曼编码即可，主要算法其实在数据结构课本、B站视频、知乎上都有不少介绍。 </p>
+<h3 id="A-核心层"><a href="#A-核心层" class="headerlink" title="A. 核心层"></a>A. 核心层</h3><p>核心层的任务其实就是构建哈弗曼树、得到哈夫曼编码即可，主要算法其实在数据结构课本、B站视频、知乎上都有不少介绍。 </p>
 <p>然而一个重要的问题就是课本上和B站中的不少介绍视频都是针对字符（字母）进行哈夫曼编码的。我们由于要对任意格式的文件进行编码，因此就要从数据的本源：字节，进行哈夫曼编码。因此我们哈弗曼树的叶子节点实际上是字节。我们以8位二进制作为一个单元（Symbol）。然后针对这个Symbol进行编码。因此我们编码的对象就从26个字母变成了256种八位二进制数字。换而言之我们是对0~255这256个数字进行编码。</p>
 <p>然后根据得到的哈夫曼编码将原字节数据一个字节（八位比特）进行编码、转换为哈夫曼编码即可。</p>
-<h2 id="B-数据存取层"><a href="#B-数据存取层" class="headerlink" title="B. 数据存取层"></a>B. 数据存取层</h2><p>在数据存取层，我们假设现在已经对原数据（raw data）构建出了哈弗曼树并且得到了原数据的哈弗曼编码，而且根据这些哈夫曼编码得到了原数据的哈夫曼编码字节流。我们在数据存取层需要做的就是</p>
+<h3 id="B-数据存取层"><a href="#B-数据存取层" class="headerlink" title="B. 数据存取层"></a>B. 数据存取层</h3><p>在数据存取层，我们假设现在已经对原数据（raw data）构建出了哈弗曼树并且得到了原数据的哈弗曼编码，而且根据这些哈夫曼编码得到了原数据的哈夫曼编码字节流。我们在数据存取层需要做的就是</p>
 <ol>
 <li>保存转换后的新的哈夫曼编码的字节流</li>
 <li>读取原始数据的二进制字节流</li>
@@ -511,12 +511,12 @@
 <p>因此数据存取层的关键就在于如何保存编码后的哈夫曼编码字节流？这个问题看似简单，其实有一个问题，就是（二进制）数据在计算机外存（固态、硬盘）中的保存都是整字节整字节的保存的，读取也是整字节整字节读取的。而我们对原文件的二进制流进行哈夫曼编码后实际上其长度是不定的，不一定是整字节的。</p>
 <p>因此保存的时候虽然我们可以强行以整字节整字节的保存编码后的二进制流，但是在最后一位由于不一定是一个整字节，因此实际上存在问题。为了处理这个问题，我们设定一个特殊的字符EOF，由于8位二进制能表示256个数字（Symbol），而这些数字都有可能出现在原字节流中，因此我们是不能直接选取一个数字来表示文件结尾的。为此，在Python中，通过一个特定的类来实现文件结尾的表示，即我们自定义的EOF。在大文件（几MB的文件）中，一共有1024*1024个字节，因此从0~255这256个数字出现的次数一定是远远大于1的，而EOF的出现次数永远为1，因此必然会拥有最长的编码。</p>
 <p>在我们转换完所有的原数据之后，我们把EOF添加到末尾去，并且如果最后不满足8位的话在最后补0。而在读取的时候，我们只需要获取最长长度的编码的长度，然后对最后一个字节做截取即可得到正确的完整的带有EOF的编码的编码后的原数据的哈夫曼编码字节流。</p>
-<h2 id="C-用户界面层"><a href="#C-用户界面层" class="headerlink" title="C. 用户界面层"></a>C. 用户界面层</h2><p>在用户界面层，不关心具体的哈夫曼编码的实现、数据的保存方式等这些具体的细节。相比，用户界面层仅关注如何提供一个用户友好的用户界面。例如在终端（Terminal）提供选项，让用户制定压缩、解压的文件。还会检查用户指定的文件是否存在、查找用户需要解码的文件对应的的哈弗曼编码表的文件位置。</p>
+<h3 id="C-用户界面层"><a href="#C-用户界面层" class="headerlink" title="C. 用户界面层"></a>C. 用户界面层</h3><p>在用户界面层，不关心具体的哈夫曼编码的实现、数据的保存方式等这些具体的细节。相比，用户界面层仅关注如何提供一个用户友好的用户界面。例如在终端（Terminal）提供选项，让用户制定压缩、解压的文件。还会检查用户指定的文件是否存在、查找用户需要解码的文件对应的的哈弗曼编码表的文件位置。</p>
 <p>当然，GUI使用会让程序显得非常高级，因此GUI部分是必须的。而完成GUI程序，则借助Qt来完成，即使用Qt的Python Binding。</p>
 <p>当然，为了便于写代码管理与开发，需要注意GUI的代码要与完成功能的代码在逻辑和形式上分离，因此采取前面所说的分层的思想。</p>
 <p>因此将GUI作为用户界面层的一个组件（另一个组件为终端命令行接口），调用由数据存取层提供的接口函数完成功能。</p>
 <p>在GUI内部，进行在GUI窗口上发生的事件的监听，以及轮转调度、回调函数调用等等功能。</p>
-<h1 id="4-具体代码"><a href="#4-具体代码" class="headerlink" title="4. 具体代码"></a>4. 具体代码</h1><p>本部分根据上面的讲解，对照代码进行详细的介绍。</p>
+<h2 id="4-具体代码"><a href="#4-具体代码" class="headerlink" title="4. 具体代码"></a>4. 具体代码</h2><p>本部分根据上面的讲解，对照代码进行详细的介绍。</p>
 <p>项目结构如下</p>
 <pre class="line-numbers language-shell"><code class="language-shell">(base) jack@Alienware:~/projects/data_structure/11_huffman$ tree -L 2
 .
@@ -542,7 +542,7 @@
 <li>ui为程序图形界面配置文件，负责设定界面大小、按钮位置等配置参数。而UI_main为具体的按钮等控件的实现代码</li>
 <li>huff.py为最终的程序，内含所有完整代码；errHuff.py为先前写错的代码，问题出在了哈夫曼建树的时候得到的不是范式哈弗曼树，因此该程序遍历哈弗树得到哈夫曼编码的时候有问题，最后压缩出来的文件比源文件大了好几倍（反向压缩。。。应了刘某的反向抽烟XXX<span class="github-emoji"><span>😂</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f602.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>）</li>
 </ul>
-<h2 id="1-导入库"><a href="#1-导入库" class="headerlink" title="1. 导入库"></a>1. 导入库</h2><p>主要导入的库为命令行参数获取库argparse、Python对象序列化库Pickle、路径处理库pathlib、堆管理库heapq、GUI库PyQt以及为了更好的显示得到的哈夫曼编码表的pandas库与命令行彩色输出的colorama库。</p>
+<h3 id="1-导入库"><a href="#1-导入库" class="headerlink" title="1. 导入库"></a>1. 导入库</h3><p>主要导入的库为命令行参数获取库argparse、Python对象序列化库Pickle、路径处理库pathlib、堆管理库heapq、GUI库PyQt以及为了更好的显示得到的哈夫曼编码表的pandas库与命令行彩色输出的colorama库。</p>
 <p>最后定义了文件的私有变量设定作者和日期，以及将可能存在源代码的文件加入文件搜索路径（类似于Linux环境变量LD_LIBRARY_PATH）</p>
 <pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> sys
 <span class="token keyword">import</span> pickle
@@ -563,7 +563,7 @@ __author__ <span class="token operator">=</span> <span class="token string">"Jac
 __date__ <span class="token operator">=</span> <span class="token string">"2021/12/19"</span>
 sys<span class="token punctuation">.</span>path<span class="token punctuation">.</span>append<span class="token punctuation">(</span>Path<span class="token punctuation">(</span>__file__<span class="token punctuation">)</span><span class="token punctuation">.</span>resolve<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>parent<span class="token punctuation">.</span>joinpath<span class="token punctuation">(</span><span class="token string">"./ui"</span><span class="token punctuation">)</span><span class="token punctuation">.</span>__str__<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="2-定义EOF符号"><a href="#2-定义EOF符号" class="headerlink" title="2. 定义EOF符号"></a>2. 定义EOF符号</h2><p>EOF符号由于和0-255个数字一样将在构建树的进行比较，因此需要重载如等于（__eq__）、大于(__gt__)、小于(__lt__)等运算符。在Python中重载运算符以魔术方法（double underline）实现。最后由于在序列化以及字典中保存符号-哈夫曼编码键值对的时候，符号作为字典的键需要时可哈希的对象（Hashable），因此重写__hash__方法，以实现作为字典的键。</p>
+<h3 id="2-定义EOF符号"><a href="#2-定义EOF符号" class="headerlink" title="2. 定义EOF符号"></a>2. 定义EOF符号</h3><p>EOF符号由于和0-255个数字一样将在构建树的进行比较，因此需要重载如等于（__eq__）、大于(__gt__)、小于(__lt__)等运算符。在Python中重载运算符以魔术方法（double underline）实现。最后由于在序列化以及字典中保存符号-哈夫曼编码键值对的时候，符号作为字典的键需要时可哈希的对象（Hashable），因此重写__hash__方法，以实现作为字典的键。</p>
 <p>注意，上面说过了EOF需要保证编码是最长的，因此当合别人比大的时候总是False，比小的时候总是True，并且只会等于同样是EOF的对象</p>
 <pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">_EOFSymbol</span><span class="token punctuation">:</span>
     <span class="token triple-quoted-string string">"""
@@ -590,7 +590,7 @@ sys<span class="token punctuation">.</span>path<span class="token punctuation">.
 
 _EOF <span class="token operator">=</span> _EOFSymbol<span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="3-哈夫曼编码"><a href="#3-哈夫曼编码" class="headerlink" title="3. 哈夫曼编码"></a>3. 哈夫曼编码</h2><p>采用工厂模式，实现哈夫曼编码与解码的核心对象为_HuffmanCoder，与用于构建_HuffmanCoder的HuffmanFactory类。</p>
+<h3 id="3-哈夫曼编码"><a href="#3-哈夫曼编码" class="headerlink" title="3. 哈夫曼编码"></a>3. 哈夫曼编码</h3><p>采用工厂模式，实现哈夫曼编码与解码的核心对象为_HuffmanCoder，与用于构建_HuffmanCoder的HuffmanFactory类。</p>
 <p>_HuffmanCoder类负责：</p>
 <ul>
 <li>输出/打印哈夫曼编码表：get_code_table方法、print_code_table方法</li>
@@ -833,7 +833,7 @@ _EOF <span class="token operator">=</span> _EOFSymbol<span class="token punctuat
         frequencies <span class="token operator">=</span> collections<span class="token punctuation">.</span>Counter<span class="token punctuation">(</span>sequence<span class="token punctuation">)</span>
         <span class="token keyword">return</span> cls<span class="token punctuation">.</span>from_frequencies<span class="token punctuation">(</span>frequencies<span class="token punctuation">,</span> concat<span class="token operator">=</span>_guess_concat_function<span class="token punctuation">(</span>sequence<span class="token punctuation">)</span><span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="4-哈夫曼编码层接口"><a href="#4-哈夫曼编码层接口" class="headerlink" title="4. 哈夫曼编码层接口"></a>4. 哈夫曼编码层接口</h2><p>为实现GUI与哈弗曼编码解耦，在前面哈夫曼编码的核心类的基础上，编写哈弗曼编码接口函数，完成编码、解码一步到位</p>
+<h3 id="4-哈夫曼编码层接口"><a href="#4-哈夫曼编码层接口" class="headerlink" title="4. 哈夫曼编码层接口"></a>4. 哈夫曼编码层接口</h3><p>为实现GUI与哈弗曼编码解耦，在前面哈夫曼编码的核心类的基础上，编写哈弗曼编码接口函数，完成编码、解码一步到位</p>
 <p>其中：</p>
 <ul>
 <li>encode负责读取文件的二进制流、压缩、输出压缩时的摘要信息</li>
@@ -890,8 +890,8 @@ _EOF <span class="token operator">=</span> _EOFSymbol<span class="token punctuat
         <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"="</span><span class="token operator">*</span>len<span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">)</span>
     <span class="token keyword">return</span> b1<span class="token punctuation">,</span> b2<span class="token punctuation">,</span> b3<span class="token punctuation">,</span> coder
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="5-用户接口层"><a href="#5-用户接口层" class="headerlink" title="5. 用户接口层"></a>5. 用户接口层</h2><p>用户接口层负责提供命令行用户界面以及GUI用户界面</p>
-<h3 id="A-GUI用户界面"><a href="#A-GUI用户界面" class="headerlink" title="A. GUI用户界面"></a>A. GUI用户界面</h3><p>GUI用户界面由于会接管程序流的控制，因此以类的形式进行封装。</p>
+<h3 id="5-用户接口层"><a href="#5-用户接口层" class="headerlink" title="5. 用户接口层"></a>5. 用户接口层</h3><p>用户接口层负责提供命令行用户界面以及GUI用户界面</p>
+<h4 id="A-GUI用户界面"><a href="#A-GUI用户界面" class="headerlink" title="A. GUI用户界面"></a>A. GUI用户界面</h4><p>GUI用户界面由于会接管程序流的控制，因此以类的形式进行封装。</p>
 <p>其中：</p>
 <ul>
 <li>initUI方法负责窗口的UI设计、按钮等控件的信号对应的槽函数（信号处理函数）的绑定</li>
@@ -963,7 +963,7 @@ _EOF <span class="token operator">=</span> _EOFSymbol<span class="token punctuat
         self<span class="token punctuation">.</span>ui<span class="token punctuation">.</span>textEdit<span class="token punctuation">.</span>setText<span class="token punctuation">(</span><span class="token string">"\n"</span><span class="token punctuation">.</span>join<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token operator">*</span>s<span class="token punctuation">,</span> summary1<span class="token punctuation">,</span> summary2<span class="token punctuation">,</span> summary3<span class="token punctuation">,</span> summary4<span class="token punctuation">,</span> <span class="token string">"解压结束"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
         self<span class="token punctuation">.</span>ui<span class="token punctuation">.</span>textEdit_2<span class="token punctuation">.</span>setText<span class="token punctuation">(</span>result<span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>print_code_table<span class="token punctuation">(</span>verbose<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span><span class="token punctuation">.</span>__str__<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="B-Terminal用户界面"><a href="#B-Terminal用户界面" class="headerlink" title="B. Terminal用户界面"></a>B. Terminal用户界面</h3><p>Terminal用户界面则是以argparse库中的ArgumentParser对象完成命令行参数的接受，稍后在主程序中配合完成用户界面。设定了-h参数输出帮助信息、-s对指定路径的文件进行压缩、-t对指定路径的文件进行解压、-g以GUI用户界面运行程序，-v将压缩/解压摘要输出到命令行窗口</p>
+<h4 id="B-Terminal用户界面"><a href="#B-Terminal用户界面" class="headerlink" title="B. Terminal用户界面"></a>B. Terminal用户界面</h4><p>Terminal用户界面则是以argparse库中的ArgumentParser对象完成命令行参数的接受，稍后在主程序中配合完成用户界面。设定了-h参数输出帮助信息、-s对指定路径的文件进行压缩、-t对指定路径的文件进行解压、-g以GUI用户界面运行程序，-v将压缩/解压摘要输出到命令行窗口</p>
 <pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">parse_args</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> argparse<span class="token punctuation">.</span>Namespace<span class="token punctuation">:</span>
     parser <span class="token operator">=</span> argparse<span class="token punctuation">.</span>ArgumentParser<span class="token punctuation">(</span>
         description<span class="token operator">=</span><span class="token string">"哈夫曼压缩算法Python实现，可以对任意文件进行压缩，提供命令行以及GUI用户界面。作者：Jack Wang"</span>
@@ -974,7 +974,7 @@ _EOF <span class="token operator">=</span> _EOFSymbol<span class="token punctuat
     parser<span class="token punctuation">.</span>add_argument<span class="token punctuation">(</span><span class="token string">"-g"</span><span class="token punctuation">,</span> <span class="token string">"--gui"</span><span class="token punctuation">,</span> dest<span class="token operator">=</span><span class="token string">"gui"</span><span class="token punctuation">,</span> action<span class="token operator">=</span><span class="token string">"store_true"</span><span class="token punctuation">,</span> help<span class="token operator">=</span><span class="token string">"是否以GUI方式显示"</span><span class="token punctuation">)</span>
     <span class="token keyword">return</span> parser<span class="token punctuation">.</span>parse_args<span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="6-主程序"><a href="#6-主程序" class="headerlink" title="6. 主程序"></a>6. 主程序</h2><p>主程序很简单，根据接受的命令行参数调用不同的接口即可</p>
+<h3 id="6-主程序"><a href="#6-主程序" class="headerlink" title="6. 主程序"></a>6. 主程序</h3><p>主程序很简单，根据接受的命令行参数调用不同的接口即可</p>
 <p>在非图形界面的运行的时候，程序的主控制流以程序为主，而以GUI方式运行的时候，程序的控制流则在Qt框架下，用户级线程调度、事件监听、信号分发、槽函数（信号处理函数）唤醒等均由框架负责。</p>
 <pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">main</span><span class="token punctuation">(</span>args<span class="token punctuation">:</span> argparse<span class="token punctuation">.</span>Namespace<span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token keyword">if</span> <span class="token operator">not</span> args<span class="token punctuation">.</span>gui<span class="token punctuation">:</span>
@@ -1014,7 +1014,7 @@ _EOF <span class="token operator">=</span> _EOFSymbol<span class="token punctuat
 <span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">"__main__"</span><span class="token punctuation">:</span>
     main<span class="token punctuation">(</span>parse_args<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h1 id="5-运行实例"><a href="#5-运行实例" class="headerlink" title="5. 运行实例"></a>5. 运行实例</h1><h3 id="A-GIF版演示"><a href="#A-GIF版演示" class="headerlink" title="A. GIF版演示"></a>A. GIF版演示</h3><p> 这里先放一个gif图片（比较大，44兆，不知道能不能加载出来），高清版本去下面的B站视频里看看</p>
+<h2 id="5-运行实例"><a href="#5-运行实例" class="headerlink" title="5. 运行实例"></a>5. 运行实例</h2><h3 id="A-GIF版演示"><a href="#A-GIF版演示" class="headerlink" title="A. GIF版演示"></a>A. GIF版演示</h3><p> 这里先放一个gif图片（比较大，44兆，不知道能不能加载出来），高清版本去下面的B站视频里看看</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/%E5%93%88%E5%A4%AB%E6%9B%BC%E7%AE%97%E6%B3%95%E5%8E%8B%E7%BC%A9%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E6%BC%94%E7%A4%BA.gif"></p>
 <h3 id="B-B站高清版"><a href="#B-B站高清版" class="headerlink" title="B. B站高清版"></a>B. B站高清版</h3><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1cL41177zL/">视频链接</a>：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1cL41177zL/">https://www.bilibili.com/video/BV1cL41177zL/</a></p>
 <iframe src="//player.bilibili.com/player.html?aid=465019836&amp;bvid=BV1cL41177zL&amp;cid=465905780&amp;page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
@@ -1023,8 +1023,8 @@ _EOF <span class="token operator">=</span> _EOFSymbol<span class="token punctuat
 
 
 
-<h1 id="6-完整代码"><a href="#6-完整代码" class="headerlink" title="6. 完整代码"></a>6. 完整代码</h1><p>完整代码如下</p>
-<h2 id="A-huff-py"><a href="#A-huff-py" class="headerlink" title="A. huff.py"></a>A. huff.py</h2><pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> sys
+<h2 id="6-完整代码"><a href="#6-完整代码" class="headerlink" title="6. 完整代码"></a>6. 完整代码</h2><p>完整代码如下</p>
+<h3 id="A-huff-py"><a href="#A-huff-py" class="headerlink" title="A. huff.py"></a>A. huff.py</h3><pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> sys
 <span class="token keyword">import</span> pickle
 <span class="token keyword">import</span> argparse
 <span class="token keyword">import</span> itertools
@@ -1464,7 +1464,7 @@ _EOF <span class="token operator">=</span> _EOFSymbol<span class="token punctuat
 <span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">"__main__"</span><span class="token punctuation">:</span>
     main<span class="token punctuation">(</span>parse_args<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="2-Ui-main-py"><a href="#2-Ui-main-py" class="headerlink" title="2. Ui_main.py"></a>2. Ui_main.py</h2><pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true"># -*- coding: utf-8 -*-</span>
+<h3 id="2-Ui-main-py"><a href="#2-Ui-main-py" class="headerlink" title="2. Ui_main.py"></a>2. Ui_main.py</h3><pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true"># -*- coding: utf-8 -*-</span>
 
 <span class="token comment" spellcheck="true"># Form implementation generated from reading ui file '/media/jack/JackCode/project/data_structure/11_huffman/ui/main.ui'</span>
 <span class="token comment" spellcheck="true">#</span>
@@ -1786,17 +1786,16 @@ _EOF <span class="token operator">=</span> _EOFSymbol<span class="token punctuat
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/12/21/ha-fu-man-ya-suo-suan-fa-python-shi-xian/">
+                <a href="/2021/12/22/a-suan-fa-python-shi-xian/">
                     <div class="card-image">
                         
-                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211222111040507.png" class="responsive-img" alt="哈夫曼（Huffman Encoding）压缩算法-Python实现">
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/a_star.gif" class="responsive-img" alt="A*算法-Python实现">
                         
-                        <span class="card-title">哈夫曼（Huffman Encoding）压缩算法-Python实现</span>
+                        <span class="card-title">A*算法-Python实现</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1806,9 +1805,9 @@ _EOF <span class="token operator">=</span> _EOFSymbol<span class="token punctuat
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-12-21
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-12-22
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -1821,16 +1820,11 @@ _EOF <span class="token operator">=</span> _EOFSymbol<span class="token punctuat
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
                     <a href="/tags/Python/">
                         <span class="chip bg-color">Python</span>
-                    </a>
-                    
-                    <a href="/tags/PyQt/">
-                        <span class="chip bg-color">PyQt</span>
                     </a>
                     
                     <a href="/tags/DataStructure/">
@@ -1841,16 +1835,20 @@ _EOF <span class="token operator">=</span> _EOFSymbol<span class="token punctuat
                         <span class="chip bg-color">数据结构</span>
                     </a>
                     
-                    <a href="/tags/HuffmanEncode/">
-                        <span class="chip bg-color">HuffmanEncode</span>
-                    </a>
-                    
-                    <a href="/tags/HuffmanAlgorithm/">
-                        <span class="chip bg-color">HuffmanAlgorithm</span>
-                    </a>
-                    
                     <a href="/tags/GUI/">
                         <span class="chip bg-color">GUI</span>
+                    </a>
+                    
+                    <a href="/tags/A/">
+                        <span class="chip bg-color">A*</span>
+                    </a>
+                    
+                    <a href="/tags/PathPlanning/">
+                        <span class="chip bg-color">PathPlanning</span>
+                    </a>
+                    
+                    <a href="/tags/Matplotlib/">
+                        <span class="chip bg-color">Matplotlib</span>
                     </a>
                     
                 </div>
@@ -2093,7 +2091,7 @@ _EOF <span class="token operator">=</span> _EOFSymbol<span class="token punctuat
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">50.1k</span>
+                        class="white-color">56k</span>
             
             
             
