@@ -10,13 +10,10 @@ Kinect是非常流行的获取深度、彩色、点云的相机。本文介绍�
 
 
 
-
-
-
 ROS杂篇 ROS中使用Kinect V2 Part1：安装+使用
 前言：为什么要写这篇博客
 
-">
+由于我">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -380,16 +377,16 @@ ROS杂篇 ROS中使用Kinect V2 Part1：安装+使用
                                 <span class="chip bg-color">ROS</span>
                             </a>
                         
+                            <a href="/tags/Kinect-V2/">
+                                <span class="chip bg-color">Kinect V2</span>
+                            </a>
+                        
                             <a href="/tags/Ubuntu/">
                                 <span class="chip bg-color">Ubuntu</span>
                             </a>
                         
                             <a href="/tags/melodic/">
                                 <span class="chip bg-color">melodic</span>
-                            </a>
-                        
-                            <a href="/tags/Kinect-V2/">
-                                <span class="chip bg-color">Kinect V2</span>
                             </a>
                         
                     </div>
@@ -459,9 +456,6 @@ ROS杂篇 ROS中使用Kinect V2 Part1：安装+使用
 </blockquote>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211118214830894.png" alt="最终效果图"></p>
 <span id="more"></span>
-
-
-
 <h1 id="ROS杂篇-ROS中使用Kinect-V2-Part1：安装-使用"><a href="#ROS杂篇-ROS中使用Kinect-V2-Part1：安装-使用" class="headerlink" title="ROS杂篇 ROS中使用Kinect V2 Part1：安装+使用"></a>ROS杂篇 ROS中使用Kinect V2 Part1：安装+使用</h1><blockquote>
 <p>前言：为什么要写这篇博客</p>
 </blockquote>
@@ -475,7 +469,7 @@ ROS杂篇 ROS中使用Kinect V2 Part1：安装+使用
 <p>虽然<code>Kinect V2</code>在2017年由于<code>Xbox</code>取消了<code>Kinect</code>的接口而停产，但是发现到<code>Kinect</code>相机价值的微软随后推出的 <code>Kinect V3</code> 和 <code>Kinect DK</code> 都是专门为科研推出的设备。（我有幸用过 <code>Kinect DK</code>，上面部署了现成的 <code>Human Motion Estimation</code> 的模型，可以直接获得人体的关键点，非常好用）</p>
 <blockquote>
 <p>摘自<code>维基百科</code></p>
-<p><strong>Kinect</strong>是由<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%BE%AE%E8%BB%9F">微软</a>开发，应用于<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/Xbox_360">Xbox 360</a>和<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/Xbox_One">Xbox One</a>主机的周边设备。它让玩家不需要手持或踩踏<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%8E%A7%E5%88%B6%E5%99%A8">控制器</a>，而是使用<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E8%AF%AD%E9%9F%B3%E6%8C%87%E4%BB%A4">语音指令</a>或<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%89%8B%E5%8A%BF">手势</a>来操作Xbox 360和Xbox One的系统界面。它也能捕捉玩家全身上下的动作，用身体来进行游戏，带给玩家“免控制器的游戏与娱乐体验”。此设备是<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%BE%AE%E8%BB%9F%E7%A0%94%E7%A9%B6%E9%99%A2">微软研究院</a>的研究成果之一。</p>
+<p><strong>Kinect</strong>是由<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/微軟">微软</a>开发，应用于<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/Xbox_360">Xbox 360</a>和<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/Xbox_One">Xbox One</a>主机的周边设备。它让玩家不需要手持或踩踏<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/控制器">控制器</a>，而是使用<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/语音指令">语音指令</a>或<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/手势">手势</a>来操作Xbox 360和Xbox One的系统界面。它也能捕捉玩家全身上下的动作，用身体来进行游戏，带给玩家“免控制器的游戏与娱乐体验”。此设备是<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/微軟研究院">微软研究院</a>的研究成果之一。</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211118142428272.png" alt="维基百科上对Kinect相机的介绍"></p>
 </blockquote>
 <p>可以看得出来，<code>Kinect</code>相机最初其实是由Windows为<code>Xbox</code>游戏机准备的外设，通过Kinect相机可以玩一些体感游戏。不过多好的设备当然是要我们来折腾的，拿来单纯玩游戏就有点太奢侈了。</p>
@@ -519,39 +513,39 @@ ROS杂篇 ROS中使用Kinect V2 Part1：安装+使用
 <h3 id="B-安装Kinect-V2驱动——libfreenect2"><a href="#B-安装Kinect-V2驱动——libfreenect2" class="headerlink" title="B. 安装Kinect V2驱动——libfreenect2"></a>B. 安装Kinect V2驱动——libfreenect2</h3><p>首先需要安装<code>Kinect</code>在<code>Ubuntu</code>上的驱动：<code>libfreenect2</code>。</p>
 <p>这个驱动是<code>Github</code>上开源的用<code>C++</code>和<code>Cmake</code>写的<code>Kinect V2</code>的驱动，所以我们稍后克隆下来之后安装一下依赖，然后配置<code>CMake</code>生成<code>Makefile</code>、然后make编译，最后make install安装库即可。</p>
 <h4 id="1-安装依赖"><a href="#1-安装依赖" class="headerlink" title="1. 安装依赖"></a>1. 安装依赖</h4><p>实现用apt包管理器安装下稍后编译时候的依赖</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project$ <span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> build-essential cmake pkg-config libturbojpeg libjpeg-turbo8-dev mesa-common-dev freeglut3-dev libxrandr-dev libxi-dev libglfw3-dev libglfw3-dev libopenni2-dev libusb-dev libturbojpeg0-dev
+<pre class="line-numbers language-lang-bash"><code class="language-lang-bash">(base) jack@jack-Alienware-m15-R3:~/project$ sudo apt-get install build-essential cmake pkg-config libturbojpeg libjpeg-turbo8-dev mesa-common-dev freeglut3-dev libxrandr-dev libxi-dev libglfw3-dev libglfw3-dev libopenni2-dev libusb-dev libturbojpeg0-dev
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>由于我已经安装过了，所以这一步我不会安装任何东西。</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211118172852901.png" alt="安装依赖"></p>
 <h4 id="2-下载源码"><a href="#2-下载源码" class="headerlink" title="2. 下载源码"></a>2. 下载源码</h4><p><code>git</code>直接下载源码即可，如果下载的慢的话，要么科学上网，要么先用国内的码云gitee克隆一下，然后再下载码云的仓库。关于如何使用码云加速<code>github</code>下载可以参考我的这篇文章（挖个坑，以后补）</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project$ <span class="token function">git</span> clone https://github.com/OpenKinect/libfreenect2.git
+<pre class="line-numbers language-lang-bash"><code class="language-lang-bash">(base) jack@jack-Alienware-m15-R3:~/project$ git clone https://github.com/OpenKinect/libfreenect2.git
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211118173143020.png" alt="下载源码"></p>
 <p>下载之后的项目文件结构，可以看出来，是一个非常经典的<code>CMake</code>的项目</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211118173557080.png" alt="下载后的项目结构"></p>
 <h4 id="3-配置-amp-编译"><a href="#3-配置-amp-编译" class="headerlink" title="3. 配置&amp;编译"></a>3. 配置&amp;编译</h4><p>对于一个<code>CMake</code>工程，得到项目最后的成果，即最终的动态链接库/共享库、可执行文件一共需要两步。第一步是配置（<code>Config</code>），第二步是构建（<code>Build</code>）。配置指的是设置项目的一些配置，比如说编译器使用的语法标准、是否禁止编译器在编译阶段优化代码等等。这里不展开讲了，具体内容可以参考我的<code>CMake</code>系列文章（挖个坑）。</p>
 <p>首先创建一个编译空间</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project$ <span class="token function">cd</span> libfreenect2/
-<span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/libfreenect2$ <span class="token function">mkdir</span> build
-<span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/libfreenect2$ <span class="token function">cd</span> build/
+<pre class="line-numbers language-lang-bash"><code class="language-lang-bash">(base) jack@jack-Alienware-m15-R3:~/project$ cd libfreenect2/
+(base) jack@jack-Alienware-m15-R3:~/project/libfreenect2$ mkdir build
+(base) jack@jack-Alienware-m15-R3:~/project/libfreenect2$ cd build/
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>接下来再使用<code>CMake</code>针对<code>build</code>文件夹外的<code>CMakeLists</code>进行配置，需要注意的是，由于我已经配好了<code>Nvidia</code>的显卡驱动和<code>CUDA</code>，因此我指定使用<code>CUDA</code>编译，这样运行的时候就会有加速。此外配置的时候要指定安装到的位置，这个安装到的位置稍后安装ROS功能包的时候会用到，所以不建议修改，用默认的就行。</p>
 <p>具体来说我们都是在命令行使用-D参数来指定<code>CMake</code>的宏及其值(D=define)，<code>CMakeLists</code>中会检查这些宏的值。如果你不是<code>CUDA</code>的话就把后面指定<code>CUDA</code>的宏删掉即可</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/libfreenect2/build$ cmake <span class="token punctuation">..</span> -DCMAKE_INSTALL_PREFIX<span class="token operator">=</span><span class="token variable">$HOME</span>/freenect2 -DENABLE_CXX11<span class="token operator">=</span>ON -DCUDA_PROPAGATE_HOST_FLAGS<span class="token operator">=</span>off
+<pre class="line-numbers language-lang-bash"><code class="language-lang-bash">(base) jack@jack-Alienware-m15-R3:~/project/libfreenect2/build$ cmake .. -DCMAKE_INSTALL_PREFIX=$HOME/freenect2 -DENABLE_CXX11=ON -DCUDA_PROPAGATE_HOST_FLAGS=off
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211118184945046.png" alt="CMake配置工程"></p>
 <p>可以看到<code>CMake</code>配置的流程还是很清晰的，首先会去寻找系统中的编译器版本然后再去检查当前编译器是否至此指定版本的语法，接下来去寻找包等等。全部配置过程没有问题的话就会显示最后的三句话，当前<code>build</code>编译空间下也多出来很多中间文件。<code>Makefile</code>就是稍后<code>make</code>解析的对象。</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/libfreenect2/build$ <span class="token function">ls</span>
+<pre class="line-numbers language-lang-bash"><code class="language-lang-bash">(base) jack@jack-Alienware-m15-R3:~/project/libfreenect2/build$ ls
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211118185449344.png" alt="配置的结果"></p>
 <p>然后我们make编译即可</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/libfreenect2/build$ <span class="token function">make</span>
+<pre class="line-numbers language-lang-bash"><code class="language-lang-bash">(base) jack@jack-Alienware-m15-R3:~/project/libfreenect2/build$ make
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>我这里的编译可以说是顺风顺水，主要原因其实是我已经配置过一遍了，这是写教程时候删掉了全部的文件重头再来的结果。<strong>其实在第一次配的时候在编译这里遇到了两三个问题</strong>，不过我都解决掉了，现在没有办法把这些问题复现出来。这里挖个坑，下一次装机补上。主要的两个问题是第一次会报错不存在一个叫<code>libGL.so</code>的共享库，第二次则是在最后编译到100%之后链接的时候报错说没有定义的引用：<code>undefined reference to _glapi_tls_Current</code>。</p>
 <p>其实这两个问题都和<code>OpenGL</code>这个图形库有关（<code>Graphic Librar</code>y）。图形负责渲染材质等等，是将数据显示到我们的显示器上的库，包括看到的桌面、窗口等等都是用图形库渲染出来的。而<code>Kinect</code>捕获到的数据要转成图片显示，就必然会用到<code>OpenGL</code>这个库。第一个报错是因为管道断开（<code>libGL.so</code>是一个软连接），重新链接就行，第二个报错则是因为<code>libGL.so</code>链接到的共享库版本太老，指定一个更新的即可。</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211118185715177.png" alt="编译的过程"></p>
 <p>最后，由于<code>libfreenect2</code>最终生成的是一个驱动，因此他最终生成的结果不仅有可执行文件，还有共享库，我们需要<code>make install</code>来安装一下共享库。说是安装，其实就是把共享库复制到指定的位置去，一般的项目都是把共享库复制到系统链接时候的搜索路径，这样编译的时候系统会自动的去搜索。<strong>不过由于我们上面CMake在配置的时候指定了安装位置，因此他其实会安装到我们的家目录下面</strong></p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/libfreenect2/build$ <span class="token function">make</span> <span class="token function">install</span>
+<pre class="line-numbers language-lang-bash"><code class="language-lang-bash">(base) jack@jack-Alienware-m15-R3:~/project/libfreenect2/build$ make install
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>从命令的输出确实能够看到安装的位置就是我们的家目录</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211118190908729.png" alt="安装的结果"></p>
@@ -563,10 +557,10 @@ ROS杂篇 ROS中使用Kinect V2 Part1：安装+使用
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/330043-6ecf51d6a519b4fe.png" alt="Systemd守护进程所处的位置"></p>
 </blockquote>
 <p>我们直接把规则文件复制到<code>udev</code>的配置文件夹下即可</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">cp</span> <span class="token punctuation">..</span>/platform/linux/udev/90-kinect2.rules /etc/udev/rules.d/
+<pre class="line-numbers language-lang-bash"><code class="language-lang-bash">sudo cp ../platform/linux/udev/90-kinect2.rules /etc/udev/rules.d/
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <h4 id="5-验证安装"><a href="#5-验证安装" class="headerlink" title="5. 验证安装"></a>5. 验证安装</h4><p>最后上面的步骤一步步做下来，应该是没有问题的，不过在编译驱动的时候我们观察到make最后在生成一个叫做<code>Protonect</code>的可执行文件。这个程序其实就是验证安装的程序。我们接上<code>Kinect</code>的连接线，然后运行这个程序，如果安装成功就能够看到下面的图片</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/libfreenect2/build$ ./bin/Protonect 
+<pre class="line-numbers language-lang-bash"><code class="language-lang-bash">(base) jack@jack-Alienware-m15-R3:~/project/libfreenect2/build$ ./bin/Protonect
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>四张图中左上角是深度图，左下角是RGB图像，右下角是点云的图像，右上角是带有RGB的点云的图像。需要注意的是，点云的图像是通过深度图推算出来的。深度图只有一个Depth通道，数值越大表示越远，看起来就越黑。而点云图是XYZ三个通道，分别表示点相对相机的的XYZ坐标。而右上角的点云则是RGBXYZ六个通道图片。右边看到，有<code>CUDA</code>加速喧嚷延迟基本都在10ms左右，速度还是非常快的</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211118193300100.png" alt="验证程序的运行结果"></p>
@@ -574,24 +568,24 @@ ROS杂篇 ROS中使用Kinect V2 Part1：安装+使用
 <h3 id="C-安装ROS-Kinect深度相机功能包——iai-kinect2"><a href="#C-安装ROS-Kinect深度相机功能包——iai-kinect2" class="headerlink" title="C. 安装ROS Kinect深度相机功能包——iai_kinect2"></a>C. 安装ROS Kinect深度相机功能包——iai_kinect2</h3><p>就像在<code>Melodic</code>上使用<code>CV_Bridge</code>一样（挖个<code>Melodic</code>编译<code>CV_Bridge</code>的坑，以后补上），<code>iai_kinect2</code>也需要我们从<code>github</code>上下载源码然后编译。</p>
 <p>在编译之后，我们想要通过Kinect获得深度图像、点云图像等等直接启动这个<code>iai_kinect2</code>中的节点就行。这个节点将会调用libfreenect，并将获取到的图像发布到指定的话题里，因此我们订阅指定的话题即可得到数据。</p>
 <h4 id="1-下载并编译功能包"><a href="#1-下载并编译功能包" class="headerlink" title="1. 下载并编译功能包"></a>1. 下载并编译功能包</h4><p>由于iai-<code>kinect2</code>本质上是<code>ROS</code>的一个功能包，而<code>ROS</code>的功能包的发布都是以功能包的形式发布的，因此我们只需要把这个功能包下载到工作空间中并进行编译即可。为了不污染我们自己的工作空间，避免每次都要编译这个包，我们新创建一个叫做<code>install_iai_kinect</code>的工作空间的安装这个包</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>ros<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project$ <span class="token function">mkdir</span> install_iai_kinect2
-<span class="token punctuation">(</span>ros<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project$ <span class="token function">cd</span> install_iai_kinect2/
-<span class="token punctuation">(</span>ros<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/install_iai_kinect2$ <span class="token function">mkdir</span> src
-<span class="token punctuation">(</span>ros<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/install_iai_kinect2$ <span class="token function">cd</span> src/
-<span class="token punctuation">(</span>ros<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/install_iai_kinect2/src$ catkin_init_workspace 
-<span class="token punctuation">(</span>ros<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/install_iai_kinect2/src$ <span class="token function">cd</span> <span class="token punctuation">..</span>
-<span class="token punctuation">(</span>ros<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/install_iai_kinect2$ catkin_make
-<span class="token punctuation">(</span>ros<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/install_iai_kinect2$ ll
+<pre class="line-numbers language-lang-bash"><code class="language-lang-bash">(ros) jack@jack-Alienware-m15-R3:~/project$ mkdir install_iai_kinect2
+(ros) jack@jack-Alienware-m15-R3:~/project$ cd install_iai_kinect2/
+(ros) jack@jack-Alienware-m15-R3:~/project/install_iai_kinect2$ mkdir src
+(ros) jack@jack-Alienware-m15-R3:~/project/install_iai_kinect2$ cd src/
+(ros) jack@jack-Alienware-m15-R3:~/project/install_iai_kinect2/src$ catkin_init_workspace 
+(ros) jack@jack-Alienware-m15-R3:~/project/install_iai_kinect2/src$ cd ..
+(ros) jack@jack-Alienware-m15-R3:~/project/install_iai_kinect2$ catkin_make
+(ros) jack@jack-Alienware-m15-R3:~/project/install_iai_kinect2$ ll
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211118205323865.png" alt="初始化之后的工作空间"></p>
 <p>然后git下载功能并安装依赖，注意这里如果前面改了<code>libfreenect</code>的安装路径的话，这里编译的时候要添加一个<code>CMake</code>的宏来指定<code>libfreenect</code>的路径，参考<a target="_blank" rel="noopener" href="https://github.com/code-iai/iai_kinect2#install">文章</a>。</p>
 <p>此外，在使用<code>rosdep</code>安装的时候会遇到一个“报错”（见下），这个其实是正常的，因为<code>kinect2_brideg</code>、<code>kinect2_cailbration</code>、<code>kinect2_caliration</code>、<code>kinect2_viewer</code>这四个节点被<code>rosdep</code>认为是功能包了，但他们其实都只是<code>iai_kinect2</code>的一部分。</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>ros<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/install_iai_kinect2$ <span class="token function">cd</span> src/
-<span class="token punctuation">(</span>ros<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/install_iai_kinect2/src$ <span class="token function">git</span> clone https://github.com/code-iai/iai_kinect2.git
-<span class="token punctuation">(</span>ros<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/install_iai_kinect2/src$ <span class="token function">cd</span> iai_kinect2
-<span class="token punctuation">(</span>ros<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/install_iai_kinect2/src/iai_kinect2$ rosdep <span class="token function">install</span> -r --from-paths <span class="token keyword">.</span>
-<span class="token punctuation">(</span>ros<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/install_iai_kinect2/src/iai_kinect2$ <span class="token function">cd</span> <span class="token punctuation">..</span>/<span class="token punctuation">..</span>/
-<span class="token punctuation">(</span>ros<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/install_iai_kinect2$ catkin_make -DCMAKE_BUILD_TYPE<span class="token operator">=</span><span class="token string">"Release"</span>
+<pre class="line-numbers language-lang-bash"><code class="language-lang-bash">(ros) jack@jack-Alienware-m15-R3:~/project/install_iai_kinect2$ cd src/
+(ros) jack@jack-Alienware-m15-R3:~/project/install_iai_kinect2/src$ git clone https://github.com/code-iai/iai_kinect2.git
+(ros) jack@jack-Alienware-m15-R3:~/project/install_iai_kinect2/src$ cd iai_kinect2
+(ros) jack@jack-Alienware-m15-R3:~/project/install_iai_kinect2/src/iai_kinect2$ rosdep install -r --from-paths .
+(ros) jack@jack-Alienware-m15-R3:~/project/install_iai_kinect2/src/iai_kinect2$ cd ../../
+(ros) jack@jack-Alienware-m15-R3:~/project/install_iai_kinect2$ catkin_make -DCMAKE_BUILD_TYPE="Release"
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <blockquote>
 <p>ERROR: the following packages/stacks could not have their rosdepc keys resolved<br>to system dependencies:<br>kinect2_bridge: Cannot locate rosdep definition for [kinect2_registration]<br>kinect2_calibration: Cannot locate rosdep definition for [kinect2_bridge]<br>kinect2_viewer: Cannot locate rosdep definition for [kinect2_bridge]<br>iai_kinect2: Cannot locate rosdep definition for [kinect2_registration]</p>
@@ -599,23 +593,23 @@ ROS杂篇 ROS中使用Kinect V2 Part1：安装+使用
 <p>最后没有error就成功安装功能包了，但是不要忘记<code>source</code>一下，因为这个功能包不在<code>ROS</code>的元功能包中。</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211118205948236.png" alt="编译的结果"></p>
 <h4 id="2-验证安装"><a href="#2-验证安装" class="headerlink" title="2. 验证安装"></a>2. 验证安装</h4><p>同样，经历过上面的步骤之后，我们脸上<code>Kinect V2</code>的连接线来跑跑节点，看看有没有问题。类似于<code>cv_bridge</code>，<code>iai-kinect2</code>编译之后会得到一个<code>kinect_bridge</code>，我们利用其中的launch文件来测试一下。</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>ros<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/install_iai-kinect$ <span class="token function">source</span> devel/setup.bash 
-<span class="token punctuation">(</span>ros<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/install_iai-kinect$ roslaunch kinect2_bridge kinect2_bridge.launch
+<pre class="line-numbers language-lang-bash"><code class="language-lang-bash">(ros) jack@jack-Alienware-m15-R3:~/project/install_iai-kinect$ source devel/setup.bash 
+(ros) jack@jack-Alienware-m15-R3:~/project/install_iai-kinect$ roslaunch kinect2_bridge kinect2_bridge.launch
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211118204334851.png" alt="launch启动整个kinect_bridge"></p>
 <p>然后我们再开一个终端来看看节点图</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/install_iai-kinect$ rqt_graph 
+<pre class="line-numbers language-lang-bash"><code class="language-lang-bash">(base) jack@jack-Alienware-m15-R3:~/project/install_iai-kinect$ rqt_graph
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>看起来还不错，可以看到<code>kinect_bridge</code>其实只是一个交互的节点，他的后端数据处理都是依靠的其他的节点，<code>kinect2</code>负责调用<code>libfreenect</code>驱动，剩下的hd、sd、qhd分别负责处理高中低分辨率的图像。</p>
 <p>不过由于rqt是通过rosmaster中的注册信息来画节点图的，因此没有被订阅的话题无法被显示出来，我们看看所有的话题</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211118203224904.png" alt="Kinect_Bridge节点图"></p>
 <p>新开一个终端</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~$ rostopic list 
+<pre class="line-numbers language-lang-bash"><code class="language-lang-bash">(base) jack@jack-Alienware-m15-R3:~$ rostopic list
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>可以看到有很多的话题，不过其实所有的话题分成三组，<code>hd</code>表示高分辨率，<code>qhd</code>表示中分辨率，<code>sd</code>表示低分辨率</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211118203435667.png" alt="Kinect_Bridge发布的所有的画图"></p>
 <p>最后其实<code>kinect_bridge</code>提供了可视化的节点，不过首先需要对kinect相机进行校准，否则是有偏差的，不过我们这里只是为了验证，因此跑起来看看</p>
-<pre class="line-numbers language-bash"><code class="language-bash">rosrun kinect2_viewer kinect2_viewer kinect2 sd cloud
+<pre class="line-numbers language-lang-bash"><code class="language-lang-bash">rosrun kinect2_viewer kinect2_viewer kinect2 sd cloud
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>看起来效果还不错，不过由于订阅的是低分辨的图片，因此图片放大之后实际上像素间就会出现一些缺失的黑色点</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211118203934128.png" alt="可视化的结果"></p>
@@ -624,16 +618,16 @@ ROS杂篇 ROS中使用Kinect V2 Part1：安装+使用
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211118202235817.png" alt="编译时候的警告"></p>
 </blockquote>
 <h4 id="4-安装功能包可能会遇到的问题"><a href="#4-安装功能包可能会遇到的问题" class="headerlink" title="4. 安装功能包可能会遇到的问题"></a>4. 安装功能包可能会遇到的问题</h4><blockquote>
-<h4 id="1-CMake-Error-at-usr-lib-x86-64-linux-gnu-cmake-Qt5Gui-Qt5GuiConfig-cmake-27-message-：Qt5的报错"><a href="#1-CMake-Error-at-usr-lib-x86-64-linux-gnu-cmake-Qt5Gui-Qt5GuiConfig-cmake-27-message-：Qt5的报错" class="headerlink" title="1. **CMake Error at /usr/lib/x86_64-linux-gnu/cmake/Qt5Gui/Qt5GuiConfig.cmake:27 (message)**：Qt5的报错"></a>1. **CMake Error at /usr/lib/x86_64-linux-gnu/cmake/Qt5Gui/Qt5GuiConfig.cmake:27 (message)**：Qt5的报错</h4><p>具体报错如下图，即缺少了<code>libEGL.so</code>这个共享库</p>
+<h4 id="1-CMake-Error-at-usr-lib-x86-64-linux-gnu-cmake-Qt5Gui-Qt5GuiConfig-cmake-27-message-：Qt5的报错"><a href="#1-CMake-Error-at-usr-lib-x86-64-linux-gnu-cmake-Qt5Gui-Qt5GuiConfig-cmake-27-message-：Qt5的报错" class="headerlink" title="1. CMake Error at /usr/lib/x86_64-linux-gnu/cmake/Qt5Gui/Qt5GuiConfig.cmake:27 (message)：Qt5的报错"></a>1. <strong>CMake Error at /usr/lib/x86_64-linux-gnu/cmake/Qt5Gui/Qt5GuiConfig.cmake:27 (message)</strong>：Qt5的报错</h4><p>具体报错如下图，即缺少了<code>libEGL.so</code>这个共享库</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211118200845339.png" alt="Qt5报错"></p>
 <p><strong>解决方法：</strong></p>
 <p>和上面安装驱动时候遇到的报错差不多，估计是一个尿性，即软连接断了，先去<code>/usr/lib/x86-linux-gnu</code>下看看。果然，红色的字体，断开的链接。即<code>/usr/lib/x86_64-linux-gnu/libEGL.so</code>这个软连接本来指向的文件没了。不过看这个样子有一个1.1.0版本的，估计是某次<code>apt upgrade</code>时候更新了这个库。</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/install_iai-kinect$ ll /usr/lib/x86_64-linux-gnu/libEGL.so* 
+<pre class="line-numbers language-lang-bash"><code class="language-lang-bash">(base) jack@jack-Alienware-m15-R3:~/project/install_iai-kinect$ ll /usr/lib/x86_64-linux-gnu/libEGL.so*
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211118201305342.png" alt="libEGL.so断开的软连接"></p>
 <p>那么解决思路就很简单了，我们先删掉原有的断掉的链接，然后让他再指向新版本就行了，毕竟新版本一般都是向后兼容的。除了<code>Python2</code>到<code>Python3</code></p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/install_iai-kinect$ <span class="token function">sudo</span> <span class="token function">rm</span> /usr/lib/x86_64-linux-gnu/libEGL.so 
-<span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/install_iai-kinect$ <span class="token function">sudo</span> <span class="token function">ln</span> -s /usr/lib/x86_64-linux-gnu/libEGL.so.1.1.0 /usr/lib/x86_64-linux-gnu/libEGL.so
+<pre class="line-numbers language-lang-bash"><code class="language-lang-bash">(base) jack@jack-Alienware-m15-R3:~/project/install_iai-kinect$ sudo rm /usr/lib/x86_64-linux-gnu/libEGL.so 
+(base) jack@jack-Alienware-m15-R3:~/project/install_iai-kinect$ sudo ln -s /usr/lib/x86_64-linux-gnu/libEGL.so.1.1.0 /usr/lib/x86_64-linux-gnu/libEGL.so
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>现在看着就没问题了，管道对了</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211118201854870.png" alt="重置libEGL.so的指向"></p>
@@ -644,59 +638,59 @@ ROS杂篇 ROS中使用Kinect V2 Part1：安装+使用
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211118210715487.png" alt="功能包的依赖"></p>
 <p>正因为<code>kinect_bridge</code>中的消息全部都是<code>ROS</code>的标准消息，所有的图像都是<code>sensor_msgs/Image</code>或者<code>sensor_msgs/CompressedImage</code>。而点云则是<code>sensor_msgs/PointCloud2</code>，我们可以非常快速的写一个测试代码，代码见下（<strong>注意如果你要写C++的话不要在iai_bridge的工作空间中编译，会报错，因为Kinect_Bridge没有提供ROS编译、安装相关的CMake指令</strong>）</p>
 <p>关于<code>ROS</code>中使用<code>conda</code>、还有<code>cv_bridge</code>、<code>ROS</code>使用<code>Python</code>等问题先挖个坑，后面补上文章</p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true">#! /home/jack/anaconda3/envs/ros/bin/python</span>
+<pre class="line-numbers language-lang-python"><code class="language-lang-python">#! /home/jack/anaconda3/envs/ros/bin/python
 
-<span class="token triple-quoted-string string">"""rospy 中使用 通过 kinect 获取点云的示例代码 """</span>
+"""rospy 中使用 通过 kinect 获取点云的示例代码 """
 
-<span class="token triple-quoted-string string">"""
+"""
 @author: Jack Wang
 @copyright: Jack Wang
 @time: 2021-11-18
-"""</span>
+"""
 
-<span class="token keyword">import</span> sys
-<span class="token keyword">import</span> datetime
-<span class="token keyword">import</span> time
+import sys
+import datetime
+import time
 
-<span class="token keyword">import</span> cv2
-<span class="token keyword">from</span> colorama <span class="token keyword">import</span> Fore<span class="token punctuation">,</span> Style
+import cv2
+from colorama import Fore, Style
 
-<span class="token comment" spellcheck="true"># 我在 Python3 下编译了cv_bridge，所以要避免import了下载ROS时候一并下载的系统的Python2.7的cv_bridge</span>
-<span class="token keyword">for</span> path_idx <span class="token keyword">in</span> range<span class="token punctuation">(</span>len<span class="token punctuation">(</span>sys<span class="token punctuation">.</span>path<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">if</span> <span class="token string">"2.7"</span> <span class="token keyword">in</span> sys<span class="token punctuation">.</span>path<span class="token punctuation">[</span>path_idx<span class="token punctuation">]</span><span class="token punctuation">:</span>
-        temp <span class="token operator">=</span> sys<span class="token punctuation">.</span>path<span class="token punctuation">.</span>pop<span class="token punctuation">(</span>path_idx<span class="token punctuation">)</span>
-        <span class="token keyword">break</span>
-sys<span class="token punctuation">.</span>path<span class="token punctuation">.</span>append<span class="token punctuation">(</span>temp<span class="token punctuation">)</span>
+# 我在 Python3 下编译了cv_bridge，所以要避免import了下载ROS时候一并下载的系统的Python2.7的cv_bridge
+for path_idx in range(len(sys.path)):
+    if "2.7" in sys.path[path_idx]:
+        temp = sys.path.pop(path_idx)
+        break
+sys.path.append(temp)
 
-<span class="token keyword">import</span> rospy
-<span class="token keyword">from</span> sensor_msgs<span class="token punctuation">.</span>msg <span class="token keyword">import</span> Image
-<span class="token keyword">from</span> cv_bridge <span class="token keyword">import</span> CvBridge
-
-
-<span class="token keyword">class</span> <span class="token class-name">MyKinectViewer</span><span class="token punctuation">(</span>object<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    bridge <span class="token operator">=</span> CvBridge<span class="token punctuation">(</span><span class="token punctuation">)</span>
-    today<span class="token punctuation">:</span> str <span class="token operator">=</span> datetime<span class="token punctuation">.</span>date<span class="token punctuation">.</span>today<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>__str__<span class="token punctuation">(</span><span class="token punctuation">)</span>
-    start_sec<span class="token punctuation">:</span> float <span class="token operator">=</span> time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span>
-    font <span class="token operator">=</span> cv2<span class="token punctuation">.</span>FONT_HERSHEY_DUPLEX
-    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> None<span class="token punctuation">:</span>
-        super<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span><span class="token punctuation">)</span>
-        rospy<span class="token punctuation">.</span>loginfo<span class="token punctuation">(</span>msg<span class="token operator">=</span>f<span class="token string">"{Fore.GREEN}启动KinectBridge订阅节点！{Style.RESET_ALL}"</span><span class="token punctuation">)</span>
-        subcriber <span class="token operator">=</span> rospy<span class="token punctuation">.</span>Subscriber<span class="token punctuation">(</span>name<span class="token operator">=</span><span class="token string">"/kinect2/sd/image_color_rect"</span><span class="token punctuation">,</span> data_class<span class="token operator">=</span>Image<span class="token punctuation">,</span> callback<span class="token operator">=</span>self<span class="token punctuation">.</span>image_cb<span class="token punctuation">,</span> queue_size<span class="token operator">=</span><span class="token number">20</span><span class="token punctuation">)</span>
-
-    <span class="token keyword">def</span> <span class="token function">image_cb</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> msg<span class="token punctuation">:</span> Image<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> None<span class="token punctuation">:</span>
-        cv_img <span class="token operator">=</span> self<span class="token punctuation">.</span>bridge<span class="token punctuation">.</span>imgmsg_to_cv2<span class="token punctuation">(</span>msg<span class="token punctuation">)</span>
-        cv_img <span class="token operator">=</span> cv2<span class="token punctuation">.</span>putText<span class="token punctuation">(</span>cv_img<span class="token punctuation">,</span> f<span class="token string">"{self.today}, start times: {time.time()-self.start_sec:>.2f}"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">380</span><span class="token punctuation">)</span><span class="token punctuation">,</span> self<span class="token punctuation">.</span>font<span class="token punctuation">,</span> <span class="token number">0.8</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">255</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span><span class="token punctuation">)</span>
-        cv_img <span class="token operator">=</span> cv2<span class="token punctuation">.</span>putText<span class="token punctuation">(</span>cv_img<span class="token punctuation">,</span> f<span class="token string">"-- by Jack Wang"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">270</span><span class="token punctuation">,</span> <span class="token number">400</span><span class="token punctuation">)</span><span class="token punctuation">,</span> self<span class="token punctuation">.</span>font<span class="token punctuation">,</span> <span class="token number">0.8</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">255</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span><span class="token punctuation">)</span>
-        cv2<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span><span class="token string">"kinect_test"</span><span class="token punctuation">,</span> cv_img<span class="token punctuation">)</span>
-        <span class="token keyword">if</span> cv2<span class="token punctuation">.</span>waitKey<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">27</span><span class="token punctuation">:</span>
-            rospy<span class="token punctuation">.</span>loginfo<span class="token punctuation">(</span>f<span class="token string">"{Fore.GREEN}关闭节点{Style.RESET_ALL}"</span><span class="token punctuation">)</span>
-            rospy<span class="token punctuation">.</span>signal_shutdown<span class="token punctuation">(</span>reason<span class="token operator">=</span><span class="token string">"pressed esc"</span><span class="token punctuation">)</span>
+import rospy
+from sensor_msgs.msg import Image
+from cv_bridge import CvBridge
 
 
-<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">"__main__"</span><span class="token punctuation">:</span>
-    rospy<span class="token punctuation">.</span>init_node<span class="token punctuation">(</span>name<span class="token operator">=</span><span class="token string">"kinect_test"</span><span class="token punctuation">,</span> anonymous<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
-    mkv <span class="token operator">=</span> MyKinectViewer<span class="token punctuation">(</span><span class="token punctuation">)</span>
-    rospy<span class="token punctuation">.</span>spin<span class="token punctuation">(</span><span class="token punctuation">)</span>
+class MyKinectViewer(object):
+    bridge = CvBridge()
+    today: str = datetime.date.today().__str__()
+    start_sec: float = time.time()
+    font = cv2.FONT_HERSHEY_DUPLEX
+    def __init__(self) -> None:
+        super().__init__()
+        rospy.loginfo(msg=f"{Fore.GREEN}启动KinectBridge订阅节点！{Style.RESET_ALL}")
+        subcriber = rospy.Subscriber(name="/kinect2/sd/image_color_rect", data_class=Image, callback=self.image_cb, queue_size=20)
+
+    def image_cb(self, msg: Image) -> None:
+        cv_img = self.bridge.imgmsg_to_cv2(msg)
+        cv_img = cv2.putText(cv_img, f"{self.today}, start times: {time.time()-self.start_sec:>.2f}", (10, 380), self.font, 0.8, (0, 255, 0), 2,)
+        cv_img = cv2.putText(cv_img, f"-- by Jack Wang", (270, 400), self.font, 0.8, (0, 255, 0), 2,)
+        cv2.imshow("kinect_test", cv_img)
+        if cv2.waitKey(1) == 27:
+            rospy.loginfo(f"{Fore.GREEN}关闭节点{Style.RESET_ALL}")
+            rospy.signal_shutdown(reason="pressed esc")
+
+
+if __name__ == "__main__":
+    rospy.init_node(name="kinect_test", anonymous=False)
+    mkv = MyKinectViewer()
+    rospy.spin()
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>可以看出来，效果还不错</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211118214830894.png" alt="节点效果图"></p>
@@ -774,16 +768,16 @@ sys<span class="token punctuation">.</span>path<span class="token punctuation">.
                                     <span class="chip bg-color">ROS</span>
                                 </a>
                             
+                                <a href="/tags/Kinect-V2/">
+                                    <span class="chip bg-color">Kinect V2</span>
+                                </a>
+                            
                                 <a href="/tags/Ubuntu/">
                                     <span class="chip bg-color">Ubuntu</span>
                                 </a>
                             
                                 <a href="/tags/melodic/">
                                     <span class="chip bg-color">melodic</span>
-                                </a>
-                            
-                                <a href="/tags/Kinect-V2/">
-                                    <span class="chip bg-color">Kinect V2</span>
                                 </a>
                             
                         </div>
@@ -999,8 +993,8 @@ sys<span class="token punctuation">.</span>path<span class="token punctuation">.
                         <span class="chip bg-color">ROS</span>
                     </a>
                     
-                    <a href="/tags/cv-bridge/">
-                        <span class="chip bg-color">cv_bridge</span>
+                    <a href="/tags/Kinect-V2/">
+                        <span class="chip bg-color">Kinect V2</span>
                     </a>
                     
                     <a href="/tags/Ubuntu/">
@@ -1015,20 +1009,20 @@ sys<span class="token punctuation">.</span>path<span class="token punctuation">.
                         <span class="chip bg-color">OpenCv</span>
                     </a>
                     
+                    <a href="/tags/cv-bridge/">
+                        <span class="chip bg-color">cv_bridge</span>
+                    </a>
+                    
                     <a href="/tags/sensor-msgs/">
                         <span class="chip bg-color">sensor_msgs</span>
                     </a>
                     
-                    <a href="/tags/roslaunch/">
-                        <span class="chip bg-color">roslaunch</span>
-                    </a>
-                    
-                    <a href="/tags/Kinect-V2/">
-                        <span class="chip bg-color">Kinect V2</span>
-                    </a>
-                    
                     <a href="/tags/iai-kinect2/">
                         <span class="chip bg-color">iai-kinect2</span>
+                    </a>
+                    
+                    <a href="/tags/roslaunch/">
+                        <span class="chip bg-color">roslaunch</span>
                     </a>
                     
                 </div>
@@ -1258,7 +1252,7 @@ hexo本身只是提供了一个博客的框架，博客网站的美化和优化�
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
-                <span id="year">2021</span>
+                <span id="year">2021-2022</span>
             
             <a href="/about" target="_blank">Jack Wang</a>
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
@@ -1266,7 +1260,7 @@ hexo本身只是提供了一个博客的框架，博客网站的美化和优化�
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">67k</span>
+                        class="white-color">83.3k</span>
             
             
             

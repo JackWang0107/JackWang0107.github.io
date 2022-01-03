@@ -1,0 +1,1511 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="数学建模算法1-线性规划, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
+    <meta name="description" content="
+本文主要讲解了数学建模中常见的一类问题：线性规划，及其求解
+
+
+数学建模算法1-线性规划线性规划是数学建模中非常常见的一类问题，这类问题的求解算法也是必须要掌握的。本文就在介绍线性规划问题的基础上讲解了如何通过编程进行求解。
+1. 介绍在">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>数学建模算法1-线性规划 | JackWang&#39;s Bolg</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">JackWang&#39;s Bolg</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-book-reader" style="zoom: 0.6;"></i>
+      
+      <span>博客</span>
+      <i class="fas fa-chevron-down" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/tags">
+          
+          <i class="fas fa-tags" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按标签归类文章</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories">
+          
+          <i class="fas fa-bookmark" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按目录归类文章</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/archives">
+          
+          <i class="fas fa-archive" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按日期分类文章</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">JackWang&#39;s Bolg</div>
+        <div class="logo-desc">
+            
+            JackWang的个人博客
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-book-reader"></i>
+			
+			博客
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>
+
+                  <a href="/tags " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-tags" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按标签归类文章</    span>
+
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/categories " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-bookmark" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按目录归类文章</    span>
+
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/archives " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-archive" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按日期分类文章</    span>
+
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('抱歉，这篇文章并不想让所有人都看到，请输入授权密码观看')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/359b033b5bb5c9eab88c9fcdd439b6003af3b3a5')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">数学建模算法1-线性规划</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Python/">
+                                <span class="chip bg-color">Python</span>
+                            </a>
+                        
+                            <a href="/tags/%E7%BA%BF%E6%80%A7%E8%A7%84%E5%88%92/">
+                                <span class="chip bg-color">线性规划</span>
+                            </a>
+                        
+                            <a href="/tags/Linear-Programming/">
+                                <span class="chip bg-color">Linear Programming</span>
+                            </a>
+                        
+                            <a href="/tags/Math-Modeling/">
+                                <span class="chip bg-color">Math Modeling</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E7%AE%97%E6%B3%95/" class="post-category">
+                                数学建模算法
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2022-01-01
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2022-01-02
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    4.4k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    17 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <blockquote>
+<p>本文主要讲解了数学建模中常见的一类问题：线性规划，及其求解</p>
+</blockquote>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/359b033b5bb5c9eab88c9fcdd439b6003af3b3a5" alt="线性规划" style="zoom:150%;"></p>
+<h1 id="数学建模算法1-线性规划"><a href="#数学建模算法1-线性规划" class="headerlink" title="数学建模算法1-线性规划"></a>数学建模算法1-线性规划</h1><p>线性规划是数学建模中非常常见的一类问题，这类问题的求解算法也是必须要掌握的。本文就在介绍线性规划问题的基础上讲解了如何通过编程进行求解。</p>
+<h2 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1. 介绍"></a>1. 介绍</h2><p>在人们的生产实践中，经常会遇到如何利用现有资源来安排生产，以取得最大经济效益的问题。更广泛的，<strong>是在某些变量有约束的条件下，求另外一些以来被约束变量的变量的最大最小值问题</strong>。针对这类问题的求解，形成了数学中的运筹学的一个重要分支——数学规划。而线性规划（Linear Programming，LP）就是数学规划中的一个组分。</p>
+<blockquote>
+<p>数学规划是用于求解有约束变量函数的极值问题。而线性规划是数学规划的一部分。</p>
+</blockquote>
+<p>自从1947年G. B. Dantzig提出求解线性规划的算法——单纯形法以来，线性规划在理论上越来越成熟，在实际的运用中也越来越广泛。尤其是计算机的发展使得能够处理成千上万个约束条件和目标变量的线性规划问题之后，线性规划的适用领域越来越广泛，成为了现代管理中经常采用的一种方法。</p>
+<p>单纯形算法利用多面体的顶点构造一个可能的解，然后沿着多面体的边走到目标函数值更高的另一个顶点，直至到达最优解为止。虽然这个算法在实际上很有效率，在小心处理可能出现的“循环”的情况下，可以保证找到最优解，但它的最坏情况可以很坏：可以构筑一个线性规划问题，单纯形算法需要问题大小的指数倍的运行时间才能将之解出。事实上，有一段时期内人们曾不能确定线性规划问题是NP完全问题还是可以在多项式时间里解出的问题。</p>
+<p>第一个在最坏情况具有多项式时间复杂度的线性规划算法在1979年由前苏联数学家Leonid Khachiyan提出。这个算法建基于非线性规划中Naum Shor发明的椭球法（ellip-soid method），该法又是Arkadi Nemirovski（2003年冯‧诺伊曼运筹学理论奖得主）和D. Yudin的凸集最优化椭球法的一般化。</p>
+<p>理论上，“椭球法”在最恶劣的情况下所需要的计算量要比“单形法”增长的缓慢，有希望用之解决超大型线性规划问题。但在实际应用上，Khachiyan的算法令人失望：一般来说，单纯形算法比它更有效率。它的重要性在于鼓励了对内点算法的研究。内点算法是针对单形法的“边界趋近”观念而改采“内部逼近”的路线，相对于只沿着可行域的边沿进行移动的单纯形算法，内点算法能够在可行域内移动。<br>1984年，贝尔实验室印度裔数学家卡马卡（Narendra Karmarkar）提出了投影尺度法（又名Karmarkar’s algorithm）。这是第一个在理论上和实际上都表现良好的算法：它的最坏情况仅为多项式时间，且在实际问题中它比单纯形算法有显著的效率提升。自此之后，很多内点算法被提出来并进行分析。一个常见的内点算法为Mehrotra predictor-corrector method。尽管在理论上对它所知甚少，在实际应用中它却表现出色。</p>
+<p>单形法沿着边界由一个顶点移动到“相邻”的顶点，内点算法每一步的移动考量较周详，“跨过可行解集合的内部”去逼近最佳解。当今的观点是：对于线性规划的日常应用问题而言，如果算法的实现良好，基于单纯形法和内点法的算法之间的效率没有太大差别，只有在超大型线性规划中，顶点几成天文数字，内点法有机会领先单形法。<br>线性规划的求解程式在各种各样的工业最优化问题里被广泛使用，例如运输网络的流量的最优化问题，其中很多都可以不太困难地被转换成线性规划问题。 </p>
+<h2 id="2-线性规划的定义"><a href="#2-线性规划的定义" class="headerlink" title="2. 线性规划的定义"></a>2. 线性规划的定义</h2><p>先看一个例子</p>
+<blockquote>
+<p>某机床厂能够生产甲、乙两种机床，各自的销售利润为四千和三千元。生产甲机床需要A、B两种机器加工，加工时间分别为2小时每台和1小时每台；生产乙机床需要A、B、C三种机器，加工时间为每种机器各一个小时。若每天A、B、C机器分别只能运行10小时、8小时和7小时。问该厂每天应该生产多少甲、乙机床，才能使得总利润最大？</p>
+</blockquote>
+<p>针对上述问题，求解过程如下：</p>
+<p>设该厂生产$x_1$台甲机床，$x_2$台乙机床，总利润为$z$，则上述问题数学模型为</p>
+<script type="math/tex; mode=display">
+\max_{x_1, x_2} z =4x_1 + 3x_2\\
+\begin {cases}
+2x_1+x+2&\leq &10\\
+x_1+x_2&\leq &8\\
+x_2 &\leq &7\\
+x_1, x_2 &\geq &0
+\end {cases}</script><p>上面这个问题中，我们称变量$x_1, x_2$为<strong>决策变量</strong>，称变量$z$为<strong>目标变量</strong>，由于目标变量$z$一般都是决策变量的函数，因此有时候也称目标变量为<strong>目标函数</strong>。而对决策变量做出的限制，即上面的四个不等式，称为<strong>约束条件</strong>。</p>
+<p>有了上面的定义后，我们接下来就可以给出线性规划的定义：<strong>称目标函数和约束条件都是线性函数的规划问题为线性规划</strong></p>
+<p>因此，线性规划问题是指在<strong>一组</strong>线性约束的条件下求<strong>一组</strong>线性目标函数最大或最小值的问题。</p>
+<p>一般来说，在约束下的决策变量的值域往往是一个连续的区域，因此称所有符合约束的决策变量的值组成的集合称为该问题的<strong>可行域</strong>，记为R。称可行域中每一个元素$\vec x=[x_1,x_2,\cdots,x_n]$为<strong>可行解</strong>。称所有可行解中可以使目标函数达到最大值的可行解为<strong>最优解</strong></p>
+<p>线性规划问题的求解，最关键的步骤其实是如何把具体的问题抽象成一个线性规划问题。实际建模的时候，一般不会出现像上面这样如此明显的问法。此外第二个问题就是决策变量的选择。</p>
+<h2 id="3-线性规划的变形"><a href="#3-线性规划的变形" class="headerlink" title="3. 线性规划的变形"></a>3. 线性规划的变形</h2><p>上面说到，线性规划问题的难度不在于求解，而在于将问题转变为一个线性规划问题。因此下面介绍一些常见的线性规划问题的变形</p>
+<h3 id="A-非线性目标函数——换元"><a href="#A-非线性目标函数——换元" class="headerlink" title="A. 非线性目标函数——换元"></a>A. 非线性目标函数——换元</h3><p>在一些情况下，目标函数虽然不是线性的，但是可以通过换元的方法实现转换。例如下面的线性规划模型</p>
+<script type="math/tex; mode=display">
+\max_{x_1, x_2, \cdots, x_n} z = |x_1| + |x_2| + \cdots + |x_n|\\
+\begin {cases}
+a_1 x_1 + a_2x_2 + \cdots + a_nx_n &\leq & a\\
+b_1 x_1 + b_2x_2 + \cdots + b_nx_n &= & b
+\end {cases}</script><p>为此，设$x_i=u_i-v_i$,，$|x_i|=u_i+v_i$，则上面的线性规划模型变为</p>
+<script type="math/tex; mode=display">
+\max_{u_1, \cdots, u_n; v_1, \cdots, v_n} z = (u_1+\cdots u_n) + (v_1\cdots v_n)\\
+\begin {cases}
+(a_1 u_1 + \cdots + a_nu_n) - (a_1 v_1 + \cdots + a_nv_n) &\leq & a\\
+(b_1 u_1 + \cdots + b_nu_n) - (b_1 v_1 + \cdots + b_nv_n) &= & b\\
+u1+v_1,\ \ \  \cdots,\ \ \  u_n+v_n &> &0
+\end {cases}</script><p>则转化为一个标准的线性规划问题</p>
+<h2 id="4-线性规划问题的公式化-向量化"><a href="#4-线性规划问题的公式化-向量化" class="headerlink" title="4. 线性规划问题的公式化/向量化"></a>4. 线性规划问题的公式化/向量化</h2><p>对线性规划问题进行向量化（表达成矩阵形式）之后，我们能够进一步的利用各种数学工具对其进行求解。</p>
+<p>对于决策变量，用一个列向量表示$\vec x=[x_1, x_2, \cdots，x_n]^T$；由于目标变量可能有多个，因此也用一个向量表示目标向量$\vec c=[c_1, c_2,\cdots, c_n]$。则目标函数的系数可以用一个矩阵$C$来表示:</p>
+<script type="math/tex; mode=display">
+\begin {aligned}
+\vec c &= C^T \times \vec x \\
+& = 
+\begin {bmatrix}
+c_{11} & c_{12} & \cdots & c_{1n}\\
+c_{21} & c_{22} & \cdots & c_{2n}\\
+\vdots & \vdots & \ddots & \vdots\\
+c_{n1} & c_{n2} & \cdots & c_{nn}
+\end {bmatrix} \times \vec x
+\end{aligned}</script><p>接下来对约束条件进行向量化。约束条件其实可以分为三类，第一类是$\leq$类型的（即$A\vec x\leq \vec b$），第二类是$=$类型的（即$A<em>{eq}\vec x\leq b</em>{eq}$），第三类是约定变量范围的（即$\vec {lb}\leq \vec x \leq \vec {ub}$）</p>
+<p>因此，整个线性规划问题的向量形式（标准形式）如下：</p>
+<script type="math/tex; mode=display">
+\max_{\vec x} \vec z = C^T \vec x\\
+\begin {cases}
+A\vec x &\leq &\vec b\\
+A_{eq} \vec x & = & \vec b_{eq}\\
+\vec {lb} &\leq &\vec x &\leq &\vec {ub}
+\end {cases}</script><p>因此，稍后用程序求解线性规划问题的时候，所需要的变量就是：$\vec C$、$\vec A$、$\vec b$、$\vec A<em>{eq}$、$\vec b</em>{eq}$、$\vec {lb}$、$\vec {ub}$</p>
+<h2 id="5-线性规划Python求解"><a href="#5-线性规划Python求解" class="headerlink" title="5. 线性规划Python求解"></a>5. 线性规划Python求解</h2><p>对于线性规划问题，对其求解办法的研究和利用线性规划求解问题是两回事。对于数学建模来说，我们其实只需要利用线性规划去求解问题即可，并不需要花费很多的时间在研究线性规划求解方法的学习上，毕竟求解线性规划问题的算法已经有很多了。其实不仅仅对于线性规划，后面讲解的诸多问题，我们只需要掌握求解方法即可，而不用过分深入求解原理。</p>
+<p>Python中使用<code>scipy</code>库中的<code>optimize</code>模块中的<code>linprog</code>函数求解</p>
+<p>注：以下内容参考<a target="_blank" rel="noopener" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.linprog.html">scipy官方的linprog文档</a>（<a target="_blank" rel="noopener" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.linprog.html）">https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.linprog.html）</a></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220101191341829.png" alt="SciPy的官方文档" style="zoom:50%;"></p>
+<p>可以看到，对于 $\leq$类型，SciPy的变量名是ub（upper bound），$=$则是eq，范围则是$bounds$</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220101191536675.png" alt="需要用到的参数" style="zoom:50%;"></p>
+<p>需要注意的就是bounds的格式，bounds是一个元组对的列表，第一个元素是下限，第二个元素是上限，若没有上限/下限则为None。</p>
+<p>此外，由于约束条件中不一定三种类型都有，因此如果没有的话指定为None即可</p>
+<p>最后的返回值是 scipy.optimize.OptimizeResult对象，可用的属性如下</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220101192003430.png" alt="返回对象的属性" style="zoom: 67%;"></p>
+<p>需要注意的是，返回的最优结果是最小值，因此我们如果要求最大值要给$C$矩阵取反</p>
+<p>下面给出一个例子</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220101195241900.png" alt="线性规划求解的例子"></p>
+<pre class="line-numbers language-lang-python"><code class="language-lang-python">import numpy as np
+import scipy.optimize
+import scipy.optimize as scopt
+
+c = np.array([-2, -3, 5])
+A = np.array([-2, 5, -1, 1, 3, 1]).reshape(2, -1)
+b = np.array([-10, 12])
+A_eq = np.ones(shape=(1, 3))
+B_eq = 7
+bounds = [[0, None], [0, None], [0, None]]
+
+result: scipy.optimize.OptimizeResult = scopt.linprog(c=c, A_ub=A, b_ub=b, A_eq=A_eq, b_eq=B_eq, bounds=bounds)
+print(f"min value of z: {result.fun}")
+print(f"corresponding xs: {result.x}")
+print()
+print(result)
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220101193044389.png" alt="运行结果"></p>
+<h2 id="6-线性规划建模例子"><a href="#6-线性规划建模例子" class="headerlink" title="6. 线性规划建模例子"></a>6. 线性规划建模例子</h2><p>最后以一个mini-数学建模的例子来结尾，这个例子就是使用线性规划求解的。</p>
+<h3 id="A-最优投资问题"><a href="#A-最优投资问题" class="headerlink" title="A. 最优投资问题"></a>A. 最优投资问题</h3><p>​    市场上有$n$种资产$s_i,\ i=1, 2, \cdots ,n$可以选择。现用数额为$M$的资金来进行一个时期的投资。在这一时期内购买资产$s_i$的平均收益率为$r_i$，风险损失率为$q_i$。此外，投资越分散，总的风险越少，而总风险可用所有购买的资产的风险中的最大的一个风险来度量。</p>
+<p>​    购买资产$s_i$时要付交易费，费率为$p_i$;，当购买额不超过给定值$u_i$（$M\gg u_i$）时，交易费率按购买额为$u_i$计算。另外，假定同期银行存款利率是$r_0$，存银行既无交易费又无风险（设$r_0= 5%$）。</p>
+<p>​    n= 4时相关数据如下表。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220101195640092.png" alt="表1.1" style="zoom:50%;"></p>
+<p>​    试给该公司设计一种投资组合方案，即用给定资金$M$，有选择地购买若干种资产或存银行生息，使净收益尽可能大，使总体风险尽可能小。 </p>
+<h3 id="B-符号规定"><a href="#B-符号规定" class="headerlink" title="B. 符号规定"></a>B. 符号规定</h3><p>对问题做出如下的符号规定</p>
+<ul>
+<li>设$s_i$表示第$i$种投资项目，如股票、债券等。则$i=0, 1, 2, \cdots, n$，其中$s_0$表示存入银行</li>
+<li>$r_i$， $p_i$， $q_i$分别表示资产$s_i$的平均收益、交易费率以及风险损失，其中$r_0=0.05$，$p_0=0$，$q_0=0$</li>
+<li>$u_i$表示交易$s_i$时候的费率</li>
+<li>$x_i$表示投资$s_i$的金额</li>
+<li>$a$表示投资的总风险</li>
+<li>$Q$表示总收益</li>
+</ul>
+<h3 id="C-基本假设"><a href="#C-基本假设" class="headerlink" title="C. 基本假设"></a>C. 基本假设</h3><ol>
+<li>为便于计算，假设$M=1$</li>
+<li>投资越分散，总风险越小</li>
+<li>总风险用购买的$s_i$中最大的一项描述</li>
+<li>$n+1$种资产$s_i$之间的风险$q_i$是独立的</li>
+<li>在投资期间内，$r_i$，$p_i$，$q_i$保持为定值，不受外界因素影响</li>
+<li>净收益和总体风险只受$r_i$，$p_i$，$q_i$影响，不受其他因素影响</li>
+</ol>
+<h3 id="D-模型分析与建立"><a href="#D-模型分析与建立" class="headerlink" title="D. 模型分析与建立"></a>D. 模型分析与建立</h3><p>模型的总风险即指投资组可能的损失，因此</p>
+<script type="math/tex; mode=display">
+a=\max\{q_ix_i| i=1,\cdots,n\}</script><p>此外，进行交易的时候购买资产<code>s_i</code>所指出的交易费用为一分段函数</p>
+<script type="math/tex; mode=display">
+\begin {cases}
+p_i u_i, & x_i \leq u_i\\
+p_i x_i, & x_i \ge u_i
+\end {cases}</script><p>考虑到购买资产$s_i$时候的收益$r_i$，且$M\gg u_i$，则购买资产$s_i$产生的净收益为</p>
+<script type="math/tex; mode=display">
+Q_i=(r_i-p_i)x_i</script><p>目标是使收益尽可能大，同时风险尽可能小，因此是一个多目标规划的模型，优化目标如下</p>
+<script type="math/tex; mode=display">
+\begin {cases}
+\max (\sum_{i=0}^n (r_i-p_i)x_i)\\
+\min \max ({q_ix_i})
+\end {cases}</script><p>约束条件为</p>
+<script type="math/tex; mode=display">
+\begin{cases}
+\sum_{i=0}^n (1+p_i)x_i = M, & i=0, \cdots,n\\
+x_i \ge 0, & i=0,\cdots,n
+\end{cases}</script><p>考虑到不同投资者在投资时的偏好不同，因此有如下三类模型：</p>
+<h4 id="1-模型一：固定风险，优化收益"><a href="#1-模型一：固定风险，优化收益" class="headerlink" title="1. 模型一：固定风险，优化收益"></a>1. 模型一：固定风险，优化收益</h4><p>设投资损失的上界$l$作为投资者能够承担的最大单笔损失比例，则投资者的损失比例$\frac{q_ix_i}{M}\leq l$</p>
+<p>此时，在加强的约束下，模型退化为</p>
+<script type="math/tex; mode=display">
+\max_{x_0,\cdots,x_n}\sum_{i=0}^n(r_i-p_i)x_i\\
+\begin{cases}
+\frac{q_ix_i}{M} \leq l\\
+\sum_{i=0}^n(1+p_i)x_i=M, & i=0,\cdots, n\\
+x_i \ge0, & i=0,\cdots,n
+\end{cases}</script><h4 id="2-模型二：固定收益，最小化风险"><a href="#2-模型二：固定收益，最小化风险" class="headerlink" title="2. 模型二：固定收益，最小化风险"></a>2. 模型二：固定收益，最小化风险</h4><p>设投资者的收益固定为$k$，则模型退化为</p>
+<script type="math/tex; mode=display">
+\min\max{q_ix_i}\\
+\begin {cases}
+\max (\sum_{i=0}^n (r_i-p_i)x_i \ge k\\
+\sum_{i=0}^n(1+p_i)x_i=M, & i=0,\cdots, n\\
+x_i \ge0, & i=0,\cdots,n
+\end{cases}</script><h4 id="3-模型三：收益与风险平衡"><a href="#3-模型三：收益与风险平衡" class="headerlink" title="3. 模型三：收益与风险平衡"></a>3. 模型三：收益与风险平衡</h4><p>投资者在权衡风险和收益的时候，不同的投资者会有不同的偏好，因此对风险和收益赋予权重$s$，称为投资偏好系数。则此时模型为</p>
+<script type="math/tex; mode=display">
+\min(s\cdot \max{q_ix_i}-(1-s)\cdot\sum_{i=0}^n(r_i-p_i)x_i)\\
+\begin {cases}
+0\leq s\leq 1\\
+\sum_{i=0}^n(1+p_i)x_i=M, & i=0,\cdots, n\\
+x_i \ge0, & i=0,\cdots,n
+\end{cases}</script><h3 id="E-模型求解"><a href="#E-模型求解" class="headerlink" title="E. 模型求解"></a>E. 模型求解</h3><p>下面针对上述三个模型进行求解</p>
+<h4 id="A-模型一"><a href="#A-模型一" class="headerlink" title="A. 模型一"></a>A. 模型一</h4><p>注意第一个约束条件是两个向量的哈达马积</p>
+<script type="math/tex; mode=display">
+\min_{[x_0,\cdots,x_n]} -[0.05, 0.27, 0.19, 0.185, 0.185][x_0, x_1, x_2, x_3, x_4, x_5]^T\\
+\begin{cases}
+\max [0, 0.025 0.015 0.055, 0.026][x_0, x_1, x_2, x_3, x_4, x_5] \leq l\\
+[1, 1.01, 1.02, 1.045, 1.065][x_0, x_1, x_2, x_3, x_4, x_5]^T=1\\
+x_0, x_1, x_2, x_3, x_4 \ge0
+\end{cases}</script><p>$l$为求解时候变量，因此对其进行搜索，从$l$从0~0.05，即损失本金的5%</p>
+<pre class="line-numbers language-lang-python"><code class="language-lang-python">import numpy as np
+import matplotlib
+import matplotlib.pyplot as plt
+import scipy.optimize as scoptim
+from typing import *
+
+r = np.array([5, 28, 21, 23, 25], dtype=float) * 0.01
+q = np.array([0., 2.5, 1.5, 5.5, 2.6], dtype=float) * 0.01
+p = np.array([0., 1, 2, 4.5, 6.5], dtype=float) * 0.01
+
+
+def model1():
+    global r, p, q
+    c = -(r - p)
+    A_eq = (1 + p).reshape(1, -1)
+    b_eq = 1
+    A_ub = np.repeat(q.reshape(1, -1), repeats=5, axis=0) * np.eye(N=5)
+    bounds = [(0, None)] * 5
+    results: List[scoptim.OptimizeResult] = []
+    for i in (x := np.arange(start=0, stop=0.05, step=1e-3)):
+        b_ub = np.ones(shape=5) * i
+        results.append(scoptim.linprog(c=c, A_ub=A_ub, b_ub=b_ub, A_eq=A_eq, b_eq=b_eq, bounds=bounds))
+    plt.plot(x, [-1 * x.fun for x in results], "o-", label="max profit - risk")
+    plt.xlabel("risk")
+    plt.ylabel("profit")
+    plt.legend()
+    plt.show()
+
+
+if __name__ == "__main__":
+    print(model1())
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220101224009040.png" alt="Results"></p>
+<p>可以看出来：</p>
+<ul>
+<li>风险越大，收益越大，损失本金的5%最高可以达到超过本金25%的收益</li>
+<li>在当前五种投资资产中，收益——风险曲线最终收敛到0.25左右，意味着当前投资策略的潜力如此</li>
+<li>$l=0.006$附近有一个转折点，转折点左侧风险增加缓慢但是收益增加显著，而右侧则风险增加很多并且收益增加不多（5%的额外收益）。所以对于风险和收益没有特殊偏好的投资者来说，应该选择曲线的转折点作为最优投资组合，大约是$l=0.6%，Q=20%$，所对应投资方案为 风险度$u=0.006$，收益$Q=0.2019$，$x_0=0$，$x_1=0.24$，$x_2=0.4$，$x_3=0.1091$，$x_4=0.2212$。</li>
+</ul>
+<h4 id="B-模型二、三"><a href="#B-模型二、三" class="headerlink" title="B. 模型二、三"></a>B. 模型二、三</h4><script type="math/tex; mode=display">
+\min\max{[0, 0.025 0.015 0.055, 0.026][x_0, x_1, x_2, x_3, x_4, x_5]}\\
+
+\begin {cases}
+ [0.05, 0.27, 0.19, 0.185, 0.185][x_0, x_1, x_2, x_3, x_4, x_5]^T \ge k\\
+[1, 1.01, 1.02, 1.045, 1.065][x_0, x_1, x_2, x_3, x_4, x_5]^T=1\\
+x_0, x_1, x_2, x_3, x_4 \ge0
+\end{cases}</script><p>模型二和模型三其实有一个问题，就是目标函数不是一个线性的，因为存在去max这一步，所以实际上是一个分段函数这是由于取最大风险的才导致的不连续。所以这里就不给出解答了。如果想要做出来的话，改一下目标函数</p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Jack Wang</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://jackwang0107.github.io/2022/01/01/shu-xue-jian-mo-suan-fa-1-xian-xing-gui-hua/">https://jackwang0107.github.io/2022/01/01/shu-xue-jian-mo-suan-fa-1-xian-xing-gui-hua/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Jack Wang</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/Python/">
+                                    <span class="chip bg-color">Python</span>
+                                </a>
+                            
+                                <a href="/tags/%E7%BA%BF%E6%80%A7%E8%A7%84%E5%88%92/">
+                                    <span class="chip bg-color">线性规划</span>
+                                </a>
+                            
+                                <a href="/tags/Linear-Programming/">
+                                    <span class="chip bg-color">Linear Programming</span>
+                                </a>
+                            
+                                <a href="/tags/Math-Modeling/">
+                                    <span class="chip bg-color">Math Modeling</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.png" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2022/01/02/shu-xue-jian-mo-suan-fa-2-zheng-shu-gui-hua/">
+                    <div class="card-image">
+                        
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/2305037-20210603134210658-726109005.png" class="responsive-img" alt="数学建模算法2-整数规划">
+                        
+                        <span class="card-title">数学建模算法2-整数规划</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-01-02
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E7%AE%97%E6%B3%95/" class="post-category">
+                                    数学建模算法
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Python/">
+                        <span class="chip bg-color">Python</span>
+                    </a>
+                    
+                    <a href="/tags/Linear-Programming/">
+                        <span class="chip bg-color">Linear Programming</span>
+                    </a>
+                    
+                    <a href="/tags/Math-Modeling/">
+                        <span class="chip bg-color">Math Modeling</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%95%B4%E6%95%B0%E8%A7%84%E5%88%92/">
+                        <span class="chip bg-color">整数规划</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/01/01/cao-zuo-xi-tong-gai-nian-du-shu-bi-ji-di-yi-zhang-jie-shao-3/">
+                    <div class="card-image">
+                        
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211228175748055.png" class="responsive-img" alt="操作系统概念读书笔记-第一章：介绍-3">
+                        
+                        <span class="card-title">操作系统概念读书笔记-第一章：介绍-3</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-01-01
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Operating-System-Concepts-Reading-Notes/" class="post-category">
+                                    Operating System Concepts Reading Notes
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
+                        <span class="chip bg-color">操作系统</span>
+                    </a>
+                    
+                    <a href="/tags/Operating-System/">
+                        <span class="chip bg-color">Operating System</span>
+                    </a>
+                    
+                    <a href="/tags/Reading-Notes/">
+                        <span class="chip bg-color">Reading Notes</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: JackWang&#39;s Bolg<br />'
+            + '文章作者: Jack Wang<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    });
+</script>
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2021-2022</span>
+            
+            <a href="/about" target="_blank">Jack Wang</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">83.3k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+                <span id="sitetime"> Loading ...</span>
+                <script>
+                    var calcSiteTime = function () {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2021";
+                        var startMonth = "11";
+                        var startDate = "12";
+                        var startHour = "0";
+                        var startMinute = "0";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+
+                        // 区分是否有年份.
+                        var language = 'zh-CN';
+                        if (startYear === String(todayYear)) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            var daysTip = 'This site has been running for ' + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                daysTip = '本站已运行 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                daysTip = '本站已運行 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = daysTip;
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            var yearsAndDaysTip = 'This site has been running for ' + diffYears + ' years and '
+                                + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                yearsAndDaysTip = '本站已运行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                yearsAndDaysTip = '本站已運行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+                        }
+                    }
+
+                    calcSiteTime();
+                </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+    <a href="mailto:2232123545@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+     
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/star.js"><\/script>');
+            }
+        </script>
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

@@ -10,10 +10,7 @@
 
 
 
-
-
-
-基于Hexo的个人技术博客搭建-Part 1 Hexo介绍以及环境搭建.md在前一章概述中，我们讲解了为什么我认为一个Geek需要一个个人">
+基于Hexo的个人技术博客搭建-Part 1 Hexo介绍以及环境搭建.md在前一章概述中，我们讲解了为什么我认为一个Geek需要一个个人技术博">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -444,9 +441,6 @@
 </blockquote>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211113024418805.png" alt="Hexo官网"></p>
 <span id="more"></span>
-
-
-
 <h1 id="基于Hexo的个人技术博客搭建-Part-1-Hexo介绍以及环境搭建-md"><a href="#基于Hexo的个人技术博客搭建-Part-1-Hexo介绍以及环境搭建-md" class="headerlink" title="基于Hexo的个人技术博客搭建-Part 1 Hexo介绍以及环境搭建.md"></a>基于Hexo的个人技术博客搭建-Part 1 Hexo介绍以及环境搭建.md</h1><p>在前一章概述中，我们讲解了为什么我认为一个Geek需要一个个人技术博客，并且简单的展示了最终效果，在接下来的章节里，我将一步步的介绍如何打造这样的效果。</p>
 <h2 id="1-What-is-Hexo"><a href="#1-What-is-Hexo" class="headerlink" title="1. What is Hexo"></a>1. What is Hexo</h2><blockquote>
 <p>等等，什么是<code>Hexo</code>？</p>
@@ -464,9 +458,9 @@
 <p>说清这个问题，要说的可不少。接触过网络的人都应该知道，前端页面是由<code>HTML</code>、<code>CSS</code>、<code>JavaScript</code>三大技术/三件套支持的，其中<code>HTML</code>负责定义网页改在哪个地方显示什么内容，<code>CSS</code>定义哪个地方的哪个内容该以什么样的方式显示，<code>JavaScript</code>则定义当你与这个内容交互的时候会有什么样的效果。</p>
 <p>举个简单例子，在<a target="_blank" rel="noopener" href="https://www.baidu.com/">百度</a>的首页，</p>
 <ol>
-<li>为什么百度的Logo会显示在中间，而备案等网站信息显示在底部？–&gt; <code>HTML</code></li>
-<li>为什么百度的背景是白色的，而不是黑色？  –&gt; <code>CSS</code></li>
-<li>为什么鼠标悬停在左上角的更多的时候会弹出来浮窗？  –&gt; <code>JavaScript</code></li>
+<li>为什么百度的Logo会显示在中间，而备案等网站信息显示在底部？—&gt; <code>HTML</code></li>
+<li>为什么百度的背景是白色的，而不是黑色？  —&gt; <code>CSS</code></li>
+<li>为什么鼠标悬停在左上角的更多的时候会弹出来浮窗？  —&gt; <code>JavaScript</code></li>
 </ol>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211113031023828.png" alt="百度的首页"></p>
 <p>正是因为有了这三件套，我们的网页变得多姿多彩了起来，有有价值的信息(<code>HTML</code>)、漂亮的页面(<code>CSS</code>)和友好的交互(<code>JavaScript</code>)。</p>
@@ -475,14 +469,14 @@
 <p>后来随着，<code>JavaScript</code>的功能越来越强大，简单的在网页中进行交互已经完全发挥其能力了。因此就出现了诸多项目，这些项目独立于传统浏览器，基于浏览器的<code>JavaScript</code>解析器内核（学名：引擎）亦或是自己编写了<code>JavaScript</code>的解析器来执行<code>JavaScript</code>。至此，<code>JavaScript</code>已经能够独立于浏览器被单独执行了，而非必须在浏览器中以网页的形式打开。</p>
 <p>在前面介绍了那么多之后，终于，到了我们的主角，<code>Node.js</code>。大名鼎鼎的<code>Node.js</code>其实就是基于<code>Chrome V8</code> 引擎的 <code>JavaScript</code> 运行时环境。简单的来说，它能够利用<code>Chrome V8</code>引擎来解析、执行<code>JavaScript</code>。<code>Node.js</code>可以粗暴的理解成<code>JavaScript</code>的解释器。基于此，<code>JavaScript</code>在很多方面都很像<code>Python</code>，包括包管理器、解释器等等</p>
 </blockquote>
-<ol start="2">
+<ol>
 <li><code>Hexo</code>利用<code>Markdown</code>来作为源文章，其内置<code>Markdown</code>的渲染引擎，我们只需要书写Markdown，而后通过<code>Hexo</code>就能够生成<code>HTML</code>等前端文件，非常方便</li>
 </ol>
 <blockquote>
 <p>正如下面这张图，这篇文章也是我用Markdown写出来的，在后续部分除了网站搭建以外，还会讲讲如何搭建写作环境，以实现畅快写作</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211113110048831.png" alt="我的Markdown写作环境：Typora+腾讯云图床+Dracula主题"></p>
 </blockquote>
-<ol start="3">
+<ol>
 <li>Hexo搭建出的博客网站是一个静态网站，这就意味着单纯<code>Hexo</code>本身只能提供博客的显示、有限的交互，如果需要登录、发表评论这类需要后端程序支持的运用，就需要第三方插件了。如果非常需要这些功能，要么使用<code>WordPress</code>，要么折腾<code>Hexo</code>的插件</li>
 </ol>
 <p>到这里，你应该明白了<code>Hexo</code>是一个基于<code>Node.js</code>的程序，他帮助我们渲染文章、管理文章，通过这个<code>Hexo</code>我们可以快速、低成本的部署自己的博客</p>
@@ -501,7 +495,7 @@
 <p><code>Hexo</code>的官网上提供了非常多的主题（<a target="_blank" rel="noopener" href="https://hexo.io/themes/">点击查看</a>），截止我写这篇文章的时候一共有348个官方收录的主题。除此以外还有非常多的未被收录的主题，强推我现在正在用的由<code>闪烁之狐</code>制作的<code>Matery</code>主题，后面也会讲解如何配置<code>Matery</code>主题，这是Matery主题的<a target="_blank" rel="noopener" href="http://blinkfox.com/">展示网站</a></p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211113112326777.png" alt="Hexo官网收录的主题"></p>
 </blockquote>
-<ol start="6">
+<ol>
 <li>……（暂时只想到这几个点）</li>
 </ol>
 <h2 id="3-Hexo环境搭建"><a href="#3-Hexo环境搭建" class="headerlink" title="3. Hexo环境搭建"></a>3. Hexo环境搭建</h2><blockquote>
@@ -514,25 +508,25 @@
 <p>注意：官网上说明，<code>Hexo</code>需要的<code>Node.js</code>的版本不低于<strong>10.13</strong>，强烈建议<code>Node.js</code><strong>12.0</strong>以上的版本</p>
 </blockquote>
 <p>我们首先用<code>apt</code>查一下Ubuntu的仓库里的nodejs的版本</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~$ <span class="token function">sudo</span> apt search nodejs
+<pre class="line-numbers language-lang-bash"><code class="language-lang-bash">(base) jack@jack-Alienware-m15-R3:~$ sudo apt search nodejs
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211113124733292.png" alt="apt搜索nodejs的结果"></p>
 <p>不难看出来，<code>apt</code>仓库里的<code>nodejs</code>的版本过低，因此我们需要自己从<code>nodejs</code>官网上下载新版本的<code>nodejs</code>，<a target="_blank" rel="noopener" href="https://nodejs.org/zh-cn/">官网传送门</a></p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211113124918179.png" alt="Node.js的官网"></p>
 <p>在我写这篇文章的时候最新版是16.13，由于遵循Linux的传统，双数版本是LTS（Long Time Supported）版本，而单数版本都是尝鲜（Beta）版本，所以选择<strong>稳定版即可</strong></p>
 <p>下载之后解压会得到一个文件夹，这个文件夹里<code>bin</code>目录放的就是官方替我们已经编译好了的二进制可执行文件，可以看到除了node，别的都是软连接</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/桌面/node-v16.13.0-linux-x64$ tree -L 2
+<pre class="line-numbers language-lang-bash"><code class="language-lang-bash">(base) jack@jack-Alienware-m15-R3:~/桌面/node-v16.13.0-linux-x64$ tree -L 2
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <blockquote>
 <p>注意，我这里是已经安装过了<code>Node.js</code>，正常情况下是没有<code>cnpm</code>的，稍后会安装<code>cnpm</code></p>
 </blockquote>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211113125500195.png" alt="解压之后的文件夹"></p>
 <p>由于后续需要在命令行中调用<code>Node.js</code>，因此还要把这个<code>bin</code>文件的路径加入到<code>Shell</code>搜索可执行文件路径的<code>PATH</code>环境变量中，这里图方便直接在.<code>bashrc</code>中添加了</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/桌面/node-v16.13.0-linux-x64$ vim ~/.bashrc  
+<pre class="line-numbers language-lang-bash"><code class="language-lang-bash">(base) jack@jack-Alienware-m15-R3:~/桌面/node-v16.13.0-linux-x64$ vim ~/.bashrc
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211113125903583.png" alt="添加了Node.js的PATH"></p>
 <p>这样未来在命令行就可以正常的调用<code>node.js</code>和附带的<code>npm</code>了，测试一波</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/桌面/node-v16.13.0-linux-x64$ node 
+<pre class="line-numbers language-lang-bash"><code class="language-lang-bash">(base) jack@jack-Alienware-m15-R3:~/桌面/node-v16.13.0-linux-x64$ node
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211113130048060.png" alt="测试Node.js"></p>
 <p>OK，装完了<code>Node.js</code>，下一步</p>
@@ -541,27 +535,27 @@
 <p>但是这些包管理工具的共性就是下载的这些库都是在包管理工具官网上维护的包，我们使用<code>xxx install xxx</code>的时候，会去<code>xxx</code>的包管理网站上搜索<code>xxx</code>包，然后下载。问题的关键就出在了下载这一步，由于这些包管理网站服务器都在国外，因此国内下载就会很慢。为此，我们通过换源来解决，即指定去国内的包管理网站上下载。在<code>pip</code>中我们可以指定<code>-i</code>参数，从而指定去清华源或者中科大源下载<code>Python</code>第三方包。而<code>npm</code>我们同样也可以指定<code>--registry</code>参数，从而指定国内的源（一般都是淘宝源）。</p>
 <p>但是每次都使用<code>--registry</code>参数有点蠢，我们直接使用淘宝做好的<code>cnpm</code>包管理工具就行。<code>cnpm</code>和<code>npm</code>在作用上是一样的，不过对国内用户做了很不错的优化。</p>
 <p>我们首先通过npm指定<code>--registry</code>参数来安装<code>cnpm</code></p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/桌面/node-v16.13.0-linux-x64$ <span class="token function">npm</span> <span class="token function">install</span> -g cnpm --registry<span class="token operator">=</span><span class="token string">"https://registry.npm.taobao.org"</span>
+<pre class="line-numbers language-lang-bash"><code class="language-lang-bash">(base) jack@jack-Alienware-m15-R3:~/桌面/node-v16.13.0-linux-x64$ npm install -g cnpm --registry="https://registry.npm.taobao.org"
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>稍等片刻即可，警告是已经安装的别的包报的错，都后面没啥影响，因为我已经安装过了cnpm，所以下面的截图和你的可能不一样</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211113131609169.png" alt="安装cnpm"></p>
 <p>安装之后检查下安装是否成功，当然由于路径等环境不一样，输出结果也不太一样，但是能够正常输出就表示安装对了</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/桌面/node-v16.13.0-linux-x64$ cnpm --version
+<pre class="line-numbers language-lang-bash"><code class="language-lang-bash">(base) jack@jack-Alienware-m15-R3:~/桌面/node-v16.13.0-linux-x64$ cnpm --version
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211113131849887.png" alt="检查cnpm是否安装成功"></p>
 <p>OK，下一步安装Git</p>
 <h3 id="3-安装git"><a href="#3-安装git" class="headerlink" title="3. 安装git"></a>3. 安装git</h3><p>由于<code>Hexo</code>内置了博客的同步、部署等功能，因此<code>Hexo</code>依赖于<code>git</code>，所以我们首先需要安装<code>git</code></p>
 <p>安装git就简单了，直接<code>apt</code>安装即可，同样由于我已经安装过了，所以输出会不一样</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/桌面/node-v16.13.0-linux-x64$ <span class="token function">sudo</span> apt <span class="token function">install</span> <span class="token function">git</span>
+<pre class="line-numbers language-lang-bash"><code class="language-lang-bash">(base) jack@jack-Alienware-m15-R3:~/桌面/node-v16.13.0-linux-x64$ sudo apt install git
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211113132146054.png" alt="apt安装git"></p>
 <p>同样，查看下<code>git</code>的版本确认安装成功</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/桌面/node-v16.13.0-linux-x64$ <span class="token function">git</span> --version
+<pre class="line-numbers language-lang-bash"><code class="language-lang-bash">(base) jack@jack-Alienware-m15-R3:~/桌面/node-v16.13.0-linux-x64$ git --version
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211113132257442.png" alt="确认git安装成功"></p>
 <h3 id="4-安装Hexo"><a href="#4-安装Hexo" class="headerlink" title="4. 安装Hexo"></a>4. 安装Hexo</h3><p>在前面所有必备的环境安装成功后，下面将安装<code>Hexo</code></p>
 <p>前面由于已经安装了<code>cnpm</code>，因此我们直接使用<code>cnpm</code>来安装<code>Hexo</code></p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/桌面/node-v16.13.0-linux-x64$ cnpm <span class="token function">install</span> -g hexo-cli
+<pre class="line-numbers language-lang-bash"><code class="language-lang-bash">(base) jack@jack-Alienware-m15-R3:~/桌面/node-v16.13.0-linux-x64$ cnpm install -g hexo-cli
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>稍等片刻就安装好了</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211113132546043.png" alt="安装hexo"></p>
@@ -571,7 +565,7 @@
 <p>同样用<code>vim</code>编辑<code>.bashrc</code></p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211113133331507.png" alt="添加hexo可执行文件"></p>
 <p>最后命令行查看下hexo的版本确认成功</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/桌面/node-v16.13.0-linux-x64$ hexo --version
+<pre class="line-numbers language-lang-bash"><code class="language-lang-bash">(base) jack@jack-Alienware-m15-R3:~/桌面/node-v16.13.0-linux-x64$ hexo --version
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211113133455333.png" alt="确认hexo安装成功"></p>
 <p>至此，我们已经成功搭建了Hexo的环境。</p>
@@ -1086,7 +1080,7 @@
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
-                <span id="year">2021</span>
+                <span id="year">2021-2022</span>
             
             <a href="/about" target="_blank">Jack Wang</a>
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
@@ -1094,7 +1088,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">67k</span>
+                        class="white-color">83.3k</span>
             
             
             

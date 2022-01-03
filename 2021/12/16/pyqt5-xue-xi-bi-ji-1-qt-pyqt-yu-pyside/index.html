@@ -474,8 +474,6 @@ PyQt5学习笔记 Chapter 0-Introduction： Par">
 <p>它是Digia公司的产品。Qt使用标准的C++和特殊的代码生成扩展（称为元对象编译器（Meta Object Compiler, moc））以及一些宏。通过语言绑定，其他的编程语言也可以使用Qt。</p>
 <p>Qt是自由且开放源代码的软件，在GNU宽通用公共许可证（LGPL）条款下发布。所有版本都支持广泛的编译器，包括GCC的C++编译器和Visual Studio。</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211217102149620.png" alt="Qt的维基百科介绍"></p>
-</blockquote>
-<blockquote>
 <p><strong>From Baidubaike</strong>：</p>
 <p>Qt 是一个1991年由Qt Company开发的跨平台C++图形用户界面应用程序开发框架。它既可以开发GUI程序，也可用于开发非GUI程序，比如控制台工具和服务器。Qt是面向对象的框架，使用特殊的代码生成扩展（称为元对象编译器(Meta Object Compiler, moc)）以及一些宏，Qt很容易扩展，并且允许真正地组件编程。<br>2008年，Qt Company科技被诺基亚公司收购，Qt也因此成为诺基亚旗下的编程语言工具。2012年，Qt被Digia收购。<br>2014年4月，跨平台集成开发环境Qt Creator 3.1.0正式发布，实现了对于iOS的完全支持，新增WinRT、Beautifier等插件，废弃了无Python接口的GDB调试支持，集成了基于Clang的C/C++代码模块，并对Android支持做出了调整，至此实现了全面支持iOS、Android、WP,它提供给应用程序开发者建立艺术级的图形用户界面所需的所有功能。基本上，Qt 同 X Window 上的 Motif，Openwin，GTK 等图形界面库和 Windows 平台上的 MFC，OWL，VCL，ATL 是同类型的东西。</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211217102306283.png" alt="Qt的百度百科介绍"></p>
@@ -497,7 +495,7 @@ PyQt5学习笔记 Chapter 0-Introduction： Par">
 <p>因此对于Python来说，Python Binding即指能够让Python调用由其他语言开发的库或者是系统提供的功能（系统调用）的Python代码。</p>
 <p>事实上，得益于Python官方的CPython解释器是由C语言开发的，因此Python具有的直接调用C/C++库的这个能力，Python中的不少库都是C++的库，然后提供了Python Binding，从而使得在Python中能够调用这些库。最著名的一个例子就是OpenCV了。</p>
 <p>我们可以用mlocate查一下</p>
-<pre class="line-numbers language-shell"><code class="language-shell">(base) jack@jack-Alienware-m15-R3:~$ locate *opencv*.so
+<pre class="line-numbers language-lang-shell"><code class="language-lang-shell">(base) jack@jack-Alienware-m15-R3:~$ locate *opencv*.so
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>我们其实就能够看到，Python的opencv库里没有opencv的so，所有的共享库文件都放在了C++源码编译时候安装的位置了，而Python的OpenCV库里本身只是提供了一些OpenCV 的Python Binding代码，真正的功能还得看预编译好的so文件。</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211217110010408.png" alt="查询结果"></p>
@@ -1037,7 +1035,7 @@ PyQt5学习笔记 Chapter 0-Introduction： Par">
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
-                <span id="year">2021</span>
+                <span id="year">2021-2022</span>
             
             <a href="/about" target="_blank">Jack Wang</a>
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
@@ -1045,7 +1043,7 @@ PyQt5学习笔记 Chapter 0-Introduction： Par">
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">67k</span>
+                        class="white-color">83.3k</span>
             
             
             

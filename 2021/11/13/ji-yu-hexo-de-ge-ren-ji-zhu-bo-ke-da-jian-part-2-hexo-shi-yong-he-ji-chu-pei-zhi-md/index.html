@@ -10,10 +10,7 @@
 
 
 
-
-
-
-基于Hexo的个人技术博客搭建 —— Part 2 Hexo快速建站以网站基础信">
+基于Hexo的个人技术博客搭建 —— Part 2 Hexo快速建站以网站基础信息配置">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -444,16 +441,13 @@
 </blockquote>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211113193858319.png" alt="快速建站最终实现的效果"></p>
 <span id="more"></span>
-
-
-
 <h1 id="基于Hexo的个人技术博客搭建-——-Part-2-Hexo快速建站以网站基础信息配置"><a href="#基于Hexo的个人技术博客搭建-——-Part-2-Hexo快速建站以网站基础信息配置" class="headerlink" title="基于Hexo的个人技术博客搭建 —— Part 2 Hexo快速建站以网站基础信息配置"></a>基于Hexo的个人技术博客搭建 —— Part 2 Hexo快速建站以网站基础信息配置</h1><p>在前面的章节中，我们已经讲解了配置<code>Hexo</code>的开发环境，本节将讲解如何使用Hexo快速建立自己的个人博客以及对个人博客进行基本信息设置</p>
 <h2 id="1-Hexo快速建站"><a href="#1-Hexo快速建站" class="headerlink" title="1. Hexo快速建站"></a>1. Hexo快速建站</h2><blockquote>
 <p>前面说过，<code>Hexo</code>搭建得到的博客本质上就是一个文件夹，因此<code>Hexo</code>进行的各种操作都是对这个文件夹里的文件进行操作。</p>
 </blockquote>
 <h3 id="1-初始化博客-——-hexo-init"><a href="#1-初始化博客-——-hexo-init" class="headerlink" title="1. 初始化博客 ——  hexo init"></a>1. 初始化博客 ——  <code>hexo init</code></h3><p><code>Hexo</code>提供了init命令来初始化一个博客，为此我们首先新建一个目录用来存放博客的所有文件</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project$ <span class="token function">mkdir</span> blog-test
-<span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project$ hexo init blog-test/
+<pre class="line-numbers language-lang-bash"><code class="language-lang-bash">(base) jack@jack-Alienware-m15-R3:~/project$ mkdir blog-test
+(base) jack@jack-Alienware-m15-R3:~/project$ hexo init blog-test/
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <blockquote>
 <p><code>hexo init</code>本质上就是去<code>github</code>上克隆<code>hexo starter</code>项目</p>
@@ -462,45 +456,43 @@
 <h3 id="2-运行博客-——-hexo-server"><a href="#2-运行博客-——-hexo-server" class="headerlink" title="2. 运行博客 —— hexo server"></a>2. 运行博客 —— <code>hexo server</code></h3><p>接下来，在博客所在的文件夹的根目录下运行<code>hexo server</code>，来启动<code>hexo</code>的服务程序，这样就可以显示出我们的博客网站。<code>hexo</code>默认是带有一个欢迎界面的，因此即便我们什么都不做也可以正常的运行</p>
 <pre><code>(base) jack@jack-Alienware-m15-R3:~/project$ cd blog-test/
 (base) jack@jack-Alienware-m15-R3:~/project/blog-test$ hexo server
-</code></pre>
-<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211113195611688.png" alt="image-20211113195611688"></p>
+</code></pre><p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211113195611688.png" alt="image-20211113195611688"></p>
 <p>运行之后浏览器中访问该端口就能够看到默认的界面，不过默认的界面的问题还是比较多的，比如网站用的默认主题并不是非常好看、网站的信息都不是，后面我们会慢慢优化。这里看到的效果如下</p>
 <p>可以看到左下角的版权信息是默认的人名，左上角的选项卡选项也很少，右侧的菜单栏消息也很少，下一步我们就将慢慢改掉默认的界面</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211113205754034.png" alt="朴素的Hexo"></p>
 <p>为了等下讲解<code>Hexo</code>的原理，我们这里先创建三个文件</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/blog-test$ <span class="token function">touch</span> before_gen.txt
-<span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/blog-test$ <span class="token function">touch</span> after_gen.txt
-<span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/blog-test$ <span class="token function">touch</span> added_gen.txt
-<span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/blog-test$ tree <span class="token operator">>></span> before_gen.txt 
+<pre class="line-numbers language-lang-bash"><code class="language-lang-bash">(base) jack@jack-Alienware-m15-R3:~/project/blog-test$ touch before_gen.txt
+(base) jack@jack-Alienware-m15-R3:~/project/blog-test$ touch after_gen.txt
+(base) jack@jack-Alienware-m15-R3:~/project/blog-test$ touch added_gen.txt
+(base) jack@jack-Alienware-m15-R3:~/project/blog-test$ tree >> before_gen.txt
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="3-生成博客-——-hexo-clean-amp-hexo-generate"><a href="#3-生成博客-——-hexo-clean-amp-hexo-generate" class="headerlink" title="3. 生成博客 —— hexo clean &amp; hexo generate"></a>3. 生成博客 —— <code>hexo clean</code> &amp; <code>hexo generate</code></h3><p>前面说道，<code>Hexo</code>的工作原理是通过<code>Markdown</code>引擎将<code>Markdown</code>格式的文本渲染成<code>HTML</code>，因此每一次我们在写完文章之后都需要生成一下博文，注意<code>hexo</code>提供了简写命令，因此g、gen、generate都是可以的</p>
 <pre><code>(base) jack@jack-Alienware-m15-R3:~/project/blog-test$ hexo gen
-</code></pre>
-<p>可以看到生成了不少文件内容</p>
+</code></pre><p>可以看到生成了不少文件内容</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211113215116668.png" alt="hexo gen生成博文"></p>
 <p>最后输出一下目录方便后面查看hexo的运行原理</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/blog-test$ tree <span class="token operator">>></span> after_gen.txt
+<pre class="line-numbers language-lang-bash"><code class="language-lang-bash">(base) jack@jack-Alienware-m15-R3:~/project/blog-test$ tree >> after_gen.txt
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <h3 id="4-新加一篇博客-——-hexo-new"><a href="#4-新加一篇博客-——-hexo-new" class="headerlink" title="4. 新加一篇博客 —— hexo new"></a>4. 新加一篇博客 —— <code>hexo new</code></h3><p>我们自己添加博客，需要使用<code>hexo new 文章名</code>，如果文章名称中含有特殊字符，需要用<code>''</code>包裹起来</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/blog-test$ hexo new 第一篇博文
+<pre class="line-numbers language-lang-bash"><code class="language-lang-bash">(base) jack@jack-Alienware-m15-R3:~/project/blog-test$ hexo new 第一篇博文
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>新添加的博客在<code>source/_posts/</code>下，使用编辑器打开即可，后面会写一个<code>Typora + 腾讯云床</code>的博客编写环境教程，挖个坑</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/blog-test$ <span class="token keyword">echo</span> <span class="token string">"# 大标题"</span> <span class="token operator">>></span> source/_posts/第一篇博文.md 
+<pre class="line-numbers language-lang-bash"><code class="language-lang-bash">(base) jack@jack-Alienware-m15-R3:~/project/blog-test$ echo "# 大标题" >> source/_posts/第一篇博文.md
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>接下来继续生成博客，然后我们启动server来看看我们新写的博文，server的简写是s</p>
 <p>注意，在生成前需要用clean清除一下中间的文件</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/blog-test$ hexo clean
-<span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/blog-test$ hexo gen
+<pre class="line-numbers language-lang-bash"><code class="language-lang-bash">(base) jack@jack-Alienware-m15-R3:~/project/blog-test$ hexo clean
+(base) jack@jack-Alienware-m15-R3:~/project/blog-test$ hexo gen
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211113220005285.png" alt="新添加一篇博文"></p>
 <p>可以看到多了一篇文章</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211113220330894.png" alt="添加文章之后的结果"></p>
 <p>同样，我们记录一下，方便后面讲解原理</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/blog-test$ tree <span class="token operator">>></span> added_gen.txt 
+<pre class="line-numbers language-lang-bash"><code class="language-lang-bash">(base) jack@jack-Alienware-m15-R3:~/project/blog-test$ tree >> added_gen.txt
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>以上就是关于<code>Hexo</code>的一些基础命令使用</p>
 <h2 id="2-Hexo的运行原理"><a href="#2-Hexo的运行原理" class="headerlink" title="2. Hexo的运行原理"></a>2. Hexo的运行原理</h2><h3 id="1-Hexo的目录结构"><a href="#1-Hexo的目录结构" class="headerlink" title="1. Hexo的目录结构"></a>1. Hexo的目录结构</h3><p>我们通过<code>tree</code>命令来查看</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/blog-test$ tree -L 1
+<pre class="line-numbers language-lang-bash"><code class="language-lang-bash">(base) jack@jack-Alienware-m15-R3:~/project/blog-test$ tree -L 1
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>其中，每个文件/文件夹的作用为：</p>
 <ul>
@@ -514,19 +506,19 @@
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211114095916621.png" alt="Hexo博客的架构"></p>
 <h3 id="2-Hexo是如何生成和发布的博文"><a href="#2-Hexo是如何生成和发布的博文" class="headerlink" title="2. Hexo是如何生成和发布的博文"></a>2. Hexo是如何生成和发布的博文</h3><p>上面从整体上介绍了<code>Hexo</code>的目录结构。下面我们将深入了解一下<code>Hexo</code>生成博文的原理。</p>
 <p>我们上面使用tree生成了三次目录结构，接下来我们查看下生成博文和添加博文之后博客项目的变化，使用<code>vim -d</code>比较下三个文件的内容</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/blog-test$ vim -d before_gen.txt after_gen.txt added_gen.txt 
+<pre class="line-numbers language-lang-bash"><code class="language-lang-bash">(base) jack@jack-Alienware-m15-R3:~/project/blog-test$ vim -d before_gen.txt after_gen.txt added_gen.txt
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>可以看到，我们编写的博客都被添加到了<code>source/_posts</code>文件夹下，而我们运行<code>hexo generate</code>后生成的静态博文网页资源就都放在<code>public</code>文件夹下，具体来说，文章放在以日期为名的系列文件夹下，<code>CSS</code>等资源文件则是单独放置</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211113223040926.png" alt="hexo new、add之后文件目录的变化"></p>
 <h3 id="3-Hexo是如何管理主题的"><a href="#3-Hexo是如何管理主题的" class="headerlink" title="3. Hexo是如何管理主题的"></a>3. Hexo是如何管理主题的</h3><p>下面我们通过我当前的这个博客来了解下<code>Hexo</code>是如何管理主题的，以及主题是如何工作的</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/hexo-blogs$ tree themes/  -L 3
+<pre class="line-numbers language-lang-bash"><code class="language-lang-bash">(base) jack@jack-Alienware-m15-R3:~/project/hexo-blogs$ tree themes/  -L 3
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>可以看到，<code>theme</code>文件夹下，一个文件夹就是一个主题。一个主题内部又有其自身的结构，不同的目录有不同的作用。例如<code>language</code>负责不同语言的博文的设置，<code>source</code>则存放主题的<code>css</code>、<code>js</code>等资源文件，<code>_config.yml</code>则负责主题的配置。</p>
 <p><strong>因此在后续我们美化、深度定制Hexo时候就是修改下载好的主题</strong></p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211114021748798.png" alt="Hexo的主题目录"></p>
 <h2 id="3-Hexo-基础信息配置"><a href="#3-Hexo-基础信息配置" class="headerlink" title="3. Hexo 基础信息配置"></a>3. Hexo 基础信息配置</h2><p>前面我们讲到，<code>Hexo</code>自身的<code>_config.yml</code>虽然负责整个项目的配置，但是通常会被我们自己下载的主题的<code>_config.yml</code>所覆盖，因此我们只在Hexo的<code>_config.yml</code>中进行一些基础信息的配置，以便于我们为我们的博客打上自己的信息。</p>
 <p>首先通过<code>vim</code>或者其他编辑器打开根目录下的<code>_config.yml</code></p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/blog-test$ vim _config.yml 
+<pre class="line-numbers language-lang-bash"><code class="language-lang-bash">(base) jack@jack-Alienware-m15-R3:~/project/blog-test$ vim _config.yml
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211114022512202.png" alt="Hexo 根目录下的配置文件"></p>
 <h3 id="1-个人信息设置"><a href="#1-个人信息设置" class="headerlink" title="1. 个人信息设置"></a>1. 个人信息设置</h3><p>我们只需要修改 <code># Site</code>中的信息即可，这样将网站的默认信息改为我们自己的信息</p>
@@ -1047,7 +1039,7 @@ hexo本身只是提供了一个博客的框架，博客网站的美化和优化�
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
-                <span id="year">2021</span>
+                <span id="year">2021-2022</span>
             
             <a href="/about" target="_blank">Jack Wang</a>
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
@@ -1055,7 +1047,7 @@ hexo本身只是提供了一个博客的框架，博客网站的美化和优化�
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">67k</span>
+                        class="white-color">83.3k</span>
             
             
             

@@ -447,7 +447,7 @@ This blog is the first part of reading notes of  Operating System Conc">
 </blockquote>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211228175748055.png" alt="Chapter 1: Introduction"></p>
 <h1 id="Operating-System-Concepts-Chapter-1-Introduction-1-Basic-Concepts"><a href="#Operating-System-Concepts-Chapter-1-Introduction-1-Basic-Concepts" class="headerlink" title="Operating System Concepts-Chapter 1: Introduction-1 Basic Concepts"></a>Operating System Concepts-Chapter 1: Introduction-1 Basic Concepts</h1><p>操作系统概念第一部分是Overview，包括第一章和第二章。</p>
-<p>本章和下一章一起，介绍了操作系统中一些基本概念和操作系统的发展历史。本章主要讲解了操作系统的一些基础概念</p>
+<p>本章主要介绍了操作系统中一些基本概念和操作系统的发展历史/操作系统的种类，以及操作系统的任务。本章的第一部分主要讲解了操作系统的一些基础概念</p>
 <h2 id="1-What-is-Operating-System"><a href="#1-What-is-Operating-System" class="headerlink" title="1. What is Operating System?"></a>1. What is Operating System?</h2><p>要说明什么是操作系统，还得从什么是计算机说起</p>
 <blockquote>
 <p><strong>What is computer</strong>：</p>
@@ -508,10 +508,7 @@ This blog is the first part of reading notes of  Operating System Conc">
 <li>设备管理：分配和控制IO设备，例如把文档以怎么样的方式保存到磁盘上、键盘输入的字符该怎样的处理</li>
 <li>文件管理：管理文件的权限，这个文件谁能看到、谁能修改……</li>
 </ul>
-<img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211229200640120.png" alt="操作系统管理的硬件资源" style="zoom:50%;">
-
-
-
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211229200640120.png" alt="操作系统管理的硬件资源" style="zoom:50%;"></p>
 <h3 id="B-Control-Program"><a href="#B-Control-Program" class="headerlink" title="B. Control Program"></a>B. Control Program</h3><p>另外一方面，从操作系统的功能来说，操作系统像一个管理程序，用于：</p>
 <ul>
 <li>防止错误的发生</li>
@@ -540,7 +537,7 @@ This blog is the first part of reading notes of  Operating System Conc">
 <p>通常来说，特权指令指的是一些如果操作不当可能会导致系统崩溃的指令，例如清除内存、重置时钟、读取磁盘等等。因此如果不对这些特权指令加以保护（即所有用户都可以使用），那么垃圾程序员写出来的烂代码很可能就会搞崩系统。</p>
 <p>为了区分用户态和内核态的程序，在硬件（CPU）上通常会用一个比特位来进行标识，称为<strong>模式位（mode bit）</strong>。例如处于用户态的程序user mode bit是1，而处于内核态的程序的user mode bit是0。</p>
 <h2 id="6-System-Call"><a href="#6-System-Call" class="headerlink" title="6. System Call"></a>6. System Call</h2><p>为了保护系统不会因为垃圾程序员导致的崩溃，系统通过不同的模式来保护一些高危的指令。例如对磁盘进行读写的指令如果使用不当可能会造成磁盘损坏，但由于我们在程序中经常会有读写文件的操作，例如C语言的fread、Python的open等等。而文件就保存在磁盘上，因此读写文件在计算机底层就一定会包含对磁盘进行操作的指令。</p>
-<p>只是由于读写磁盘这些特权指令使用的非常频繁，经常在用户态的程序中被调用，因此就需要为用户态的程序提供仅可以在内核态运行的指令的接口/入口/函数API。**这些函数称为系统调用(System Call)**。</p>
+<p>只是由于读写磁盘这些特权指令使用的非常频繁，经常在用户态的程序中被调用，因此就需要为用户态的程序提供仅可以在内核态运行的指令的接口/入口/函数API。<strong>这些函数称为系统调用(System Call)</strong>。</p>
 <p>在系统调用的时候，我们的程序会取调用这些系统提供的函数，因此在执行这些函数的时候，程序的控制流会短暂的移交到系统提供的函数中。此时我们程序的模式位会改变为内核态。在内核提供的函数完成调用后，程序控制流会返回我们的程序，此时程序的模式位会改回我们原先的特权态。</p>
 <p>称进行系统调用时，程序控制流转移到系统中为<strong>陷入内核（trap in kernel）</strong>。</p>
 <p>因此一次系统调用的过程中我们程序的控制流和对应的状态位变化如下，横轴为时间。</p>
@@ -562,18 +559,10 @@ This blog is the first part of reading notes of  Operating System Conc">
 <p>然而一个经典的CPU的执行流程是：用户通过键盘鼠标、磁盘等输入输出设备把数据输入（鼠标点击、键盘敲击、读取磁盘中的文件）到计算机，接下来数据被CPU计算得到结果，最后结果通过显示器或者磁盘输出（显示或者保存）。</p>
 <p>而由于多种不同的设备读取到的数据的形式可能不同，而CPU只能够处理一种格式的数据，因此就需要在硬件上有控制器（Device Controller）或者适配器（Device Adapter），他们负责把从磁盘、鼠标、键盘读取到的原始数据处理转化为CPU可以直接处理的数据，然后让CPU进行处理，或者是把CPU处理之后的数据转换为显示器可以显示的数据。</p>
 <p>此外，数据在电路中的传输是以分时的电信号的形式传输的，传播速度为光速，因此需要设备保存下数据，因此就有了存储器（Memory）。</p>
-<img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211229221140892.png" alt="计算机系统的组成" style="zoom:150%;">
-
-
-
-
-
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211229221140892.png" alt="计算机系统的组成" style="zoom:150%;"></p>
 <h2 id="9-Bus"><a href="#9-Bus" class="headerlink" title="9. Bus"></a>9. Bus</h2><p>上面说到，数据在不同的设备间传递，而每个设备都会有自己的Controller或者Adapter以实现和CPU的交互。数据的传输需要有实体，这个实体在计算机中实际上就是总线（Bus）。</p>
 <p>通过总线我们就可以实现让不同的设备（买来的机器自带的设备还是我们自己外加的附加设备/周边设备/第三方设备）之间进行数据的交互。</p>
-<img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211229221706606.png" alt="总线让内存和CPU之间进行交互" style="zoom:150%;">
-
-
-
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211229221706606.png" alt="总线让内存和CPU之间进行交互" style="zoom:150%;"></p>
 <h2 id="10-I-O-Operation"><a href="#10-I-O-Operation" class="headerlink" title="10. I/O Operation"></a>10. I/O Operation</h2><p>还是在上面说到，不同的设备每个设备都会有一个控制器/适配器，设备可以通过控制器/适配器和CPU进行数据间的交互。然而通常来说，每个控制器/适配器都会有一个自己的缓存（buffer），用来存储暂时的输入。</p>
 <p>使用buffer的原因也很简单，就是因为设备读取输入的速度的问题。例如我们现在希望从磁盘中读取一个文本文件（例如，三国演义），然后让CPU把这个文本文件里的每个句子在句子末尾添加一个回车，接下来再把处理后的文本文件保存到磁盘中去。</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211229223014684.png" alt="三国演绎的文本文件"></p>
@@ -587,7 +576,7 @@ This blog is the first part of reading notes of  Operating System Conc">
 <p><strong>为什么需要内存/主存（内存又称为主存）</strong>：</p>
 <p>我们上面的讲解中说道，各种控制器读取到的数据需要移入内存中才能够被CPU处理，而CPU处理完的数据也需要保存到内存中才能够被设备保存（输出到磁盘或者屏幕上）。</p>
 <p>那么为什么数据需要经过内存/主存？原因就在于<strong>各种设备运行的速度/访问的时间不同</strong></p>
-<p>借用_现代操作系统_中的图片，CPU从寄存器中获取需要处理的数据只需要1纳秒，从内存中获取需要处理的数据需要10纳秒，而从磁盘中获取数据则需要10毫秒，基本上$10^3$的数量级的差距。</p>
+<p>借用<em>现代操作系统</em>中的图片，CPU从寄存器中获取需要处理的数据只需要1纳秒，从内存中获取需要处理的数据需要10纳秒，而从磁盘中获取数据则需要10毫秒，基本上$10^3$的数量级的差距。</p>
 <p>因此如果CPU直接从设备中获取需要处理的数据，那么CPU就不得不等待这些设备，因此就会浪费大量的时间。所以提高CPU的利用率，降低等待时间/加快速度，所有的数据都需要被放到内存中去。</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211229224334928.png" alt="各种设备的访问时间"></p>
 </blockquote>
@@ -599,7 +588,7 @@ This blog is the first part of reading notes of  Operating System Conc">
 <li>CPU在收到控制器发来的消息后，会中止当前正在执行的指令，继续去每个句子后添加回车。</li>
 </ul>
 <p>具体的时序图如下：</p>
-<pre class="line-numbers language-mermaid"><code class="language-mermaid">    sequenceDiagram
+<pre class="line-numbers language-lang-mermaid"><code class="language-lang-mermaid">    sequenceDiagram
     CPU->>USB Port 1: Fetch the data from file zzzzzz for me
     USB Port 1 -->> Main Memory: Put data1： xxxxxxx on yyyyyyy
     USB Port 1 -->> Main Memory: Put data2： xxxxxxx on yyyyyyy
@@ -610,7 +599,7 @@ This blog is the first part of reading notes of  Operating System Conc">
     Main Memory -->> CPU: Here is your data: xxxxxxx
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211230191239374.png" alt="CPU与控制器的交互"></p>
-<p>因此，称在某些情况下计算机中止当前程序的运行，并转而去运行其他的程序的现象为**中断(Interruput)<strong>。上面的例子就是典型的I/O中断，即由于输入输出导致的中断。而导致中断发生的事件称为</strong>中断事件(Interrupt Event)**。</p>
+<p>因此，称在某些情况下计算机中止当前程序的运行，并转而去运行其他的程序的现象为<strong>中断(Interruput)</strong>。上面的例子就是典型的I/O中断，即由于输入输出导致的中断。而导致中断发生的事件称为<strong>中断事件(Interrupt Event)</strong>。</p>
 <p>除了I/O中断以外，还有很多类型的中断，例如上面的执行系统调用（System Call），以及CPU执行用户程序时发生的运算错误，例如除0错误。</p>
 <p>实际上中断是计算机系统中非常常用的机制，因为中断可以让原有的程序放弃CPU并且让CPU执行新的程序。</p>
 <p>此外，中断分为两类，一类是<strong>可屏蔽的中断（Maskable Interrupt）</strong>，一类是<strong>不可屏蔽的中断（Non-Maskable Interruptable）</strong>。可屏蔽的中断表示中断事件导致的中断并不会立即中止当前程序的运行。CPU可能在稍后来响应这个中断事件，例如上面的把文件从磁盘读入到内存完成后，控制器向CPU发送的中断可能并不会立即让CPU中止运行当前的程序，来处理内存中的程序。因为CPU当前运行的程序可能是具有更高优先级的。例如在后面我们会讲到的同步。当前程序会特地的禁止CPU响应中断。</p>
@@ -627,7 +616,7 @@ This blog is the first part of reading notes of  Operating System Conc">
 <p>因此计时器的目的其实就在于通过分时的CPU占用实现类似于并行的效果，提升多用户使用的体验（多道程序）。而之所以需要不断的中断的原因在于CPU（假设只有一个核心，虽然现在的CPU经常都是8核、16核）一次只能运行一个程序，因为一个程序被编译出来之后可能只有几百KB，但是在汇编层次的机器码而言，会有成千上万的指令。这些指令运行和解释起来就需要一个CPU（的核心）。</p>
 <p>因此，操作系统中的计时器机制的特点如下：</p>
 <ul>
-<li>通过简单的计时 –&gt; 中断，避免了无穷循环和硬件资源的永久霸占</li>
+<li>通过简单的计时 —&gt; 中断，避免了无穷循环和硬件资源的永久霸占</li>
 <li>在一定的时间间隔后会发出一个中断</li>
 <li>当中断发生后，当前进程可能会被kill掉，而其占用的资源会被释放，例如加锁的文件（文件加锁在后面会讲，但是目前只需要明白为了避免文件被两个程序同时修改导致的不同步，程序在修改文件的时候通常会给文件加锁，避免其他人同时修改文件）</li>
 </ul>
@@ -636,15 +625,14 @@ This blog is the first part of reading notes of  Operating System Conc">
 <h2 id="13-Interrupt-Handling"><a href="#13-Interrupt-Handling" class="headerlink" title="13. Interrupt Handling"></a>13. Interrupt Handling</h2><p>当中断发生的时候（例如计时器中断），操作系统具体是如何完成整个中断的过程的？</p>
 <p>首先我们需要明白，中断的定义就是中止运行当前程序，然后去运行新的程序。因此对中断的处理其实就包含两步，第一步就是中止当前程序的运行，第二步就是运行新的程序。</p>
 <p>对于中止当前程序的运行，需要做的首先就是保存当前程序运算到中间得到的一些中间变量。例如我们让一个程序循环从1加到1000，例如：</p>
-<pre class="line-numbers language-python"><code class="language-python">sum <span class="token operator">=</span> <span class="token number">0</span>
-<span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1001</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-    sum <span class="token operator">+=</span> i
-<span class="token keyword">print</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span>
+<pre class="line-numbers language-lang-python"><code class="language-lang-python">sum = 0
+for i in range(1, 1001):
+    sum += i
+print(i)
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>那么在加到50的时候程序可能由于时间片用完了，导致程序需要被中断，CPU转而去运行别的程序。此时需要保存循环变量i。以及保存在寄存器的中间变量sum。</p>
-<p>接下来第二步就是运行新的程序，即**中断处理程序(Interruput Handler或者Interrupt Service Routine，ISR)<strong>。在计算机内部，中断的表示是利用一个整数来表示的。而接下来去运行中断处理程序处理中断处理程序。由于中断可能会有很多种，因此中断处理程序也会有很多。为此需要指定一个中断 – &gt;中断处理程序的映射表，这个映射表称为</strong>中断表(Interrupt Table)**。一个典型的中断表如下</p>
-<img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211230152940124.png" alt="中断表" style="zoom:50%;">
-
+<p>接下来第二步就是运行新的程序，即<strong>中断处理程序(Interruput Handler或者Interrupt Service Routine，ISR)</strong>。在计算机内部，中断的表示是利用一个整数来表示的。而接下来去运行中断处理程序处理中断处理程序。由于中断可能会有很多种，因此中断处理程序也会有很多。为此需要指定一个中断 — &gt;中断处理程序的映射表，这个映射表称为<strong>中断表(Interrupt Table)</strong>。一个典型的中断表如下</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211230152940124.png" alt="中断表" style="zoom:50%;"></p>
 <p>如果是上面假设的计时器中断（中断的目的就在于把CPU让给下一个程序）的话，那么就会去运行计时器中断处理程序，计时器中断处理程序会从CPU的就绪队列中挑去下一个需要执行CPU的进程，然后把这个进程的变量和程序计数器加载到寄存器中，从而开始运行下一个程序。</p>
 <p>以上就是一个典型的中断处理的过程。</p>
 <p>除了正常的中断处理意外，还有可能发生的一个情况就是中断冲突。</p>
@@ -668,15 +656,14 @@ This blog is the first part of reading notes of  Operating System Conc">
 <li><strong>二级存储（Secondary Memory）</strong>：二级存储是对主存的扩展，其内部的数据是<strong>非易失性的（nonvolatile）</strong>。</li>
 <li><strong>磁盘（Magnetic Disks）</strong>：磁盘是由可以保存磁场的材料制成的。数据在其内部以磁的形式保存<ul>
 <li>通常而言，数据在磁盘上按照<strong>磁道（Track）</strong>、<strong>扇区（Sector）</strong>的形式记录在磁盘上。</li>
-<li>磁盘上的**设备控制器(Disk Controller)**帮助完成计算机和磁盘之间的沟通，包括磁信号到电信号的转换。</li>
+<li>磁盘上的<strong>设备控制器(Disk Controller)</strong>帮助完成计算机和磁盘之间的沟通，包括磁信号到电信号的转换。</li>
 </ul>
 </li>
 </ul>
 <p>通常在考虑存储器的选择的时候，会权衡速度、价格和容量三个方面的因素。一般而言速度越快、容量越大，价格就会越高。因此系统中存储器的分层结构（Storage-Device Hierarchy）如下图</p>
-<img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211230163108041.png" alt="存储器的分层结构" style="zoom:150%;">
-
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211230163108041.png" alt="存储器的分层结构" style="zoom:150%;"></p>
 <p>从上到下单位价格容量越来越低，而速度越来越慢。</p>
-<p>在前面放过一张图，图中描述了CPU访问每个设备、获取到数据需要的时间。一般来说访问内存需要10纳秒左右的时间，虽然寄存器的访问速度非常快，但是CPU内板载的寄存器首先非常有限，其次价格非常高昂，因此退而求其次，就有了**高速缓存(Cache)**。</p>
+<p>在前面放过一张图，图中描述了CPU访问每个设备、获取到数据需要的时间。一般来说访问内存需要10纳秒左右的时间，虽然寄存器的访问速度非常快，但是CPU内板载的寄存器首先非常有限，其次价格非常高昂，因此退而求其次，就有了<strong>高速缓存(Cache)</strong>。</p>
 <p>计算机中的二八定律指出80%的访问都是针对20%的数据的，因此可以把内存中一些经常被访问的数据加载到高速缓存中去，CPU每次要从内存中获取数据前先从高速缓存中去看看，如果高速缓存中有的话就直接获取数据即可，如果没有再去内存中获取数据。</p>
 <p>因此如果绝大多数CPU需要的数据都在缓存中的话，系统的运行速度实际上可以有极大地提升。</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211229224334928.png" alt="各种设备的访问时间"></p>
@@ -736,7 +723,7 @@ This blog is the first part of reading notes of  Operating System Conc">
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://jackwang0107.github.io/2021/12/29/cao-zuo-xi-tong-gai-nian-du-shu-bi-ji-di-yi-zhang-jie-shao/">https://jackwang0107.github.io/2021/12/29/cao-zuo-xi-tong-gai-nian-du-shu-bi-ji-di-yi-zhang-jie-shao/</a>
+                    <a href="https://jackwang0107.github.io/2021/12/29/cao-zuo-xi-tong-gai-nian-du-shu-bi-ji-di-yi-zhang-jie-shao-1/">https://jackwang0107.github.io/2021/12/29/cao-zuo-xi-tong-gai-nian-du-shu-bi-ji-di-yi-zhang-jie-shao-1/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -1236,7 +1223,7 @@ This blog is the first part of reading notes of  Operating System Conc">
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
-                <span id="year">2021</span>
+                <span id="year">2021-2022</span>
             
             <a href="/about" target="_blank">Jack Wang</a>
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
@@ -1244,7 +1231,7 @@ This blog is the first part of reading notes of  Operating System Conc">
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">67k</span>
+                        class="white-color">83.3k</span>
             
             
             

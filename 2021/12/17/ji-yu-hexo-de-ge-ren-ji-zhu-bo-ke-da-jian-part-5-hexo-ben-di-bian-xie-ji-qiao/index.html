@@ -448,7 +448,7 @@
 <p>其实包括后面的密码验证文章也在这里设置。</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211217130309720.png" alt="Markdown的Header"></p>
 <h3 id="2-Hexo中的草稿与正式发布文章"><a href="#2-Hexo中的草稿与正式发布文章" class="headerlink" title="2. Hexo中的草稿与正式发布文章"></a>2. Hexo中的草稿与正式发布文章</h3><p>由于Hexo是通过Markdown文件来生成文章，因此我们写的草稿和正式要发布的文章其实对于Hexo来说是完全等价的。要区分两者。Hexo实际上是通过文件所处的文件夹来进行的。我们所有的要发布的文章都在<code>source/_post</code>文件夹中，而所有的草稿都在<code>source/_draft</code>中</p>
-<pre class="line-numbers language-shell"><code class="language-shell">(base) jack@jack-Alienware-m15-R3:/media/jack/JackCode/project/hexo-blogs$ tree -d -L 2 source/
+<pre class="line-numbers language-lang-shell"><code class="language-lang-shell">(base) jack@jack-Alienware-m15-R3:/media/jack/JackCode/project/hexo-blogs$ tree -d -L 2 source/
 (base) jack@jack-Alienware-m15-R3:/media/jack/JackCode/project/hexo-blogs$ ls source/_posts/
 (base) jack@jack-Alienware-m15-R3:/media/jack/JackCode/project/hexo-blogs$ ls source/_drafts/
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
@@ -457,20 +457,20 @@
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211217131004765.png" alt="具体的草稿与发布的文章"></p>
 <p>因此用的来说，我们写博客时候需要掌握的技巧就是文章在草稿（文件夹）与正式发布（文件夹）之间的左右横跳与单篇文章内的信息设置。</p>
 <h2 id="2-Hexo文章草稿与正式发布的博客"><a href="#2-Hexo文章草稿与正式发布的博客" class="headerlink" title="2. Hexo文章草稿与正式发布的博客"></a>2. Hexo文章草稿与正式发布的博客</h2><h3 id="1-草稿"><a href="#1-草稿" class="headerlink" title="1. 草稿"></a>1. 草稿</h3><h4 id="1-创建草稿"><a href="#1-创建草稿" class="headerlink" title="1. 创建草稿"></a>1. 创建草稿</h4><p>我们通过hexo new的时候指定使用的模板是draft即可，此时创建的文章会被自动放到_draft文件夹下面</p>
-<pre class="line-numbers language-shell"><code class="language-shell">hexo new draft <title>
+<pre class="line-numbers language-lang-shell"><code class="language-lang-shell">hexo new draft <title>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>例如：</p>
-<pre class="line-numbers language-shell"><code class="language-shell">(base) jack@jack-Alienware-m15-R3:/media/jack/JackCode/project/hexo-blogs$ hexo new draft draft_test
+<pre class="line-numbers language-lang-shell"><code class="language-lang-shell">(base) jack@jack-Alienware-m15-R3:/media/jack/JackCode/project/hexo-blogs$ hexo new draft draft_test
 (base) jack@jack-Alienware-m15-R3:/media/jack/JackCode/project/hexo-blogs$ ls source/_drafts/
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211217134454739.png" alt="Hexo创建草稿"></p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211217134547721.png" alt="所有草稿文章"></p>
 <p>然后我们hexo gen生成文章，再使用hexo server来查看本地文章的时候，并不会看到这些草稿文章</p>
 <h4 id="2-发布草稿"><a href="#2-发布草稿" class="headerlink" title="2. 发布草稿"></a>2. 发布草稿</h4><p>当我们完成了草稿文章之后想要发布的时候，使用下面的命令来进行发布</p>
-<pre class="line-numbers language-shell"><code class="language-shell">hexo publish <title>
+<pre class="line-numbers language-lang-shell"><code class="language-lang-shell">hexo publish <title>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>需要注意的是，Hexo是一个轻量级的博客，因此不存在像记录草稿、已发布的文章这样的数据库。所有的操作都是基于文件的，因此上面的命令就是把文章从_draft中移动到_post中。我们直接手动mv也是可以的</p>
-<pre class="line-numbers language-shell"><code class="language-shell">(base) jack@jack-Alienware-m15-R3:/media/jack/JackCode/project/hexo-blogs$ hexo publish draft-test
+<pre class="line-numbers language-lang-shell"><code class="language-lang-shell">(base) jack@jack-Alienware-m15-R3:/media/jack/JackCode/project/hexo-blogs$ hexo publish draft-test
 (base) jack@jack-Alienware-m15-R3:/media/jack/JackCode/project/hexo-blogs$ ls source/_posts/ | grep dra
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211217135305343.png" alt="发布文章"></p>
@@ -481,7 +481,7 @@
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211217131946247.png" alt="Front-Formatter闪烁之狐的介绍"></p>
 <h3 id="1-密码设置"><a href="#1-密码设置" class="headerlink" title="1. 密码设置"></a>1. 密码设置</h3><p>对文章进行密码设置功能并不是Hexo的功能，而是Matery主题中的功能，因此我们需要在Matery主题的配置中进行设置</p>
 <p>具体路径为<code>themes/hexo-theme-matery</code>下的<code>_config.yml</code>，然后找到<code>verifyPassword</code>这一项，将其设置为True，然后修改提示语即可</p>
-<pre class="line-numbers language-shell"><code class="language-shell">(base) jack@jack-Alienware-m15-R3:/media/jack/JackCode/project/hexo-blogs$ vim themes/hexo-theme-matery/_config.yml 
+<pre class="line-numbers language-lang-shell"><code class="language-lang-shell">(base) jack@jack-Alienware-m15-R3:/media/jack/JackCode/project/hexo-blogs$ vim themes/hexo-theme-matery/_config.yml
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211217132432259.png" alt="设置主题，开启文章加密功能"></p>
 <p>需要注意的是，Matery主题中的验证密码方式是通过内置的SHA256算法对访问者输入的密码加密之后和我们在文章的Front-Formatter中设置的经过SHA256 加密的 password 的值进行对比得到的。因此我们首先可以通过一下网站来获得密码对应的值。</p>
@@ -493,12 +493,12 @@
 <p>例如我们使用开源中国来进行值的获取，注意选择SHA256算法。</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211217133017741.png" alt="生成加密后的密码的值"></p>
 <p>然后我们新建一篇文章来进行测试。</p>
-<pre class="line-numbers language-shell"><code class="language-shell">(base) jack@jack-Alienware-m15-R3:/media/jack/JackCode/project/hexo-blogs$ hexo new passwd-test
+<pre class="line-numbers language-lang-shell"><code class="language-lang-shell">(base) jack@jack-Alienware-m15-R3:/media/jack/JackCode/project/hexo-blogs$ hexo new passwd-test
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>然后我们在里面设置password这一项，随便写一点内容</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211217133315175.png" alt="设置文章密码"></p>
 <p>然后我们使用hexo gen来生成文章看看效果</p>
-<pre class="line-numbers language-shell"><code class="language-shell">(base) jack@jack-Alienware-m15-R3:/media/jack/JackCode/project/hexo-blogs$ hexo gen
+<pre class="line-numbers language-lang-shell"><code class="language-lang-shell">(base) jack@jack-Alienware-m15-R3:/media/jack/JackCode/project/hexo-blogs$ hexo gen
 (base) jack@jack-Alienware-m15-R3:/media/jack/JackCode/project/hexo-blogs$ hexo s
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>接下来我们就能够在首页看到这个加密的文章了</p>
@@ -1027,7 +1027,7 @@
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
-                <span id="year">2021</span>
+                <span id="year">2021-2022</span>
             
             <a href="/about" target="_blank">Jack Wang</a>
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
@@ -1035,7 +1035,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">67k</span>
+                        class="white-color">83.3k</span>
             
             
             
