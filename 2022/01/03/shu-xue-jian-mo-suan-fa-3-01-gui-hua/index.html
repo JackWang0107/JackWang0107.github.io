@@ -1,0 +1,1553 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="数学建模算法3-01规划, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
+    <meta name="description" content="
+本文主要讲解了数学建模中常见的一类问题：01规划，及其求解
+
+
+数学建模算法3-01规划前面我们介绍了数学规划中的线性规划、整数规划。其实对于整数规划来说，还有一类特殊的规划问题就是决策变量的取值只能为0或者1，这样的问题我们称为0-1规">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>数学建模算法3-01规划 | JackWang&#39;s Bolg</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">JackWang&#39;s Bolg</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-book-reader" style="zoom: 0.6;"></i>
+      
+      <span>博客</span>
+      <i class="fas fa-chevron-down" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/tags">
+          
+          <i class="fas fa-tags" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按标签归类文章</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories">
+          
+          <i class="fas fa-bookmark" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按目录归类文章</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/archives">
+          
+          <i class="fas fa-archive" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按日期分类文章</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">JackWang&#39;s Bolg</div>
+        <div class="logo-desc">
+            
+            JackWang的个人博客
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-book-reader"></i>
+			
+			博客
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>
+
+                  <a href="/tags " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-tags" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按标签归类文章</    span>
+
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/categories " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-bookmark" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按目录归类文章</    span>
+
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/archives " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-archive" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按日期分类文章</    span>
+
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('抱歉，这篇文章并不想让所有人都看到，请输入授权密码观看')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220103165339023.png')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">数学建模算法3-01规划</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Python/">
+                                <span class="chip bg-color">Python</span>
+                            </a>
+                        
+                            <a href="/tags/Linear-Programming/">
+                                <span class="chip bg-color">Linear Programming</span>
+                            </a>
+                        
+                            <a href="/tags/Math-Modeling/">
+                                <span class="chip bg-color">Math Modeling</span>
+                            </a>
+                        
+                            <a href="/tags/01%E8%A7%84%E5%88%92/">
+                                <span class="chip bg-color">01规划</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E7%AE%97%E6%B3%95/" class="post-category">
+                                数学建模算法
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2022-01-03
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2022-01-04
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    3.3k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    13 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <blockquote>
+<p>本文主要讲解了数学建模中常见的一类问题：01规划，及其求解</p>
+</blockquote>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220103165339023.png" alt="01规划问题"></p>
+<h1 id="数学建模算法3-01规划"><a href="#数学建模算法3-01规划" class="headerlink" title="数学建模算法3-01规划"></a>数学建模算法3-01规划</h1><p>前面我们介绍了数学规划中的线性规划、整数规划。其实对于整数规划来说，还有一类特殊的规划问题就是决策变量的取值只能为0或者1，这样的问题我们称为0-1规划。</p>
+<p>01规划问题通常出现在指派问题中，例如一共有很多种任务，多个不同的人完成每种任务需要的时间不同，求最短耗时。那么这里是否派A去做任务X就是一个只能取0或者1的变量。因此这样的问题就可以用01规划来解决。更多可以用01规划求解的问题在后面会进行介绍。</p>
+<h2 id="1-01规划问题介绍"><a href="#1-01规划问题介绍" class="headerlink" title="1. 01规划问题介绍"></a>1. 01规划问题介绍</h2><p>其实对于01规划问题来说，如果假设所有的变量的取值都是0或者1，并且所有变量之间都是独立的，那么我们其实用整数规划就能求解。因为所有变量独立的01规划问题相比于整数规划问题，只是单纯的限制了每个决策变量的定义域为$0\leq x_i\leq 1$。</p>
+<p>所以对于所有变量独立的01规划来说，给所有的01变量添加大于等于0且小于等于1的约束即可。</p>
+<p>然而01规划中，真正难处理的是01变量之间会相互影响的01规划。例如上面的投资问题，设$x_i$表示是否投资第$i$个项目，那么$x_i$的取值只能在0和1之间。</p>
+<p>但是项目I、II、III之间会相互影响，即是否投资项目II会影响到项目I、项目III的投资，而项目I是否投资又会影响到项目V是否投资。</p>
+<p>因此，称处01变量之间相互制约的条件为<strong>互斥条件</strong>，而为了处理含互斥条件的的01问题，在原有的约束的基础上引入<strong>互斥约束</strong></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220103165339023.png" alt="01规划问题"></p>
+<p>再举一个例子（如下图），新工序和原工序都是线性约束，但是在考虑两种工序到底用哪一个才能使得收益最大的时候，就可以另设一个01变量$y$表示是否用原工序。此时问题就成了混合线性规划问题。</p>
+<p>当然这里也可以设$x_0$表示是否用原工序，$x_1$表示是否用新工序，那么再额外引入一个互斥约束为$x_1+x_1=1$。</p>
+<p>注意，之所以要$M$是一个充分大的数（无穷），是因为$3x_1+5x_2\leq\infin$这个约束条件等价于没有，因为$x_1$和$x_2$都可以取任意的值</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220103170758245.png" alt="互斥约束问题"></p>
+<h2 id="2-01规划问题的数学化"><a href="#2-01规划问题的数学化" class="headerlink" title="2. 01规划问题的数学化"></a>2. 01规划问题的数学化</h2><p>要对01规划进行进行求解，就需要首先写出来01规划的标准式，然后针对标准式运用算法进行求解</p>
+<h3 id="A-leq-类型"><a href="#A-leq-类型" class="headerlink" title="A. $\leq$类型"></a>A. $\leq$类型</h3><p>设从下面$p$个约束条件中选择$q$个约束条件</p>
+<script type="math/tex; mode=display">
+\begin{cases}
+\sum_{j=1}^n a_{1j}x_j \leq b_1\\
+\sum_{j=1}^n a_{2j}x_j \leq b_2\\
+\sum_{j=1}^n a_{3j}x_j \leq b_3\\
+\cdots\\
+\sum_{j=1}^n a_{pj}x_j \leq b_p\\
+\end{cases}</script><p>设</p>
+<script type="math/tex; mode=display">
+y_i=\begin{cases}
+0, &选择第i个约束条件\\
+1, &不选择第i个约束条件
+\end{cases}</script><p>则需要添加的互斥约束为：</p>
+<script type="math/tex; mode=display">
+\begin{cases}
+\sum_{j=1}^n a_{ij}x_j \leq b_i+My_i, & i=1,2,\cdots,p\\
+\sum_{i=1}^p y_i=p-q, &i=1,2,\cdots,p
+\end{cases}</script><p>上面这两个约束也非常好理解：</p>
+<ul>
+<li>不选的约束的和加起来等于$p-q$</li>
+<li>不选这个约束则表示让该改约失效，即加上一个充分大的数即可</li>
+</ul>
+<h2 id="3-01规划问题举例"><a href="#3-01规划问题举例" class="headerlink" title="3. 01规划问题举例"></a>3. 01规划问题举例</h2><h3 id="A-固定费用问题"><a href="#A-固定费用问题" class="headerlink" title="A. 固定费用问题"></a>A. 固定费用问题</h3><blockquote>
+<p>服装公司租用生产线拟生产T恤、衬衫和裤子。 每年可用劳动力8200h，布料8800m2。生产每类商品需要的劳动力、布料以及售价等信息如下表所示。求该怎样生产产品可以获得最大收益。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220103174537365.png" alt="商品信息表" style="zoom:67%;"></p>
+</blockquote>
+<p>上述问题中的变量其实有两类，第一类是某个商品该生产多少件，第二类是是否租用该商品的生产线。很明显，第二类变量是01变量。</p>
+<p>设$y_i$表示是否要租用第$i$类生产线，$x_j$表示第$j$类商品生产多少件，那么上述问题的数学模型如下：</p>
+<script type="math/tex; mode=display">
+\max_{\vec x,\vec y} Z=150x_1+220x_2+300x_3-200000y_1-150000y_2-100000y_3\\
+\begin{cases}
+3x_1+2x_2+6x_3\leq 8200, &x_1\leq M_1y_1且x_2\leq M_2y_2且x_3\leq M_3y_3\\
+0.8x_1+1.1x_2+1.5x_2\leq 8800, &x_1\leq M_1y_1且x_2\leq M_2y_2且x_3\leq M_3y_3\\
+x_1,x_2,x_3\ge 0\\
+x_1,x_2,x_3均为整数\\
+y_1,y_2,y_3=0或1
+\end{cases}</script><h3 id="B-指派问题"><a href="#B-指派问题" class="headerlink" title="B. 指派问题"></a>B. 指派问题</h3><blockquote>
+<p>甲乙丙丁四个人，ABCD四项工作，每个人完成每项工作用时如下表。要求每人只能做一项工 作，每项工作只由一人完成，问如何指派总时间最短？</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220103183021177.png" alt="工作用时表"></p>
+</blockquote>
+<p>上述问题中，一个人完成四个工作有4个时间，那么4个人就一种16个时间。针对这16个时间，引入变量$x_{ij}$</p>
+<script type="math/tex; mode=display">
+x_{ij}=
+\begin{cases}
+1, &第i个人做第j个工作\\
+0, &第i个人不做第j个工作
+\end{cases}</script><p>则指派问题的数学模型如下</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\min Z=&3x_{11}+5x_{12}+8x_{13}+4x_{14}+\\
+& 6x_{21}+8x_{22}+5x_{23}+4x_{24}+\\
+& 2x_{31}+5x_{32}+8x_{33}+5x_{34}+\\
+& 9x_{41}+2x_{42}+5x_{43}+2x_{44}
+\end{align}</script><script type="math/tex; mode=display">
+\begin{cases}
+x_{11}+x_{12}+x_{13}+x_{14}=1\\
+x_{21}+x_{22}+x_{23}+x_{24}=1\\
+x_{31}+x_{32}+x_{33}+x_{34}=1\\
+x_{41}+x_{42}+x_{43}+x_{44}=1\\
+x_{11}+x_{21}+x_{31}+x_{41}=1\\
+x_{12}+x_{22}+x_{32}+x_{42}=1\\
+x_{13}+x_{23}+x_{33}+x_{43}=1\\
+x_{14}+x_{24}+x_{34}+x_{44}=1\\
+\end{cases}</script><p>上述八个约束中，前四个约束为一个人只能做一项工作，而后四个约束为一个工作只能由一个人完成。</p>
+<h3 id="C-指派问题的标准形式"><a href="#C-指派问题的标准形式" class="headerlink" title="C. 指派问题的标准形式"></a>C. 指派问题的标准形式</h3><p>$n$个人和$n$个工作，已知第$i$个人完成第$j$个工作的代价$c_{ij}$，要求每项工作只能由一个人完成，每个人只能完成其中的一项工作，问如何分配工作可以使总代价最少？</p>
+<script type="math/tex; mode=display">
+C = (c_{ij})_{n\times n}
+\begin{bmatrix}
+c_{11} & c_{12} & \cdots & c_{1n}\\
+c_{21} & c_{22} & \cdots & c_{2n}\\
+\vdots & \vdots & \ddots & \vdots\\
+c_{n1} & c_{n2} & \cdots & c_{nn}\\
+\end{bmatrix}</script><p>称矩阵$C$为指派问题的系数矩阵</p>
+<p>设$x_{ij}$表示第$i$个人做第$j$项工作的状态，即</p>
+<script type="math/tex; mode=display">
+x_{ij}=\begin{cases}
+1, & 第i个人做第j项工作\\
+0, & 第i个人不做第j项工作
+\end{cases}</script><p>则称</p>
+<script type="math/tex; mode=display">
+X = (x_{ij})_{n\times n}
+\begin{bmatrix}
+x_{11} & x_{12} & \cdots & x_{1n}\\
+x_{21} & x_{22} & \cdots & x_{2n}\\
+\vdots & \vdots & \ddots & \vdots\\
+x_{n1} & x_{n2} & \cdots & x_{nn}\\
+\end{bmatrix}</script><p>为指派问题的解矩阵。由于指派问题的要求，解矩阵每行每列都仅有一个1，类似于八皇后问题的退化版。</p>
+<p>而指派问题的数学模型为</p>
+<script type="math/tex; mode=display">
+\min z=\sum_{i=1}^n\sum_{j=1}^nc_{ij}x_{ij}\\
+\begin{cases}
+\sum_{j=1}^nx_{ij}=1, & i=1,\cdots,n\\
+\sum_{i=1}^nx_{ij}=1, & i=1,\cdots,n\\
+x_{ij}=0或x_{ij}=1, & i=1,\cdots,n
+\end{cases}</script><h3 id="D-非标准形式的指派问题"><a href="#D-非标准形式的指派问题" class="headerlink" title="D. 非标准形式的指派问题"></a>D. 非标准形式的指派问题</h3><h4 id="1-最大化指派问题"><a href="#1-最大化指派问题" class="headerlink" title="1) 最大化指派问题"></a>1) 最大化指派问题</h4><p>指派问题中是要求画的总时间最少，然而在一些指派问题的变体中，要求优化目标最大，则此时取系数矩阵中最大的元素$c’=\max C$，令</p>
+<script type="math/tex; mode=display">
+C'=c'-C</script><p>然后转化为了指派问题，对其你找指派问题进行求解即可</p>
+<h4 id="2-人数和工作数不相等"><a href="#2-人数和工作数不相等" class="headerlink" title="2) 人数和工作数不相等"></a>2) 人数和工作数不相等</h4><p>在指派问题中，有$n$个人做$n$项工作，然而在一些变体问题中却会存在两者数量不相等的情况，为此</p>
+<ul>
+<li><strong>人少工作多</strong>：添加虚拟的人，使得人数和工作数相等，注意，添加的虚拟人的代价都是0</li>
+<li><strong>人多工作少</strong>：添加虚拟的工作，使得人数和工作数相等，注意，添加的虚拟工作的代价都是0</li>
+</ul>
+<h4 id="4-多面手问题"><a href="#4-多面手问题" class="headerlink" title="4) 多面手问题"></a>4) 多面手问题</h4><p>标准的指派问题中要求一个人只能做一项工作，然而若一个人可以做三四项工作，那么把这个人变为几个相同的人即可</p>
+<h4 id="5-禁止某人做某工作"><a href="#5-禁止某人做某工作" class="headerlink" title="5) 禁止某人做某工作"></a>5) 禁止某人做某工作</h4><p>为此，将该人做某工作的代价记为无穷大即可</p>
+<h2 id="4-匈牙利算法解01规划问题"><a href="#4-匈牙利算法解01规划问题" class="headerlink" title="4. 匈牙利算法解01规划问题"></a>4. 匈牙利算法解01规划问题</h2><p>下面将结合指派问题讲解如何用匈牙利算法求解01规划问题</p>
+<p>匈牙利算法步骤如下：</p>
+<ol>
+<li><p>对指派问题的系数矩阵$(c<em>{ij})$进行变换，使其变为$(b</em>{ij})$，$(b_{ij})$满足在每行每列中都有0元素。变换步骤如下</p>
+<ul>
+<li>对$(c_{ij})$每行元素减去该行最小元素</li>
+<li>从得到的新的矩阵每列元素减去该列的最小元素</li>
+</ul>
+</li>
+<li><p>进行试指派，以寻求最优解</p>
+<p>在$(b<em>{ij})$中找尽可能多的独立0元素，若能找出$n$个独立0元素（独立0元素指该元素所在的行和列数不相等），就以这$n$个独立0元素对应解矩阵$(x</em>{ij})$中的元素为1，其余为0，这就得到最优解。找独立0元素，常用的步骤为：</p>
+<ol>
+<li>从只有一个0元素的行(列)开始，给这个0元素加圈，记作◎ 。然后划去◎ 所在列(行)的其它0元素，记作Ø；这表示这列所代表的任务已指派 完，不必再考虑别人了。</li>
+<li>给只有一个0元素的列(行)中的0元素加圈，记作◎；然后划去◎ 所 在行的0元素，记作Ø ．</li>
+<li>反复进行(1)，(2)两步，直到尽可能多的0元素都被圈出和划掉为止</li>
+<li>若仍有没有划圈的0元素，且同行(列)的0元素至少有两个， 则从剩有0元素最少的行(列)开始，比较这行各0元素所在列中0元 素的数目，选择0元素少的那列的这个0元素加圈(表示选择性多的 要“礼让”选择性少的)。然后划掉同行同列的其它0元素。可反 复进行，直到所有0元素都已圈出和划掉为止</li>
+<li>若◎ 元素的数目m 等于矩阵的阶数n，那么这指派问题的 最优解已得到。若m &lt; n, 则转入下一步</li>
+</ol>
+</li>
+<li><p>作最少的直线覆盖所有0元素</p>
+<ol>
+<li>对没有◎的行打√号</li>
+<li>对已打√号的行中所有含Ø元素的列打√号</li>
+<li>再对打有√号的列中含◎ 元素的行打√号</li>
+<li>重复(2)，(3)直到得不出新的打√号的行、列为止</li>
+<li>对没有打√号的行画横线，有打√号的列画纵线，这就得到覆盖 所有0元素的最少直线数 l 。l 应等于m，若不相等，说明试指派过 程有误，回到第二步(4)，另行试指派；若 l＝m &lt; n，须再变换当前 的系数矩阵，以找到n个独立的0元素，为此转第四步</li>
+</ol>
+</li>
+<li><p>变换矩阵(bij)以增加0元素</p>
+<ol>
+<li>在没有被直线覆盖的所有元素中找出最小元素，然后打√各行都减去 这最小元素；打√各列都加上这最小元素（以保证系数矩阵中不出现 负元素）。新系数矩阵的最优解和原问题仍相同。转回第二步</li>
+</ol>
+</li>
+</ol>
+<p>实际上，单纯的看自然语言的描述不好懂，因此下面根据不同的例子来进行讲解匈牙利算法。</p>
+<h3 id="A-例子一"><a href="#A-例子一" class="headerlink" title="A. 例子一"></a>A. 例子一</h3><p>求解下面的指派问题</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220104150537191.png" alt="例子一" style="zoom:50%;"></p>
+<ol>
+<li>第一步：对系数矩阵进行变换</li>
+</ol>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220104150601301.png" alt="第一步：变换系数矩阵" style="zoom:50%;"></p>
+<ol>
+<li><p>第二步：试指派，寻找最优解，寻找独立的0元素</p>
+<ol>
+<li><p>寻找独立0元素<br> <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220104150735537.png" alt="第二步：试指派" style="zoom:50%;"></p>
+</li>
+<li><p>判断是否完成求解</p>
+<p>  <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220104150954853.png" alt="第二步:判断是否完成求解"></p>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="B-例子二"><a href="#B-例子二" class="headerlink" title="B. 例子二"></a>B. 例子二</h3><p>求解下面的指派问题</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220104151405833.png" alt="例子二" style="zoom:50%;"></p>
+<ol>
+<li><p>第一步：变换系数矩阵</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220104151706104.png" alt="变换系数矩阵"></p>
+</li>
+<li><p>第二步：试指派</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220104151735596.png" alt="试指派"></p>
+</li>
+<li><p>第三步：覆盖0元素</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220104151823539.png" alt="覆盖0元素"></p>
+</li>
+<li><p>第四步：变换系数矩阵，增加0元素</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220104152021619.png" alt="变换系数矩阵"></p>
+</li>
+<li><p>第二步：继续进行试指派</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220104152113689.png" alt="试指派"></p>
+</li>
+</ol>
+<h2 id="5-01规划Python求解"><a href="#5-01规划Python求解" class="headerlink" title="5. 01规划Python求解"></a>5. 01规划Python求解</h2><blockquote>
+<p>以下内容参考博客：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/youcans/p/14854596.html">https://www.cnblogs.com/youcans/p/14854596.html</a></p>
+</blockquote>
+<p>我们上面讲解了该如何使用匈牙利算法求解01规划问题，然而落实到真实的求解上，我们其实可以直接用PuLP即可，没有必要自己去写出来匈牙利算法，逼近CBC以及为我们准备好了。</p>
+<p>下面以一个问题来进行举例</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220104152607093.png" alt="例题"></p>
+<h3 id="A-建模"><a href="#A-建模" class="headerlink" title="A. 建模"></a>A. 建模</h3><p>定义决策变量</p>
+<script type="math/tex; mode=display">
+x_i=\begin{cases}
+0, &不选第i个项目\\
+1, &选择第i个项目
+\end{cases}</script><p>则模型为</p>
+<script type="math/tex; mode=display">
+\max Z=150x_1+210x_2+60x_3+80x_4+180x_5\\
+\begin{cases}
+210x_1+300x_2+100x_3+130x_4+260x_5\leq 600\\
+x_1+x_2+x_3=1\\
+x_3+x_4\leq 1\\
+x_5\leq x_1\\
+x_i=0或1, & i=1,\cdots,5
+\end{cases}</script><h3 id="B-Python求解"><a href="#B-Python求解" class="headerlink" title="B. Python求解"></a>B. Python求解</h3><p>求解的具体过程我们其实还是使用PuLP库。类似于整数规划问题，我们只需要指定01变量的类别为”Binary”即可。</p>
+<pre class="line-numbers language-lang-python"><code class="language-lang-python">import pulp
+import numpy as np
+
+
+problem: pulp.LpProblem = pulp.LpProblem(name="最大化投资问题", sense=pulp.LpMaximize)
+
+
+xs = np.array([pulp.LpVariable(name=f"x{i}", lowBound=0, cat=pulp.LpBinary) for i in range(5)])
+profits = np.array([150, 210, 60, 80, 180])
+
+contrain1 = np.array([1, 1, 1, 0, 0])
+contrain2 = np.array([0, 0, 1, 1, 0])
+contrain3 = np.array([-1, 0, 0, 0, 1])
+
+problem.setObjective(profits @ xs)
+problem += (contrain1 @ xs == 1, "约束1")
+problem += (contrain2 @ xs <= 1, "约束2")
+problem += (contrain3 @ xs <= 0, "约束3")
+
+if pulp.LpStatus[problem.solve()] == "Optimal":
+    v: pulp.LpVariable
+    for v in problem.variables():
+        print(f"{v.name}={v.varValue}")
+    print(f"max Z={pulp.value(problem.objective)}")
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>运行后的结果为</p>
+<pre class="line-numbers language-lang-shell"><code class="language-lang-shell">Result - Optimal solution found
+
+Objective value:                410.00000000
+Enumerated nodes:               0
+Total iterations:               0
+Time (CPU seconds):             0.00
+Time (Wallclock seconds):       0.00
+
+Option for printingOptions changed from normal to all
+Total time (CPU seconds):       0.00   (Wallclock seconds):       0.00
+
+x0=1.0
+x1=0.0
+x2=0.0
+x3=1.0
+x4=1.0
+max Z=410.0
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220104154056572.png" alt="运行结果"></p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Jack Wang</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://jackwang0107.github.io/2022/01/03/shu-xue-jian-mo-suan-fa-3-01-gui-hua/">https://jackwang0107.github.io/2022/01/03/shu-xue-jian-mo-suan-fa-3-01-gui-hua/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Jack Wang</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/Python/">
+                                    <span class="chip bg-color">Python</span>
+                                </a>
+                            
+                                <a href="/tags/Linear-Programming/">
+                                    <span class="chip bg-color">Linear Programming</span>
+                                </a>
+                            
+                                <a href="/tags/Math-Modeling/">
+                                    <span class="chip bg-color">Math Modeling</span>
+                                </a>
+                            
+                                <a href="/tags/01%E8%A7%84%E5%88%92/">
+                                    <span class="chip bg-color">01规划</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.png" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2022/01/04/shu-xue-jian-mo-suan-fa-4-fei-xian-xing-gui-hua/">
+                    <div class="card-image">
+                        
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/v2-69cfe96a3fb52b79353c03cadb085a3b_1440w.jpg" class="responsive-img" alt="数学建模算法4-非线性规划">
+                        
+                        <span class="card-title">数学建模算法4-非线性规划</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-01-04
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E7%AE%97%E6%B3%95/" class="post-category">
+                                    数学建模算法
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Python/">
+                        <span class="chip bg-color">Python</span>
+                    </a>
+                    
+                    <a href="/tags/Math-Modeling/">
+                        <span class="chip bg-color">Math Modeling</span>
+                    </a>
+                    
+                    <a href="/tags/%E9%9D%9E%E7%BA%BF%E6%80%A7%E8%A7%84%E5%88%92/">
+                        <span class="chip bg-color">非线性规划</span>
+                    </a>
+                    
+                    <a href="/tags/Non-Linear-Programming/">
+                        <span class="chip bg-color">Non-Linear Programming</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/01/03/python-zhong-de-tui-dao-shi/">
+                    <div class="card-image">
+                        
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/20201221215820109.png" class="responsive-img" alt="Python中的推导式">
+                        
+                        <span class="card-title">Python中的推导式</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-01-03
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            Jack Wang
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Python/">
+                        <span class="chip bg-color">Python</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%9D%82%E9%A1%B9/">
+                        <span class="chip bg-color">杂项</span>
+                    </a>
+                    
+                    <a href="/tags/Python-Comprehension/">
+                        <span class="chip bg-color">Python Comprehension</span>
+                    </a>
+                    
+                    <a href="/tags/Python-%E6%8E%A8%E5%AF%BC%E5%BC%8F/">
+                        <span class="chip bg-color">Python 推导式</span>
+                    </a>
+                    
+                    <a href="/tags/CSDN-Blog-Transfer/">
+                        <span class="chip bg-color">CSDN Blog Transfer</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: JackWang&#39;s Bolg<br />'
+            + '文章作者: Jack Wang<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    });
+</script>
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2021-2022</span>
+            
+            <a href="/about" target="_blank">Jack Wang</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">87.9k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+                <span id="sitetime"> Loading ...</span>
+                <script>
+                    var calcSiteTime = function () {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2021";
+                        var startMonth = "11";
+                        var startDate = "12";
+                        var startHour = "0";
+                        var startMinute = "0";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+
+                        // 区分是否有年份.
+                        var language = 'zh-CN';
+                        if (startYear === String(todayYear)) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            var daysTip = 'This site has been running for ' + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                daysTip = '本站已运行 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                daysTip = '本站已運行 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = daysTip;
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            var yearsAndDaysTip = 'This site has been running for ' + diffYears + ' years and '
+                                + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                yearsAndDaysTip = '本站已运行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                yearsAndDaysTip = '本站已運行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+                        }
+                    }
+
+                    calcSiteTime();
+                </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+    <a href="mailto:2232123545@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+     
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/star.js"><\/script>');
+            }
+        </script>
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
