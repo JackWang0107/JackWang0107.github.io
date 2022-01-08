@@ -546,7 +546,7 @@
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220104234906589.png" alt="判断矩阵"></p>
 <p>但其实此时得到的判断矩阵是有问题，例如有$\frac {C_1}{C_2}=\frac 1 2$，而$\frac{C_2}{C_3}=7$，那么$\frac{C_1}{C_3}=\frac 7 2$，但是上述我们给出的$\frac {C_1}{C_3}$却是4，因此是存在不一致问题。</p>
 <p>因此，在判断矩阵中，<strong>允许不一致，但要确定不一致的允许范围</strong></p>
-<p>若矩阵中任意三个相关联的数字是一致的，即$a<em>{ik}\cdot a</em>{kj}=a_{ij}$，那么此时<strong>称对比矩阵为一致阵，反之为不一致阵</strong>。</p>
+<p>若矩阵中任意三个相关联的数字是一致的，即$a_{ik}\cdot a_{kj}=a_{ij}$，那么此时<strong>称对比矩阵为一致阵，反之为不一致阵</strong>。</p>
 <p>一致阵的性质有：</p>
 <ul>
 <li>A的秩为1，A的唯一非零特征根为n，即矩阵的行/列数。（$A\vec w=n\vec w$）</li>
@@ -577,7 +577,7 @@ CI=\frac {\lambda-n} {n-1}</script><p>因此，有</p>
 <p>为了获得这个上界，那么可以通过和随机构造的随机矩阵的CI的值进行比较，来衡量我们给出的非一致判断阵和随机给出的判断阵之间的关系，从而衡量我们给出的判断阵是否合理，若合理即表示虽然不一致，但是在允许范围内。</p>
 <p>因此，引入入<strong>随机一致性指标$RI$</strong>。$RI$的计算方法如下：</p>
 <ul>
-<li><p>随机构造500个的成对比较矩阵$A<em>1$，$A_2$，……，$A</em>{500}$</p>
+<li><p>随机构造500个的成对比较矩阵$A_1$，$A_2$，……，$A_{500}$</p>
 </li>
 <li><p>对每个大小的矩阵计算$CI$，得到$CI_i,i=1,\cdots,500$</p>
 </li>
@@ -1123,10 +1123,6 @@ if __name__ == "__main__":
                         <span class="chip bg-color">Math Modeling</span>
                     </a>
                     
-                    <a href="/tags/Grey-relational-analysis/">
-                        <span class="chip bg-color">Grey relational analysis</span>
-                    </a>
-                    
                     <a href="/tags/%E7%81%B0%E8%89%B2%E5%85%B3%E8%81%94%E5%88%86%E6%9E%90/">
                         <span class="chip bg-color">灰色关联分析</span>
                     </a>
@@ -1137,6 +1133,10 @@ if __name__ == "__main__":
                     
                     <a href="/tags/%E7%81%B0%E8%89%B2%E6%A8%A1%E5%9E%8B/">
                         <span class="chip bg-color">灰色模型</span>
+                    </a>
+                    
+                    <a href="/tags/Grey-relational-analysis/">
+                        <span class="chip bg-color">Grey relational analysis</span>
                     </a>
                     
                     <a href="/tags/Grey-Model/">
@@ -1394,7 +1394,7 @@ if __name__ == "__main__":
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">113.8k</span>
+                        class="white-color">113.9k</span>
             
             
             

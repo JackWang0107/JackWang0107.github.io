@@ -414,7 +414,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-01-02
+                    2022-01-09
                 </div>
                 
 
@@ -507,7 +507,7 @@ c_{21} & c_{22} & \cdots & c_{2n}\\
 \vdots & \vdots & \ddots & \vdots\\
 c_{n1} & c_{n2} & \cdots & c_{nn}
 \end {bmatrix} \times \vec x
-\end{aligned}</script><p>接下来对约束条件进行向量化。约束条件其实可以分为三类，第一类是$\leq$类型的（即$A\vec x\leq \vec b$），第二类是$=$类型的（即$A<em>{eq}\vec x\leq b</em>{eq}$），第三类是约定变量范围的（即$\vec {lb}\leq \vec x \leq \vec {ub}$）</p>
+\end{aligned}</script><p>接下来对约束条件进行向量化。约束条件其实可以分为三类，第一类是$\leq$类型的（即$A\vec x\leq \vec b$），第二类是$=$类型的（即$A_{eq}\vec x\leq b_{eq}$），第三类是约定变量范围的（即$\vec{lb}\leq\vec x \leq\vec{ub}$）</p>
 <p>因此，整个线性规划问题的向量形式（标准形式）如下：</p>
 <script type="math/tex; mode=display">
 \max_{\vec x} \vec z = C^T \vec x\\
@@ -515,7 +515,7 @@ c_{n1} & c_{n2} & \cdots & c_{nn}
 A\vec x &\leq &\vec b\\
 A_{eq} \vec x & = & \vec b_{eq}\\
 \vec {lb} &\leq &\vec x &\leq &\vec {ub}
-\end {cases}</script><p>因此，稍后用程序求解线性规划问题的时候，所需要的变量就是：$\vec C$、$\vec A$、$\vec b$、$\vec A<em>{eq}$、$\vec b</em>{eq}$、$\vec {lb}$、$\vec {ub}$</p>
+\end {cases}</script><p>因此，稍后用程序求解线性规划问题的时候，所需要的变量就是：$\vec C$、$\vec A$、$\vec b$、$\vec A_{eq}$、$\vec b_{eq}$、$\vec {lb}$、$\vec {ub}$</p>
 <h2 id="5-线性规划Python求解"><a href="#5-线性规划Python求解" class="headerlink" title="5. 线性规划Python求解"></a>5. 线性规划Python求解</h2><p>对于线性规划问题，对其求解办法的研究和利用线性规划求解问题是两回事。对于数学建模来说，我们其实只需要利用线性规划去求解问题即可，并不需要花费很多的时间在研究线性规划求解方法的学习上，毕竟求解线性规划问题的算法已经有很多了。其实不仅仅对于线性规划，后面讲解的诸多问题，我们只需要掌握求解方法即可，而不用过分深入求解原理。</p>
 <p>Python中使用<code>scipy</code>库中的<code>optimize</code>模块中的<code>linprog</code>函数求解</p>
 <p>注：以下内容参考<a target="_blank" rel="noopener" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.linprog.html">scipy官方的linprog文档</a>（<a target="_blank" rel="noopener" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.linprog.html）">https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.linprog.html）</a></p>
@@ -1217,7 +1217,7 @@ x_0, x_1, x_2, x_3, x_4 \ge0
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">113.8k</span>
+                        class="white-color">113.9k</span>
             
             
             
