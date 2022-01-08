@@ -4,6 +4,74 @@
   
     
     <entry>
+      <title>数学建模算法9-相关性分析</title>
+      <link href="/2022/01/09/shu-xue-jian-mo-suan-fa-9-xiang-guan-xing-fen-xi/"/>
+      <url>/2022/01/09/shu-xue-jian-mo-suan-fa-9-xiang-guan-xing-fen-xi/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>本文主要介绍了数学建模中的一类知识：相关性分析</p></blockquote><p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/v2-df840824b0adc9a637a2ce10d5d52ceb_r.jpg" alt="相关性分析"></p><h1 id="数学建模算法9-相关性分析"><a href="#数学建模算法9-相关性分析" class="headerlink" title="数学建模算法9-相关性分析"></a>数学建模算法9-相关性分析</h1><p><strong>相关性，是指两个变量的关联程度</strong>。一般地，从散点图上可以观察到两个变量有以下三种关系之一：两变量<strong>正相关</strong>、<strong>负相关</strong>、<strong>不相关</strong>。</p><ul><li>如果一个变量高的值对应于另一个变量高的值，相似地，低的值对应低的值，那么这两个变量正相关。在土壤中，孔隙率和渗透度就具有典型的正相关。</li><li>反之，如果一个变量高的值对应于另一个变量低的值，那么这两个变量负相关。</li><li>如果两个变量间没有关系，即一个变量的变化对另一变量没有明显影响，那么这两个变量不相关。</li></ul><p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/v2-6d544d2fe7ff1daa2cab78f0ba2ed3c8_1440w.jpg" alt="两个变量间的关系"></p><p>而<strong>相关性分析是指对两个或多个具备相关性的变量元素进行分析，从而衡量两个变量因素的相关密切程度</strong>。</p><p>之所以要进行相关性分析，是因为在数学建模中经常会遇到一类题目，会评价两个指标（变量）之间的关系/联系。因此，本文就将介绍相关性分析的相关知识。</p><h2 id="1-变量间的相关性"><a href="#1-变量间的相关性" class="headerlink" title="1. 变量间的相关性"></a>1. 变量间的相关性</h2><p>在统计学上，我们通常这样判断变量之间是否有关：</p><ul><li><strong>如果一个变量的取值发生变化，另外一个变量的取值也相应发生变化，则这两个变量有关</strong>。</li><li><strong>如果一个变量的变化不引起另一个变量的变化则二者无关</strong>。</li></ul><p>在变量相关的基础上，我们又会有两个变量的相关程度到底如何，即一个变量变化多少另外一个变量对应的会变化多少？</p><p>因此我们定义<strong>变量关系强度</strong>，即<strong>两个变量相关程度的高低</strong>。统计学中是以准实验的思想来分析变量相关的。通常从以下的角度分析：</p><ul><li>两变量是否相互独立</li><li>两变量是否有共变趋势</li><li>一变量的变化多大程度上能由另一变量的变化来解释</li></ul><h2 id="2-四种基本变量"><a href="#2-四种基本变量" class="headerlink" title="2. 四种基本变量"></a>2. 四种基本变量</h2><p>根据变量的类型，现实中的变量可以分为下面四种：</p><ul><li><strong>定类变量</strong>：根据定性的原则区分总体各个案类别的变量，变量间没有大小关系。例如：性别，民族、婚姻状况</li><li><strong>定序变量</strong>：区别同一类别个案中等级次序的变量，变量间具有大小关系，但是没有数值关系。例如：文化程度、工厂规模、年龄大小</li><li><strong>定距变量</strong>：区别同一类别个案中等级次序及其距离的变量，变量间具有大小关系且具有数值关系（可以用数值描述的变量），例如：摄氏温度、比率、智力水平。此外，定距变量是没有零点的，零只是其中的一个值。而且，加减得到的差值有意义而乘除后的值没有意义。</li><li><strong>定比变量</strong>：也是区别同一类别个案中等级次序及其距离的变量，除了具有定距变量的特点外，还具有零点，即零点相比于其他值有意义，例如：收入、价格、市场占有率</li></ul><h2 id="3-两变量的相关分析"><a href="#3-两变量的相关分析" class="headerlink" title="3. 两变量的相关分析"></a>3. 两变量的相关分析</h2><h3 id="A-Pearson相关系数"><a href="#A-Pearson相关系数" class="headerlink" title="A. Pearson相关系数"></a>A. Pearson相关系数</h3><h4 id="1-Pearson相关系数的计算"><a href="#1-Pearson相关系数的计算" class="headerlink" title="1. Pearson相关系数的计算"></a>1. Pearson相关系数的计算</h4><p>适用于定距、定比类型的变量。 是运用最广的一种相关程度统计量。例如可以用皮尔逊系数分析收入和商品价格的相关性。</p><p>皮尔逊系数$r$的计算如下：</p><script type="math/tex; mode=display">r= \frac{\sum_{i=1}^n (x_i-\bar x)(y_i-\bar y)}{\sqrt {\sum_{i=1}^n (x_i-\bar x)^2\sum_{i=1}^n (y_i-\bar y)^2}}</script><p>Pearson系数的相关性检验用$t$检验，其统计量$t$服从自由度($n-2$)的分布，其中n表示数据的维度</p><script type="math/tex; mode=display">t=  \frac{r}{1-\frac{r^2}{n-2}}</script><p>之所以需要对皮尔逊系数进行检验，原因在于我们对一个变量的值的采集是通过有限次的观测。因此就会存在偶然性的问题，所以需要进行相关性检验</p><ul><li>若计算得到$t\ge t_{a/2}$或$p\ge a$，则认为$r$统计显著。例如变量十六个维度（$n-2=14$），且$a$取0.05，若计算得到$t\ge2.145$，则有95%的概率认为两个变量相关这一结果不是偶然造成的，或者说有95%的把握认为两个变量相关。</li><li>若计算得到$t\leq t_{a/2}$或$p\leq a$，则认为$r$统计不显著，即非常有可能是偶然因素造成的</li></ul><p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220108200212772.png" alt="t检验的表"></p><h4 id="2-Pearson相关系数的意义"><a href="#2-Pearson相关系数的意义" class="headerlink" title="2. Pearson相关系数的意义"></a>2. Pearson相关系数的意义</h4><p>对于皮尔逊系数而言，其越接近一，表示计算该皮尔逊系数的两个变量之间相关性越高</p><p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220108200533348.png" alt="皮尔逊系数与相关程度" style="zoom:67%;"></p><h4 id="3-Pearson相关系数的使用条件"><a href="#3-Pearson相关系数的使用条件" class="headerlink" title="3. Pearson相关系数的使用条件"></a>3. Pearson相关系数的使用条件</h4><ol><li>两变量均应由测量得到的连续变量。</li><li>两变量所来自的总体都应是正态分布，或接近正态的单峰对称分布</li><li>变量必须是成对的数据</li><li>两变量间为线性关系，因此计算前需要先画散点图查看一下</li></ol><h3 id="B-Spearman相关系数"><a href="#B-Spearman相关系数" class="headerlink" title="B. Spearman相关系数"></a>B. Spearman相关系数</h3><h4 id="1-Spearman系数的计算"><a href="#1-Spearman系数的计算" class="headerlink" title="1. Spearman系数的计算"></a>1. Spearman系数的计算</h4><p>Spearman系数是用于计算度量定序变量与定序变量之间的相关系数。</p><p>斯皮尔曼系数计算如下</p><script type="math/tex; mode=display">r_s=1-\frac{6\sum(x_i-y_i)^2}{n(n^2-1)}</script><p>其中，$x_i$，$y_i$是两个变量按照大小排序的等级，$n$为样本容量。在$n\ge 20$之后，可以用$t$统计量进行检验。</p><script type="math/tex; mode=display">t=r_s\sqrt {\frac{n-2}{1-r_s^2}}</script><p>同样，</p><ul><li>若计算得到$t\ge t_{a/2}$或$p\ge a$，则认为$r$统计显著。例如变量十六个维度（$n-2=14$），且$a$取0.05，若计算得到$t\ge2.145$，则有95%的概率认为两个变量相关这一结果不是偶然造成的，或者说有95%的把握认为两个变量相关。</li><li>若计算得到$t\leq t_{a/2}$或$p\leq a$，则认为$r$统计不显著，即非常有可能是偶然因素造成的</li></ul><h3 id="C-双变量关系强度测量的主要指标"><a href="#C-双变量关系强度测量的主要指标" class="headerlink" title="C. 双变量关系强度测量的主要指标"></a>C. 双变量关系强度测量的主要指标</h3><p>双变量关系强度测量的主要指标如下</p><p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220108203130288.png" alt="双变量关系强度测量的主要指标"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 数学建模算法 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Python </tag>
+            
+            <tag> Math Modeling </tag>
+            
+            <tag> 相关性分析 </tag>
+            
+            <tag> 皮尔逊系数 </tag>
+            
+            <tag> Correlation Analysis </tag>
+            
+            <tag> Pearson Correlation Coefficient </tag>
+            
+            <tag> Spearman&#39;s rank correlation coefficient </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>数学建模算法10-主成分分析</title>
+      <link href="/2022/01/08/shu-xue-jian-mo-suan-fa-10-zhu-cheng-fen-fen-xi/"/>
+      <url>/2022/01/08/shu-xue-jian-mo-suan-fa-10-zhu-cheng-fen-fen-xi/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>本文主要讲解了数模中帮助进行数据压缩的算法：主成分分析，PCA</p></blockquote><p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/GaussianScatterPCA.svg/300px-GaussianScatterPCA.svg.png" alt="主成分分析" style="zoom:150%;"></p><h1 id="数学建模算法10-主成分分析"><a href="#数学建模算法10-主成分分析" class="headerlink" title="数学建模算法10-主成分分析"></a>数学建模算法10-主成分分析</h1><p>在前面的一节我们讲解了相关性分析。相关性分析用于判断两个变量之间的相关性。那么就存在一个问题，假设现在我们需要建模的数据有上万行，而每一样的一个example都有二十多个维度。那么要对这样的数据进行分析就会非常占用内存，甚至在数模的这几天里面跑出来这些数据就会占用大部分时间。</p><p>因此，为了简化分析、节约时间，在数模中可以使用主成分分析这一方法(Priciple Component Analysis)。</p><p>其基本思想就是通过一些手段，实现对<strong>数据信息的压缩</strong>，从而在损失一部分信息量的前提下实现需要分析的数据的压缩，从而帮助加速分析。</p><p>而如何实现损失部分信息带来数据的压缩呢？一个简单的思路其实就可以通过我们前面说的相关性分析，若两个变量$A,B$之间是强相关的（皮尔逊系数大于0.9），那么我们其实可以认为变量$B$的绝大部分信息都蕴含在$A$，我们通过一些方法就可以从A中获得$B$的信息（例如拟合得到的曲线）。那么通过这样，我们其实就没有必要存储$B$的所有的值了，我们只需要存储$A$的值即可。这样做虽然丢失了部分B的信息，但是我们却能够节省内存。</p><p>类似的，主成分分析就是同类型的用于进行数据压缩的算法。</p><p>数模中常用的数据降维的方法有两种：<strong>主成分分析法</strong>和<strong>因子分析法</strong>。两种方法其实差别不大大，而主成分分析得到的指标数量和原来的指标数量，我们选择前几个就行，而因子分析法则是生成我们指定数量的指标数量。</p><h2 id="1-主成分分析的介绍"><a href="#1-主成分分析的介绍" class="headerlink" title="1. 主成分分析的介绍"></a>1. 主成分分析的介绍</h2><p>主成分的概念由Karl Pearson在1901年提出的。他是考察多个变量间相关性一种多元统计方法。</p><p><strong>主成分分析研究如何通过少数几个主成分(principal component)来解释多个变量间的内部结构</strong>，即从原始变量中导出少数几个主分量，使它们尽可能多地保留原始变量的信息，且彼此间互不相关。</p><p>主成分分析的目的：</p><ul><li><p>数据的压缩</p></li><li><p>数据的解释</p></li></ul><p>其常被用来寻找判断事物或现象的综合指标，并对综合指标所包含的信息进行适当的解释</p><p>若直接对原有的指标进行删除，那么存在的一个问题就是一定会丢失掉信息。因此相比于直接简单的删除，需要先对原始数据进行一定的变换，以实现信息的重组，从而保留蕴含更多信息的指标而丢弃蕴含信息较少的指标。</p><h2 id="2-主成分分析的基本思想"><a href="#2-主成分分析的基本思想" class="headerlink" title="2. 主成分分析的基本思想"></a>2. 主成分分析的基本思想</h2><p>主成分分析的主要思想就是：对这相关变量（为便于理解，先以两个为例）所携带的信息(在统计上信息往往是指数据的变异)进行浓缩处理。假定只有两个变量$x_1$和$x_2$，从散点图可见两个变量存在相关关系，这意味着两个变量提供的信息有重叠。</p><p>那么如果把两个变量用一个变量来表示，同时这一个新的变量又尽可能包含原来的两个变量的信息，这就是降维的过程</p><p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220108232921556.png" alt="主成分分析的例子"></p><p>例如，$x_1,x_2$分别表示身高和体重。那么身高和体重确实具有一定的关联，因为身高越高体重一般都会越重。</p><p>我们通过坐标轴的旋转，例如旋转到$y_1$和$y_2$，则此时，我们的数据在$y_1$这个轴上的分布越广泛，则其方差相比于原来就会大了很多。而方差在某种意义上可以表达信息的丰富和匮乏程度。方差非常小的一组数据，由于不同的数据间的同质化严重，因此其信息含量非常的匮乏，而方差大的一组数据则由于数据的多样新，因此其中蕴含的信息会更加丰富。</p><p>从上面的角度来理解，方差越大的维度其表达能力其实就越强，因为其中蕴含了更多的信息。因此我们其实可以仅仅保存所有数据点的$y_1$的值，那么就可以实现数据的有损压缩。</p><p>旋转坐标轴用可以有旋转矩阵来表示，即</p><script type="math/tex; mode=display">\begin{cases}y_1=a_{11}x_1+a_{12}x_2\\y_2=a_{21}x_1+a_{22}x_2\end{cases}</script><p>则我们的关键其实就是找到参数（旋转矩阵）</p><script type="math/tex; mode=display">A=\begin{bmatrix}a_{11} & a_{12}\\a_{21} & a_{22}\end{bmatrix}</script><p>那么对于高维数据，其实也是一样的思想，只不过在高维空间中是一个高维椭球，无法直观地观察。</p><p>每个变量都有一个坐标轴，所以有几个变量就有几个主轴。首先把椭球的各个主轴都找出来，再用代表大多数数据信息的最长的几个轴作为新变量，这样，降维过程也就完成了。</p><p>找出的这些新变量是原来变量的线性组合，叫做<strong>主成分</strong>。</p><p>上面是比较口语化的描述，下面是比较数学一点的描述。</p><blockquote><p>主成分分析就是设法将原来众多具有一定相关性的变量(如$p$个变量)，重新组合成一组新的相互无关的综合变量来代替原来变量。如何处理？</p><p>通常数学上的处理就是将原来$p$个变量作线性组合作为新的综合变量。如何选择？</p><p>如果将选取的第一个线性组合即第一个综合变量记为$F_1$，自然希望$F_1$尽可能多的反映原来变量的信息。怎样反映?</p><p>最经典的方法就是用方差来表达，即$var(F_1)$越大，表示$F_1$包含的信息越多。因此在所有的线性组合中所选取的$F_1$应该是方差最大的，故称之为<strong>第一主成分（Principal  Component I）</strong>。</p><p>如果第一主成分不足以代表原来$p$个变量的信息，再考虑选取$F_2$即第二个线性组合。$F_2$称为<strong>第二主成分（Principal  cComponent II）</strong>。 F1和F2的关系？</p><p>为了有效地反映原来信息，F1已有的信息就不再出现在F2中，即$cov(F1,F2)＝0$。依此类推，可以获得$p$个主成分。因此，这些主成分之间是互不相关的，而且方差依次递减。在实际中，挑选前几个最大主成分来表征。标准？</p><p> 各主成分的累积方差贡献率&gt;80%或特征根&gt;1。</p></blockquote><h2 id="3-主成分分析的数学模型"><a href="#3-主成分分析的数学模型" class="headerlink" title="3. 主成分分析的数学模型"></a>3. 主成分分析的数学模型</h2><p>假定有$n$个样本，每个样本共有$p$个维度，构成一个$n\times p$   阶的数据阵。</p><script type="math/tex; mode=display">X=\begin{bmatrix}x_{11} & x_{12} & \cdots & x_{1p}\\x_{21} & x_{22} & \cdots & x_{2p}\\\vdots & \vdots & \ddots & \vdots\\x_{n1} & x_{n1} & \cdots & x_{np}\\\end{bmatrix}</script><p>当p较大时，在p维空间中考察问题比较麻烦。为了克服这一困难，就需要进行降维处理，即用较少的几个综合变量代替原来较多的<br>变量变量，而且使这些较少的综合变量既能尽量多地反映原来较多变量变量所反映的信息。</p><p>要从原来的所有变量得到新的综合变量，一种较为简单的方法是作线性变换，使新的综合变量为原变量的线性组合，即</p><script type="math/tex; mode=display">\begin{cases}F_1=a_{11}x_1+a_{21}x_2+\cdots+a_{p1}x_p\\F_2=a_{12}x_1+a_{22}x_2+\cdots+a_{p2}x_p\\\qquad\qquad\qquad\vdots\\F_p=a_{1p}x_1+a_{2p}x_2+\cdots+a_{pp}x_p\\\end{cases}</script><p>此外，由于要求所有的主成分之间是没有信息重叠的，因此需要满足规范化条件，即</p><script type="math/tex; mode=display">a_{i1}^2+a_{i2}^2+\cdots+a_{ip}^2=1</script><p>此外，主成分分析要求：</p><ul><li>原始变量之间存在一定的相关性：如果多个变量相互独立或相关性很小，就不能进行主成分分析。<ul><li>首先可以使用Kaiser-Meyer-Olkin（KMO)检验（检验变量之间的偏相关系数是否过小）来进行判断，<strong>要求检验的值大于0.5为可以做，小于0.3为不建议做，0.3~0.5之间是可以做，但是不保证效果</strong></li><li>其次也可以用Bartlett’s 检验。该检验的原假设是相关矩阵为单位阵（不相关），如果不能拒绝原假设，则不适合进行主成分分析，<strong>要求检验的值小于0.05</strong></li><li>上面两个检验有一个就行</li></ul></li><li>各个综合变量间互不相关，即协方差为0</li><li>为了消除变量数量级/分布不同对方差的影响，通常对数据进行标准化处理，变量之间的协方差即为相关系数。</li></ul><p>将原有数据案列拆分为</p><script type="math/tex; mode=display">X=\begin{bmatrix}X_1 & X_2 & \cdots & X_p\end{bmatrix}=\begin{bmatrix}x_{11} & x_{12} & \cdots & x_{1p}\\x_{21} & x_{22} & \cdots & x_{2p}\\\vdots & \vdots & \ddots & \vdots\\x_{n1} & x_{n1} & \cdots & x_{np}\\\end{bmatrix}</script><p>则求</p><script type="math/tex; mode=display">\max_{\vec a} Var(F)， \quad F=\begin{bmatrix}a_1 & a_2 & \cdots & a_p\end{bmatrix} \times\begin{bmatrix}X_1 & X_2 & \cdots & X_p\end{bmatrix}^T</script><p>则将$F$的表达式展开，带入方差的计算式之后即可得到解</p><h2 id="4-PCA的Python求解"><a href="#4-PCA的Python求解" class="headerlink" title="4. PCA的Python求解"></a>4. PCA的Python求解</h2><p>Python中的scikit-learn中其实已经有了非常成熟的PCA的实现，因此我们直接用即可。</p><p>在sklearn中，PCA算法主要是由<code>sklearn.decomposition.PCA</code>类完成。该类的签名如下</p><pre class="line-numbers language-lang-python"><code class="language-lang-python">class sklearn.decomposition.PCA(n_components=None, *, copy=True, whiten=False, svd_solver='auto', tol=0.0, iterated_power='auto', random_state=None)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>其中，我们需要关注的参数有：</p><ul><li><strong>n_components</strong>：PCA算法中所要保留的主成分个数n，也即保留下来的特征个数n。int 或者 string，缺省时默认为None，所有成分被保留。赋值为int，比如n_components=1，将把原始数据降到一个维度。赋值为string，比如n_components=’mle’，将自动选取特征个数n，使得满足所要求的方差百分比。</li><li><strong>copy</strong>：bool，True或者False，缺省时默认为True。表示是否在运行算法时，将原始训练数据复制一份。若为True，则运行PCA算法后，原始训练数据的值不会有任何改变，因为是在原始数据的副本上进行运算；若为False，则运行PCA算法后，原始训练数据的值会改，因为是在原始数据上进行降维计算。</li><li><strong>whiten</strong>：bool，缺省时默认为False。白化，使得每个特征具有相同的方差</li></ul><p>其常用的属性如下：</p><ul><li>components_ ：返回具有最大方差的成分。</li><li>explained_variance_ratio_：返回 所保留的n个成分各自的方差百分比。_</li><li>n_components_：返回所保留的成分个数n。</li></ul><p>其常用的方法如下：</p><ul><li><p>fit(X,y=None)</p><p>fit()可以说是scikit-learn中通用的方法，每个需要训练的算法都会有fit()方法，它其实就是算法中的“训练”这一步骤。因为PCA是无监督学习算法，此处y自然等于None。</p></li><li><p>fit(X)，表示用数据X来训练PCA模型。</p><p>函数返回值：调用fit方法的对象本身。比如pca.fit(X)，表示用X对pca这个对象进行训练。</p></li><li><p>fit_transform(X)</p><p>用X来训练PCA模型，同时返回降维后的数据。newX=pca.fit_transform(X)，newX就是降维后的数据。</p></li><li><p>inverse_transform()</p><p>将降维后的数据转换成原始数据，X=pca.inverse_transform(newX)</p></li><li><p>transform(X)</p><p>将数据X转换成降维后的数据。当模型训练好后，对于新输入的数据，都可以用transform方法来降维。</p></li></ul><p>此外，还有get_covariance()、get_precision()、get_params(deep=True)、score(X, y=None)等方法，以后用到再补充吧。</p><h2 id="5-PCA案例"><a href="#5-PCA案例" class="headerlink" title="5. PCA案例"></a>5. PCA案例</h2><blockquote><p><strong>根据我国31个省市自治区2006年的6项主要经济指标数据，进行主成分分析，找出主成分并进行适当的解释</strong></p><p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220109004849578.png" alt="主要经济指标"></p></blockquote><p>Python直接求解即可</p><pre class="line-numbers language-lang-python"><code class="language-lang-python">import pandas as pdfrom pathlib import Pathimport sklearn.decomposition as skdecomposedf = pd.read_excel(Path(__file__).resolve().parent.joinpath("test1.xlsx"), index_col=0, header=0)pca = skdecompose.PCA(n_components=df.shape[1])new = pca.fit_transform(df.to_numpy())print(df)print(pd.DataFrame(new, index=df.index))print(pca.explained_variance_ratio_)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>运行结果</p><p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220109010518417.png" alt="运行结果"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 数学建模算法 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Python </tag>
+            
+            <tag> Math Modeling </tag>
+            
+            <tag> 主成分分析 </tag>
+            
+            <tag> Principal Components Analysis </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>数学建模算法8-模糊综合评价模型</title>
       <link href="/2022/01/07/shu-xue-jian-mo-suan-fa-8-mo-hu-zong-he-ping-jie-mo-xing/"/>
       <url>/2022/01/07/shu-xue-jian-mo-suan-fa-8-mo-hu-zong-he-ping-jie-mo-xing/</url>
