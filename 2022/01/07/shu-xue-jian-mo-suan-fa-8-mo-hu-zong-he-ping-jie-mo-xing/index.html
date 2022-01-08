@@ -1,0 +1,1650 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="数学建模算法8-模糊综合评价模型, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
+    <meta name="description" content="
+本文主要介绍了数学建模中常见的评价算法（模型）：模糊综合评价
+
+
+数学建模算法8-模糊综合评价模型在数学建模中，很多问题都涉及到评价类问题。而针对评价类问题，我们在前面介绍了层次分析法、灰色综合分析两种用于评价的方法/模型。本文将介绍第三">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>数学建模算法8-模糊综合评价模型 | JackWang&#39;s Bolg</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">JackWang&#39;s Bolg</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-book-reader" style="zoom: 0.6;"></i>
+      
+      <span>博客</span>
+      <i class="fas fa-chevron-down" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/tags">
+          
+          <i class="fas fa-tags" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按标签归类文章</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories">
+          
+          <i class="fas fa-bookmark" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按目录归类文章</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/archives">
+          
+          <i class="fas fa-archive" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按日期分类文章</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">JackWang&#39;s Bolg</div>
+        <div class="logo-desc">
+            
+            JackWang的个人博客
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-book-reader"></i>
+			
+			博客
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>
+
+                  <a href="/tags " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-tags" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按标签归类文章</    span>
+
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/categories " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-bookmark" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按目录归类文章</    span>
+
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/archives " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-archive" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按日期分类文章</    span>
+
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('抱歉，这篇文章并不想让所有人都看到，请输入授权密码观看')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/v2-368fd890e8f6524b341b070804782bd2_1440w.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">数学建模算法8-模糊综合评价模型</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Python/">
+                                <span class="chip bg-color">Python</span>
+                            </a>
+                        
+                            <a href="/tags/Math-Modeling/">
+                                <span class="chip bg-color">Math Modeling</span>
+                            </a>
+                        
+                            <a href="/tags/%E6%A8%A1%E7%B3%8A%E6%95%B0%E5%AD%A6/">
+                                <span class="chip bg-color">模糊数学</span>
+                            </a>
+                        
+                            <a href="/tags/%E6%A8%A1%E7%B3%8A%E7%BB%BC%E5%90%88%E8%AF%84%E4%BB%B7/">
+                                <span class="chip bg-color">模糊综合评价</span>
+                            </a>
+                        
+                            <a href="/tags/Fuzzy-Comprehension-Evaluation-Method/">
+                                <span class="chip bg-color">Fuzzy Comprehension Evaluation Method</span>
+                            </a>
+                        
+                            <a href="/tags/fuzzy-mathematics/">
+                                <span class="chip bg-color">fuzzy mathematics</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E7%AE%97%E6%B3%95/" class="post-category">
+                                数学建模算法
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2022-01-07
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2022-01-08
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    6.5k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    24 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <blockquote>
+<p>本文主要介绍了数学建模中常见的评价算法（模型）：模糊综合评价</p>
+</blockquote>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/v2-368fd890e8f6524b341b070804782bd2_1440w.jpg" alt="模糊综合评价法"></p>
+<h1 id="数学建模算法8-模糊综合评价模型"><a href="#数学建模算法8-模糊综合评价模型" class="headerlink" title="数学建模算法8-模糊综合评价模型"></a>数学建模算法8-模糊综合评价模型</h1><p>在数学建模中，很多问题都涉及到评价类问题。而针对评价类问题，我们在前面介绍了层次分析法、灰色综合分析两种用于评价的方法/模型。本文将介绍第三种评价模型：模糊综合评价模型。</p>
+<p>层次分析法适合于对指标这类主观性较强、数据量较少的问题进行评价，而灰色综合分析适合于少量数据并且已知标准（参考向量）的这类评价问题。</p>
+<p>然而在生活中还有一类评价问题：即评价的等级之间是模糊的这一类评价问题。例如现在对一群人的身高进行评价，那么高和矮就是我们可以给出的评价的等级。然而这样的评价等级是模糊的，例如什么样的身高算高、什么算矮、高矮之间的分界线是什么？</p>
+<p>因此针对这类评价等级是模糊的问题，就有了模糊综合评价模型。</p>
+<h2 id="1-模糊数学介绍"><a href="#1-模糊数学介绍" class="headerlink" title="1. 模糊数学介绍"></a>1. 模糊数学介绍</h2><p>现实世界中的许多现象和关系具有不确定性。 这些不确定性的表现形式多种多样，如随机性、 灰色性、模糊性和粗糙性等。</p>
+<p>模糊数学正是利用模糊集及其运算研究、处理模糊不确定现象和关系的数学分支学科。许多数学建模问题包括模糊现象和关系，这类 问题往往可以用模糊数学方法处理。</p>
+<p>下面是百度百科和维基百科上对其的介绍</p>
+<blockquote>
+<p><strong>From BaiduBaike</strong>：</p>
+<p>模糊数学又称Fuzzy 数学，是研究和处理模糊性现象的一种数学理论和方法。模糊性数学发展的主流是在它的应用方面。<br>由于模糊性概念已经找到了模糊集的描述方式，人们运用概念进行判断、评价、推理、决策和控制的过程也可以用模糊性数学的方法来描述。例如模糊聚类分析、模糊模式识别、模糊综合评判、模糊决策与模糊预测、模糊控制、模糊信息处理等。这些方法构成了一种模糊性系统理论，构成了一种思辨数学的雏形，它已经在医学、气象、心理、经济管理、石油、地质、环境、生物、农业、林业、化工、语言、控制、遥感、教育、体育等方面取得具体的研究成果。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220107222908877.png" alt="百度百科上模糊数学的介绍"></p>
+<p><strong>From Wikipedia</strong>：</p>
+<p>模糊数学，亦称弗晰数学或模糊性数学。1965年以后，在模糊集合、模糊逻辑的基础上发展起来的模糊拓扑、模糊测度论等数学领域的统称。是研究现实世界中许多界限不分明甚至是很模糊的问题的数学工具。在模式识别、人工智能等方面有广泛的应用。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220107222951369.png" alt="维基百科上对模糊数学的介绍"></p>
+</blockquote>
+<p>正如介绍中所指出的，现代数学是建立在集合论基础之上的。</p>
+<p><strong>集合论的重要意义就在于它能将数学的抽象能力延伸到人类认识过程的深处：用集合来描述概念，用集合的关系和运算表达判断和推理，从而将一切现实的理论系统都纳入集合描述的数学框架中</strong>。毫无疑问，以经典集合论为基础的精确数学和随机数学在描述自然界多种客观现象的内在规律中，获得了显著的效果。</p>
+<p>但是，和随机现象一样，在自然界和人们的日常生活中普遍存在着大量的模糊现象，如多云、阴灭、小雨、大雨、贫困、温饱等。<strong>由于经典集合论只能把自己的表现力限制在那些有明确外延的现象和概念上，它要求元素对集合的隶属关系必须是明确的，不能模棱两可</strong>，因而对于那些经典集合无法反映的外延不分明的概念，以前人们都是尽量回避它们。</p>
+<p>然而，随着现代科技的发展，我们所面对的系统日益复杂，模糊性总是伴随着复杂性出现；此外人文、社会学科及其他“软科学”的数学化、定量化趋向，也把模糊性的数学处理问题推向中心地位；更重要的是，计算机科学、控制理论、系统科学的迅速发展，要求计算机要像人脑那样具备模糊逻辑思维和形象思维的功能。凡此种种，迫使人们再也无法回避模糊性，必须寻求途径去描述和处理客观现象中非清晰、非绝对化的一面。</p>
+<p>1965年，美国控制论专家扎德Zadeh(Lotfi A．Zadeh)教授在Information and Control杂志上发表了题为Fuzzy Sets的论文，<strong>提出用“隶属函数”来描述现象差异的中间过渡，从而突破了经典集合论中属于或不属于的绝对关系</strong>。Zadeh教授这一开创性的工作，标志着数学的一个新分支——模糊数学的诞生。</p>
+<h2 id="2-基础概念"><a href="#2-基础概念" class="headerlink" title="2. 基础概念"></a>2. 基础概念</h2><p>在介绍模糊综合评价模型前，需要介绍模糊数学中的一些基础概念</p>
+<h3 id="A-模糊集、隶属度、隶属函数"><a href="#A-模糊集、隶属度、隶属函数" class="headerlink" title="A. 模糊集、隶属度、隶属函数"></a>A. 模糊集、隶属度、隶属函数</h3><p>给定论域$U$，定义$U$上的一个<strong>模糊集</strong>$A$为：</p>
+<script type="math/tex; mode=display">
+\exists \mu_A(x), s.t. \forall x\in U \rightarrow\mu_A(x)\in[0,1]</script><p>称映射$\mu_A(x)$为模糊集$A$的<strong>隶属函数</strong>，而函数值$\mu_A(x)$称为元素$x$对模糊集$A$的<strong>隶属度</strong>。</p>
+<p>因此，<strong>模糊集就是每个元素都有隶属度的集合</strong>。一个模糊集和一个隶属函数相关。</p>
+<p>类比于概率，隶属度描述了一个元素属于这个模糊集的程度/概率</p>
+<blockquote>
+<p>例题：</p>
+<p>从下列30条线段中选出长线段。设长度从1~30分别为30~1cm</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220108104418258.png" alt="30条线段"></p>
+<p>解：由题意得</p>
+<p>“长”是模糊概念，因此可以用模糊集来描述。设$A$表示“长线段”的集合，$x<em>i,i=1,\cdots,30$表示第$i$条线段，则论域为$U={x_1,x_2,\cdots,x</em>{30}}$。</p>
+<p>则线段$x_i$作为集合$A$的成员的资格即为$x_i$对$A$的隶属度。因此建立集合$A$的一种隶属函数如下：</p>
+<p>因为线段越长，则其属于$A$的程度越大，因此线段$A$的长短可以用于作为表示A的隶属度。</p>
+<p>从而，令$A(x_1)=1,A(x_2)=0$，作直线：</p>
+<script type="math/tex; mode=display">
+A(x_i)-0=\frac{1-0}{1-30}(i-30)</script><p>故得到第$i$条线段$x_i$属于长线段集合$A$的隶属函数为：</p>
+<script type="math/tex; mode=display">
+A(x_i)=\frac{1}{29}(30-i),\qquad i=1,2,\cdots,30</script></blockquote>
+<h3 id="B-隶属函数"><a href="#B-隶属函数" class="headerlink" title="B. 隶属函数"></a>B. 隶属函数</h3><p><strong>隶属函数是将元素映射到隶属度的函数</strong>，其建立了元素和模糊评价之间的联系例如，身高175cm和高之间，假设在当前人群中高个子人群构成的模糊集$A$的隶属函数为$\mu_A$，那么若$\mu_A(175)=0.87$，那么我们就可以认为175cm的身高在当前人群中是高的，即175cm的人属于模糊集$A$。我们也可以理解为175cm的身高在当前人群中有87%的概率是高的。</p>
+<h3 id="C-模糊集的运算"><a href="#C-模糊集的运算" class="headerlink" title="C. 模糊集的运算"></a>C. 模糊集的运算</h3><p>由于模糊集中没有元素和集合间的绝对隶属关系，所以模糊集的运算是通过隶属函数完成的。</p>
+<p>设集合$A$、$B$为两个模糊集，其隶属函数分别为$\mu_A(x),\mu_B(x)$，则集合$A$与$B$常见的运算为：</p>
+<ol>
+<li><strong>包含</strong>：$A\subseteq B \Leftrightarrow \forall x \in A, \mu_A(x)\leq \mu_B(x)$</li>
+<li><strong>相等</strong>：$A= B \Leftrightarrow \forall x \ in A, \mu_A(x) = \mu_B(x)$</li>
+<li><strong>交</strong>：$C=A\cap B \Leftrightarrow \mu_C(x) = \mu_A(x)\land \mu_B(x)$</li>
+<li><strong>并</strong>：$C=A\cup B \Leftrightarrow \mu_C(x) = \mu_A(x)\lor \mu_B(x)$</li>
+<li><strong>补</strong>：$A^c\Leftrightarrow\mu<em>{A^C}(x)=1-\mu</em>{A}(x)$</li>
+<li><strong>内积</strong>：$A\times B=\lor_{x\in U}(A(x)\land B(x))$</li>
+<li><strong>外积</strong>：$A\otimes B=\land_{x\in U}(A(x)\lor B(x))$</li>
+</ol>
+<h2 id="3-隶属函数的确定"><a href="#3-隶属函数的确定" class="headerlink" title="3. 隶属函数的确定"></a>3. 隶属函数的确定</h2><p>由模糊集的概念可知，<strong>模糊数学的基本思想是用隶属度代替绝对的属于还是不属于</strong>，所以<strong>应用模糊数学方法建立数学模型的关键是建立符合实际的隶属函数</strong>。然而，如何确定一个模糊集的隶属函数至今还是尚未完全解决的问题。</p>
+<p>目前，<strong>确定隶属度的常用方法是模糊分布法</strong>。模糊分布法将隶属函数看成一种模糊 分布，首先根据问题性质选取适当的模 糊分布，然后再依据相关数据确定分布中的参数。</p>
+<p>模糊分布中常用的梯形分布如下</p>
+<h3 id="A-偏小型"><a href="#A-偏小型" class="headerlink" title="A. 偏小型"></a>A. 偏小型</h3><p>偏小型指值越小越属于这个模糊集，对应的，其隶属函数如下：</p>
+<script type="math/tex; mode=display">
+\begin{cases}
+1, & x< a\\
+\frac{b-x}{b-a}, & a \leq x \leq b\\
+0, & b < x
+\end{cases}</script><p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220108132351591.png" alt="偏小型隶属函数"></p>
+<h3 id="B-偏大型"><a href="#B-偏大型" class="headerlink" title="B. 偏大型"></a>B. 偏大型</h3><p>偏大型指值越大越属于这个模糊集，对应的，其隶属函数如下</p>
+<script type="math/tex; mode=display">
+\begin{cases}
+0, & x< a\\
+\frac{x-a}{b-a}, & a \leq x \leq b\\
+1, & b < x
+\end{cases}</script><p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220108132706169.png" alt="偏大型隶属函数"></p>
+<h3 id="C-中间型"><a href="#C-中间型" class="headerlink" title="C. 中间型"></a>C. 中间型</h3><p>中间型指值越大和越小都不属于这个模糊集，只有在中间的时候才属于这个模糊集，例如人群中不高不矮的人群。其隶属函数如下</p>
+<script type="math/tex; mode=display">
+\begin{cases}
+0, & x< a\\
+\frac{x-a}{b-a}, & a \leq x < b\\
+1, & b \leq x < c\\
+\frac{d-x}{d-c}, &c\leq x < d\\
+0, & d \leq x
+\end{cases}</script><p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220108133025758.png" alt="中间型隶属函数"></p>
+<h2 id="4-模糊综合评价法"><a href="#4-模糊综合评价法" class="headerlink" title="4. 模糊综合评价法"></a>4. 模糊综合评价法</h2><p>评价是人类社会中经常性的、极为重要的认识活动。 <strong>对一个事物的评价通常要涉及多个因素或多个指标</strong>，评价是在多因素相互作用下的一种综合评判。</p>
+<p>综合评价是数学建模竞赛中较为常见的问题， 如</p>
+<ul>
+<li>长江水质的评价与预测(2005A)</li>
+<li>艾滋病疗法的 评价及疗效的预测(2006B)</li>
+<li>2010上海世博会影 响力的定量评估(2010B)</li>
+</ul>
+<p>综合评价的方法众多，常用的有<strong>灰色评价法</strong>、 <strong>层次分析法</strong>、<strong>模糊综合评价法</strong>、<strong>数据包络分析法</strong>、 <strong>人工神经网络评价法</strong>、<strong>理想解法</strong>等。有时，还可将两种评价方法集成为组合评价方法。</p>
+<p>各种评价方法出发点不同，解决问题的思路不同，适用对象不同，各有优缺点。不同的评价方法会产生不同的评价结论，有时甚至结论相左，即综合评价的结果不是唯一的。</p>
+<p>而下面就将讲解其中的模糊综合评价法</p>
+<h3 id="A-模糊综合评价法介绍"><a href="#A-模糊综合评价法介绍" class="headerlink" title="A. 模糊综合评价法介绍"></a>A. 模糊综合评价法介绍</h3><p>模糊综合评价作为模糊数学的一种具体应用，最早由我国学者汪培庄提出。基本思想是：<strong>以模糊数学为基础， 应用模糊关系合成原理，将一些边界不清、不易定量的因素定量化，从多个因素对被评价事物隶属等级状况进行综合评价</strong>。</p>
+<p>具体步骤为：</p>
+<ul>
+<li>首先确定被评价对象的<strong>因素集</strong>和<strong>评价集</strong>（例如对成绩进行评价，那么语文、数学、英语就是因素集，而优、良和几个是评价集）</li>
+<li>然后再分别确定各因素的权重及它们的隶属度向量，获得模糊评价矩阵</li>
+<li>最后将模糊评价矩阵与因素的权向量进行模糊运算并归一化，从而得到模糊评价综合结果。</li>
+</ul>
+<p>模糊综合评价法简单易掌握，对多因素、多层次的复杂问题评价效果较好，很难为其它评价方法所替代。</p>
+<h3 id="B-模糊综合评价法的步骤"><a href="#B-模糊综合评价法的步骤" class="headerlink" title="B. 模糊综合评价法的步骤"></a>B. 模糊综合评价法的步骤</h3><h4 id="1-确定评价指标和评价等级（因素集和评价集）"><a href="#1-确定评价指标和评价等级（因素集和评价集）" class="headerlink" title="1. 确定评价指标和评价等级（因素集和评价集）"></a>1. 确定评价指标和评价等级（因素集和评价集）</h4><p>设$U={u_1,u_2,\cdots,u_m}$为刻画被评价对象的$m$中因素（评价指标），$V={v_1,v_2,\cdots,v_n}$为刻画所有因素所处的状态的$n$种评语（评价等级）。</p>
+<p>这里，$m$为评价因素的个数，通常由具体指标体系决定；$n$为评语的个数， 一般划分为3～5个等级。</p>
+<blockquote>
+<p><strong>某服装厂欲采用模糊综合评价法来了解顾客对某种服装的欢迎程度</strong>：</p>
+<ol>
+<li><p><strong>确定评价指标和评价等级</strong></p>
+<p>顾客是否喜欢某种服装，通常与这种服装的花色、样式、价格、耐用度和舒适度等因素有关，故确定评价服装的因素集为</p>
+<script type="math/tex; mode=display">
+U=\{花色, 样式, 价格, 耐用度，舒适度\}</script><p>综合评价的目的是弄清楚顾客对衣服各方面的欢迎程度，因此每个因素都可能受欢迎、不受欢迎等等。因此，评价集应为 </p>
+<script type="math/tex; mode=display">
+V=\{很欢迎, 欢迎, 一般, 不欢迎\}</script></li>
+</ol>
+</blockquote>
+<h4 id="2-构造模糊综合评价矩阵"><a href="#2-构造模糊综合评价矩阵" class="headerlink" title="2. 构造模糊综合评价矩阵"></a>2. 构造模糊综合评价矩阵</h4><p>在确定了评价指标和评价等级后，接着就要对每个评价指标$u_i(i=1,\cdots,m)$ 逐一进行模糊评价。</p>
+<p>具体评价方法是：</p>
+<ol>
+<li><p>对评价指标$u<em>i$给出其能被评为等级$v_j$的隶属度$r</em>{ij}$。$r<em>{ij}$可理解为指标$u_i$对于等级$v_j$的隶属度，通常要将$r</em>{ij}$归一化以便于使用</p>
+</li>
+<li><p>设指标$u<em>i$的模糊评价为$r_i = ( r</em>{i1} , r<em>{i2} , \cdots, r</em>{in})$，则对所有评价指标$u_i(i=1,\cdots, m)$ 进行的模糊评价构成的<strong>矩阵$R$称为各指标的模糊综合评价矩阵</strong>。其中，</p>
+<script type="math/tex; mode=display">
+R=(r_{ij})_{m\times n}\begin{bmatrix}
+r_{11} & r_{12} & \cdots & r_{1n}\\
+r_{21} & r_{22} & \cdots & r_{2n}\\
+\vdots & \vdots & \ddots & \vdots \\
+r_{m1} & r_{m2} & \cdots & r_{mn}\\
+\end{bmatrix}</script></li>
+<li><p><strong>一般在真实问题中，隶属度$r_{ij}$可以通过频率法确定</strong></p>
+</li>
+</ol>
+<blockquote>
+<p><strong>某服装厂欲采用模糊综合评价法来了解顾客对某种服装的欢迎程度</strong>：</p>
+<ol>
+<li><p><strong>构造模糊综合评价矩阵</strong></p>
+<p>服装厂通过问卷调查，对该服装的花色进行调查，众多被调查者中有20%认为“很欢迎”, 50%认为“欢迎”，30%认为“一般” ， 没有人认为“不欢迎”，则$u_1=花色$的评价向量为$R_1=(0.2, 0.5, 0.3, 0)$。同理，得到$R_2,R_3,R_4,R_5$，那么得到的模糊综合评价矩阵为</p>
+<script type="math/tex; mode=display">
+R=
+\begin{bmatrix}
+R_1\\
+R_2\\
+R_3\\
+R_4\\
+R_5\\
+\end{bmatrix}=
+\begin{bmatrix}
+0.2 & 0.5 & 0.3 & 0\\
+0.1 & 0.3 & 0.5 & 0.1\\
+0 & 0.1 & 0.6 & 0.3\\
+0 & 0.4 & 0.5 & 0.1\\
+0.5 & 0.3 & 0.2 & 0\\
+\end{bmatrix}</script></li>
+</ol>
+</blockquote>
+<h4 id="3-评价指标权重的确定"><a href="#3-评价指标权重的确定" class="headerlink" title="3. 评价指标权重的确定"></a>3. 评价指标权重的确定</h4><p>确定了模糊综合评价矩阵，尚不足以对事物做出评价。<strong>原因在于，各评价指标在评价目标中有不同的地位和作用，即各评价指标在综合评价中占有不同的权重</strong>。</p>
+<p>为此，通常引入一个<strong>模糊向量</strong>$A=(a_1 , a_2 ,\cdots,a_n)$ 来表示各评价指标在目标中所占权重，称之为$权重向量$。其中$a_i$为$u_i$的权重，$\sum a_i=1, a_i\ge 0$。</p>
+<p><strong>确定权重通常有主观和客观两类方法</strong>：</p>
+<ul>
+<li>主观法的代表是层次分析法，即通过因素（层次分析法中的指标）的比较矩阵判断得出来一个权重向量</li>
+<li>客观法是根据各指标间的联系，利用数学方法计算出各指标的权重，如质量分数法、变异系数法等。</li>
+</ul>
+<blockquote>
+<p><strong>变异系数法</strong></p>
+<p>变异系数法的设计原理是：<strong>若某项指标的数值差异较大，能明确区分开各被评价对象，说明该指标的分辨信息丰富，因而应给该指标以较大的权重；反之，若各个被评价对象在某项指标上的数值差异较小，那么这项指标区分各评价对象的能力较弱，因而应给该指标较小的权重</strong></p>
+<p>因为方差可以描述取值的离散程度，即某指标的方差反映了该指标的的分辨能力， 所以可用方差定义指标的权重。由于方差的大小是相对的，还需考虑指标取值的大小、量级，故指标的分辨能力可定义为</p>
+<script type="math/tex; mode=display">
+v_i=\frac{s_i}{|\bar x_i|}</script><p>例：已知5个投资方案如下表，试确定4个评价指标的权重</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220108141518205.png" alt="五个投资方案" style="zoom: 50%;"></p>
+<p>解：根据变异系数法，可按照下列步骤 确定各指标的权重</p>
+<ol>
+<li><p><strong>计算第$i$项指标的均值与方差</strong>：</p>
+<script type="math/tex; mode=display">
+\bar x_i=\frac 1 n \sum_{j=1}^na_{ij}\\
+s_i^2=\frac 1{n-1} \sum_{j=1}^n (a_{ij}-\bar x_i)^2</script></li>
+<li><p>计算每个指标的分辨能力，取归一化后的分辨能力为各指标的权重</p>
+<script type="math/tex; mode=display">
+v_i = \frac {s_i} {|\bar x_i|}\\
+w_i = \frac {v_i}{\sum v_i}</script></li>
+<li><p>最终解得，四个指标的权重为：$w=(0.244, 0.172, 0.173, 0.412)$</p>
+</li>
+</ol>
+<p>需要指出的是，<strong>用变异系数法求出的某指标的权重与该指标在评价体系中的重要性是两个概念，变异系数法的作用只是提高指标的分辨能力，利于排序</strong>。因为变异系数法的权重计算是根据指标的分辨能力计算的。</p>
+<p>其实，<strong>使用变异系数法的前提恰恰是所有指标在评价体系中的重要性相当</strong>。 也就是说，当<strong>指标在评价体系中的重要性相差较大时，使用变异系数法确定权重并不一定合适</strong></p>
+</blockquote>
+<h4 id="4-模糊合成与综合评价"><a href="#4-模糊合成与综合评价" class="headerlink" title="4. 模糊合成与综合评价"></a>4. 模糊合成与综合评价</h4><p>模糊综合评价矩阵R中的不同行反映了被评价事物从不同的指标评价对各等级的隶属程度。<strong>用权向量A将不同的行进行综合，就可得到被评价事物从总体上对各等级的隶属程度，即模糊综合评价结果</strong>。</p>
+<p>通常采用所谓的<strong>模糊合成</strong>来实现上述的综合。</p>
+<p>模糊合成的基本思想是：<strong>对评价矩阵$R$和权向量$A$进行某种适当的模糊运算, 将两者合成为一个模糊向量$B={b_1,b_2,\cdots,b_n}$， 即$B=A M R$，$M$为模糊合成算子然后对B按照一定法则进行综合分析后即可得出最终的模糊综合评价结果</strong>。</p>
+<p>常见的模糊合成算子有：</p>
+<ul>
+<li>主因素突出型：$M(\land, \lor):b<em>j=\lor</em>{i=1}^m(a<em>i\land r</em>{ij})$</li>
+<li>主因素突出型：$M(\cdot, \lor):b<em>j=\lor</em>{i=1}^m(a<em>i\cdot r</em>{ij})$</li>
+<li>加权平均型：$M(\land, \oplus):b<em>j=\sum</em>{i=1}^m(a<em>i\land r</em>{ij})$</li>
+<li>加权平均型：$M(\cdot, \oplus):b<em>j=\sum</em>{i=1}^m(a<em>i\cdot r</em>{ij})$</li>
+</ul>
+<p>注意，算子是对矩阵沿列计算的，相当于A右乘R，同时使用算子。即<code>np.apply_along_axis(axis=1)</code></p>
+<p>上述模糊合成算子的特点如下：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220108143220851.png" alt="模糊合成算子的特点" style="zoom:67%;"></p>
+<p>此外，也可以取M为普通的矩阵乘法， 此时合成即为加权平均。至于到底取何种算子取决于问题的性质和算子的特点。</p>
+<p>通常而言，采用<strong>主因素突出型</strong>和<strong>加权平均型算法</strong>的结果大同小异。但在实际中还是要注意这两类算法的特点：</p>
+<ul>
+<li>主因素突出型适用于模糊矩阵中数据相差很悬殊的情形</li>
+<li>加权平均型则常用于因素很多的情形，可以避免信息丢失</li>
+</ul>
+<p>此外，上面的$B$全称为<strong>模糊综合评价向量</strong>，满足$0\leq b_j \leq 1$，且$b_j$需要进行归一化。$b_j$可以理解为被评价对象对第$j$等级的隶属度。</p>
+<p>对$B$分析处理后即可获得综合评价结果。分析处理$B$的常用方法有：</p>
+<ol>
+<li><p><strong>最大隶属度法</strong>：即认定被评价对象的等级为最大隶属度对应的等级, 适用于某隶属度明显大于其它隶属度的情形</p>
+</li>
+<li><p><strong>加权平均法</strong>：具体方法是，给定评价集$V={v_1 ,v_2 ,\cdots,v_n}$中的各等级赋以适当的分值$C={c_1,c_2,\cdots,c_n}$，用归一化的综合评价向量$B={b_1,b_2,\cdots,b_n}$对C的加权平均，得到的值就是模糊综合评价的结果，即：</p>
+<script type="math/tex; mode=display">
+最终评价=\sum_{i=1}^nc_ib_i</script></li>
+</ol>
+<blockquote>
+<p>例如, 设评价等级集为${很好, 好, 一 般, 差}$，综合评价向量$B=[0.4, 0.3, 0.2, 0 . 1 ]$。</p>
+<ul>
+<li>按最大隶属度法，评价等级为 “很好”。</li>
+<li>若给评价集分别赋值$[4, 3, 2, 1]$，则加权平均值为4 * 0.4 + 3 * 0.3 + 2 * 0.2 + 1 * 0.1 = 3.0，评价为好</li>
+</ul>
+</blockquote>
+<h3 id="C-模糊综合评价法的案例"><a href="#C-模糊综合评价法的案例" class="headerlink" title="C. 模糊综合评价法的案例"></a>C. 模糊综合评价法的案例</h3><blockquote>
+<p><strong>教师教学评价</strong></p>
+<p>在教学过程的综合评价中，取因素集$U={清楚易懂, 教材熟悉, 生动有趣, 板书整齐清晰}$，评价集 $V={很好, 较好, 一般,不好}$。设某班学生对教师的教学评价矩阵为</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220108150003732.png" alt="评价矩阵" style="zoom:67%;"></p>
+<p>若考虑评价集的权重$A=(0.5, 0.2, 0.2, 0.1)$，试求学生对这位教师的综合评价。</p>
+<p>解：</p>
+<p>根据A和R，利用四种合成算子， 编程计算得</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220108151125965.png" alt="模糊综合评价矩阵" style="zoom:50%;"></p>
+<p>可以看出，第二列较大而第三列较小，因此就认为老师0.3左右是很好的老师，0.4左右是较好的老师，0.2左右是不好的老师，0.06左右是不好的老师</p>
+</blockquote>
+<h3 id="D-模糊综合评价矩阵的获得"><a href="#D-模糊综合评价矩阵的获得" class="headerlink" title="D. 模糊综合评价矩阵的获得"></a>D. 模糊综合评价矩阵的获得</h3><p>上面举得例子简单明了，然而上面的例子实在是太过于简单，因为不仅给出了模糊综合评价矩阵$R$，而且还直接给出了权重向量$A$。实际问题往往只提供了一系列的评价对象以及每个对象的若干评价指标，并且这些指标可能数值差异很大，性质也不同。</p>
+<p>此时，不仅指标的权重向量$A$需要根据适当的方法确定，就连评价矩阵$R$也要按照某种方法对评价指标进行处理后才能获得。</p>
+<ul>
+<li>确定权重向量$A$的常用方法是前面介绍的<strong>变异系数法</strong></li>
+<li>而处理评价指标获取评价矩阵$R$的常用方法除了前面的评论法以外，还有：<strong>相对偏差法</strong>和<strong>相对优属度法</strong></li>
+</ul>
+<h4 id="1-相对偏差模糊矩阵评价法"><a href="#1-相对偏差模糊矩阵评价法" class="headerlink" title="1.  相对偏差模糊矩阵评价法"></a>1.  相对偏差模糊矩阵评价法</h4><p>相对偏差模糊矩阵评价法与灰色关联分析有点类似。首先虚拟一个理想方案$u$，然后按照某种方法建立各方案与$u$的偏差矩阵$R$，再确定各评价指标的权重$A$，最后用$A$对$R$加权平均得各方案与$u$的综合距离$F$，则根据$F$即可对方案进行排序即可。</p>
+<p>相对偏差法评价法的基本步骤如下：</p>
+<ol>
+<li><p><strong>虚拟理想方案</strong>：</p>
+<script type="math/tex; mode=display">
+u=(u_1, u_2,\cdots, u_n)</script><p>其中，即越多越好的取最大值，越少越好的取最小值</p>
+<script type="math/tex; mode=display">
+u_i=\begin{cases}
+\max_j{a_{ij}}, & a_{ij}为效益型指标，即越大越好\\
+\min_i{a_{ij}}, & a_{ij}为成本型指标，即越小越好
+\end{cases}</script></li>
+<li><p><strong>建立相对偏差模糊矩阵$R$</strong></p>
+<script type="math/tex; mode=display">
+R=\begin{bmatrix}
+r_{11} & r_{12} & \cdots & r_{1n}\\
+r_{21} & r_{22} & \cdots & r_{2n}\\
+\vdots & \vdots & \ddots & \vdots \\
+r_{m1} & r_{m2} & \cdots & r_{mn}\\
+\end{bmatrix}</script><p>其中，$a_{ij}$为收集得到的数值</p>
+<script type="math/tex; mode=display">
+r_{ij}=\frac{|a_{ij}-u_i|}{\max_j a_{ij} - \min_j a_{ij}}</script></li>
+<li><p>确定各评价指标权重$w_i$</p>
+</li>
+<li><p>对各方案的偏差加权平均</p>
+<script type="math/tex; mode=display">
+F_j=\sum_{i=1}^mw_ir_{ij},\qquad j=1,2,\cdots,n</script></li>
+<li><p>根据$F_j$值进行综合评价：若$F_t$&lt;$F_s$，则第$t$个方案排在第$s$个方案之前</p>
+</li>
+</ol>
+<blockquote>
+<p><strong>技术方案评价</strong></p>
+<p>现有下列5个农业技术经济方案，试评价各方案的优劣。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220108153619522.png" alt="五个技术方案" style="zoom: 50%;"></p>
+<p>解：</p>
+<p>上述评价指标中，产量、肥力是效益型，而其余均为成本型。</p>
+<ol>
+<li><p>理想方案为:</p>
+<script type="math/tex; mode=display">
+u=[1000, 60, 4000, 1, 30, 0.5, 1]</script></li>
+<li><p>根据前述方法求出相对偏差模糊矩阵</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220108153803418.png" alt="五个技术方案的相对偏差矩阵" style="zoom:50%;"></p>
+</li>
+<li><p>由变异系数法求出指标权重</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220108153841727.png" alt="求指标权重" style="zoom:50%;"></p>
+<p>得到指标权重为</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220108153907216.png" alt="指标权重" style="zoom:50%;"></p>
+</li>
+<li><p>求加权平均偏差并排序</p>
+<script type="math/tex; mode=display">
+加权平均偏差为=[0.3525, 0.4558, 0.4505, 0.5206, 0.5864]</script><p>故方案的优劣次序为1、3、2、4、5。</p>
+</li>
+</ol>
+</blockquote>
+<h4 id="2-相对优属度模糊矩阵评价法"><a href="#2-相对优属度模糊矩阵评价法" class="headerlink" title="2. 相对优属度模糊矩阵评价法"></a>2. 相对优属度模糊矩阵评价法</h4><p>相对偏差法的评价依据是各方案与理想方案的偏差，而<strong>相对优属度评价法的基本思想是：首先用适当的方法将所有指标(效益型、 成本型、固定型)转化为效益型(成本型)，得到优属度矩阵$R$，再确定各评价指标的权重$A$，最后用$A$对$R$加权平均得各方案的综合优属度$F$, 则根据$F$即可对方案进行排序</strong></p>
+<p>相对优属度评价法步骤如下：</p>
+<ol>
+<li><p>建立模糊效益矩阵$R_{ij}$    ，其中$\alpha_j$是第$j$个指标的适度值</p>
+<script type="math/tex; mode=display">
+r_{ij}=\begin{cases}
+\frac {a_{ij}}{\max_j a_{ij}}, & a_{ij}为效益型\\
+\frac {\min_j a_{ij}}{a_{ij}}，& a_{ij}为成本型\\
+\frac {\min_j |a_{ij}-\alpha_j|}{a_{ij}-\alpha_j}, & a_{ij}为固定型
+\end{cases}</script></li>
+<li><p>确定各评价指标权重$w_i$</p>
+</li>
+<li><p>对各方案的偏差加权平均</p>
+<script type="math/tex; mode=display">
+F_j=\sum_{i=1}^mw_ir_{ij},\qquad j=1,2,\cdots,n</script></li>
+<li><p>根据$F_j$值进行综合评价：若$F_t&gt;F_s$，则第$t$个方案排在第$s$个方案之前</p>
+</li>
+</ol>
+<blockquote>
+<p><strong>投资方案评价</strong></p>
+<p>已知5个投资方案如下表，试确定4个评价指标的权重</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220108141518205.png" alt="五个投资方案" style="zoom: 50%;"></p>
+<p>解：</p>
+<p>4个指标中，投资额、风险损失为成本型，期望净现值、风险盈利值为效益型</p>
+<ol>
+<li><p>按前述方法建立相对优属度模糊矩阵</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220108155736847.png" alt="相对优属度模糊矩阵"></p>
+</li>
+<li><p>由变异系数法求出指标权重</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220108155807607.png" alt="指标权重"></p>
+</li>
+<li><p>各方案的加权平均优属度</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220108155831023.png" alt="加权平均优属度"></p>
+</li>
+</ol>
+<p>故方案排序为1, 3, 5, 2, 4</p>
+</blockquote>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Jack Wang</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://jackwang0107.github.io/2022/01/07/shu-xue-jian-mo-suan-fa-8-mo-hu-zong-he-ping-jie-mo-xing/">https://jackwang0107.github.io/2022/01/07/shu-xue-jian-mo-suan-fa-8-mo-hu-zong-he-ping-jie-mo-xing/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Jack Wang</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/Python/">
+                                    <span class="chip bg-color">Python</span>
+                                </a>
+                            
+                                <a href="/tags/Math-Modeling/">
+                                    <span class="chip bg-color">Math Modeling</span>
+                                </a>
+                            
+                                <a href="/tags/%E6%A8%A1%E7%B3%8A%E6%95%B0%E5%AD%A6/">
+                                    <span class="chip bg-color">模糊数学</span>
+                                </a>
+                            
+                                <a href="/tags/%E6%A8%A1%E7%B3%8A%E7%BB%BC%E5%90%88%E8%AF%84%E4%BB%B7/">
+                                    <span class="chip bg-color">模糊综合评价</span>
+                                </a>
+                            
+                                <a href="/tags/Fuzzy-Comprehension-Evaluation-Method/">
+                                    <span class="chip bg-color">Fuzzy Comprehension Evaluation Method</span>
+                                </a>
+                            
+                                <a href="/tags/fuzzy-mathematics/">
+                                    <span class="chip bg-color">fuzzy mathematics</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.png" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2022/01/07/shu-xue-jian-mo-suan-fa-8-mo-hu-zong-he-ping-jie-mo-xing/">
+                    <div class="card-image">
+                        
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/v2-368fd890e8f6524b341b070804782bd2_1440w.jpg" class="responsive-img" alt="数学建模算法8-模糊综合评价模型">
+                        
+                        <span class="card-title">数学建模算法8-模糊综合评价模型</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-01-07
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E7%AE%97%E6%B3%95/" class="post-category">
+                                    数学建模算法
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Python/">
+                        <span class="chip bg-color">Python</span>
+                    </a>
+                    
+                    <a href="/tags/Math-Modeling/">
+                        <span class="chip bg-color">Math Modeling</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%A8%A1%E7%B3%8A%E6%95%B0%E5%AD%A6/">
+                        <span class="chip bg-color">模糊数学</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%A8%A1%E7%B3%8A%E7%BB%BC%E5%90%88%E8%AF%84%E4%BB%B7/">
+                        <span class="chip bg-color">模糊综合评价</span>
+                    </a>
+                    
+                    <a href="/tags/Fuzzy-Comprehension-Evaluation-Method/">
+                        <span class="chip bg-color">Fuzzy Comprehension Evaluation Method</span>
+                    </a>
+                    
+                    <a href="/tags/fuzzy-mathematics/">
+                        <span class="chip bg-color">fuzzy mathematics</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/01/07/shu-xue-jian-mo-suan-fa-7-yi-wei-er-wei-cha-zhi-yi-ji-ni-he/">
+                    <div class="card-image">
+                        
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/300px-Splined_epitrochoid.svg.png" class="responsive-img" alt="数学建模算法7-一维二维插值以及拟合">
+                        
+                        <span class="card-title">数学建模算法7-一维二维插值以及拟合</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-01-07
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E7%AE%97%E6%B3%95/" class="post-category">
+                                    数学建模算法
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Python/">
+                        <span class="chip bg-color">Python</span>
+                    </a>
+                    
+                    <a href="/tags/Math-Modeling/">
+                        <span class="chip bg-color">Math Modeling</span>
+                    </a>
+                    
+                    <a href="/tags/%E4%B8%80%E7%BB%B4%E4%BA%8C%E7%BB%B4%E6%8F%92%E5%80%BC/">
+                        <span class="chip bg-color">一维二维插值</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%8B%9F%E5%90%88/">
+                        <span class="chip bg-color">拟合</span>
+                    </a>
+                    
+                    <a href="/tags/Interpolation/">
+                        <span class="chip bg-color">Interpolation</span>
+                    </a>
+                    
+                    <a href="/tags/Fitting/">
+                        <span class="chip bg-color">Fitting</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: JackWang&#39;s Bolg<br />'
+            + '文章作者: Jack Wang<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    });
+</script>
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2021-2022</span>
+            
+            <a href="/about" target="_blank">Jack Wang</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">113.8k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+                <span id="sitetime"> Loading ...</span>
+                <script>
+                    var calcSiteTime = function () {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2021";
+                        var startMonth = "11";
+                        var startDate = "12";
+                        var startHour = "0";
+                        var startMinute = "0";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+
+                        // 区分是否有年份.
+                        var language = 'zh-CN';
+                        if (startYear === String(todayYear)) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            var daysTip = 'This site has been running for ' + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                daysTip = '本站已运行 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                daysTip = '本站已運行 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = daysTip;
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            var yearsAndDaysTip = 'This site has been running for ' + diffYears + ' years and '
+                                + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                yearsAndDaysTip = '本站已运行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                yearsAndDaysTip = '本站已運行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+                        }
+                    }
+
+                    calcSiteTime();
+                </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+    <a href="mailto:2232123545@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+     
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/star.js"><\/script>');
+            }
+        </script>
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
