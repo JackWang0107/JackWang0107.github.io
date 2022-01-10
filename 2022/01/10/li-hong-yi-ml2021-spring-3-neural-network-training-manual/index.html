@@ -4,8 +4,12 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="contact, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
-    <meta name="description" content="contact | JackWang&#39;s Bolg">
+    <meta name="keywords" content="李宏毅ML2021-Spring-3: Neural Network Training Manual, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
+    <meta name="description" content="
+本文是李宏毅Machine Learning 2021 Spring 第二节课Introduction of Machine / Deep Learning的笔记，本节课主要讲解了深度学习的训练攻略
+
+
+李宏毅ML2021-Spring-">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +21,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>contact | JackWang&#39;s Bolg</title>
+    <title>李宏毅ML2021-Spring-3: Neural Network Training Manual | JackWang&#39;s Bolg</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -254,12 +258,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/16.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/7.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">contact</h1>
+                    <h1 class="description center-align post-title">李宏毅ML2021-Spring-3: Neural Network Training Manual</h1>
                 </div>
             </div>
         </div>
@@ -373,12 +377,37 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Deep-Learning/">
+                                <span class="chip bg-color">Deep Learning</span>
+                            </a>
+                        
+                            <a href="/tags/Hungyi-Li/">
+                                <span class="chip bg-color">Hungyi Li</span>
+                            </a>
+                        
+                            <a href="/tags/Machine-Learning/">
+                                <span class="chip bg-color">Machine Learning</span>
+                            </a>
+                        
+                            <a href="/tags/Neural-Network/">
+                                <span class="chip bg-color">Neural Network</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E6%9D%8E%E5%AE%8F%E6%AF%85ML2021-Spring-Notes/" class="post-category">
+                                李宏毅ML2021 Spring Notes
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -387,28 +416,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-11-12
+                    2022-01-10
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-11-12
+                    2022-01-10
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    0
+                    2.5k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    9 分
                 </div>
                 
 
@@ -428,7 +457,107 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <blockquote>
+<p>本文是李宏毅Machine Learning 2021 Spring 第二节课Introduction of Machine / Deep Learning的笔记，本节课主要讲解了深度学习的训练攻略</p>
+</blockquote>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110183944100.png" alt="第二节课：Neural Network Training Manual"></p>
+<h1 id="李宏毅ML2021-Spring-3-Neural-Network-Training-Manual"><a href="#李宏毅ML2021-Spring-3-Neural-Network-Training-Manual" class="headerlink" title="李宏毅ML2021-Spring-3: Neural Network Training Manual"></a>李宏毅ML2021-Spring-3: Neural Network Training Manual</h1><p>我们在前面的一节课以Youtube人数预测这个案例贯穿始终，在介绍Machine Learning / Deep Learning基础概念的同时，从线性模型入手，讲解了神经网络模型。</p>
+<p>此外，我们还讲解了Machine Learning中训练一个模型的流程（Procedure）。我们复习一下，这三步分别是：</p>
+<ol>
+<li>定义模型（含参函数）</li>
+<li>定义损失函数（根据我们的数据）</li>
+<li>优化（训练）模型（神经网络是通过梯度下降）</li>
+</ol>
+<p>然而其实神经网络中进行训练的时候，直接使用梯度下降往往会出现很多的问题，导致模型训练不出来。除此以外，我们上节课其实海遗留了不少问题，例如为什么神经网络要用Deep的而不是Fat的。这些内容在本节课都会进行讲解。</p>
+<h2 id="1-Framework-of-ML"><a href="#1-Framework-of-ML" class="headerlink" title="1. Framework of ML"></a>1. Framework of ML</h2><p>我们首先规范化一下我们的（训练）模型（神经网络）时候整体的框架。</p>
+<p>首先，我们根据我们需要完成的任务来收集数据，所有的数据被分为两部分，<strong>一部分是包含label的训练数据</strong>，而<strong>另外一部分是不包含label的测试数据</strong>：</p>
+<ul>
+<li><strong>Training Data</strong>：${(x^1,\hat y^1),(x^2,\hat y^2),(x^3,\hat y^3),\cdots,(x^N,\hat y^N)}$</li>
+<li><strong>Testing Data</strong>：${x^{N+1},x^{N+2},x^{N+3},\cdots,x^{N+M}}$</li>
+</ul>
+<blockquote>
+<p>PS：其实，我们在手机数据的时候是不会划分测试数据和训练数据的，换而言之我们收集数据的时候都是$(x,\hat y)$这样的键值对。然后我们收集完数据之后再对数据进行拆分，其中一部分分为训练数据，而另外一部分分为测试数据。</p>
+<p><strong>这就意味我们其实是有测试数据的label的</strong>。但是注意，我们要当做没有，原因会在本文的后面讲解</p>
+</blockquote>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110212204164.png" alt="训练和测试数据"></p>
+<p>而具体每一个具有label的数据，我们称为一个示例（example），即$(x^i,\hat y^i),i=1,\cdots,N$。在不同的问题中，$x^i$和$y^i$的表现形式不同。例如：</p>
+<ul>
+<li>在语音辨识（Speech Recognition）问题中，$x^i$是输入的音频，而输出的$\hat y$是音素(Phoneme，类似于音标)</li>
+<li>在图像识别（Image Recognition）问题中，$x^i$是输入的图片，而输出的$\hat y$是图片中的物品的名称/类别(Class)</li>
+<li>在语者辨识（Speaker Recognition）问题中，$x^i$是输入的音频，而输出的$\hat y$是说话的人的名字</li>
+<li>在机器翻译（Machine Translation）问题中，$x^i$是带翻译的文本，而输出的$\hat y$是目标语言的文本</li>
+</ul>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110214031998.png" alt="不通问题中x和y的形式不同"></p>
+<p>接下来，有了训练数据和测试数据之后，我们就能够训练、测试我们的模型</p>
+<ul>
+<li><p>首先是训练阶段</p>
+<ol>
+<li>训练阶段的第一件事，就是定义出来一个含有位置参数的函数$y=f_\theta(x)$，注意，以后我们用$\theta$表示模型中的参数</li>
+<li>接下来，我们要定义一个loss，loss是一个函数，因此有的时候又被称为loss function。Loss function的输入是模型中的参数，用于判定这组参数是好还是不好</li>
+<li>最后一步就是求解一个Optimization的问题，即找一个$\theta^*$，能够让$L(\theta)$最小</li>
+</ol>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110214209790.png" alt="训练阶段"></p>
+</li>
+<li><p>在训练阶段之后，就是测试阶段</p>
+<ol>
+<li><p>我们用得到的$\theta^*$来对所有的测试数据中的数据进行预测，即</p>
+<script type="math/tex; mode=display">
+y^i=f_{\theta^*}(x^i), \qquad\qquad i=N+1,N+2,\cdots,N+M</script></li>
+<li><p>接下来就可以用我们预测得到的${y^{N+1},y^{N+2},\cdots,y^{N+M}}$，例如把预测得到的结果上传到Kaggle上去（后面的课程的作业的要求）</p>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="2-General-Guide"><a href="#2-General-Guide" class="headerlink" title="2. General Guide"></a>2. General Guide</h2><p>下面的这张图就是神经网络训练的攻略手册，可以帮助我们训练出来高精度的模型。当然适用于我们前期训练模型</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110223158424.png" alt="模型训练攻略"></p>
+<p>整个攻略是从上到下的，因此当我们发现模型得到的精度不高，或者是模型根本没有训练起来的时候，第一步就是先检查模型在训练数据上的损失。</p>
+<p>有人可能会问，为什么模型在测试集上的表现不好反而要先去检查训练集上的损失呢？</p>
+<p>其实检查训练集上的损失是为了先检查模型有没有学习到东西。虽然说模型可能表现很差，但是通过这一步能看到模型训练时候的loss有没有下降，如果没有下降，那么就意味着很可能代码写错了</p>
+<h3 id="A-Large-Loss-on-Training-Data"><a href="#A-Large-Loss-on-Training-Data" class="headerlink" title="A. Large Loss on Training Data"></a>A. Large Loss on Training Data</h3><p>我们如果检查发现，在训练集上模型的表现确实有提升，但是最终模型收敛到的loss却很大，那么此时就有两个可能，第一个是Model Bias，第二个就是Optimization的问题</p>
+<h4 id="1-Model-Bias"><a href="#1-Model-Bias" class="headerlink" title="1. Model Bias"></a>1. Model Bias</h4><p>对于Model Bias而言，其实在上周就已经讲过了。具体而言就是我们的模型太简单，其学习能力太弱难以充分的学习当前的任务。或者说模型的潜力太小，最终开发/学习到极致的模型也无法胜任当前的任务。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110221632640.png" alt="模型训练攻略" style="zoom: 33%;"></p>
+<p>那么到底什么是模型的学习能力/潜力呢？</p>
+<p>举例来说，我们现在设计了一个含有参数$\theta$的模型$f_\theta(x)$，即</p>
+<script type="math/tex; mode=display">
+y=f_\theta(x)</script><p>由于模型中的参数是可以变化的，而一个参数就对应一个具体的模型，例如$y=2x^2$和$y=3x^3$，这两个模型都平方模型这一类模型，但是却是两个不同的模型。</p>
+<p>因此，我们让模型$f_\theta(x)$中的参数$\theta$取不同的值，就有了不同的具体的模型，例如：$f_\theta^1(x)$、$f_\theta^2(x)$、$f_\theta^3(x)$、$\cdots$、$f_\theta^N(x)$、$\cdots$</p>
+<p>那么我们把这些模型当做高维（维数大于等于$len(\theta)$，因为可能存在参数更多的模型）空间中的一个点，那么我们把所有的模型集合起来，就可以得到一个模型的Set。</p>
+<p>然而当前模型所构成Function Set太小了，无法包含到让模型损失最小的模型。换而言之，可以让Model表现最好的模型（模型由参数描述）是无法用当前模型来描述的</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110224645545.png" alt="当前模型的Function Set不包含最佳的Function" style="zoom:50%;"></p>
+<p>那么这个时候，即便是当前模型所能够描述的Function Set中最好的模型，他的Loss依然很高。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110225130533.png" alt="image-20220110225130533"></p>
+<p>这个时候问题就类似于我们是在大海里捞针（表现最好的参数），然而大海里并没有针（当前模型并不存在全局/全模型最佳的参数）</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110225344433.png" alt="大海捞针却没有针" style="zoom:50%;"></p>
+<p>那么这个时候，我们要做的就是重新设计我们的模型，让他具有更大的潜力/更加可塑（more flexible）。所谓更加可塑，其实指的就是结构更加复杂、参数更加多、能够表达更多的模型。</p>
+<p>这样的事情其实我们在上一节课就已经做过了，我们发现线性模型只看一天前的数据不太行，那么就让他看前56天的数据，然后觉得模型还是不太行，那么就引入Sigmoid、ReLu等函数为模型添加非线性、构成深度网络、神经网络</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110230559512.png" alt="Model Bias的解决方案：重新设计模型" style="zoom:50%;"></p>
+<h4 id="2-Optimization"><a href="#2-Optimization" class="headerlink" title="2. Optimization"></a>2. Optimization</h4><p>在训练数据上loss大可能是由于Model Bias造成的，但并不是说所有的在训练数据上loss大就是由于Model Bias造成的，还有一种可能就是Optimization的问题。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110231923155.png" alt="Optimization的问题" style="zoom: 33%;"></p>
+<p>所谓Optimization的问题，其实指的就是我们没有做好Optimization这一步。在我们的预期里，我们通过Optimization就能够让模型的表现得到提升，然而这都是建立在我们做好了Optimization这一步的基础山的，因此如果我们没有做好Optimization，模型的表现也是上不去的。</p>
+<p>Optimization这一步出问题，其实由很多种可能，例如我们的学习率设的太大或者太小等等。当然，我们在上一节课其实也讲了一种Optimization中可能出现的问题，就是Local Minima的问题</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110231450099.png" alt="梯度下降卡在了Local Minima上" style="zoom:33%;"></p>
+<p>同样，用图像来形象的表示的话，就是问题的最佳的模型的参数确实可能由我们的模型来描述，然而在Gradient Descent的时候，由于某些原因（例如局部最优点），我们无法得到这个全局最优点。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110231557891.png" alt="无法得到最优值，只能得到次优值" style="zoom: 50%;"></p>
+<p>形象的比喻，我们这个时候面临的问题就是针确实在海里，只是我们没有办法找到这根针</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110232047999.png" alt="大海捞针找不到针" style="zoom:50%;"></p>
+<h4 id="3-Diagnosis-between-Model-Bias-and-Optimization"><a href="#3-Diagnosis-between-Model-Bias-and-Optimization" class="headerlink" title="3. Diagnosis between Model Bias and Optimization"></a>3. Diagnosis between Model Bias and Optimization</h4><p>那么这个时候问题来了，既然模型在训练数据上的表现糟糕可能是由Model Bias造成的，也有可能是由Optimization造成的。那么在当我们真实遇到了模型在训练数据集上的表现糟糕的情况的时候，到底那个才是我们的处境？</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110232503590.png" alt="到底哪个才是我们现在所处的问题呢？" style="zoom: 33%;"></p>
+<p>那么这个时候，判断我们所处的情况的关键就是我们的模型到底有没有足够的潜力，或者说我们的模型到底够不够flexible（可塑）？</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110233144866.png" alt="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110233055346.png"></p>
+<p>那么这个时候我们可以通过下面的几个方法来进行判断：</p>
+<ul>
+<li><p>通过不同的模型之间的比较来获得insight，即我们的模型是否足够的flexible</p>
+<blockquote>
+<p><strong>举一个通过比较或者insight的例子</strong></p>
+<p>这个例子是来自与2015年的Paper：Residual Network中的例子。这个Paper在一开头就讲了一个故事。这个故事是说，现在针对同一个任务，训练两个基本的结构相同而层数不同的Network。一个Network是20层网络，而另外一个是56层的模型</p>
+</blockquote>
+</li>
+<li><p>a</p>
+</li>
+<li><p>as</p>
+</li>
+</ul>
+
                 
             </div>
             <hr/>
@@ -454,7 +583,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://jackwang0107.github.io/contact/index.html">https://jackwang0107.github.io/contact/index.html</a>
+                    <a href="https://jackwang0107.github.io/2022/01/10/li-hong-yi-ml2021-spring-3-neural-network-training-manual/">https://jackwang0107.github.io/2022/01/10/li-hong-yi-ml2021-spring-3-neural-network-training-manual/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -491,7 +620,23 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/Deep-Learning/">
+                                    <span class="chip bg-color">Deep Learning</span>
+                                </a>
+                            
+                                <a href="/tags/Hungyi-Li/">
+                                    <span class="chip bg-color">Hungyi Li</span>
+                                </a>
+                            
+                                <a href="/tags/Machine-Learning/">
+                                    <span class="chip bg-color">Machine Learning</span>
+                                </a>
+                            
+                                <a href="/tags/Neural-Network/">
+                                    <span class="chip bg-color">Neural Network</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -666,13 +811,13 @@
                 <i class="far fa-dot-circle"></i>&nbsp;本篇
             </div>
             <div class="card">
-                <a href="/contact/index.html">
+                <a href="/2022/01/10/li-hong-yi-ml2021-spring-3-neural-network-training-manual/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="contact">
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="李宏毅ML2021-Spring-3: Neural Network Training Manual">
                         
-                        <span class="card-title">contact</span>
+                        <span class="card-title">李宏毅ML2021-Spring-3: Neural Network Training Manual</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -683,17 +828,41 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-12
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-01-10
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            Jack Wang
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%9D%8E%E5%AE%8F%E6%AF%85ML2021-Spring-Notes/" class="post-category">
+                                    李宏毅ML2021 Spring Notes
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
 
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Deep-Learning/">
+                        <span class="chip bg-color">Deep Learning</span>
+                    </a>
+                    
+                    <a href="/tags/Hungyi-Li/">
+                        <span class="chip bg-color">Hungyi Li</span>
+                    </a>
+                    
+                    <a href="/tags/Machine-Learning/">
+                        <span class="chip bg-color">Machine Learning</span>
+                    </a>
+                    
+                    <a href="/tags/Neural-Network/">
+                        <span class="chip bg-color">Neural Network</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
@@ -701,16 +870,15 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/contact/index.html">
+                <a href="/2022/01/09/li-hong-yi-ml2021-spring-2-introduction-of-deeplearning-machinelearning/">
                     <div class="card-image">
                         
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220109135954313.png" class="responsive-img" alt="李宏毅ML2021-Spring-2: Introduction of Machine/Deep Learning">
                         
-                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="contact">
-                        
-                        <span class="card-title">contact</span>
+                        <span class="card-title">李宏毅ML2021-Spring-2: Introduction of Machine/Deep Learning</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -721,17 +889,40 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-12
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-01-09
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            Jack Wang
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%9D%8E%E5%AE%8F%E6%AF%85ML2021-Spring-Notes/" class="post-category">
+                                    李宏毅ML2021 Spring Notes
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
-
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Deep-Learning/">
+                        <span class="chip bg-color">Deep Learning</span>
+                    </a>
+                    
+                    <a href="/tags/Hungyi-Li/">
+                        <span class="chip bg-color">Hungyi Li</span>
+                    </a>
+                    
+                    <a href="/tags/Machine-Learning/">
+                        <span class="chip bg-color">Machine Learning</span>
+                    </a>
+                    
+                    <a href="/tags/Neural-Network/">
+                        <span class="chip bg-color">Neural Network</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
