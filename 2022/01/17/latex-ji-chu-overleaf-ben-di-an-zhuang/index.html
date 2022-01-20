@@ -419,21 +419,21 @@ Latex基础-Overleaf本地安装1. 前言对于我个人而言，我经常用Mar
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-01-17
+                    2022-01-18
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.7k
+                    2.2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    6 分
+                    8 分
                 </div>
                 
 
@@ -558,10 +558,23 @@ tlmgr install scheme-full
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220117180153749.png" alt="登录界面"></p>
 <p>登录之后就可以正常使用了</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220117180311035.png" alt="熟悉的感觉又回来了"></p>
-<h2 id="4-一些小建议"><a href="#4-一些小建议" class="headerlink" title="4. 一些小建议"></a>4. 一些小建议</h2><p>我们在新建项目的时候，本地是没有网页版的template中的各种模板可以用的，所以这个时候我们可以先从官网上下载下来temple然后在本地上传即可</p>
-<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220117180513493.png" alt="从本地上传新项目"></p>
 <p>最后写作的体验就是很流畅~，完全不会断线，编译、展示速度快到飞起！</p>
 <p>开始快乐的写作<span class="github-emoji"><span>🎉</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f389.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><span class="github-emoji"><span>🎉</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f389.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><span class="github-emoji"><span>🎉</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f389.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span></p>
+<h2 id="4-后记"><a href="#4-后记" class="headerlink" title="4. 后记"></a>4. 后记</h2><p>下面是我在后面的日常使用中发现的一些问题、对应的解决方案以及一些建议</p>
+<h3 id="1-关于模板"><a href="#1-关于模板" class="headerlink" title="1. 关于模板"></a>1. 关于模板</h3><p>我们在新建项目的时候，本地是没有网页版的template中的各种模板可以用的，所以这个时候我们可以先从官网上下载下来temple然后在本地上传即可</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220117180513493.png" alt="从本地上传新项目"></p>
+<h3 id="2-关于镜像"><a href="#2-关于镜像" class="headerlink" title="2. 关于镜像"></a>2. 关于镜像</h3><p>我们前面在下载好了各种latex的包之后，通过<code>docker commit</code>命令把我们的修改提交到了镜像上。然而有的时候我们可能需要在新的机器上，例如课题组的服务器上跑一个私有Overleaf。那么这个时候我们就需要把下载好包的镜像复制到服务器上。所以我们还需要把镜像打包出来方便迁移。</p>
+<p>当然，关于docker更多的内容，这里不会介绍，在我的后面的docker专栏会有所介绍</p>
+<h4 id="A-打包镜像"><a href="#A-打包镜像" class="headerlink" title="A. 打包镜像"></a>A. 打包镜像</h4><p>因为docker的文件系统是分层存储的，而直接以分层文件形式迁移镜像的话就很不方便，所以我们需要首先把镜像打包为一个tarball包</p>
+<pre class="line-numbers language-lang-shell"><code class="language-lang-shell">docker save -o ./OverLeaf.tar sharelatex/sharelatex:with-texlive-full
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>打包时间会比较长，因为下载了所有的包之后会比较大高达7.6G，打包之后就会得到一个镜像，未来我们只需要把这个镜像复制到目标计算机上然后完成下面的步骤就可以了</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220118192015987.png" alt="打包之后的文件非常大"></p>
+<h4 id="B-导入镜像"><a href="#B-导入镜像" class="headerlink" title="B. 导入镜像"></a>B. 导入镜像</h4><p>我们上面是通过docker把分层的image打包为了tarball文件，然后我们把tarball文件复制到目标计算机上后，其实是没有办法直接解压tarball文件然后直接使用的，我们还需要通过docker把这个文件通过docker还原为一个镜像。</p>
+<p>主语，下面这条命令要在目标机器（没有Overleaf的机器）上运行</p>
+<pre class="line-numbers language-lang-shell"><code class="language-lang-shell">docker load -i OverLeaf.tar
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>注意，由于我们在提交镜像后可能有新写了文章，这个时候打包的镜像里其实是没有你写的文章的，因此文章还是需要另外保存的</p>
 
                 
             </div>
@@ -807,17 +820,16 @@ tlmgr install scheme-full
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2022/01/17/latex-ji-chu-overleaf-ben-di-an-zhuang/">
+                <a href="/2022/01/17/li-hong-yi-ml2021-spring-4-problem-in-training/">
                     <div class="card-image">
                         
-                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/screenshot.png" class="responsive-img" alt="Latex基础-Overleaf本地安装">
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220120154739046.png" class="responsive-img" alt="李宏毅ML2021-Spring-4: When Training Fails">
                         
-                        <span class="card-title">Latex基础-Overleaf本地安装</span>
+                        <span class="card-title">李宏毅ML2021-Spring-4: When Training Fails</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -827,35 +839,38 @@ tlmgr install scheme-full
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-01-17
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-01-17
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Latex%E5%9F%BA%E7%A1%80/" class="post-category">
-                                    Latex基础
+                            <a href="/categories/%E6%9D%8E%E5%AE%8F%E6%AF%85ML2021-Spring-Notes/" class="post-category">
+                                    李宏毅ML2021 Spring Notes
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Latex/">
-                        <span class="chip bg-color">Latex</span>
+                    <a href="/tags/Deep-Learning/">
+                        <span class="chip bg-color">Deep Learning</span>
                     </a>
                     
-                    <a href="/tags/Overleaf/">
-                        <span class="chip bg-color">Overleaf</span>
+                    <a href="/tags/Hungyi-Li/">
+                        <span class="chip bg-color">Hungyi Li</span>
                     </a>
                     
-                    <a href="/tags/paper-writing/">
-                        <span class="chip bg-color">paper writing</span>
+                    <a href="/tags/Machine-Learning/">
+                        <span class="chip bg-color">Machine Learning</span>
+                    </a>
+                    
+                    <a href="/tags/Neural-Network/">
+                        <span class="chip bg-color">Neural Network</span>
                     </a>
                     
                 </div>
@@ -1079,7 +1094,7 @@ tlmgr install scheme-full
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">147.7k</span>
+                        class="white-color">160.4k</span>
             
             
             
