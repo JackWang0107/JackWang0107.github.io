@@ -430,7 +430,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    3.3k
+                    3.5k
                 </div>
                 
 
@@ -671,33 +671,33 @@ x_3+x_4\leq 1\\
 x_5\leq x_1\\
 x_i=0或1, & i=1,\cdots,5
 \end{cases}</script><h3 id="B-Python求解"><a href="#B-Python求解" class="headerlink" title="B. Python求解"></a>B. Python求解</h3><p>求解的具体过程我们其实还是使用PuLP库。类似于整数规划问题，我们只需要指定01变量的类别为”Binary”即可。</p>
-<pre class="line-numbers language-lang-python"><code class="language-lang-python">import pulp
-import numpy as np
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> pulp
+<span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
 
 
-problem: pulp.LpProblem = pulp.LpProblem(name="最大化投资问题", sense=pulp.LpMaximize)
+problem<span class="token punctuation">:</span> pulp<span class="token punctuation">.</span>LpProblem <span class="token operator">=</span> pulp<span class="token punctuation">.</span>LpProblem<span class="token punctuation">(</span>name<span class="token operator">=</span><span class="token string">"最大化投资问题"</span><span class="token punctuation">,</span> sense<span class="token operator">=</span>pulp<span class="token punctuation">.</span>LpMaximize<span class="token punctuation">)</span>
 
 
-xs = np.array([pulp.LpVariable(name=f"x{i}", lowBound=0, cat=pulp.LpBinary) for i in range(5)])
-profits = np.array([150, 210, 60, 80, 180])
+xs <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span>pulp<span class="token punctuation">.</span>LpVariable<span class="token punctuation">(</span>name<span class="token operator">=</span>f<span class="token string">"x{i}"</span><span class="token punctuation">,</span> lowBound<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span> cat<span class="token operator">=</span>pulp<span class="token punctuation">.</span>LpBinary<span class="token punctuation">)</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+profits <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">150</span><span class="token punctuation">,</span> <span class="token number">210</span><span class="token punctuation">,</span> <span class="token number">60</span><span class="token punctuation">,</span> <span class="token number">80</span><span class="token punctuation">,</span> <span class="token number">180</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
 
-contrain1 = np.array([1, 1, 1, 0, 0])
-contrain2 = np.array([0, 0, 1, 1, 0])
-contrain3 = np.array([-1, 0, 0, 0, 1])
+contrain1 <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+contrain2 <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+contrain3 <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
 
-problem.setObjective(profits @ xs)
-problem += (contrain1 @ xs == 1, "约束1")
-problem += (contrain2 @ xs <= 1, "约束2")
-problem += (contrain3 @ xs <= 0, "约束3")
+problem<span class="token punctuation">.</span>setObjective<span class="token punctuation">(</span>profits @ xs<span class="token punctuation">)</span>
+problem <span class="token operator">+=</span> <span class="token punctuation">(</span>contrain1 @ xs <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"约束1"</span><span class="token punctuation">)</span>
+problem <span class="token operator">+=</span> <span class="token punctuation">(</span>contrain2 @ xs <span class="token operator">&lt;=</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"约束2"</span><span class="token punctuation">)</span>
+problem <span class="token operator">+=</span> <span class="token punctuation">(</span>contrain3 @ xs <span class="token operator">&lt;=</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token string">"约束3"</span><span class="token punctuation">)</span>
 
-if pulp.LpStatus[problem.solve()] == "Optimal":
-    v: pulp.LpVariable
-    for v in problem.variables():
-        print(f"{v.name}={v.varValue}")
-    print(f"max Z={pulp.value(problem.objective)}")
+<span class="token keyword">if</span> pulp<span class="token punctuation">.</span>LpStatus<span class="token punctuation">[</span>problem<span class="token punctuation">.</span>solve<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">"Optimal"</span><span class="token punctuation">:</span>
+    v<span class="token punctuation">:</span> pulp<span class="token punctuation">.</span>LpVariable
+    <span class="token keyword">for</span> v <span class="token keyword">in</span> problem<span class="token punctuation">.</span>variables<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span>f<span class="token string">"{v.name}={v.varValue}"</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>f<span class="token string">"max Z={pulp.value(problem.objective)}"</span><span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>运行后的结果为</p>
-<pre class="line-numbers language-lang-shell"><code class="language-lang-shell">Result - Optimal solution found
+<pre class="line-numbers language-shell"><code class="language-shell">Result - Optimal solution found
 
 Objective value:                410.00000000
 Enumerated nodes:               0
@@ -1269,7 +1269,7 @@ max Z=410.0
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">181.6k</span>
+                        class="white-color">191.3k</span>
             
             
             

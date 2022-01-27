@@ -529,7 +529,7 @@ f(x)=\sum_{i=0}^n y_i\prod_{j\neq i}\frac{x-x_j}{x_i-x_j}</script><h2 id="3-高�
 <p>下面的内容主要参考<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/136700122">博客</a>：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/136700122">https://zhuanlan.zhihu.com/p/136700122</a></p>
 <h3 id="A-一维插值"><a href="#A-一维插值" class="headerlink" title="A. 一维插值"></a>A. 一维插值</h3><p>一维插值指的是自变量是一个标量，我们前面举得例子都是一维插值。</p>
 <p>一维插值主要使用<code>scipy.interpolate.interp1d</code>类实现，其签名如下</p>
-<pre class="line-numbers language-lang-python"><code class="language-lang-python">class scipy.interpolate.interp1d(x, y, kind='linear', axis=- 1, copy=True, bounds_error=None, fill_value=nan, assume_sorted=False)
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">scipy</span><span class="token punctuation">.</span>interpolate<span class="token punctuation">.</span>interp1d<span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">,</span> kind<span class="token operator">=</span><span class="token string">'linear'</span><span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">,</span> copy<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> bounds_error<span class="token operator">=</span>None<span class="token punctuation">,</span> fill_value<span class="token operator">=</span>nan<span class="token punctuation">,</span> assume_sorted<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>其中，我们需要关注的有：</p>
 <ul>
@@ -537,28 +537,28 @@ f(x)=\sum_{i=0}^n y_i\prod_{j\neq i}\frac{x-x_j}{x_i-x_j}</script><h2 id="3-高�
 <li>kind：插值方式，所有可选项为：‘linear’, ‘nearest’, ‘nearest-up’, ‘zero’, ‘slinear’, ‘quadratic’, ‘cubic’, ‘previous’, or ‘next’。默认为线性插值</li>
 </ul>
 <p>注意，该类实现了call方法，因此直接call即可</p>
-<pre class="line-numbers language-lang-python"><code class="language-lang-python">import numpy as np
-import scipy.interpolate as scinterp
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+<span class="token keyword">import</span> scipy<span class="token punctuation">.</span>interpolate <span class="token keyword">as</span> scinterp
 
-import matplotlib.pyplot as plt
+<span class="token keyword">import</span> matplotlib<span class="token punctuation">.</span>pyplot <span class="token keyword">as</span> plt
 
 
-x = np.linspace(0, 3 * np.pi, 11)
-y = np.sin(x)
+x <span class="token operator">=</span> np<span class="token punctuation">.</span>linspace<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">3</span> <span class="token operator">*</span> np<span class="token punctuation">.</span>pi<span class="token punctuation">,</span> <span class="token number">11</span><span class="token punctuation">)</span>
+y <span class="token operator">=</span> np<span class="token punctuation">.</span>sin<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
 
-x_a = np.linspace(0, 3 * np.pi, 1000)
-f = scinterp.interp1d(x, y)
-y_a = f(x_a)
+x_a <span class="token operator">=</span> np<span class="token punctuation">.</span>linspace<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">3</span> <span class="token operator">*</span> np<span class="token punctuation">.</span>pi<span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span>
+f <span class="token operator">=</span> scinterp<span class="token punctuation">.</span>interp1d<span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span>
+y_a <span class="token operator">=</span> f<span class="token punctuation">(</span>x_a<span class="token punctuation">)</span>
 
-print(type(f))
+<span class="token keyword">print</span><span class="token punctuation">(</span>type<span class="token punctuation">(</span>f<span class="token punctuation">)</span><span class="token punctuation">)</span>
 
-plt.plot(x, y)
-plt.plot(x_a, y_a)
-plt.show()
+plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x_a<span class="token punctuation">,</span> y_a<span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="B-二维插值"><a href="#B-二维插值" class="headerlink" title="B. 二维插值"></a>B. 二维插值</h3><p>二维插值指的是自变量是一个具有两个分量的向量。虽然我们前面讲的都是一维插值的方法，其实对于二维插值，只需要对两个分量分别进行插值即可，即双xxx插值，例如双线性插值。</p>
 <p>Python中实现二维插值主要使用<code>scipy.interpolate.interp2d</code>类实现，其签名如下</p>
-<pre class="line-numbers language-lang-python"><code class="language-lang-python">class scipy.interpolate.interp2d(x, y, z, kind='linear', copy=True, bounds_error=False, fill_value=None)
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">scipy</span><span class="token punctuation">.</span>interpolate<span class="token punctuation">.</span>interp2d<span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">,</span> z<span class="token punctuation">,</span> kind<span class="token operator">=</span><span class="token string">'linear'</span><span class="token punctuation">,</span> copy<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> bounds_error<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">,</span> fill_value<span class="token operator">=</span>None<span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>其中，需要关注的参数为：</p>
 <ul>
@@ -581,7 +581,7 @@ plt.show()
 <p>通常而言，线型的选择依靠专业知识（先验知识）和散点图；而参数的计算，若为线性拟合则用最小二乘法，非线性拟合则用Gauss-Newton迭代法。</p>
 <h2 id="1-Python中的拟合"><a href="#1-Python中的拟合" class="headerlink" title="1. Python中的拟合"></a>1. Python中的拟合</h2><p>Python中的拟合主要依靠Numpy、Scipy中的函数</p>
 <h3 id="A-多项式拟合"><a href="#A-多项式拟合" class="headerlink" title="A. 多项式拟合"></a>A. 多项式拟合</h3><p>多项式拟合主要使用Numpy中的<code>polyfit</code>函数，其函数签名如下</p>
-<pre class="line-numbers language-lang-python"><code class="language-lang-python">numpy.polyfit(x, y, deg, rcond=None, full=False, w=None, cov=False)
+<pre class="line-numbers language-python"><code class="language-python">numpy<span class="token punctuation">.</span>polyfit<span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">,</span> deg<span class="token punctuation">,</span> rcond<span class="token operator">=</span>None<span class="token punctuation">,</span> full<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">,</span> w<span class="token operator">=</span>None<span class="token punctuation">,</span> cov<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>其中，我们需要关注的为：</p>
 <ul>
@@ -589,21 +589,21 @@ plt.show()
 <li>deg：拟合的多项式次数</li>
 </ul>
 <p>返回值为Numpy中的ndarray，分比为从高到低次的项的系数</p>
-<pre class="line-numbers language-lang-python"><code class="language-lang-python">import numpy as np
-import matplotlib as mpl
-import matplotlib.pyplot as plt
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+<span class="token keyword">import</span> matplotlib <span class="token keyword">as</span> mpl
+<span class="token keyword">import</span> matplotlib<span class="token punctuation">.</span>pyplot <span class="token keyword">as</span> plt
 
 
-x = np.linspace(0, 2 * np.pi, 100)
-y = 1.5 * x
-y_noise = y + np.array([np.random.randn() for i in range(len(y))])
+x <span class="token operator">=</span> np<span class="token punctuation">.</span>linspace<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">2</span> <span class="token operator">*</span> np<span class="token punctuation">.</span>pi<span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">)</span>
+y <span class="token operator">=</span> <span class="token number">1.5</span> <span class="token operator">*</span> x
+y_noise <span class="token operator">=</span> y <span class="token operator">+</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span>np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>randn<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>len<span class="token punctuation">(</span>y<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
 
-coeff = np.polyfit(x, y=y_noise, deg=1)
+coeff <span class="token operator">=</span> np<span class="token punctuation">.</span>polyfit<span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token operator">=</span>y_noise<span class="token punctuation">,</span> deg<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span>
 
-plt.plot(x, y)
-plt.plot(x, y_noise)
-plt.plot(x, x * coeff[0] + coeff[1])
-plt.show()
+plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">,</span> y_noise<span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">,</span> x <span class="token operator">*</span> coeff<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">+</span> coeff<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220107220729119.png" alt="拟合的结果"></p>
 
@@ -1187,7 +1187,7 @@ plt.show()
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">181.6k</span>
+                        class="white-color">191.3k</span>
             
             
             

@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="基于hexo的个人技术博客搭建 —— Part-3 matery主题下的Hexo博客优化.md, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
+    <meta name="keywords" content="基于hexo的个人技术博客搭建 —— Part 3 matery主题下的Hexo博客优化.md, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
     <meta name="description" content="
 hexo本身只是提供了一个博客的框架，博客网站的美化和优化还是需要靠自己配置主题。本讲将带领读者利用Matery主题对Hexo搭建的博客进行深度优化
 
@@ -22,7 +22,7 @@ hexo本身只是提供了一个博客的框架，博客网站的美化和优化�
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>基于hexo的个人技术博客搭建 —— Part-3 matery主题下的Hexo博客优化.md | JackWang&#39;s Blog</title>
+    <title>基于hexo的个人技术博客搭建 —— Part 3 matery主题下的Hexo博客优化.md | JackWang&#39;s Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -264,7 +264,7 @@ hexo本身只是提供了一个博客的框架，博客网站的美化和优化�
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">基于hexo的个人技术博客搭建 —— Part-3 matery主题下的Hexo博客优化.md</h1>
+                    <h1 class="description center-align post-title">基于hexo的个人技术博客搭建 —— Part 3 matery主题下的Hexo博客优化.md</h1>
                 </div>
             </div>
         </div>
@@ -412,7 +412,7 @@ hexo本身只是提供了一个博客的框架，博客网站的美化和优化�
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-12-10
+                    2022-01-27
                 </div>
                 
 
@@ -469,19 +469,19 @@ hexo本身只是提供了一个博客的框架，博客网站的美化和优化�
 <p>注意，下面的很多教程在<code>Matery</code>的<code>Github</code>上已经有介绍了，因此下面的介绍更多的是关注<code>Matery Github</code>上没有讲到的点</p>
 </blockquote>
 <h3 id="1-安装Matery"><a href="#1-安装Matery" class="headerlink" title="1. 安装Matery"></a>1. 安装Matery</h3><p><code>Matery</code>的<code>Github</code>中的中文说明已经讲过了，在<code>Hexo</code>博客文件夹下的<code>theme</code>文件夹<code>clone</code> 下<code>Matery</code>项目即可</p>
-<pre class="line-numbers language-lang-bash"><code class="language-lang-bash">(base) jack@jack-Alienware-m15-R3:~/project/blog-test$ cd themes/
-(base) jack@jack-Alienware-m15-R3:~/project/blog-test/themes$ git clone https://github.com/blinkfox/hexo-theme-matery.git
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/blog-test$ <span class="token function">cd</span> themes/
+<span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/blog-test/themes$ <span class="token function">git</span> clone https://github.com/blinkfox/hexo-theme-matery.git
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>安装完成之后，我们hexo博客看看效果</p>
-<pre class="line-numbers language-lang-bash"><code class="language-lang-bash">(base) jack@jack-Alienware-m15-R3:~/project/blog-test/themes$ cd ..
-(base) jack@jack-Alienware-m15-R3:~/project/blog-test$ hexo s
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/blog-test/themes$ <span class="token function">cd</span> <span class="token punctuation">..</span>
+<span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/blog-test$ hexo s
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p><strong>发现和之前的博客并没有任何变化</strong>，这是因为我们需要在<code>Hexo</code>的配置文件中指定使用<code>Matery</code>主题</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211115011512753.png" alt="博客没有任何变化"></p>
 <h3 id="2-切换Matery主题"><a href="#2-切换Matery主题" class="headerlink" title="2. 切换Matery主题"></a>2. 切换Matery主题</h3><p><code>vim</code>修改<code>hexo</code>博客根目录下的<code>_config.yml</code>，将<code>theme</code>的值改为 <code>hexo-theme-matery</code>，这样就启用了Matery主题</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211115011735922.png" alt="修改之后的值"></p>
 <p>接下来运行一下博客，就能够看到效果了</p>
-<pre class="line-numbers language-lang-bash"><code class="language-lang-bash">(base) jack@jack-Alienware-m15-R3:~/project/blog-test$ hexo s
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/blog-test$ hexo s
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>可以看到，默认配置就已经非常漂亮了</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211115011929561.png" alt="Matery主题的首页"></p>
@@ -492,27 +492,27 @@ hexo本身只是提供了一个博客的框架，博客网站的美化和优化�
 <h3 id="3-添加缺失的页面"><a href="#3-添加缺失的页面" class="headerlink" title="3. 添加缺失的页面"></a>3. 添加缺失的页面</h3><p>在前面的一章中，我们讲到<code>hexo</code>中一篇博客的源文件是一个<code>.md</code>文件，通过使用<code>hexo generta</code>命令，hexo自动的为我们的博文生成一个网页以及对应的资源文件。而其实在<code>hexo</code>，中一个页面对应的也是一个<code>.md</code>文件，同样我们稍后使用<code>hexo generta</code>来生成新的页面。只不过页面对应的<code>.md</code>文件会和博客的<code>.md</code>存在一些不同</p>
 <p>下面就将以添加<code>关于</code>界面为例，讲解Hexo的页面工作原理的同时带领读者配置<code>Matery</code>的页面</p>
 <h4 id="A-添加关于About页面"><a href="#A-添加关于About页面" class="headerlink" title="A. 添加关于About页面"></a>A. 添加<code>关于About</code>页面</h4><p>我们首先在根目录下使用<code>hexo new page xxx</code>命令来生成一个新的页面。同样为了后续的讲解，我们首先保存下现在的目录结构</p>
-<pre class="line-numbers language-lang-bash"><code class="language-lang-bash">(base) jack@jack-Alienware-m15-R3:~/project/blog-test$ touch before_about.txt
-(base) jack@jack-Alienware-m15-R3:~/project/blog-test$ touch after_about.txt
-(base) jack@jack-Alienware-m15-R3:~/project/blog-test$ tree >> before_about.txt 
-(base) jack@jack-Alienware-m15-R3:~/project/blog-test$ hexo new page "about"
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/blog-test$ <span class="token function">touch</span> before_about.txt
+<span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/blog-test$ <span class="token function">touch</span> after_about.txt
+<span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/blog-test$ tree <span class="token operator">>></span> before_about.txt 
+<span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/blog-test$ hexo new page <span class="token string">"about"</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>接下来我们需要修改刚刚新生成的<code>.md</code>来说明这个是一个页面而非博客，这样稍后生成博客的时候就会生成出来一个新的页面</p>
-<pre class="line-numbers language-lang-bash"><code class="language-lang-bash">(base) jack@jack-Alienware-m15-R3:~/project/blog-test$ vim source/about/index.md
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/blog-test$ vim source/about/index.md
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>将<code>index.md</code>修改为如下内容，当然日期可以按照你自己的来</p>
-<pre class="line-numbers language-lang-markdown"><code class="language-lang-markdown">---
+<pre class="line-numbers language-markdown"><code class="language-markdown"><span class="token hr punctuation">---</span>
 title: about
 date: 2021-11-15 01:37:51
 type: "about"
-layout: "about"
----
+<span class="token title important">layout: "about"
+<span class="token punctuation">---</span></span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211115014047478.png" alt="修改后的index.md"></p>
 <p>接下来我们生成一下添加后的博客，别忘了生成之前<code>clean</code>一下，清除掉之前的博客。同时下面由于要讲解原理，因此生成后我们输出一下生成之后的目录结构</p>
-<pre class="line-numbers language-lang-bash"><code class="language-lang-bash">(base) jack@jack-Alienware-m15-R3:~/project/blog-test$ hexo clean
-(base) jack@jack-Alienware-m15-R3:~/project/blog-test$ hexo gen
-(base) jack@jack-Alienware-m15-R3:~/project/blog-test$ tree >> after_about.txt
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/blog-test$ hexo clean
+<span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/blog-test$ hexo gen
+<span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/blog-test$ tree <span class="token operator">>></span> after_about.txt
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>然后我们运行下博客看看效果</p>
 <p>可以看到，此时点击<code>关于</code>就可以正常显示处页面了，底部则显示出我们的制作的项目</p>
@@ -520,7 +520,7 @@ layout: "about"
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211115014620968.png" alt="关于页面的底部"></p>
 <p>当然，这些信息都是默认的信息，我们稍后是肯定需要修改成我们自己的。不过在这之前，先别着急，我们先了解一下<code>hexo</code>是怎么样新生成一个页面的</p>
 <h4 id="B-Hexo是怎么样生成新的页面的？"><a href="#B-Hexo是怎么样生成新的页面的？" class="headerlink" title="B. Hexo是怎么样生成新的页面的？"></a>B. Hexo是怎么样生成新的页面的？</h4><p>我们利用上面两次输出的目录结构，来看看添加、生成页面之后博客目录结构的变化</p>
-<pre class="line-numbers language-lang-bash"><code class="language-lang-bash">(base) jack@jack-Alienware-m15-R3:~/project/blog-test$ vim -d before_about.txt after_about.txt
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/blog-test$ vim -d before_about.txt after_about.txt
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>首先是发布的博客的<code>public</code>文件夹下多了非常多的东西。除了我们之前添加的第一篇博客外，还多出了<code>about</code>、<code>css</code>、<code>js</code>等一些文件夹</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211115015145727.png" alt="Public文件夹的变化"></p>
@@ -540,19 +540,19 @@ layout: "about"
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211115021145362.png" alt="我们的界面"></p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211115021216163.png" alt="闪烁之狐的网站"></p>
 <p>实际上，这个功能是依靠第三方插件<code>+Matery</code>配置完成的。我们首先下载这个插件，不过注意，我们在前面安装了<code>cnpm</code>，因此使用<code>cnpm</code>安装即可</p>
-<pre class="line-numbers language-lang-bash"><code class="language-lang-bash">(base) jack@jack-Alienware-m15-R3:~/project/blog-test$ cnpm i --save hexo-wordcount
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/blog-test$ cnpm i --save hexo-wordcount
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>安装完成之后，我们还要修改<code>theme</code>文件夹下<code>Matery</code>主题的配置文件来激活插件，<strong>注意是Matey主题的配置文件</strong>。因为页面的样式信息都是Matery负责的。</p>
-<pre class="line-numbers language-lang-bash"><code class="language-lang-bash">(base) jack@jack-Alienware-m15-R3:~/project/blog-test$ vim themes/hexo-theme-matery/_config.yml
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/blog-test$ vim themes/hexo-theme-matery/_config.yml
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>修改为</p>
-<pre class="line-numbers language-lang-yaml"><code class="language-lang-yaml">postInfo:
-  date: true
-  update: false
-  wordCount: true # 设置文章字数统计为 true.
-  totalCount: true # 设置站点文章总字数统计为 true.
-  min2read: true # 阅读时长.
-  readCount: true # 阅读次数.
+<pre class="line-numbers language-yaml"><code class="language-yaml"><span class="token key atrule">postInfo</span><span class="token punctuation">:</span>
+  <span class="token key atrule">date</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
+  <span class="token key atrule">update</span><span class="token punctuation">:</span> <span class="token boolean important">false</span>
+  <span class="token key atrule">wordCount</span><span class="token punctuation">:</span> <span class="token boolean important">true </span><span class="token comment" spellcheck="true"># 设置文章字数统计为 true.</span>
+  <span class="token key atrule">totalCount</span><span class="token punctuation">:</span> <span class="token boolean important">true </span><span class="token comment" spellcheck="true"># 设置站点文章总字数统计为 true.</span>
+  <span class="token key atrule">min2read</span><span class="token punctuation">:</span> <span class="token boolean important">true </span><span class="token comment" spellcheck="true"># 阅读时长.</span>
+  <span class="token key atrule">readCount</span><span class="token punctuation">:</span> <span class="token boolean important">true </span><span class="token comment" spellcheck="true"># 阅读次数.</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211115021824246.png" alt="修改后的_config.yml"></p>
 <p>然后我们同样clean之后generate看看效果</p>
@@ -1098,7 +1098,7 @@ Kinect是非常流行的获取深度、彩色、点云的相机。本文介绍�
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">181.6k</span>
+                        class="white-color">191.3k</span>
             
             
             

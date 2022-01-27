@@ -459,22 +459,22 @@ PyQt5学习笔记 Chapter 0-Introduction： Part 3.第一个Qt程序在Introduct
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211220145356314.png" alt="第一个Qt Gui程序"></p>
 <h1 id="PyQt5学习笔记-Chapter-0-Introduction：-Part-3-第一个Qt程序"><a href="#PyQt5学习笔记-Chapter-0-Introduction：-Part-3-第一个Qt程序" class="headerlink" title="PyQt5学习笔记 Chapter 0-Introduction： Part 3.第一个Qt程序"></a>PyQt5学习笔记 Chapter 0-Introduction： Part 3.第一个Qt程序</h1><p>在Introduction章节中，我们介绍了什么是Qt、PyQt以及Qt中的一些基本概念。本文作为Introduction的终节，展示一个Qt程序。</p>
 <h2 id="1-Qt程序"><a href="#1-Qt程序" class="headerlink" title="1. Qt程序"></a>1. Qt程序</h2><p>上面的Qt GUI程序的代码如下</p>
-<pre class="line-numbers language-lang-python"><code class="language-lang-python">import sys
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> sys
 
-from PyQt5.QtWidgets import QApplication, QMainWindow
+<span class="token keyword">from</span> PyQt5<span class="token punctuation">.</span>QtWidgets <span class="token keyword">import</span> QApplication<span class="token punctuation">,</span> QMainWindow
 
 
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">"__main__"</span><span class="token punctuation">:</span>
+    app <span class="token operator">=</span> QApplication<span class="token punctuation">(</span>sys<span class="token punctuation">.</span>argv<span class="token punctuation">)</span>
 
-    w = QMainWindow()
-    w.resize(300, 150)
-    w.move(300, 300)
-    w.setWindowTitle("第一个Qt应用")
-    w.show()
+    w <span class="token operator">=</span> QMainWindow<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    w<span class="token punctuation">.</span>resize<span class="token punctuation">(</span><span class="token number">300</span><span class="token punctuation">,</span> <span class="token number">150</span><span class="token punctuation">)</span>
+    w<span class="token punctuation">.</span>move<span class="token punctuation">(</span><span class="token number">300</span><span class="token punctuation">,</span> <span class="token number">300</span><span class="token punctuation">)</span>
+    w<span class="token punctuation">.</span>setWindowTitle<span class="token punctuation">(</span><span class="token string">"第一个Qt应用"</span><span class="token punctuation">)</span>
+    w<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span>
 
-    # 运行主循环，循环扫描窗口上的事件，并分发给对应的回调函数
-    sys.exit(app.exec_())
+    <span class="token comment" spellcheck="true"># 运行主循环，循环扫描窗口上的事件，并分发给对应的回调函数</span>
+    sys<span class="token punctuation">.</span>exit<span class="token punctuation">(</span>app<span class="token punctuation">.</span>exec_<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>我们运行之后就会弹出来一个窗口。</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211220145739135.png" alt="弹出来的窗口"></p>
@@ -1036,7 +1036,7 @@ if __name__ == "__main__":
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">181.6k</span>
+                        class="white-color">191.3k</span>
             
             
             

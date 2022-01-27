@@ -472,57 +472,57 @@ This blog has been finished 2 years ago, in 2019, and was uploaded to CSDN. Now,
 </ul>
 <h2 id="1-List-Comprehension"><a href="#1-List-Comprehension" class="headerlink" title="1. List Comprehension"></a>1. List Comprehension</h2><p>列表推导式指的是可以用于生成列表的推导式</p>
 <h3 id="A-Simple-List-Comprehension"><a href="#A-Simple-List-Comprehension" class="headerlink" title="A. Simple List Comprehension"></a>A. Simple List Comprehension</h3><p>简单的列表推导式的语法如下,这样我们就能够快捷的创建列表</p>
-<pre class="line-numbers language-lang-python"><code class="language-lang-python">[ 表达式 for 变量 in 可迭代对象 ]
+<pre class="line-numbers language-python"><code class="language-python"><span class="token punctuation">[</span> 表达式 <span class="token keyword">for</span> 变量 <span class="token keyword">in</span> 可迭代对象 <span class="token punctuation">]</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>示例如下</p>
-<pre class="line-numbers language-lang-python"><code class="language-lang-python">>>> List1=[x for x in 'abcd']
->>> List2=[y**2 for y in range(6)]
->>> List3=[i+1 for i in [-1,-2,-3,-4]]
->>> print(List1)
->>> print(List2)
->>> print(List3)
-['a', 'b', 'c', 'd']
-[0, 1, 4, 9, 16, 25]
-[0, -1, -2, -3]
+<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">>></span><span class="token operator">></span> List1<span class="token operator">=</span><span class="token punctuation">[</span>x <span class="token keyword">for</span> x <span class="token keyword">in</span> <span class="token string">'abcd'</span><span class="token punctuation">]</span>
+<span class="token operator">>></span><span class="token operator">></span> List2<span class="token operator">=</span><span class="token punctuation">[</span>y<span class="token operator">**</span><span class="token number">2</span> <span class="token keyword">for</span> y <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+<span class="token operator">>></span><span class="token operator">></span> List3<span class="token operator">=</span><span class="token punctuation">[</span>i<span class="token operator">+</span><span class="token number">1</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token operator">>></span><span class="token operator">></span> <span class="token keyword">print</span><span class="token punctuation">(</span>List1<span class="token punctuation">)</span>
+<span class="token operator">>></span><span class="token operator">></span> <span class="token keyword">print</span><span class="token punctuation">(</span>List2<span class="token punctuation">)</span>
+<span class="token operator">>></span><span class="token operator">></span> <span class="token keyword">print</span><span class="token punctuation">(</span>List3<span class="token punctuation">)</span>
+<span class="token punctuation">[</span><span class="token string">'a'</span><span class="token punctuation">,</span> <span class="token string">'b'</span><span class="token punctuation">,</span> <span class="token string">'c'</span><span class="token punctuation">,</span> <span class="token string">'d'</span><span class="token punctuation">]</span>
+<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">,</span> <span class="token number">16</span><span class="token punctuation">,</span> <span class="token number">25</span><span class="token punctuation">]</span>
+<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">3</span><span class="token punctuation">]</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>运行结果如下(<code>In [1]</code>中的内容可以不管)</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/20201221215759612.png" alt="简单的列表推导式"></p>
 <h3 id="B-List-Comprehension-with-conditions"><a href="#B-List-Comprehension-with-conditions" class="headerlink" title="B. List Comprehension with conditions"></a>B. List Comprehension with conditions</h3><p>上面我们创建了简单的推导式,实际上还可以创建带条件的推导式,这样我们能够创建更复杂的表达式</p>
 <p>带条件的列表推导式如下</p>
-<pre class="line-numbers language-lang-python"><code class="language-lang-python">[ 表达式 for 变量 in 可迭代对象 if 条件 ]
+<pre class="line-numbers language-python"><code class="language-python"><span class="token punctuation">[</span> 表达式 <span class="token keyword">for</span> 变量 <span class="token keyword">in</span> 可迭代对象 <span class="token keyword">if</span> 条件 <span class="token punctuation">]</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>例子如下</p>
-<pre class="line-numbers language-lang-python"><code class="language-lang-python">>>>List4=[x for x in range(6) if x%2==0]
->>>List5=[i**2 for i in range(10) if i**2 in range(10)]
->>>print(List4)
->>>print(List5)
-[0, 2, 4]
-[0, 1, 4, 9]
+<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">>></span><span class="token operator">></span>List4<span class="token operator">=</span><span class="token punctuation">[</span>x <span class="token keyword">for</span> x <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">)</span> <span class="token keyword">if</span> x<span class="token operator">%</span><span class="token number">2</span><span class="token operator">==</span><span class="token number">0</span><span class="token punctuation">]</span>
+<span class="token operator">>></span><span class="token operator">></span>List5<span class="token operator">=</span><span class="token punctuation">[</span>i<span class="token operator">**</span><span class="token number">2</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span> <span class="token keyword">if</span> i<span class="token operator">**</span><span class="token number">2</span> <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+<span class="token operator">>></span><span class="token operator">></span><span class="token keyword">print</span><span class="token punctuation">(</span>List4<span class="token punctuation">)</span>
+<span class="token operator">>></span><span class="token operator">></span><span class="token keyword">print</span><span class="token punctuation">(</span>List5<span class="token punctuation">)</span>
+<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">]</span>
+<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">]</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/20201221215809455.png" alt="带条件的列表推导式"></p>
 <h3 id="C-Multi-variable-Comprehension"><a href="#C-Multi-variable-Comprehension" class="headerlink" title="C. Multi-variable Comprehension"></a>C. Multi-variable Comprehension</h3><p>我们前面的列表推导式实际上都只有一个变量,但是我们其实可以使用多变量的列表推导式</p>
 <p>具体时候类似于两个for循环嵌套,因此又可以称为嵌套列表式/多变量推导式</p>
 <p>以双变量和三变量为例的列表推导式如下, 按照这样的规则实际上可以扩展到n个变量的嵌套列表推导式</p>
 <p><strong>双变量列表推导式</strong></p>
-<pre class="line-numbers language-lang-python"><code class="language-lang-python">[ 表达式(可含变量1和变量2) for 变量1 in 可迭代对象1 for 变量2 in 可迭代对象2 ]
+<pre class="line-numbers language-python"><code class="language-python"><span class="token punctuation">[</span> 表达式<span class="token punctuation">(</span>可含变量<span class="token number">1</span>和变量<span class="token number">2</span><span class="token punctuation">)</span> <span class="token keyword">for</span> 变量<span class="token number">1</span> <span class="token keyword">in</span> 可迭代对象<span class="token number">1</span> <span class="token keyword">for</span> 变量<span class="token number">2</span> <span class="token keyword">in</span> 可迭代对象<span class="token number">2</span> <span class="token punctuation">]</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><strong>三变量列表推导式</strong></p>
-<pre class="line-numbers language-lang-python"><code class="language-lang-python">[ 表达式(可含变量1和变量及变量3) for 变量1 in 可迭代对象1 for 变量2 in 可迭代对象2 for 变量3 in 可迭代兑现3]
+<pre class="line-numbers language-python"><code class="language-python"><span class="token punctuation">[</span> 表达式<span class="token punctuation">(</span>可含变量<span class="token number">1</span>和变量及变量<span class="token number">3</span><span class="token punctuation">)</span> <span class="token keyword">for</span> 变量<span class="token number">1</span> <span class="token keyword">in</span> 可迭代对象<span class="token number">1</span> <span class="token keyword">for</span> 变量<span class="token number">2</span> <span class="token keyword">in</span> 可迭代对象<span class="token number">2</span> <span class="token keyword">for</span> 变量<span class="token number">3</span> <span class="token keyword">in</span> 可迭代兑现<span class="token number">3</span><span class="token punctuation">]</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>例子如下</p>
-<pre class="line-numbers language-lang-python"><code class="language-lang-python">>>> List6=[(x,y) for x in range(-2,2) for y in [0,1]]
->>> List7=[x+y+z for x in range(-2,2) for y in range(3) for z in [0,1]]
->>> print(List6)
->>> print(List7)
-[(-2, 0), (-2, 1), (-1, 0), (-1, 1), (0, 0), (0, 1), (1, 0), (1, 1)]
-[-2, -1, -1, 0, 0, 1, -1, 0, 0, 1, 1, 2, 0, 1, 1, 2, 2, 3, 1, 2, 2, 3, 3, 4]
+<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">>></span><span class="token operator">></span> List6<span class="token operator">=</span><span class="token punctuation">[</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">)</span> <span class="token keyword">for</span> x <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token keyword">for</span> y <span class="token keyword">in</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token operator">>></span><span class="token operator">></span> List7<span class="token operator">=</span><span class="token punctuation">[</span>x<span class="token operator">+</span>y<span class="token operator">+</span>z <span class="token keyword">for</span> x <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token keyword">for</span> y <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span> <span class="token keyword">for</span> z <span class="token keyword">in</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token operator">>></span><span class="token operator">></span> <span class="token keyword">print</span><span class="token punctuation">(</span>List6<span class="token punctuation">)</span>
+<span class="token operator">>></span><span class="token operator">></span> <span class="token keyword">print</span><span class="token punctuation">(</span>List7<span class="token punctuation">)</span>
+<span class="token punctuation">[</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+<span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">]</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>运行结果如下</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/20201221215820109.png" alt="多变量推导式"></p>
 <h3 id="C-Complex-Comprehension"><a href="#C-Complex-Comprehension" class="headerlink" title="C. Complex Comprehension"></a>C. Complex Comprehension</h3><p>实际上我们能够结合带条件的列表推导式和嵌套列表推导式,由此可以有一些非常Pythonic的操作</p>
-<pre class="line-numbers language-lang-python"><code class="language-lang-python">>>>List8=[(x,y) for x in range(-20,20,1) for y in range(-20,20,1) if y==x**2 ]
->>>print(List8)
-[(-4, 16), (-3, 9), (-2, 4), (-1, 1), (0, 0), (1, 1), (2, 4), (3, 9), (4, 16)]
+<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">>></span><span class="token operator">></span>List8<span class="token operator">=</span><span class="token punctuation">[</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">)</span> <span class="token keyword">for</span> x <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">20</span><span class="token punctuation">,</span><span class="token number">20</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token keyword">for</span> y <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">20</span><span class="token punctuation">,</span><span class="token number">20</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token keyword">if</span> y<span class="token operator">==</span>x<span class="token operator">**</span><span class="token number">2</span> <span class="token punctuation">]</span>
+<span class="token operator">>></span><span class="token operator">></span><span class="token keyword">print</span><span class="token punctuation">(</span>List8<span class="token punctuation">)</span>
+<span class="token punctuation">[</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">16</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">16</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>上面的代码就是求<code>y=x**2</code>的曲线上的点的代码</p>
 <p>其实后续结合Numpy,Pandas,Matplotlib等诸多第三方库还可以进行绘图,</p>
@@ -531,67 +531,67 @@ This blog has been finished 2 years ago, in 2019, and was uploaded to CSDN. Now,
 <h2 id="2-Dictionary-Comprehension"><a href="#2-Dictionary-Comprehension" class="headerlink" title="2. Dictionary Comprehension"></a>2. Dictionary Comprehension</h2><p>类似于列表推导式, 字典推导式也可以结合条件语句以及多变量嵌套</p>
 <h3 id="A-Simple-Dictionary-Comprehension"><a href="#A-Simple-Dictionary-Comprehension" class="headerlink" title="A. Simple Dictionary Comprehension"></a>A. Simple Dictionary Comprehension</h3><p>简单的字典推导式只使用一个变量, 因此键和键值的表达式中都需要有变量</p>
 <p>声明语句如下</p>
-<pre class="line-numbers language-lang-python"><code class="language-lang-python">{ 键表达式 : 值表达式 for 表达式 in 可迭代对象 }
+<pre class="line-numbers language-python"><code class="language-python"><span class="token punctuation">{</span> 键表达式 <span class="token punctuation">:</span> 值表达式 <span class="token keyword">for</span> 表达式 <span class="token keyword">in</span> 可迭代对象 <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>举例如下</p>
-<pre class="line-numbers language-lang-python"><code class="language-lang-python">>>>Dict1={i : i**2 for i in range(6)}
->>>print(Dict1)
-{0: 0, 1: 1, 2: 4, 3: 9, 4: 16, 5: 25}
+<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">>></span><span class="token operator">></span>Dict1<span class="token operator">=</span><span class="token punctuation">{</span>i <span class="token punctuation">:</span> i<span class="token operator">**</span><span class="token number">2</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">)</span><span class="token punctuation">}</span>
+<span class="token operator">>></span><span class="token operator">></span><span class="token keyword">print</span><span class="token punctuation">(</span>Dict1<span class="token punctuation">)</span>
+<span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">:</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">:</span> <span class="token number">9</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">:</span> <span class="token number">16</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">:</span> <span class="token number">25</span><span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/20201221215830693.png" alt="字典推导式"></p>
 <h3 id="B-Multi-Variable-Dictionary-Comprehension"><a href="#B-Multi-Variable-Dictionary-Comprehension" class="headerlink" title="B. Multi-Variable Dictionary Comprehension"></a>B. Multi-Variable Dictionary Comprehension</h3><p>实际上一般在创建字典的时候,我们使用的键和键值是不一样的,因此我们更常见的做法是使用嵌套的字典推导式/多变量字典推导式, 即使用多个变量分别作为键和值来进行循环,这样来创建不同的键值对</p>
-<pre class="line-numbers language-lang-python"><code class="language-lang-python">{ 键表达式 : 值表达式 for 变量1 in 可迭代对象1 for 变量2 in 可迭代对象2 }
+<pre class="line-numbers language-python"><code class="language-python"><span class="token punctuation">{</span> 键表达式 <span class="token punctuation">:</span> 值表达式 <span class="token keyword">for</span> 变量<span class="token number">1</span> <span class="token keyword">in</span> 可迭代对象<span class="token number">1</span> <span class="token keyword">for</span> 变量<span class="token number">2</span> <span class="token keyword">in</span> 可迭代对象<span class="token number">2</span> <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>示例如下:</p>
-<pre class="line-numbers language-lang-python"><code class="language-lang-python">Dict1={letter : i for i in range(6) for letter in "abcdef"}
+<pre class="line-numbers language-python"><code class="language-python">Dict1<span class="token operator">=</span><span class="token punctuation">{</span>letter <span class="token punctuation">:</span> i <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">)</span> <span class="token keyword">for</span> letter <span class="token keyword">in</span> <span class="token string">"abcdef"</span><span class="token punctuation">}</span>
 Dict1
->>>
-{'a': 5, 'b': 5, 'c': 5, 'd': 5, 'e': 5, 'f': 5}
+<span class="token operator">>></span><span class="token operator">></span>
+<span class="token punctuation">{</span><span class="token string">'a'</span><span class="token punctuation">:</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token string">'b'</span><span class="token punctuation">:</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token string">'c'</span><span class="token punctuation">:</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token string">'d'</span><span class="token punctuation">:</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token string">'e'</span><span class="token punctuation">:</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token string">'f'</span><span class="token punctuation">:</span> <span class="token number">5</span><span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p><img src="https://img-blog.csdnimg.cn/20201221215840522.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDg4MjQy,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
 <h3 id="C-Dictionary-Comprehension-with-conditions"><a href="#C-Dictionary-Comprehension-with-conditions" class="headerlink" title="C. Dictionary Comprehension with conditions"></a>C. Dictionary Comprehension with conditions</h3><p>其实和嵌套的字典推导式一样,略</p>
 <h3 id="D-Complex-Dictionary-Comprehension"><a href="#D-Complex-Dictionary-Comprehension" class="headerlink" title="D. Complex Dictionary Comprehension"></a>D. Complex Dictionary Comprehension</h3><p>复杂字典推导式能够实现各种骚气的功能</p>
 <p>具体就不细说了,我下面给一个例子,更多的使用还需要大家自己开发</p>
-<pre class="line-numbers language-lang-python"><code class="language-lang-python">>>> Sentece='This is a sentence waiting to be count that how many times does letters occur in this sentence'
->>> Dict2={letter : Sentece.lower().count(letter) for letter in list('abcdefghijklmnopqrstuvwxyz') }
->>> import pprint
->>> pprint.print(Dict2)
-{'a': 4,
- 'b': 1,
- 'c': 5,
- 'd': 1,
- 'e': 11,
- 'f': 0,
- 'g': 1,
- 'h': 4,
- 'i': 7,
- 'j': 0,
- 'k': 0,
- 'l': 1,
- 'm': 2,
- 'n': 8,
- 'o': 5,
- 'p': 0,
- 'q': 0,
- 'r': 2,
- 's': 8,
- 't': 12,
- 'u': 2,
- 'v': 0,
- 'w': 2,
- 'x': 0,
- 'y': 1,
- 'z': 0}
+<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">>></span><span class="token operator">></span> Sentece<span class="token operator">=</span><span class="token string">'This is a sentence waiting to be count that how many times does letters occur in this sentence'</span>
+<span class="token operator">>></span><span class="token operator">></span> Dict2<span class="token operator">=</span><span class="token punctuation">{</span>letter <span class="token punctuation">:</span> Sentece<span class="token punctuation">.</span>lower<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>count<span class="token punctuation">(</span>letter<span class="token punctuation">)</span> <span class="token keyword">for</span> letter <span class="token keyword">in</span> list<span class="token punctuation">(</span><span class="token string">'abcdefghijklmnopqrstuvwxyz'</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
+<span class="token operator">>></span><span class="token operator">></span> <span class="token keyword">import</span> pprint
+<span class="token operator">>></span><span class="token operator">></span> pprint<span class="token punctuation">.</span><span class="token keyword">print</span><span class="token punctuation">(</span>Dict2<span class="token punctuation">)</span>
+<span class="token punctuation">{</span><span class="token string">'a'</span><span class="token punctuation">:</span> <span class="token number">4</span><span class="token punctuation">,</span>
+ <span class="token string">'b'</span><span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+ <span class="token string">'c'</span><span class="token punctuation">:</span> <span class="token number">5</span><span class="token punctuation">,</span>
+ <span class="token string">'d'</span><span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+ <span class="token string">'e'</span><span class="token punctuation">:</span> <span class="token number">11</span><span class="token punctuation">,</span>
+ <span class="token string">'f'</span><span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+ <span class="token string">'g'</span><span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+ <span class="token string">'h'</span><span class="token punctuation">:</span> <span class="token number">4</span><span class="token punctuation">,</span>
+ <span class="token string">'i'</span><span class="token punctuation">:</span> <span class="token number">7</span><span class="token punctuation">,</span>
+ <span class="token string">'j'</span><span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+ <span class="token string">'k'</span><span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+ <span class="token string">'l'</span><span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+ <span class="token string">'m'</span><span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+ <span class="token string">'n'</span><span class="token punctuation">:</span> <span class="token number">8</span><span class="token punctuation">,</span>
+ <span class="token string">'o'</span><span class="token punctuation">:</span> <span class="token number">5</span><span class="token punctuation">,</span>
+ <span class="token string">'p'</span><span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+ <span class="token string">'q'</span><span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+ <span class="token string">'r'</span><span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+ <span class="token string">'s'</span><span class="token punctuation">:</span> <span class="token number">8</span><span class="token punctuation">,</span>
+ <span class="token string">'t'</span><span class="token punctuation">:</span> <span class="token number">12</span><span class="token punctuation">,</span>
+ <span class="token string">'u'</span><span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+ <span class="token string">'v'</span><span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+ <span class="token string">'w'</span><span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+ <span class="token string">'x'</span><span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+ <span class="token string">'y'</span><span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+ <span class="token string">'z'</span><span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>这个例子的作用就是查询这一句话中26个字母出现的字数,可以看到在C/C++中需要写很多行代码才能实现的功能在Python中只需要一行就能结束</p>
 <h2 id="3-集合推导式"><a href="#3-集合推导式" class="headerlink" title="3. 集合推导式"></a>3. 集合推导式</h2><p>集合推导式和列表推导是一样的,三种用法都一样,就不赘述了</p>
-<pre class="line-numbers language-lang-python"><code class="language-lang-python">{ 表达式 for 表达式 in 可迭代变量}
+<pre class="line-numbers language-python"><code class="language-python"><span class="token punctuation">{</span> 表达式 <span class="token keyword">for</span> 表达式 <span class="token keyword">in</span> 可迭代变量<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>例子如下:</p>
-<pre class="line-numbers language-lang-python"><code class="language-lang-python">Set1={x for x in range(6)}
+<pre class="line-numbers language-python"><code class="language-python">Set1<span class="token operator">=</span><span class="token punctuation">{</span>x <span class="token keyword">for</span> x <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">)</span><span class="token punctuation">}</span>
 Set1
->>>
-{0, 1, 2, 3, 4, 5}
+<span class="token operator">>></span><span class="token operator">></span>
+<span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
                 
@@ -1143,7 +1143,7 @@ Set1
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">181.6k</span>
+                        class="white-color">191.3k</span>
             
             
             

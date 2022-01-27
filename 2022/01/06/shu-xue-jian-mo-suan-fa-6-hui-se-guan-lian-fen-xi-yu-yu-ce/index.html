@@ -610,50 +610,50 @@ sign(\frac{\sigma_i}{\sigma_n})=-sign(\frac{\sigma_j}{\sigma_n}), & 则X_i和X_j
 </li>
 </ol>
 <h3 id="C-灰色关联度计算代码"><a href="#C-灰色关联度计算代码" class="headerlink" title="C. 灰色关联度计算代码"></a>C. 灰色关联度计算代码</h3><p>Python实现的代码如下：</p>
-<pre class="line-numbers language-lang-python"><code class="language-lang-python">from typing import *
-from pathlib import Path
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">from</span> typing <span class="token keyword">import</span> <span class="token operator">*</span>
+<span class="token keyword">from</span> pathlib <span class="token keyword">import</span> Path
 
-import numpy as np
-from numpy.lib.function_base import iterable
-import pandas as pd
+<span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+<span class="token keyword">from</span> numpy<span class="token punctuation">.</span>lib<span class="token punctuation">.</span>function_base <span class="token keyword">import</span> iterable
+<span class="token keyword">import</span> pandas <span class="token keyword">as</span> pd
 
 
-class GrayRationalAnalysis(object):
-    def __init__(self, df: pd.DataFrame, reference_vector: Union[int, np.ndarray]) -> None:
-        super().__init__()
-        self.df = df
-        self.reference_vector = reference_vector
-        self.indices = df.columns
+<span class="token keyword">class</span> <span class="token class-name">GrayRationalAnalysis</span><span class="token punctuation">(</span>object<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> df<span class="token punctuation">:</span> pd<span class="token punctuation">.</span>DataFrame<span class="token punctuation">,</span> reference_vector<span class="token punctuation">:</span> Union<span class="token punctuation">[</span>int<span class="token punctuation">,</span> np<span class="token punctuation">.</span>ndarray<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> None<span class="token punctuation">:</span>
+        super<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>df <span class="token operator">=</span> df
+        self<span class="token punctuation">.</span>reference_vector <span class="token operator">=</span> reference_vector
+        self<span class="token punctuation">.</span>indices <span class="token operator">=</span> df<span class="token punctuation">.</span>columns
 
-    def run(self, rho=0.5):
-        refer_table = self.df.subtract(self.reference_vector, axis=1).abs()
-        min_value, max_value = refer_table.min().min(), refer_table.max().max()
+    <span class="token keyword">def</span> <span class="token function">run</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> rho<span class="token operator">=</span><span class="token number">0.5</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        refer_table <span class="token operator">=</span> self<span class="token punctuation">.</span>df<span class="token punctuation">.</span>subtract<span class="token punctuation">(</span>self<span class="token punctuation">.</span>reference_vector<span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">.</span>abs<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        min_value<span class="token punctuation">,</span> max_value <span class="token operator">=</span> refer_table<span class="token punctuation">.</span>min<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>min<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> refer_table<span class="token punctuation">.</span>max<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>max<span class="token punctuation">(</span><span class="token punctuation">)</span>
 
-        correlation_table: pd.DataFrame = (min_value + rho * max_value) / (refer_table + rho * max_value)
-        print(correlation_table.sum(axis=1)/self.df.shape[1])
+        correlation_table<span class="token punctuation">:</span> pd<span class="token punctuation">.</span>DataFrame <span class="token operator">=</span> <span class="token punctuation">(</span>min_value <span class="token operator">+</span> rho <span class="token operator">*</span> max_value<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token punctuation">(</span>refer_table <span class="token operator">+</span> rho <span class="token operator">*</span> max_value<span class="token punctuation">)</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span>correlation_table<span class="token punctuation">.</span>sum<span class="token punctuation">(</span>axis<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">/</span>self<span class="token punctuation">.</span>df<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
 
 
     @staticmethod
-    def build_from_csv(csv_path: Union[str, Path], reference_vector: Union[int, np.ndarray]=9) -> 'GrayRationalAnalysis':
-        """
+    <span class="token keyword">def</span> <span class="token function">build_from_csv</span><span class="token punctuation">(</span>csv_path<span class="token punctuation">:</span> Union<span class="token punctuation">[</span>str<span class="token punctuation">,</span> Path<span class="token punctuation">]</span><span class="token punctuation">,</span> reference_vector<span class="token punctuation">:</span> Union<span class="token punctuation">[</span>int<span class="token punctuation">,</span> np<span class="token punctuation">.</span>ndarray<span class="token punctuation">]</span><span class="token operator">=</span><span class="token number">9</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token string">'GrayRationalAnalysis'</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">"""
         Notes:
             build_from_csv用于从CSV文件中读取数据并构建灰色分析对象
-        """
-        csv_path = Path(csv_path) if isinstance(csv_path, str) else csv_path
-        df = pd.read_csv(csv_path, header=0, index_col=0)
+        """</span>
+        csv_path <span class="token operator">=</span> Path<span class="token punctuation">(</span>csv_path<span class="token punctuation">)</span> <span class="token keyword">if</span> isinstance<span class="token punctuation">(</span>csv_path<span class="token punctuation">,</span> str<span class="token punctuation">)</span> <span class="token keyword">else</span> csv_path
+        df <span class="token operator">=</span> pd<span class="token punctuation">.</span>read_csv<span class="token punctuation">(</span>csv_path<span class="token punctuation">,</span> header<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span> index_col<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span>
 
-        if isinstance(reference_vector, int):
-            reference_vector: np.ndarray = np.full(df.shape[1], fill_value=reference_vector)
-        elif iterable(reference_vector):
-            reference_vector = np.array(reference_vector)
-            assert df.shape[1] == len(reference_vector), f"维度不匹配"
+        <span class="token keyword">if</span> isinstance<span class="token punctuation">(</span>reference_vector<span class="token punctuation">,</span> int<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            reference_vector<span class="token punctuation">:</span> np<span class="token punctuation">.</span>ndarray <span class="token operator">=</span> np<span class="token punctuation">.</span>full<span class="token punctuation">(</span>df<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> fill_value<span class="token operator">=</span>reference_vector<span class="token punctuation">)</span>
+        <span class="token keyword">elif</span> iterable<span class="token punctuation">(</span>reference_vector<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            reference_vector <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span>reference_vector<span class="token punctuation">)</span>
+            <span class="token keyword">assert</span> df<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">==</span> len<span class="token punctuation">(</span>reference_vector<span class="token punctuation">)</span><span class="token punctuation">,</span> f<span class="token string">"维度不匹配"</span>
 
-        return GrayRationalAnalysis(df=df, reference_vector=reference_vector)
+        <span class="token keyword">return</span> GrayRationalAnalysis<span class="token punctuation">(</span>df<span class="token operator">=</span>df<span class="token punctuation">,</span> reference_vector<span class="token operator">=</span>reference_vector<span class="token punctuation">)</span>
 
 
 
-if __name__ == "__main__":
-    gra = GrayRationalAnalysis.build_from_csv(Path(__file__).resolve().parent.joinpath("./test.csv"), reference_vector=[9,9,9,9,8,9,9]).run()
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">"__main__"</span><span class="token punctuation">:</span>
+    gra <span class="token operator">=</span> GrayRationalAnalysis<span class="token punctuation">.</span>build_from_csv<span class="token punctuation">(</span>Path<span class="token punctuation">(</span>__file__<span class="token punctuation">)</span><span class="token punctuation">.</span>resolve<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>parent<span class="token punctuation">.</span>joinpath<span class="token punctuation">(</span><span class="token string">"./test.csv"</span><span class="token punctuation">)</span><span class="token punctuation">,</span> reference_vector<span class="token operator">=</span><span class="token punctuation">[</span><span class="token number">9</span><span class="token punctuation">,</span><span class="token number">9</span><span class="token punctuation">,</span><span class="token number">9</span><span class="token punctuation">,</span><span class="token number">9</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">,</span><span class="token number">9</span><span class="token punctuation">,</span><span class="token number">9</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">.</span>run<span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="4-灰色生成数列"><a href="#4-灰色生成数列" class="headerlink" title="4. 灰色生成数列"></a>4. 灰色生成数列</h2><p>灰色系统理论认为，对于一个系统而言，尽管客观表象复杂，但总是有整体功能的，因此必然蕴含某种内在规律。关键在于如何选择适当的方式去挖掘和利用它。<strong>灰色系统是通过对原始数据的整理来寻求其变化规律的</strong>， 这是一种就数据寻求数据的现实规律的途径，即为灰色序列的生成。<strong>一切灰色序列都能通过某种生成弱化其随机性，显现其规律性</strong>。数据生成的常用方式：</p>
 <ul>
@@ -807,131 +807,131 @@ x^{(0)}(k+1)=x^{(1)}(k+1)-x^{(1)}(k),\qquad k=1,2,\cdots,n-1</script></li>
 </li>
 </ol>
 <h2 id="7-灰色预测Python求解"><a href="#7-灰色预测Python求解" class="headerlink" title="7. 灰色预测Python求解"></a>7. 灰色预测Python求解</h2><p>基于Numpy和Pandas实现的灰色预测模型代码如下</p>
-<h3 id="A-代码"><a href="#A-代码" class="headerlink" title="A. 代码"></a>A. 代码</h3><pre class="line-numbers language-lang-python"><code class="language-lang-python">from pathlib import Path
-import re
-from typing import Union
+<h3 id="A-代码"><a href="#A-代码" class="headerlink" title="A. 代码"></a>A. 代码</h3><pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">from</span> pathlib <span class="token keyword">import</span> Path
+<span class="token keyword">import</span> re
+<span class="token keyword">from</span> typing <span class="token keyword">import</span> Union
 
-import numpy as np
-import pandas as pd
-import scipy.stats as scist
-
-
-
-class GrayForcast(object):
-    def __init__(self, series: Union[pd.DataFrame, pd.Series]) -> None:
-        super().__init__()
-        self.index: pd.Index = series.index
-        self.x0 = series.to_numpy()
-
-    def train(self, verbose: bool = True):
-        # 计算级比
-        right_moved: np.ndarray = np.array([0, *(self.x0[:-1])])
-        self.lambdas: np.ndarray = right_moved / self.x0
-
-        # 级比检验
-        n = len(self.x0)
-        assert (l:=(np.exp(-2/n) < self.lambdas[1:]) & (self.lambdas[1:] < np.exp(2/n))).all(), f"级比检验未通过:{l}, 其中第{list(np.where(l==False)[0])}位:{self.x0[1:][~l]} 出错，数据不适合直接进行灰色预测"
-        if verbose:
-            print("级比检验通过")
-
-        # GM(1,1)建模
-        # 一次累加
-        self.x1 = np.cumsum(self.x0)
-
-        # 构建B和Y矩阵
-        Y = self.x0[1:].reshape(-1, 1)
-        right_moved = np.array([*(self.x1[:-1])])
-        left_moved = np.array([*(self.x1[1:])])
-        B = np.vstack(tup=(-1 * (left_moved + right_moved) / 2, np.ones_like(right_moved))).T
-
-        # 线性回归
-        self.u = np.linalg.inv(B.T @ B) @ B.T @ Y
-
-        # 模型检验
-        x0_pred = self.predict(items=7)
-
-        # 残差检验
-        relative_residual = np.abs((self.x0 - x0_pred) / self.x0)
-        if (l:= (relative_residual < 0.1)).all():
-            print("残差检验通过，所有残差小于0.1，达到高精度")
-        else:
-            if (l:= (relative_residual < 0.2)).all():
-                print("残差检验通过，所有残差小于0.2，达到一般精度要求")
-            else:
-                assert False, f"残差检验未通过，第{np.where(l==False)[0]}位:{relative_residual[~l]}大于0.2"
-
-        # 级比检验
-        rho = 1- (1 - self.u[0, 0] * 0.5) / (1 + self.u[0, 0] * 0.5) * self.lambdas
-        if (l:= (rho[1:] < 0.1)).all():
-            print("级比检验通过，所有级比小于0.1，达到高精度")
-        else:
-            if (l:= (rho[1:] < 0.2)).all():
-                print("级比检验通过，所有级比小于0.2，达到一般精度要求")
-            else:
-                assert False, f"级比检验未通过，第{np.where(l==False)[0]}位:{rho[1:][~l]}大于0.2"
-        rho[0] = np.nan
-
-        if verbose:
-            df = np.vstack(tup=(self.x0, x0_pred, self.x0-x0_pred, relative_residual*100, rho))
-            df = pd.DataFrame(df.T, index=self.index, columns=["原始值","预测值","残差","相对残差(%)","级比偏差"])
-            print(df)
+<span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+<span class="token keyword">import</span> pandas <span class="token keyword">as</span> pd
+<span class="token keyword">import</span> scipy<span class="token punctuation">.</span>stats <span class="token keyword">as</span> scist
 
 
 
-    def predict(self, items: int) -> np.ndarray:
-        a, b = self.u[0, 0], self.u[1,0]
-        def x1_kp1(k: int):
-            if k == 0:
-                return self.x0[0]
-            else:
-                return (self.x0[0] - b/a) * np.exp(-a * k) + b/a
-        x1_pred = np.array([x1_kp1(i) for i in range(items)])
-        right_moved = np.array([0, *(x1_pred[:-1])])
-        x0_pred = x1_pred - right_moved
-        return x0_pred
+<span class="token keyword">class</span> <span class="token class-name">GrayForcast</span><span class="token punctuation">(</span>object<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> series<span class="token punctuation">:</span> Union<span class="token punctuation">[</span>pd<span class="token punctuation">.</span>DataFrame<span class="token punctuation">,</span> pd<span class="token punctuation">.</span>Series<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> None<span class="token punctuation">:</span>
+        super<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>index<span class="token punctuation">:</span> pd<span class="token punctuation">.</span>Index <span class="token operator">=</span> series<span class="token punctuation">.</span>index
+        self<span class="token punctuation">.</span>x0 <span class="token operator">=</span> series<span class="token punctuation">.</span>to_numpy<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">train</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> verbose<span class="token punctuation">:</span> bool <span class="token operator">=</span> <span class="token boolean">True</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token comment" spellcheck="true"># 计算级比</span>
+        right_moved<span class="token punctuation">:</span> np<span class="token punctuation">.</span>ndarray <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token operator">*</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>x0<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>lambdas<span class="token punctuation">:</span> np<span class="token punctuation">.</span>ndarray <span class="token operator">=</span> right_moved <span class="token operator">/</span> self<span class="token punctuation">.</span>x0
+
+        <span class="token comment" spellcheck="true"># 级比检验</span>
+        n <span class="token operator">=</span> len<span class="token punctuation">(</span>self<span class="token punctuation">.</span>x0<span class="token punctuation">)</span>
+        <span class="token keyword">assert</span> <span class="token punctuation">(</span>l<span class="token punctuation">:</span><span class="token operator">=</span><span class="token punctuation">(</span>np<span class="token punctuation">.</span>exp<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">2</span><span class="token operator">/</span>n<span class="token punctuation">)</span> <span class="token operator">&lt;</span> self<span class="token punctuation">.</span>lambdas<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span> <span class="token punctuation">(</span>self<span class="token punctuation">.</span>lambdas<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">:</span><span class="token punctuation">]</span> <span class="token operator">&lt;</span> np<span class="token punctuation">.</span>exp<span class="token punctuation">(</span><span class="token number">2</span><span class="token operator">/</span>n<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>all<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> f<span class="token string">"级比检验未通过:{l}, 其中第{list(np.where(l==False)[0])}位:{self.x0[1:][~l]} 出错，数据不适合直接进行灰色预测"</span>
+        <span class="token keyword">if</span> verbose<span class="token punctuation">:</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"级比检验通过"</span><span class="token punctuation">)</span>
+
+        <span class="token comment" spellcheck="true"># GM(1,1)建模</span>
+        <span class="token comment" spellcheck="true"># 一次累加</span>
+        self<span class="token punctuation">.</span>x1 <span class="token operator">=</span> np<span class="token punctuation">.</span>cumsum<span class="token punctuation">(</span>self<span class="token punctuation">.</span>x0<span class="token punctuation">)</span>
+
+        <span class="token comment" spellcheck="true"># 构建B和Y矩阵</span>
+        Y <span class="token operator">=</span> self<span class="token punctuation">.</span>x0<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">.</span>reshape<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>
+        right_moved <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token operator">*</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>x1<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+        left_moved <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token operator">*</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>x1<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+        B <span class="token operator">=</span> np<span class="token punctuation">.</span>vstack<span class="token punctuation">(</span>tup<span class="token operator">=</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span> <span class="token operator">*</span> <span class="token punctuation">(</span>left_moved <span class="token operator">+</span> right_moved<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">,</span> np<span class="token punctuation">.</span>ones_like<span class="token punctuation">(</span>right_moved<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>T
+
+        <span class="token comment" spellcheck="true"># 线性回归</span>
+        self<span class="token punctuation">.</span>u <span class="token operator">=</span> np<span class="token punctuation">.</span>linalg<span class="token punctuation">.</span>inv<span class="token punctuation">(</span>B<span class="token punctuation">.</span>T @ B<span class="token punctuation">)</span> @ B<span class="token punctuation">.</span>T @ Y
+
+        <span class="token comment" spellcheck="true"># 模型检验</span>
+        x0_pred <span class="token operator">=</span> self<span class="token punctuation">.</span>predict<span class="token punctuation">(</span>items<span class="token operator">=</span><span class="token number">7</span><span class="token punctuation">)</span>
+
+        <span class="token comment" spellcheck="true"># 残差检验</span>
+        relative_residual <span class="token operator">=</span> np<span class="token punctuation">.</span>abs<span class="token punctuation">(</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>x0 <span class="token operator">-</span> x0_pred<span class="token punctuation">)</span> <span class="token operator">/</span> self<span class="token punctuation">.</span>x0<span class="token punctuation">)</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>l<span class="token punctuation">:</span><span class="token operator">=</span> <span class="token punctuation">(</span>relative_residual <span class="token operator">&lt;</span> <span class="token number">0.1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>all<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"残差检验通过，所有残差小于0.1，达到高精度"</span><span class="token punctuation">)</span>
+        <span class="token keyword">else</span><span class="token punctuation">:</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>l<span class="token punctuation">:</span><span class="token operator">=</span> <span class="token punctuation">(</span>relative_residual <span class="token operator">&lt;</span> <span class="token number">0.2</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>all<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+                <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"残差检验通过，所有残差小于0.2，达到一般精度要求"</span><span class="token punctuation">)</span>
+            <span class="token keyword">else</span><span class="token punctuation">:</span>
+                <span class="token keyword">assert</span> <span class="token boolean">False</span><span class="token punctuation">,</span> f<span class="token string">"残差检验未通过，第{np.where(l==False)[0]}位:{relative_residual[~l]}大于0.2"</span>
+
+        <span class="token comment" spellcheck="true"># 级比检验</span>
+        rho <span class="token operator">=</span> <span class="token number">1</span><span class="token operator">-</span> <span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">-</span> self<span class="token punctuation">.</span>u<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token number">0.5</span><span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">+</span> self<span class="token punctuation">.</span>u<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token number">0.5</span><span class="token punctuation">)</span> <span class="token operator">*</span> self<span class="token punctuation">.</span>lambdas
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>l<span class="token punctuation">:</span><span class="token operator">=</span> <span class="token punctuation">(</span>rho<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">:</span><span class="token punctuation">]</span> <span class="token operator">&lt;</span> <span class="token number">0.1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>all<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"级比检验通过，所有级比小于0.1，达到高精度"</span><span class="token punctuation">)</span>
+        <span class="token keyword">else</span><span class="token punctuation">:</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>l<span class="token punctuation">:</span><span class="token operator">=</span> <span class="token punctuation">(</span>rho<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">:</span><span class="token punctuation">]</span> <span class="token operator">&lt;</span> <span class="token number">0.2</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>all<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+                <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"级比检验通过，所有级比小于0.2，达到一般精度要求"</span><span class="token punctuation">)</span>
+            <span class="token keyword">else</span><span class="token punctuation">:</span>
+                <span class="token keyword">assert</span> <span class="token boolean">False</span><span class="token punctuation">,</span> f<span class="token string">"级比检验未通过，第{np.where(l==False)[0]}位:{rho[1:][~l]}大于0.2"</span>
+        rho<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> np<span class="token punctuation">.</span>nan
+
+        <span class="token keyword">if</span> verbose<span class="token punctuation">:</span>
+            df <span class="token operator">=</span> np<span class="token punctuation">.</span>vstack<span class="token punctuation">(</span>tup<span class="token operator">=</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>x0<span class="token punctuation">,</span> x0_pred<span class="token punctuation">,</span> self<span class="token punctuation">.</span>x0<span class="token operator">-</span>x0_pred<span class="token punctuation">,</span> relative_residual<span class="token operator">*</span><span class="token number">100</span><span class="token punctuation">,</span> rho<span class="token punctuation">)</span><span class="token punctuation">)</span>
+            df <span class="token operator">=</span> pd<span class="token punctuation">.</span>DataFrame<span class="token punctuation">(</span>df<span class="token punctuation">.</span>T<span class="token punctuation">,</span> index<span class="token operator">=</span>self<span class="token punctuation">.</span>index<span class="token punctuation">,</span> columns<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">"原始值"</span><span class="token punctuation">,</span><span class="token string">"预测值"</span><span class="token punctuation">,</span><span class="token string">"残差"</span><span class="token punctuation">,</span><span class="token string">"相对残差(%)"</span><span class="token punctuation">,</span><span class="token string">"级比偏差"</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span>df<span class="token punctuation">)</span>
+
+
+
+    <span class="token keyword">def</span> <span class="token function">predict</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> items<span class="token punctuation">:</span> int<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> np<span class="token punctuation">.</span>ndarray<span class="token punctuation">:</span>
+        a<span class="token punctuation">,</span> b <span class="token operator">=</span> self<span class="token punctuation">.</span>u<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> self<span class="token punctuation">.</span>u<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">]</span>
+        <span class="token keyword">def</span> <span class="token function">x1_kp1</span><span class="token punctuation">(</span>k<span class="token punctuation">:</span> int<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">if</span> k <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
+                <span class="token keyword">return</span> self<span class="token punctuation">.</span>x0<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+            <span class="token keyword">else</span><span class="token punctuation">:</span>
+                <span class="token keyword">return</span> <span class="token punctuation">(</span>self<span class="token punctuation">.</span>x0<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">-</span> b<span class="token operator">/</span>a<span class="token punctuation">)</span> <span class="token operator">*</span> np<span class="token punctuation">.</span>exp<span class="token punctuation">(</span><span class="token operator">-</span>a <span class="token operator">*</span> k<span class="token punctuation">)</span> <span class="token operator">+</span> b<span class="token operator">/</span>a
+        x1_pred <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span>x1_kp1<span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>items<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+        right_moved <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token operator">*</span><span class="token punctuation">(</span>x1_pred<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+        x0_pred <span class="token operator">=</span> x1_pred <span class="token operator">-</span> right_moved
+        <span class="token keyword">return</span> x0_pred
 
 
     @staticmethod
-    def preprocess_donothing(gf: "GrayForcast") -> "GrayForcast":
-        return gf
+    <span class="token keyword">def</span> <span class="token function">preprocess_donothing</span><span class="token punctuation">(</span>gf<span class="token punctuation">:</span> <span class="token string">"GrayForcast"</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token string">"GrayForcast"</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> gf
 
     @staticmethod
-    def build_from_csv(csv_path: Union[str, Path], target_col: Union[None, int, str]=None) -> "GrayForcast":
-        csv_path = csv_path if isinstance(csv_path, Path) else Path(__file__).resolve().parent.joinpath(csv_path)
-        df : pd.DataFrame = pd.read_csv(csv_path, header=0, index_col=0)
+    <span class="token keyword">def</span> <span class="token function">build_from_csv</span><span class="token punctuation">(</span>csv_path<span class="token punctuation">:</span> Union<span class="token punctuation">[</span>str<span class="token punctuation">,</span> Path<span class="token punctuation">]</span><span class="token punctuation">,</span> target_col<span class="token punctuation">:</span> Union<span class="token punctuation">[</span>None<span class="token punctuation">,</span> int<span class="token punctuation">,</span> str<span class="token punctuation">]</span><span class="token operator">=</span>None<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token string">"GrayForcast"</span><span class="token punctuation">:</span>
+        csv_path <span class="token operator">=</span> csv_path <span class="token keyword">if</span> isinstance<span class="token punctuation">(</span>csv_path<span class="token punctuation">,</span> Path<span class="token punctuation">)</span> <span class="token keyword">else</span> Path<span class="token punctuation">(</span>__file__<span class="token punctuation">)</span><span class="token punctuation">.</span>resolve<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>parent<span class="token punctuation">.</span>joinpath<span class="token punctuation">(</span>csv_path<span class="token punctuation">)</span>
+        df <span class="token punctuation">:</span> pd<span class="token punctuation">.</span>DataFrame <span class="token operator">=</span> pd<span class="token punctuation">.</span>read_csv<span class="token punctuation">(</span>csv_path<span class="token punctuation">,</span> header<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span> index_col<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span>
 
-        assert (multiple:=df.shape[1] != 1) and target_col is not None, f"CSV文件存在多个序列：{df.columns}，请指定target_col参数指定需要预测的序列"
+        <span class="token keyword">assert</span> <span class="token punctuation">(</span>multiple<span class="token punctuation">:</span><span class="token operator">=</span>df<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">!=</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">and</span> target_col <span class="token keyword">is</span> <span class="token operator">not</span> None<span class="token punctuation">,</span> f<span class="token string">"CSV文件存在多个序列：{df.columns}，请指定target_col参数指定需要预测的序列"</span>
 
-        if multiple:
-            if isinstance(target_col, str):
-                target_col = df.T.loc[target_col]
-            elif isinstance(target_col, int):
-                target_col = df.iloc[:, target_col]
-        else:
-            target_col = df
-        return GrayForcast(series=target_col)
+        <span class="token keyword">if</span> multiple<span class="token punctuation">:</span>
+            <span class="token keyword">if</span> isinstance<span class="token punctuation">(</span>target_col<span class="token punctuation">,</span> str<span class="token punctuation">)</span><span class="token punctuation">:</span>
+                target_col <span class="token operator">=</span> df<span class="token punctuation">.</span>T<span class="token punctuation">.</span>loc<span class="token punctuation">[</span>target_col<span class="token punctuation">]</span>
+            <span class="token keyword">elif</span> isinstance<span class="token punctuation">(</span>target_col<span class="token punctuation">,</span> int<span class="token punctuation">)</span><span class="token punctuation">:</span>
+                target_col <span class="token operator">=</span> df<span class="token punctuation">.</span>iloc<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span> target_col<span class="token punctuation">]</span>
+        <span class="token keyword">else</span><span class="token punctuation">:</span>
+            target_col <span class="token operator">=</span> df
+        <span class="token keyword">return</span> GrayForcast<span class="token punctuation">(</span>series<span class="token operator">=</span>target_col<span class="token punctuation">)</span>
 
     @staticmethod
-    def build_from_excel(csv_path: Union[str, Path], target_col: Union[None, int, str]=None) -> "GrayForcast":
-        csv_path = csv_path if isinstance(csv_path, Path) else Path(__file__).resolve().parent.joinpath(csv_path)
-        df : pd.DataFrame = pd.read_excel(csv_path, header=0, index_col=0)
+    <span class="token keyword">def</span> <span class="token function">build_from_excel</span><span class="token punctuation">(</span>csv_path<span class="token punctuation">:</span> Union<span class="token punctuation">[</span>str<span class="token punctuation">,</span> Path<span class="token punctuation">]</span><span class="token punctuation">,</span> target_col<span class="token punctuation">:</span> Union<span class="token punctuation">[</span>None<span class="token punctuation">,</span> int<span class="token punctuation">,</span> str<span class="token punctuation">]</span><span class="token operator">=</span>None<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token string">"GrayForcast"</span><span class="token punctuation">:</span>
+        csv_path <span class="token operator">=</span> csv_path <span class="token keyword">if</span> isinstance<span class="token punctuation">(</span>csv_path<span class="token punctuation">,</span> Path<span class="token punctuation">)</span> <span class="token keyword">else</span> Path<span class="token punctuation">(</span>__file__<span class="token punctuation">)</span><span class="token punctuation">.</span>resolve<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>parent<span class="token punctuation">.</span>joinpath<span class="token punctuation">(</span>csv_path<span class="token punctuation">)</span>
+        df <span class="token punctuation">:</span> pd<span class="token punctuation">.</span>DataFrame <span class="token operator">=</span> pd<span class="token punctuation">.</span>read_excel<span class="token punctuation">(</span>csv_path<span class="token punctuation">,</span> header<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span> index_col<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span>
 
-        assert (multiple:=df.shape[1] != 1) and target_col is None, f"xlsx文件存在多个序列：{df.columns}，请指定target_col参数指定需要预测的序列"
+        <span class="token keyword">assert</span> <span class="token punctuation">(</span>multiple<span class="token punctuation">:</span><span class="token operator">=</span>df<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">!=</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">and</span> target_col <span class="token keyword">is</span> None<span class="token punctuation">,</span> f<span class="token string">"xlsx文件存在多个序列：{df.columns}，请指定target_col参数指定需要预测的序列"</span>
 
-        if multiple:
-            if isinstance(target_col, str):
-                target_col = df.loc[target_col]
-            elif isinstance(target_col, int):
-                target_col = df.iloc[:, target_col]
-        else:
-            target_col = df
-        return GrayForcast(series=target_col)
+        <span class="token keyword">if</span> multiple<span class="token punctuation">:</span>
+            <span class="token keyword">if</span> isinstance<span class="token punctuation">(</span>target_col<span class="token punctuation">,</span> str<span class="token punctuation">)</span><span class="token punctuation">:</span>
+                target_col <span class="token operator">=</span> df<span class="token punctuation">.</span>loc<span class="token punctuation">[</span>target_col<span class="token punctuation">]</span>
+            <span class="token keyword">elif</span> isinstance<span class="token punctuation">(</span>target_col<span class="token punctuation">,</span> int<span class="token punctuation">)</span><span class="token punctuation">:</span>
+                target_col <span class="token operator">=</span> df<span class="token punctuation">.</span>iloc<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span> target_col<span class="token punctuation">]</span>
+        <span class="token keyword">else</span><span class="token punctuation">:</span>
+            target_col <span class="token operator">=</span> df
+        <span class="token keyword">return</span> GrayForcast<span class="token punctuation">(</span>series<span class="token operator">=</span>target_col<span class="token punctuation">)</span>
 
 
-if __name__ == "__main__":
-    gf = GrayForcast.build_from_csv(csv_path="./test2.csv", target_col="噪声")
-    gf.train()
-    print(gf.predict(10))
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">"__main__"</span><span class="token punctuation">:</span>
+    gf <span class="token operator">=</span> GrayForcast<span class="token punctuation">.</span>build_from_csv<span class="token punctuation">(</span>csv_path<span class="token operator">=</span><span class="token string">"./test2.csv"</span><span class="token punctuation">,</span> target_col<span class="token operator">=</span><span class="token string">"噪声"</span><span class="token punctuation">)</span>
+    gf<span class="token punctuation">.</span>train<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>gf<span class="token punctuation">.</span>predict<span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="B-使用说明"><a href="#B-使用说明" class="headerlink" title="B. 使用说明"></a>B. 使用说明</h3><p>代码从指定的表格中读取数据，然后先训练得到参数，最后通过预测指定，需要预测的项数即可</p>
 <p>表格要求如下：第一列为序号，其余列为对比数列，对比数列沿列展开，若表格有多列则需要指定计算的列的名称</p>
@@ -1544,7 +1544,7 @@ if __name__ == "__main__":
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">181.6k</span>
+                        class="white-color">191.3k</span>
             
             
             

@@ -559,7 +559,7 @@ X_1 & X_2 & \cdots & X_p
 \end{bmatrix}^T</script><p>则将$F$的表达式展开，带入方差的计算式之后即可得到解</p>
 <h2 id="4-PCA的Python求解"><a href="#4-PCA的Python求解" class="headerlink" title="4. PCA的Python求解"></a>4. PCA的Python求解</h2><p>Python中的scikit-learn中其实已经有了非常成熟的PCA的实现，因此我们直接用即可。</p>
 <p>在sklearn中，PCA算法主要是由<code>sklearn.decomposition.PCA</code>类完成。该类的签名如下</p>
-<pre class="line-numbers language-lang-python"><code class="language-lang-python">class sklearn.decomposition.PCA(n_components=None, *, copy=True, whiten=False, svd_solver='auto', tol=0.0, iterated_power='auto', random_state=None)
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">sklearn</span><span class="token punctuation">.</span>decomposition<span class="token punctuation">.</span>PCA<span class="token punctuation">(</span>n_components<span class="token operator">=</span>None<span class="token punctuation">,</span> <span class="token operator">*</span><span class="token punctuation">,</span> copy<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> whiten<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">,</span> svd_solver<span class="token operator">=</span><span class="token string">'auto'</span><span class="token punctuation">,</span> tol<span class="token operator">=</span><span class="token number">0.0</span><span class="token punctuation">,</span> iterated_power<span class="token operator">=</span><span class="token string">'auto'</span><span class="token punctuation">,</span> random_state<span class="token operator">=</span>None<span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>其中，我们需要关注的参数有：</p>
 <ul>
@@ -597,22 +597,22 @@ X_1 & X_2 & \cdots & X_p
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220109004849578.png" alt="主要经济指标"></p>
 </blockquote>
 <p>Python直接求解即可</p>
-<pre class="line-numbers language-lang-python"><code class="language-lang-python">import pandas as pd
-from pathlib import Path
-import sklearn.decomposition as skdecompose
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> pandas <span class="token keyword">as</span> pd
+<span class="token keyword">from</span> pathlib <span class="token keyword">import</span> Path
+<span class="token keyword">import</span> sklearn<span class="token punctuation">.</span>decomposition <span class="token keyword">as</span> skdecompose
 
 
-df = pd.read_excel(Path(__file__).resolve().parent.joinpath("test1.xlsx"), index_col=0, header=0)
+df <span class="token operator">=</span> pd<span class="token punctuation">.</span>read_excel<span class="token punctuation">(</span>Path<span class="token punctuation">(</span>__file__<span class="token punctuation">)</span><span class="token punctuation">.</span>resolve<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>parent<span class="token punctuation">.</span>joinpath<span class="token punctuation">(</span><span class="token string">"test1.xlsx"</span><span class="token punctuation">)</span><span class="token punctuation">,</span> index_col<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span> header<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span>
 
 
-pca = skdecompose.PCA(n_components=df.shape[1])
+pca <span class="token operator">=</span> skdecompose<span class="token punctuation">.</span>PCA<span class="token punctuation">(</span>n_components<span class="token operator">=</span>df<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
 
-new = pca.fit_transform(df.to_numpy())
+new <span class="token operator">=</span> pca<span class="token punctuation">.</span>fit_transform<span class="token punctuation">(</span>df<span class="token punctuation">.</span>to_numpy<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 
 
-print(df)
-print(pd.DataFrame(new, index=df.index))
-print(pca.explained_variance_ratio_)
+<span class="token keyword">print</span><span class="token punctuation">(</span>df<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>pd<span class="token punctuation">.</span>DataFrame<span class="token punctuation">(</span>new<span class="token punctuation">,</span> index<span class="token operator">=</span>df<span class="token punctuation">.</span>index<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>pca<span class="token punctuation">.</span>explained_variance_ratio_<span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>运行结果</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220109010518417.png" alt="运行结果"></p>
@@ -1182,7 +1182,7 @@ print(pca.explained_variance_ratio_)
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">181.6k</span>
+                        class="white-color">191.3k</span>
             
             
             

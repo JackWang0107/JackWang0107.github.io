@@ -664,132 +664,132 @@ CR=\frac{a_1CI_1+a_2CI_2+\cdots+a_mCI_m}{a_1RI_1+a_2RI_2+\cdots+a_mRI_m}</script
 <li>计算总排序权向量并做一致性检验。计算最下层对最上层总排序的权向量，利用总排序一致性比率，进行检验。若通过，则可按照总排序权向量表示的结果进 行决策，否则需要重新考虑模型或重新构造那些一致性比率较大的成对比较矩阵</li>
 </ol>
 <h2 id="5-层次分析法Python求解"><a href="#5-层次分析法Python求解" class="headerlink" title="5. 层次分析法Python求解"></a>5. 层次分析法Python求解</h2><p>由于层次分析法全部都是矩阵乘法，因此Numpy和Pandas即可求解，下面的这个只是一个初级版本，实现了层次分析法，但是没有实现从表格中读取，也没有给出GUI的输入，后面等开始大美赛前再完善一下吧</p>
-<pre class="line-numbers language-lang-python"><code class="language-lang-python">import numpy as np
-import pandas as pd
-from typing import *
-from colorama import Fore, Style
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+<span class="token keyword">import</span> pandas <span class="token keyword">as</span> pd
+<span class="token keyword">from</span> typing <span class="token keyword">import</span> <span class="token operator">*</span>
+<span class="token keyword">from</span> colorama <span class="token keyword">import</span> Fore<span class="token punctuation">,</span> Style
 
 
-class AnalyticHierarchyProcess(object):
-    RI = (0, 0, 0.58, 0.9, 1.12, 1.32, 1.41, 1.45, 1.49)
-    def __init__(self, criteria: Union[List[str], int], plans: Union[List[str], int], method="manual") -> None:
-        super().__init__()
-        assert method in ["csv", "manual"]
-        self.criteria_name = [f"准则{i}" for i in range(criteria)] if isinstance(criteria, int) else criteria
-        self.criteria = self.get_criteria(criteria_names=self.criteria_name, method=method)
-        self.plan_names = [f"方案{i}" for i in range(plans)] if isinstance(plans, int) else plans
-        self.plan_scores = self.get_plan_scores(self.plan_names, self.criteria_name, method=method)
+<span class="token keyword">class</span> <span class="token class-name">AnalyticHierarchyProcess</span><span class="token punctuation">(</span>object<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    RI <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0.58</span><span class="token punctuation">,</span> <span class="token number">0.9</span><span class="token punctuation">,</span> <span class="token number">1.12</span><span class="token punctuation">,</span> <span class="token number">1.32</span><span class="token punctuation">,</span> <span class="token number">1.41</span><span class="token punctuation">,</span> <span class="token number">1.45</span><span class="token punctuation">,</span> <span class="token number">1.49</span><span class="token punctuation">)</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> criteria<span class="token punctuation">:</span> Union<span class="token punctuation">[</span>List<span class="token punctuation">[</span>str<span class="token punctuation">]</span><span class="token punctuation">,</span> int<span class="token punctuation">]</span><span class="token punctuation">,</span> plans<span class="token punctuation">:</span> Union<span class="token punctuation">[</span>List<span class="token punctuation">[</span>str<span class="token punctuation">]</span><span class="token punctuation">,</span> int<span class="token punctuation">]</span><span class="token punctuation">,</span> method<span class="token operator">=</span><span class="token string">"manual"</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> None<span class="token punctuation">:</span>
+        super<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">assert</span> method <span class="token keyword">in</span> <span class="token punctuation">[</span><span class="token string">"csv"</span><span class="token punctuation">,</span> <span class="token string">"manual"</span><span class="token punctuation">]</span>
+        self<span class="token punctuation">.</span>criteria_name <span class="token operator">=</span> <span class="token punctuation">[</span>f<span class="token string">"准则{i}"</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>criteria<span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token keyword">if</span> isinstance<span class="token punctuation">(</span>criteria<span class="token punctuation">,</span> int<span class="token punctuation">)</span> <span class="token keyword">else</span> criteria
+        self<span class="token punctuation">.</span>criteria <span class="token operator">=</span> self<span class="token punctuation">.</span>get_criteria<span class="token punctuation">(</span>criteria_names<span class="token operator">=</span>self<span class="token punctuation">.</span>criteria_name<span class="token punctuation">,</span> method<span class="token operator">=</span>method<span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>plan_names <span class="token operator">=</span> <span class="token punctuation">[</span>f<span class="token string">"方案{i}"</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>plans<span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token keyword">if</span> isinstance<span class="token punctuation">(</span>plans<span class="token punctuation">,</span> int<span class="token punctuation">)</span> <span class="token keyword">else</span> plans
+        self<span class="token punctuation">.</span>plan_scores <span class="token operator">=</span> self<span class="token punctuation">.</span>get_plan_scores<span class="token punctuation">(</span>self<span class="token punctuation">.</span>plan_names<span class="token punctuation">,</span> self<span class="token punctuation">.</span>criteria_name<span class="token punctuation">,</span> method<span class="token operator">=</span>method<span class="token punctuation">)</span>
 
-    def matrix2str(self, column: List[str], index: List[str]) -> str:
-        ss = pd.DataFrame(self.criteria, index=index, columns=column)
-        return ss.__str__()
+    <span class="token keyword">def</span> <span class="token function">matrix2str</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> column<span class="token punctuation">:</span> List<span class="token punctuation">[</span>str<span class="token punctuation">]</span><span class="token punctuation">,</span> index<span class="token punctuation">:</span> List<span class="token punctuation">[</span>str<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> str<span class="token punctuation">:</span>
+        ss <span class="token operator">=</span> pd<span class="token punctuation">.</span>DataFrame<span class="token punctuation">(</span>self<span class="token punctuation">.</span>criteria<span class="token punctuation">,</span> index<span class="token operator">=</span>index<span class="token punctuation">,</span> columns<span class="token operator">=</span>column<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> ss<span class="token punctuation">.</span>__str__<span class="token punctuation">(</span><span class="token punctuation">)</span>
 
-    def run(self):
-        print("开始层次单排序")
-        eigvalue, eigvector = np.linalg.eig(self.criteria)
-        if len(eigvalue) == 1:
-            print("标准对比矩阵为一致阵")
-            w = eigvector
-        else:
-            print("标准对比矩阵为非一致阵，开始进行一致性检验")
-            ci = (max(eigvalue) - len(self.criteria)) / (len(self.criteria) - 1)
-            if (cr := ci/self.RI[len(self.criteria) -1]) < 0.1:
-                print(f"层次单排序一致性检验一致性比率CR={cr:>.3f}，通过检验")
-                w = eigvector[:, np.argmax(eigvalue)]
-            else:
-                print(self.matrix2str(column=self.criteria_name, index=self.criteria_name))
-                assert False, f"层次单排序一致性检验未通过， CR={cr:>.3f}"
-        # 归一化处理，softmax
-        w = w / sum(w)
-        print("开始层次总排序")
-        m = []
-        ci_all = []
-        ri_all = []
-        for c_name, c_score in zip(self.criteria_name, self.plan_scores):
-            print(f"针对 {Fore.GREEN}{c_name}{Style.RESET_ALL} 进行层次单排序")
-            eigvalue, eigvector = np.linalg.eig(c_score)
-            if len(eigvalue) == 1:
-                print(f"{Fore.GREEN}{c_name}{Style.RESET_ALL} 的对比矩阵为一致阵")
-                m.append(eigvector / sum(eigvector))
-            else:
-                print(f"{Fore.GREEN}{c_name}{Style.RESET_ALL} 的对比矩阵为非一致阵")
-                ci = (max(eigvalue) - len(c_score)) / (len(c_score) - 1)
-                if (cr := ci/self.RI[len(c_score) -1]) < 0.1:
-                    print(f"{Fore.YELLOW}{c_name}{Style.RESET_ALL}层次单排序一致性检验一致性比率CR={cr:>.3f}，通过检验")
-                    e = eigvector[:, np.argmax(eigvalue)]
-                    m.append(e / sum(e))
-                else:
-                    print(self.matrix2str(self.plan_names, self.plan_names))
-                    assert False, f"{Fore.YELLOW}{c_name}{Style.RESET_ALL}层次单排序一致性检验未通过， CR={cr:>.3f}"
-            ci_all.append(ci)
-            ri_all.append(self.RI[len(c_score)-1])
-        assert (cr:=(np.array(ci_all) @ w) / (np.array(ri_all) @ w)) < 0.1, f"层次总排序一致性检验未通过，CR={cr:>.3f}"
-        m = np.array(m)
-        final_score = w @ m
-        print(f"最终得分:{final_score}")
+    <span class="token keyword">def</span> <span class="token function">run</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"开始层次单排序"</span><span class="token punctuation">)</span>
+        eigvalue<span class="token punctuation">,</span> eigvector <span class="token operator">=</span> np<span class="token punctuation">.</span>linalg<span class="token punctuation">.</span>eig<span class="token punctuation">(</span>self<span class="token punctuation">.</span>criteria<span class="token punctuation">)</span>
+        <span class="token keyword">if</span> len<span class="token punctuation">(</span>eigvalue<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">:</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"标准对比矩阵为一致阵"</span><span class="token punctuation">)</span>
+            w <span class="token operator">=</span> eigvector
+        <span class="token keyword">else</span><span class="token punctuation">:</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"标准对比矩阵为非一致阵，开始进行一致性检验"</span><span class="token punctuation">)</span>
+            ci <span class="token operator">=</span> <span class="token punctuation">(</span>max<span class="token punctuation">(</span>eigvalue<span class="token punctuation">)</span> <span class="token operator">-</span> len<span class="token punctuation">(</span>self<span class="token punctuation">.</span>criteria<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token punctuation">(</span>len<span class="token punctuation">(</span>self<span class="token punctuation">.</span>criteria<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>cr <span class="token punctuation">:</span><span class="token operator">=</span> ci<span class="token operator">/</span>self<span class="token punctuation">.</span>RI<span class="token punctuation">[</span>len<span class="token punctuation">(</span>self<span class="token punctuation">.</span>criteria<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">0.1</span><span class="token punctuation">:</span>
+                <span class="token keyword">print</span><span class="token punctuation">(</span>f<span class="token string">"层次单排序一致性检验一致性比率CR={cr:>.3f}，通过检验"</span><span class="token punctuation">)</span>
+                w <span class="token operator">=</span> eigvector<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span> np<span class="token punctuation">.</span>argmax<span class="token punctuation">(</span>eigvalue<span class="token punctuation">)</span><span class="token punctuation">]</span>
+            <span class="token keyword">else</span><span class="token punctuation">:</span>
+                <span class="token keyword">print</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>matrix2str<span class="token punctuation">(</span>column<span class="token operator">=</span>self<span class="token punctuation">.</span>criteria_name<span class="token punctuation">,</span> index<span class="token operator">=</span>self<span class="token punctuation">.</span>criteria_name<span class="token punctuation">)</span><span class="token punctuation">)</span>
+                <span class="token keyword">assert</span> <span class="token boolean">False</span><span class="token punctuation">,</span> f<span class="token string">"层次单排序一致性检验未通过， CR={cr:>.3f}"</span>
+        <span class="token comment" spellcheck="true"># 归一化处理，softmax</span>
+        w <span class="token operator">=</span> w <span class="token operator">/</span> sum<span class="token punctuation">(</span>w<span class="token punctuation">)</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"开始层次总排序"</span><span class="token punctuation">)</span>
+        m <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+        ci_all <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+        ri_all <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+        <span class="token keyword">for</span> c_name<span class="token punctuation">,</span> c_score <span class="token keyword">in</span> zip<span class="token punctuation">(</span>self<span class="token punctuation">.</span>criteria_name<span class="token punctuation">,</span> self<span class="token punctuation">.</span>plan_scores<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span>f<span class="token string">"针对 {Fore.GREEN}{c_name}{Style.RESET_ALL} 进行层次单排序"</span><span class="token punctuation">)</span>
+            eigvalue<span class="token punctuation">,</span> eigvector <span class="token operator">=</span> np<span class="token punctuation">.</span>linalg<span class="token punctuation">.</span>eig<span class="token punctuation">(</span>c_score<span class="token punctuation">)</span>
+            <span class="token keyword">if</span> len<span class="token punctuation">(</span>eigvalue<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">:</span>
+                <span class="token keyword">print</span><span class="token punctuation">(</span>f<span class="token string">"{Fore.GREEN}{c_name}{Style.RESET_ALL} 的对比矩阵为一致阵"</span><span class="token punctuation">)</span>
+                m<span class="token punctuation">.</span>append<span class="token punctuation">(</span>eigvector <span class="token operator">/</span> sum<span class="token punctuation">(</span>eigvector<span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token keyword">else</span><span class="token punctuation">:</span>
+                <span class="token keyword">print</span><span class="token punctuation">(</span>f<span class="token string">"{Fore.GREEN}{c_name}{Style.RESET_ALL} 的对比矩阵为非一致阵"</span><span class="token punctuation">)</span>
+                ci <span class="token operator">=</span> <span class="token punctuation">(</span>max<span class="token punctuation">(</span>eigvalue<span class="token punctuation">)</span> <span class="token operator">-</span> len<span class="token punctuation">(</span>c_score<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token punctuation">(</span>len<span class="token punctuation">(</span>c_score<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>cr <span class="token punctuation">:</span><span class="token operator">=</span> ci<span class="token operator">/</span>self<span class="token punctuation">.</span>RI<span class="token punctuation">[</span>len<span class="token punctuation">(</span>c_score<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">0.1</span><span class="token punctuation">:</span>
+                    <span class="token keyword">print</span><span class="token punctuation">(</span>f<span class="token string">"{Fore.YELLOW}{c_name}{Style.RESET_ALL}层次单排序一致性检验一致性比率CR={cr:>.3f}，通过检验"</span><span class="token punctuation">)</span>
+                    e <span class="token operator">=</span> eigvector<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span> np<span class="token punctuation">.</span>argmax<span class="token punctuation">(</span>eigvalue<span class="token punctuation">)</span><span class="token punctuation">]</span>
+                    m<span class="token punctuation">.</span>append<span class="token punctuation">(</span>e <span class="token operator">/</span> sum<span class="token punctuation">(</span>e<span class="token punctuation">)</span><span class="token punctuation">)</span>
+                <span class="token keyword">else</span><span class="token punctuation">:</span>
+                    <span class="token keyword">print</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>matrix2str<span class="token punctuation">(</span>self<span class="token punctuation">.</span>plan_names<span class="token punctuation">,</span> self<span class="token punctuation">.</span>plan_names<span class="token punctuation">)</span><span class="token punctuation">)</span>
+                    <span class="token keyword">assert</span> <span class="token boolean">False</span><span class="token punctuation">,</span> f<span class="token string">"{Fore.YELLOW}{c_name}{Style.RESET_ALL}层次单排序一致性检验未通过， CR={cr:>.3f}"</span>
+            ci_all<span class="token punctuation">.</span>append<span class="token punctuation">(</span>ci<span class="token punctuation">)</span>
+            ri_all<span class="token punctuation">.</span>append<span class="token punctuation">(</span>self<span class="token punctuation">.</span>RI<span class="token punctuation">[</span>len<span class="token punctuation">(</span>c_score<span class="token punctuation">)</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+        <span class="token keyword">assert</span> <span class="token punctuation">(</span>cr<span class="token punctuation">:</span><span class="token operator">=</span><span class="token punctuation">(</span>np<span class="token punctuation">.</span>array<span class="token punctuation">(</span>ci_all<span class="token punctuation">)</span> @ w<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token punctuation">(</span>np<span class="token punctuation">.</span>array<span class="token punctuation">(</span>ri_all<span class="token punctuation">)</span> @ w<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">0.1</span><span class="token punctuation">,</span> f<span class="token string">"层次总排序一致性检验未通过，CR={cr:>.3f}"</span>
+        m <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span>m<span class="token punctuation">)</span>
+        final_score <span class="token operator">=</span> w @ m
+        <span class="token keyword">print</span><span class="token punctuation">(</span>f<span class="token string">"最终得分:{final_score}"</span><span class="token punctuation">)</span>
 
 
 
 
     @staticmethod
-    def get_criteria(criteria_names: List[str], method: str) -> np.ndarray:
-        if method == "manual":
-            criteria = np.eye(N=(l:=len(criteria_names)))
-            print("="*200)
-            print("请输入评价标准之间的相对重要性（1-9，1，3，5，7，9分别表示标准A比标准B：同等重要、稍微重要、比较重要、很重要、绝对重要，2，4，6，8分别为中位数）")
-            print("若标准A不如标准B重要，则输入1/标准B比标准A的相对重要性，例如标准A不如标准B重要，而标准B比标准A为3，那么标准A比标准B为1/3")
-            print("+"*200)
-            for i in range(l):
-                for j in range(i+1,  l):
-                    if "/" not in (inp:=input(f"请输入 {Fore.GREEN}{criteria_names[i]}{Style.RESET_ALL} 对 {Fore.GREEN}{criteria_names[j]}{Style.RESET_ALL} 的相对重要性：")):
-                        criteria[i, j] = int(inp)
-                    else:
-                        upper, lower = [int(j) for j in inp.split("/")]
-                        criteria[i, j] = upper / lower
-                if i+1 < l:
-                    print("+"*200)
-            position = np.where(criteria==0)
-            criteria[position] = 1 / criteria.transpose()[position]
-            print("输入的评价标准之间的对比矩阵为：")
-            print(criteria)
-            print("="*200)
-        elif method == "csv":
-            pass
-        return criteria
+    <span class="token keyword">def</span> <span class="token function">get_criteria</span><span class="token punctuation">(</span>criteria_names<span class="token punctuation">:</span> List<span class="token punctuation">[</span>str<span class="token punctuation">]</span><span class="token punctuation">,</span> method<span class="token punctuation">:</span> str<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> np<span class="token punctuation">.</span>ndarray<span class="token punctuation">:</span>
+        <span class="token keyword">if</span> method <span class="token operator">==</span> <span class="token string">"manual"</span><span class="token punctuation">:</span>
+            criteria <span class="token operator">=</span> np<span class="token punctuation">.</span>eye<span class="token punctuation">(</span>N<span class="token operator">=</span><span class="token punctuation">(</span>l<span class="token punctuation">:</span><span class="token operator">=</span>len<span class="token punctuation">(</span>criteria_names<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"="</span><span class="token operator">*</span><span class="token number">200</span><span class="token punctuation">)</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"请输入评价标准之间的相对重要性（1-9，1，3，5，7，9分别表示标准A比标准B：同等重要、稍微重要、比较重要、很重要、绝对重要，2，4，6，8分别为中位数）"</span><span class="token punctuation">)</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"若标准A不如标准B重要，则输入1/标准B比标准A的相对重要性，例如标准A不如标准B重要，而标准B比标准A为3，那么标准A比标准B为1/3"</span><span class="token punctuation">)</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"+"</span><span class="token operator">*</span><span class="token number">200</span><span class="token punctuation">)</span>
+            <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>l<span class="token punctuation">)</span><span class="token punctuation">:</span>
+                <span class="token keyword">for</span> j <span class="token keyword">in</span> range<span class="token punctuation">(</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span>  l<span class="token punctuation">)</span><span class="token punctuation">:</span>
+                    <span class="token keyword">if</span> <span class="token string">"/"</span> <span class="token operator">not</span> <span class="token keyword">in</span> <span class="token punctuation">(</span>inp<span class="token punctuation">:</span><span class="token operator">=</span>input<span class="token punctuation">(</span>f<span class="token string">"请输入 {Fore.GREEN}{criteria_names[i]}{Style.RESET_ALL} 对 {Fore.GREEN}{criteria_names[j]}{Style.RESET_ALL} 的相对重要性："</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+                        criteria<span class="token punctuation">[</span>i<span class="token punctuation">,</span> j<span class="token punctuation">]</span> <span class="token operator">=</span> int<span class="token punctuation">(</span>inp<span class="token punctuation">)</span>
+                    <span class="token keyword">else</span><span class="token punctuation">:</span>
+                        upper<span class="token punctuation">,</span> lower <span class="token operator">=</span> <span class="token punctuation">[</span>int<span class="token punctuation">(</span>j<span class="token punctuation">)</span> <span class="token keyword">for</span> j <span class="token keyword">in</span> inp<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">"/"</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+                        criteria<span class="token punctuation">[</span>i<span class="token punctuation">,</span> j<span class="token punctuation">]</span> <span class="token operator">=</span> upper <span class="token operator">/</span> lower
+                <span class="token keyword">if</span> i<span class="token operator">+</span><span class="token number">1</span> <span class="token operator">&lt;</span> l<span class="token punctuation">:</span>
+                    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"+"</span><span class="token operator">*</span><span class="token number">200</span><span class="token punctuation">)</span>
+            position <span class="token operator">=</span> np<span class="token punctuation">.</span>where<span class="token punctuation">(</span>criteria<span class="token operator">==</span><span class="token number">0</span><span class="token punctuation">)</span>
+            criteria<span class="token punctuation">[</span>position<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">/</span> criteria<span class="token punctuation">.</span>transpose<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">[</span>position<span class="token punctuation">]</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"输入的评价标准之间的对比矩阵为："</span><span class="token punctuation">)</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span>criteria<span class="token punctuation">)</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"="</span><span class="token operator">*</span><span class="token number">200</span><span class="token punctuation">)</span>
+        <span class="token keyword">elif</span> method <span class="token operator">==</span> <span class="token string">"csv"</span><span class="token punctuation">:</span>
+            <span class="token keyword">pass</span>
+        <span class="token keyword">return</span> criteria
 
     @staticmethod
-    def get_plan_scores(plan_names: List[str], criteria_names: List[str], method: str) -> np.ndarray:
-        if method == "manual":
-            plan_scores = np.repeat(np.eye(N=len(plan_names)).reshape(1, len(plan_names), len(plan_names)), repeats=len(criteria_names), axis=0)
-            print("="*200)
-            print("请输入不同方案之间就某一个标准的的相对重要性（1-9，1，3，5，7，9分别表示标准A比标准B：同等重要、稍微重要、比较重要、很重要、绝对重要，2，4，6，8分别为中位数）")
-            print("若就标准X，方案A不如方案B重要，则输入1/方案B比方案A的相对重要性，例如就标准X，方案A不如方案B重要，而方案B比方案A为3，那么方案A比方案B为1/3")
-            for i in range(len(criteria_names)):
-                print(f"就 {Fore.YELLOW}{criteria_names[i]}{Style.RESET_ALL} 对方案之间的得分进行比较".center(200, "+"))
-                for j in range(l := len(plan_names)):
-                    for k in range(j+1, l):
-                        if "/" not in (inp:=input(f"请从 {Fore.YELLOW}{criteria_names[i]}{Style.RESET_ALL} 的角度，输入 {Fore.GREEN}{plan_names[j]}{Style.RESET_ALL} 对 {Fore.GREEN}{plan_names[k]}{Style.RESET_ALL} 的相对重要性：")):
-                            plan_scores[i, j, k] = int(inp)
-                        else:
-                            upper, lower = [int(j) for j in inp.split("/")]
-                            plan_scores[i, j, k] = upper / lower
-                position = np.where(plan_scores[i] == 0)
-                plan_scores[i, position[0], position[1]] = 1 / plan_scores[i].transpose()[position]
-            print("输入的不同评价标准下方案间的对比矩阵为：")
-            for c, s in zip(criteria_names, plan_scores):
-                print(c)
-                print(s)
-            print("="*200)
-        elif method == "csv":
-            pass
-        return plan_scores
+    <span class="token keyword">def</span> <span class="token function">get_plan_scores</span><span class="token punctuation">(</span>plan_names<span class="token punctuation">:</span> List<span class="token punctuation">[</span>str<span class="token punctuation">]</span><span class="token punctuation">,</span> criteria_names<span class="token punctuation">:</span> List<span class="token punctuation">[</span>str<span class="token punctuation">]</span><span class="token punctuation">,</span> method<span class="token punctuation">:</span> str<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> np<span class="token punctuation">.</span>ndarray<span class="token punctuation">:</span>
+        <span class="token keyword">if</span> method <span class="token operator">==</span> <span class="token string">"manual"</span><span class="token punctuation">:</span>
+            plan_scores <span class="token operator">=</span> np<span class="token punctuation">.</span>repeat<span class="token punctuation">(</span>np<span class="token punctuation">.</span>eye<span class="token punctuation">(</span>N<span class="token operator">=</span>len<span class="token punctuation">(</span>plan_names<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>reshape<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> len<span class="token punctuation">(</span>plan_names<span class="token punctuation">)</span><span class="token punctuation">,</span> len<span class="token punctuation">(</span>plan_names<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> repeats<span class="token operator">=</span>len<span class="token punctuation">(</span>criteria_names<span class="token punctuation">)</span><span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"="</span><span class="token operator">*</span><span class="token number">200</span><span class="token punctuation">)</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"请输入不同方案之间就某一个标准的的相对重要性（1-9，1，3，5，7，9分别表示标准A比标准B：同等重要、稍微重要、比较重要、很重要、绝对重要，2，4，6，8分别为中位数）"</span><span class="token punctuation">)</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"若就标准X，方案A不如方案B重要，则输入1/方案B比方案A的相对重要性，例如就标准X，方案A不如方案B重要，而方案B比方案A为3，那么方案A比方案B为1/3"</span><span class="token punctuation">)</span>
+            <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>len<span class="token punctuation">(</span>criteria_names<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+                <span class="token keyword">print</span><span class="token punctuation">(</span>f<span class="token string">"就 {Fore.YELLOW}{criteria_names[i]}{Style.RESET_ALL} 对方案之间的得分进行比较"</span><span class="token punctuation">.</span>center<span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">,</span> <span class="token string">"+"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                <span class="token keyword">for</span> j <span class="token keyword">in</span> range<span class="token punctuation">(</span>l <span class="token punctuation">:</span><span class="token operator">=</span> len<span class="token punctuation">(</span>plan_names<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+                    <span class="token keyword">for</span> k <span class="token keyword">in</span> range<span class="token punctuation">(</span>j<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span> l<span class="token punctuation">)</span><span class="token punctuation">:</span>
+                        <span class="token keyword">if</span> <span class="token string">"/"</span> <span class="token operator">not</span> <span class="token keyword">in</span> <span class="token punctuation">(</span>inp<span class="token punctuation">:</span><span class="token operator">=</span>input<span class="token punctuation">(</span>f<span class="token string">"请从 {Fore.YELLOW}{criteria_names[i]}{Style.RESET_ALL} 的角度，输入 {Fore.GREEN}{plan_names[j]}{Style.RESET_ALL} 对 {Fore.GREEN}{plan_names[k]}{Style.RESET_ALL} 的相对重要性："</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+                            plan_scores<span class="token punctuation">[</span>i<span class="token punctuation">,</span> j<span class="token punctuation">,</span> k<span class="token punctuation">]</span> <span class="token operator">=</span> int<span class="token punctuation">(</span>inp<span class="token punctuation">)</span>
+                        <span class="token keyword">else</span><span class="token punctuation">:</span>
+                            upper<span class="token punctuation">,</span> lower <span class="token operator">=</span> <span class="token punctuation">[</span>int<span class="token punctuation">(</span>j<span class="token punctuation">)</span> <span class="token keyword">for</span> j <span class="token keyword">in</span> inp<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">"/"</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+                            plan_scores<span class="token punctuation">[</span>i<span class="token punctuation">,</span> j<span class="token punctuation">,</span> k<span class="token punctuation">]</span> <span class="token operator">=</span> upper <span class="token operator">/</span> lower
+                position <span class="token operator">=</span> np<span class="token punctuation">.</span>where<span class="token punctuation">(</span>plan_scores<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+                plan_scores<span class="token punctuation">[</span>i<span class="token punctuation">,</span> position<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> position<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">/</span> plan_scores<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>transpose<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">[</span>position<span class="token punctuation">]</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"输入的不同评价标准下方案间的对比矩阵为："</span><span class="token punctuation">)</span>
+            <span class="token keyword">for</span> c<span class="token punctuation">,</span> s <span class="token keyword">in</span> zip<span class="token punctuation">(</span>criteria_names<span class="token punctuation">,</span> plan_scores<span class="token punctuation">)</span><span class="token punctuation">:</span>
+                <span class="token keyword">print</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span>
+                <span class="token keyword">print</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"="</span><span class="token operator">*</span><span class="token number">200</span><span class="token punctuation">)</span>
+        <span class="token keyword">elif</span> method <span class="token operator">==</span> <span class="token string">"csv"</span><span class="token punctuation">:</span>
+            <span class="token keyword">pass</span>
+        <span class="token keyword">return</span> plan_scores
 
 
 
 
-if __name__ == "__main__":
-    ahp = AnalyticHierarchyProcess(criteria=["景色", "费用", "居住", "饮食", "旅途"], plans=["苏杭", "北戴河", "桂林"])
-    ahp.run()
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">"__main__"</span><span class="token punctuation">:</span>
+    ahp <span class="token operator">=</span> AnalyticHierarchyProcess<span class="token punctuation">(</span>criteria<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">"景色"</span><span class="token punctuation">,</span> <span class="token string">"费用"</span><span class="token punctuation">,</span> <span class="token string">"居住"</span><span class="token punctuation">,</span> <span class="token string">"饮食"</span><span class="token punctuation">,</span> <span class="token string">"旅途"</span><span class="token punctuation">]</span><span class="token punctuation">,</span> plans<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">"苏杭"</span><span class="token punctuation">,</span> <span class="token string">"北戴河"</span><span class="token punctuation">,</span> <span class="token string">"桂林"</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+    ahp<span class="token punctuation">.</span>run<span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>运行结果</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220106135400089.png" alt="层次分析法运行结果"></p>
@@ -1404,7 +1404,7 @@ if __name__ == "__main__":
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">181.6k</span>
+                        class="white-color">191.3k</span>
             
             
             

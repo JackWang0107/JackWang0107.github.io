@@ -598,7 +598,7 @@ This blog is the first part of reading notes of  _Operating System Con">
 <li>CPU在收到控制器发来的消息后，会中止当前正在执行的指令，继续去每个句子后添加回车。</li>
 </ul>
 <p>具体的时序图如下：</p>
-<pre class="line-numbers language-lang-mermaid"><code class="language-lang-mermaid">    sequenceDiagram
+<pre class="line-numbers language-mermaid"><code class="language-mermaid">    sequenceDiagram
     CPU->>USB Port 1: Fetch the data from file zzzzzz for me
     USB Port 1 -->> Main Memory: Put data1： xxxxxxx on yyyyyyy
     USB Port 1 -->> Main Memory: Put data2： xxxxxxx on yyyyyyy
@@ -635,10 +635,10 @@ This blog is the first part of reading notes of  _Operating System Con">
 <h2 id="13-Interrupt-Handling"><a href="#13-Interrupt-Handling" class="headerlink" title="13. Interrupt Handling"></a>13. Interrupt Handling</h2><p>当中断发生的时候（例如计时器中断），操作系统具体是如何完成整个中断的过程的？</p>
 <p>首先我们需要明白，中断的定义就是中止运行当前程序，然后去运行新的程序。因此对中断的处理其实就包含两步，第一步就是中止当前程序的运行，第二步就是运行新的程序。</p>
 <p>对于中止当前程序的运行，需要做的首先就是保存当前程序运算到中间得到的一些中间变量。例如我们让一个程序循环从1加到1000，例如：</p>
-<pre class="line-numbers language-lang-python"><code class="language-lang-python">sum = 0
-for i in range(1, 1001):
-    sum += i
-print(i)
+<pre class="line-numbers language-python"><code class="language-python">sum <span class="token operator">=</span> <span class="token number">0</span>
+<span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1001</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    sum <span class="token operator">+=</span> i
+<span class="token keyword">print</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>那么在加到50的时候程序可能由于时间片用完了，导致程序需要被中断，CPU转而去运行别的程序。此时需要保存循环变量i。以及保存在寄存器的中间变量sum。</p>
 <p>接下来第二步就是运行新的程序，即<strong>中断处理程序(Interruput Handler或者Interrupt Service Routine，ISR)</strong>。在计算机内部，中断的表示是利用一个整数来表示的。而接下来去运行中断处理程序处理中断处理程序。由于中断可能会有很多种，因此中断处理程序也会有很多。为此需要指定一个中断 — &gt;中断处理程序的映射表，这个映射表称为<strong>中断表(Interrupt Table)</strong>。一个典型的中断表如下</p>
@@ -1241,7 +1241,7 @@ print(i)
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">181.6k</span>
+                        class="white-color">191.3k</span>
             
             
             

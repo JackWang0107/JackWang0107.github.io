@@ -494,7 +494,7 @@ g_i(x)\leq 0, &i=1,\cdots,q\\
 lb\leq x \leq ub
 \end{cases}</script><h2 id="3-非线性规划问题的Python求解"><a href="#3-非线性规划问题的Python求解" class="headerlink" title="3. 非线性规划问题的Python求解"></a>3. 非线性规划问题的Python求解</h2><p>使用Python求解非线性规划问题，主要使用SciPy中的minimize函数，这个函数实际上是多个优化算法的接口。</p>
 <p>该函数的函数头如下</p>
-<pre class="line-numbers language-lang-python"><code class="language-lang-python">scipy.optimize.minimize(fun, x0, args=(), method=None, jac=None, hess=None, hessp=None, bounds=None, constraints=(), tol=None, callback=None, options=None)
+<pre class="line-numbers language-python"><code class="language-python">scipy<span class="token punctuation">.</span>optimize<span class="token punctuation">.</span>minimize<span class="token punctuation">(</span>fun<span class="token punctuation">,</span> x0<span class="token punctuation">,</span> args<span class="token operator">=</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> method<span class="token operator">=</span>None<span class="token punctuation">,</span> jac<span class="token operator">=</span>None<span class="token punctuation">,</span> hess<span class="token operator">=</span>None<span class="token punctuation">,</span> hessp<span class="token operator">=</span>None<span class="token punctuation">,</span> bounds<span class="token operator">=</span>None<span class="token punctuation">,</span> constraints<span class="token operator">=</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> tol<span class="token operator">=</span>None<span class="token punctuation">,</span> callback<span class="token operator">=</span>None<span class="token punctuation">,</span> options<span class="token operator">=</span>None<span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>其中，我们需要关注的变量只有下面几个：</p>
 <ul>
@@ -506,7 +506,7 @@ lb\leq x \leq ub
 </li>
 <li><p>constrains：元组形式的约束条件，其中每个约束条件是元组中的一个项，用一个字典表示</p>
 <p>以字典形式表示的约束条件按照如下方式</p>
-<pre class="line-numbers language-lang-python"><code class="language-lang-python">{'type': 'ineq', 'fun': functionname}
+<pre class="line-numbers language-python"><code class="language-python"><span class="token punctuation">{</span><span class="token string">'type'</span><span class="token punctuation">:</span> <span class="token string">'ineq'</span><span class="token punctuation">,</span> <span class="token string">'fun'</span><span class="token punctuation">:</span> functionname<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>其中：</p>
 <ul>
@@ -526,103 +526,103 @@ x_1^2-x_2+x_3^2\ge 0\\
 x_2+2x_3^2=3\\
 x_1,x_2,x_3\ge 0
 \end{cases}</script><h3 id="A-定义决策变量"><a href="#A-定义决策变量" class="headerlink" title="A. 定义决策变量"></a>A. 定义决策变量</h3><p>定义决策变量很简单，直接写一个函数就行了，注意这个函数的输入是和x0形状相同的Numpy的array</p>
-<pre class="line-numbers language-lang-python"><code class="language-lang-python">import numpy as np
-import scipy.optimize as scopt
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+<span class="token keyword">import</span> scipy<span class="token punctuation">.</span>optimize <span class="token keyword">as</span> scopt
 
 
-def objective(x: np.ndarray):
-    return sum(x ** 2)
+<span class="token keyword">def</span> <span class="token function">objective</span><span class="token punctuation">(</span>x<span class="token punctuation">:</span> np<span class="token punctuation">.</span>ndarray<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> sum<span class="token punctuation">(</span>x <span class="token operator">**</span> <span class="token number">2</span><span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="B-定义约束"><a href="#B-定义约束" class="headerlink" title="B. 定义约束"></a>B. 定义约束</h3><p>注意，约束的定义也是写成Python中的函数，函数的参数也是Numpy的array</p>
-<pre class="line-numbers language-lang-python"><code class="language-lang-python">def constrain1(x: np.ndarray):
-    return x[0] ** 2 - x[1] + x[2] ** 2
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">constrain1</span><span class="token punctuation">(</span>x<span class="token punctuation">:</span> np<span class="token punctuation">.</span>ndarray<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> x<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">**</span> <span class="token number">2</span> <span class="token operator">-</span> x<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">+</span> x<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">**</span> <span class="token number">2</span>
 
-def constrain2(x):
-    return -(x[0] + x[1] ** 2 + x[2] ** 3 - 20)
+<span class="token keyword">def</span> <span class="token function">constrain2</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> <span class="token operator">-</span><span class="token punctuation">(</span>x<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">+</span> x<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">**</span> <span class="token number">2</span> <span class="token operator">+</span> x<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">**</span> <span class="token number">3</span> <span class="token operator">-</span> <span class="token number">20</span><span class="token punctuation">)</span>
 
-def constrain3(x):
-    return -x[0] - x[1] ** 2 + 2
+<span class="token keyword">def</span> <span class="token function">constrain3</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> <span class="token operator">-</span>x<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">-</span> x<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">**</span> <span class="token number">2</span> <span class="token operator">+</span> <span class="token number">2</span>
 
-def constrain4(x):
-    return x[1] + 2 * x[2] ** 2 - 3
+<span class="token keyword">def</span> <span class="token function">constrain4</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> x<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">2</span> <span class="token operator">*</span> x<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">**</span> <span class="token number">2</span> <span class="token operator">-</span> <span class="token number">3</span>
 
-def x0_bound(x):
-    return x[0] - 0
+<span class="token keyword">def</span> <span class="token function">x0_bound</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> x<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">0</span>
 
-def x1_bound(x):
-    return x[1] - 0
+<span class="token keyword">def</span> <span class="token function">x1_bound</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> x<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">0</span>
 
-def x2_bound(x):
-    return x[2] - 0
+<span class="token keyword">def</span> <span class="token function">x2_bound</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> x<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">0</span>
 
-constrains = (
-    {"type": "ineq", "fun": constrain1},
-    {"type": "ineq", "fun": constrain2},
-    {"type": "eq", "fun": constrain3},
-    {"type": "eq", "fun": constrain4},
-    {"type": "ineq", "fun": x0_bound},
-    {"type": "ineq", "fun": x1_bound},
-    {"type": "ineq", "fun": x2_bound},
-)
+constrains <span class="token operator">=</span> <span class="token punctuation">(</span>
+    <span class="token punctuation">{</span><span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"ineq"</span><span class="token punctuation">,</span> <span class="token string">"fun"</span><span class="token punctuation">:</span> constrain1<span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span><span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"ineq"</span><span class="token punctuation">,</span> <span class="token string">"fun"</span><span class="token punctuation">:</span> constrain2<span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span><span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"eq"</span><span class="token punctuation">,</span> <span class="token string">"fun"</span><span class="token punctuation">:</span> constrain3<span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span><span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"eq"</span><span class="token punctuation">,</span> <span class="token string">"fun"</span><span class="token punctuation">:</span> constrain4<span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span><span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"ineq"</span><span class="token punctuation">,</span> <span class="token string">"fun"</span><span class="token punctuation">:</span> x0_bound<span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span><span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"ineq"</span><span class="token punctuation">,</span> <span class="token string">"fun"</span><span class="token punctuation">:</span> x1_bound<span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span><span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"ineq"</span><span class="token punctuation">,</span> <span class="token string">"fun"</span><span class="token punctuation">:</span> x2_bound<span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="C-调用求解"><a href="#C-调用求解" class="headerlink" title="C. 调用求解"></a>C. 调用求解</h3><p>调用函数求解，依次填入参数即可</p>
-<pre class="line-numbers language-lang-python"><code class="language-lang-python">x0 = np.array([1, 2, 3])
+<pre class="line-numbers language-python"><code class="language-python">x0 <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
 
-result: scopt.OptimizeResult = scopt.minimize(fun=objective, x0=x0, constraints=constrains)
+result<span class="token punctuation">:</span> scopt<span class="token punctuation">.</span>OptimizeResult <span class="token operator">=</span> scopt<span class="token punctuation">.</span>minimize<span class="token punctuation">(</span>fun<span class="token operator">=</span>objective<span class="token punctuation">,</span> x0<span class="token operator">=</span>x0<span class="token punctuation">,</span> constraints<span class="token operator">=</span>constrains<span class="token punctuation">)</span>
 
-print(result.message)
-print(result.x)
-print(result.fun)
+<span class="token keyword">print</span><span class="token punctuation">(</span>result<span class="token punctuation">.</span>message<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>result<span class="token punctuation">.</span>x<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>result<span class="token punctuation">.</span>fun<span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>求解结果</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220104173928413.png" alt="求解结果"></p>
 <h3 id="D-完整代码"><a href="#D-完整代码" class="headerlink" title="D. 完整代码"></a>D. 完整代码</h3><p>完整的代码如下，注意约束条件也可以指定bounds参数</p>
-<pre class="line-numbers language-lang-python"><code class="language-lang-python">import numpy as np
-import scipy.optimize as scopt
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+<span class="token keyword">import</span> scipy<span class="token punctuation">.</span>optimize <span class="token keyword">as</span> scopt
 
-def objective(x: np.ndarray):
-    return sum(x ** 2)
+<span class="token keyword">def</span> <span class="token function">objective</span><span class="token punctuation">(</span>x<span class="token punctuation">:</span> np<span class="token punctuation">.</span>ndarray<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> sum<span class="token punctuation">(</span>x <span class="token operator">**</span> <span class="token number">2</span><span class="token punctuation">)</span>
 
-def constrain1(x: np.ndarray):
-    return x[0] ** 2 - x[1] + x[2] ** 2
+<span class="token keyword">def</span> <span class="token function">constrain1</span><span class="token punctuation">(</span>x<span class="token punctuation">:</span> np<span class="token punctuation">.</span>ndarray<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> x<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">**</span> <span class="token number">2</span> <span class="token operator">-</span> x<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">+</span> x<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">**</span> <span class="token number">2</span>
 
-def constrain2(x):
-    return -(x[0] + x[1] ** 2 + x[2] ** 3 - 20)
+<span class="token keyword">def</span> <span class="token function">constrain2</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> <span class="token operator">-</span><span class="token punctuation">(</span>x<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">+</span> x<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">**</span> <span class="token number">2</span> <span class="token operator">+</span> x<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">**</span> <span class="token number">3</span> <span class="token operator">-</span> <span class="token number">20</span><span class="token punctuation">)</span>
 
-def constrain3(x):
-    return -x[0] - x[1] ** 2 + 2
+<span class="token keyword">def</span> <span class="token function">constrain3</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> <span class="token operator">-</span>x<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">-</span> x<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">**</span> <span class="token number">2</span> <span class="token operator">+</span> <span class="token number">2</span>
 
-def constrain4(x):
-    return x[1] + 2 * x[2] ** 2 - 3
+<span class="token keyword">def</span> <span class="token function">constrain4</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> x<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">2</span> <span class="token operator">*</span> x<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">**</span> <span class="token number">2</span> <span class="token operator">-</span> <span class="token number">3</span>
 
-def x0_bound(x):
-    return x[0] - 0
+<span class="token keyword">def</span> <span class="token function">x0_bound</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> x<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">0</span>
 
-def x1_bound(x):
-    return x[1] - 0
+<span class="token keyword">def</span> <span class="token function">x1_bound</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> x<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">0</span>
 
-def x2_bound(x):
-    return x[2] - 0
+<span class="token keyword">def</span> <span class="token function">x2_bound</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> x<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">0</span>
 
-constrains = (
-    {"type": "ineq", "fun": constrain1},
-    {"type": "ineq", "fun": constrain2},
-    {"type": "eq", "fun": constrain3},
-    {"type": "eq", "fun": constrain4},
-    # {"type": "ineq", "fun": x0_bound},
-    # {"type": "ineq", "fun": x1_bound},
-    # {"type": "ineq", "fun": x2_bound},
-)
+constrains <span class="token operator">=</span> <span class="token punctuation">(</span>
+    <span class="token punctuation">{</span><span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"ineq"</span><span class="token punctuation">,</span> <span class="token string">"fun"</span><span class="token punctuation">:</span> constrain1<span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span><span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"ineq"</span><span class="token punctuation">,</span> <span class="token string">"fun"</span><span class="token punctuation">:</span> constrain2<span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span><span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"eq"</span><span class="token punctuation">,</span> <span class="token string">"fun"</span><span class="token punctuation">:</span> constrain3<span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span><span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"eq"</span><span class="token punctuation">,</span> <span class="token string">"fun"</span><span class="token punctuation">:</span> constrain4<span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token comment" spellcheck="true"># {"type": "ineq", "fun": x0_bound},</span>
+    <span class="token comment" spellcheck="true"># {"type": "ineq", "fun": x1_bound},</span>
+    <span class="token comment" spellcheck="true"># {"type": "ineq", "fun": x2_bound},</span>
+<span class="token punctuation">)</span>
 
-bounds = [(0, None) for i in range(3)]
+bounds <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> None<span class="token punctuation">)</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
 
-x0 = np.array([1, 2, 3])
+x0 <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
 
-result: scopt.OptimizeResult = scopt.minimize(fun=objective, x0=x0, constraints=constrains, bounds=bounds)
+result<span class="token punctuation">:</span> scopt<span class="token punctuation">.</span>OptimizeResult <span class="token operator">=</span> scopt<span class="token punctuation">.</span>minimize<span class="token punctuation">(</span>fun<span class="token operator">=</span>objective<span class="token punctuation">,</span> x0<span class="token operator">=</span>x0<span class="token punctuation">,</span> constraints<span class="token operator">=</span>constrains<span class="token punctuation">,</span> bounds<span class="token operator">=</span>bounds<span class="token punctuation">)</span>
 
-print(result.message)
-print(result.x)
-print(result.fun)
+<span class="token keyword">print</span><span class="token punctuation">(</span>result<span class="token punctuation">.</span>message<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>result<span class="token punctuation">.</span>x<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>result<span class="token punctuation">.</span>fun<span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="4-非线性规划例子"><a href="#4-非线性规划例子" class="headerlink" title="4. 非线性规划例子"></a>4. 非线性规划例子</h2><p>下面介绍即非线性规划的数学模型的例子</p>
 <h3 id="A-选址供应问题"><a href="#A-选址供应问题" class="headerlink" title="A. 选址供应问题"></a>A. 选址供应问题</h3><p>问题的具体描述如下</p>
@@ -1198,7 +1198,7 @@ print(result.fun)
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">181.6k</span>
+                        class="white-color">191.3k</span>
             
             
             

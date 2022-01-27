@@ -469,10 +469,10 @@ Latex基础-Overleaf本地安装1. 前言对于我个人而言，我经常用Mar
 <h2 id="2-Overleaf本地安装"><a href="#2-Overleaf本地安装" class="headerlink" title="2. Overleaf本地安装"></a>2. Overleaf本地安装</h2><p>就像在前面所说的，Overleaf本身是一个开源的项目，Overleaf官方则是在Overleaf的基础上提供了团队协作、云文件存储等云服务功能。因此我们在本地完全可以搭建出来一个Overleaf环境出来。只不过我们自己搭建的Overleaf只能给自己用，没有办法和别人协作。</p>
 <p>Overleaf程序本身是运行在docker里的，然后通过docker的端口映射提供了浏览器的localhost访问。因此首先需要安装docker</p>
 <h3 id="1-Docker安装"><a href="#1-Docker安装" class="headerlink" title="1. Docker安装"></a>1. Docker安装</h3><p>本地机器首先卸载一下老版本的docker</p>
-<pre class="line-numbers language-lang-shell"><code class="language-lang-shell">sudo apt-get remove docker docker-engine docker.io containerd runc
+<pre class="line-numbers language-shell"><code class="language-shell">sudo apt-get remove docker docker-engine docker.io containerd runc
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>然后从apt的仓库里安装依赖</p>
-<pre class="line-numbers language-lang-shell"><code class="language-lang-shell">sudo apt-get update
+<pre class="line-numbers language-shell"><code class="language-shell">sudo apt-get update
 sudo apt-get install \
     ca-certificates \
     curl \
@@ -480,63 +480,63 @@ sudo apt-get install \
     lsb-release
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>接下来添加Docker官方的GPG Key</p>
-<pre class="line-numbers language-lang-shell"><code class="language-lang-shell">curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+<pre class="line-numbers language-shell"><code class="language-shell">curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>设定下载稳定版本的Docker</p>
-<pre class="line-numbers language-lang-shell"><code class="language-lang-shell">echo \
+<pre class="line-numbers language-shell"><code class="language-shell">echo \
   "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
   $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>然后安装即可</p>
-<pre class="line-numbers language-lang-shell"><code class="language-lang-shell">sudo apt-get update
+<pre class="line-numbers language-shell"><code class="language-shell">sudo apt-get update
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220117145809738.png" alt="docker安装过程"></p>
 <p>安装完了之后运行一下helloword验证一下安装</p>
-<pre class="line-numbers language-lang-shell"><code class="language-lang-shell">sudo docker run hello-world
+<pre class="line-numbers language-shell"><code class="language-shell">sudo docker run hello-world
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220117145921325.png" alt="验证的结果"></p>
 <p>出现上面的信息就表示安装成功</p>
 <h3 id="2-把当前用户加入到docker组里"><a href="#2-把当前用户加入到docker组里" class="headerlink" title="2. 把当前用户加入到docker组里"></a>2. 把当前用户加入到docker组里</h3><p>在安装完docker后，默认会创建一个docker组，只有组内的用户才可以有权限使用docker的命令，因此还需要把当前用户加入到docker组里去</p>
-<pre class="line-numbers language-lang-shell"><code class="language-lang-shell">sudo tail -n 5 /etc/group
+<pre class="line-numbers language-shell"><code class="language-shell">sudo tail -n 5 /etc/group
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220117151049856.png" alt="可以看到新创建的docker组"></p>
 <p>把当前登录用户加入到docker组里去</p>
-<pre class="line-numbers language-lang-shell"><code class="language-lang-shell">sudo gpasswd -a $USER docker
+<pre class="line-numbers language-shell"><code class="language-shell">sudo gpasswd -a $USER docker
 # 更新一下docker组的信息
 newgrp docker
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>然后我们不用sudo运行一下上面的docker命令看看</p>
-<pre class="line-numbers language-lang-shell"><code class="language-lang-shell">docker run hello-world
+<pre class="line-numbers language-shell"><code class="language-shell">docker run hello-world
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220117151603677.png" alt="运行结果"></p>
 <h3 id="3-安装以及配置Overleaf项目"><a href="#3-安装以及配置Overleaf项目" class="headerlink" title="3. 安装以及配置Overleaf项目"></a>3. 安装以及配置Overleaf项目</h3><p>Overleaf项目被打包成了docker的一个镜像，我们把Overleaf的镜像从dockerhub里拉下来然后在本地创建容器运行即可</p>
-<pre class="line-numbers language-lang-shell"><code class="language-lang-shell">docker pull sharelatex/sharelatex
+<pre class="line-numbers language-shell"><code class="language-shell">docker pull sharelatex/sharelatex
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>因为docker的文件系统是分层的，因此等待一段时间等所有层下载完之后就ok了</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220117153754354.png" alt="正在拉去镜像"></p>
 <p>接下来拉取一下官方的Overleaf配置文件</p>
-<pre class="line-numbers language-lang-shell"><code class="language-lang-shell">cd ~/projects
+<pre class="line-numbers language-shell"><code class="language-shell">cd ~/projects
 mkdir overleaf
 cd overleaf
 wget https://raw.githubusercontent.com/sharelatex/sharelatex/master/docker-compose.yml
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>我们下载配置文件后，可以根据需要修改一下启动Overleaf的容器的时候的配置，例如：因为默认的启动端口是80往往有Apache或者Nginx，因此把Overleaf容器的80端口改到本机的其他端口，例如改到本机的8000上去</p>
-<pre class="line-numbers language-lang-shell"><code class="language-lang-shell">sudo vim docker-compose.yml
+<pre class="line-numbers language-shell"><code class="language-shell">sudo vim docker-compose.yml
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220117154606461.png" alt="修改容器的端口映射"></p>
 <h3 id="4-初次启动Overleaf容器以及texlive安装"><a href="#4-初次启动Overleaf容器以及texlive安装" class="headerlink" title="4. 初次启动Overleaf容器以及texlive安装"></a>4. 初次启动Overleaf容器以及texlive安装</h3><p>启动Overleaf需要在配置文件在的文件夹下启动。</p>
-<pre class="line-numbers language-lang-shell"><code class="language-lang-shell">docker-compose up -d
+<pre class="line-numbers language-shell"><code class="language-shell">docker-compose up -d
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>初次启动需要下载一下数据库之类的东西</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220117155148568.png" alt="等待下载"></p>
 <p>然后进入容器即可</p>
-<pre class="line-numbers language-lang-shell"><code class="language-lang-shell">docker exec -it sharelatex bash
+<pre class="line-numbers language-shell"><code class="language-shell">docker exec -it sharelatex bash
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>注意进入容器后命令行的提示符会发生改变</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220117155315366.png" alt="进入容器"></p>
 <p>接下来在容器内安装编译所需要的完整的texlive，包含大概4000个常用包。考虑到速度可能会比较慢，所以走清华源</p>
-<pre class="line-numbers language-lang-shell"><code class="language-lang-shell"># 换源
+<pre class="line-numbers language-shell"><code class="language-shell"># 换源
 tlmgr option repository https://mirrors.tuna.tsinghua.edu.cn/CTAN/systems/texlive/tlnet/
 # 更新
 tlmgr update --self --all
@@ -547,7 +547,7 @@ tlmgr install scheme-full
 <p>最后，等了一个半小时左右，总算是把4138个包全部下载好了</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220117173418961.png" alt="下载成功的结果"></p>
 <p>这里下载好了之后，我们对下载了包的镜像进行一下提交，这样我们后面换了机器之后也可以随时部署，不需要再去下载一遍这些包</p>
-<pre class="line-numbers language-lang-shell"><code class="language-lang-shell">docker commit sharelatex sharelatex/sharelatex:with-texlive-full
+<pre class="line-numbers language-shell"><code class="language-shell">docker commit sharelatex sharelatex/sharelatex:with-texlive-full
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <h2 id="3-Overleaf的使用"><a href="#3-Overleaf的使用" class="headerlink" title="3. Overleaf的使用"></a>3. Overleaf的使用</h2><p>接下来我们直接访问<code>http://ip:端口/</code>就可以使用Overleaf了，不过在此之前，我们先创建一下管理员账户</p>
 <h3 id="1-创建管理员账户"><a href="#1-创建管理员账户" class="headerlink" title="1. 创建管理员账户"></a>1. 创建管理员账户</h3><p>管理员（后台）登录在<code>http://ip:端口/launchpad</code></p>
@@ -566,13 +566,13 @@ tlmgr install scheme-full
 <h3 id="2-关于镜像"><a href="#2-关于镜像" class="headerlink" title="2. 关于镜像"></a>2. 关于镜像</h3><p>我们前面在下载好了各种latex的包之后，通过<code>docker commit</code>命令把我们的修改提交到了镜像上。然而有的时候我们可能需要在新的机器上，例如课题组的服务器上跑一个私有Overleaf。那么这个时候我们就需要把下载好包的镜像复制到服务器上。所以我们还需要把镜像打包出来方便迁移。</p>
 <p>当然，关于docker更多的内容，这里不会介绍，在我的后面的docker专栏会有所介绍</p>
 <h4 id="A-打包镜像"><a href="#A-打包镜像" class="headerlink" title="A. 打包镜像"></a>A. 打包镜像</h4><p>因为docker的文件系统是分层存储的，而直接以分层文件形式迁移镜像的话就很不方便，所以我们需要首先把镜像打包为一个tarball包</p>
-<pre class="line-numbers language-lang-shell"><code class="language-lang-shell">docker save -o ./OverLeaf.tar sharelatex/sharelatex:with-texlive-full
+<pre class="line-numbers language-shell"><code class="language-shell">docker save -o ./OverLeaf.tar sharelatex/sharelatex:with-texlive-full
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>打包时间会比较长，因为下载了所有的包之后会比较大高达7.6G，打包之后就会得到一个镜像，未来我们只需要把这个镜像复制到目标计算机上然后完成下面的步骤就可以了</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220118192015987.png" alt="打包之后的文件非常大"></p>
 <h4 id="B-导入镜像"><a href="#B-导入镜像" class="headerlink" title="B. 导入镜像"></a>B. 导入镜像</h4><p>我们上面是通过docker把分层的image打包为了tarball文件，然后我们把tarball文件复制到目标计算机上后，其实是没有办法直接解压tarball文件然后直接使用的，我们还需要通过docker把这个文件通过docker还原为一个镜像。</p>
 <p>主语，下面这条命令要在目标机器（没有Overleaf的机器）上运行</p>
-<pre class="line-numbers language-lang-shell"><code class="language-lang-shell">docker load -i OverLeaf.tar
+<pre class="line-numbers language-shell"><code class="language-shell">docker load -i OverLeaf.tar
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>注意，由于我们在提交镜像后可能有新写了文章，这个时候打包的镜像里其实是没有你写的文章的，因此文章还是需要另外保存的</p>
 
@@ -1105,7 +1105,7 @@ tlmgr install scheme-full
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">181.6k</span>
+                        class="white-color">191.3k</span>
             
             
             

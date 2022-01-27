@@ -435,14 +435,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    4.9k
+                    5.6k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    18 分
+                    22 分
                 </div>
                 
 
@@ -735,48 +735,48 @@ x_1+\frac9{14}x_2 \leq \frac{51}{14}\\
 x_1, x_2 \ge 0\\
 x_1, x_2为整数
 \end{cases}</script><h3 id="A-定义问题"><a href="#A-定义问题" class="headerlink" title="A. 定义问题"></a>A. 定义问题</h3><p>PuLP求解线性规划问题第一步就是创建一个线性规划问题（Linear Program Problem，LpProblem）。PuLP中将线性规划问题抽象为一个类，而诸如约束条件、优化目标、决策变量等等都是该类下的属性</p>
-<pre class="line-numbers language-lang-python"><code class="language-lang-python">import pulp
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> pulp
 
-problem: pulp.LpProblem = pulp.LpProblem(name="线性规划例子", sense=pulp.LpMaximize)
+problem<span class="token punctuation">:</span> pulp<span class="token punctuation">.</span>LpProblem <span class="token operator">=</span> pulp<span class="token punctuation">.</span>LpProblem<span class="token punctuation">(</span>name<span class="token operator">=</span><span class="token string">"线性规划例子"</span><span class="token punctuation">,</span> sense<span class="token operator">=</span>pulp<span class="token punctuation">.</span>LpMaximize<span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>我们在初始化该类的时候需要指定该问题的名称，以及优化的类型，是最大值还是最小值</p>
 <h3 id="B-创建决策变量"><a href="#B-创建决策变量" class="headerlink" title="B. 创建决策变量"></a>B. 创建决策变量</h3><p>同样，决策变量也被抽象为了一个类，因此我们需要对其进行初始化</p>
-<pre class="line-numbers language-lang-python"><code class="language-lang-python">x1 = pulp.LpVariable(name="x1", cat=pulp.LpInteger, lowBound=0)
-x2 = pulp.LpVariable(name="x2", cat=pulp.LpInteger, lowBound=0)
+<pre class="line-numbers language-python"><code class="language-python">x1 <span class="token operator">=</span> pulp<span class="token punctuation">.</span>LpVariable<span class="token punctuation">(</span>name<span class="token operator">=</span><span class="token string">"x1"</span><span class="token punctuation">,</span> cat<span class="token operator">=</span>pulp<span class="token punctuation">.</span>LpInteger<span class="token punctuation">,</span> lowBound<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span>
+x2 <span class="token operator">=</span> pulp<span class="token punctuation">.</span>LpVariable<span class="token punctuation">(</span>name<span class="token operator">=</span><span class="token string">"x2"</span><span class="token punctuation">,</span> cat<span class="token operator">=</span>pulp<span class="token punctuation">.</span>LpInteger<span class="token punctuation">,</span> lowBound<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>我们在创建决策变量的时候首先需要指定决策变量的名称，然后指定其类型，因为我们要求解的整数规划问题，因此我们指定这两个变量的取值是整数。</p>
 <p>此外我们还指定了这两个变量的下界都是0，类似与SciPy中连续的线性规划，我们不指定上界（上届为None）的时候，默认是无穷</p>
 <h3 id="C-设置优化目标和约束"><a href="#C-设置优化目标和约束" class="headerlink" title="C. 设置优化目标和约束"></a>C. 设置优化目标和约束</h3><p>我们设置优化目标和添加约束的时候，既可以通过LpProblem类的接口显示的添加，也可以通过其重载的运算符完成</p>
-<pre class="line-numbers language-lang-python"><code class="language-lang-python">problem.setObjective(x1 + x2)
+<pre class="line-numbers language-python"><code class="language-python">problem<span class="token punctuation">.</span>setObjective<span class="token punctuation">(</span>x1 <span class="token operator">+</span> x2<span class="token punctuation">)</span>
 
-problem += x1 + 9/14 * x2 <=51/14, "约束1"
-problem += pulp.LpConstraint(e=(-2 * x1 + x2), sense=pulp.LpConstraintLE, rhs=1/3, name="约束2")
-# problem += -2 * x1 + x2 <= 1/3, "约束2"
+problem <span class="token operator">+=</span> x1 <span class="token operator">+</span> <span class="token number">9</span><span class="token operator">/</span><span class="token number">14</span> <span class="token operator">*</span> x2 <span class="token operator">&lt;=</span><span class="token number">51</span><span class="token operator">/</span><span class="token number">14</span><span class="token punctuation">,</span> <span class="token string">"约束1"</span>
+problem <span class="token operator">+=</span> pulp<span class="token punctuation">.</span>LpConstraint<span class="token punctuation">(</span>e<span class="token operator">=</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">2</span> <span class="token operator">*</span> x1 <span class="token operator">+</span> x2<span class="token punctuation">)</span><span class="token punctuation">,</span> sense<span class="token operator">=</span>pulp<span class="token punctuation">.</span>LpConstraintLE<span class="token punctuation">,</span> rhs<span class="token operator">=</span><span class="token number">1</span><span class="token operator">/</span><span class="token number">3</span><span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">"约束2"</span><span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true"># problem += -2 * x1 + x2 &lt;= 1/3, "约束2"</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>上面我们设定优化目标是$x_1+x_2$，然后分别通过problem重载的+=符号、提供的类进行约束添加</p>
 <p>我们此时可以打印一下problem，就能够看到添加了目标和约束之后的问题</p>
-<pre class="line-numbers language-lang-python"><code class="language-lang-python">>>> print(problem)
-线性规划例子:
+<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">>></span><span class="token operator">></span> <span class="token keyword">print</span><span class="token punctuation">(</span>problem<span class="token punctuation">)</span>
+线性规划例子<span class="token punctuation">:</span>
 MAXIMIZE
-1*x1 + 1*x2 + 0
+<span class="token number">1</span><span class="token operator">*</span>x1 <span class="token operator">+</span> <span class="token number">1</span><span class="token operator">*</span>x2 <span class="token operator">+</span> <span class="token number">0</span>
 SUBJECT TO
-约束1: x1 + 0.642857142857 x2 <= 3.64285714286
+约束<span class="token number">1</span><span class="token punctuation">:</span> x1 <span class="token operator">+</span> <span class="token number">0.642857142857</span> x2 <span class="token operator">&lt;=</span> <span class="token number">3.64285714286</span>
 
-约束2: - 2 x1 + x2 <= 0.333333333333
+约束<span class="token number">2</span><span class="token punctuation">:</span> <span class="token operator">-</span> <span class="token number">2</span> x1 <span class="token operator">+</span> x2 <span class="token operator">&lt;=</span> <span class="token number">0.333333333333</span>
 
 VARIABLES
-0 <= x1 Integer
-0 <= x2 Integer
+<span class="token number">0</span> <span class="token operator">&lt;=</span> x1 Integer
+<span class="token number">0</span> <span class="token operator">&lt;=</span> x2 Integer
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220103151645040.png" alt="运行结果"></p>
 <h3 id="D-求解"><a href="#D-求解" class="headerlink" title="D. 求解"></a>D. 求解</h3><p>由于并不是所有的问题都是可解的因此在对问题进行求解后，实际上问题会有很多种状态，所有的解的状态保存在pulp.LpStatus这个常量中</p>
-<pre class="line-numbers language-lang-python"><code class="language-lang-python">>>> import pprint
->>> pprint.print(pulp.LpStatus)
-{-3: 'Undefined',
- -2: 'Unbounded',
- -1: 'Infeasible',
- 0: 'Not Solved',
- 1: 'Optimal'}
+<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">>></span><span class="token operator">></span> <span class="token keyword">import</span> pprint
+<span class="token operator">>></span><span class="token operator">></span> pprint<span class="token punctuation">.</span><span class="token keyword">print</span><span class="token punctuation">(</span>pulp<span class="token punctuation">.</span>LpStatus<span class="token punctuation">)</span>
+<span class="token punctuation">{</span><span class="token operator">-</span><span class="token number">3</span><span class="token punctuation">:</span> <span class="token string">'Undefined'</span><span class="token punctuation">,</span>
+ <span class="token operator">-</span><span class="token number">2</span><span class="token punctuation">:</span> <span class="token string">'Unbounded'</span><span class="token punctuation">,</span>
+ <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">:</span> <span class="token string">'Infeasible'</span><span class="token punctuation">,</span>
+ <span class="token number">0</span><span class="token punctuation">:</span> <span class="token string">'Not Solved'</span><span class="token punctuation">,</span>
+ <span class="token number">1</span><span class="token punctuation">:</span> <span class="token string">'Optimal'</span><span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>其中，</p>
 <ul>
@@ -787,42 +787,42 @@ VARIABLES
 <li>Undefined，即问题可能存在最优解，但是求解器的求解算法没有得出解</li>
 </ul>
 <p>因此，在我们对问题求解之后，只有Optimal才会得到最终的答案，所以我们求解结束之后输出的时候需要检查一下状态</p>
-<pre class="line-numbers language-lang-python"><code class="language-lang-python">print(problem)
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">print</span><span class="token punctuation">(</span>problem<span class="token punctuation">)</span>
 
-if pulp.LpStatus[status] == "Optimal":
-    variable: pulp.LpVariable
-    for variable in problem.variables():
-        print(f"{variable.name}={variable.varValue}")
-    print(pulp.value(problem.objective))
+<span class="token keyword">if</span> pulp<span class="token punctuation">.</span>LpStatus<span class="token punctuation">[</span>status<span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">"Optimal"</span><span class="token punctuation">:</span>
+    variable<span class="token punctuation">:</span> pulp<span class="token punctuation">.</span>LpVariable
+    <span class="token keyword">for</span> variable <span class="token keyword">in</span> problem<span class="token punctuation">.</span>variables<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span>f<span class="token string">"{variable.name}={variable.varValue}"</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>pulp<span class="token punctuation">.</span>value<span class="token punctuation">(</span>problem<span class="token punctuation">.</span>objective<span class="token punctuation">)</span><span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="E-完整代码"><a href="#E-完整代码" class="headerlink" title="E. 完整代码"></a>E. 完整代码</h3><p>完整代码如下</p>
-<pre class="line-numbers language-lang-python"><code class="language-lang-python">import pulp
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> pulp
 
-problem: pulp.LpProblem = pulp.LpProblem(name="线性规划例子", sense=pulp.LpMaximize)
+problem<span class="token punctuation">:</span> pulp<span class="token punctuation">.</span>LpProblem <span class="token operator">=</span> pulp<span class="token punctuation">.</span>LpProblem<span class="token punctuation">(</span>name<span class="token operator">=</span><span class="token string">"线性规划例子"</span><span class="token punctuation">,</span> sense<span class="token operator">=</span>pulp<span class="token punctuation">.</span>LpMaximize<span class="token punctuation">)</span>
 
-x1 = pulp.LpVariable(name="x1", cat=pulp.LpInteger, lowBound=0)
-x2 = pulp.LpVariable(name="x2", cat=pulp.LpInteger, lowBound=0)
+x1 <span class="token operator">=</span> pulp<span class="token punctuation">.</span>LpVariable<span class="token punctuation">(</span>name<span class="token operator">=</span><span class="token string">"x1"</span><span class="token punctuation">,</span> cat<span class="token operator">=</span>pulp<span class="token punctuation">.</span>LpInteger<span class="token punctuation">,</span> lowBound<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span>
+x2 <span class="token operator">=</span> pulp<span class="token punctuation">.</span>LpVariable<span class="token punctuation">(</span>name<span class="token operator">=</span><span class="token string">"x2"</span><span class="token punctuation">,</span> cat<span class="token operator">=</span>pulp<span class="token punctuation">.</span>LpInteger<span class="token punctuation">,</span> lowBound<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span>
 
-problem.setObjective(x1 + x2)
+problem<span class="token punctuation">.</span>setObjective<span class="token punctuation">(</span>x1 <span class="token operator">+</span> x2<span class="token punctuation">)</span>
 
-problem += x1 + 9/14 * x2 <=51/14, "约束1"
-problem += pulp.LpConstraint(e=(-2 * x1 + x2), sense=pulp.LpConstraintLE, rhs=1/3, name="约束2")
-# problem += -2 * x1 + x2 <= 1/3, "约束2"
+problem <span class="token operator">+=</span> x1 <span class="token operator">+</span> <span class="token number">9</span><span class="token operator">/</span><span class="token number">14</span> <span class="token operator">*</span> x2 <span class="token operator">&lt;=</span><span class="token number">51</span><span class="token operator">/</span><span class="token number">14</span><span class="token punctuation">,</span> <span class="token string">"约束1"</span>
+problem <span class="token operator">+=</span> pulp<span class="token punctuation">.</span>LpConstraint<span class="token punctuation">(</span>e<span class="token operator">=</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">2</span> <span class="token operator">*</span> x1 <span class="token operator">+</span> x2<span class="token punctuation">)</span><span class="token punctuation">,</span> sense<span class="token operator">=</span>pulp<span class="token punctuation">.</span>LpConstraintLE<span class="token punctuation">,</span> rhs<span class="token operator">=</span><span class="token number">1</span><span class="token operator">/</span><span class="token number">3</span><span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">"约束2"</span><span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true"># problem += -2 * x1 + x2 &lt;= 1/3, "约束2"</span>
 
 
-status = problem.solve()
+status <span class="token operator">=</span> problem<span class="token punctuation">.</span>solve<span class="token punctuation">(</span><span class="token punctuation">)</span>
 
-# print(status)
-print(problem)
+<span class="token comment" spellcheck="true"># print(status)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>problem<span class="token punctuation">)</span>
 
-if pulp.LpStatus[status] == "Optimal":
-    variable: pulp.LpVariable
-    for variable in problem.variables():
-        print(f"{variable.name}={variable.varValue}")
-    print(pulp.value(problem.objective))
+<span class="token keyword">if</span> pulp<span class="token punctuation">.</span>LpStatus<span class="token punctuation">[</span>status<span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">"Optimal"</span><span class="token punctuation">:</span>
+    variable<span class="token punctuation">:</span> pulp<span class="token punctuation">.</span>LpVariable
+    <span class="token keyword">for</span> variable <span class="token keyword">in</span> problem<span class="token punctuation">.</span>variables<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span>f<span class="token string">"{variable.name}={variable.varValue}"</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>pulp<span class="token punctuation">.</span>value<span class="token punctuation">(</span>problem<span class="token punctuation">.</span>objective<span class="token punctuation">)</span><span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>运行后的输出</p>
-<pre class="line-numbers language-lang-shell"><code class="language-lang-shell">Welcome to the CBC MILP Solver 
+<pre class="line-numbers language-shell"><code class="language-shell">Welcome to the CBC MILP Solver 
 Version: 2.10.3 
 Build Date: Dec 15 2019 
 
@@ -904,75 +904,75 @@ x2=2.0
 [0,0,0.03,0,0,0.08]\vec x^T\leq900\\
 x_i \ge 0,&i=1,\cdots,6
 \end {cases}</script><h3 id="E-编程求解"><a href="#E-编程求解" class="headerlink" title="E. 编程求解"></a>E. 编程求解</h3><p>代码如下</p>
-<pre class="line-numbers language-lang-python"><code class="language-lang-python">import pulp
-import numpy as np
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> pulp
+<span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
 
-problem: pulp.LpProblem = pulp.LpProblem(name="玩具最优生产问题", sense=pulp.LpMaximize)
+problem<span class="token punctuation">:</span> pulp<span class="token punctuation">.</span>LpProblem <span class="token operator">=</span> pulp<span class="token punctuation">.</span>LpProblem<span class="token punctuation">(</span>name<span class="token operator">=</span><span class="token string">"玩具最优生产问题"</span><span class="token punctuation">,</span> sense<span class="token operator">=</span>pulp<span class="token punctuation">.</span>LpMaximize<span class="token punctuation">)</span>
 
-variables = np.array([pulp.LpVariable(name=f"x_{i}", cat=pulp.LpInteger, lowBound=0) for i in range(6)], dtype=object)
+variables <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span>pulp<span class="token punctuation">.</span>LpVariable<span class="token punctuation">(</span>name<span class="token operator">=</span>f<span class="token string">"x_{i}"</span><span class="token punctuation">,</span> cat<span class="token operator">=</span>pulp<span class="token punctuation">.</span>LpInteger<span class="token punctuation">,</span> lowBound<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span> dtype<span class="token operator">=</span>object<span class="token punctuation">)</span>
 
-jia = np.array([0.01, 0.01,0.01,0.03,0.03,0.03])
-yi = np.array([0.02, 0, 0, 0.05, 0, 0])
-bing = np.array([0, 0.02,0,0,0.05,0])
-ding = np.array([0,0,0.03,0,0,0.08])
-profits = np.array([20,14,16,36,32,30])
+jia <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">0.01</span><span class="token punctuation">,</span> <span class="token number">0.01</span><span class="token punctuation">,</span><span class="token number">0.01</span><span class="token punctuation">,</span><span class="token number">0.03</span><span class="token punctuation">,</span><span class="token number">0.03</span><span class="token punctuation">,</span><span class="token number">0.03</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+yi <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">0.02</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0.05</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+bing <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0.02</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0.05</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+ding <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0.03</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0.08</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+profits <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">20</span><span class="token punctuation">,</span><span class="token number">14</span><span class="token punctuation">,</span><span class="token number">16</span><span class="token punctuation">,</span><span class="token number">36</span><span class="token punctuation">,</span><span class="token number">32</span><span class="token punctuation">,</span><span class="token number">30</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
 
-problem += jia @ variables <= 850, "甲工厂工时约束"
-problem += yi @ variables <= 700, "乙工厂工时约束"
-problem += bing @ variables <= 100, "丙工厂工时约束"
-problem += ding @ variables <= 900, "丁工厂工时约束"
+problem <span class="token operator">+=</span> jia @ variables <span class="token operator">&lt;=</span> <span class="token number">850</span><span class="token punctuation">,</span> <span class="token string">"甲工厂工时约束"</span>
+problem <span class="token operator">+=</span> yi @ variables <span class="token operator">&lt;=</span> <span class="token number">700</span><span class="token punctuation">,</span> <span class="token string">"乙工厂工时约束"</span>
+problem <span class="token operator">+=</span> bing @ variables <span class="token operator">&lt;=</span> <span class="token number">100</span><span class="token punctuation">,</span> <span class="token string">"丙工厂工时约束"</span>
+problem <span class="token operator">+=</span> ding @ variables <span class="token operator">&lt;=</span> <span class="token number">900</span><span class="token punctuation">,</span> <span class="token string">"丁工厂工时约束"</span>
 
-problem.setObjective(profits @ variables)
+problem<span class="token punctuation">.</span>setObjective<span class="token punctuation">(</span>profits @ variables<span class="token punctuation">)</span>
 
-print(problem)
+<span class="token keyword">print</span><span class="token punctuation">(</span>problem<span class="token punctuation">)</span>
 
-if pulp.LpStatus[problem.solve()] == "Optimal":
-    variable: pulp.LpVariable
-    for variable in problem.variables():
-        print(f"{variable.name} = {variable.varValue}")
-    print(pulp.value(problem.objective))
+<span class="token keyword">if</span> pulp<span class="token punctuation">.</span>LpStatus<span class="token punctuation">[</span>problem<span class="token punctuation">.</span>solve<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">"Optimal"</span><span class="token punctuation">:</span>
+    variable<span class="token punctuation">:</span> pulp<span class="token punctuation">.</span>LpVariable
+    <span class="token keyword">for</span> variable <span class="token keyword">in</span> problem<span class="token punctuation">.</span>variables<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span>f<span class="token string">"{variable.name} = {variable.varValue}"</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>pulp<span class="token punctuation">.</span>value<span class="token punctuation">(</span>problem<span class="token punctuation">.</span>objective<span class="token punctuation">)</span><span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>输出</p>
-<pre class="line-numbers language-lang-python"><code class="language-lang-python">玩具最优生产问题:
+<pre class="line-numbers language-python"><code class="language-python">玩具最优生产问题<span class="token punctuation">:</span>
 MAXIMIZE
-20*x_0 + 14*x_1 + 16*x_2 + 36*x_3 + 32*x_4 + 30*x_5 + 0
+<span class="token number">20</span><span class="token operator">*</span>x_0 <span class="token operator">+</span> <span class="token number">14</span><span class="token operator">*</span>x_1 <span class="token operator">+</span> <span class="token number">16</span><span class="token operator">*</span>x_2 <span class="token operator">+</span> <span class="token number">36</span><span class="token operator">*</span>x_3 <span class="token operator">+</span> <span class="token number">32</span><span class="token operator">*</span>x_4 <span class="token operator">+</span> <span class="token number">30</span><span class="token operator">*</span>x_5 <span class="token operator">+</span> <span class="token number">0</span>
 SUBJECT TO
-甲工厂工时约束: 0.01 x_0 + 0.01 x_1 + 0.01 x_2 + 0.03 x_3 + 0.03 x_4 + 0.03 x_5
- <= 850
+甲工厂工时约束<span class="token punctuation">:</span> <span class="token number">0.01</span> x_0 <span class="token operator">+</span> <span class="token number">0.01</span> x_1 <span class="token operator">+</span> <span class="token number">0.01</span> x_2 <span class="token operator">+</span> <span class="token number">0.03</span> x_3 <span class="token operator">+</span> <span class="token number">0.03</span> x_4 <span class="token operator">+</span> <span class="token number">0.03</span> x_5
+ <span class="token operator">&lt;=</span> <span class="token number">850</span>
 
-乙工厂工时约束: 0.02 x_0 + 0.05 x_3 <= 700
+乙工厂工时约束<span class="token punctuation">:</span> <span class="token number">0.02</span> x_0 <span class="token operator">+</span> <span class="token number">0.05</span> x_3 <span class="token operator">&lt;=</span> <span class="token number">700</span>
 
-丙工厂工时约束: 0.02 x_1 + 0.05 x_4 <= 100
+丙工厂工时约束<span class="token punctuation">:</span> <span class="token number">0.02</span> x_1 <span class="token operator">+</span> <span class="token number">0.05</span> x_4 <span class="token operator">&lt;=</span> <span class="token number">100</span>
 
-丁工厂工时约束: 0.03 x_2 + 0.08 x_5 <= 900
+丁工厂工时约束<span class="token punctuation">:</span> <span class="token number">0.03</span> x_2 <span class="token operator">+</span> <span class="token number">0.08</span> x_5 <span class="token operator">&lt;=</span> <span class="token number">900</span>
 
 VARIABLES
-0 <= x_0 Integer
-0 <= x_1 Integer
-0 <= x_2 Integer
-0 <= x_3 Integer
-0 <= x_4 Integer
-0 <= x_5 Integer
+<span class="token number">0</span> <span class="token operator">&lt;=</span> x_0 Integer
+<span class="token number">0</span> <span class="token operator">&lt;=</span> x_1 Integer
+<span class="token number">0</span> <span class="token operator">&lt;=</span> x_2 Integer
+<span class="token number">0</span> <span class="token operator">&lt;=</span> x_3 Integer
+<span class="token number">0</span> <span class="token operator">&lt;=</span> x_4 Integer
+<span class="token number">0</span> <span class="token operator">&lt;=</span> x_5 Integer
 
 
-Result - Optimal solution found
+Result <span class="token operator">-</span> Optimal solution found
 
-Objective value:                1250000.00000000
-Enumerated nodes:               0
-Total iterations:               0
-Time (CPU seconds):             0.00
-Time (Wallclock seconds):       0.00
+Objective value<span class="token punctuation">:</span>                <span class="token number">1250000.00000000</span>
+Enumerated nodes<span class="token punctuation">:</span>               <span class="token number">0</span>
+Total iterations<span class="token punctuation">:</span>               <span class="token number">0</span>
+Time <span class="token punctuation">(</span>CPU seconds<span class="token punctuation">)</span><span class="token punctuation">:</span>             <span class="token number">0.00</span>
+Time <span class="token punctuation">(</span>Wallclock seconds<span class="token punctuation">)</span><span class="token punctuation">:</span>       <span class="token number">0.00</span>
 
-Option for printingOptions changed from normal to all
-Total time (CPU seconds):       0.00   (Wallclock seconds):       0.00
+Option <span class="token keyword">for</span> printingOptions changed <span class="token keyword">from</span> normal to all
+Total time <span class="token punctuation">(</span>CPU seconds<span class="token punctuation">)</span><span class="token punctuation">:</span>       <span class="token number">0.00</span>   <span class="token punctuation">(</span>Wallclock seconds<span class="token punctuation">)</span><span class="token punctuation">:</span>       <span class="token number">0.00</span>
 
-x_0 = 35000.0
-x_1 = 5000.0
-x_2 = 30000.0
-x_3 = 0.0
-x_4 = 0.0
-x_5 = 0.0
-1250000.0
+x_0 <span class="token operator">=</span> <span class="token number">35000.0</span>
+x_1 <span class="token operator">=</span> <span class="token number">5000.0</span>
+x_2 <span class="token operator">=</span> <span class="token number">30000.0</span>
+x_3 <span class="token operator">=</span> <span class="token number">0.0</span>
+x_4 <span class="token operator">=</span> <span class="token number">0.0</span>
+x_5 <span class="token operator">=</span> <span class="token number">0.0</span>
+<span class="token number">1250000.0</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
                 
@@ -1527,7 +1527,7 @@ x_5 = 0.0
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">181.6k</span>
+                        class="white-color">191.3k</span>
             
             
             
