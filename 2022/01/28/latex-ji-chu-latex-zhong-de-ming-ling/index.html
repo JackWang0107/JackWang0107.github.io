@@ -415,7 +415,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-01-28
+                    2022-01-31
                 </div>
                 
 
@@ -557,14 +557,15 @@ We just define a command to generate a polynomial, so we next call it and see wh
 <h2 id="3-Overwrite-a-command"><a href="#3-Overwrite-a-command" class="headerlink" title="3. Overwrite a command"></a>3. Overwrite a command</h2><p>Latex中其实是有条件判断语句的，因此我们其实可以搭配着条件判断语句来实现程序流程的控制。因此，在有些情况下我们就需要重写一下已经定义过的命令。此时如果我们使用<code>\newcommand</code>的话编译器就会报错。</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220128161742577.png" alt="直接使用newcommand会报错"></p>
 <p>因此，我们此时就需要用<code>\renewcommand</code>来重写一个命令。<code>\renewcommand</code>和<code>\newcommand</code>一模一样，只不过重复的时候会重写。因此下面就举一个简单的例子</p>
-<pre><code>\newcommand{\overWrite}{x+y}
-\overWrite
-\newline
+<pre class="line-numbers language-latex"><code class="language-latex"><span class="token function selector">\newcommand</span><span class="token punctuation">{</span><span class="token function selector">\overWrite</span><span class="token punctuation">}</span><span class="token punctuation">{</span>x+y<span class="token punctuation">}</span>
+<span class="token function selector">\overWrite</span>
+<span class="token function selector">\newline</span>
 
 
-\renewcommand{\overWrite}{a+b}
-\overWrite
-</code></pre><p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220128162613742.png" alt="重写命令的例子"></p>
+<span class="token function selector">\renewcommand</span><span class="token punctuation">{</span><span class="token function selector">\overWrite</span><span class="token punctuation">}</span><span class="token punctuation">{</span>a+b<span class="token punctuation">}</span>
+<span class="token function selector">\overWrite</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220128162613742.png" alt="重写命令的例子"></p>
 
                 
             </div>
@@ -810,55 +811,53 @@ We just define a command to generate a polynomial, so we next call it and see wh
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2022/01/28/latex-ji-chu-latex-zhong-de-ming-ling/">
+                <a href="/2022/01/29/research-proposal-workshops-3/">
                     <div class="card-image">
                         
-                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220128162651753.png" class="responsive-img" alt="Latex基础：Commands">
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220129005050717.png" class="responsive-img" alt="Research Skills Workshop 3">
                         
-                        <span class="card-title">Latex基础：Commands</span>
+                        <span class="card-title">Research Skills Workshop 3</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            本文主要介绍了Latex中的命令
+                            本文是CCSIT Research Skills Workshop 3的笔记。为了保护版权，本文仅用作我的复习只用，因此并不会向所有人公开,抱歉了哈~
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-01-28
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-01-29
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Latex%E5%9F%BA%E7%A1%80/" class="post-category">
-                                    Latex基础
+                            <a href="/categories/Cambridge-CCISTC-AI-Research-Programme-2022-Winter/" class="post-category">
+                                    Cambridge CCISTC AI Research Programme 2022 Winter
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Latex/">
-                        <span class="chip bg-color">Latex</span>
+                    <a href="/tags/Research-Proposal-Workshops/">
+                        <span class="chip bg-color">Research Proposal Workshops</span>
                     </a>
                     
-                    <a href="/tags/Overleaf/">
-                        <span class="chip bg-color">Overleaf</span>
+                    <a href="/tags/CCISTC/">
+                        <span class="chip bg-color">CCISTC</span>
                     </a>
                     
-                    <a href="/tags/Latex-Commands/">
-                        <span class="chip bg-color">Latex Commands</span>
+                    <a href="/tags/University-of-Cambridge/">
+                        <span class="chip bg-color">University of Cambridge</span>
                     </a>
                     
                 </div>
@@ -875,9 +874,9 @@ We just define a command to generate a polynomial, so we next call it and see wh
                 <a href="/2022/01/27/latex-bao-yu-lei-2-bian-xie-zi-ji-de-lei/">
                     <div class="card-image">
                         
-                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220127231805688.png" class="responsive-img" alt="Latex包与类-2-编写自己的类">
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220127231805688.png" class="responsive-img" alt="Latex包与类-2: Writing my own class files">
                         
-                        <span class="card-title">Latex包与类-2-编写自己的类</span>
+                        <span class="card-title">Latex包与类-2: Writing my own class files</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1105,7 +1104,7 @@ We just define a command to generate a polynomial, so we next call it and see wh
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">193.5k</span>
+                        class="white-color">201.6k</span>
             
             
             
@@ -1182,6 +1181,11 @@ We just define a command to generate a polynomial, so we next call it and see wh
                 </script>
             
             <br>
+            
+                <span id="icp"><img src="/medias/icp.png"
+                                    style="vertical-align: text-bottom;"/>
+                <a href="https://beian.miit.gov.cn" target="_blank">陕ICP备2021014294号-1</a>
+            </span>
             
         </div>
         <div class="col s12 m4 l4 social-link social-statis">
