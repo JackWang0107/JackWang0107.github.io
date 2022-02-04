@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="炼丹手记, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
-    <meta name="description" content="本文记录了我炼丹的心得">
+    <meta name="keywords" content="Pytorch中使用TensorBoard, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
+    <meta name="description" content="本文记录了如何在Pytorch中使用Tensorboard（备忘录）">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>炼丹手记 | JackWang&#39;s Blog</title>
+    <title>Pytorch中使用TensorBoard | JackWang&#39;s Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -254,12 +254,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220202001104734.png')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/tensorboard.gif')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">炼丹手记</h1>
+                    <h1 class="description center-align post-title">Pytorch中使用TensorBoard</h1>
                 </div>
             </div>
         </div>
@@ -391,6 +391,10 @@
                                 <span class="chip bg-color">AI</span>
                             </a>
                         
+                            <a href="/tags/TensorBoard/">
+                                <span class="chip bg-color">TensorBoard</span>
+                            </a>
+                        
                     </div>
                     
                 </div>
@@ -412,28 +416,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-02-02
+                    2022-02-04
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-02-02
+                    2022-02-05
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    481
+                    3k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    10 分
                 </div>
                 
 
@@ -454,28 +458,134 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <blockquote>
-<p>本文是我在炼丹的过程中的一些心得</p>
+<p>本文记录了如何在Pytorch中使用Tensorboard（主要是为了备忘）</p>
 </blockquote>
-<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220202001104734.png" alt="Pytorch官网"></p>
-<h1 id="炼丹手记"><a href="#炼丹手记" class="headerlink" title="炼丹手记"></a>炼丹手记</h1><p>因为目前是一个本科生，所以经常需要balance课程、科研、竞赛、写代码……所以一个问题就是我经常一段时间忙于做事情A，一段时间忙于做事情B。</p>
-<p>这个对于炼丹其实是不太好的，因为炼丹的经验会随着时间的流逝而遗忘，因此决定还是把自己的炼丹时候的心得都记录下来，这样的话方便以后回顾、总结、提高。</p>
-<p>此外，因为我用的是Pytorch，所以有一些关于Pytorch的心得，这部分工具的心得可能不是很适合TensorFlow用户，因此略掉就好。</p>
-<h2 id="1-Pytorch读取Numpy"><a href="#1-Pytorch读取Numpy" class="headerlink" title="1. Pytorch读取Numpy"></a>1. Pytorch读取Numpy</h2><p>有的时候数据是以numpy的npy或者npz形式保存的，这个时候直接使用<code>np.load</code>就可以读取了。可是读取完了之后从numpy的ndarray转成torch的tensor的时候会有问题。</p>
-<p>具体来说就是首先是数据类型的问题：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/tensorboard.gif" alt="TensorBoard的界面"></p>
+<h1 id="Pytorch中使用TensorBoard"><a href="#Pytorch中使用TensorBoard" class="headerlink" title="Pytorch中使用TensorBoard"></a>Pytorch中使用TensorBoard</h1><p>虽然我本身就会用TensorBoard，但是因为TensorBoard只有在写训练代码的框架的时候才会写，因此实际上写的频率的还是很低的，所以我每次要写训练代码、使用TensorBoard的时候都需要看自己之前写的代码，或者查一下别人写的博客。而且不少博客写的都是一鳞半爪的，不少用法都要查很多博客，久而久之就会觉得很烦。而且很多技巧随着时间的流逝也逐渐的忘记。</p>
+<p>因此为了方便以后自己的查询（备忘），同时也是能够留下一个不错的教程，因此决定自己写一个比较全面的TensorBoard的教程。</p>
+<h2 id="1-Introduction-to-TensorBoard"><a href="#1-Introduction-to-TensorBoard" class="headerlink" title="1. Introduction to TensorBoard"></a>1. Introduction to TensorBoard</h2><p>在炼丹的时候，经常需要追踪模型在训练过程中性能的变化，例如：Regression任务中的MSE、分类任务中的准确率、生成（图片）任务中图片的生成质量、此外还有合成语音的质量……</p>
+<p>大体上来说，所有需要追踪的数据包括：标量（scalar）、图像（image）、统计图（diagram）、视频（video）、音频（audio）、文本（text）、Embedding等等</p>
+<p>除了有大量的数据需要追踪外，我们还需要很好的把这些数据显示出来，即数据的写入和显示（读取）要有异步IO，有的时候服务器在学校的机房托管，因此还需要能够通过内网提供可视化……</p>
+<p>因此，在种种需求之下，使用一个网页程序来帮助我们进行数据的追踪就成了一个很好的解决方案。具体来说，网页程序实现了前后端的分离，后端只需要专注于数据的记录，而前端专注于数据的显示。此外，网页程序可以进一步扩展，提供网络服务。</p>
+<p>因此，就有了TensorBoard这个网页程序实现了我们上面的需求。TensorBoard最早是TensorFlow中的模块，不过现在经过Pytorch团队的努力，TensorBoard已经集成到了Pytorch中。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220204112804634.png" alt="TensorFlow官网上的TensorBoard"></p>
+<blockquote>
+<p>TensorBoard的教程主要分为两部分，一部分是如何使用TensorBoard（即在训练过程中添加数据，然后在浏览器中监视训练的这整个pipeline）的教程，另外一部分是TensorBoard如何添加不同种类数据（即TensorBoard的API）的教程</p>
+</blockquote>
+<h2 id="2-TensoBoard-Pipeline"><a href="#2-TensoBoard-Pipeline" class="headerlink" title="2. TensoBoard Pipeline"></a>2. TensoBoard Pipeline</h2><p>上面说道，TensorBoard是分为前段显示和后端数据记录的，因此其Pipeline也分为两步：</p>
 <ul>
-<li>numpy里转数据类型不如pytorch方便</li>
-<li>pytorch有的时候在计算的时候是需要统一数据类型为float的，因此用numpy转换数据类型和用torch转换数据类型混着来容易分不清楚</li>
-<li>有的时候pytorch计算有需要LongTensor，例如用交叉熵/负对数似然损失函数，因为去nature log的时候数值的范围比较大</li>
+<li>第一步：后端数据记录</li>
+<li>第二步：前段查看数据</li>
 </ul>
-<p><strong>因此，如果数据是numpy的文件的话，读完了之后直接转torch的tensor再进行后续操作</strong></p>
-<p>读的时候<code>np.load</code>，而<code>torch.from_numpy</code>会直接帮我们完成从<code>np.ndarrary</code>到<code>torch.Tensor</code>的转换，转换过程中保持数据格式、内存对齐等属性不变，然后我们再用<code>torch.Tensor.long()</code>之类的方法转换</p>
+<h3 id="A-后端数据记录"><a href="#A-后端数据记录" class="headerlink" title="A. 后端数据记录"></a>A. 后端数据记录</h3><p>类似于<code>Flask</code>和<code>Django</code>中把后端程序（服务器）被抽象为了一个类，然而这个类中提供了方法来开启和关闭服务，TensorBoard中也是把后端服务器抽象成了一个类：<code>SummaryWriter</code>，不过不同的是，TensorBoard中的<code>SummaryWriter</code>类在被声明后就开启了对应的服务，直到我们使用了<code>SummaryWriter</code>关闭服务的API。</p>
+<p>此外，还有一个不同的之处在于，TensorBoard的前段数据显示和后端数据记录是<code>异步I/O</code>的，即后端程序（<code>SummaryWriter</code>类的实例）将数据写入到一个文件中，而前端程序读取文件中的数据来进行显示。因此后端所谓的服务指的就是数据的记录，而非提供前端的显示。数据记录的实现方式即通过<code>SummaryWriter</code>类中的方法</p>
+<p>然后在开启了后端程序的服务器之后，我们就可以通过各种API来添加数据了</p>
+<h4 id="0-导入包"><a href="#0-导入包" class="headerlink" title="0. 导入包"></a>0. 导入包</h4><p>我们首先导入包</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> torch
+<span class="token keyword">from</span> torch<span class="token punctuation">.</span>utils<span class="token punctuation">.</span>tensorboard <span class="token keyword">import</span> SummaryWriter
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h4 id="1-SummaryWriter类"><a href="#1-SummaryWriter类" class="headerlink" title="1. SummaryWriter类"></a>1. SummaryWriter类</h4><p><code>SummaryWriter</code>声明之后就会开启后端数据记录的服务，因此在实例化该类的时候我们就需要保存数据的位置。声明保存数据的位置有好几种方式</p>
+<p><code>SummaryWriter</code>的签名如下：</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">torch</span><span class="token punctuation">.</span>utils<span class="token punctuation">.</span>tensorboard<span class="token punctuation">.</span>writer<span class="token punctuation">.</span>SummaryWriter<span class="token punctuation">(</span>log_dir<span class="token operator">=</span>None<span class="token punctuation">,</span> comment<span class="token operator">=</span><span class="token string">''</span><span class="token punctuation">,</span> purge_step<span class="token operator">=</span>None<span class="token punctuation">,</span> max_queue<span class="token operator">=</span><span class="token number">10</span><span class="token punctuation">,</span> flush_secs<span class="token operator">=</span><span class="token number">120</span><span class="token punctuation">,</span> filename_suffix<span class="token operator">=</span><span class="token string">''</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>其中：</p>
+<ul>
+<li><code>log_dir</code> (str)：指定了数据保存的文件夹的位置，如果该文件夹不存在则会创建一个出来。如果没有指定的话，默认的保存的文件夹是<code>./runs/现在的时间_主机名</code>，例如：<code>Feb04_22-42-47_Alienware</code>，因此每次运行之后都会创建一个新的文件夹。在写论文的时候我们会涉及一系列实验，从不同的角度来说明一些问题，例如我们的假设是否正确、模型性能是否更好……因此最好不要用默认的实现来直接作为存放数据的文件夹，而是使用具有含义的二级结构，例如：<code>runs/exp1</code>。这样的话，所有的实验1的数据都在这个文件夹下，这样我们就可以方便的进行比较。</li>
+<li><code>comment</code> (string)：给默认的<code>log_dir</code>添加的后缀，如果我们已经指定了<code>log_dir</code>具体的值，那么这个参数就不会有任何的效果</li>
+<li><code>purge_step</code> (int)：TensorBoard在记录数据的时候有可能会崩溃，例如在某一个epoch中，进行到第$T+X$个step的时候由于各种原因（内存溢出）导致崩溃，那么当服务重启之后，就会从$T$个step重新开始将数据写入文件，而中间的$X$，即<code>purge_step</code>指定的step内的数据都被被丢弃。</li>
+<li><code>max_queue</code> (int)：在记录数据的时候，在内存中开的队列的长度，当队列慢了之后就会把数据写入磁盘（文件）中。</li>
+<li><code>flush_secs</code> (int)：以秒为单位的写入磁盘的间隔，默认是120秒，即两分钟。</li>
+<li><code>filename_suffix</code> (string)：添加到<code>log_dir</code>中每个文件的后缀。更多文件名称设置要参考<code>tensorboard.summary.writer.event_file_writer.EventFileWriter</code>类。</li>
+</ul>
+<p>因此，一个成熟的数据记录方式就是在<code>runs</code>文件夹下按照一定的意义来划分二级文件夹，例如<code>网络结构1</code>、<code>网络结构2</code>、<code>实验1</code>、<code>实验2</code>等等。</p>
+<h4 id="2-添加数据"><a href="#2-添加数据" class="headerlink" title="2. 添加数据"></a>2. 添加数据</h4><p>想后端服务程序添加数据使用的是<code>SummaryWriter</code>类中的一系列方法，这些方法都以<code>add_</code>开头，例如：<code>add_scalar</code>、<code>add_scalars</code>、<code>add_image</code>……具体来说，所有的方法有：</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> pprint
+pprint<span class="token punctuation">.</span>pprint<span class="token punctuation">(</span><span class="token punctuation">[</span>i <span class="token keyword">for</span> i <span class="token keyword">in</span> SummaryWriter<span class="token punctuation">.</span>__dict__<span class="token punctuation">.</span>keys<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">if</span> i<span class="token punctuation">.</span>startwith<span class="token punctuation">(</span><span class="token string">"add_"</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<ul>
+<li>add_hparams，add_scalar，add_scalars，add_histogram，add_histogram_raw，add_image，add_images，add_image_with_boxes，add_figure，add_video，add_audio，add_text，add_onnx_graph，add_graph，add_embedding，add_pr_curve，add_pr_curve_raw，add_custom_scalars_multilinechart，add_custom_scalars_marginchart，add_custom_scalars，add_mesh</li>
+</ul>
+<p>后面在第二部分会详细的讲解每个方法，这里先讲共性。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220205000043632.png" alt="SummaryWriter中所有添加数据的API" style="zoom:67%;"></p>
+<p>每个方法根据需要添加的数据的不同，方法中具体的参数也不同，但是所有的方法终归都是要添加数据的，因此会存在相同的参数。具体来说，相同的参数包括：</p>
+<ul>
+<li><p><code>tag</code> (str)：用于给数据进行分类的标签，标签中可以包含父级和子级标签。例如给训练的loss以<code>loss/train</code>的tag，而给验证以<code>loss/val</code>的tag，这样的话，最终的效果就是训练的loss和验证的loss都被分到了<code>loss</code>这个父级标签下。而<code>train</code>和<code>val</code>则是具体用于区分两个参数的标识符（identifier）。例如我们现在有两个tag，<code>cos/dense</code>和<code>cos/sparse</code>，那么最终展示下来的效果是这样的。此外，<strong>只支持二级标签</strong></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220205003612607.png" alt="二级标签可视化后的效果"></p>
+</li>
+<li><p><code>globa_step</code> (int)：首先，每个epoch中我们都会更新固定的step。因此，在一个数据被加入的时候，有两种step，第一种step是数据被加入时当前epoch已经进行了多少个step，第二种step是数据被加入时候，累计（包括之前的epoch）已经进行了多少个step。而考虑到我们在绘图的时候往往是需要观察所有的step下的数据的变化，因此<code>global_step</code>指的就是当前数据被加入的时候已经计算了多少个step。计算<code>global_step</code>的步骤很简单，就是$global_step=epoch * len(dataloader) + current_step$</p>
+</li>
+<li><p><code>wlltime</code> (int)：从<code>SummaryWriter</code>实例化开始到当前数据被加入时候所经历时间（以秒计算），默认是使用<code>time.time()</code>来自动计算的，当然我们也可以指定这个参数来进行修改。这个参数一般不改</p>
+</li>
+</ul>
+<p>以添加标量（add_scalar）为例，演示一下添加数据的方法的用法。其他的方法第二部分会讲</p>
+<pre class="line-numbers language-python"><code class="language-python">writer <span class="token operator">=</span> SummaryWriter<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">for</span> epoch <span class="token keyword">in</span> range<span class="token punctuation">(</span>n_epoch <span class="token punctuation">:</span><span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">for</span> step <span class="token keyword">in</span> range<span class="token punctuation">(</span>total_step <span class="token punctuation">:</span><span class="token operator">=</span> <span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token comment" spellcheck="true"># 训练代码</span>
+        <span class="token comment" spellcheck="true"># ...</span>
+        <span class="token comment" spellcheck="true"># ...</span>
+
+        <span class="token comment" spellcheck="true"># 计算 loss</span>
+        loss <span class="token operator">=</span> np<span class="token punctuation">.</span>sin<span class="token punctuation">(</span>step <span class="token operator">*</span> <span class="token number">0.01</span><span class="token punctuation">)</span>
+
+        <span class="token comment" spellcheck="true"># 添加标量</span>
+        writer<span class="token punctuation">.</span>add_scalar<span class="token punctuation">(</span>tag<span class="token operator">=</span><span class="token string">"loss/train"</span><span class="token punctuation">,</span> scalar_value<span class="token operator">=</span>loss<span class="token punctuation">,</span>
+                          global_step<span class="token operator">=</span>epoch <span class="token operator">*</span> total_step <span class="token operator">+</span> step<span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>然后可以看到的效果如下：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220205010449745.png" alt="添加数据的效果"></p>
+<h4 id="3-关闭SummaryWriter"><a href="#3-关闭SummaryWriter" class="headerlink" title="3. 关闭SummaryWriter"></a>3. 关闭SummaryWriter</h4><p>我们刚才说过，SummaryWriter这样的后端程序在被实例化出来就自动开启了数据记录的服务，而我们在完成了所有的数据记录只有，需要关闭服务。</p>
+<p>关闭服务很简单，就是直接调用<code>close</code>方法即可</p>
+<pre class="line-numbers language-python"><code class="language-python">writer<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h4 id="4-Summary"><a href="#4-Summary" class="headerlink" title="4. Summary"></a>4. Summary</h4><p>最终，总结一下整个后端数据记录的流程，其实就三步：</p>
+<ul>
+<li>实例化<code>SummaryWriter</code>类，同时指定数据保存的文件夹</li>
+<li>利用<code>SummaryWriter</code>类提供的方法，添加不同类型的的数据</li>
+<li>关闭<code>SummaryWriter</code>类，中止服务</li>
+</ul>
+<h3 id="B-前端显示数据"><a href="#B-前端显示数据" class="headerlink" title="B. 前端显示数据"></a>B. 前端显示数据</h3><p>因为TensorBoard是异步I/O的网页服务程序，因此后端程序在把数据写入到文件的时候，前端程序可以读取数据来进行显示。</p>
+<p>具体来说，后端数据记录程序会把所有的数据记录到同一个文件夹下的多个文件内，以方便前端显示程序多线程加速读取。<strong>因此，前端显示程序在启动的时候需要指定读取的文件夹</strong></p>
+<h4 id="1-默认使用"><a href="#1-默认使用" class="headerlink" title="1. 默认使用"></a>1. 默认使用</h4><p>前端显示程序提供了CLI（命令行）界面，因此我们直接在命令行启动就行了</p>
+<pre class="line-numbers language-shell"><code class="language-shell">tensorboard --logdir=数据文件夹
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>其中数据文件夹就是在声明SummaryWriter时候指定的文件夹。</p>
 <p>例如：</p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">ExampleDataset</span><span class="token punctuation">(</span>Dataset<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        data <span class="token operator">=</span> torch<span class="token punctuation">.</span>from_numpy<span class="token punctuation">(</span>np<span class="token punctuation">.</span>load<span class="token punctuation">(</span>file_path<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>float<span class="token punctuation">(</span><span class="token punctuation">)</span>
-        <span class="token comment" spellcheck="true"># 类似的，还可以是</span>
-        long <span class="token operator">=</span> torch<span class="token punctuation">.</span>from_numpy<span class="token punctuation">(</span>np<span class="token punctuation">.</span>load<span class="token punctuation">(</span>file_path<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>long<span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-shell"><code class="language-shell">tensorboard --logdir=./Feb05_01-00-48_Alienware/
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>而在我们启动前端显示程序之后，就会得到一个端口，访问这个端口就能看到显示的效果</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220205012353764.png" alt="命令行启动tensorboard后会看到程序启动的端口" style="zoom: 67%;"></p>
+<p>访问该端口就能看到程序</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220205012630314.png" alt="浏览器中访问就能看到效果" style="zoom:67%;"></p>
+<h4 id="2-修改端口"><a href="#2-修改端口" class="headerlink" title="2. 修改端口"></a>2. 修改端口</h4><p>有的时候，在服务器上训练模型的时候为了避免和别人的TensorBoard的端口撞了，我们需要指定新的端口。或者有的时候我们在docker容器里跑TensorBoard，我们通过一个端口映射到主机上去，这个时候就需要指定TensorBoard使用特定的端口。</p>
+<p>具体来说就是通过CLI的<code>--port</code>参数</p>
+<pre class="line-numbers language-shell"><code class="language-shell">tensorboard --logdir=数据文件夹 --port=端口
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>例如我们现在指定上面的例子端口为10000</p>
+<pre class="line-numbers language-shell"><code class="language-shell">tensorboard --logdir=./Feb05_01-00-48_Alienware/ --port=10000
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220205013842301.png" alt="修改后的端口"></p>
+<h3 id="C-Summary"><a href="#C-Summary" class="headerlink" title="C. Summary"></a>C. Summary</h3><p>最后，总结一下使用TensorFlow的Pipeline，首先在训练的过程中使用SummaryWriter来记录数据，记录的过程中需要注意文件夹需要来合理的划分。</p>
+<p>然后我们在前端查看的时候，运行<code>tensorboard</code>的CLI程序即可，一般用的最多的就是<code>--log_dir</code>和<code>--port</code>两个参数。</p>
+<p>此外，如果是服务器上的话，那么tensorboard的CLI运行在服务器上，然后在自己的电脑上，利用浏览器，通过内网来查看训练过程。</p>
+<h2 id="3-SummaryWriter-APIs"><a href="#3-SummaryWriter-APIs" class="headerlink" title="3. SummaryWriter APIs"></a>3. SummaryWriter APIs</h2><p>上面讲完了SummaryWriter的Workflow/Pipeline，剩下的就是SummaryWriter添加数据的API的讲解了。关于这些API的话，正如上面介绍的，他们都以<code>add_</code>开头，具体有：</p>
+<ul>
+<li>标量类：<code>add_scalar</code>、<code>add_scalars</code>、<code>add_custom_scalars</code>、<code>add_custom_scalars_marginchart</code>、<code>add_custom_scalars_multilinechart</code>、</li>
+<li>数据显示类：<ul>
+<li>图像：<code>add_image</code>、<code>add_images</code>、<code>add_image_with_boxes</code>、<code>add_figure</code></li>
+<li>视频：<code>add_video</code></li>
+<li>音频：<code>add_audio</code></li>
+<li>文本：<code>add_text</code></li>
+<li>Embedding：<code>add_embedding</code></li>
+<li>点云：<code>add_mesh</code></li>
+</ul>
+</li>
+<li>统计图：<code>add_histogram</code>、<code>add_histogram_raw</code>、<code>add_pr_curve</code>、add_pr_curve_raw</li>
+<li>网络图：<code>add_onnx_graph</code>、<code>add_graph</code></li>
+<li>超参数图：<code>add_hparams</code></li>
+</ul>
+<p>因为我目前主要在做CV、点云和NLP，对于语音、视频设计的比较少，因此关于这些API以后用到了我再慢慢补充。</p>
+<p>其实主要就是对官网上的翻译，可以直接看官网上的<a target="_blank" rel="noopener" href="https://pytorch.org/docs/stable/tensorboard.html">介绍</a>：<a target="_blank" rel="noopener" href="https://pytorch.org/docs/stable/tensorboard.html">https://pytorch.org/docs/stable/tensorboard.html</a></p>
 
                 
             </div>
@@ -502,7 +612,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://jackwang0107.github.io/2022/02/02/lian-dan-shou-ji/">https://jackwang0107.github.io/2022/02/02/lian-dan-shou-ji/</a>
+                    <a href="https://jackwang0107.github.io/2022/02/04/shen-du-xue-xi-pytorch-zhong-shi-yong-tensorboard/">https://jackwang0107.github.io/2022/02/04/shen-du-xue-xi-pytorch-zhong-shi-yong-tensorboard/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -554,6 +664,10 @@
                             
                                 <a href="/tags/AI/">
                                     <span class="chip bg-color">AI</span>
+                                </a>
+                            
+                                <a href="/tags/TensorBoard/">
+                                    <span class="chip bg-color">TensorBoard</span>
                                 </a>
                             
                         </div>
@@ -725,28 +839,94 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2022/02/02/li-hong-yi-ml2021-spring-7-convolutional-neural-network/">
+                <a href="/2022/02/04/shen-du-xue-xi-pytorch-zhong-shi-yong-tensorboard/">
                     <div class="card-image">
                         
-                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220202093153305.png" class="responsive-img" alt="李宏毅ML2021-Spring-7: Convolutional Neural Network (CNN)">
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/tensorboard.gif" class="responsive-img" alt="Pytorch中使用TensorBoard">
                         
-                        <span class="card-title">李宏毅ML2021-Spring-7: Convolutional Neural Network (CNN)</span>
+                        <span class="card-title">Pytorch中使用TensorBoard</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            本文是Machine Learning 2021 Spring 第七节课的笔记，本节课主要讲解了Neural Network架构中的Convolutional Neural Network。
+                            本文记录了如何在Pytorch中使用Tensorboard（备忘录）
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-02-02
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-02-04
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Deep-Learning-Blogs/" class="post-category">
+                                    Deep Learning Blogs
+                                </a>
+                            
+                            
                         </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Python/">
+                        <span class="chip bg-color">Python</span>
+                    </a>
+                    
+                    <a href="/tags/Deep-Learning/">
+                        <span class="chip bg-color">Deep Learning</span>
+                    </a>
+                    
+                    <a href="/tags/Pytorch/">
+                        <span class="chip bg-color">Pytorch</span>
+                    </a>
+                    
+                    <a href="/tags/AI/">
+                        <span class="chip bg-color">AI</span>
+                    </a>
+                    
+                    <a href="/tags/TensorBoard/">
+                        <span class="chip bg-color">TensorBoard</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/02/03/li-hong-yi-ml2021-spring-8-self-attention/">
+                    <div class="card-image">
+                        
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220203105511476.png" class="responsive-img" alt="李宏毅ML2021-Spring-8: Self-Attention">
+                        
+                        <span class="card-title">李宏毅ML2021-Spring-8: Self-Attention</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            本文是Machine Learning 2021 Spring 第八节课的笔记，本节课主要讲解了Neural Network中的Attention机制以及常见的Attention的架构（Module）：Self-Attention。
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-02-03
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -778,64 +958,12 @@
                         <span class="chip bg-color">Neural Network</span>
                     </a>
                     
-                    <a href="/tags/CNN/">
-                        <span class="chip bg-color">CNN</span>
+                    <a href="/tags/Attention/">
+                        <span class="chip bg-color">Attention</span>
                     </a>
                     
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2022/01/31/latex-ji-chu-latex-zhong-de-huan-jing/">
-                    <div class="card-image">
-                        
-                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220201014340608.png" class="responsive-img" alt="Latex基础：Environments">
-                        
-                        <span class="card-title">Latex基础：Environments</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            本文主要介绍了Latex中的环境
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-01-31
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/Latex%E5%9F%BA%E7%A1%80/" class="post-category">
-                                    Latex基础
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/Latex/">
-                        <span class="chip bg-color">Latex</span>
-                    </a>
-                    
-                    <a href="/tags/Overleaf/">
-                        <span class="chip bg-color">Overleaf</span>
-                    </a>
-                    
-                    <a href="/tags/Latex-Environment/">
-                        <span class="chip bg-color">Latex Environment</span>
+                    <a href="/tags/Self-Attention/">
+                        <span class="chip bg-color">Self-Attention</span>
                     </a>
                     
                 </div>
@@ -1022,7 +1150,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">217.2k</span>
+                        class="white-color">220.4k</span>
             
             
             

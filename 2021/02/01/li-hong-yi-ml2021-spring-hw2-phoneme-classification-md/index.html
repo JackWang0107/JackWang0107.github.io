@@ -419,21 +419,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-02-02
+                    2022-02-04
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.6k
+                    1.9k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    5 分
+                    6 分
                 </div>
                 
 
@@ -518,7 +518,13 @@
 </ul>
 <p>因为这次是分类任务，因此计算分数就是按照准确率来给分，所以越大越好</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220201155131992.png" alt="Baselines"></p>
-<h2 id="3"><a href="#3" class="headerlink" title="3."></a>3.</h2>
+<h2 id="3-My-Solution"><a href="#3-My-Solution" class="headerlink" title="3. My Solution"></a>3. My Solution</h2><p>下面是我关于本次任务的理解和更新</p>
+<h3 id="1-Thoughs"><a href="#1-Thoughs" class="headerlink" title="1. Thoughs"></a>1. Thoughs</h3><p>这个是一个classification的任务，最后的输出是一个类别的one-hot向量，所以网络最后一层输出是和类别数量相同长度的一个向量。</p>
+<p>然后因为要归一化，或者说引入概率（虽然只有Sigmoid才是从概率推到得到的），对最后的输出使用softmax，使得最终类别的概率向量的总和为1，而每个Dimension都小于1。</p>
+<p>然后从所有的类别中选取出来（伪）概率最大的类（argmax）别作为网络最终输出的类别。</p>
+<p>需要额外注意的是，Cross-Entropy Loss中已经帮我们集成了Softmax来算，因此训练的时候我们没有必要自己算softmax，但是在生成submission.csv的时候还是需要的自己算的。</p>
+<p>除了这个基础的问题以外，还可以试试Self-Attention来提升性能。</p>
+<h3 id="2-Updates"><a href="#2-Updates" class="headerlink" title="2. Updates"></a>2. Updates</h3>
                 
             </div>
             <hr/>
@@ -1053,7 +1059,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">217.2k</span>
+                        class="white-color">220.4k</span>
             
             
             
