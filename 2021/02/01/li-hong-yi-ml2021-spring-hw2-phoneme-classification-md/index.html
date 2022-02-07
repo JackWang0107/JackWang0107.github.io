@@ -419,21 +419,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-02-04
+                    2022-02-05
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.9k
+                    2.1k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    6 分
+                    7 分
                 </div>
                 
 
@@ -457,7 +457,9 @@
 <p>本文主要讲解李宏毅ML2021 Spring的Homework2： Phoneme Classification</p>
 </blockquote>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211213151600181.png" alt="作业二：Phoneme Classification"></p>
-<h1 id="李宏毅ML2021-Spring-hw2：-Phoneme-Classification"><a href="#李宏毅ML2021-Spring-hw2：-Phoneme-Classification" class="headerlink" title="李宏毅ML2021-Spring-hw2： Phoneme Classification"></a>李宏毅ML2021-Spring-hw2： Phoneme Classification</h1><h2 id="1-Homework-Objective"><a href="#1-Homework-Objective" class="headerlink" title="1. Homework Objective"></a>1. Homework Objective</h2><p>作业二的目的在于：</p>
+<h1 id="李宏毅ML2021-Spring-hw2：-Phoneme-Classification"><a href="#李宏毅ML2021-Spring-hw2：-Phoneme-Classification" class="headerlink" title="李宏毅ML2021-Spring-hw2： Phoneme Classification"></a>李宏毅ML2021-Spring-hw2： Phoneme Classification</h1><p>比较汗颜，上一个作业是在两个月之前了。这段时间发生了挺多的事情：一个是要期末考试了，所以忙于复习；西安出现了疫情封城了一个月；新年回老家过春节；写课程的笔记……</p>
+<p>所以就把第二个作业的笔记耽误了，不过现在继续补上</p>
+<h2 id="1-Homework-Objective"><a href="#1-Homework-Objective" class="headerlink" title="1. Homework Objective"></a>1. Homework Objective</h2><p>作业二的目的在于：</p>
 <ul>
 <li>Finish a classification task.</li>
 <li>进一步熟悉基本的DNN训练技术：调参、特征选择、正则化</li>
@@ -524,7 +526,11 @@
 <p>然后从所有的类别中选取出来（伪）概率最大的类（argmax）别作为网络最终输出的类别。</p>
 <p>需要额外注意的是，Cross-Entropy Loss中已经帮我们集成了Softmax来算，因此训练的时候我们没有必要自己算softmax，但是在生成submission.csv的时候还是需要的自己算的。</p>
 <p>除了这个基础的问题以外，还可以试试Self-Attention来提升性能。</p>
-<h3 id="2-Updates"><a href="#2-Updates" class="headerlink" title="2. Updates"></a>2. Updates</h3>
+<h3 id="2-Updates"><a href="#2-Updates" class="headerlink" title="2. Updates"></a>2. Updates</h3><h4 id="1-2022-2-5：完成了基本的框架-triangular-flag-on-post"><a href="#1-2022-2-5：完成了基本的框架-triangular-flag-on-post" class="headerlink" title="1. 2022.2.5：完成了基本的框架:triangular_flag_on_post:"></a>1. 2022.2.5：完成了基本的框架<span class="github-emoji"><span>🚩</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f6a9.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span></h4><ul>
+<li><strong>进展</strong>：完成了基本的框架的搭建，开始了Baseline的训练。完成的框架包括训练代码，网络的定义，dataset和得到提交文件的代码；这次使用了TensorBoard来监控训练过程，避免了自己用Matplotlib要花费大量的时间来写和训练无关的可视化代码</li>
+</ul>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220205174140429.png" alt="用TensorBoard监控训练"></p>
+
                 
             </div>
             <hr/>
@@ -1059,7 +1065,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">220.4k</span>
+                        class="white-color">232.6k</span>
             
             
             
