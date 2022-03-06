@@ -4,6 +4,62 @@
   
     
     <entry>
+      <title>最近的一些情况</title>
+      <link href="/2022/03/06/zui-jin-de-yi-xie-qing-kuang/"/>
+      <url>/2022/03/06/zui-jin-de-yi-xie-qing-kuang/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>本文记录了我的一些最近的情况</p></blockquote><p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220306220558702.png" alt="ICRA2022的Submission Acknowledgement"></p><h1 id="最近的一些情况"><a href="#最近的一些情况" class="headerlink" title="最近的一些情况"></a>最近的一些情况</h1><p>上次更新文章仿佛已经是一个月前的事情了，到今天，也就是3月6日已经快一个月了。所以写篇文章记录下最近的情况，证明没有摸鱼O(∩_∩)O。同时也准备规划一下未来的一些博客的计划</p><h2 id="1-过去一段时间的事情"><a href="#1-过去一段时间的事情" class="headerlink" title="1. 过去一段时间的事情"></a>1. 过去一段时间的事情</h2><p>一个月前大概是2月7号，我还在老家过寒假，因此有足够的时间写博客，所以这段时间写了比较多的文章。</p><p>可是2月7号之后，事情一件接着一件导致我没有时间来写作，首先是2月7号以后进行了一场非常重要的面试，也是我非常想去的学校（可以说是我的梦校）的面试。所以为了这个这面我专心准备了几天，结果的话官网说是4月中旬发邮件通知我，面试的老师倒是说一到两个周后发邮件通知我。所以现在我也不知道具体情况怎么样，贼怕自己凉凉了。</p><p>除了面试以外，先前的Cambridge这边的项目需要听一下课、写一些东西，所以花了一段时间把课听完了，准备完成要求的submission。一直到了2月15号我准备开学返校。因为我的学校2月19号开学，但是数模美赛2月18号就开始了，因此不得不提前几天回去。刚好因为寒假从学校走的时候西安处于疫情末尾，因此走的比较仓促，所以提前几天回来收拾了一下宿舍。</p><p>美赛从2月18号到2月22号做了四天，期间感觉挺不错的，选择的C题，给模型引入了Uncertainty作为判据，虽然结果好像也要等一两个月，不过至少从排版上来说还是蛮不错的。</p><p>然后离谱的事情就来了，新学期教务处在网站上发了一个公告。因为上个学期末西安的疫情，学校最终取消了期末考试周。而这个公告的内容就是说2月19号开学第一个周完成上个学期的期末考试。结果就是我有两门期末考试和数模美赛完美撞车了，因此不得不缓考。除了缓考的几门以外，还有几个考试需要完成。所以第一个周就忙于复习和考试了。</p><p>大概是2月28号左右开始了开学的第二个周，这个周就开始了正常的上课。这个学期我的课比较多，有31个学分要修，所以本身时间就比较少。一开始我也是打算抽时间来写博客。但是2月1号的时候去年投的ICRA2022中了。审稿一件一个比较支持，一个偏负面，最后领域主席AC救了一命。偏负面的审稿人主要diss了文章的experiments部分，说这一节之前写的非常好，这一节之后仿佛就成了另外一个人写的一样，非常的晦涩难懂。其实这个的确有一部分是我们的原因，去年投稿的时候比较赶，最后是赶着ddl提交的，所以experiment部分就完成的比较匆忙。最后文章要改的就比较多，experiments部分整个重写，然后补充几个实验。这个时候坑爹的地方就来了，ICRA2022 final submission的时间是2022年3月1日晚上12点 PST，换算到北京时间就是3月2日下午3点半。所以从2月28号开始到3月2号下午这两天半的时间需要狂改文章。最后熬了一个大半夜外加翘了一整天的课狂写，总算是在ddl前完成了终稿并且提交了。下面就是提交终稿之后收到的acknowledgement letter。</p><p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220306220558702.png" alt="ICRA2022的Submission Acknowledgement"></p><p>本来觉得事情总算告一段落了，可是开始继续写文章了，结果这个时候学校2023的申请项目出来了。最早觉得直接申请就OK了，没有想到我的托福过了有效期，有需要重新考一个。所以又得画上两三天时间捡起来，然后后面一两个周练习就行。所以上个周，即从2月28号开始到3月5号就这样过去了。</p><p>虽然目前课程比较多，作业压力也比较大，不过总的来说还是ok的，还是能够抽出来事件写博客的。所以非常惭愧，直到一个月后的今天才有时间重新提笔。</p><h2 id="2-未来的一些规划"><a href="#2-未来的一些规划" class="headerlink" title="2. 未来的一些规划"></a>2. 未来的一些规划</h2><p>因为这个学期是我在CS的第二个学习，选了一些比较有意思的课程，比如Assembly、Computer Vision、Machine Learning这些我挺感兴趣的课程，所以未来准备写一些课程的notes，一方面是note，一方面其中的知识又可以作为博客的内容。所以准备写一些这些内容。</p><p>除了课程的notes以外，上一个工作可以说已经到了结尾，除了5月下旬还需要去开会和给一个presentation（其实想推给我的学长去做<span class="github-emoji"><span>😂</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f602.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>），发表到ICRA2022 Conference Proceedings上去其实就标志着一个工作已经结束了。</p><p>新的工作准备面向Point Cloud、Video Understanding等方向来做。因为是新的工作，所以前期的文献调研、设计方法，到后期的设计方法、写文章等等过程其实都可以记录下来。所以我也准备把做新的工作时候的一些内容写成博客。具体内容会包括前期阅读的文章的一个Summary，中期的科研进展、研究心得、研究日记等内容，当然如果运气好的话最后发表出来之后会写几个（主要是中文、英文以及面向0 beginner、面向这个领域的研究者）博客出来详细的讲解我们的方法。当然，一些内容，包括研究的进展这些内容是最后研究结束了之后才会发出来。</p><h2 id="3-这段时间学习的Skills"><a href="#3-这段时间学习的Skills" class="headerlink" title="3. 这段时间学习的Skills"></a>3. 这段时间学习的Skills</h2><p>这段时间当然不止是处理一些杂事了。其实我抽时间学了一手MS Project。因为有上一段科研的经历，明白拖延症是多烦，所以想要严格的stick to the project还是需要有一个严格的计划的。其实从某个角度来讲科研也可以视为一个project，所以也可以用项目管理的角度来管理科研。所以特地学了一下Project，给下一段科研做了一个项目规划。期待后面能够帮助到新的科研。</p><p>以上就是最近的情况。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 杂项 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 杂项 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>XJTU计算机视觉2022-Spring-1: 绪论</title>
+      <link href="/2022/03/06/xjtu-ji-suan-ji-shi-jue-2022-spring-1-xu-lun/"/>
+      <url>/2022/03/06/xjtu-ji-suan-ji-shi-jue-2022-spring-1-xu-lun/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>本文是XJTU计算机视觉2022 Spring 第一节课Introduction的笔记，对计算机视觉、模式识别等内容进行了介绍，同时说明了课程相关的要求</p></blockquote><p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220306215122381.png" alt="计算机视觉与模式识别"></p><h1 id="XJTU计算机视觉2022-Spring-1-绪论"><a href="#XJTU计算机视觉2022-Spring-1-绪论" class="headerlink" title="XJTU计算机视觉2022-Spring-1: 绪论"></a>XJTU计算机视觉2022-Spring-1: 绪论</h1><p><strong>计算机视觉是一门研究如何使机器“看”的科学</strong>，更进一步的说，就是是指用摄影机和电脑代替人眼对目标进行识别、跟踪和测量等任务，从而实现机器视觉，并进一步做图形处理，使电脑处理成为更适合人眼观察或传送给仪器检测的图像。</p><p>第一节课绪论的所有内容如下</p><p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220306232754930.png" alt="第一节课绪论的内容"></p><p>不过由于我所写的是笔记，而非课程的PPT的复制粘贴，因此我将有选择性的介绍一些内容。</p><h2 id="1-计算机视觉的定义"><a href="#1-计算机视觉的定义" class="headerlink" title="1. 计算机视觉的定义"></a>1. 计算机视觉的定义</h2><p>维基百科上对计算机视觉（Computer Vision）的介绍如下</p><blockquote><p>Computer vision is an interdisciplinary scientific field that deals with how computers can gain high-level understanding from digital images or videos. From the perspective of engineering, it seeks to understand and automate tasks that the human visual system can do.</p><p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220306233115131.png" alt="维基百科上对计算机视觉的介绍"></p></blockquote><p>通俗的来说：</p><ul><li>计算机视觉是一门研究如何使机器“看”的科学</li><li>更进一步的说，就是是指<strong>用摄影机和电脑代替人眼</strong>，完成<ul><li><strong>对目标进行识别、跟踪和测量</strong></li><li><strong>并进一步做图形处理</strong></li><li><strong>使电脑处理成为更适合人眼观察或传送给仪器检测的图像</strong></li></ul></li></ul><h2 id="2-模式识别的定义"><a href="#2-模式识别的定义" class="headerlink" title="2. 模式识别的定义"></a>2. 模式识别的定义</h2><p>这门课程的名称是<code>计算机视觉与模式识别</code>，其中包含了Computer Vision和Pattern Recognition两个部分。因此下面就将介绍一下模式识别的定义。</p><p>想要明白什么是模式识别，就需要先明白什么是模式识别。在前面的某一个博客中我其实以及介绍过了模式（Pattern），这里再介绍一下</p><p>Pattern虽然直译为模式，但其含义其实是规律，即万事万物中存在的规律。用维基百科的话来说如下</p><blockquote><p>模式（英语：Pattern）是存在于人们感知到的世界、人造设计或抽象思想中的规律。因此，模式的元素以可预测的方式重复。几何图案是一种由几何形状形成的图案，通常像壁纸设计一样重复。</p><p>任何感官都可以直接观察模式。相反，科学、数学或语言中的抽象模式可能只有透过分析才能观察到。实践中的直接观察，意味著看到在自然界和艺术中普遍存在的视觉模式。自然界中的视觉模式通常是混乱的，很少完全重复，并且经常涉及分形。自然图案包括螺旋、曲折、波浪、泡沫、瓷砖、裂缝，以及由旋转和反射的对称性产生的图案。模式有一个潜在的数学结构[1]；事实上，数学可以被看作是对规律的探索，任何函数的输出都是一个数学模式。同样在科学中，理论解释和预测世界的规律。</p><p>在艺术和建筑中，装饰或视觉图案可以组合和重复以形成设计用于对观看者产生选定效果的图案。在计算机科学中，软体设计模式是对一类编程问题的已知解决方案。在时尚界，图案是用于创建任意数量的类似服装的模板。</p><p>在模式之中，某些固定的元素不断以可预测的方式周期性重现。最基本而常见的模式，称为密铺，具备重复性以及周期性两大特征。找寻出固定模式是人类基本的认知功能之一。</p><p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220306234310705.png" alt="模式（Pattern）的含义"></p></blockquote><p>所以模式识别的意思其实指的就是识别存在于事物中的规律。然后利用这种规律来帮助我们完成任务。</p><h2 id="3-模式识别和计算机视觉的关系"><a href="#3-模式识别和计算机视觉的关系" class="headerlink" title="3. 模式识别和计算机视觉的关系"></a>3. 模式识别和计算机视觉的关系</h2><p>我们上面说道，计算机视觉其实指的就是用机器来完成诸如追踪、目标识别和测量等视觉任务。因此，计算机视觉和模式识别的关系其实就是：<strong>模式识别为计算机视觉解决机器视觉任务提供了工具</strong></p><p>换而言之，本课程的关注的对象就是计算机视觉，而模式识别是帮助计算机视觉完成任务的有力工具。</p><p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220306235133384.png" alt="计算机视觉和模式识别的关系"></p><p>所以我们后面要讲的内容就包括：</p><ul><li>计算机表示视觉的方式（图像的表示）</li><li>计算机（摄像机）成像的原理</li><li>对图像的变换（几何变换、灰度变换、空间滤波、频域变换等等）</li><li>等等</li></ul><p>这些内容都是经典的计算机视觉的内容，并且将会为接下来的学习做好准备</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> XJTU计算机视觉2022-Spring </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 计算机视觉 </tag>
+            
+            <tag> 模式识别 </tag>
+            
+            <tag> Computer Vision </tag>
+            
+            <tag> Pattern Recognition </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>李宏毅ML2021-Spring-10: Generative Adversarial Network (GAN)</title>
       <link href="/2022/02/07/li-hong-yi-ml2021-spring-10-gan/"/>
       <url>/2022/02/07/li-hong-yi-ml2021-spring-10-gan/</url>
