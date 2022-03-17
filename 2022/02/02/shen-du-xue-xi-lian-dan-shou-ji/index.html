@@ -419,21 +419,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-02-05
+                    2022-03-17
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.2k
+                    2.5k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    4 分
+                    10 分
                 </div>
                 
 
@@ -478,8 +478,8 @@
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="2-Pytorch使用CrossEntropy"><a href="#2-Pytorch使用CrossEntropy" class="headerlink" title="2. Pytorch使用CrossEntropy"></a>2. Pytorch使用CrossEntropy</h2><p>CrossEntropy损失函数一般用于分类任务。具体的原理就是交叉熵（Cross-Entropy）其实等价于最大化似然（Maximize Likelihood），或者说最小化对数负似然（Negative Log Likelihood），即让网络输出的分布和真实的数据的分布越相似越好。因此，交叉熵损失（Cross-Entropy Loss）其实等于负对数似然（NLL Loss）</p>
 <p>在Pytorch中，提供了负对数似然损失函数的API，然后在其基础上又集成了softmax，就成了Pytorch中的Cross-Entropy损失函数。因此一般在分类的时候都是直接使用Cross-Entropy作为损失函数的，就避免了我们自己写softmax。</p>
-<p>但是使用Cross-Entropy的时候因为要计算SoftMax，所以Pytorch要求输入的<code>target</code>都是long类型的</p>
-<p>所以最好在读取完数据之后把<code>target</code>，也就是y转为long，即</p>
+<h3 id="1-数据类型的问题"><a href="#1-数据类型的问题" class="headerlink" title="1. 数据类型的问题"></a>1. 数据类型的问题</h3><p>但是使用Cross-Entropy的时候因为要计算Softmax，所以Pytorch要求输入的<code>target</code>是long类型的，即输入的label要求是long，输入的<code>input</code>也就是预测值是float</p>
+<p>所以最好在读取完数据之后把<code>target</code>，也就是y转为long，y_pred转为float，即</p>
 <pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true"># train</span>
 self<span class="token punctuation">.</span>network<span class="token punctuation">.</span>train<span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token keyword">for</span> step<span class="token punctuation">,</span> <span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span> <span class="token keyword">in</span> enumerate<span class="token punctuation">(</span>self<span class="token punctuation">.</span>train_loader<span class="token punctuation">)</span><span class="token punctuation">:</span>
@@ -493,8 +493,8 @@ self<span class="token punctuation">.</span>network<span class="token punctuatio
     <span class="token comment" spellcheck="true"># calculate loss</span>
     output <span class="token operator">=</span> self<span class="token punctuation">.</span>network<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
 
-    <span class="token comment" spellcheck="true"># 我这里是在Dataset中就已经转为long了，所以这里保持不变即可</span>
-    loss<span class="token punctuation">:</span> torch<span class="token punctuation">.</span>Tensor <span class="token operator">=</span> self<span class="token punctuation">.</span>loss_function<span class="token punctuation">(</span>output<span class="token punctuation">,</span> y<span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># 注意这里要转成float和long</span>
+    loss<span class="token punctuation">:</span> torch<span class="token punctuation">.</span>Tensor <span class="token operator">=</span> self<span class="token punctuation">.</span>loss_function<span class="token punctuation">(</span>output<span class="token punctuation">.</span>float<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> y<span class="token punctuation">.</span>long<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 
     <span class="token comment" spellcheck="true"># Gradient Descent</span>
     loss<span class="token punctuation">.</span>backward<span class="token punctuation">(</span><span class="token punctuation">)</span>
@@ -502,6 +502,58 @@ self<span class="token punctuation">.</span>network<span class="token punctuatio
     <span class="token comment" spellcheck="true"># Step</span>
     self<span class="token punctuation">.</span>optimizer<span class="token punctuation">.</span>step<span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>否则会出现如下的报错</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220317100142950.png" alt="没有转成long的错误"></p>
+<h3 id="2-输入顺序问题"><a href="#2-输入顺序问题" class="headerlink" title="2. 输入顺序问题"></a>2. 输入顺序问题</h3><p>此外，除了要求转成long，计算CrossEntropyLoss的时候是要求预测值作为第一个实参，真实的label作为第二个实参，即</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true"># train</span>
+self<span class="token punctuation">.</span>network<span class="token punctuation">.</span>train<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">for</span> step<span class="token punctuation">,</span> <span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span> <span class="token keyword">in</span> enumerate<span class="token punctuation">(</span>self<span class="token punctuation">.</span>train_loader<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment" spellcheck="true"># 注意在这里转换，如果Dataset里面以及转换了这里就不要转换了</span>
+    x<span class="token punctuation">,</span> y <span class="token operator">=</span> x<span class="token punctuation">.</span>to<span class="token punctuation">(</span>dtype<span class="token operator">=</span>self<span class="token punctuation">.</span>network<span class="token punctuation">.</span>dtype<span class="token punctuation">,</span> device<span class="token operator">=</span>self<span class="token punctuation">.</span>available_device<span class="token punctuation">)</span><span class="token punctuation">,</span> y<span class="token punctuation">.</span>to<span class="token punctuation">(</span>
+        device<span class="token operator">=</span>self<span class="token punctuation">.</span>available_device<span class="token punctuation">)</span>
+
+    <span class="token comment" spellcheck="true"># zero grad</span>
+    self<span class="token punctuation">.</span>network<span class="token punctuation">.</span>zero_grad<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token comment" spellcheck="true"># calculate loss</span>
+    output <span class="token operator">=</span> self<span class="token punctuation">.</span>network<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+
+    <span class="token comment" spellcheck="true"># 注意第一位是预测值，第二位是long的label</span>
+    loss<span class="token punctuation">:</span> torch<span class="token punctuation">.</span>Tensor <span class="token operator">=</span> self<span class="token punctuation">.</span>loss_function<span class="token punctuation">(</span>output<span class="token punctuation">,</span> y<span class="token punctuation">.</span>long<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token comment" spellcheck="true"># Gradient Descent</span>
+    loss<span class="token punctuation">.</span>backward<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token comment" spellcheck="true"># Step</span>
+    self<span class="token punctuation">.</span>optimizer<span class="token punctuation">.</span>step<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>否则就会出现下面的错误</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220317100515724.png" alt="顺序出错的报错"></p>
+<h3 id="3-输入维度的问题"><a href="#3-输入维度的问题" class="headerlink" title="3. 输入维度的问题"></a>3. 输入维度的问题</h3><p>对于分类问题来说，我们输入的$x$最后得到的$y_{pred}$是$[Batch, Class]$类型的数据，因此Pytoch的CrossEntropyLoss要求输入的预测值的是二维的数据。但是Pytorch却要求GroundTruth的$y$的形状是一维的，长度和$Batch$数相等，每一位表示对应的类别，即</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true"># train</span>
+self<span class="token punctuation">.</span>network<span class="token punctuation">.</span>train<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">for</span> step<span class="token punctuation">,</span> <span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span> <span class="token keyword">in</span> enumerate<span class="token punctuation">(</span>self<span class="token punctuation">.</span>train_loader<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment" spellcheck="true"># 注意在这里转换，如果Dataset里面以及转换了这里就不要转换了</span>
+    x<span class="token punctuation">,</span> y <span class="token operator">=</span> x<span class="token punctuation">.</span>to<span class="token punctuation">(</span>dtype<span class="token operator">=</span>self<span class="token punctuation">.</span>network<span class="token punctuation">.</span>dtype<span class="token punctuation">,</span> device<span class="token operator">=</span>self<span class="token punctuation">.</span>available_device<span class="token punctuation">)</span><span class="token punctuation">,</span> y<span class="token punctuation">.</span>to<span class="token punctuation">(</span>
+        device<span class="token operator">=</span>self<span class="token punctuation">.</span>available_device<span class="token punctuation">)</span>
+
+    <span class="token comment" spellcheck="true"># zero grad</span>
+    self<span class="token punctuation">.</span>network<span class="token punctuation">.</span>zero_grad<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token comment" spellcheck="true"># calculate loss</span>
+    output <span class="token operator">=</span> self<span class="token punctuation">.</span>network<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+
+    <span class="token comment" spellcheck="true"># 注意对ground truth进行了squeeze来保证是一维的，因为dataloader里面进行了stack</span>
+    loss<span class="token punctuation">:</span> torch<span class="token punctuation">.</span>Tensor <span class="token operator">=</span> self<span class="token punctuation">.</span>loss_function<span class="token punctuation">(</span>output<span class="token punctuation">,</span> y<span class="token punctuation">.</span>squeeze<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>long<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token comment" spellcheck="true"># Gradient Descent</span>
+    loss<span class="token punctuation">.</span>backward<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token comment" spellcheck="true"># Step</span>
+    self<span class="token punctuation">.</span>optimizer<span class="token punctuation">.</span>step<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>否则会报错    </p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220317101634866.png" alt="形状出错的报错"></p>
 <h2 id="3-训练代码调bug"><a href="#3-训练代码调bug" class="headerlink" title="3. 训练代码调bug"></a>3. 训练代码调bug</h2><p>把所有的测试代码写完了之后一般来说是没法直接开始训练的，需要调一下bug，但是这个时候因为<code>epoch</code>、<code>dataloader</code>的循环都写好了，因此如果直接调试的话可能会卡到训练部分。</p>
 <p>这个时候可以给训练循环的这类步骤直接break掉就行了，因为的目的在于验证流程，即验证是否可以跑完流程而非开始训练，因此这个时候break掉即可。即</p>
 <pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">for</span> epoch <span class="token keyword">in</span> range<span class="token punctuation">(</span>n_epoch<span class="token punctuation">)</span><span class="token punctuation">:</span>
@@ -562,6 +614,101 @@ self<span class="token punctuation">.</span>network<span class="token punctuatio
         <span class="token string">"val_loss: {Fore.GREEN + Style.BRIGHT}{loss:>.5f}{Style.RESET_ALL}, "</span>
         <span class="token string">"min_val_loss: {Fore.GREEN + Style.BRIGHT}{min_val_loss:>.5f}{Style.RESET_ALL}"</span><span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="4-训练阶段Early-Stop"><a href="#4-训练阶段Early-Stop" class="headerlink" title="4. 训练阶段Early Stop"></a>4. 训练阶段Early Stop</h2><p>在训练网络的过程中，可能会出现过拟合，因此就需要用Early Stop技术来防止过拟合。判断是否过拟合的依据是看训练和验证阶段的loss曲线，但在真实训练的时候是没办法人工一直查看损失曲线的，因此我们更希望在代码里面能够进行判断。</p>
+<p>相比于记录下来每一个epoch的性能，Early Stop其实更加简单粗暴，<strong>Early Stop指的其实就是如果网络在N个epoch中性能都没有下降，那么就停止训练</strong>。</p>
+<p>在代码里的实现类似这样</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">for</span> epoch <span class="token keyword">in</span> range<span class="token punctuation">(</span>n_epoch<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    x<span class="token punctuation">:</span> torch<span class="token punctuation">.</span>Tensor
+    y<span class="token punctuation">:</span> torch<span class="token punctuation">.</span>Tensor
+
+    <span class="token comment" spellcheck="true"># train</span>
+    self<span class="token punctuation">.</span>network<span class="token punctuation">.</span>train<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">for</span> step<span class="token punctuation">,</span> <span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span> <span class="token keyword">in</span> tqdm<span class="token punctuation">(</span>enumerate<span class="token punctuation">(</span>self<span class="token punctuation">.</span>train_loader<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">pass</span>
+
+    <span class="token comment" spellcheck="true"># validation</span>
+    self<span class="token punctuation">.</span>network<span class="token punctuation">.</span>eval<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">with</span> torch<span class="token punctuation">.</span>no_grad<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">for</span> step<span class="token punctuation">,</span> <span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span> <span class="token keyword">in</span> tqdm<span class="token punctuation">(</span>enumerate<span class="token punctuation">(</span>self<span class="token punctuation">.</span>val_loader<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">pass</span>
+
+    <span class="token comment" spellcheck="true"># early stop</span>
+    <span class="token keyword">if</span> loss <span class="token operator">&lt;</span> min_val_loss<span class="token punctuation">:</span>
+        min_val_loss <span class="token operator">=</span> loss
+        earl_stop <span class="token operator">=</span> <span class="token number">0</span>
+        self<span class="token punctuation">.</span>save_check_point<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">else</span><span class="token punctuation">:</span>
+        earl_stop <span class="token operator">+=</span> <span class="token number">1</span>
+
+    <span class="token keyword">if</span> earl_stop <span class="token operator">></span> self<span class="token punctuation">.</span>early_stop_cnt<span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span>f<span class="token string">"{Fore.YELLOW}Early Stoped at epoch: {epoch}"</span><span class="token punctuation">)</span>
+        <span class="token keyword">break</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="5-代码里使用SummaryWriter"><a href="#5-代码里使用SummaryWriter" class="headerlink" title="5. 代码里使用SummaryWriter"></a>5. 代码里使用SummaryWriter</h2><p>如果代码里使用了SummaryWriter，那么调试的时候有一个问题，就是Python是遇到报错之后就直接退出，不会运行完所有的代码。</p>
+<p>而SummaryWriter是一个异步的服务程序，因此在使用之后是需要关闭的。如果这次调试没有关闭SummaryWriter，那么下一次调试产生的数据就会写入到这次调试的数据里去。</p>
+<p>所以在调试阶段为了防止这个问题，可以吧SummaryWriter的关闭方法写入到类的<code>__del__</code>方法里去。<code>__del__</code>是在对象被销毁的时候运行，一般在程序运行结束（不管是正常结束还是因为异常报错）的时候，Python会自动销毁所有的对象。</p>
+<p>因此如果我们把训练的代码写成了一个类的话，重写<code>__del__</code>方法就可以帮助我们关闭SummaryWriter</p>
+<p>具体在代码中是这样的</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">NetworkTrainer</span><span class="token punctuation">:</span>
+    available_device <span class="token operator">=</span> <span class="token string">"cuda:0"</span> <span class="token keyword">if</span> torch<span class="token punctuation">.</span>cuda<span class="token punctuation">.</span>is_available<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">else</span> <span class="token string">"cpu"</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>writer <span class="token operator">=</span> SummaryWriter<span class="token punctuation">(</span>log_dir<span class="token operator">=</span>path2log<span class="token punctuation">)</span>
+        <span class="token keyword">pass</span>
+
+    <span class="token keyword">def</span> <span class="token function">__del__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>writer<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="6-高效使用tqdm"><a href="#6-高效使用tqdm" class="headerlink" title="6. 高效使用tqdm"></a>6. 高效使用tqdm</h2><p>在训练代码的时候，往往使用tqdm来给出来一个训练的进度条，例如下面</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/697264-20200723170905473-1915244785.png" alt="tqdm可视化得到的训练进度条"></p>
+<p>然而很多时候我们都需要再输出一些内容，比如训练和验证的loss，分类的准确率这类信息。</p>
+<p>如果我们直接print的话，就会导致tqdm的进度条断开，非常的不美观，因此我们可以使用tqdm的<code>set_description</code>或者<code>set_postfix</code>方法来设置一些训练的信息，可是这样做并不优雅，因为能够显示的信息有限。一个优雅的解决方案如下面的gif所示</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/深度录屏_x-terminal-emulator_20220317111046.gif" alt="优雅的解决方案"></p>
+<p>即每次输出都会保证tqdm的进度条在最下面。要实现这样的效果，其实通过tqdm的另外一个方法就行了。</p>
+<p>在输出的时候，缓冲区是被tqdm占用的，因此直接输出肯定会有问题，我们使用tqdm的write方法来让tqdm自动处理即可。例如实现上面的效果的代码</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">train</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> n_epoch<span class="token punctuation">:</span> int<span class="token punctuation">,</span> early_stop<span class="token punctuation">:</span> int<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        x<span class="token punctuation">:</span> torch<span class="token punctuation">.</span>Tensor
+        y<span class="token punctuation">:</span> torch<span class="token punctuation">.</span>Tensor
+        max_acc <span class="token operator">=</span> <span class="token number">0</span>
+        early_stop_cnt <span class="token operator">=</span> <span class="token number">0</span>
+        <span class="token keyword">for</span> epoch <span class="token keyword">in</span> <span class="token punctuation">(</span>tt <span class="token punctuation">:</span><span class="token operator">=</span> tqdm<span class="token punctuation">.</span>trange<span class="token punctuation">(</span>n_epoch<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token comment" spellcheck="true"># train</span>
+            <span class="token keyword">for</span> step<span class="token punctuation">,</span> <span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span> <span class="token keyword">in</span> enumerate<span class="token punctuation">(</span>self<span class="token punctuation">.</span>train_loader<span class="token punctuation">)</span><span class="token punctuation">:</span>
+                x<span class="token punctuation">,</span> y <span class="token operator">=</span> x<span class="token punctuation">.</span>to<span class="token punctuation">(</span>device<span class="token operator">=</span>self<span class="token punctuation">.</span>available_device<span class="token punctuation">,</span> dtype<span class="token operator">=</span>self<span class="token punctuation">.</span>network<span class="token punctuation">.</span>dtype<span class="token punctuation">)</span><span class="token punctuation">,</span> y<span class="token punctuation">.</span>to<span class="token punctuation">(</span>device<span class="token operator">=</span>self<span class="token punctuation">.</span>available_device<span class="token punctuation">,</span>
+                                                                                          dtype<span class="token operator">=</span>self<span class="token punctuation">.</span>network<span class="token punctuation">.</span>dtype<span class="token punctuation">)</span>
+                <span class="token keyword">pass</span>
+
+            <span class="token comment" spellcheck="true"># val</span>
+            acc <span class="token operator">=</span> <span class="token number">0</span>
+            all <span class="token operator">=</span> <span class="token number">0</span>
+            <span class="token keyword">with</span> torch<span class="token punctuation">.</span>no_grad<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+                <span class="token keyword">for</span> step<span class="token punctuation">,</span> <span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span> <span class="token keyword">in</span> enumerate<span class="token punctuation">(</span>self<span class="token punctuation">.</span>val_loader<span class="token punctuation">)</span><span class="token punctuation">:</span>
+                    x<span class="token punctuation">,</span> y <span class="token operator">=</span> x<span class="token punctuation">.</span>to<span class="token punctuation">(</span>device<span class="token operator">=</span>self<span class="token punctuation">.</span>available_device<span class="token punctuation">,</span> dtype<span class="token operator">=</span>self<span class="token punctuation">.</span>network<span class="token punctuation">.</span>dtype<span class="token punctuation">)</span><span class="token punctuation">,</span> y<span class="token punctuation">.</span>to<span class="token punctuation">(</span>
+                        device<span class="token operator">=</span>self<span class="token punctuation">.</span>available_device<span class="token punctuation">,</span>
+                        dtype<span class="token operator">=</span>self<span class="token punctuation">.</span>network<span class="token punctuation">.</span>dtype<span class="token punctuation">)</span>
+                    <span class="token keyword">pass</span>
+
+                    <span class="token comment" spellcheck="true"># get acc</span>
+                    acc <span class="token operator">+=</span> <span class="token punctuation">(</span>y_pred<span class="token punctuation">.</span>argmax<span class="token punctuation">(</span>dim<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">==</span> y<span class="token punctuation">.</span>squeeze<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>sum<span class="token punctuation">(</span><span class="token punctuation">)</span>
+                    all <span class="token operator">+=</span> x<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+            self<span class="token punctuation">.</span>writer<span class="token punctuation">.</span>add_scalar<span class="token punctuation">(</span>tag<span class="token operator">=</span><span class="token string">"acc"</span><span class="token punctuation">,</span> scalar_value<span class="token operator">=</span><span class="token punctuation">(</span>cur_acc <span class="token punctuation">:</span><span class="token operator">=</span> acc <span class="token operator">/</span> all<span class="token punctuation">)</span><span class="token punctuation">,</span> global_step<span class="token operator">=</span>epoch<span class="token punctuation">)</span>
+
+            <span class="token comment" spellcheck="true"># early stop</span>
+            <span class="token keyword">if</span> cur_acc <span class="token operator">></span> max_acc<span class="token punctuation">:</span>
+                max_acc <span class="token operator">=</span> cur_acc
+                early_stop_cnt <span class="token operator">=</span> <span class="token number">0</span>
+                <span class="token keyword">if</span> <span class="token operator">not</span> self<span class="token punctuation">.</span>checkpoint_path<span class="token punctuation">.</span>parent<span class="token punctuation">.</span>exists<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+                    self<span class="token punctuation">.</span>checkpoint_path<span class="token punctuation">.</span>parent<span class="token punctuation">.</span>mkdir<span class="token punctuation">(</span>parents<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+                torch<span class="token punctuation">.</span>save<span class="token punctuation">(</span>self<span class="token punctuation">.</span>network<span class="token punctuation">.</span>state_dict<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> self<span class="token punctuation">.</span>checkpoint_path<span class="token punctuation">)</span>
+            <span class="token keyword">else</span><span class="token punctuation">:</span>
+                early_stop_cnt <span class="token operator">+=</span> <span class="token number">1</span>
+
+            <span class="token comment" spellcheck="true"># 注意，这里调用了tqdm的trange对象的write方法，其实别的对象也是可以的</span>
+            tt<span class="token punctuation">.</span>write<span class="token punctuation">(</span>
+                f<span class="token string">"Epoch [{epoch:>5d}|{n_epoch:>5d}], train_loss {train_loss:>7.4f}, val_loss {val_loss:>7.4f}, "</span>
+                f<span class="token string">"early_stop_cnt: [{early_stop_cnt:>5d}|{early_stop:>5d}]"</span><span class="token punctuation">)</span>
+            <span class="token keyword">if</span> early_stop_cnt <span class="token operator">>=</span> early_stop<span class="token punctuation">:</span>
+                <span class="token keyword">break</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
                 
             </div>
@@ -1108,7 +1255,7 @@ self<span class="token punctuation">.</span>network<span class="token punctuatio
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">259.8k</span>
+                        class="white-color">261.2k</span>
             
             
             
