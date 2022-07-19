@@ -1,0 +1,1610 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="数学建模备赛：美赛基础入门及历年出题点分析, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
+    <meta name="description" content="本文主要介绍了数学建模美赛并分析了数模美赛历年的出题点">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>数学建模备赛：美赛基础入门及历年出题点分析 | JackWang&#39;s Blog</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+
+   <style>
+    body{
+       background-image: url(https://cdn.jsdelivr.net/gh/Tokisaki-Galaxy/res/site/medias/background.jpg);
+       background-repeat:no-repeat;
+       background-size: 100% 100%;
+       background-attachment:fixed;
+    }
+</style>
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">JackWang&#39;s Blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-book-reader" style="zoom: 0.6;"></i>
+      
+      <span>博客</span>
+      <i class="fas fa-chevron-down" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/tags">
+          
+          <i class="fas fa-tags" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按标签归类文章</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories">
+          
+          <i class="fas fa-bookmark" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按目录归类文章</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/archives">
+          
+          <i class="fas fa-archive" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按日期分类文章</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">JackWang&#39;s Blog</div>
+        <div class="logo-desc">
+            
+            JackWang的个人博客
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-book-reader"></i>
+			
+			博客
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>
+
+                  <a href="/tags " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-tags" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按标签归类文章</    span>
+
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/categories " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-bookmark" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按目录归类文章</    span>
+
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/archives " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-archive" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按日期分类文章</    span>
+
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('抱歉，这篇文章并不想让所有人都看到，请输入授权密码观看')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220112183134553.png')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">数学建模备赛：美赛基础入门及历年出题点分析</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/COMAP/">
+                                <span class="chip bg-color">COMAP</span>
+                            </a>
+                        
+                            <a href="/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E7%BE%8E%E8%B5%9B/">
+                                <span class="chip bg-color">数学建模美赛</span>
+                            </a>
+                        
+                            <a href="/tags/MCM/">
+                                <span class="chip bg-color">MCM</span>
+                            </a>
+                        
+                            <a href="/tags/ICM/">
+                                <span class="chip bg-color">ICM</span>
+                            </a>
+                        
+                            <a href="/tags/Mathematical-Contest-in-Modeling/">
+                                <span class="chip bg-color">Mathematical Contest in Modeling</span>
+                            </a>
+                        
+                            <a href="/tags/The-Interdisciplinary-Contest-in-Modeling/">
+                                <span class="chip bg-color">The Interdisciplinary Contest in Modeling</span>
+                            </a>
+                        
+                            <a href="/tags/Math-Modeling/">
+                                <span class="chip bg-color">Math Modeling</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E5%A4%87%E8%B5%9B/" class="post-category">
+                                数学建模备赛
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2022-01-12
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2022-01-28
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    3.1k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    10 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <blockquote>
+<p>本文主要介绍了数学建模美赛并分析了数模美赛历年的出题点</p>
+</blockquote>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220112183134553.png" alt="2022美赛宣传海报" style="zoom:50%;"></p>
+<h1 id="数学建模备赛：美赛基础入门及历年出题点分析"><a href="#数学建模备赛：美赛基础入门及历年出题点分析" class="headerlink" title="数学建模备赛：美赛基础入门及历年出题点分析"></a>数学建模备赛：美赛基础入门及历年出题点分析</h1><h1 id="一、美赛基础入门"><a href="#一、美赛基础入门" class="headerlink" title="一、美赛基础入门"></a>一、美赛基础入门</h1><h2 id="1-数模美赛入门"><a href="#1-数模美赛入门" class="headerlink" title="1. 数模美赛入门"></a>1. 数模美赛入门</h2><blockquote>
+<p>对于零基础的人来说，还是先直观的认识一下数模美赛</p>
+</blockquote>
+<h3 id="A-2020-MCM-A-题目"><a href="#A-2020-MCM-A-题目" class="headerlink" title="A. 2020 MCM-A 题目"></a>A. 2020 MCM-A 题目</h3><p>在到点（比赛开始）之后，美赛官方会在官网上公布题目，即下面的PDF文件</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220112103650809.png" alt="赛题-1"></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220112103715739.png" alt="赛题-2"></p>
+<p>英文看起来不太方便，所以翻译成中文来看看</p>
+<blockquote>
+<p><strong>2020MCM        A题：向北迁徙</strong></p>
+<p>全球海洋温度影响某些海洋生物的生境质量。当温度变化太大，无法继续繁衍时， 这些物种就会迁移到其他更适合它们现在和未来生活和繁殖的生境。这方面的一个例 子是美国缅因州的龙虾种群,它们正在慢慢向北迁移到加拿大，那里较低的海洋温度提 供了更合适的栖息地。这种地理种群的变化会严重扰乱那些依赖生物稳定性的种群的 生计。</p>
+<p>你的团队已被苏格兰北大西洋渔业管理财团聘请为顾问。该财团希望更好地了解， 如果全球海洋温度上升，苏格兰鲱鱼和鲭鱼可能从苏格兰附近的现有栖息地迁移的相 关问题。这两个鱼种对苏格兰渔业的经济贡献很大。鲱鱼和鲭鱼种群位置的变化，可 能会使以苏格兰为基地的小型渔业公司在经济上无法生存。因为这些公司使用的渔船 上没有冷藏设备，而他们需要收获新鲜鱼并将其运往苏格兰渔港的市场。</p>
+<p>要求：</p>
+<ol>
+<li>建立一个数学模型，确定这两种鱼在未来50年内最可能迁徙到的位置，假设水温 会发生足够导致种群移动的变化。</li>
+<li>根据海洋水温变化的速度，用你的模型预测最佳情况、最坏情况和最有可能的时 间：如果小型捕鱼公司继续在目前的地点作业，这些种群将太远，直到小型捕鱼公司 无法捕捞。</li>
+</ol>
+</blockquote>
+<h3 id="B-最终解决方案"><a href="#B-最终解决方案" class="headerlink" title="B. 最终解决方案"></a>B. 最终解决方案</h3><p>经过四天的比赛，美赛要求参赛队伍最终提交一个PDF文件作为最终解决方案，其中包括Summary、论文、附录等等内容</p>
+<p>下面是上面这道题的O奖文章之一</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220112104017921.png" alt="最终论文"></p>
+<p>这是论文里的部分内容</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220112104359345.png" alt="部分论文内容" style="zoom: 67%;"></p>
+<h3 id="C-美赛到底是什么？"><a href="#C-美赛到底是什么？" class="headerlink" title="C. 美赛到底是什么？"></a>C. 美赛到底是什么？</h3><p>在直观的认识了美赛之后，我们不禁想要问，什么是美赛？</p>
+<blockquote>
+<p><strong>美赛（美国大学生数学建模竞赛）是什么？</strong></p>
+<ul>
+<li>美赛=微型的科研项目</li>
+<li>美赛=设计和策划方案</li>
+<li>美赛=模型思路+程序+论文</li>
+</ul>
+</blockquote>
+<p>下面我们就开始正式的介绍美赛</p>
+<h2 id="2-美赛的发展及规模"><a href="#2-美赛的发展及规模" class="headerlink" title="2. 美赛的发展及规模"></a>2. 美赛的发展及规模</h2><p><strong>Mathematical Contest in Modeling（MCM）</strong>是一项由美国数学及其应用联合会(<strong>COMAP</strong>)发起组织的国际级竞赛项目，自1985年开始举办 ，每年一次。由美国自然基金协会和美国数学及其应用联合会共同主办 ，美国运筹学学会、工业与应用数学学会、数学学会等多家机构协办。 </p>
+<p>1999年起，美国数学及其应用联合会又同时推出<strong>交叉学科竞赛（ Interdisciplinary Contest in Modeling ），简称 ICM</strong>（涉及数学、环境 科学、生物学、化学、资源管理等交叉学科）。</p>
+<ul>
+<li>MCM是国际大学生各类竞赛中级别最高的一项赛事，每年吸引世界 著名高校参赛，很多国内外著名科研机构和企业将其作为衡量学生素 质和水平的重要依据</li>
+<li>美赛对国内大部分高校可以保研加分（虽然欲我无瓜<span class="github-emoji"><span>😂</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f602.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>）</li>
+<li>美赛成绩国外的认可度要高一些（出国留学）</li>
+<li>国内高校对美赛的热情略低于国赛，大部分学校没有常规的的赛前集训</li>
+</ul>
+<p>美赛历年参加的人数在不断的增加：</p>
+<ul>
+<li>2015年，MCM近8000队，ICM近2000队</li>
+<li>2016年，MCM近9000队，ICM近2000队</li>
+<li>2017年，MCM 11000队，ICM6000多队</li>
+<li>2018年，MCM 12000队，ICM7000多队</li>
+<li>2019年，MCM14000多队，ICM11000多队</li>
+<li><strong>人数逐年增加，选择MCM的人数多于ICM。</strong></li>
+</ul>
+<p>和国内一等奖最高不一样，美赛最高的奖项是特等奖。各个奖项以及获奖比利如下：</p>
+<ul>
+<li>特等奖（O奖）每题18、19队，&lt;1%</li>
+<li>特等奖提名（F奖）每题180，234队，3%</li>
+<li>一等奖（M奖） 5-6%，二等奖（H奖）22－26％</li>
+<li>S奖（Successful Participant）</li>
+</ul>
+<p><strong>从2019年开始，严查违规问题（DQ），10%-20%被判违规，以前只有少量被判违规。</strong></p>
+<h2 id="3-美赛的比赛形式及流程"><a href="#3-美赛的比赛形式及流程" class="headerlink" title="3. 美赛的比赛形式及流程"></a>3. 美赛的比赛形式及流程</h2><ul>
+<li><strong>题目</strong>：各领域简化的应用问题<ul>
+<li>MCM 3 题（A， B ，C，连续，离散，数据分析）</li>
+<li>ICM 3 题（D，E，F，计算机网络，环境，政策措施）</li>
+</ul>
+</li>
+<li><strong>提交成果</strong>：一篇包含<strong>问题分析、模型假设、建立、求解(数学软件)、 结果分析</strong>等的全英文论文。</li>
+<li><strong>形式</strong>：3名大学生组队，在4天内完成通讯比赛</li>
+<li><strong>标准</strong>：<ul>
+<li>假设的合理性</li>
+<li><strong>建模的创造性</strong></li>
+<li>结果的正确性</li>
+<li>表述的清晰性</li>
+</ul>
+</li>
+</ul>
+<p>2022年美赛的流程如下：</p>
+<ul>
+<li><strong>注册（报名）截至时间</strong>：比赛开始前两小时<ul>
+<li><strong>2022年2月18日早上4点前</strong></li>
+</ul>
+</li>
+<li><p><strong>比赛时间</strong>：一般美赛都在每年2-3月（过年前后，开学前）</p>
+<ul>
+<li><strong>2022年2月18日早上6点——2月22日早上9点</strong></li>
+</ul>
+</li>
+<li><p>3月完成评审，4月30日之前COMAP网站发布结果</p>
+</li>
+<li>注册报名：<ul>
+<li><strong>美赛官网注册报名</strong></li>
+</ul>
+</li>
+</ul>
+<p>COMAP官网：<a target="_blank" rel="noopener" href="https://www.comap.com/，第二个就是数模美赛">https://www.comap.com/，第二个就是数模美赛</a></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220112110317316.png" alt="COMAP官网以及美赛"></p>
+<h2 id="4-美赛的能力要求与准备"><a href="#4-美赛的能力要求与准备" class="headerlink" title="4. 美赛的能力要求与准备"></a>4. 美赛的能力要求与准备</h2><p>首先，美赛对能力的要求如下：</p>
+<ul>
+<li>良好的数理知识（高等数学、概率论、线性代数）</li>
+<li>编程及软件使用能力（Matlab、Python)</li>
+<li>英语写作能力</li>
+<li>资料搜集能力：一般除了C题其他的题目不会给数据，然而自己的模型是需要数据验证的，因此还要自己根据题目的暗示找数据</li>
+<li>文献阅读能力</li>
+</ul>
+<p>接下来是美赛的准备方法：</p>
+<ul>
+<li>基础模型算法/编程</li>
+<li>实战真题（3-5年）</li>
+<li>阅读真题O奖论文：因为O奖论文是最接近评委心中的满分答案的论文</li>
+</ul>
+<p>而为了准备美赛，推荐的资料如下：</p>
+<ul>
+<li>数理知识：<ul>
+<li>《数学建模算法与应用》司守奎等</li>
+<li>历年美赛真题与O奖论文集合</li>
+</ul>
+</li>
+<li>常用软件：<ul>
+<li>Matlab, SPSS, Excel, PPT制图，Latex（必备）</li>
+<li>Lingo，ArcGIS, Python，Origin, SAS, R语言（推荐）</li>
+</ul>
+</li>
+<li>英语：<ul>
+<li>雅思、托福写作词组+句式</li>
+</ul>
+</li>
+</ul>
+<h2 id="5-美赛的特点"><a href="#5-美赛的特点" class="headerlink" title="5. 美赛的特点"></a>5. 美赛的特点</h2><p>相对于国赛，美赛的特点如下：</p>
+<ul>
+<li>赛题灵活度高，内容广泛，开放性强</li>
+<li><strong>对算法难度和准确度要求低于国赛</strong>，基本上合理即可</li>
+<li><strong>注重方法的创新</strong></li>
+<li>英文写作水平要求较高</li>
+<li>注重论文的完整度与丰富度</li>
+</ul>
+<h2 id="6-美赛的组队与分工"><a href="#6-美赛的组队与分工" class="headerlink" title="6. 美赛的组队与分工"></a>6. 美赛的组队与分工</h2><p>大体来说，完成美赛需要团队具有下面三个模块的能力</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220112111608785.png" alt="美赛需要的三个能力"></p>
+<p>在细节上，建议：</p>
+<ul>
+<li>至少一位擅长英语写作</li>
+<li>至少一位擅长编程</li>
+<li>建模知识都需要入门</li>
+<li>根据你们的特长调整分工及选题</li>
+<li><strong>最终决策权</strong></li>
+<li>沟通、负责</li>
+</ul>
+<h1 id="二、美赛出题点分析"><a href="#二、美赛出题点分析" class="headerlink" title="二、美赛出题点分析"></a>二、美赛出题点分析</h1><p>本文只是对美赛的出题点进行了简要的介绍，跟多内容请参考其他文字</p>
+<h2 id="1-美赛出题领域"><a href="#1-美赛出题领域" class="headerlink" title="1. 美赛出题领域"></a>1. 美赛出题领域</h2><p>从10年开始，历年美赛出题的领域如下：</p>
+<ul>
+<li><strong>工程</strong>：<ul>
+<li>2018A多跳HF无限电传播</li>
+<li>2016A浴缸的水温模型</li>
+</ul>
+</li>
+<li><strong>交通</strong>：<ul>
+<li>卢浮宫疏散</li>
+<li>2017B高速收费站合并</li>
+<li>2018D机场安检站优化</li>
+</ul>
+</li>
+<li><strong>生态环境</strong>： <ul>
+<li>2020A向北迁徙</li>
+<li>2019A饲养一条龙</li>
+<li>2019E环境恶化的代价 是什么？</li>
+</ul>
+</li>
+<li><strong>金融</strong>：<ul>
+<li>2016C优质基金挑战</li>
+</ul>
+</li>
+<li><strong>新能源</strong>：<ul>
+<li>2011C电动汽车</li>
+</ul>
+</li>
+<li><strong>犯罪</strong>：<ul>
+<li>毒品危机</li>
+</ul>
+</li>
+<li><strong>疾病医学</strong>：<ul>
+<li>2015A 根除埃博拉病毒</li>
+</ul>
+</li>
+<li><strong>人文社科</strong>：<ul>
+<li>2020F难民危机，2019B语言传播趋势, 2018F隐私成本问题</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-美赛常见题型"><a href="#2-美赛常见题型" class="headerlink" title="2. 美赛常见题型"></a>2. 美赛常见题型</h2><p>其实不光是美赛，整个数学建模常见的题型如下：</p>
+<ul>
+<li><strong>运筹优化类问题</strong><ul>
+<li>规划模型</li>
+<li>排队论</li>
+<li>神经网络</li>
+<li>启发式算法</li>
+</ul>
+</li>
+<li><strong>评价类问题</strong><ul>
+<li>层次分析法</li>
+<li>聚类分析法</li>
+<li>主成分分析评价法</li>
+</ul>
+</li>
+<li><strong>预测类问题</strong><ul>
+<li>灰色预测</li>
+<li>回归预测</li>
+<li>神经网络</li>
+<li>马尔科夫链</li>
+</ul>
+</li>
+<li><strong>机理分析类问题</strong>：其实涵盖的面更广<ul>
+<li>回归</li>
+<li>拟合</li>
+<li>微分方程</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-美赛必备算法模型"><a href="#3-美赛必备算法模型" class="headerlink" title="3. 美赛必备算法模型"></a>3. 美赛必备算法模型</h2><p>为了应对美赛，每一小问都能划归到上面的四类题型。因此我们需要掌握下面的算法模型：</p>
+<ol>
+<li><strong>蒙特卡罗/计算机仿真算法</strong><ul>
+<li>该算法又称随机性模拟算法，是通过计算机仿真来解决问题的算法， 同时可以通过模拟可以来检验自己模型的正确性，比较好用的算法</li>
+</ul>
+</li>
+<li>数据拟合、参数估计、插值等数据处理算法<ul>
+<li>比赛中通常会遇到大量的数据需要处理，而处理数据的关键就在于这 些算法，通常使用Matlab作为工具</li>
+</ul>
+</li>
+<li>线性规划、整数规划、多元规划、二次规划等规划类问题<ul>
+<li>建模竞赛大多数问题属于最优化问题，很多时候这些问题可以用数学 规划算法来描述，使用Matlab或Lingo软件实现</li>
+</ul>
+</li>
+<li>网格算法和穷举法<ul>
+<li>当重点讨论模型本身而轻视算法的时候，可以使用这种暴力方案，最 好使用一些高级语言作为编程工具</li>
+</ul>
+</li>
+<li>最优化理论的三大非经典算法：模拟退火法、神经网络、遗传算 法<ul>
+<li>这些问题是用来解决一些较困难的最优化问题的算法，对于有些 问题非常有帮助，但是算法的实现比较困难，需慎重使用</li>
+</ul>
+</li>
+<li>排队论<ul>
+<li>对算法要求高，如元胞自动机</li>
+</ul>
+</li>
+<li>评价类算法<ol>
+<li>层次分析法（AHP）（必掌握）<ul>
+<li>作决策，去哪旅游，通过指标，综合考虑作决策</li>
+</ul>
+</li>
+<li>主成分分析（必掌握）<ul>
+<li>评价多个对象的水平并排序，指标间关联性很强</li>
+</ul>
+</li>
+<li>其他<ul>
+<li>熵权法（客观）、模糊综合评判（简单）、秩和比综合评价 法、TOPSIS法)、数据包络（DEA）、投影寻踪综合评价法、或者揉 和多种算法，比如遗传算法、最优化理论</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>预测算法<ol>
+<li>灰色预测模型（灰箱模型）<ul>
+<li>适合数据样本点个数少，数据呈现指数或曲线的形式</li>
+</ul>
+</li>
+<li>回归分析预测（必掌握）<ul>
+<li>求一个因变量与若干自变量之间的关系，若自变量变化后，求因变量 如何变化； 对样本点的个数、分布有要求</li>
+</ul>
+</li>
+<li>其他<ul>
+<li>微分方程预测、马尔科夫预测、时间序列预测、小波分析 预测、神经网络预测</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>多元分析与关联分析<ol>
+<li>聚类分析（必掌握，参考19）</li>
+<li>主成分分析（必掌握）</li>
+<li>因子分析（必掌握）</li>
+<li>典型相关分析</li>
+<li>灰色关联分析法</li>
+<li>方差分析、协方差分析</li>
+<li>Person相关（样本点的个数比较多）</li>
+</ol>
+</li>
+</ol>
+<h2 id="4-美赛考察点"><a href="#4-美赛考察点" class="headerlink" title="4. 美赛考察点"></a>4. 美赛考察点</h2><p>美赛的考察点，或者说评判时候裁判看中的点，有下面几个：</p>
+<ol>
+<li>运筹优化、机理分析类问题（重难点）：相对于预测类问题，这两类问题能够处理的问题、包含的算法很广，因此是考察的重点</li>
+<li>评价类问题常规要突出新意：因为现在评价模型已经非常完备了，因此使用评价类算法进行评价的时候要突出新意</li>
+<li>模型的完整性和叙述的逻辑性：论文要好好写</li>
+<li>数据分析、挖掘</li>
+<li>方法迁移：把其他学科的研究方法、算法迁移过来，比如Word Embedding</li>
+<li>创新：有理有据，打破常规</li>
+<li>画图美观很重要</li>
+<li>使用专业的软件</li>
+</ol>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Jack Wang</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://jackwang0107.github.io/2022/01/12/shu-xue-jian-mo-bei-sai-mei-sai-ji-chu-ru-men-ji-li-nian-chu-ti-dian-fen-xi/">https://jackwang0107.github.io/2022/01/12/shu-xue-jian-mo-bei-sai-mei-sai-ji-chu-ru-men-ji-li-nian-chu-ti-dian-fen-xi/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Jack Wang</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/COMAP/">
+                                    <span class="chip bg-color">COMAP</span>
+                                </a>
+                            
+                                <a href="/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E7%BE%8E%E8%B5%9B/">
+                                    <span class="chip bg-color">数学建模美赛</span>
+                                </a>
+                            
+                                <a href="/tags/MCM/">
+                                    <span class="chip bg-color">MCM</span>
+                                </a>
+                            
+                                <a href="/tags/ICM/">
+                                    <span class="chip bg-color">ICM</span>
+                                </a>
+                            
+                                <a href="/tags/Mathematical-Contest-in-Modeling/">
+                                    <span class="chip bg-color">Mathematical Contest in Modeling</span>
+                                </a>
+                            
+                                <a href="/tags/The-Interdisciplinary-Contest-in-Modeling/">
+                                    <span class="chip bg-color">The Interdisciplinary Contest in Modeling</span>
+                                </a>
+                            
+                                <a href="/tags/Math-Modeling/">
+                                    <span class="chip bg-color">Math Modeling</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.png" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2022/01/12/2021-ji-suan-ji-ke-xue-ji-zhu-dao-lun-qi-mo-da-zuo-ye-part2/">
+                    <div class="card-image">
+                        
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220121100119989.png" class="responsive-img" alt="2021计算机科学技术导论期末大作业网页">
+                        
+                        <span class="card-title">2021计算机科学技术导论期末大作业网页</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            输入密码才能看哦~
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-01-12
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%9D%82%E9%A1%B9/" class="post-category">
+                                    杂项
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E4%BD%9C%E4%B8%9A/">
+                        <span class="chip bg-color">作业</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/01/12/shu-xue-jian-mo-bei-sai-shu-xue-jian-mo-ti-xing-hua-fen-chang-yong-suan-fa-fen-lei-ji-qi-gua-yong-chang-jing/">
+                    <div class="card-image">
+                        
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220112134606210.png" class="responsive-img" alt="数学建模备赛：数学建模题型划分、常用算法分类及其适用场景">
+                        
+                        <span class="card-title">数学建模备赛：数学建模题型划分、常用算法分类及其适用场景</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            本文主要讲解了数学建模的题型划分、常用算法分类以及常用算法的适用场景
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-01-12
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E5%A4%87%E8%B5%9B/" class="post-category">
+                                    数学建模备赛
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Math-Modeling/">
+                        <span class="chip bg-color">Math Modeling</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E9%A2%98%E5%9E%8B/">
+                        <span class="chip bg-color">数学建模题型</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E7%AE%97%E6%B3%95%E4%BD%93%E7%B3%BB/">
+                        <span class="chip bg-color">数学建模算法体系</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E5%B8%B8%E7%94%A8%E8%A7%A3%E9%A2%98%E6%96%B9%E6%B3%95/">
+                        <span class="chip bg-color">数学建模常用解题方法</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: JackWang&#39;s Blog<br />'
+            + '文章作者: Jack Wang<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2021-2022</span>
+            
+            <a href="/about" target="_blank">Jack Wang</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">261.2k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+                <span id="sitetime"> Loading ...</span>
+                <script>
+                    var calcSiteTime = function () {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2021";
+                        var startMonth = "11";
+                        var startDate = "12";
+                        var startHour = "0";
+                        var startMinute = "0";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+
+                        // 区分是否有年份.
+                        var language = 'zh-CN';
+                        if (startYear === String(todayYear)) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            var daysTip = 'This site has been running for ' + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                daysTip = '本站已运行 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                daysTip = '本站已運行 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = daysTip;
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            var yearsAndDaysTip = 'This site has been running for ' + diffYears + ' years and '
+                                + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                yearsAndDaysTip = '本站已运行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                yearsAndDaysTip = '本站已運行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+                        }
+                    }
+
+                    calcSiteTime();
+                </script>
+            
+            <br>
+            
+                <span id="icp"><img src="/medias/icp.png"
+                                    style="vertical-align: text-bottom;"/>
+                <a href="https://beian.miit.gov.cn" target="_blank">陕ICP备2021014294号-1</a>
+            </span>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+    <a href="mailto:2232123545@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2232123545" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2232123545" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+        
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/sakura.js"><\/script>');
+            }
+        </script>
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

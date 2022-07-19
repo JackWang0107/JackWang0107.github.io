@@ -1,0 +1,1493 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Latex基础：Environments, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
+    <meta name="description" content="本文主要介绍了Latex中的环境">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>Latex基础：Environments | JackWang&#39;s Blog</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+
+   <style>
+    body{
+       background-image: url(https://cdn.jsdelivr.net/gh/Tokisaki-Galaxy/res/site/medias/background.jpg);
+       background-repeat:no-repeat;
+       background-size: 100% 100%;
+       background-attachment:fixed;
+    }
+</style>
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">JackWang&#39;s Blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-book-reader" style="zoom: 0.6;"></i>
+      
+      <span>博客</span>
+      <i class="fas fa-chevron-down" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/tags">
+          
+          <i class="fas fa-tags" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按标签归类文章</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories">
+          
+          <i class="fas fa-bookmark" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按目录归类文章</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/archives">
+          
+          <i class="fas fa-archive" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按日期分类文章</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">JackWang&#39;s Blog</div>
+        <div class="logo-desc">
+            
+            JackWang的个人博客
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-book-reader"></i>
+			
+			博客
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>
+
+                  <a href="/tags " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-tags" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按标签归类文章</    span>
+
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/categories " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-bookmark" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按目录归类文章</    span>
+
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/archives " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-archive" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按日期分类文章</    span>
+
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('抱歉，这篇文章并不想让所有人都看到，请输入授权密码观看')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220201014340608.png')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Latex基础：Environments</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Latex/">
+                                <span class="chip bg-color">Latex</span>
+                            </a>
+                        
+                            <a href="/tags/Overleaf/">
+                                <span class="chip bg-color">Overleaf</span>
+                            </a>
+                        
+                            <a href="/tags/Latex-Environment/">
+                                <span class="chip bg-color">Latex Environment</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Latex%E5%9F%BA%E7%A1%80/" class="post-category">
+                                Latex基础
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2022-01-31
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2022-02-01
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    1.8k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    6 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <blockquote>
+<p>本文主要介绍了Latex中的环境</p>
+</blockquote>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220201014340608.png" alt="Latex中的环境"></p>
+<h1 id="Latex基础：Enviroments"><a href="#Latex基础：Enviroments" class="headerlink" title="Latex基础：Enviroments"></a>Latex基础：Enviroments</h1><p>上文介绍到，Latex的源代码类似于Markdown和HTML，都是含有特殊标记的纯文本。而Latex的排版引擎（编译器）通过解析这些特殊的标记来得知我们对某些文本的排版要求（例如字号、粗细）等等。而后Latex排版引擎而后通过排版算法，最终将我们文档中的所有的元素按照我们希望的方式完成排版。<strong>这些特殊的标记称为命令</strong>。</p>
+<p>在命令的基础上，Latex的另外一个概念就是环境（Environment）。通过环境，我们能够更好的组织我们的文档，本文下面就将介绍Latex中的环境（Environment）。</p>
+<h2 id="1-Concept-of-Latex-Environment"><a href="#1-Concept-of-Latex-Environment" class="headerlink" title="1. Concept of Latex Environment"></a>1. Concept of Latex Environment</h2><p>为了能够准确的把握Latex中环境（Environment）这个概念，我们先来看看环境（Environment）这个词语的意思。</p>
+<p>由于Surrounding和Environment等多个词语翻译成中文都是环境的意思，因此为了准确，我们还是得查英文的词典中Environment的意思。</p>
+<p>在剑桥词典中，Environment有两个意思：</p>
+<ul>
+<li><p>自然环境</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220131211630440.png" alt="环境的第一个意思"></p>
+</li>
+<li><p>周围的状况</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220131204735055.png" alt="环境的第二个意思"></p>
+</li>
+</ul>
+<p>因此，<strong>对于Latex而言，环境指的就是一段文本周围状况</strong>。文本周围的状况具体包括这段文本的字号、字间距、字体、字体风格（斜体、加粗、下滑线、删除线等等）。<strong>形象的理解，对于一段含有格式的文本而言，我们把文本从中抽取出来，剩下的所有字体格式等内容包含在一起就称为环境</strong>。</p>
+<p>例如我们下面的这个<code>center</code>环境。这个环境的作用可以使一段文本居中对齐</p>
+<pre class="line-numbers language-latex"><code class="language-latex"><span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">center</span><span class="token punctuation">}</span>
+This text will be centred since it is inside a special 
+environment. Environments provide a efficient way of modifying 
+blocks of text within your document.
+<span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">center</span><span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220131214956715.png" alt="居中环境的效果"></p>
+<h2 id="2-Introdcution"><a href="#2-Introdcution" class="headerlink" title="2. Introdcution"></a>2. Introdcution</h2><p>我们上面介绍了Latex的环境的概念，下面就将更深入的介绍Latex的环境。</p>
+<h3 id="A-一般的环境"><a href="#A-一般的环境" class="headerlink" title="A. 一般的环境"></a>A. 一般的环境</h3><p>正如我们在最前面所讲的，Latex中的排版是通过命令完成的，而环境是建立在命令基础上的概念。因此，环境也是通过命令来实现的。具体而言，就是用过<code>\begin</code>和<code>\end</code>两个命令来开启和结束环境的。例如上面的居中环境</p>
+<pre class="line-numbers language-latex"><code class="language-latex"><span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">center</span><span class="token punctuation">}</span>
+This text will be centred since it is inside a special 
+environment. Environments provide a efficient way of modifying 
+blocks of text within your document.
+<span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">center</span><span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>我们在命令那一节中说过，命令可以理解为函数，那么<code>center</code>这里就是我们传递给<code>\begin</code>和<code>\end</code>命令的参数，即<code>\begin</code>和<code>\end</code>通过参数的形式来开启和关闭环境。</p>
+<p>我们说过环境是一段文本周围包括字号等格式在内的状况，而我们使用<code>\begin</code>开始一个环境和<code>\end</code>结束一个中间都处于我们开启的环境中，因此，被<code>\begin{环境名}</code>和<code>\end{环境名}</code>包围的文字，都将拥有环境的格式。</p>
+<p>因此，环境是一个非常方便的能够设置一块（block）文本的格式。</p>
+<h3 id="B-含参数的环境"><a href="#B-含参数的环境" class="headerlink" title="B. 含参数的环境"></a>B. 含参数的环境</h3><p>我们前面说，环境是用<code>\begin</code>和<code>\end</code>两个命令来开启和结束，而命令可以接受参数和可选参数，因此我们在开启环境的时候也可以指定参数或者可选参数。</p>
+<p>参数的例子例如表格环境，我们的第一个参数是每列单元格的就这种格式</p>
+<pre class="line-numbers language-latex"><code class="language-latex"><span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">tabular</span><span class="token punctuation">}</span><span class="token punctuation">{</span> c c c <span class="token punctuation">}</span> 
+  cell1 <span class="token punctuation">&amp;</span> cell2 <span class="token punctuation">&amp;</span> cell3 <span class="token function selector">\\</span> 
+  cell4 <span class="token punctuation">&amp;</span> cell5 <span class="token punctuation">&amp;</span> cell6 <span class="token function selector">\\</span> 
+  cell7 <span class="token punctuation">&amp;</span> cell8 <span class="token punctuation">&amp;</span> cell9 <span class="token function selector">\\</span> 
+ <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">tabular</span><span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220131225137991.png" alt="表格环境的效果"></p>
+<p>我们也可以用<code>[]</code>来传入可选参数，例如表格环境中使用<code>[htbp]</code>来指定排版算法在排版时优先排版的位置</p>
+<h2 id="3-Defining-a-new-environment"><a href="#3-Defining-a-new-environment" class="headerlink" title="3. Defining a new environment"></a>3. Defining a new environment</h2><p>在Latex中，我们可以使用<code>\newcommand</code>来定义一个新的命令，从而简化我们编写源代码。</p>
+<p>我们其实也可以自己定义一个新的环境，在新的环境中定义我们需要的格式，这样的话就可以减少不必要的重复。</p>
+<h3 id="A-定义简单的环境"><a href="#A-定义简单的环境" class="headerlink" title="A. 定义简单的环境"></a>A. 定义简单的环境</h3><p>环境因为包含开始和结束两部分，因此我们在自己定义环境的时候也需要环境的开始和结束部分。而定义新环境所使用的命令为<code>\newenvironment</code>，具体使用如下</p>
+<pre class="line-numbers language-latex"><code class="language-latex"><span class="token function selector">\newenviroment</span><span class="token punctuation">{</span>新环境名<span class="token punctuation">}</span>
+<span class="token punctuation">{</span>
+    环境开始部分代码
+<span class="token punctuation">}</span>
+<span class="token punctuation">{</span>
+    环境结束部分代码
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>注意，环境开始部分的代码会在环境开始的<code>\begin</code>之后立即执行，而环境结束部分代码则紧跟在<code>\end</code>前运行</p>
+<p>而在定义结束之后，我们和使用正常的环境一样进行使用即可，即</p>
+<pre class="line-numbers language-latex"><code class="language-latex"><span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">新环境名</span><span class="token punctuation">}</span>
+...
+<span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">新环境名</span><span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>例如我们现在定义用一个单元格的表格给四周加上线来表示一个方框的环境，代码如下</p>
+<pre class="line-numbers language-latex"><code class="language-latex"><span class="token function selector">\newenvironment</span><span class="token punctuation">{</span>myBox<span class="token punctuation">}</span><span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">% 开始环境代码</span>
+    <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">center</span><span class="token punctuation">}</span>
+    <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">tabular</span><span class="token punctuation">}</span><span class="token punctuation">{</span>|c|<span class="token punctuation">}</span>
+
+    <span class="token function selector">\hline</span>
+    <span class="token function selector">\newline</span>
+<span class="token punctuation">}</span><span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">% 结束环境代码</span>
+    <span class="token function selector">\\</span>
+    <span class="token function selector">\hline</span>
+    <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">tabular</span><span class="token punctuation">}</span>
+    <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">center</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>然后我们使用新定义的环境之后的效果如下</p>
+<pre class="line-numbers language-latex"><code class="language-latex"><span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">myBox</span><span class="token punctuation">}</span>
+    This sentence will be placed in the center with a box.
+<span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">myBox</span><span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220201004826372.png" alt="新定义的box"></p>
+<h3 id="B-接受参数的环境"><a href="#B-接受参数的环境" class="headerlink" title="B. 接受参数的环境"></a>B. 接受参数的环境</h3><p>同样，在定义新环境的时候我们也可以接受一个参数，然后在代码部分通过<code>#1</code>、<code>#2</code>的形式来调用。而和命令一样的是，我们在指定了环境的名称之后使用<code>[]</code>来指定参数个数，具体如下</p>
+<pre class="line-numbers language-latex"><code class="language-latex"><span class="token function selector">\newenvironment</span><span class="token punctuation">{</span>新环境名<span class="token punctuation">}</span><span class="token punctuation">[</span>参数数量<span class="token punctuation">]</span>
+<span class="token punctuation">{</span>
+    环境开始部分代码
+<span class="token punctuation">}</span>
+<span class="token punctuation">{</span>
+    环境结束部分代码
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>例如我们现在要给前面的box加上名字</p>
+<pre class="line-numbers language-latex"><code class="language-latex"><span class="token function selector">\newenvironment</span><span class="token punctuation">{</span>myNamedBox<span class="token punctuation">}</span><span class="token punctuation">[</span>1<span class="token punctuation">]</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">% 开始环境代码</span>
+    <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">center</span><span class="token punctuation">}</span>
+    Title: #1<span class="token function selector">\\</span><span class="token punctuation">[</span>1ex<span class="token punctuation">]</span>
+    <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">tabular</span><span class="token punctuation">}</span><span class="token punctuation">{</span>|c|<span class="token punctuation">}</span>
+    <span class="token function selector">\hline</span>
+    <span class="token function selector">\newline</span>
+<span class="token punctuation">}</span><span class="token punctuation">{</span>
+    <span class="token function selector">\\</span>
+    <span class="token function selector">\hline</span>
+    <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">tabular</span><span class="token punctuation">}</span>
+    <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">center</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">myNamedBox</span><span class="token punctuation">}</span><span class="token punctuation">{</span>Named Box Example<span class="token punctuation">}</span>
+    This is a named box.
+<span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">myNamedBox</span><span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>结果如下</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220201010602125.png" alt="使用参数的环境"></p>
+<h3 id="C-含默认参数的环境"><a href="#C-含默认参数的环境" class="headerlink" title="C. 含默认参数的环境"></a>C. 含默认参数的环境</h3><p>含默认参数的环境和命令一样，都是</p>
+<pre class="line-numbers language-latex"><code class="language-latex"><span class="token function selector">\newenvironment</span><span class="token punctuation">{</span>新环境名<span class="token punctuation">}</span><span class="token punctuation">[</span>参数个数<span class="token punctuation">]</span><span class="token punctuation">[</span>默认参数值<span class="token punctuation">]</span>
+<span class="token punctuation">{</span>
+    开始部分代码
+<span class="token punctuation">}</span>
+<span class="token punctuation">{</span>
+    结束部分代码
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>例如</p>
+<pre class="line-numbers language-latex"><code class="language-latex"><span class="token function selector">\newenvironment</span><span class="token punctuation">{</span>indexedBox<span class="token punctuation">}</span><span class="token punctuation">[</span>2<span class="token punctuation">]</span><span class="token punctuation">[</span>A<span class="token punctuation">]</span>
+<span class="token punctuation">{</span>
+    <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">center</span><span class="token punctuation">}</span>
+    Title #1. #2<span class="token function selector">\\</span>
+    <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">tabular</span><span class="token punctuation">}</span><span class="token punctuation">{</span>|c|<span class="token punctuation">}</span>
+    <span class="token function selector">\hline</span>
+<span class="token punctuation">}</span>
+<span class="token punctuation">{</span>
+    <span class="token function selector">\\</span>
+    <span class="token function selector">\hline</span>
+    <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">tabular</span><span class="token punctuation">}</span>
+    <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">center</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">indexedBox</span><span class="token punctuation">}</span><span class="token punctuation">{</span>Indexed Box A<span class="token punctuation">}</span>
+    This is box A
+<span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">indexedBox</span><span class="token punctuation">}</span>
+
+<span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">indexedBox</span><span class="token punctuation">}</span><span class="token punctuation">[</span>B<span class="token punctuation">]</span><span class="token punctuation">{</span>Indexed Box B<span class="token punctuation">}</span>
+    This is box B
+<span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">indexedBox</span><span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>编译之后的效果如下：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220201013215957.png" alt="含默认参数的环境"></p>
+<h2 id="4-Overwriting-existing-environments"><a href="#4-Overwriting-existing-environments" class="headerlink" title="4. Overwriting existing environments"></a>4. Overwriting existing environments</h2><p>要重写一个现有的环境也非常简单，直接用<code>\renewenvironment</code>即可</p>
+<pre class="line-numbers language-latex"><code class="language-latex"><span class="token function selector">\renewenvironment</span><span class="token punctuation">{</span>原环境名<span class="token punctuation">}</span><span class="token punctuation">[</span>参数个数<span class="token punctuation">]</span>
+<span class="token punctuation">{</span>
+    开始代码
+<span class="token punctuation">}</span>
+<span class="token punctuation">{</span>
+    结束代码
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>例如我们重写一下<code>itemize</code>环境</p>
+<pre class="line-numbers language-latex"><code class="language-latex"><span class="token function selector">\renewenvironment</span><span class="token punctuation">{</span>itemize<span class="token punctuation">}</span>
+<span class="token punctuation">{</span>
+    <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">center</span><span class="token punctuation">}</span>
+    <span class="token function selector">\em</span>
+<span class="token punctuation">}</span>
+<span class="token punctuation">{</span>
+    <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">center</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>结果如下</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220201012457406.png" alt="覆盖环境"></p>
+<h2 id="5-带编号的环境"><a href="#5-带编号的环境" class="headerlink" title="5. 带编号的环境"></a>5. 带编号的环境</h2><p>实际上，<code>enumerate</code>、<code>itemize</code>都是带编号的环境，在其中我们可以使用环境内部定义的命令来生成编号项。</p>
+<p>而我们其实也可以自己的来实现，即运用Latex自带的<code>\newcounter</code>命令来实现，或者用<code>amsmath</code>包中提供的<code>\newtherum</code>宏来实现。例如</p>
+<pre class="line-numbers language-latex"><code class="language-latex"><span class="token comment" spellcheck="true">%Numbered environment</span>
+<span class="token function selector">\newcounter</span><span class="token punctuation">{</span>example<span class="token punctuation">}</span><span class="token punctuation">[</span>section<span class="token punctuation">]</span>
+<span class="token function selector">\newenvironment</span><span class="token punctuation">{</span>example<span class="token punctuation">}</span><span class="token punctuation">[</span>1<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+<span class="token punctuation">{</span>
+    <span class="token function selector">\refstepcounter</span><span class="token punctuation">{</span>example<span class="token punctuation">}</span><span class="token function selector">\par</span><span class="token function selector">\medskip</span>
+    <span class="token function selector">\noindent</span> <span class="token function selector">\textbf</span><span class="token punctuation">{</span>Example~<span class="token function selector">\theexample</span>. #1<span class="token punctuation">}</span> <span class="token function selector">\rmfamily</span>
+<span class="token punctuation">}</span>
+<span class="token punctuation">{</span>
+    <span class="token function selector">\medskip</span>
+<span class="token punctuation">}</span>
+
+<span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">example</span><span class="token punctuation">}</span>
+    User-defined numbered environment 1
+<span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">example</span><span class="token punctuation">}</span>
+<span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">example</span><span class="token punctuation">}</span>
+    User-defined numbered environment 2
+<span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">example</span><span class="token punctuation">}</span>
+
+
+<span class="token comment" spellcheck="true">%Numbered environment defined with Newtheorem</span>
+<span class="token function selector">\newtheorem</span><span class="token punctuation">{</span>SampleEnv<span class="token punctuation">}</span><span class="token punctuation">{</span>Sample Environment<span class="token punctuation">}</span><span class="token punctuation">[</span>section<span class="token punctuation">]</span>
+
+<span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">SampleEnv</span><span class="token punctuation">}</span>
+User-defined environment created with the <span class="token function selector">\texttt</span><span class="token punctuation">{</span>newtheorem<span class="token punctuation">}</span> command.
+<span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">SampleEnv</span><span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>编译后得到的效果如下，注意第二种方法需要在导言区<code>\usepackage{amsmath}</code></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220201013827348.png" alt="带编号的环境"></p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Jack Wang</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://jackwang0107.github.io/2022/01/31/latex-ji-chu-latex-zhong-de-huan-jing/">https://jackwang0107.github.io/2022/01/31/latex-ji-chu-latex-zhong-de-huan-jing/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Jack Wang</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/Latex/">
+                                    <span class="chip bg-color">Latex</span>
+                                </a>
+                            
+                                <a href="/tags/Overleaf/">
+                                    <span class="chip bg-color">Overleaf</span>
+                                </a>
+                            
+                                <a href="/tags/Latex-Environment/">
+                                    <span class="chip bg-color">Latex Environment</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.png" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2022/02/02/shen-du-xue-xi-lian-dan-shou-ji/">
+                    <div class="card-image">
+                        
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220202001104734.png" class="responsive-img" alt="炼丹手记">
+                        
+                        <span class="card-title">炼丹手记</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            本文记录了我炼丹的心得
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-02-02
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Deep-Learning-Blogs/" class="post-category">
+                                    Deep Learning Blogs
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Python/">
+                        <span class="chip bg-color">Python</span>
+                    </a>
+                    
+                    <a href="/tags/Deep-Learning/">
+                        <span class="chip bg-color">Deep Learning</span>
+                    </a>
+                    
+                    <a href="/tags/Pytorch/">
+                        <span class="chip bg-color">Pytorch</span>
+                    </a>
+                    
+                    <a href="/tags/AI/">
+                        <span class="chip bg-color">AI</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/01/31/research-proposal-workshops-5/">
+                    <div class="card-image">
+                        
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220131105840698.png" class="responsive-img" alt="Research Skills Workshop 5">
+                        
+                        <span class="card-title">Research Skills Workshop 5</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            本文是CCSIT Research Skills Workshop 5的笔记。为了保护版权，本文仅用作我的复习只用，因此并不会向所有人公开,抱歉了哈~
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-01-31
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Cambridge-CCISTC-AI-Research-Programme-2022-Winter/" class="post-category">
+                                    Cambridge CCISTC AI Research Programme 2022 Winter
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Research-Proposal-Workshops/">
+                        <span class="chip bg-color">Research Proposal Workshops</span>
+                    </a>
+                    
+                    <a href="/tags/CCISTC/">
+                        <span class="chip bg-color">CCISTC</span>
+                    </a>
+                    
+                    <a href="/tags/University-of-Cambridge/">
+                        <span class="chip bg-color">University of Cambridge</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: JackWang&#39;s Blog<br />'
+            + '文章作者: Jack Wang<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2021-2022</span>
+            
+            <a href="/about" target="_blank">Jack Wang</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">261.2k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+                <span id="sitetime"> Loading ...</span>
+                <script>
+                    var calcSiteTime = function () {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2021";
+                        var startMonth = "11";
+                        var startDate = "12";
+                        var startHour = "0";
+                        var startMinute = "0";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+
+                        // 区分是否有年份.
+                        var language = 'zh-CN';
+                        if (startYear === String(todayYear)) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            var daysTip = 'This site has been running for ' + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                daysTip = '本站已运行 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                daysTip = '本站已運行 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = daysTip;
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            var yearsAndDaysTip = 'This site has been running for ' + diffYears + ' years and '
+                                + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                yearsAndDaysTip = '本站已运行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                yearsAndDaysTip = '本站已運行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+                        }
+                    }
+
+                    calcSiteTime();
+                </script>
+            
+            <br>
+            
+                <span id="icp"><img src="/medias/icp.png"
+                                    style="vertical-align: text-bottom;"/>
+                <a href="https://beian.miit.gov.cn" target="_blank">陕ICP备2021014294号-1</a>
+            </span>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+    <a href="mailto:2232123545@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2232123545" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2232123545" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+        
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/sakura.js"><\/script>');
+            }
+        </script>
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

@@ -1,0 +1,1377 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="2021计算机科学技术导论期末大作业网页, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
+    <meta name="description" content="输入密码才能看哦~">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>2021计算机科学技术导论期末大作业网页 | JackWang&#39;s Blog</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+
+   <style>
+    body{
+       background-image: url(https://cdn.jsdelivr.net/gh/Tokisaki-Galaxy/res/site/medias/background.jpg);
+       background-repeat:no-repeat;
+       background-size: 100% 100%;
+       background-attachment:fixed;
+    }
+</style>
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">JackWang&#39;s Blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-book-reader" style="zoom: 0.6;"></i>
+      
+      <span>博客</span>
+      <i class="fas fa-chevron-down" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/tags">
+          
+          <i class="fas fa-tags" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按标签归类文章</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories">
+          
+          <i class="fas fa-bookmark" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按目录归类文章</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/archives">
+          
+          <i class="fas fa-archive" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按日期分类文章</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">JackWang&#39;s Blog</div>
+        <div class="logo-desc">
+            
+            JackWang的个人博客
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-book-reader"></i>
+			
+			博客
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>
+
+                  <a href="/tags " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-tags" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按标签归类文章</    span>
+
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/categories " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-bookmark" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按目录归类文章</    span>
+
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/archives " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-archive" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按日期分类文章</    span>
+
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '105d7b38d15ecaf4074288814b6cd6dac999373972a0b825579b0bc89549f809';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('抱歉，这篇文章并不想让所有人都看到，请输入授权密码观看')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220121100119989.png')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">2021计算机科学技术导论期末大作业网页</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E4%BD%9C%E4%B8%9A/">
+                                <span class="chip bg-color">作业</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E6%9D%82%E9%A1%B9/" class="post-category">
+                                杂项
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2022-01-12
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2022-01-28
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    2.8k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    9 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <blockquote>
+<p>本文是XJTU 2021秋季 计算机科学导论期末大作业——Part 2的在线网页</p>
+</blockquote>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220121100119989.png" alt="西安交通大学计算机科学与技术学院"></p>
+<h1 id="2021计算机科学技术导论期末大作业网页"><a href="#2021计算机科学技术导论期末大作业网页" class="headerlink" title="2021计算机科学技术导论期末大作业网页"></a>2021计算机科学技术导论期末大作业网页</h1><h4 id="姓名：王仕鸿"><a href="#姓名：王仕鸿" class="headerlink" title="姓名：王仕鸿"></a>姓名：王仕鸿</h4><h4 id="班级：计算机003"><a href="#班级：计算机003" class="headerlink" title="班级：计算机003"></a>班级：计算机003</h4><h4 id="学号：2196113760"><a href="#学号：2196113760" class="headerlink" title="学号：2196113760"></a>学号：2196113760</h4><p>本文发布于我的<a target="_blank" rel="noopener" href="http://jackwang.cafe/">个人网站</a>：<a target="_blank" rel="noopener" href="http://jackwang.cafe/">http://jackwang.cafe/</a></p>
+<p><a target="_blank" rel="noopener" href="http://jackwang.cafe/2022/01/12/2021-ji-suan-ji-ke-xue-ji-zhu-dao-lun-qi-mo-da-zuo-ye-part2/">文章链接</a>：<a target="_blank" rel="noopener" href="http://jackwang.cafe/2022/01/12/2021-ji-suan-ji-ke-xue-ji-zhu-dao-lun-qi-mo-da-zuo-ye-part2/">http://jackwang.cafe/2022/01/12/2021-ji-suan-ji-ke-xue-ji-zhu-dao-lun-qi-mo-da-zuo-ye-part2/</a></p>
+<p>文章阅读密码：2021XJTU计算机科学技术导论</p>
+<p>SHA256加密后密码: 105d7b38d15ecaf4074288814b6cd6dac999373972a0b825579b0bc89549f809</p>
+<h2 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h2><p>用超文本标记语言（HTML页面）、或窗口化程序、微信小程序、手机APP等（表现形式不限），组织如下内容进行展示：（30分）</p>
+<ol>
+<li>你画出的计算机学科各课程之间的关系图。</li>
+<li>收集计算机学科各课程有用的参考资料，并使用超链接等集成（包括但不限于外部网页链接，可供下载的ppt、工程文件等）。</li>
+<li>你对计算机专业的认识。</li>
+<li>你的学业规划。</li>
+</ol>
+<h2 id="二、回答"><a href="#二、回答" class="headerlink" title="二、回答"></a>二、回答</h2><h3 id="1-计算机学科各个课程之间的关系图"><a href="#1-计算机学科各个课程之间的关系图" class="headerlink" title="1. 计算机学科各个课程之间的关系图"></a>1. 计算机学科各个课程之间的关系图</h3><h4 id="A-计算机学科有哪些课程？"><a href="#A-计算机学科有哪些课程？" class="headerlink" title="A. 计算机学科有哪些课程？"></a>A. 计算机学科有哪些课程？</h4><p><strong>为绘制计算机学科各个课程之间的关系图，首先需要清楚计算机学科有哪些课程</strong></p>
+<p>参考西安交通大学计算机科学与技术专业2019版培养方案[1]，计算机科学与技术专业课程体系设置如下</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220120204105964.png" alt="计算机科学与技术专业课程体系设置" style="zoom:50%;"></p>
+<p>其中，专业课程包括：</p>
+<ul>
+<li>专业核心课程：<ul>
+<li>COMP450105 计算机组成 4 学分</li>
+<li>COMP000105 计算机科学技术导论 1 学分</li>
+<li>COMP450205 操作系统原理 I 3 学分</li>
+<li>COMP450305 形式语言与编译 3.5 学分</li>
+<li>COMP450505 计算机网络原理 3 学分</li>
+<li>COMP462105 数据库系统 2.5 学分</li>
+<li>COMP462205 算法分析与设计 2.5 学分</li>
+<li>COMP460405 数据结构与程序设计专题实验 1 学分</li>
+<li>COMP450905 计算机组成与结构专题实验 1 学分</li>
+<li>COMP451005 操作系统设计专题实验 1 学分</li>
+<li>COMP451105 编译器设计专题实验 1 学分</li>
+<li>COMP460605 计算机网络专题实验 1 学分</li>
+<li>COMP460705 计算机系统综合设计实验 1 学分</li>
+</ul>
+</li>
+<li>专业选修课程：<ul>
+<li>计算机软件与理论模块</li>
+<li>计算机系统结构模块</li>
+<li>大数据与人工智能模块</li>
+<li>计算机网络模块</li>
+<li>跨方向选修课程</li>
+</ul>
+</li>
+</ul>
+<p>由于计算机科学与技术专业培养方案中要求计算机专业必修课程较多，因此<strong>本文认为：“计算机专业各个课程“指计算机科学与技术专业核心课程</strong></p>
+<h4 id="B-计算机专业各个课程的内容"><a href="#B-计算机专业各个课程的内容" class="headerlink" title="B. 计算机专业各个课程的内容"></a>B. 计算机专业各个课程的内容</h4><p>为了能够绘制出计算机学科各课程之间的关系图，<strong>其次还需要清楚各个课程教授的的内容</strong>。因此下面是各个核心课程的主要内容如下：</p>
+<ul>
+<li><strong>计算机组成</strong>：组成原理是计算机其他核心课程的一个“导引”。学习组成原理之后，向下，你可以学习数字电路相关的课程，向上，你可以学习编译原理、操作系统这些核心课程。因此，<strong>计算机组成原理能够告诉我们软硬件的边界，学习这门课程能帮助我们完成从硬件门电路到软件的过渡</strong>。参考：[2, 3, 4]</li>
+<li><strong>计算机科学技术导论</strong>：计算机导论是计算机专业学生进入大学学习的第一门专业基础课程，其目的在于用统一的思想认识计算机学科的本质，对计算机学科的系统化和科学化进行阐述，以PBL的教学方式给学生提供一个对计算机科学范畴漫游的丰富而易懂的“思维导图”，了解计算机科学与技术领域的概貌、学术范畴、专业词汇和计算机应用的发展，用逻辑严密的方式将学生引入计算机理论与技术的领域中。参考：[5]</li>
+<li><strong>操作系统原理 I</strong>：任何计算机都必须在加载相应的操作系统之后，才能构成一个可以运转的、完整的计算机系统。操作系统的功能是否强大，决定了计算机系统的综合能力；操作系统的性能高低，决定了整个计算机系统的性能；操作系统本身的安全可靠程度，决定了整个计算机系统的安全性和可靠性。操作系统是软件技术的核心和基础运行平台。因此，计算机科学技术专业的学生需要学习和掌握操作系统的基本原理和专业知识。参考：[6]</li>
+<li><strong>形式语言与编译</strong>：形式语言与编译介绍形式语言、自动机、文法、词法分析、语法分析和语义分析，既包括系统的正则语言理论和上下文无关语言理论，也有强调原理性的程序分析和转换方法。同学通过本课程学习，认识基础性计算规律，掌握通用的形式语言理论和编译方法，不仅具备设计编译器前端的能力，也为解决广泛的计算问题打下理论基础。参考：[7]</li>
+<li><strong>计算机网络原理</strong>：计算机网络原理”是一门理论与实践并重的专业课程，通过课程学习，可以掌握计算机网络工作原理、典型网络协议和网络互联网设备工作原理，更好地理解互联网技术和应用。参考：[8]</li>
+<li><strong>数据库系统</strong>：现代信息社会离不开数据库，计算机应用绕不过数据库。如何开发数据库应用？数据库应用的系统支撑软件，即数据库管理系统（DBMS），数据库系统就是讲解数据库相关内容的课程。参考：[9]</li>
+<li><strong>算法分析与设计</strong>：算法分析与设计针对实际问题需求，进行数学建模并选择高效求解算法的训练。主要内容涉及：面对实际问题建立数学模型、设计正确的求解算法、算法的效率估计、改进算法的途径、问题计算复杂度的估计、难解问题的确定和应对策略等等。算法分析与设计是算法课程的基础部分，主要涉及算法的设计、分析与改进途径，其他有关计算复杂性的内容则在后续课程中加以介绍。参考：[10]</li>
+</ul>
+<h4 id="C-计算机各个课程之间的关系图"><a href="#C-计算机各个课程之间的关系图" class="headerlink" title="C. 计算机各个课程之间的关系图"></a>C. 计算机各个课程之间的关系图</h4><p>根据上述内容，绘制如下的计算机各个课程之间的关系图</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220120220757364.png" alt="计算机各个课程间关系图"></p>
+<h3 id="2-收集计算机学科各课程有用的参考资料"><a href="#2-收集计算机学科各课程有用的参考资料" class="headerlink" title="2. 收集计算机学科各课程有用的参考资料"></a>2. 收集计算机学科各课程有用的参考资料</h3><p>我认为计算机学科有用的资料有：</p>
+<ul>
+<li>在你自学计算机的路上，哪些书籍对你的帮助最大?：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/421913237/answer/1882385602">https://www.zhihu.com/question/421913237/answer/1882385602</a></li>
+<li>一个几乎没有计算机知识的人，怎样入门计算机？：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/448071180">https://zhuanlan.zhihu.com/p/448071180</a></li>
+<li>你当初是如何学会操作系统这门课程的？：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/270998611/answer/1866650533">https://www.zhihu.com/question/270998611/answer/1866650533</a></li>
+<li>如何学好操作系统原理这门课？：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/22874344/answer/1158044965">https://www.zhihu.com/question/22874344/answer/1158044965</a></li>
+<li><p>大学四年自学走来，关于怎么学「操作系统」和「计算机网络」我贡献出来了！：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/260189203">https://zhuanlan.zhihu.com/p/260189203</a></p>
+</li>
+<li><p>形式语言与编译：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1w741177Uv/">https://www.bilibili.com/video/BV1w741177Uv/</a></p>
+</li>
+</ul>
+<h3 id="3-你对计算机专业的认识"><a href="#3-你对计算机专业的认识" class="headerlink" title="3. 你对计算机专业的认识"></a>3. 你对计算机专业的认识</h3><p>我对计算机专业的认识是：</p>
+<ul>
+<li>计算机首先是构建在硬件系统上的物理机器：从基础的的电路开始，有了模拟电路和数字电路。在由门电路组成的电路的基础上，数字电路系统具有了保存信息、处理信息的能力。因此在基础的数字电路系统的基础上，CPU通过ALU、控制器等完成运算，存储器以磁、点信号等方式将指令、数据保存在内部，I/O设备以光（显示器）、位移（鼠标）、按键（键盘）、声音（麦克风/喇叭）等形式输入、输出……因此计算机就是在一套又一套的硬件系统上构建出来的复杂的、庞大的硬件系统。计算机专业研究、学习的对象是计算机，因此，<strong>学习这些硬件知识非常必要</strong>。学习硬件知识，能够帮助我们更深入的理解计算机。计算机专业首先就意味着我们熟知硬件知识。</li>
+<li>其次，计算机是一系列软件程序的集合：为了方便用户使用硬件以及硬件设备的管理和，就出现了操作系统，操作系统作为中间层向用户提供硬件的抽象来方便用户操作。而为了能够让两台物理机器上的两个进程之间进行通信，就有了计算机网络，还有从完成动高级语言到二进制机器码的编译器……诸多这些软件在一起，构成了计算机系统。完成了从硬件到软件的过度，最终使得用户在使用时完全感受不到硬件。因此对于计算机专业的学生来说，<strong>学习这些计算机软件知识是必要的</strong>，因为这知识能够帮助我们更好的理解计算机系统。</li>
+</ul>
+<h3 id="4-你的学业规划"><a href="#4-你的学业规划" class="headerlink" title="4. 你的学业规划"></a>4. 你的学业规划</h3><p>我的学业规划：</p>
+<ul>
+<li>首先好好学习，把感兴趣的专业选修课全部学完</li>
+<li>然后在学完专业课的基础上学习网络上的其他学校的一些感兴趣的课程，例如机器学习、深度学习</li>
+<li>希望能够在本科期间独立完成科研工作、发表文章</li>
+</ul>
+<h2 id="三、Reference"><a href="#三、Reference" class="headerlink" title="三、Reference"></a>三、Reference</h2><p>[1]    西安交通大学计算机科学与技术学院,“计算机科学与技术专业2019版培养方案,”[EB/OL],<a target="_blank" rel="noopener" href="http://www.cs.xjtu.edu.cn/local/6/BF/72/F3B7CBE5AC68D0F8D34951D38C9690DEE098E91C.pdf?e=.pdf.3">http://www.cs.xjtu.edu.cn/local/6/BF/72/F3B7CBE5AC68D0F8D34951D38C9690DEE098E91C.pdf?e=.pdf.3</a>.</p>
+<p>[2]    一路带飞,  “学了半天，计算机组成原理，到底有啥用？,”  [EB/OL],  <a target="_blank" rel="noopener" href="https://www.eet-china.com/mp/a79426.html">https://www.eet-china.com/mp/a79426.html</a>.</p>
+<p>[3]    徐文浩,  “深入浅出计算机组成原理,”  [EB/OL],  <a target="_blank" rel="noopener" href="https://time.geekbang.org/column/intro/100026001">https://time.geekbang.org/column/intro/100026001</a>.</p>
+<p>[4]    知乎,  “怎样学习和理解计算机组成原理？,”   [EB/OL],  <a target="_blank" rel="noopener" href="https://www.zhihu.com/question/20706264.3">https://www.zhihu.com/question/20706264.3</a>.</p>
+<p>[5]    华南师范大学,  “计算机科学技术导论,”  [EB/OL], <a target="_blank" rel="noopener" href="https://moodle.scnu.edu.cn/course/view.php?id=4906.3">https://moodle.scnu.edu.cn/course/view.php?id=4906.3</a>.</p>
+<p>[6]    X.  Chen,  “操作系统原理（operating  systems）,”  [EB/OL],  <a target="_blank" rel="noopener" href="https://zh.coursera.org/learn/os-pku.3">https://zh.coursera.org/learn/os-pku.3</a>.</p>
+<p>[7]    BobLee-XJTU,    “形 式语言与编译,”    [EB/OL],    <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1w741177Uv/.3">https://www.bilibili.com/video/BV1w741177Uv/.3</a>.</p>
+<p>[8]    青岛大学, “玩转计算机网络-计算机网络原理,” [EB/OL], <a target="_blank" rel="noopener" href="https://www.icourse163.org/course/QDU-1206901804?tid=1450727466.3">https://www.icourse163.org/course/QDU-1206901804?tid=1450727466.3</a>.</p>
+<p>[9]    浙江大学,    “数据库系统原理,”    [EB/OL],   <a target="_blank" rel="noopener" href="https://mooc.study.163.com/course/1000031000?tracecpk2=51ff5f4a61d34c3ba1c0a0404842a5b5#/info.3">https://mooc.study.163.com/course/1000031000?tracecpk2=51ff5f4a61d34c3ba1c0a0404842a5b5#/info.3</a>.</p>
+<p>[10]  W.Qu,“算法设计与分析designand analysis of algorithms,”[EB/OL],<a target="_blank" rel="noopener" href="https://mooc.study.163.com/course/1000031000?tracecpk2=51ff5f4a61d34c3ba1c0a0404842a5b5#/info.3">https://mooc.study.163.com/course/1000031000?tracecpk2=51ff5f4a61d34c3ba1c0a0404842a5b5#/info.3</a></p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Jack Wang</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://jackwang0107.github.io/2022/01/12/2021-ji-suan-ji-ke-xue-ji-zhu-dao-lun-qi-mo-da-zuo-ye-part2/">https://jackwang0107.github.io/2022/01/12/2021-ji-suan-ji-ke-xue-ji-zhu-dao-lun-qi-mo-da-zuo-ye-part2/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Jack Wang</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E4%BD%9C%E4%B8%9A/">
+                                    <span class="chip bg-color">作业</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.png" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2022/01/17/latex-ji-chu-overleaf-ben-di-an-zhuang/">
+                    <div class="card-image">
+                        
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/screenshot.png" class="responsive-img" alt="Latex基础：Overleaf本地安装">
+                        
+                        <span class="card-title">Latex基础：Overleaf本地安装</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            本文主要介绍了如何在本地搭建一个Overleaf写作环境
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-01-17
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Latex%E5%9F%BA%E7%A1%80/" class="post-category">
+                                    Latex基础
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Latex/">
+                        <span class="chip bg-color">Latex</span>
+                    </a>
+                    
+                    <a href="/tags/Overleaf/">
+                        <span class="chip bg-color">Overleaf</span>
+                    </a>
+                    
+                    <a href="/tags/paper-writing/">
+                        <span class="chip bg-color">paper writing</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/01/12/shu-xue-jian-mo-bei-sai-mei-sai-ji-chu-ru-men-ji-li-nian-chu-ti-dian-fen-xi/">
+                    <div class="card-image">
+                        
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220112183134553.png" class="responsive-img" alt="数学建模备赛：美赛基础入门及历年出题点分析">
+                        
+                        <span class="card-title">数学建模备赛：美赛基础入门及历年出题点分析</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            本文主要介绍了数学建模美赛并分析了数模美赛历年的出题点
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-01-12
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E5%A4%87%E8%B5%9B/" class="post-category">
+                                    数学建模备赛
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/COMAP/">
+                        <span class="chip bg-color">COMAP</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E7%BE%8E%E8%B5%9B/">
+                        <span class="chip bg-color">数学建模美赛</span>
+                    </a>
+                    
+                    <a href="/tags/MCM/">
+                        <span class="chip bg-color">MCM</span>
+                    </a>
+                    
+                    <a href="/tags/ICM/">
+                        <span class="chip bg-color">ICM</span>
+                    </a>
+                    
+                    <a href="/tags/Mathematical-Contest-in-Modeling/">
+                        <span class="chip bg-color">Mathematical Contest in Modeling</span>
+                    </a>
+                    
+                    <a href="/tags/The-Interdisciplinary-Contest-in-Modeling/">
+                        <span class="chip bg-color">The Interdisciplinary Contest in Modeling</span>
+                    </a>
+                    
+                    <a href="/tags/Math-Modeling/">
+                        <span class="chip bg-color">Math Modeling</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: JackWang&#39;s Blog<br />'
+            + '文章作者: Jack Wang<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2021-2022</span>
+            
+            <a href="/about" target="_blank">Jack Wang</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">261.2k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+                <span id="sitetime"> Loading ...</span>
+                <script>
+                    var calcSiteTime = function () {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2021";
+                        var startMonth = "11";
+                        var startDate = "12";
+                        var startHour = "0";
+                        var startMinute = "0";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+
+                        // 区分是否有年份.
+                        var language = 'zh-CN';
+                        if (startYear === String(todayYear)) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            var daysTip = 'This site has been running for ' + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                daysTip = '本站已运行 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                daysTip = '本站已運行 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = daysTip;
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            var yearsAndDaysTip = 'This site has been running for ' + diffYears + ' years and '
+                                + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                yearsAndDaysTip = '本站已运行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                yearsAndDaysTip = '本站已運行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+                        }
+                    }
+
+                    calcSiteTime();
+                </script>
+            
+            <br>
+            
+                <span id="icp"><img src="/medias/icp.png"
+                                    style="vertical-align: text-bottom;"/>
+                <a href="https://beian.miit.gov.cn" target="_blank">陕ICP备2021014294号-1</a>
+            </span>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+    <a href="mailto:2232123545@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2232123545" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2232123545" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+        
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/sakura.js"><\/script>');
+            }
+        </script>
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
