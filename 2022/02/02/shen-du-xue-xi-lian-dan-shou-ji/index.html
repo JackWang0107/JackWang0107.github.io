@@ -419,21 +419,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-03-17
+                    2022-03-22
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.5k
+                    3.8k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    10 分
+                    15 分
                 </div>
                 
 
@@ -709,6 +709,84 @@ self<span class="token punctuation">.</span>network<span class="token punctuatio
             <span class="token keyword">if</span> early_stop_cnt <span class="token operator">>=</span> early_stop<span class="token punctuation">:</span>
                 <span class="token keyword">break</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="7-网络中含有线性层的问题"><a href="#7-网络中含有线性层的问题" class="headerlink" title="7. 网络中含有线性层的问题"></a>7. 网络中含有线性层的问题</h2><p>很多时候网络中都需要写线性层，尤其是对于分类网络或者Self-Attention的结构来说。在网络中经常出现的一个情况就是前面的层不是线性层，而后面接的是线性层。这个时候就需要注意一下特征数量的问题。</p>
+<p>以图像分类的卷积网络为例，输入要求的形状是：$[Batch, Channel, Width, Height]$，经过前面几个用于特征提取的层之后，feature map的形状是：$[Batch, Channel_{new}, Width_{new}, Height_{new}]$。但是对于全连接层来说，他其实干的事情就是矩阵相乘，因此要求输入的形状是$[Batch,feature_num]$。所以<strong>直接把前面层的输出丢给线性层往往是会有问题的，这个时候就需要对前面层的输出进行变换</strong>。</p>
+<p>对于上面的分类的卷积网络来说，就需要把$Batch$维度之后的$Channel_{new}$、$Width_{new}$和$Height_{new}$三个维度拉平成一个向量丢给分类网络。</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">forward</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> x<span class="token punctuation">:</span> torch<span class="token punctuation">.</span>Tensor<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> torch<span class="token punctuation">.</span>Tensor<span class="token punctuation">:</span>
+        x <span class="token operator">=</span> self<span class="token punctuation">.</span>conv1<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+        x <span class="token operator">=</span> self<span class="token punctuation">.</span>pool1<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+        x <span class="token operator">=</span> self<span class="token punctuation">.</span>activation<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+        x <span class="token operator">=</span> self<span class="token punctuation">.</span>conv2<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+        x <span class="token operator">=</span> self<span class="token punctuation">.</span>pool2<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+        x <span class="token operator">=</span> self<span class="token punctuation">.</span>activation<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+        <span class="token comment" spellcheck="true"># 注意这里把后面的特征维度拉平为一个向量</span>
+        x <span class="token operator">=</span> x<span class="token punctuation">.</span>flatten<span class="token punctuation">(</span>start_dim<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span>
+        x <span class="token operator">=</span> self<span class="token punctuation">.</span>linear1<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+        x <span class="token operator">=</span> self<span class="token punctuation">.</span>activation<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+        x <span class="token operator">=</span> self<span class="token punctuation">.</span>linear2<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+        x <span class="token operator">=</span> self<span class="token punctuation">.</span>activation<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>output<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>因此，对于不同的网络模型，在进行操作的时候一定要注意，在经过线性层之前一定要把上一层的输入处理好。</p>
+<h2 id="8-TensorBoard查看多次实验"><a href="#8-TensorBoard查看多次实验" class="headerlink" title="8. TensorBoard查看多次实验"></a>8. TensorBoard查看多次实验</h2><p>TensorBoard实际上是支持一次性查看多组实验的训练过程的。多组实验的结果会显示在左下角，我们点击就可以切换</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/20180726171253594" alt="TensorBoard支持查看多组实验"></p>
+<p>但是我们自己在查看的时候，很多情况下都是左下角只有一个<code>.</code>，并且只会显示一组实验的过程。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220318160601709.png" alt="TensorBoard支持查看多组实验" style="zoom:67%;"></p>
+<p>其实这是由于我们的路径选择的问题，TensorBoard会递归的扫描我们指定的目录下所有的文件，找到其中所有的event文件，然后把这个event文件所在的文件夹视为一个训练，因此我们其实只需要在启动TensorBoard的时候制定所有训练日志所在的父级目录即可，例如下面</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220318161426776.png" alt="制定打开父级文件即可"></p>
+<h2 id="9-从Tensor列表中创建Tensor"><a href="#9-从Tensor列表中创建Tensor" class="headerlink" title="9. 从Tensor列表中创建Tensor"></a>9. 从Tensor列表中创建Tensor</h2><p>在Dataset读取图像的时候，进场需要进行的一个从操作就是读取图像，这个时候往往读出来的是单张图像的Tensor。我们接下来会使用一个list，来保存所有的单张图像的Tensor。在读取完接下来我们又会需要把所有的图像转换成一个大的TensorBoard，即<code>[Batch, Channel, Width, Height]</code>形状的TensorBoard。</p>
+<p>这个时候我们就需要把<code>List[Tensor[Channel, Width, Height]]</code>的列表转换为<code>Tensor[Batch, Channel, Width, Height]</code>。如果直接使用<code>torch.Tensor(List[Tensor])</code>的话会报错</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220321230351403.png" alt="会抛出来ValueError"></p>
+<p>这个时候我们需要用的其实是<code>torch.stack</code>，他会自动帮我们在前面构建一个维度，即</p>
+<pre class="line-numbers language-python"><code class="language-python">a<span class="token punctuation">:</span> List<span class="token punctuation">[</span>torch<span class="token punctuation">.</span>Tensor<span class="token punctuation">]</span>
+b <span class="token operator">=</span> torch<span class="token punctuation">.</span>stack<span class="token punctuation">(</span>a<span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>其实，<code>a</code>只需要是一个以<code>torch.Tensor</code>为原子的可迭代对象即可</p>
+<h2 id="10-线性层flatten问题"><a href="#10-线性层flatten问题" class="headerlink" title="10. 线性层flatten问题"></a>10. 线性层flatten问题</h2><p>前面说到，对于分类任务来说，在输入到网络进行计算的时候在线性层之前需要把输入flatten。这个时候存在一个问题，就是flatten的时候得到的feature的维度数量是和输入的时候的图像的大小是相关的。</p>
+<p>因此在网络初始化的时候就需要有一个参数指定这个feature的数量。具体feature的数量完全可以单步调试的时候来确定，即</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Net</span><span class="token punctuation">(</span>nn<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> in_size<span class="token punctuation">:</span> int<span class="token punctuation">,</span> predict_class<span class="token punctuation">:</span> int<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>conv1 <span class="token operator">=</span> nn<span class="token punctuation">.</span>Sequential<span class="token punctuation">(</span>
+            nn<span class="token punctuation">.</span>Conv2d<span class="token punctuation">(</span>in_channels<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">,</span> out_channels<span class="token operator">=</span><span class="token number">96</span><span class="token punctuation">,</span> kernel_size<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">11</span><span class="token punctuation">,</span> <span class="token number">11</span><span class="token punctuation">)</span><span class="token punctuation">,</span> stride<span class="token operator">=</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            nn<span class="token punctuation">.</span>ReLU<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            nn<span class="token punctuation">.</span>MaxPool2d<span class="token punctuation">(</span>kernel_size<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">,</span> stride<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">)</span>
+        <span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>conv2 <span class="token operator">=</span> nn<span class="token punctuation">.</span>Sequential<span class="token punctuation">(</span>
+            nn<span class="token punctuation">.</span>Conv2d<span class="token punctuation">(</span>in_channels<span class="token operator">=</span><span class="token number">96</span><span class="token punctuation">,</span> out_channels<span class="token operator">=</span><span class="token number">256</span><span class="token punctuation">,</span> kernel_size<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">,</span> stride<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> padding<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            nn<span class="token punctuation">.</span>ReLU<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            nn<span class="token punctuation">.</span>MaxPool2d<span class="token punctuation">(</span>kernel_size<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">,</span> stride<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">)</span>
+        <span class="token punctuation">)</span>
+        <span class="token comment" spellcheck="true"># 注意这里留下来了in_size</span>
+        self<span class="token punctuation">.</span>linear1 <span class="token operator">=</span> nn<span class="token punctuation">.</span>Sequential<span class="token punctuation">(</span>
+            nn<span class="token punctuation">.</span>Linear<span class="token punctuation">(</span>in_features<span class="token operator">=</span>in_size<span class="token punctuation">,</span> out_features<span class="token operator">=</span><span class="token number">4096</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            nn<span class="token punctuation">.</span>ReLU<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            nn<span class="token punctuation">.</span>Dropout<span class="token punctuation">(</span>p<span class="token operator">=</span><span class="token number">0.5</span><span class="token punctuation">)</span>
+        <span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>linear2 <span class="token operator">=</span> nn<span class="token punctuation">.</span>Sequential<span class="token punctuation">(</span>
+            nn<span class="token punctuation">.</span>Linear<span class="token punctuation">(</span>in_features<span class="token operator">=</span><span class="token number">4096</span><span class="token punctuation">,</span> out_features<span class="token operator">=</span><span class="token number">4096</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            nn<span class="token punctuation">.</span>ReLU<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            nn<span class="token punctuation">.</span>Dropout<span class="token punctuation">(</span>p<span class="token operator">=</span><span class="token number">0.5</span><span class="token punctuation">)</span>
+        <span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>output <span class="token operator">=</span> nn<span class="token punctuation">.</span>Linear<span class="token punctuation">(</span>in_features<span class="token operator">=</span><span class="token number">4096</span><span class="token punctuation">,</span> out_features<span class="token operator">=</span>predict_class<span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="11-持续监控GPU缓存"><a href="#11-持续监控GPU缓存" class="headerlink" title="11. 持续监控GPU缓存"></a>11. 持续监控GPU缓存</h2><p>在训练模型的时候我们需要监控内存和GPU缓存的用量。内存的用量使用htop就可以很好的来监控，但是GPU缓存的话使用<code>nvidia-smi</code>只能看到当前时刻的用量。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220322105449663.png" alt="htop可以很好的监控系统状态，包括内存"></p>
+<p>那么我们就会想问有没有类似htop、top一类可以实时监控GPU缓存用量的命令行工具呢？</p>
+<p>答案其实是有的，下面几种方法都可以实现持续不断地监控GPU缓存的用量</p>
+<h3 id="1-watch-nvidia-smi"><a href="#1-watch-nvidia-smi" class="headerlink" title="1. watch nvidia-smi"></a>1. watch nvidia-smi</h3><p>第一种方法就是最原始<code>watch</code>+<code>nvidia-smi</code>的方式，使用下面的命令，指定0.1秒查询一次</p>
+<pre class="line-numbers language-shell"><code class="language-shell">watch -n0.1 nvidia-smi
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>使用效果如下</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/深度录屏_选择区域_20220322105816.gif" alt="watch+nvidia-smi的使用效果"></p>
+<h3 id="2-gpustat"><a href="#2-gpustat" class="headerlink" title="2. gpustat"></a>2. gpustat</h3><p>使用<code>nvidia-smi</code>得到的输出是没有颜色的，我们就希望能不能像htop一样有彩色的输出。这个时候我们就可以结束<code>gpustat</code>这个工具实现。</p>
+<p>首先安装该工具</p>
+<pre class="line-numbers language-shell"><code class="language-shell">pip install gpustat
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>然后在安装的python环境下，使用如下命令</p>
+<pre class="line-numbers language-shell"><code class="language-shell">gpustat -cp --watch
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>就可以看到如下的效果</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/深度录屏_选择区域_20220322110301.gif" alt="gpustat的效果"></p>
 
                 
             </div>
@@ -1255,7 +1333,7 @@ self<span class="token punctuation">.</span>network<span class="token punctuatio
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">261.2k</span>
+                        class="white-color">265.6k</span>
             
             
             
