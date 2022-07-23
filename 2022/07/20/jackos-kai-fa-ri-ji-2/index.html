@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="JackOS开发日记 1：开发工具链、目标成果以及开机流程, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
+    <meta name="keywords" content="JackOS开发日记 2：开机流程, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
     <meta name="description" content="本文是JackOS开发日记的第1篇，主要介绍了开发工具链以及JackOS预期达到的目标">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>JackOS开发日记 1：开发工具链、目标成果以及开机流程 | JackWang&#39;s Blog</title>
+    <title>JackOS开发日记 2：开机流程 | JackWang&#39;s Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -259,7 +259,7 @@
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">JackOS开发日记 1：开发工具链、目标成果以及开机流程</h1>
+                    <h1 class="description center-align post-title">JackOS开发日记 2：开机流程</h1>
                 </div>
             </div>
         </div>
@@ -415,21 +415,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-07-20
+                    2022-07-21
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.7k
+                    0
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    5 分
+                    1 分
                 </div>
                 
 
@@ -449,88 +449,7 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <blockquote>
-<p>本文是JackOS开发日记的第1篇，主要介绍了开发工具链，以及JackOS预期达到的目标</p>
-</blockquote>
-<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/JackOSALL.png" alt="JackOS开发日记的第0篇"></p>
-<h1 id="JackOS开发日记-1：开发工具链和目标成果"><a href="#JackOS开发日记-1：开发工具链和目标成果" class="headerlink" title="JackOS开发日记 1：开发工具链和目标成果"></a>JackOS开发日记 1：开发工具链和目标成果</h1><blockquote>
-<p>工欲善其事，必先利其器</p>
-</blockquote>
-<p>开发操作系统时，当然需要掌握开发用到的各种工具，形成自己的开发工具链。然后再介绍一下JackOS的预期目标，这样就可以正式的开始开发了。</p>
-<h2 id="1-开发工具链"><a href="#1-开发工具链" class="headerlink" title="1. 开发工具链"></a>1. 开发工具链</h2><p>开发操作系统中会用到很多的工具，主要分成下面几大类：</p>
-<ul>
-<li><p><strong>虚拟机</strong></p>
-<ul>
-<li><code>VirtualBox</code>：实体机仿真</li>
-<li><code>bochs</code>：调试代码用</li>
-</ul>
-</li>
-<li><p><strong>二进制文件查看以及读写</strong>：</p>
-<ul>
-<li><code>xxd</code>：主要用于查看小段硬盘镜像</li>
-<li><code>dd</code>：主要用于写入启动扇区</li>
-<li><p><code>wxhexeditor</code>：WinHex的Linux版本，集查看、修改于一体</p>
-</li>
-<li><p><code>bximage</code>：硬盘镜像操作工具</p>
-</li>
-</ul>
-</li>
-<li><p>编译器：</p>
-<ul>
-<li><code>nasm</code>：汇编语言编译器</li>
-<li><code>gcc</code>：C语言编译器</li>
-</ul>
-</li>
-</ul>
-<p>而在开发的时候，工作流程是这样的：</p>
-<ul>
-<li><p>首先通过VsCode写好<code>.asm</code>和<code>.c</code>的汇编和C语言源代码</p>
-</li>
-<li><p>接下来通过<code>nasm</code>和<code>gcc</code>分别对汇编和C语言源代码进行编译</p>
-<ul>
-<li><p>对于汇编来说，开发操作系统时候，编译的<code>asm</code>文件有两种去路：</p>
-<ol>
-<li>要么通过<code>nasm</code>编译得到<code>bin</code>格式的裸二进制指令文件。<strong>裸二进制指令文件里直接就是二进制的CPU指令，CPU可以直接运行，不需要操作系统环境</strong>。所以裸二进制的bin文件，主要就是在计算机开机时候直接执行，用于拉起来操作系统</li>
-<li>要么通过<code>nasm</code>编译得到<code>obj</code>格式的共享文件，用于与C语言进行混合编程。<strong>更加形象的说，就是用汇编为C开发最基础的库函数</strong>。<strong>因为只有汇编才可以和硬件进行直接的沟通，而完成如读取硬盘、显示文字等功能其实就是和硬件进行沟通，所以必须是用汇编来实现这些功能</strong>。而后C语言调用汇编来完成这些功能。具体来说C和汇编的混合编程有两种，一种是C的内联汇编，另外一种就是汇编和C分别编译成obj文件后链接在一起。</li>
-</ol>
-</li>
-<li><p>对于C来说，开发操作系统的时候，最基本的一些功能必须要用汇编来实现，但是在用汇编完成了这些工作之后，就用C语言调用汇编来执行这些功能，因此在此之后，就利用C来完成系统内核的开发。</p>
-</li>
-<li><p>最终编译的结果有两种：</p>
-<ul>
-<li><strong>一种是裸二进制bin格式程序</strong>：上面说了，这种程序/文件里面直接就是CPU指令，CPU可以直接执行，所以主要是在开机启动阶段运行</li>
-<li><strong>一种是正常的可执行程序</strong>：未来编译出来的内核其实就是一个可执行程序。可执行程序在裸二进制程序的基础上，添加了描述程序的信息，加在裸二进制代码前。这样做的好处就是由于我们有了程序的其他信息，方便了我们去运行程序。关于这个未来会详细解释。</li>
-</ul>
-<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220720141936671.png" alt="左侧的裸二进制文件直接就是可执行的机器指令，右侧的可执行程序多了很多的程序头"></p>
-</li>
-</ul>
-</li>
-<li><p>在编译后得到了可执行程序，我们把可执行程序（即操作系统）写入到磁盘映像文件。<strong>磁盘映像文件其实就相当于磁盘</strong>。我们真实的计算机开机之后，操作系统从磁盘中启动，而我们用虚拟机来调试的话，因为磁盘映像文件相当于磁盘，所以虚拟机中的操作系统就从磁盘映像文件中启动。关于磁盘映像文件，未来会进行详细的解释。</p>
-<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220720142441163.png" alt="用xxd查看JackOS.img磁盘映像文件的头512个字节内容"></p>
-</li>
-<li><p>最后，我们在虚拟机中启动我们的系统，利用bochs进行单步调试，VirtualBox进行实体机仿真</p>
-<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220720141529000.png" alt="使用Bochs虚拟机对系统进行单步调试"></p>
-</li>
-</ul>
-<p>上面就是我们正常的开发操作系统内核时候的工作流程。其实最后还有一步，就是把我们写好的系统烧录到U盘上，从U盘上启动我们的操作系统。不过关于这一步，我目前还只是设想，因为当前的计算机启动用的基本都是UEFI，而为了关注于开发操作系统，我像用传统的BIOS开发来引导操作系统，所以其实我们最后的系统能否从U盘启动还是有些问题的。不过关于这个问题，后面开发到了再说吧。</p>
-<p>而关于具体怎么使用这些工具，我想未来我会专门写一系列博客来介绍，毕竟在这篇文章中介绍这些工具的话，一个是介绍不完，另一个是会导致这篇文章偏离方向。</p>
-<h2 id="2-目标成果"><a href="#2-目标成果" class="headerlink" title="2. 目标成果"></a>2. 目标成果</h2><p>介绍完了开发工具链之后，接下来就要对JackOS进行一下规划了。目前我对JackOS的规划是这样的（当然，不排除未来随着开发的逐渐深入/对内核开发逐渐深入会改变规划）：</p>
-<ul>
-<li>运行在32位保护模式下，16位实模式的话难以做到虚拟内存，而64位又有些复杂，所以折中考虑，还是写一个32位保护模式的系统</li>
-<li>运行在字符模式下，主要是为了避免图形模式需要对字符进行渲染，增加复杂度。因为我本身对计算机图形学没有很多的了解，未来给写好的系统做窗口模块的话可能会考虑。</li>
-<li>类Unix的非实时操作系统，因为我参考的几本书都是类Unix的书：赵炯老师的《Linux内核完全剖析》、郑刚老师的《操作系统真相还原》，还有荷兰神仙Tanenbaum教授的《操作系统：设计与实现》的MINIX系统和《现代操作系统》</li>
-<li><p>具有操作系统最基本的功能：</p>
-<ul>
-<li>进程与线程实现：进程与线程实现、CPU调度、同步与互斥、死锁检测与解除</li>
-<li>内存管理：基本段/页式内存管理、虚拟内存实现</li>
-<li>文件系统：FAT文件系统、EXT2文件系统，NTFS文件系统、虚拟文件系统</li>
-<li>I/O管理：可以连接一些外部设备</li>
-</ul>
-</li>
-<li>未来可能考虑转UEFI开发，这样就可以把真实的在实体机上跑我的操作系统。</li>
-</ul>
-<p>当然，我知道这个目标很大，但是万事开头难，坚持下去一定会有成果。目标有点大，我忍一下~</p>
-
+                
                 
             </div>
             <hr/>
@@ -556,7 +475,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://jackwang0107.github.io/2022/07/20/jackos-kai-fa-ri-ji-1/">https://jackwang0107.github.io/2022/07/20/jackos-kai-fa-ri-ji-1/</a>
+                    <a href="https://jackwang0107.github.io/2022/07/20/jackos-kai-fa-ri-ji-2/">https://jackwang0107.github.io/2022/07/20/jackos-kai-fa-ri-ji-2/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -775,9 +694,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2022/07/20/jackos-kai-fa-ri-ji-2/">
                     <div class="card-image">
@@ -794,9 +714,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-07-20
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-07-20
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -809,6 +729,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -835,23 +756,23 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/07/19/jackos-kai-fa-ri-ji-0/">
+                <a href="/2022/07/20/jackos-kai-fa-ri-ji-1/">
                     <div class="card-image">
                         
-                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/JackOSALL.png" class="responsive-img" alt="JackOS开发日记 0：为什么要写一个操作系统">
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/JackOSALL.png" class="responsive-img" alt="JackOS开发日记 1：开发工具链、目标成果以及开机流程">
                         
-                        <span class="card-title">JackOS开发日记 0：为什么要写一个操作系统</span>
+                        <span class="card-title">JackOS开发日记 1：开发工具链、目标成果以及开机流程</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            本文是JackOS开发日记的第0篇，主要记录了为什么我想开发一个自己的操作系统出来
+                            本文是JackOS开发日记的第1篇，主要介绍了开发工具链以及JackOS预期达到的目标
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-07-19
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-07-20
                             </span>
                         <span class="publish-author">
                             
