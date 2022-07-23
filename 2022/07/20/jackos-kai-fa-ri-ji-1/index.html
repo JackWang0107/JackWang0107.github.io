@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="JackOS开发日记 1：开发工具链和目标成果, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
-    <meta name="description" content="本文是JackOS开发日记的第1篇，主要介绍了开发工具链以及JackOS预期达到的目标">
+    <meta name="keywords" content="JackOS开发日记 1：最近的进度以及开发工具链和目标成果, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
+    <meta name="description" content="本文是JackOS开发日记的第1篇，记录了最近几日的开发情况，并且介绍了开发工具链，以及JackOS预期达到的目标">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>JackOS开发日记 1：开发工具链和目标成果 | JackWang&#39;s Blog</title>
+    <title>JackOS开发日记 1：最近的进度以及开发工具链和目标成果 | JackWang&#39;s Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -259,7 +259,7 @@
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">JackOS开发日记 1：开发工具链和目标成果</h1>
+                    <h1 class="description center-align post-title">JackOS开发日记 1：最近的进度以及开发工具链和目标成果</h1>
                 </div>
             </div>
         </div>
@@ -415,21 +415,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-07-23
+                    2022-07-24
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.7k
+                    2.3k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    5 分
+                    8 分
                 </div>
                 
 
@@ -450,14 +450,24 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <blockquote>
-<p>本文是JackOS开发日记的第1篇，主要介绍了开发工具链，以及JackOS预期达到的目标</p>
+<p>本文是JackOS开发日记的第1篇，记录了最近几日的开发情况，并且介绍了开发工具链，以及JackOS预期达到的目标</p>
 </blockquote>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/JackOSALL.png" alt="JackOS开发日记的第0篇"></p>
-<h1 id="JackOS开发日记-1：开发工具链和目标成果"><a href="#JackOS开发日记-1：开发工具链和目标成果" class="headerlink" title="JackOS开发日记 1：开发工具链和目标成果"></a>JackOS开发日记 1：开发工具链和目标成果</h1><blockquote>
+<h1 id="JackOS开发日记-1：最近的进度以及开发工具链和目标成果"><a href="#JackOS开发日记-1：最近的进度以及开发工具链和目标成果" class="headerlink" title="JackOS开发日记 1：最近的进度以及开发工具链和目标成果"></a>JackOS开发日记 1：最近的进度以及开发工具链和目标成果</h1><blockquote>
+<p>暑假的前一段时间因为要去申请一下签证，所以去了广州一趟,不过开发并没有落下。</p>
+</blockquote>
+<h2 id="1-最近的进度"><a href="#1-最近的进度" class="headerlink" title="1.最近的进度"></a>1.最近的进度</h2><p>最近学习了硬盘的物理结构，虽然磁盘的物理结构其实在学校讲的操作系统这门课上讲到外存管理的时候老师上课讲过了，但是我觉得当时的学习更多的是机械式的记忆，即记住了磁盘的物理结构，<strong>并没有理解磁盘的物理结构</strong>。</p>
+<p>但是这一次，在了解了磁盘结构（传统的柱面/磁道/扇区）的基础上，我又学习了放在第0柱面、第0磁道、第1扇区的主引导记录（Master Boot Record，MBR），主引导记录负责计算机的启动。磁盘在计算机看来其实就是二进制的序列，我们可以把我们的数据和程序写入其中，因为数据和程序本质上来说都是二进制序列。所以对于MBR这个第一个分区来说，我们既可以把数据写入其中，也可以把程序写入其中。但是更一般的，我们会把程序写入第一个分区，即MBR分区中，具体原因就是因为MBR负责计算机的启动。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220724001756403.png" alt="计算机视角下的磁盘，以及MBR分区"></p>
+<p>具体来说，主板上的BIOS程序放在ROM芯片上，开机之后就会运行ROM里的BIOS程序（CPU初始化后CS:IP被强制加载到1M内存的最后16个字节，后16个字节其实是一个绝对跳转指令<code>jmp far</code>，跳转的目的地址是BIOS程序）；而BIOS程序在完成了开机硬件自检、中断向量表IVT的设置之后，就会去读取每个磁盘的第0柱面、第0磁道、第1扇区，如果找到了程序，那么就会运行其中的程序。因此我们就需要MBR分区中写入可以运行的程序，MBR中的程序会从磁盘中读取新的程序运行，就这样运行起来了操作系统。</p>
+<p>虽然说启动扇区是CHS模式下的概念，目前都是固态硬盘了，基本用的都是LBA，但是第一个扇区的这个概念依旧存在。因此MBR这种传统的启动方式还是OK的。现代都是UEFI了，那就是以后在学的东西了。</p>
+<p>目前，我已经写出了自己的MBR程序，这个MBR程序会去读取磁盘中的程序（BootLoader），然后去运行该程序（BootLoader）。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220724002836420.png" alt="自己的BIOS程序"></p>
+<blockquote>
 <p>工欲善其事，必先利其器</p>
 </blockquote>
-<p>开发操作系统时，当然需要掌握开发用到的各种工具，形成自己的开发工具链。然后再介绍一下JackOS的预期目标，这样就可以正式的开始开发了。</p>
-<h2 id="1-开发工具链"><a href="#1-开发工具链" class="headerlink" title="1. 开发工具链"></a>1. 开发工具链</h2><p>开发操作系统中会用到很多的工具，主要分成下面几大类：</p>
+<h2 id="2-开发工具链"><a href="#2-开发工具链" class="headerlink" title="2. 开发工具链"></a>2. 开发工具链</h2><p>开发操作系统时，当然需要掌握开发用到的各种工具，形成自己的开发工具链。然后再介绍一下JackOS的预期目标，这样就可以正式的开始开发了。</p>
+<p>开发操作系统中会用到很多的工具，主要分成下面几大类：</p>
 <ul>
 <li><p><strong>虚拟机</strong></p>
 <ul>
@@ -514,7 +524,7 @@
 </ul>
 <p>上面就是我们正常的开发操作系统内核时候的工作流程。其实最后还有一步，就是把我们写好的系统烧录到U盘上，从U盘上启动我们的操作系统。不过关于这一步，我目前还只是设想，因为当前的计算机启动用的基本都是UEFI，而为了关注于开发操作系统，我像用传统的BIOS开发来引导操作系统，所以其实我们最后的系统能否从U盘启动还是有些问题的。不过关于这个问题，后面开发到了再说吧。</p>
 <p>而关于具体怎么使用这些工具，我想未来我会专门写一系列博客来介绍，毕竟在这篇文章中介绍这些工具的话，一个是介绍不完，另一个是会导致这篇文章偏离方向。</p>
-<h2 id="2-目标成果"><a href="#2-目标成果" class="headerlink" title="2. 目标成果"></a>2. 目标成果</h2><p>介绍完了开发工具链之后，接下来就要对JackOS进行一下规划了。目前我对JackOS的规划是这样的（当然，不排除未来随着开发的逐渐深入/对内核开发逐渐深入会改变规划）：</p>
+<h2 id="3-目标成果"><a href="#3-目标成果" class="headerlink" title="3. 目标成果"></a>3. 目标成果</h2><p>介绍完了开发工具链之后，接下来就要对JackOS进行一下规划了。目前我对JackOS的规划是这样的（当然，不排除未来随着开发的逐渐深入/对内核开发逐渐深入会改变规划）：</p>
 <ul>
 <li>运行在32位保护模式下，16位实模式的话难以做到虚拟内存，而64位又有些复杂，所以折中考虑，还是写一个32位保护模式的系统</li>
 <li>运行在字符模式下，主要是为了避免图形模式需要对字符进行渲染，增加复杂度。因为我本身对计算机图形学没有很多的了解，未来给写好的系统做窗口模块的话可能会考虑。</li>
@@ -782,15 +792,15 @@
                 <a href="/2022/07/20/jackos-kai-fa-ri-ji-2/">
                     <div class="card-image">
                         
-                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/JackOSALL.png" class="responsive-img" alt="JackOS开发日记 2：开机流程">
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/JackOSALL.png" class="responsive-img" alt="JackOS开发日记 2：最近的进度以及操作系统启动流程">
                         
-                        <span class="card-title">JackOS开发日记 2：开机流程</span>
+                        <span class="card-title">JackOS开发日记 2：最近的进度以及操作系统启动流程</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            本文是JackOS开发日记的第1篇，主要介绍了开发工具链以及JackOS预期达到的目标
+                            本文是JackOS开发日记的第2篇，记录了最近几日的开发情况，并且介绍了操作系统的启动流程
                         
                     </div>
                     <div class="publish-info">
@@ -1064,7 +1074,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">269.9k</span>
+                        class="white-color">272.4k</span>
             
             
             
