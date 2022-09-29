@@ -1,0 +1,1714 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="李宏毅ML2021-Spring-4: When Training Fails, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
+    <meta name="description" content="本文是李宏毅Machine Learning 2021 Spring 第四节课的笔记，本节课主要讲解了深度学习训练过程中训练失败的一些情况以及对应的处理方法。">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>李宏毅ML2021-Spring-4: When Training Fails | JackWang&#39;s Blog</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.2">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+
+   <style>
+    body{
+       background-image: url(https://cdn.jsdelivr.net/gh/Tokisaki-Galaxy/res/site/medias/background.jpg);
+       background-repeat:no-repeat;
+       background-size: 100% 100%;
+       background-attachment:fixed;
+    }
+</style>
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">JackWang&#39;s Blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-book-reader" style="zoom: 0.6;"></i>
+      
+      <span>博客</span>
+      <i class="fas fa-chevron-down" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/tags">
+          
+          <i class="fas fa-tags" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按标签归类文章</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories">
+          
+          <i class="fas fa-bookmark" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按目录归类文章</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/archives">
+          
+          <i class="fas fa-archive" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按日期分类文章</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">JackWang&#39;s Blog</div>
+        <div class="logo-desc">
+            
+            JackWang的个人博客
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-book-reader"></i>
+			
+			博客
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>
+
+                  <a href="/tags " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-tags" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按标签归类文章</    span>
+
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/categories " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-bookmark" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按目录归类文章</    span>
+
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/archives " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-archive" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按日期分类文章</    span>
+
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('抱歉，这篇文章并不想让所有人都看到，请输入授权密码观看')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220120154739046.png')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">李宏毅ML2021-Spring-4: When Training Fails</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Deep-Learning/">
+                                <span class="chip bg-color">Deep Learning</span>
+                            </a>
+                        
+                            <a href="/tags/Hungyi-Li/">
+                                <span class="chip bg-color">Hungyi Li</span>
+                            </a>
+                        
+                            <a href="/tags/Machine-Learning/">
+                                <span class="chip bg-color">Machine Learning</span>
+                            </a>
+                        
+                            <a href="/tags/Neural-Network/">
+                                <span class="chip bg-color">Neural Network</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E6%9D%8E%E5%AE%8F%E6%AF%85ML2021-Spring-Notes/" class="post-category">
+                                李宏毅ML2021 Spring Notes
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2022-01-17
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2022-09-28
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    12.2k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    44 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <blockquote>
+<p>本文是李宏毅Machine Learning 2021 Spring 第四节课的笔记，本节课主要讲解了深度学习训练过程中训练失败的一些情况以及对应的处理方法。</p>
+</blockquote>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220120154739046.png" alt="第三节课：When Training Fails"></p>
+<h1 id="李宏毅ML2021-Spring-4-When-Training-Fails"><a href="#李宏毅ML2021-Spring-4-When-Training-Fails" class="headerlink" title="李宏毅ML2021-Spring-4: When Training Fails"></a>李宏毅ML2021-Spring-4: When Training Fails</h1><p>在前一节课中，我们首先介绍了ML的Framework，具体来说我们分两步介绍了ML Framework：</p>
+<ul>
+<li>我们首先定义，ML Framework中的第一步是数据集准备<ul>
+<li>数据集中一部分用于训练我们的模型，称为训练集</li>
+<li>数据集中剩下的一部分用于测试我们的模型，称为测试集</li>
+</ul>
+</li>
+<li>然后我们介绍了ML Framework中的第二步是模型训练和测试<ul>
+<li>首先用我们的训练集训练我们的模型</li>
+<li>然后将训练好的模型在测试集上测试，来看看我们模型的效果</li>
+</ul>
+</li>
+</ul>
+<p>如果我们的模型在测试集上的表现也非常不错的话，那么我们其实就可以部署我们的模型了。</p>
+<p>接下来我们由介绍了深度学习训练查错的指导，具体来说：</p>
+<ul>
+<li>当出错时候首先检查模型在训练集合上的loss<ul>
+<li>如果训练集上的loss比较大，那么：<ul>
+<li>有可能是model bias，即模型的能力太弱，导致模型学不起来，这个时候可以增加模型的复杂程度，即引入更多的可学习的参数。形象的表示：<strong>最优的模型不在我们模型的表示范围内</strong>。大海捞针——海里没有针</li>
+<li>还有可能是我们的Optimization出了问题，导致没有对模型进行Optimization，这个时候就要更改Optimization的方法，使用其他的优化方法或者对当前优化方法进行改进。形象的表示：<strong>最优的模型在我们的模型的表示范围内，但是我们找不到它</strong>。大海捞针——针在海里，我们找不到</li>
+</ul>
+</li>
+<li>如果在训练集上的loss比较小，那么：<ul>
+<li>判断模型在测试集上的表现<ul>
+<li>如果模型在测试集上的loss比较大，那么：<ul>
+<li>可能是Overfitting，模型过度的拟合了训练数据。这个时候方法一是收集更多的数据，而方法二则是对模型进行正则化，即要么限制模型的学习能力，要么给模型添加惩罚项</li>
+<li>还有可能是Mismatch，即模型学习到的训练集的分布和测试集的分布不同，针对Mismatch的方法在后面会专门讲解</li>
+</ul>
+</li>
+<li>如果模型在测试集上的loss比较小，Happy Ending<span class="github-emoji"><span>🎉</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f389.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>以上就是上节课讲的内容的一个复习。</p>
+<p>然而在上节课，我们其实有两个地方没有展开讲，第一个就是Optimization失败的时候，我们没有讲如何提升Optimization的效果，即没有讲怎么样对Optimization的方法进行提高。第二个就是对于Mismatch，我们也没有讲处理方法。</p>
+<p>其中，Mismatch将在后面讲解，本节课将讲解Optimization失败的几种原因及其处理方法。</p>
+<h2 id="一、原因一：Critical-Point"><a href="#一、原因一：Critical-Point" class="headerlink" title="一、原因一：Critical Point"></a>一、原因一：Critical Point</h2><p>网络更新失败的第一种原因就是由于Critical Point。下面就将详细讲解Critical Point，然后在其基础上讲解处理Critical Pioint的办法以及和Critical Point有关的Batch Size的问题</p>
+<h3 id="1-What-happened-when-Optimization-failed？"><a href="#1-What-happened-when-Optimization-failed？" class="headerlink" title="1. What happened when Optimization failed？"></a>1. What happened when Optimization failed？</h3><p>我们首先讲解Optimization失败的时候到底发生了什么，然后我们在从中总结规律，为后续的处理方法做好准备。</p>
+<h4 id="A-Differential-of-parameters-is-0"><a href="#A-Differential-of-parameters-is-0" class="headerlink" title="A. Differential of parameters is 0"></a>A. Differential of parameters is 0</h4><p>我们说Optimization失败，通常是在训练阶段不管我们怎样的训练，模型在训练集上的表现一直都很差。</p>
+<p>而就真实的情况而言，其实在训练集上的loss很大有两种表现：</p>
+<ul>
+<li>第一种是模型有在学习，但是最终学了一会学不动了，而且此时表现比较差</li>
+<li>第二种是模型没有在学习</li>
+</ul>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220118053204876.png" alt="Optimization失败的两种情况" style="zoom:67%;"></p>
+<p>而根据我们前面讲过的Gradient Descent这个优化算法，我们只要能够根据loss算出来Gradient那么就一定够提升模型的表现。而想上面这两种情况，模型的loss最终收敛（稳定）到了一个值附近。这也就意味着我们的梯度中的大部分都成了0。</p>
+<p>为什么我们认为大部分都成了0呢？其实我们反过来想，如果梯度全都不是0，那么我们的模型的表现一定还有所提升。如果全部都是0，那么我们模型的表现应该是一条直线。只有大部分是0而少部分不是0，我们的模型得到的梯度只能在几个方向上指导模型去梯度下降、探索Loss Surface。而在这几个方向上的loss其实都差不多，因此最终表现在图上就是模型在震荡。</p>
+<p>因此，导致上面模型最终收敛的原因就是loss对模型中参数的微分是0（后面我们说的是0往往指近似为0）</p>
+<h4 id="B-What-may-cause-this？"><a href="#B-What-may-cause-this？" class="headerlink" title="B. What may cause this？"></a>B. What may cause this？</h4><p>由于微分是根据loss对参数求微分得到，因此我们在loss space中可视化出来了话，有两种可能导致梯度为0：</p>
+<ul>
+<li>陷入了Local Minima</li>
+<li>陷入了Saddle Point</li>
+</ul>
+<p>而我们统称Local Minima和Saddle Point为Critical Point</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220117222822784.png" alt="Local Minia和Saddle Point" style="zoom: 67%;"></p>
+<h4 id="C-Local-minima-or-saddle-point"><a href="#C-Local-minima-or-saddle-point" class="headerlink" title="C. Local minima or saddle point?"></a>C. Local minima or saddle point?</h4><p>那么我们在发现模型陷入到了Critical Point的时候，我们其实很有必要去知道模型到底是陷入了Local Minima还是Saddle Point。因为两者最重要的一个差别就是Local Minima意味着周围没有新的路了，而Saddle Point意味着其实模型的loss还可以继续降低</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220117223551192.png" alt="我们需要鉴定到底是Saddle Point还是Local Minima" style="zoom: 67%;"></p>
+<p>而对Local Minima和Saddle Point的判断其实需要一些数学的知识</p>
+<p>泰勒定理告诉我们其实可以用一个多项式来在某一个区间内以一定的精度来逼近某个函数。而在全部范围（定义域）内逼近这个函数则需要无穷多项。</p>
+<p>因此，对于损失函数$L=L(\theta)$，我们可以用一个无穷多项的多项式函数来进行逼近。但是我们其实不需要损失函数在全部范围内的值，因为我们现在的目的在于判断模型当前收敛到的参数的这个点到底是Local Minima 还是 Saddle Point。而要判断一个点是不是Saddle Point，我们其实只需要看这个点周围的值是否都比这个值大即可</p>
+<p>因此我们其实只需要损失函数在$\theta’$这个值附近的值即可。因此对于泰勒定理来说，我们只需要在$\theta’$的一个邻域内，在一定程度上逼近$L$即可。</p>
+<p>因此我们在$\theta’$这个地方展开第二项即可，即</p>
+<script type="math/tex; mode=display">
+L(\theta)\approx L(\theta')+(\theta-\theta')g + \frac1 2 (\theta-\theta')^TH(\theta-\theta')</script><p>其中，$g$是$L$对$\theta$的在$\theta’$处的梯度，每个分量都是$L$对$\theta$中某个分量的偏导，即</p>
+<script type="math/tex; mode=display">
+g=\nabla L(\theta'),\qquad g_i=\frac{\partial L(\theta')}{\partial \theta_i}</script><p>而H则是Hessian Matrix，可以理解为二阶导，H中的每个元素都是混合偏导数，即</p>
+<script type="math/tex; mode=display">
+H_{ij}=\frac{\partial^2}{\partial \theta_i\partial \theta_j}L(\theta')</script><p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220117225659037.png" alt="用Taylor展开爱逼近Loss Function在Critical Point附近的值" style="zoom:50%;"></p>
+<p>而我们现在在Critical Point的话，就意味着$L$对$\theta$的梯度为0，即上面的式子中的第二项没了，那么我们的二阶泰勒展开式就只有两项了</p>
+<script type="math/tex; mode=display">
+L(\theta)\approx L(\theta') + \frac1 2 (\theta-\theta')^TH(\theta-\theta')</script><p>那么这个时候，我们就可以用$H$来估计$L(\theta’)$周围的值，有了这些值之后，我们就可以判断某个点周围的地貌，从而判断某个点周围是不是Saddle Point了</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220117230117690.png" alt="image-20220117230117690" style="zoom:50%;"></p>
+<p>当然，对这个点周围的值进行穷举来获得Critical Point周围的地貌所需要的计算量太大了，因此不现实。我们下面从数学上来用$H$判断Critical Point是Saddle Point还是Local Minima</p>
+<p>首先为了符号记录的方便，我们记</p>
+<script type="math/tex; mode=display">
+v=v(\theta)=\theta-\theta'</script><p>则有</p>
+<script type="math/tex; mode=display">
+L(\theta)\approx L(\theta') + \frac 1 2v^THv</script><p>那么如果对于所有的$v$，均有</p>
+<script type="math/tex; mode=display">
+v^THv > 0</script><p>那就意味着</p>
+<script type="math/tex; mode=display">
+\forall \theta \in \mathring U(\theta'), \qquad L(\theta) > L(\theta')</script><p>那么此时，$\theta’$就是Local Minima</p>
+<p>反之，若</p>
+<script type="math/tex; mode=display">
+\forall \theta \in \mathring U(\theta'), \qquad v^THv < =</script><p>则$\theta’$为Local Maxima</p>
+<p>而如果有时候$v^THv&lt;0$而有时候$v^THv&gt;0$，这就意味着这个点是Saddle Point。</p>
+<p>而要实现全部大于0或者全部小于0，我们只需要$L$对$\theta$的Hessian Matrix是正定或者负定或者不定的。如果是正定的话，那么所有的特征值全都是正的，负定的话全部都是负的，不定的话则有正也有负。</p>
+<p>对应的我们只需要计算Hessian Matrix矩阵的Eigen Values即可。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220117233219302.png" alt="利用Hessian来帮助我们判断" style="zoom:50%;"></p>
+<p>​    </p>
+<h4 id="D-Example"><a href="#D-Example" class="headerlink" title="D. Example"></a>D. Example</h4><p>下面我们真实的给出来一个Loss Function的曲面，然后来判断这个Surface上的Loss的情况。不过为了能够把Loss Surface绘制出来，我们的网络必须要简单，最多只能有两个参数。我们选下面这样的网络</p>
+<p>训练集只有一个example，输入是一个数字，label也是一个数字，激活函数是$y=x$线性函数</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220118101628489.png" alt="史上最废的网络"></p>
+<p>那么，由于我们的Loss Function是$L=L(\theta)$中$\theta$只有两个参数（我们连Bias都没有加），因此我们就可以绘制出来Loss Surface</p>
+<p>在此基础上我们找出来其中梯度为0的点，最后所有Critical Point和Error Surface的图如下</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220118102815053.png" alt="Error Surface以及对于的Critical Point"></p>
+<p>接下来，为了搞清楚这些Critical Point是Local Minia 还是 Saddle Point，我们需要求一下Hessian Matrix。因为这里我们的Loss Function我们其实是可以写出来的，即</p>
+<script type="math/tex; mode=display">
+L(\theta)=L(w_1,w_2)=(\hat y-w_1w_2x)^2</script><p>而上式中的example是$(x,\hat y)$，而由于我们的example只有一个$(1,1)$，因此，Loss Function为</p>
+<script type="math/tex; mode=display">
+L(\theta) = L(w_1,w_2) = (1-w_1w_2)^2</script><p>那么我们写下来$L(\theta)$对$w_1$和$w_2$写出来他们的梯度</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\frac {\partial L}{\partial w_1} &= 2(1-w_1w_2)(-w_2)\\
+\frac {\partial L}{\partial w_2} &= 2(1-w_1w_2)(-w_1)\\
+\end{align}</script><p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220118104737107.png" alt="算到的梯度" style="zoom:33%;"></p>
+<p>然后我们再算出来二阶导数，就可以得到Hessian Matrix</p>
+<script type="math/tex; mode=display">
+\begin{matrix}
+\frac{\partial^2L}{\partial w_1^2}  = 2(-w_2)(-w_2) & 
+\frac{\partial ^2L}{\partial w_1w_2} = -2+4w_1w_2 \\
+\frac{\partial ^2L}{\partial w_2w_1} = -2+4w_1w_2 &
+\frac{\partial^2L}{\partial w_1^2}  = 2(-w_1)(-w_1) 
+\end{matrix}</script><p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220118110632053.png" alt="Hessian Matrix"></p>
+<p>然后我们把$(w_1,w_2)$的值带进去，就可以计算得到他的Hessian Matrix。然后在Hessian Matrix的基础上，计算Eigen Value</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220118111011046.png" alt="image-20220118111011046"></p>
+<p>那么由于特征值有正有负，因此$(0,0)$这个点就是一个Saddle Point。同理，我们计算完剩下的点，就可以得到这些Critical Point的类别了</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220118102228933.png" alt="上面网络的Error Surface" style="zoom:50%;"></p>
+<p>其实Hessian Matrix其实不仅能够帮助我们去判断一个Critical Point是Saddle Point还是Local Minia，他还可以帮助我们去进一步指导网络的下降。</p>
+<p>我们如果把$v$换成$u$，那么在损失函数中第二项的正负其实就由Eigen Value决定的</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220118112402386.png" alt="image-20220118112402386" style="zoom: 33%;"></p>
+<p>所有这个时候，我们让参数沿着负特征值对应的特征向量$u$的方向前进即可</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220118112622033.png" alt="image-20220118112622033" style="zoom:50%;"></p>
+<p>所以利用Hessian，我们就可以逃离中间的原点。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220118113721043.png" alt="利用Hessian逃离Saddle Point" style="zoom:50%;"></p>
+<p>但是其实在现实中很少会用Hessian来帮助我们逃离Saddle Point，因为计算Hessian的话，要算二次微分，并且要算$len(\theta)^2$个二阶导数，而考虑到在真实的情景中，$\theta$中包含的参数的数列往往有几万个，计算量实在是太大了，即便是只算一次，开销都是无法接受的。</p>
+<p>这还不包括计算特征向量的开销等等</p>
+<p>上面讲的这些内容呢，其实是为了让我们明白，卡在Saddle Point的时候还是有办法的，只不过用的可能不是我们这里介绍的方法+</p>
+<h4 id="E-Local-Minima-v-s-Saddle-Point-which-one-is-more"><a href="#E-Local-Minima-v-s-Saddle-Point-which-one-is-more" class="headerlink" title="E. Local Minima v.s. Saddle Point: which one is more?"></a>E. Local Minima v.s. Saddle Point: which one is more?</h4><p>上面我们介绍了Local Minima和Saddle Point，然后介绍了如何利用Hessian来逃离Saddle Point，其数学原理就是Taylor Series Approximation。</p>
+<p>所以对于我们来说，Saddle Point不可怕，真正可怕的Local Minima。那么我们不禁要问，  在真实的情况中，我们的网络最终是在Local Minia还是Saddle Point？或者说有多少的比例，我们最后的网络是应为Local Minima导致无法进行训练的？</p>
+<p>所以接下来，我们就要讲解这两个问题</p>
+<p>在讲之前，我们先讲一个三体里的故事</p>
+<blockquote>
+<p><strong>君士坦丁堡的故事</strong></p>
+<p>在公元1543年的时候，土耳其人进攻君士坦丁堡。那个时候君士坦丁堡本来是东罗马帝国的城堡，可是被土耳其奥斯曼帝国进攻，最后君士坦丁堡沦陷，东罗马帝国灭网</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220118201706225.png" alt="君士坦丁堡沦陷"></p>
+<p>这个故事就是，在土耳其人进攻的时候，君士坦丁堡的皇帝，君士坦丁一世不知道该怎么样抵挡土耳其人的进攻。</p>
+<p>这个时候，就有人向君士坦丁一世推荐了魔法师地奥伦纳，地奥伦纳说自己有万军从中取敌军将领首级的能力。那么大家肯定就不相信，大家纷纷都要求地奥伦纳展示一下自己的能力。</p>
+<p>于是地奥伦纳就拿出了一个圣杯。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220118203843439.png" alt="地奥伦纳拿到的圣杯" style="zoom:33%;"></p>
+<p>大家看到这个圣杯纷纷都大惊失色，因为这个圣杯本来是存放在圣索菲亚大教堂的地下室里的，而且是放在一个密封的石棺里的，没有人能够打开他。</p>
+<p>地奥伦纳就说自己并不止是把圣杯拿出来了，还放了一串新鲜的葡萄进去。于是君士坦丁一世就命人打开了石棺，发现石棺里真的有一串葡萄。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220118204017912.png" alt="圣索菲亚大教堂地下室的石棺" style="zoom:33%;"></p>
+<p>那么为什么地奥伦纳真的可以拿到石棺中的圣杯、放葡萄进去呢？</p>
+<p>其实是因为，在我们看来封闭的石棺只是在三维上是封闭的，而在高维空间，例如四位空间中，它不一定是封闭的。而地奥伦纳就可以进出四维空间。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220118204745587.png" alt="高维空间里不一定封闭的石棺"></p>
+</blockquote>
+<p>上面这个故事的意义其实在于，三维空间没有路可以走的地方在高维空间中可能会有路能够进去。那么Error Surface会不会也是这样？</p>
+<p>这样的猜想是合理的，因为我们很轻松就可以给出一个例子。在一维中我们看来的Local Minima在二维中可能只是一个Saddle Point，在一维中我们没有路径能够达到Global Minia但是在二维中我们却依然有路。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220118205011681.png" alt="一维中的Local Minima可能只是二维中的Saddle Point" style="zoom:50%;"></p>
+<p>所以，我们依次类推，而一个崎岖的二维平面上的Local Minia有没有可能是高维平面上的Saddle Point？</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220118205635810.png" alt="崎岖的Loss Surface"></p>
+<p>那么我们在真实的网络训练中，参数是百万千万的，那么我们其实就会想，这么多的参数，会不会真真的Local Minima会比较稀少？</p>
+<p>那么我们自己做实验的结果其实也支持这个假说。我们自己训练一个网络，然后等网络收敛。这个时候我们来看一下此时网络的Hessian Matrix，看看到底是不是Local Minia。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220118211115881.png" alt="真实的实验"></p>
+<p>所以说，上面的图片中，每一个点就表示网络训练一次，直到网络停在了Critical Point</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220118211801282.png" alt="每个点都表示训练一次"></p>
+<p>上面这个图的纵轴表示最终收敛的时候的Training Loss而横轴表示Minimum Ratio。Minia Ratio的定义如下图，我们计算Hessian Matrix的所有特征值，然后用其中正特征值的数量除以所有特征值的数量。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220118211942902.png" alt="Minima Ratio" style="zoom: 50%;"></p>
+<p>因此，横轴实际上反应了Critical Point接近Local Minima的程度，越向右越接近Local Minima。可是在实践中，从来没有见过所有的特征值都是正的的情况，最多只有接近0.6，即60%的Eigen Value是正的。</p>
+<p>因此从经验上来看，我们训练不下去了往往不是因为到了Local Minia，而是卡在了Saddle Point</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220118212328772.png" alt="Empirical Study" style="zoom:50%;"></p>
+<h3 id="2-Batch"><a href="#2-Batch" class="headerlink" title="2. Batch"></a>2. Batch</h3><p>我们在前面第二节课：Introduction to ML的时候讲解了ML的Framework，其实就三步：</p>
+<ol>
+<li>根据我们对任务的认识，设计一个含参的函数</li>
+<li>根据我们对任务的认识，设计一个用于衡量参数表现好坏的损失函数</li>
+<li>接下来通过方法（对于神经网络而言就是Gradient Descent）对函数的参数进行优化，以实现在损失函数上表现良好的参数</li>
+</ol>
+<p>其中，对于参数进行优化的时候，我们说了我们在真真通过Gradient Descent的时候，我们不是计算了所有的example的loss再求Gradient，而是只看一部分example，然后求出来其梯度，然后进行计算，求出Gradient。</p>
+<p>所以我们其实是把数据分成不同个Batch，然后每个Batch进行计算的</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220118213506444.png" alt="分Batch进行计算" style="zoom:50%;"></p>
+<p>我们下面就将对Batch进行一下讨论，然后给出通过Batch来减少由于Gradient下降的方式导致Optimization失败的解决方法</p>
+<h4 id="A-Small-Batch-v-s-Large-Batch"><a href="#A-Small-Batch-v-s-Large-Batch" class="headerlink" title="A. Small Batch v.s. Large Batch"></a>A. Small Batch v.s. Large Batch</h4><p>我们现在假设我们的训练集只有20个example（N=20）。然后我们分别通过大Batch和小Batch两种方式计算一个epoch。</p>
+<ul>
+<li>对于大Batch，我们取Batch Size为20，即Full Batch</li>
+<li>对于小Batch，我们取Batch Size为1</li>
+</ul>
+<p>然后我们对这两种Batch都计算一遍整个Training Set，得到的结果如下</p>
+<p>注意，由于我们是每个Batch之后都会计算一个Gradient然后下降，所以Batch Size为1的时候为了看完整个Training Set，其实已经梯度下降了20次了</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220118214301307.png" alt="Large Batch v.s. Small Batch"></p>
+<p>那么我们其实可以看到，对于Large Batch而言，其非常的稳定，而对于Small Batch而言，他的Gradient非常不稳定，因此我们可以看到右边的Small Batch的Gradient指导下的参数的更新路径，非常的曲折。</p>
+<p>我们如果从Gradient Update的角度来进行比喻，Large Batch Size就是冷却时间比较长，但是威力比较大的技能，而Small Batch Size就是冷却时间比较短，但是威力比较小的技能。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220118214857035.png" alt="对Large/Small Batch的形象的比喻" style="zoom:50%;"></p>
+<h4 id="B-Is-larger-really-slower"><a href="#B-Is-larger-really-slower" class="headerlink" title="B. Is larger really slower?"></a>B. Is larger really slower?</h4><p>我们上面很自然就会想到，如果是Large Batch Size的话，每次我们因为要计算多个example的值，所以速度会比Smaller的Batch计算的要慢。</p>
+<p>那其实，我们如果考虑了GPU的平行计算的话并不一定是越大的Batch计算就越慢。使用英伟达的Tesla V100 GPU对一个Batch进行一个Update需要的时间的实验结果如下图</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220118220651050.png" alt="Tesla V100上的不同Batch Size计算需要的时间"></p>
+<p>那么我们其实可以看到，在Batch小于1000的时候，其实计算一个Batch花费的时间并没有差很多。这其实就是GPU并行计算带来的提升。</p>
+<p>最后，GPU的能力当然不是无穷的，因此，最终当Batch Size大于一定程度之后，计算一个Batch所需要的事件就会很长了。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220118221146150.png" alt="GPU也是有Limitation的"></p>
+<p>我们如果从看完整个epoch来说的话，那情况其实就反过来了，小的GPU需要更长的时间跑完一个epoch而大的GPU则需要一个Batch即可</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220118221524339.png" alt="Large Batch计算完一个Epoch更快" style="zoom:50%;"></p>
+<p>因此我们在综合考虑的情况下，会发现其实我们前面说的两者的区别并不成立。一般来说，总的计算时间会随着Batch的变大而先升高、后降低</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220118221924489.png" alt="大的Batch不一定比小的Batch慢" style="zoom:50%;"></p>
+<h4 id="C-Is-the-larger-the-better"><a href="#C-Is-the-larger-the-better" class="headerlink" title="C. Is the larger the better?"></a>C. Is the larger the better?</h4><p>我们上面说了，对于总时间来说，其实是越大的Batch计算完一个epoch的时间就越短。那么我们考虑到大的Batch的梯度稳定，我们就会想是不是越大的Batch就越好呢？</p>
+<p>其实事情也不是这样的。我们下面做一个实验，针对相同的任务，以相同的网络不同的Batch Size来训练，看看最终收敛到的Accuracy是多少。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220118222504244.png" alt="不同Batch Size的最终结果的实验"></p>
+<p>那么我们其实会发现，大的Batch反而导致最终的精度有所下降。这个就比较神奇了，因为我们用的是同一种Network，这就意味着其实大的Batch和小的Batch训练的网络应该能够表示的Function Set的范围是一样的。可是最终训练得到的结果就是两者不同。</p>
+<p>那么为什么小的Batch会要好一点呢？其实一种原因就是如果用Full Batch，那么遇到Critical Point那就真完蛋了。但是对于Small Batch而言，因为每个Batch计算都会由于example的不完全而引入noise，而这个noise可以冲破这个Critical Point，帮助模型进行更多的探索。所以小的Batch会更好一点。</p>
+<p>不从引入noise的角度来理解的话，另外一种理解就是我们在计算梯度的时候，其实梯度是依赖于输入的，因此输入的不同，梯度就不同，对应的损失函数反向传播到这里的值就不同，因此我们对于其中一个是Critical Point，但是对其他输入的损失函数来说不一定是Critical Point。那么只要这个Critical Point能够更新就行了。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220118231935524.png" alt="第二种理解"></p>
+<h4 id="D-Smaller-Batch-Better-Generation"><a href="#D-Smaller-Batch-Better-Generation" class="headerlink" title="D. Smaller Batch, Better Generation"></a>D. Smaller Batch, Better Generation</h4><p>我们上面给出的小的batch的性能要更好只是训练阶段的效果，那么我们就会想，看看大的batch和小的batch训练得到的模型在测试集上的表示如何？换而言之，就是大的Batch和小的Batch谁的泛化能力更强。</p>
+<p>因此，在进行这个实验的时候就需要排除其他的因素的影响，因此我们需要通过各种方法，例如调参，让大的batch训练得到的网络在测试阶段的性能和小的batch得到的性能近似的时候，然后再在测试数据上测试两种的泛化能力。</p>
+<p>那么实验一共对五种网络在几个不同的数据集上进行了测试，发现哪怕是测试集上的表现差不多一样了，在测试集上的表现依旧是小的Batch得到的模型的泛化能力比较强</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220118233234945.png" alt="小Batch训练的模型泛化能力更强" style="zoom:50%;"></p>
+<p>那么这个现象就非常有意思了，而在上面提出这个现象的文章里的解释是Sharp Minima。</p>
+<p>具体来说，如果想让小Batch训练的模型卡在Local Minima上，那么就需要Loss Function在这个点周围的Loss都比较小，这样的才能够Cover掉noise带来的随机的波动。即小的Batch Size训练的网络最后会卡在flat的Local Minia；而Large Batch Size训练出来的网络就没有这样的性质了，容易卡在Sharp的Local Minima。</p>
+<p>配合图像来说，我们的Loss Surface上可能有不止一个Local Minima能够达到差不多的Training Loss。如下图</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220118233915972.png" alt="不同的Local Minima能达到差不多的性能"></p>
+<p>然而，由于Testing的数据和Training的distribution不同或者说我们sample的时候会存在偏差，所以导致了测试数据的Loss Surface会存在一点点的偏差。</p>
+<p>那么对于左边的Minima，偏差了一点他的Testing Loss差的不多。而右边的Minima则是偏差了一点可能Testing Loss就会差很多。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220118234143048.png" alt="两种不同的Minima的好坏不同"></p>
+<p>而就像前面很多，Flat的Local Minia其实更容易让Small Batch训练得到的网络陷进入。</p>
+<h4 id="E-Summary-of-Batch-Size"><a href="#E-Summary-of-Batch-Size" class="headerlink" title="E. Summary of Batch Size"></a>E. Summary of Batch Size</h4><p>最后我们对不同的大小的Batch Size训练的特点进行一个总结，结果如下</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220118235020935.png" alt="Small Batch v.s. Large Batch" style="zoom:50%;"></p>
+<p>最后是一些进一步讨论Batch Size的文章</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220118235326973.png" alt="进一步讨论的文章"></p>
+<h3 id="3-Momentum"><a href="#3-Momentum" class="headerlink" title="3. Momentum"></a>3. Momentum</h3><p>我们在前面讲过用Hessian Matrix计算Eigen Vector的方式来对抗Saddle Point，但是这个方法其实是没有人会去用的，因为开销太大了，我们通常的处理就是使用动量来处理。</p>
+<p>下面我们就将讲讲Momentum这个技术。</p>
+<h4 id="A-Idea-of-Momentum"><a href="#A-Idea-of-Momentum" class="headerlink" title="A. Idea of Momentum"></a>A. Idea of Momentum</h4><p>动量的这个技术的想法其实是来自于物理。我们想象参数在Loss Surface上的Update其实就可以类比于小球从山顶上滚到山脚下。而对于前面的朴素的Gradient Descent来说，是以跳跃的形式下降的。那么Gradient Descent在Saddle Point就会停下来</p>
+<p>可是现实世界中的球并不会在Saddle Point停下来，这是因为现实世界中的球其实是有动量的</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220119000312188.png" alt="动量帮助真实世界中的球下降" style="zoom: 50%;"></p>
+<p>甚至有可能我们的Momentum足够的大，那么这个球就会冲破Local Minima，到更小的地方去。</p>
+<p>所以类似的，我们就想在真实的Gradient Descent中实现一下Momentum</p>
+<p>我们先看看Vanilla的Gradient Descent是什么样的。正如下图，Vanilla的Gradient Descent是每算一次Gradient就向反方向Update一次。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220119000938835.png" alt="Vanilla Gradient Descent" style="zoom:50%;"></p>
+<p>现在我们考虑Momentum的话，Momentum其实可以理解为物体对上一个状态的记忆，因此类似的，我们在进行当前的更新的时候，可以参考一下上一次的Gradient。具体而言，就是我们在这一次的梯度反方向的基础上，稍微偏向一点上一次的梯度方向。在实践上就是上一次的Gradient减去这一次的Gradient。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220119001300828.png" alt="参考之前的Gradient"></p>
+<p>所以此时，最终整个的更新如下</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220119001546090.png" alt="带有Momentum的更新" style="zoom: 50%;"></p>
+<h3 id="4-Summary"><a href="#4-Summary" class="headerlink" title="4. Summary"></a>4. Summary</h3><p>最后我们对上面的内容进行一下总结</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220120012124802.png" alt="Summary" style="zoom:50%;"></p>
+<h2 id="二、原因二：Rugged-Error-Surface"><a href="#二、原因二：Rugged-Error-Surface" class="headerlink" title="二、原因二：Rugged Error Surface"></a>二、原因二：Rugged Error Surface</h2><p>前面我们讲了Critical Point可能是导致Optimization失败的原因，那其实还有另外一种可能就是由于崎岖的损失曲面造成的。针对由于崎岖的损失曲面造成Optimization（Naive Gradient Descent）失败的问题，我们可以通过不同的梯度下降的策略来解决。因此，我们下面将：</p>
+<ul>
+<li>首先讲解Rugged Loss Surface造成的问题</li>
+<li>然后再讲解处理崎岖的曲面造成的Optimization失败的处理方法，即不同的Optimization</li>
+</ul>
+<h3 id="1-What-happen-when-pptimization-fail？"><a href="#1-What-happen-when-pptimization-fail？" class="headerlink" title="1. What happen when pptimization fail？"></a>1. What happen when pptimization fail？</h3><h4 id="A-It’s-actually-not-critical-points"><a href="#A-It’s-actually-not-critical-points" class="headerlink" title="A. It’s actually not critical points"></a>A. It’s actually not critical points</h4><p>我们前面说当模型在Optimization失败的时候，一种可能的情况是卡在了Critical Point上，这个时候Gradient大部分都是0，因此导致无法训练。</p>
+<p>但是真的是这样吗？我们做一个实验来看看，当网络最后训练不动的时候，我们来看看参数的梯度的平均值</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220119003347952.png" alt="一开始人们认为是卡在Critical Point上" style="zoom:50%;"></p>
+<p>可是Gradient的平均数看下来，每个参数的平均Gradient并不是一直都是零，有的时候还会很大，正如图中圈起来的部分</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220119003605165.png" alt="image-20220119003605165" style="zoom:50%;"></p>
+<p>这个时候Gradient有翻天覆地的变化，但是体现在Loss的Curve上，却一直保持不变。</p>
+<p>那么这就意味着其实并不是卡在了Local Minima上，一定存在别的原因，这个原因就直接给出来了，就是下面这种，参数一直在山谷间跳跃。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220119003947196.png" alt="image-20220119003947196"></p>
+<h3 id="2-Optimizer"><a href="#2-Optimizer" class="headerlink" title="2. Optimizer"></a>2. Optimizer</h3><p>针对Rugged Loss Surface，使用原始的Gradient Descent显然就不行了，我们需要对Gradient进行修改，让他带有策略。<strong>而（不同的/带有策略的）梯度下降算法又称为Optimizer</strong>，</p>
+<p>因此，我们可以通过不同的Optimizer来解决上面的在峡谷中跳跃的问题，下面就将讲讲不同的Optimizer</p>
+<h4 id="A-What’s-the-problem-of-vanilla-Gradient-Descent"><a href="#A-What’s-the-problem-of-vanilla-Gradient-Descent" class="headerlink" title="A. What’s the problem of vanilla Gradient Descent?"></a>A. What’s the problem of vanilla Gradient Descent?</h4><p>我们为了更加直观的理解这个问题，举下面的例子</p>
+<p>这个例子中，我们的Loss Surface是一个凸的椭圆抛物线，叉叉的地方是最小的地方，我们的模型从黑色的地方开始更新</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220119004526912.png" alt="Case Study"></p>
+<p>虽然这个Loss Surface非常的简单，可是即便是这样的Loss Surface用Gradient Descent都不一定能够找到最小值</p>
+<p>我们第一次把学习率设为0.01，结果模型就一直在山谷两边跳来跳去</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220119005056610.png" alt="Learning Rate过大" style="zoom: 67%;"></p>
+<p>那这个时候有人就会说，是我把学习率设的太大了，我们把学习率设小一点肯定就没问题了。可是事实却是，我们把Learning Rate设小了，还是没有办法学习到全局最优。而且到了后面基本上十万次Update都才只能前进一点点。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220119005242974.png" alt="小的Learning Rate也没有用" style="zoom: 67%;"></p>
+<p>我们深究这个问题就会发现，这个其实是由于我们的Learning Rate的锅。</p>
+<p>我们每次把Learning Rate设成一样的参数，导致在梯度小的时候难以前进，而在梯度大的时候有前进的过多，所以我们自然就会想，能不能对Learning Rate进行改进，让他不必每次都是一个常数</p>
+<p>我们自然而然的就会想让Learning Rate在梯度大的地方比较小而在梯度小的地方比较大</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220119010647775.png" alt="可以根据梯度调整的Learning Rate" style="zoom:67%;"></p>
+<p>那么为了实现这样的效果，我们就可以再额外的引入一个在真正进行更新时候控制Learning Rate的参数。这个参数是依赖于模型的参数的，此外还依赖于更新的次数，因此我们的记号中会有表示参数和更新次数的符号，即$\sigma_i^t$。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220119010848038.png" alt="为Learning Rate引入参数" style="zoom:67%;"></p>
+<h4 id="B-Rooted-Mean-Square（RMS）-Adagrad"><a href="#B-Rooted-Mean-Square（RMS）-Adagrad" class="headerlink" title="B. Rooted Mean Square（RMS）/Adagrad"></a>B. Rooted Mean Square（RMS）/Adagrad</h4><p>Rooted Mean Square表示的是方均根。而RMS在这里的意思其实就是让这个参数$\sigma$是梯度的方均根即可，即</p>
+<script type="math/tex; mode=display">
+\sigma^t_i=\sqrt {\frac{1}{1+t}\sum_{i=0}^t(g_i^t)^2}</script><p>上面这个式子展开的话，就是下面这样的</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220119011558380.png" alt="RMS的计算" style="zoom: 33%;"></p>
+<p><strong>RMS被用在了Adagrad这个优化器中</strong></p>
+<p>我们不经会问，为什么RMS可以实现我们上面说的，在梯度大的时候控制前进的step小而在梯度小的时候控制前进的step大？这个其实非常好理解，因为方均根的参数$\sigma$是和梯度的大小成正比的，梯度越大Sigma就越大，除下来就越小，反之亦然</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220119214018994.png" alt="RMS可以在小梯度的地方迈大Step" style="zoom:67%;"></p>
+<h4 id="C-RMSprop"><a href="#C-RMSprop" class="headerlink" title="C. RMSprop"></a>C. RMSprop</h4><p>我们上面将了RMS这个方法，然而RMS这个方法其实有一个问题，就是在计算参数$\sigma$的时候是考虑了之前所有的梯度的。假如说现在在某个方向上更新了1000次，前9000次的得到的梯度都很大，但是到了9000次以后的梯度就很小了。可是如果使用RMS的，9001次及以后都不会更新了，因为计算出来的$\sigma$太大了。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220119221601829.png" alt="同一个方向上的Gradient可能不同" style="zoom:50%;"></p>
+<p>其实造成这个现象的根本原因就在于RMS这个方法是记忆性的，他计算RMS的时候会把所有之前的Gradient拿来用。因此导致了这个问题。所以我们想要进行修改的话其实就让RMS遗忘掉之前的梯度就行了。具体实现遗忘的方法有很多，可以固定只使用前面的几项，也可以给前面的项不同的权重等等。</p>
+<p>RMSprop就是一种实现遗忘的方法。</p>
+<blockquote>
+<p><strong>RMSprop的一些故事</strong></p>
+<p>其实RMSprop这个方法有一点传奇，因为这个方法是找不到论文的。在很多年以前，大概是十年前，2010年左右，Hinton在Coursera上开过一门Deep Learning的课，在这门课上Hinton讲解了RMSprop这个方法，所以大家要cite的话，其实都是cite那个视频的链接。</p>
+</blockquote>
+<p>RMSprop中实现遗忘的方法就是我们自己设置一个记忆率，决定要把之前的梯度记忆多少到当前的梯度里来</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220119223005686.png" alt="RMSprop的计算" style="zoom:50%;"></p>
+<p>使用RMSprop的好处之一，就是可以实现上面说的，根据局部的梯度来动态调整。<strong>RMSprop算法就是RMSprop这个优化器实现的</strong></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220119230431379.png" alt="RMSprop可以动态的调整Step的大小" style="zoom:50%;"></p>
+<h4 id="D-Adam：RMSprop-Momentum"><a href="#D-Adam：RMSprop-Momentum" class="headerlink" title="D. Adam：RMSprop + Momentum"></a>D. Adam：RMSprop + Momentum</h4><p>今天其实最常用的Optimizer并不是RMSprop，而是Adam。Adam优化器其实就是RMSprop+Momentum。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220120001959299.png" alt="Adam的伪算法" style="zoom: 67%;"></p>
+<h3 id="3-Learning-Rate-Scheduling"><a href="#3-Learning-Rate-Scheduling" class="headerlink" title="3. Learning Rate Scheduling"></a>3. Learning Rate Scheduling</h3><p>我们上面介绍了崎岖的曲面导致原始的梯度下降其实是不行的，因此我们又讲解了其他对梯度下降进行修改了的算法，即其他的Optimizer。</p>
+<p>但是其实上面的Optimizer本身是有问题的，我们下面会首先通过一个案例来进行讲解，然后再讲解处理这个问题的方法，即Learning Rate Schedule</p>
+<h4 id="A-What’s-the-problem-of-Optimizers"><a href="#A-What’s-the-problem-of-Optimizers" class="headerlink" title="A. What’s the problem of Optimizers?"></a>A. What’s the problem of Optimizers?</h4><p>我们现在随便从上面的三个优化器取出来一个，因为这个问题对三个Optimizer是共性的，和遗忘、动量都无关，因此我们为了简单起见，就以Adagrad进行讲解</p>
+<p>还是上面的例子，我们这次试验一下Adagrad的表现</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220120004537809.png" alt="先前过大的学习率和过小的学习率的实验"></p>
+<p>我们进行时候之后发现，在开始阶段确实Adagrad避免了Vanilla的Gradient Descent的结果，可是到了后面，就会出现<strong>暴走</strong>。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220120004732601.png" alt="自适应学习率会有暴走"></p>
+<p>那么这个暴走发生的原因其实是，我们在Optimizer帮助模型完成了竖着走之后，开始横着走了一段时间，在这段时间里竖向的梯度都很小，因此在过了一段时间之后，当更新的次数一多（t一大），那么就导致横向的梯度就很小，所以sigma就会很小。那么就会在这些方向上除完以后，梯度直接起飞。</p>
+<p>不过由于梯度下降的原因，虽然横向的梯度起飞导致Loss爆炸了，我们等一会之后其实模型还是会回到正轨，继续向左走，然后再走了一段时间之后继续暴走（同样的原因）。然后如此往复，直到Local Minima（当然如果假设参数的取值只有这些的话，那其实就是Global Minima）。</p>
+<p>所以我们其实会发现，使用这些自适应的Optimizer的一个问题就是，我们如果保持在某些方向上的梯度一直都很小，那么在累积一段时间之后就会暴走。</p>
+<p>而暴走虽然进行了更多的exploration，但是却浪费了很多的Update。这就是自适应的Optimizer的问题。</p>
+<h4 id="B-Learning-Rate-Decay"><a href="#B-Learning-Rate-Decay" class="headerlink" title="B. Learning Rate Decay"></a>B. Learning Rate Decay</h4><p>我们发现，自适应的Optimizer造成的问题其实是由于$\sigma$在某些情况下会过小，而这个时候$\eta$保持不变，所以除下来的值就很大了。</p>
+<p>那么为此，我们想要减轻这个问题，就让$\sigma$变小的同时$\eta$也变小，那么就实现了减小震荡的范围</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220120005926061.png" alt="Learning Rate Decay" style="zoom:50%;"></p>
+<p>因为我们这个Learning Rate Scheduling的方式就是让学习率不断减小，因此这种Learning Rate Scheduling的方法其实又称为Learning Rate Decay。</p>
+<p>Learning Rate Decay的效果如下，可以看得出来非常不错</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220120010136747.png" alt="Learning Rate Decay的效果" style="zoom:50%;"></p>
+<h4 id="C-Warm-Up"><a href="#C-Warm-Up" class="headerlink" title="C. Warm Up"></a>C. Warm Up</h4><p>我们说Learning Rate Decay，就是说要求学习率随着时间下降。而Warm Up则是说要首先从0开始增加学习率然后再减小学习率</p>
+<p>这个想法一开始听着可能匪夷所思，但其实也是合理的，因为在初始阶段，一开始求得的梯度是有非常大的偏差的。因为一开始随机初始化的参数表现肯定烂，然而我们又是一个Batch一个Batch的进行训练的，所以一开始计算的时候，模型本身Loss就大，大了还不算什么，我们的Batch又会引入偏差，所以就导致一开始的梯度会有问题。</p>
+<p>而在进行了一段时间的学习之后，$\sigma$所表达的过往的梯度其实以及比较平均了，因此这种Variance就会被Cover掉，所以后面给大的权重。而一开始的阶段给小的权重其实就是为了让模型先在Loss Surface上进行一下探索，在探索的比较准确之后再开始迈大步</p>
+<p>不过上面的这个说法只是一种可能的解释，目前对Warm Up还并没有一个统一的、公认的解释。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220120010406958.png" alt="Warm Up" style="zoom:50%;"></p>
+<p>而类似于Warm Up这样的Learning Rate Scheduling的方法其实并不是最近才出现的，在远古时代就已经出现了</p>
+<p>例如何凯明2015年的ResNet就已经Reference到了</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220120011142082.png" alt="25年就提到了 Warm Up了" style="zoom:50%;"></p>
+<p>类似的，其实在Transformer里面也用了Warm Up，只不过是以数学形式表达的形式，这个函数画出来就是Warm Up，先升高后减小</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220120011333984.png" alt="Transformer中也用了Warm Up" style="zoom:50%;"></p>
+<p>关于Warm Up的更多内容，参考RAdam</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220120011835129.png" alt="RAdam" style="zoom:50%;"></p>
+<h4 id="4-Summary-of-Optimizer"><a href="#4-Summary-of-Optimizer" class="headerlink" title="4. Summary of Optimizer"></a>4. Summary of Optimizer</h4><p>最后我们对Optimizer进行一下总结，我们对原始的梯度下降从两个不同的角度对他进行了提升：方向和幅度</p>
+<p>然后针对幅度可能导致的新的问题，我们又讲解了处理这个问题的Optimizer Warm Up</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220120011931140.png" alt="Summary of Optimizer" style="zoom:50%;"></p>
+<p>最后就是更多关于Optimizer的内容</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220120012437250.png" alt="More about Optimizer" style="zoom:50%;"></p>
+<h2 id="三、Batch-Normalization"><a href="#三、Batch-Normalization" class="headerlink" title="三、Batch Normalization"></a>三、Batch Normalization</h2><p>上面我们说到，当Loss Surface比较崎岖的时候其实就会非常难Train。为此，我们会利用不同的Optimizer和Learning Rate Scheduling来处理这个问题</p>
+<p>然而，针对崎岖的Loss Surface带来的问题，另外一种处理思路就是，我们其实没有必要为了陡峭的山峰来设计让模型能够来回绕路的算法，我们能不能用神罗天征直接把山炸平</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220120084218880.png" alt="神罗天征把崎岖的Loss Surface炸平" style="zoom: 67%;"></p>
+<p>答案当然是可以的，通过Batch Normalization就可以实现这个效果</p>
+<h3 id="1-Rethinking-rugged-loss-surface"><a href="#1-Rethinking-rugged-loss-surface" class="headerlink" title="1. Rethinking rugged loss surface"></a>1. Rethinking rugged loss surface</h3><p>我们在上面讲Optimizer的时候说过，Vanilla Gradient Descent其实Optimization的能力是有限的，即便是一些简单的Error Surface都不一定能够Train好</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220120085350701.png" alt="简单的碗型的Loss Surface都学不好" style="zoom:50%;"></p>
+<p>而原始的Gradient Descent在开始变横向移动之后就很难走动了。针对这个问题，我们上面是对Gradient Descent的方法进行了修改。导致这个问题的根本原因是在Loss Surface上，一个方向梯度大，一个方向梯度小。</p>
+<p>那么我们就不禁要问问，为什么会导致上面这个问题？</p>
+<p>我们从模型入手，产生上面这个Error Surface的模型其实非常简单，就是下面这个模型</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220120085836885.png" alt="产生上面的Loss Surface的模型" style="zoom:50%;"></p>
+<p>而梯度则衡量的是输入的变化对输出的影响，因此为了看看梯度，我们给Loss Surface的两个变量$w_1$和$w_2$进行一下适当的改变</p>
+<p>我们现在给$w_1$增加一个$\Delta w_1$，那么$\Delta w_1$对$L$的影响是首先对$y$产生一个影响$\Delta y$，然后$\Delta y$又对$e$产生一个影响$\Delta e$，最后$\Delta e$再对$L$产生影响$\Delta L$。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220120090109987.png" alt="变化w1对L产生影响的过程" style="zoom:50%;"></p>
+<p>那么在什么时候，$w_1$的变化对$L$的影响（梯度）会很小呢？那么只有当和$w_1$相乘的$x_1$比较小的时候，这个影响才会很小。</p>
+<p>原因的解释当然可以从数学的角度出发，给出来上游梯度和局部梯度。不过我们不准备那样讲解，因为太抽象了。</p>
+<p>我们想，如果$\Delta w_1$保持不变的话，那么如果$x_1$比较小，乘下来的$y’$就等于</p>
+<script type="math/tex; mode=display">
+y'=y+\Delta y = b + w_2x_2 + (w_1+\Delta w_1)x_1</script><p>对应的，</p>
+<script type="math/tex; mode=display">
+\Delta y = \Delta w_1x_1</script><p>因此，在保持$\Delta w_1$不变的情况下，让x$_1$变小就可以对应的，让$\Delta y$变小。同理，这个反应是链式的，因此最终$\Delta L$也会变小</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220120090806394.png" alt="让x1变小就可以让L的变化变小" style="zoom: 50%;"></p>
+<p>所以这个时候就会出现Loss Surface中在水平方向梯度很小的情况，也就是Loss Surface非常平滑</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220120091503623.png" alt="x1小导致w1方向上Loss Surface平滑" style="zoom: 80%;"></p>
+<p>同理，如果$x_2$很大，那么就会导致在$w_2$方向上的梯度非常陡峭</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220120091823130.png" alt="x2很大导致w2方向上梯度很大" style="zoom:80%;"></p>
+<p>因此，我们就会想，如果让一个input里不同的feature具有同样的range的话，我们的Error Surface是不是就会平坦很多？</p>
+<p>换而言之，我们可以通过对输入输出的范围进行修改，即通过归一化的方式让输入不同的feature的范围到一起去，那么我们的Error Surface就会变的非常平坦，而这个操作其实就是Feature Normalization</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220120092305189.png" alt="Error Surface变得非常平坦" style="zoom: 67%;"></p>
+<h3 id="2-Feature-Normalization-For-Single-Layer"><a href="#2-Feature-Normalization-For-Single-Layer" class="headerlink" title="2. Feature Normalization (For Single Layer)"></a>2. Feature Normalization (For Single Layer)</h3><p>我们基于前面Rethinking得到的结果，下面就将更加具体的讲讲Feature Normalization的方法</p>
+<p>假设我们现在有下面这么多的训练数据</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220120092803446.png" alt="所有的训练数据" style="zoom:50%;"></p>
+<p>上图中每一个橘黄色的圆圈表示一个Feature。那么Feature Normalization的步骤是首先把不同个example的同一个Dimension（假设是第$i$个Dimension）的Feature取出来计算他的mean，得到$m_i$。然后我们计算这些Feature的Standard Deviation得到$\sigma_i$</p>
+<p>然后我们对其中每一个example的这一个Dimension的Feature进行下面的计算，即减去均值除以标准差。最后就得到了Normalize之后的结果</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220120093624256.png" alt="Normalize之后的结果"></p>
+<p>这样，当我们在昨晚Feature Normalization之后，对于每一个Feature，他的Mean是0而Variance是1。这样其实就会比较好Train</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220120094103094.png" alt="Normalization之后的结果" style="zoom: 80%;"></p>
+<h3 id="3-Normalization-For-Deep-Learning"><a href="#3-Normalization-For-Deep-Learning" class="headerlink" title="3. Normalization For Deep Learning"></a>3. Normalization For Deep Learning</h3><p>我们上面讲解的Feature Normalization其实是针对一层的模型，我们下面来讨论一下在深度网络中Feature Normalization是怎么实现的</p>
+<p>首先对于第一层输入层来说，我们可以直接对每个输入数据$x$的每一个Feature 进行Normalization之后得到$\tilde x$，然后后面接$W^1$，Activation Function得到这一层的输出，然后后面继续想接几层就看我们自己。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220120094351483.png" alt="再输入层对原始数据进行Normalization" style="zoom:33%;"></p>
+<p>可是，我们仔细想想的话，就会发现有一个问题，就是对于第二层$W^2$来说，它的输入是a。而我们知道给向量（每个example就是一个向量）乘以矩阵$W^1$其实就是对这个向量进行线性变换。在进行线性变换之后，输出的$z$的值不一定是均值为0，标准差为1的了。然后通过了一个非线性的激活函数，那么就更不知道了。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220120095229075.png" alt="W的线性变换作用导致第二层非常难Train" style="zoom: 33%;"></p>
+<p>因此在进过$W^1$进行变换之后，进入到下一个层的$W^2$之前，我们还需要再进行一次Feature Normalization</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220120101831956.png" alt="在进入下一层前还需要进行一次Feature Normalization"></p>
+<p>而进行Feature Normalization的位置的话在激活函数前还是激活函数后其实都可以，因为在实践上两者是差不多的。我们这里的讲解以对z进行Feature Normalization为例，具体的计算步骤如下</p>
+<p>首先计算出来一个均值向量和方差向量</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220120102643131.png" alt="对z进行Feature Normalization"></p>
+<p>然后让每个example和均值向量相减之后除以方差向量（按位计算）</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220120102853462.png" alt="计算得到第二层的输入"></p>
+<p>然后继续把结果丢给后面的网络即可</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220120110132022.png" alt="继续后面的计算"></p>
+<p>然而，正是因为我们在做Normalization的过程中需要计算均值和方差，因此我们现在网络其实一次是要吃一批example进去的。所以站着输入的角度上来看，现在的Network变大了，成为了一个同时接受N的输入的大网络，这个大网络中不同的输入是共享同一套参数的</p>
+<p>从另外一个角度来理解为什么成了一个大网络的话，我们如果给$\tilde x^1$一个扰动的话，那么对应的$z^1$就会产生一个$\Delta$，进而会影响$\mu$和$\sigma$，最后反过来，影响所有的$\tilde z^i$。所以这一批输入其实是作为一个整体，只要有一个变化其他的全部都会变化，因此我们就会看到，网络变成了一个非常大的网络</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220120112745028.png" alt="网络现在一次要吃一个Batch进去"></p>
+<h3 id="4-Batch-Normalization"><a href="#4-Batch-Normalization" class="headerlink" title="4. Batch Normalization"></a>4. Batch Normalization</h3><p>我们需要计算均值和方差，因此我们就需要把example读入到内存中去，然而由于GPU的显存通常是有限的，因此一次只能读取一些example，即读入一个batch。而我们每次也就是对这个batch计算均值和方差。</p>
+<p>所以我们上面讲的Normalization这招其实叫做Batch Normalization</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220120112848690.png" alt="Batch Normalization" style="zoom:50%;"></p>
+<p>此外，关于Batch Normalization有一个问题就是我们在实践中其实还是让计算得到的$\tilde z$和一个向量$\gamma$进行哈达玛积，然后再加上另外一个向量$\beta$。</p>
+<p>这样做的原因就是我们进行Batch Normalization的话其实是强制让输入的均值和方差变成了0和1，对应的，这就有可能给网络的训练带来限制，因此我们乘以一个$\gamma$再加上一个$\beta$，让网络自己去学一下这个需要的均值和方差    </p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220120113247935.png" alt="让网络自己去学均值和方差" style="zoom:50%;"></p>
+<h3 id="5-Batch-Normalization-for-Testing"><a href="#5-Batch-Normalization-for-Testing" class="headerlink" title="5. Batch Normalization for Testing"></a>5. Batch Normalization for Testing</h3><p>接下来我们就要讲一讲在测试阶段的Batch Normalization了</p>
+<p>Batch Normalization在Testing的时候有一个问题。就是我们上面说的，因为要计算均值，所以我们是需要有一个Batch的数据才能计算。</p>
+<p>可是在测试场景中，我们其实是没有办法一次获得一个Batch的，我们一次获得一个Batch的测试数据只是在测试集的基础上的。当模型真正上线之后数据往往是流式的</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220120114026177.png" alt="测试时候Batch Normalization是有问题的" style="zoom:50%;"></p>
+<p>因此在实践中是不能用$\mu$和$\sigma$的，得用别的计算方法来近似这里的均值和方差。而在Pytorch中，均值和方差是用Moving Average来估计的。具体来说，就是在训练的时候每一个Batch都会计算自己的平均数和方差。然后利用每一个Batch的平均数和方差都会更新移动平均数。$p$是一个超参数，在Pytorch中取0.1</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220120133907237.png" alt="计算移动平均数" style="zoom: 33%;"></p>
+<p>我们在计算了移动平均数之后，在测试阶段，我们就用移动平均数来代替均值和方差</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220120142240505.png" alt="移动平均数来代表均值和方差" style="zoom: 33%;"></p>
+<h3 id="6-Effectiveness-of-Batch-Normalization"><a href="#6-Effectiveness-of-Batch-Normalization" class="headerlink" title="6. Effectiveness of Batch Normalization"></a>6. Effectiveness of Batch Normalization</h3><p>最后是关于Batch Normalization的效果。下面是在原论文中的图片</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220120143337334.png" alt="原论文中的实验图" style="zoom: 67%;"></p>
+<p>这个图横轴表示更新次数，纵轴表示accuracy。图例中的Inception是Baseline的模型，而BN表示使用了BN，$\times*$表示学习率放大几倍，蓝菱形表示达到Baseline需要的更新的次数。</p>
+<p>那么从图里其实可以看出来，要达到相同的准确度，使用了Batch Normalization之后需要更新的次数远少于没有用Batch Normalization的次数</p>
+<p>然而关于放大了学习率反而导致性能更好，论文里作者说他们也没有搞懂为什么，不过对于DL来说有的时候就是会有这种怪怪的、不知道该怎么解释的现象。但是因为实验的严谨性，因此在论文里还是要呈现原始的数据</p>
+<h3 id="7-Internal-Covariate-Shift"><a href="#7-Internal-Covariate-Shift" class="headerlink" title="7. Internal Covariate Shift?"></a>7. Internal Covariate Shift?</h3><p>Covariate Shift这个概念本来说的是测试集的数据分布和训练集的数据分布不同，这种分布的漂移导致了模型的Generalization能力不行的问题。这个概念其实最早是出现在Machine Learning中的。</p>
+<p>而对于Batch Normalization来说，原作者认为Batch Normalization解决了模型内部的数据漂移问题，即Internal Covariate Shift。</p>
+<p>Internal Covariate Shift指的是下面图中的这个问题，就是一开始针对一批example，$A$对$x$计算得到了一个$a$，并且稍后通过反向传播得到了一个Gradient。同理，$B$对$a$计算得到了一个$b$然后计算得到了一个Gradient。</p>
+<p>可是问题是，现在在利用从第一个$x$上计算得到的Gradient去更新$A$和$B$之后，$A$和$B$都是更加适应了第一批example。因此针对第二批$x$，通过$A’$之后计算得到的是$a’$，因为第一次层变了，因此第二层的输入的分布也变了，可是第二层的Gradient适应的是$a$，即原先的数据分布而非更新后新的分布，因此$B$又会耗费大量的开销去适应由$A$的更新所导致的中间的Feature Map的漂移</p>
+<p>因此在Batch Normalization的论文中，原作者创造了一个词Internal Covariate Shift来描述这个现象</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220120151239114.png" alt="Internal Covariate Shift" style="zoom: 33%;"></p>
+<p>而Batch Normalization能够让前面的层变化了之后的输出还是保持类似的分布，因此能够加快训练。这个就是原作者认为的Batch Normalization的作用。</p>
+<p>那Batch Normalization效果好真的是因为这样的吗？答案是否定的，因为后面有一篇文章，设计了各种各样的实验来反驳原作者认为的解释</p>
+<p>首先，这篇文章首先说明了Internal Covariate Shift不一定是Training Neural Network时候的一个问题，然后又说了Batch Normalization比较好不一定是Internal Covariate Shift的问题。</p>
+<p>具体来说，这个文章里研究了不同的step下$a$的分布的变化，发现分布的变化其实并不大。然后又通过巧妙地构造，让$a$的分布变化很大，发现分布差别很大对Training并没有很大的伤害。最后又研究了一下分布差别很大的$a$和$a’$，发现方向都差不多。</p>
+<p>所以这篇文章最后就打脸了原作者的这个观点，指出Internal Covariate Shift不一定是Train网络时候的主要问题，Batch Normalization也不一定是Batch Normalization解决的问题</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220120152907190.png" alt="打脸了Internal Covariate Shift的文章"></p>
+<p>最后，打脸原文的文章中从数学上和理论上给出了证明，Batch Normalization是通过改变了损失曲边，让其变得更加光滑从而加速了训练。并且从平滑损失曲面来说，作者还设计了其他的几种方法。并且发现这些方法的表现和Batch Normalization差不多，有的表现甚至更好。</p>
+<p>因此在最后作者感叹说Batch Normalization的巨大的效果的的发现是非常偶然（serendipitous）的，就像发现青霉素一样</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220120153835534.png" alt="image-20220120153835534" style="zoom: 33%;"></p>
+<h3 id="8-More-About-Batch-Normalization"><a href="#8-More-About-Batch-Normalization" class="headerlink" title="8. More About Batch Normalization"></a>8. More About Batch Normalization</h3><p>最后，关于Normalization的方法其实有一大把，不同的Batch Normalization的方法的效果也不同。具体参考这些文章。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220120154428580.png" alt="其他的Normalization方法"></p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Jack Wang</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://jackwang0107.github.io/2022/01/17/li-hong-yi-ml2021-spring-4-problem-in-training/">https://jackwang0107.github.io/2022/01/17/li-hong-yi-ml2021-spring-4-problem-in-training/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Jack Wang</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/Deep-Learning/">
+                                    <span class="chip bg-color">Deep Learning</span>
+                                </a>
+                            
+                                <a href="/tags/Hungyi-Li/">
+                                    <span class="chip bg-color">Hungyi Li</span>
+                                </a>
+                            
+                                <a href="/tags/Machine-Learning/">
+                                    <span class="chip bg-color">Machine Learning</span>
+                                </a>
+                            
+                                <a href="/tags/Neural-Network/">
+                                    <span class="chip bg-color">Neural Network</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.png" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2022/01/19/research-proposal-workshops-1/">
+                    <div class="card-image">
+                        
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220129005211245.png" class="responsive-img" alt="Research Skills Workshop 1">
+                        
+                        <span class="card-title">Research Skills Workshop 1</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            本文是CCSIT Research Skills Workshop 1的笔记。为了保护版权，本文仅用作我的复习只用，因此并不会向所有人公开,抱歉了哈~
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-01-20
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Cambridge-CCISTC-AI-Research-Programme-2022-Winter/" class="post-category">
+                                    Cambridge CCISTC AI Research Programme 2022 Winter
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Research-Proposal-Workshops/">
+                        <span class="chip bg-color">Research Proposal Workshops</span>
+                    </a>
+                    
+                    <a href="/tags/CCISTC/">
+                        <span class="chip bg-color">CCISTC</span>
+                    </a>
+                    
+                    <a href="/tags/University-of-Cambridge/">
+                        <span class="chip bg-color">University of Cambridge</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/01/16/latex-ji-chu-overleaf-ben-di-an-zhuang/">
+                    <div class="card-image">
+                        
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/screenshot.png" class="responsive-img" alt="Latex基础：Overleaf本地安装">
+                        
+                        <span class="card-title">Latex基础：Overleaf本地安装</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            本文主要介绍了如何在本地搭建一个Overleaf写作环境
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-01-17
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Latex%E5%9F%BA%E7%A1%80/" class="post-category">
+                                    Latex基础
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Latex/">
+                        <span class="chip bg-color">Latex</span>
+                    </a>
+                    
+                    <a href="/tags/Overleaf/">
+                        <span class="chip bg-color">Overleaf</span>
+                    </a>
+                    
+                    <a href="/tags/paper-writing/">
+                        <span class="chip bg-color">paper writing</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: JackWang&#39;s Blog<br />'
+            + '文章作者: Jack Wang<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    });
+</script>
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2021-2022</span>
+            
+            <a href="/about" target="_blank">Jack Wang</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">297k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+                <span id="sitetime"> Loading ...</span>
+                <script>
+                    var calcSiteTime = function () {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2021";
+                        var startMonth = "11";
+                        var startDate = "12";
+                        var startHour = "0";
+                        var startMinute = "0";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+
+                        // 区分是否有年份.
+                        var language = 'zh-CN';
+                        if (startYear === String(todayYear)) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            var daysTip = 'This site has been running for ' + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                daysTip = '本站已运行 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                daysTip = '本站已運行 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = daysTip;
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            var yearsAndDaysTip = 'This site has been running for ' + diffYears + ' years and '
+                                + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                yearsAndDaysTip = '本站已运行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                yearsAndDaysTip = '本站已運行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+                        }
+                    }
+
+                    calcSiteTime();
+                </script>
+            
+            <br>
+            
+                <span id="icp"><img src="/medias/icp.png"
+                                    style="vertical-align: text-bottom;"/>
+                <a href="https://beian.miit.gov.cn" target="_blank">陕ICP备2021014294号-1</a>
+            </span>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+    <a href="mailto:2232123545@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2232123545" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2232123545" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+        
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/sakura.js"><\/script>');
+            }
+        </script>
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

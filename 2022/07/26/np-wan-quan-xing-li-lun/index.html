@@ -1,0 +1,1594 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="NP完全性理论, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
+    <meta name="description" content="本文主要介绍了NP完全性理论">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>NP完全性理论 | JackWang&#39;s Blog</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.2">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+
+   <style>
+    body{
+       background-image: url(https://cdn.jsdelivr.net/gh/Tokisaki-Galaxy/res/site/medias/background.jpg);
+       background-repeat:no-repeat;
+       background-size: 100% 100%;
+       background-attachment:fixed;
+    }
+</style>
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">JackWang&#39;s Blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-book-reader" style="zoom: 0.6;"></i>
+      
+      <span>博客</span>
+      <i class="fas fa-chevron-down" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/tags">
+          
+          <i class="fas fa-tags" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按标签归类文章</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories">
+          
+          <i class="fas fa-bookmark" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按目录归类文章</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/archives">
+          
+          <i class="fas fa-archive" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按日期分类文章</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">JackWang&#39;s Blog</div>
+        <div class="logo-desc">
+            
+            JackWang的个人博客
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-book-reader"></i>
+			
+			博客
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>
+
+                  <a href="/tags " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-tags" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按标签归类文章</    span>
+
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/categories " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-bookmark" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按目录归类文章</    span>
+
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/archives " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-archive" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按日期分类文章</    span>
+
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('抱歉，这篇文章并不想让所有人都看到，请输入授权密码观看')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220728153924152.png')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">NP完全性理论</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/NP/">
+                                <span class="chip bg-color">NP</span>
+                            </a>
+                        
+                            <a href="/tags/NP-Hard/">
+                                <span class="chip bg-color">NP Hard</span>
+                            </a>
+                        
+                            <a href="/tags/NP-Complete/">
+                                <span class="chip bg-color">NP Complete</span>
+                            </a>
+                        
+                            <a href="/tags/Algorithm/">
+                                <span class="chip bg-color">Algorithm</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" class="post-category">
+                                数据结构与算法
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2022-07-27
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2022-09-28
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    5.3k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    19 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220728153924152.png" alt="NP完全性理论"></p>
+<h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h2><p>算法对于一个计算机系的学术来说，是最终的课程之一，也是程序员必修内功之一。而本文其实是我在学习算法设计这门课的时候<code>NP完全性理论</code>部分的笔记。因为我自己真心觉得我这个笔记做得不错，所以特地将<code>NP完全性理论</code>部分的笔记整理出来，写成博客，以飨读者。</p>
+<h2 id="2-NP完全性理论-——-基础"><a href="#2-NP完全性理论-——-基础" class="headerlink" title="2. NP完全性理论 —— 基础"></a>2. NP完全性理论 —— 基础</h2><blockquote>
+<p>学一个东西，需要明白它是干什么用的</p>
+</blockquote>
+<p><strong><code>NP完全性理论</code>是一个研究问题类别的理论</strong>。和回溯法、动态规划等研究具体某一类问题的求解不同，<strong><code>NP完全性理论</code>是研究问题之间关系的理论</strong>。</p>
+<p>因此，明白这个道理之后，我们就知道，<strong><code>NP完全性理论</code>其实并不是帮助我们去求解某一类问题的，而是帮助我们去认识问题的</strong>。</p>
+<h3 id="A-Lead-in：多项式时间问题和指数时间问题"><a href="#A-Lead-in：多项式时间问题和指数时间问题" class="headerlink" title="A. Lead-in：多项式时间问题和指数时间问题"></a>A. Lead-in：多项式时间问题和指数时间问题</h3><p>时间复杂度有很多种，每一个问题都可以有一个求解算法，而每一个求解算法都有时间复杂度。因此我们如果用某一个问题的最优算法来表征这个问题，那么就可以说这个问题是<code>xxxx（时间复杂度）</code>问题。例如对于<code>0/1背包问题</code>，我们最好的求解算法的时间复杂度是$\mathcal{O}(2^n)$，那我们就可以称<code>0/1背包问题</code>为$\mathcal{O}(2^n)$问题。</p>
+<p>那么根据时间复杂度来进行划分，我们就可以把问题分成两大类：<code>多项式时间问题（Polynomial Time Problem）</code>和<code>指数时间问题（Exponential Time Problem）</code>。</p>
+<blockquote>
+<p>后文中会把中文的<code>多项式时间问题</code>和<code>指数时间问题</code>与英文简称<code>Polynomial</code>和<code>Exponential</code>混用。</p>
+</blockquote>
+<p>常见的<code>多项式时间问题</code>和<code>指数时间问题</code>有：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">多项式时间问题</th>
+<th style="text-align:center">多项式时间问题</th>
+<th style="text-align:center">指数时间问题</th>
+<th style="text-align:center">指数时间问题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><strong>算法名称</strong></td>
+<td style="text-align:center"><strong>时间复杂度</strong></td>
+<td style="text-align:center"><strong>算法名称</strong></td>
+<td style="text-align:center"><strong>时间复杂度</strong></td>
+</tr>
+<tr>
+<td style="text-align:center">Linear Search</td>
+<td style="text-align:center">$\mathcal{O}(n)$</td>
+<td style="text-align:center">0/1 Knapsack</td>
+<td style="text-align:center">$\mathcal{O}(2^n)$</td>
+</tr>
+<tr>
+<td style="text-align:center">Binary Search</td>
+<td style="text-align:center">$\mathcal{O}(\log n)$</td>
+<td style="text-align:center">Traveling SP</td>
+<td style="text-align:center">$\mathcal{O}(2^n)$</td>
+</tr>
+<tr>
+<td style="text-align:center">Intersection Sort</td>
+<td style="text-align:center">$\mathcal{O}(n^2)$</td>
+<td style="text-align:center">Sum of Subset</td>
+<td style="text-align:center">$\mathcal{O}(2^n)$</td>
+</tr>
+<tr>
+<td style="text-align:center">Merge Sort</td>
+<td style="text-align:center">$\mathcal{O}(n\log n)$</td>
+<td style="text-align:center">Graph Coloring</td>
+<td style="text-align:center">$\mathcal{O}(2^n)$</td>
+</tr>
+<tr>
+<td style="text-align:center">Matrix Manipulation</td>
+<td style="text-align:center">$\mathcal{O}(n^3)$</td>
+<td style="text-align:center">Hamilton Cycle</td>
+<td style="text-align:center">$\mathcal{O}(2^n)$</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>那还有一个问题就是，为什么要分为<code>多项式时间问题</code>和<code>指数时间问题</code>呢？其实是因为<strong>这两类问题本质上存在不同，多项时间的问题是简单问题/易问题，而指数时间是难问题</strong>。类比人类做数学题的样子，如果我们求解一个问题花的时间非常长，那么这个问题就非常难。如果花的时间短，那么这个问题就是一个简单问题。</p>
+<p>例如，假设某个<code>问题A</code>的最优算法时间复杂度是$\mathcal{O}(n^{100})$，<code>问题B</code>的最优算法的时间复杂度是$\mathcal{O}(2^n)$，那么虽然一开始问题规模比较小的时候是<code>问题A</code>更难，但是当问题规模一定大了之后，即$n$一定大了之后，<code>问题B</code>更难。因此，最终/从根本上来说，<code>问题B</code>更难。</p>
+<p>所以我们才说，<code>多项式时间问题</code>是简单问题，而<code>指数时间问题</code>是难问题。</p>
+<h3 id="B-NP完全性理论的idea"><a href="#B-NP完全性理论的idea" class="headerlink" title="B. NP完全性理论的idea"></a>B. NP完全性理论的idea</h3><p>NP完全性理论起源于两个idea：</p>
+<ul>
+<li>能否为所有的Exponential的问题进行分类？更详细的说，目前有很多问题已知的最好的求解算法是Exponential Time的，那么对于这些问题，他们之间是否存在相似性？进一步，我们能否利用这种相似性来对所有的Exponential Time的问题进行划分，这样的话对于划分后的每一组问题，只需要解决组内的一个问题，然后稍加变形就可以解决这一组的所有问题。</li>
+<li>如果不能为一个目前最好的算法是Exponential Time的问题写出Deterministic的Polynomial Solution，那么能否为其写出一个Non-Deterministic的Polynomial Solution？</li>
+</ul>
+<p>而整个NP完全性理论，就是从这两个idea中发展出来的。从这两个idea出发，就可以构建出整个NP完全性理论</p>
+<h3 id="C-确定性算法（Deterministic）与非确定性算法（Non-Deterministic）"><a href="#C-确定性算法（Deterministic）与非确定性算法（Non-Deterministic）" class="headerlink" title="C. 确定性算法（Deterministic）与非确定性算法（Non-Deterministic）"></a>C. 确定性算法（Deterministic）与非确定性算法（Non-Deterministic）</h3><p>上面我们在说NP完全性理论的时候说到了确定性算法和非确定性算法，那么这两个术语的意思是什么呢？</p>
+<h4 id="确定性算法"><a href="#确定性算法" class="headerlink" title="确定性算法"></a>确定性算法</h4><p>所谓<strong>确定性算法，指的就是由确定性的算法语句组成的算法</strong>。而所谓<strong>确定性语句，指的就是我们明白其内部流程（对于函数）的语句</strong>。</p>
+<p>简单的理解确定性算法，就是我们知道这个算法的实现，写不住来只是因为单纯的码力问题。</p>
+<p>举一个确定性算法的例子，下面这个算法是利用<code>OrbSLAM2</code>算法对周围环境建立三维地图的程序。</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">// 需要opencv</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;opencv2/opencv.hpp></span></span>
+
+<span class="token comment" spellcheck="true">// ORB-SLAM的系统接口</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"System.h"</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;string></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;chrono></span>   </span><span class="token comment" spellcheck="true">// for time stamp</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
+
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+
+string parameterFile <span class="token operator">=</span> <span class="token string">"./myvideo.yaml"</span><span class="token punctuation">;</span>
+string vocFile <span class="token operator">=</span> <span class="token string">"./Vocabulary/ORBvoc.txt"</span><span class="token punctuation">;</span>
+string videoFile <span class="token operator">=</span> <span class="token string">"./myvideo.mp4"</span><span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">int</span> argc<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token operator">*</span><span class="token operator">*</span>argv<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 声明 ORB-SLAM2 系统</span>
+    ORB_SLAM2<span class="token operator">::</span>System <span class="token function">SLAM</span><span class="token punctuation">(</span>vocFile<span class="token punctuation">,</span> parameterFile<span class="token punctuation">,</span> ORB_SLAM2<span class="token operator">::</span>System<span class="token operator">::</span>MONOCULAR<span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 获取视频图像</span>
+    cv<span class="token operator">::</span>VideoCapture <span class="token function">cap</span><span class="token punctuation">(</span>videoFile<span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">// change to 1 if you want to use USB camera.</span>
+    <span class="token comment" spellcheck="true">// 记录系统时间</span>
+    <span class="token keyword">auto</span> start <span class="token operator">=</span> chrono<span class="token operator">::</span>system_clock<span class="token operator">::</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        cv<span class="token operator">::</span>Mat frame<span class="token punctuation">;</span>
+        cap <span class="token operator">>></span> frame<span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">// 读取相机数据</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span> frame<span class="token punctuation">.</span>data <span class="token operator">==</span> <span class="token keyword">nullptr</span> <span class="token punctuation">)</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+
+        <span class="token comment" spellcheck="true">// rescale because image is too large</span>
+        cv<span class="token operator">::</span>Mat frame_resized<span class="token punctuation">;</span>
+        cv<span class="token operator">::</span><span class="token function">resize</span><span class="token punctuation">(</span>frame<span class="token punctuation">,</span> frame_resized<span class="token punctuation">,</span> cv<span class="token operator">::</span><span class="token function">Size</span><span class="token punctuation">(</span><span class="token number">640</span><span class="token punctuation">,</span><span class="token number">360</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">auto</span> now <span class="token operator">=</span> chrono<span class="token operator">::</span>system_clock<span class="token operator">::</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">auto</span> timestamp <span class="token operator">=</span> chrono<span class="token operator">::</span>duration_cast<span class="token operator">&lt;</span>chrono<span class="token operator">::</span>milliseconds<span class="token operator">></span><span class="token punctuation">(</span>now <span class="token operator">-</span> start<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        SLAM<span class="token punctuation">.</span><span class="token function">TrackMonocular</span><span class="token punctuation">(</span>frame_resized<span class="token punctuation">,</span> <span class="token keyword">double</span><span class="token punctuation">(</span>timestamp<span class="token punctuation">.</span><span class="token function">count</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">/</span><span class="token number">1000.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        cv<span class="token operator">::</span><span class="token function">waitKey</span><span class="token punctuation">(</span><span class="token number">30</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    SLAM<span class="token punctuation">.</span><span class="token function">Shutdown</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>虽然<strong>我</strong>不知道<code>OrbSLAM2</code>算法的底层实现，即我们不知道诸如<code>SLAM.TrackMonocular()</code>、<code>chrono::system_clock::now()</code>等函数/方法的内部是怎么写的，<strong>但是OrbSLAM2算法的原理我们（人类）是知道的，只要我们花时间去学习，假以时日我们就能自己写出来</strong>。</p>
+<h4 id="非确定性算法"><a href="#非确定性算法" class="headerlink" title="非确定性算法"></a>非确定性算法</h4><p>既然确定性算法是我们知道原理的算法，那么<strong>非确定算法就是我们不知道原理的算法</strong>，而不是我们没有学习原理的算法。<strong>我们没有学习原理的算法，他的原理已经被人发现了，就放在那里，是你不学</strong>。而非确定性算法，其原理还没有人发现过，目前还是未知。</p>
+<p>所以，我们之前写的所有的程序、实现的所有算法，都是确定性算法。那么问题就来了，我们不知道确定性算法，那么到底该怎么写出来非确定性算法？</p>
+<blockquote>
+<p>很简单，把非确定性算法中我们不会写的、并且是Polynomial的地方留白，未来当我们知道这个地方怎么写了，我们再把留白的地方补上去。</p>
+</blockquote>
+<p>这样解释还是比较含糊不清，下面就举一个非确定性算法的例子。</p>
+<blockquote>
+<p>N-Search问题：给定一个随机数组A，和一个值key，要求值key是否存在于数组A中。</p>
+<p>求解这个问题最简单的算法就是遍历数组A就行了，这样的话得到的算法时间复杂度是$\mathcal{O}(n)$。而我们能够写出这样的算法，因此，下面的<code>n-search1</code>算法就是确定性的算法</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">bool</span> n<span class="token operator">-</span><span class="token function">search1</span><span class="token punctuation">(</span><span class="token keyword">int</span> A<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token keyword">int</span> n<span class="token punctuation">,</span> <span class="token keyword">int</span> key<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>A<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">==</span> key<span class="token punctuation">)</span>
+            retutrn <span class="token boolean">true</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>因此，目前我们能够找到的N-Search问题最好的算法是$\mathcal{O}(n)$的，因此N-Search问题是$\mathcal{O}(n)$问题。</p>
+<p>那么我们接下来就要问了，N-Search问题是否存在$\mathcal{O}(1)$的算法？你当然可能会想，肯定不存在这样的算法，因为要挨个比较每个元素，因为……诸如此类的原因其实都是我们人认为的。可是，<strong>在数学上，我们否定一个问题是需要给出严格的证明的</strong>。可是，对于”N-Search问题不存在$\mathcal{O}(1)$的算法“这个问题，我们在数学上没有办法给出严格的证明。</p>
+<p>因此，我们其实没法否认”N-Search问题存在$\mathcal{O}(1)$的算法“这个命题，有可能在未来某一天，我们就真的找到了的算法。但至少在目前，我们是不知道这个算法的。为此，我们可以用下面的方式来表示</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">bool</span> n<span class="token operator">-</span><span class="token function">search2</span><span class="token punctuation">(</span><span class="token keyword">int</span> A<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token keyword">int</span> n<span class="token punctuation">,</span> <span class="token keyword">int</span> key<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// choice函数是n-search的O(1)的解法</span>
+    <span class="token keyword">int</span> idx <span class="token operator">=</span> <span class="token function">choice</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>A<span class="token punctuation">[</span>idx<span class="token punctuation">]</span> <span class="token operator">==</span> key<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>那么这样，<code>n-search2</code>算法就是n-search问题的一个$\mathcal{O}(1)$的算法，只不过其中的操作我们并不知道原理，即<code>choice</code>语句到底是怎么样用$\mathcal{O}(1)$来找到一个idx的？</p>
+<p>这就是为什么我们说<code>n-search2</code>算法是non-deterministic的。而对于<code>choice</code>语句来说：</p>
+<p align="center"><i>When we don't know how it works, it's magic. Once we know it, it's technique.</i></p>
+
+</blockquote>
+<p>至此，我想上面的这个例子已经很清楚的解释了，什么是非确定性的算法。</p>
+<p>而对于所有的非确定性算法，可能我们今天不知道非确定性算法是怎么工作的，但是可能我们明天就知道的了，那么明天这个非确定性算法就变成了确定性算法了。</p>
+<h4 id="为什么要用非确定算法？"><a href="#为什么要用非确定算法？" class="headerlink" title="为什么要用非确定算法？"></a>为什么要用非确定算法？</h4><p>我们上面介绍了确定性算法和非确定性算法，那么我们就想要问，确定性算法我们可以写出来，因此确定性算法是有其实际意义的。可是，非确定性算法我们根本没法写出来，他到底有什么用呢？</p>
+<p>哈哈，别忘了我在前面说过的，NP完全性理论的目的：研究问题之间的关系。非确定性算法恰恰就是用于帮助我们去研究问题之间关系的工具。</p>
+<p>接下来，我们就要开始用确定性与非确定性算法来研究NP问题了。</p>
+<h3 id="D-P类问题与NP类问题"><a href="#D-P类问题与NP类问题" class="headerlink" title="D. P类问题与NP类问题"></a>D. P类问题与NP类问题</h3><p>我们前面举了一个例子，例子中我们为<code>n-search</code>这个目前只有$\mathcal{O}(n)$的问题写出了$\mathcal{O}(1)$的非确定性算法。</p>
+<p>那么以此类推，我们其实可以给所有的Exponential 问题写出来Polynomial的Non-Deterministic的解法。</p>
+<p>因此，我们定义：</p>
+<ul>
+<li><strong>用P来表示所有具有Polynomial Time的Deterministic Solution的问题（Polynomial Problem）</strong>。</li>
+<li><strong>用NP来表示所有具有Polynomial Time的Non-Deterministic Solution的问题（Non-deterministic Polynomial Problem）</strong>。</li>
+</ul>
+<p>即：</p>
+<ul>
+<li><strong>P类问题是目前我们已经能够为其写出确定性多项式时间算法的问题</strong></li>
+<li><strong>NP类问题是目前我们只能够为其写出非确定性多项式时间算法的问题</strong></li>
+</ul>
+<p>注意，因为我们说不确定的算法可以变成确定的算法，因此NP问题如果我们找到了确定性的解法，那么这个NP问题就成为了P类问题。因此，P类问题和NP类问题有一个重要的性质，就是</p>
+<script type="math/tex; mode=display">
+P\subset NP</script><p>到这里，我们其实已经完成了NP完全性理论的第二个问题，即我们为Polynomial Time的问题写出了Non-deterministic的Polynomial算法。</p>
+<h2 id="3-NP-Hard与NP-Complete问题"><a href="#3-NP-Hard与NP-Complete问题" class="headerlink" title="3. NP-Hard与NP-Complete问题"></a>3. NP-Hard与NP-Complete问题</h2><p>在介绍完了NP完全性理论的基础之后，我们接下来要介绍的，就是NP-Hard问题与NP-Complete问题，即NP难问题与NP完全问题。</p>
+<h3 id="A-问题的相似性"><a href="#A-问题的相似性" class="headerlink" title="A. 问题的相似性"></a>A. 问题的相似性</h3><p>在开始介绍NP-Hard和NP-Complete问题前，先通过一个例子，阐述问题的相似性。</p>
+<h4 id="CNF-Satisfactory问题-合取范式问题"><a href="#CNF-Satisfactory问题-合取范式问题" class="headerlink" title="CNF-Satisfactory问题/合取范式问题"></a>CNF-Satisfactory问题/合取范式问题</h4><blockquote>
+<p><strong>CNF-Satisfactory问题/合取范式问题</strong></p>
+<p>写代码的时候，我们经常遇到一个很长的逻辑表达式，然后针对表达式中的各个变量，到底在取什么值的时候表达式的值为真？那么这个问题就是合取范式问题，即CNF-Satisfactory问题。</p>
+<p>我们形式化的描述一下CNF-Satisfactory问题：给定0-1变量集合${x_1,x_2,…,x_n}$，给定范式（即逻辑表达式）$CNF=f(x_1,x_2,…,f_n)$，求$\vec x={x_1,x_2,…,x_n}$，使得<code>CNF</code>成立。</p>
+</blockquote>
+<p>举个CNF-SAT问题（CNF-Satisfactory简写为CNF-SAT）的例子：</p>
+<blockquote>
+<p>设$\vec x = {x_1,x_2,x_3}$，求$\vec x_0$，使得$CNF=(x_1\or\bar x_2 \or x_3) \and (\bar x_1 \or x_2 \or \bar x_3)$成立（为真）。</p>
+</blockquote>
+<p>求解这个问题，我们当然可以用遍历的方法去做，这样的话我们需要遍历八种可能。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">$x_1$</th>
+<th style="text-align:center">$x_2$</th>
+<th style="text-align:center">$x_3$</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>但其实，我们可以把解空间组织成一个树的形式，而后利用分支限界或者回溯法来高效的遍历。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220728175648315.png" alt="CNF-SAT问题的解空间树"></p>
+<h4 id="0-1背包问题"><a href="#0-1背包问题" class="headerlink" title="0/1背包问题"></a>0/1背包问题</h4><p>对于0/1背包问题的介绍，建议查阅知乎文章：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/30959069，这里就不再啰嗦了。">https://zhuanlan.zhihu.com/p/30959069，这里就不再啰嗦了。</a></p>
+<h4 id="问题相似性"><a href="#问题相似性" class="headerlink" title="问题相似性"></a>问题相似性</h4><p>对于0/1背包问题，我们对于每一个物品，可以用一个布尔变量$x_i$来表示拿或者不拿这个物品。那么这样的话，我们其实也可以把0/1背包问题，用一个树来表示。</p>
+<p><strong>那么，如果现在我们拿到了一个展开树/解空间树，我们其实是不知道这个树是01背包问题还是CNF-Satisfactory问题，这是因为，在本质上，01背包问题与CNF-Satisfactory问题是一类问题，都可以用解空间树来表示，而且，这两个利用解空间树进行求解的方法也是一样的</strong></p>
+<p>由此可见，诸多的问题之间，其实是存在相似性的，我们可以利用这一相似性，对问题进行划分。那么问题的关键，就在于现在假设有两个问题A和B，我们要如何得知这两个问题是否是同一类问题呢？</p>
+<h4 id="问题规约"><a href="#问题规约" class="headerlink" title="问题规约"></a>问题规约</h4><p>上面我们通过0/1背包问题和CNF-SAT问题的这个例子，说明了问题之间存在相似性。那么现在给定两个问题，如何判断这两个问题之间是否有相似性呢？</p>
+<p>具体的判断方法，就是看两个问题能否规约到一起去。即问题A能否规约到问题B，或者问题B能否规约到问题A。而规约的含义，就是对一个问题进行一定的变换，例如我们上面对0/1背包问题进行了变换，变换到了解空间树上去。而这一变换，术语称为<strong>规约</strong>，问题$L_1$可以归约到问题$L_2$记为：$L_1\propto L_2$。</p>
+<p>注意，规约要求进行问题变换的时候，花费的时间也必须是多项式时间的，并且进行变换的算法必须是已知的，因为我们必须知道这个变换的方式，否是没有办法把问题B变换到问题A上去的。其次如果不存在多项式时间的变换，那么这个变换也是没有意义的，因为变换所花费的时间不必直接求解问题B要多。</p>
+<p>规约的一个好处就是，如果我们用变换$f$将问题A变换为了问题B，那么我们对B问题的解法进行逆变换$f^{-1}$，就可以得到问题A的解法。</p>
+<p>因此规约带来的的好处就是我们可以通过研究同一类问题中的其他比较容易解决的问题，来解决不好解决的问题。例如上面用合取范式求解背包问题。</p>
+<p>更进一步，对于同一类问题我们其实只需要求解其中的一个就行了，剩下的就是寻找待解决的问题和已经解决的问题之间的变换$f$，找到了之后利用逆变换就可以求出来待解决问题的解。而变换$f$其实很好求，通常都是只需要做到解空间对应即可。</p>
+<h3 id="B-NP-Hard问题"><a href="#B-NP-Hard问题" class="headerlink" title="B. NP-Hard问题"></a>B. NP-Hard问题</h3><p>我们接下来定义一类特殊的问题，定义：CNF-SAT问题是一个NP-Hard问题。设问题$L$，若$L\propto CNF-SAT$，则$L\in NP-hard$，即所有可以归约到$CNF-SAT$的问题都是NP-hard问题。注意，我们并没有说不能规约到$CNF-SAT$的问题就不是NP-hard问题</p>
+<p>首先我们需要明白，NP-hard问题和NP问题有什么关系。NP问题的定义就是能够写出Polynomial Time的Non-Deterministic解法的问题。但是NP-hard问题中只有一部分能否写出来Polynomial Time的Non-Deterministic解法，因此$NP-hard\subset NP$不成立，只能是$NP-hard\cap NP\neq \varnothing$。</p>
+<p>NP-hard问题的定义可能一开始看会觉得很奇怪，感觉这样一个“问题+规约”的形式的定义有些怪怪的。</p>
+<p>其实一点都不怪，还记得前面说过的NP完全性理论的目的么？NP完全性理论就是研究问题之间的相关性的，所以先定义一个问题作为”根问题“，而后用归约作为桥梁，来扩充NP-hard类问题的集合。</p>
+<p>之所以要定义出来NP-hard类问题，是为了和接下来的NP-Complete问题比较。</p>
+<h3 id="C-NP-Complete问题"><a href="#C-NP-Complete问题" class="headerlink" title="C. NP-Complete问题"></a>C. NP-Complete问题</h3><blockquote>
+<p>定义：若一个问题存在Polynomial Time的Deterministic解，那么该问题就是NP-Complete问题</p>
+</blockquote>
+<p>同样的，NPC问题也可以通过规约来进行传递，即：设问题$L_1\in NP-Complete$，若问题$L_2\propto L_1$，则$L_2\in NP-Complete$。</p>
+<p>我们再给出一个定理：$SAT\in NP-Complete$。这个定理的证明书上有7页，我就不放了。反正就是说明了SAT是一个NPC问题。</p>
+<h2 id="4-P-NP？"><a href="#4-P-NP？" class="headerlink" title="4. P=NP？"></a>4. P=NP？</h2><p>前面说了一大堆，介绍了P类问题，NP类问题，NP-hard类问题，NP-Complete类问题，我们画个图来表示一下他们之间的关系：</p>
+<ul>
+<li>$P\subset NP$</li>
+<li>$NP-hard\cap NP\neq \varnothing$</li>
+<li>$SAT\in NPC$，且$SAT\in NP-hard$，故$SAT\in NPC$</li>
+<li>$\forall L,\ if\ L\propto SAT,\ then\ L\in NP-hard\ and\ L\in NP-Complete\ and\ L \in NP$，故$NPC=NP-hard\cap NP$</li>
+</ul>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220728202119301.png" alt="P、NP、NP-Complete、NP-Hard问题之间的关系。"></p>
+<p>那么最后，我们还有一个问题，就是随着我们发现越来越多的算法，P类问题变得越来越大，那么有一天，P类问题会不会变得和NP类问题一样大？即会不会有一天，我们为所有的NP问题找到了确定性的多项式时间算法呢？用数学语言表示，$P=NP$还是$P\neq NP$？这个问题就是著名的$P-NP$问题</p>
+<p>如果$P=NP$，那么就说明当前所有指数时间的算法都是存在多项式时间的解法的，只不过我们还没有发现它。</p>
+<p>$P=NP$会带来很大的影响。例如，目前绝大多数的加密算法经过精心的设计，使得破解加密的算法的时间复杂度是次数非常夸张的多项式时间，例如$\mathcal{O}(1000000^n)$，这样，我们加密后的密码是256位的，那么破解密码需要的计算时间为$\mathcal{O}(1000000^{256})$，这个让计算机一直计算完一个人的一生也算不到，因此就不可能破解出来我们的密码。</p>
+<p>可是如果$P=NP$，那么就意味着其实存在多项式时间的算法来破解密码，只不过我们现在还没有找到。</p>
+<p>所以说，如果$P=NP$，那么对于所有的算法来说，就有：</p>
+<p align="center"><i>We are not inventing it, we are discovering it.</i></p>
+
+
+
+
+
+<h2 id="5-后记"><a href="#5-后记" class="headerlink" title="5. 后记"></a>5. 后记</h2><h3 id="A-NP-Complete问题树"><a href="#A-NP-Complete问题树" class="headerlink" title="A. NP-Complete问题树"></a>A. NP-Complete问题树</h3><p>我们前面说，规约$\propto$可以传递问题的NPC、NPH等性质，所以基于$SAT$这个基问题，人们不断地将一些问题归约到了SAT问题上去，从而我们就为NP完全问题构建出来了一个NP完全问题树。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220728203736855.png" alt="NP-Complete Problems Tree"></p>
+<h3 id="B-P-NP问题的研究进展"><a href="#B-P-NP问题的研究进展" class="headerlink" title="B. P-NP问题的研究进展"></a>B. P-NP问题的研究进展</h3><p>最后，目前关于$P=NP$问题的研究的进展，最大的一个就是著名的Cook定理，Cook定理说的是个什么事呢？</p>
+<p>Cook定理是说：$P=NP\Leftrightarrow SAT\in P$</p>
+<p>即如果我们能够为SAT问题找到一个多项式时间的解，那么$P=NP$。因此，基于Cook定理，现在大家在做的事情就是想办法证明$SAT\in P$</p>
+<p>但是由于直接为$SAT$问题找到多项式时间的解实在是太难了，所以人们就利用上面的NPC问题树，只要解决了这个树中的任何一个问题$L$，那么由于规约的定义中规约时进行变换花费的时间也必须是多项式时间的，因此我们再花费多项式的时间将其解法归约到$SAT$问题山去，那么我们就完成了$N-NP$问题的证明。</p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Jack Wang</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://jackwang0107.github.io/2022/07/26/np-wan-quan-xing-li-lun/">https://jackwang0107.github.io/2022/07/26/np-wan-quan-xing-li-lun/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Jack Wang</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/NP/">
+                                    <span class="chip bg-color">NP</span>
+                                </a>
+                            
+                                <a href="/tags/NP-Hard/">
+                                    <span class="chip bg-color">NP Hard</span>
+                                </a>
+                            
+                                <a href="/tags/NP-Complete/">
+                                    <span class="chip bg-color">NP Complete</span>
+                                </a>
+                            
+                                <a href="/tags/Algorithm/">
+                                    <span class="chip bg-color">Algorithm</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.png" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2022/07/29/ubuntu-di-pin-shi-yong-ming-ling/">
+                    <div class="card-image">
+                        
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220729210010695.png" class="responsive-img" alt="Ubuntu低频实用命令">
+                        
+                        <span class="card-title">Ubuntu低频实用命令</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            本文主要介绍了Linux(Ubuntu)系统下低频但是却非常实用的命令
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-07-29
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Linux%E5%AE%9E%E7%94%A8%E6%8A%80%E5%B7%A7/" class="post-category">
+                                    Linux实用技巧
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Ubuntu/">
+                        <span class="chip bg-color">Ubuntu</span>
+                    </a>
+                    
+                    <a href="/tags/Linux/">
+                        <span class="chip bg-color">Linux</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/07/26/paper-yue-du-bi-ji-1-imagenet-classification-with-deep-convolutional-neural-networks/">
+                    <div class="card-image">
+                        
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220725205629608.png" class="responsive-img" alt="Paper阅读笔记 1: ImageNet Classification with Deep Convolutional Neural Networks">
+                        
+                        <span class="card-title">Paper阅读笔记 1: ImageNet Classification with Deep Convolutional Neural Networks</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            本文是NIPS 2012的ImageNet Classification with Deep Convolutional Neural Networks的阅读笔记
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-07-26
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Paper%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" class="post-category">
+                                    Paper阅读笔记
+                                </a>
+                            
+                            <a href="/categories/Paper%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/Image-Classification/" class="post-category">
+                                    Image Classification
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/AlexNet/">
+                        <span class="chip bg-color">AlexNet</span>
+                    </a>
+                    
+                    <a href="/tags/NIPS/">
+                        <span class="chip bg-color">NIPS</span>
+                    </a>
+                    
+                    <a href="/tags/NIPS-2012/">
+                        <span class="chip bg-color">NIPS 2012</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">
+                        <span class="chip bg-color">深度学习</span>
+                    </a>
+                    
+                    <a href="/tags/Deep-Learning/">
+                        <span class="chip bg-color">Deep Learning</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: JackWang&#39;s Blog<br />'
+            + '文章作者: Jack Wang<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    });
+</script>
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2021-2022</span>
+            
+            <a href="/about" target="_blank">Jack Wang</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">297k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+                <span id="sitetime"> Loading ...</span>
+                <script>
+                    var calcSiteTime = function () {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2021";
+                        var startMonth = "11";
+                        var startDate = "12";
+                        var startHour = "0";
+                        var startMinute = "0";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+
+                        // 区分是否有年份.
+                        var language = 'zh-CN';
+                        if (startYear === String(todayYear)) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            var daysTip = 'This site has been running for ' + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                daysTip = '本站已运行 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                daysTip = '本站已運行 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = daysTip;
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            var yearsAndDaysTip = 'This site has been running for ' + diffYears + ' years and '
+                                + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                yearsAndDaysTip = '本站已运行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                yearsAndDaysTip = '本站已運行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+                        }
+                    }
+
+                    calcSiteTime();
+                </script>
+            
+            <br>
+            
+                <span id="icp"><img src="/medias/icp.png"
+                                    style="vertical-align: text-bottom;"/>
+                <a href="https://beian.miit.gov.cn" target="_blank">陕ICP备2021014294号-1</a>
+            </span>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+    <a href="mailto:2232123545@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2232123545" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2232123545" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+        
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/sakura.js"><\/script>');
+            }
+        </script>
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

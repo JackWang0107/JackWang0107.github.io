@@ -1,0 +1,1443 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="XJTU计算机视觉2022-Spring-2: 数字图像基础, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
+    <meta name="description" content="本文是XJTU计算机视觉2022-Spring第二节课的笔记">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>XJTU计算机视觉2022-Spring-2: 数字图像基础 | JackWang&#39;s Blog</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.2">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+
+   <style>
+    body{
+       background-image: url(https://cdn.jsdelivr.net/gh/Tokisaki-Galaxy/res/site/medias/background.jpg);
+       background-repeat:no-repeat;
+       background-size: 100% 100%;
+       background-attachment:fixed;
+    }
+</style>
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">JackWang&#39;s Blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-book-reader" style="zoom: 0.6;"></i>
+      
+      <span>博客</span>
+      <i class="fas fa-chevron-down" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/tags">
+          
+          <i class="fas fa-tags" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按标签归类文章</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories">
+          
+          <i class="fas fa-bookmark" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按目录归类文章</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/archives">
+          
+          <i class="fas fa-archive" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按日期分类文章</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">JackWang&#39;s Blog</div>
+        <div class="logo-desc">
+            
+            JackWang的个人博客
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-book-reader"></i>
+			
+			博客
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>
+
+                  <a href="/tags " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-tags" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按标签归类文章</    span>
+
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/categories " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-bookmark" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按目录归类文章</    span>
+
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/archives " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-archive" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按日期分类文章</    span>
+
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('抱歉，这篇文章并不想让所有人都看到，请输入授权密码观看')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220306215122381.png')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">XJTU计算机视觉2022-Spring-2: 数字图像基础</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/">
+                                <span class="chip bg-color">计算机视觉</span>
+                            </a>
+                        
+                            <a href="/tags/%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB/">
+                                <span class="chip bg-color">模式识别</span>
+                            </a>
+                        
+                            <a href="/tags/Computer-Vision/">
+                                <span class="chip bg-color">Computer Vision</span>
+                            </a>
+                        
+                            <a href="/tags/Pattern-Recognition/">
+                                <span class="chip bg-color">Pattern Recognition</span>
+                            </a>
+                        
+                            <a href="/tags/Fundamentals-of-digital-image/">
+                                <span class="chip bg-color">Fundamentals of digital image</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/XJTU%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%892022-Spring/" class="post-category">
+                                XJTU计算机视觉2022-Spring
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2022-03-07
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2022-09-28
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    3.5k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    12 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <blockquote>
+<p>本文是XJTU计算机视觉2022 Spring 第二节课的笔记，对数字图像的定义、常见的图像的数据类型、图像的基本属性等内容进行了讲解。</p>
+</blockquote>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220306215122381.png" alt="计算机视觉与模式识别"></p>
+<h1 id="XJTU计算机视觉2022-Spring-2-数字图像基础"><a href="#XJTU计算机视觉2022-Spring-2-数字图像基础" class="headerlink" title="XJTU计算机视觉2022-Spring-2: 数字图像基础"></a>XJTU计算机视觉2022-Spring-2: 数字图像基础</h1><p>上节课我们说道，本课程的全称计算机视觉与模式识别其实包含了两个部分：计算机视觉与模式识别。其中计算机视觉是我们研究的对象，而模式识别是我们用于研究计算机视觉的工具。</p>
+<p>而对于计算机视觉来说，研究其的第一步就是研究如何在计算机中表示视觉。视觉信息最重要的一种表示（representation）就是图像，因此本节课就将讲解图像在图像在计算机中的表示，即数字图像</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220307082751990.png" alt="第二节课数字图像基础的内容"></p>
+<p>不过由于我所写的是笔记，而非课程的PPT的复制粘贴，因此我将有选择性的介绍一些内容。</p>
+<h2 id="1-数字图像的定义"><a href="#1-数字图像的定义" class="headerlink" title="1. 数字图像的定义"></a>1. 数字图像的定义</h2><p>我们首先看一个图像的例子。当我们把一个图像方法很多倍之后，就会看到一个个灰色的小方块</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220307083326212.png" alt="一个图像的例子"></p>
+<p>其实图像在计算机中就是由一个又一个的像素块所组成的，这些像素块以栅格的形式组织。</p>
+<p>因此，数字图像的定义如下：</p>
+<ul>
+<li><strong>数字图像是二维图像用有限数字数值像素的表示</strong></li>
+<li>或者说，<strong>数字图像是定义在正则化网格点上的离散函数</strong>。其中函数以网格坐标$(i,j)$为输入，函数值$I(i,j)$为网格中该位置的像素值。根据图像的色彩系统的不同，函数值为一个标量（灰色图像的灰度色彩系统），或者为一个向量（彩色图像的RGB、HSV等色彩系统）。</li>
+</ul>
+<p>此外，<strong>数字图像简称为图像</strong>，后面我们将混用数字图像和图像。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220307084035453.png" alt="数字图像的定义"></p>
+<p>维基百科上对数字图像（Digital Image）的介绍如下</p>
+<blockquote>
+<p>数字图像，是二维图像用有限数字数值像素的表示。</p>
+<p>通常，<strong>像素在计算机中保存为二维整数数组的光栅图像，这些值经常用压缩格式进行传输和储存</strong>。</p>
+<p>数字图像可以许多不同的输入设备和技术生成，例如数字相机、扫描仪、坐标测量机、seismographic profiling、airborne radar等等，也可以从任意的非图像数据合成得到，例如数学函数或者三维几何模型，三维几何模型是计算机图形学的一个主要分支。数字图像处理领域就是研究它们的变换算法。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220307085152257.png" alt="维基百科上对数字图像的介绍"></p>
+</blockquote>
+<p>通俗的来说：</p>
+<ul>
+<li>计算机视觉是一门研究如何使机器“看”的科学</li>
+<li>更进一步的说，就是是指<strong>用摄影机和电脑代替人眼</strong>，完成<ul>
+<li><strong>对目标进行识别、跟踪和测量</strong></li>
+<li><strong>并进一步做图形处理</strong></li>
+<li><strong>使电脑处理成为更适合人眼观察或传送给仪器检测的图像</strong></li>
+</ul>
+</li>
+</ul>
+<h2 id="2-常见图像数据类型"><a href="#2-常见图像数据类型" class="headerlink" title="2. 常见图像数据类型"></a>2. 常见图像数据类型</h2><p>上面我们说图像是定义在正则化网格点上的离散函数。那么根据函数的输入输出不同（其实输入都是一样的，即网格点的坐标$(i,j)$，主要是输出不同），图像有不同的类型。</p>
+<p>下面就将介绍下常见的图像（这种数据）的种类。</p>
+<h3 id="2-1-一位图像：黑白图"><a href="#2-1-一位图像：黑白图" class="headerlink" title="2.1 一位图像：黑白图"></a>2.1 一位图像：黑白图</h3><p>一位图像即指图像的每个像素用一个比特数值来表示，那么一位图像只能表示两种颜色</p>
+<ul>
+<li>1 表示白</li>
+<li>0 表示黑</li>
+</ul>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220307090048180.png" alt="一位黑白图像"></p>
+<h3 id="2-2-八位图像：灰度图"><a href="#2-2-八位图像：灰度图" class="headerlink" title="2.2 八位图像：灰度图"></a>2.2 八位图像：灰度图</h3><p>八位图像中每一个像素的值都是用一个八位的二进制数字来表示，因此能够表示从0-255种色彩。<strong>在实践中一般用这8位二进制数字来表示光强</strong>，0为最暗，255为最亮。中间的值表示从黑色到百色的过度，因此就是灰色，所以八位图像称为灰度图</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220307090427688.png" alt="八位灰度图像"></p>
+<h3 id="2-3-二十四位图像：（真）彩色图"><a href="#2-3-二十四位图像：（真）彩色图" class="headerlink" title="2.3 二十四位图像：（真）彩色图"></a>2.3 二十四位图像：（真）彩色图</h3><p>二十四位图像中每一个像素的值都是用一个二十四位的二进制数字来表示。这个二十四位数字由三个八位二进制数字组成，分别表示红绿蓝三种颜色的光的强度。</p>
+<p>而红绿蓝三种颜色的光按照不同的强度混合，在人眼看来就是不同的颜色的光。此外由于二十四位的二进制数字分别表示三种颜色，因此一个位置上的像素值其实也可以表示成一个向量，即$(V<em>{red},V</em>{green},V_{blue})$</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220307091216362.png" alt="二十四位彩色图像"></p>
+<h3 id="2-4-伪彩色：彩色索引图像"><a href="#2-4-伪彩色：彩色索引图像" class="headerlink" title="2.4 伪彩色：彩色索引图像"></a>2.4 伪彩色：彩色索引图像</h3><p>我们上面说到，真彩色图能够表示$2^{24}$，大概是百万以上种颜色。虽然能够表示的颜色非常多，但是人眼不一定能够分辨出来这些颜色。此外，每个像素用24位，即3个字节表示的话，那么一张图像512高，512宽的图像，就非常占用存储空间了（不考虑现有的一些图像压缩方法）。</p>
+<p>为了节省空间，有另外一种彩色的表示方式，就是提前设定好一个lookup table，这个表中提前设定好了一些颜色，而在图像中的像素值只需要表示色彩查询表中的位置即可。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220307092022707.png" alt="彩色索引图像"></p>
+<p>而在很多的软件中，都会有伪彩色的色彩盘/查色表的概念</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220307104859304.png" alt="其他软件中的色彩盘"></p>
+<h2 id="3-图像的基本属性"><a href="#3-图像的基本属性" class="headerlink" title="3. 图像的基本属性"></a>3. 图像的基本属性</h2><p>上面我们介绍了常见的图像数据类型，接下来将讲解图像的基本属性</p>
+<h3 id="3-1-图像的三个基本属性"><a href="#3-1-图像的三个基本属性" class="headerlink" title="3.1 图像的三个基本属性"></a>3.1 图像的三个基本属性</h3><p>所谓<strong>属性，指的是事物共同的性质和特点</strong>。例如，一个对象的颜色和形式，人的能力，身份，以及社会的基础关系等等。属性是用在许多领域的术语。（来自维基百科）</p>
+<p>因此，图像作为一种真实存在的事物，也是具有特定的属性的。图像的一些基本属性如下：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220307092901697.png" alt="图像的基本属性"></p>
+<p>此外，图像虽然具有分辨率这个属性，但是我们在说到图像分辨率的时候因为图像的分辨率与显示器的显示分辨率和人眼分辨率是息息相关的，因此我们不能仅仅只介绍图像分辨率。所以下面在讲解</p>
+<p>下面就将详细的介绍图像的这些属性</p>
+<h3 id="3-2-分辨率"><a href="#3-2-分辨率" class="headerlink" title="3.2 分辨率"></a>3.2 分辨率</h3><p>上面说到，分辨率包括：</p>
+<ul>
+<li>图像分辨率</li>
+<li>显示分辨率</li>
+<li>人眼分辨率</li>
+</ul>
+<h4 id="1-图像分辨率"><a href="#1-图像分辨率" class="headerlink" title="1. 图像分辨率"></a>1. 图像分辨率</h4><p>图像分辨率指的是一个图像的正则化网格点的数量。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220307094011377.png" alt="图像分辨率"></p>
+<p>通常有两种方式衡量图像的分辨率：</p>
+<ul>
+<li><p>用表示一张图像的像素矩阵长宽来衡量，一般说的$512\times512$、$64\times64$就是这个意思</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220307094514794.png" alt="两种不同分辨率的Lena"></p>
+</li>
+<li><p>另外一种方法就是根据每英寸图像内有多少个像素点，则此时图像分辨率的单位为PPI(Pixels Per Inch)，通常叫做像素每英寸。</p>
+</li>
+</ul>
+<p>需要注意的是，对于计算机中的数字图像来说，一般选用第一种方式来表示图像分辨率，对于印刷工业、工业设计来说选用第二种方式表示图像分辨率，原因如下：</p>
+<blockquote>
+<p>在平面设计中，图像的分辨率以PPI来度量，它和图像的宽、高尺寸一起决定了图像文件的大小及图像质量。比如，一幅图像宽8英寸、高6英寸，分辨率为100PPI，如果保持图像文件的大小不变，也就是总的像素数不变，将分辨率降为50PPI，在宽高比不变的情况下，图像的宽将变为16英寸、高将变为12英寸。<strong>打印输出</strong>变化前后的这两幅图，我们会发现后者的幅面是前者的4倍，而且图像质量下降了许多。</p>
+<p>那么，把这两幅变化前后的图送入计算机显示器会出现什么现象呢？比如，将它们送入显示模式为800×600的显示器显示，我们会发现这两幅图的画面尺寸一样，画面质量也没有区别。其实对于计算机的显示系统来说，一幅图像的PPI值是没有意义的，起作用的是这幅图像所包含的总的像素数，即：水平方向的像素数×垂直方向的的像素数。<strong>这是因为计算机的显示器的工作方式也是将屏幕划分为了网格</strong>。而第二种分辨率表示方法同时也表示了图像显示时的宽高尺寸。前面所讲的PPI值变化前后的两幅图，它们总的像素数都是800×600，因此在显示时是分辨率相同、幅面相同的两幅图像。读者不妨尝试一下这个例子。</p>
+</blockquote>
+<h4 id="2-显示分辨率、点距"><a href="#2-显示分辨率、点距" class="headerlink" title="2. 显示分辨率、点距"></a>2. 显示分辨率、点距</h4><p>显示分辨率指的其实就是显示屏上能够显示出的像素数目</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220307104953428.png" alt="显示分辨率"></p>
+<p>然而对于显示器来说，虽然其显示图像的原理就是以网格的形式来表示一个个像素，但是显示器的每一个像素都是具有物理尺寸的点，因此就有了点距这个概念</p>
+<p>所谓点距指的其实是相邻的两个像素之间的距离。点距的单位常用毫米mm</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220307105255604.png" alt="点距的概念"></p>
+<p>由于屏幕中的点是具有实际尺寸的，因此就可以用上面讲的第二种方式PPI来衡量显示器的分辨率</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220307105524431.png" alt="PPI衡量的显示分辨率"></p>
+<p>​    </p>
+<h4 id="3-人眼分辨率"><a href="#3-人眼分辨率" class="headerlink" title="3. 人眼分辨率"></a>3. 人眼分辨率</h4><p>第三分辨率就是人眼的分辨率。人眼的分辨率指的是人眼分辨细节的能力。用人能看到的位于$y$处的长度为$x$的最小值来表示。例如在100米处时候，人眼能够分辨出来最小的物体是15米的话，那么人演的分辨率就是$15/100$</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220307105830009.png" alt="人眼分辨力的计算"></p>
+<p>一般来说，在测人眼分辨力的时候是把一个<code>山</code>放到距离人2-5米左右的地方来看。</p>
+<p>由于相比于距离，这个物体非常小，因此就直接用角度来衡量了，即分辨角</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220307110205501.png" alt="分辨角"></p>
+<p>人眼分辨力的一些特点如下：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220307110238552.png" alt="人眼分辨力的特点"></p>
+<p>一些广泛测试得到的人眼的分辨率如下：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220307110320129.png" alt="人眼分辨力的一些数据"></p>
+<h3 id="3-3-像素深度、图像量化"><a href="#3-3-像素深度、图像量化" class="headerlink" title="3.3 像素深度、图像量化"></a>3.3 像素深度、图像量化</h3><p>像素深度指存储每个像素所用的位数，像素深度又称为图像深度。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220307110648479.png" alt="像素深度"></p>
+<p>而在获得图像的时候，我们需要把连续的光强离散化为整数，这一步称为量化。量化的时候就使用的量化等级决定了我们图像的像素深度</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220307110817974.png" alt="图像量化"></p>
+<p>一般来说，量化等级越少图像的细节信息就越少，例如</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220307111013000.png" alt="减少量化等级-1"></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220307111029722.png" alt="减少量化等级-2"></p>
+<p>此外，量化的时候每一个点的采样数也决定了图像的色彩，每个点只有一个采样值的话那么就是灰度图像，三个值的话就是彩色图像。四个值还包括了灰色信息。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220307111150847.png" alt="量化决定色彩"></p>
+<h3 id="3-4-色彩"><a href="#3-4-色彩" class="headerlink" title="3.4 色彩"></a>3.4 色彩</h3><p>图像的最后一个基本属性就是其色彩。根据图像表示色彩的方式不同，可以分为</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220307111408408.png" alt="图像表示彩色的方式"></p>
+<p>而表示每个颜色用的位数决定了能够表示的颜色的数量</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220307111533488.png" alt="位数决定能表示的颜色数量"></p>
+<h2 id="4-图像的存储"><a href="#4-图像的存储" class="headerlink" title="4. 图像的存储"></a>4. 图像的存储</h2><p>根据我们表示不同种类的图像的不同，我们存储图像的方法也是不同的。</p>
+<h3 id="4-1-黑白图像的存储"><a href="#4-1-黑白图像的存储" class="headerlink" title="4.1 黑白图像的存储"></a>4.1 黑白图像的存储</h3><p>存储黑白图像只用一位01表示即可，所以像素数量除以8就是需要的字节数</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220307111720974.png" alt="黑白图像的存储"></p>
+<h3 id="4-2-灰度图像的存储"><a href="#4-2-灰度图像的存储" class="headerlink" title="4.2 灰度图像的存储"></a>4.2 灰度图像的存储</h3><p>灰度图像中每一个像素值由一个字节（8个比特）来表示，所以像素的数量就是需要用的字节数量。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220307112012181.png" alt="灰度图像的存储"></p>
+<h3 id="4-3-真彩色图像的存储"><a href="#4-3-真彩色图像的存储" class="headerlink" title="4.3 真彩色图像的存储"></a>4.3 真彩色图像的存储</h3><p>真彩色图像每一位需要保存三种颜色的光强，因此计算得到的比特数还需要乘三，计算得到的才是需要的字节数量</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220307112305371.png" alt="真彩色图像的存储"></p>
+<h3 id="4-4-计算图像占用的存储空间"><a href="#4-4-计算图像占用的存储空间" class="headerlink" title="4.4 计算图像占用的存储空间"></a>4.4 计算图像占用的存储空间</h3><p>计算图像占用的存储空间其实还是比较简单的</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220307112430858.png" alt="计算图像占用的存储空间-1"></p>
+<p>例如下面的例子</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220307112503839.png" alt="计算示例"></p>
+<h2 id="5-图像的分类"><a href="#5-图像的分类" class="headerlink" title="5. 图像的分类"></a>5. 图像的分类</h2><p>最后介绍一下图像的分类。其实从不同的角度进行划分，有多种分类方式。例如：按照有无颜色可以分为灰度图和彩色图。</p>
+<p>但是下面我们要介绍的是在计算机中图像的分类，即矢量图和点阵图。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220307112644494.png" alt="图像的分类"></p>
+<h3 id="5-1-矢量图和点位图"><a href="#5-1-矢量图和点位图" class="headerlink" title="5.1 矢量图和点位图"></a>5.1 矢量图和点位图</h3><p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220307112716850.png" alt="矢量图和点位图-1"></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220307112818366.png" alt="矢量图和点位图-2"></p>
+<h3 id="5-2-矢量图"><a href="#5-2-矢量图" class="headerlink" title="5.2 矢量图"></a>5.2 矢量图</h3><p>矢量图指的就是采用一系列计算机指令描绘的图，以点、线、面、曲线、圆、矩形等这些基本的几何单元来描述图像。</p>
+<p>因此矢量图不管怎样放缩小都能够保证其边缘不模糊。其本质是对图像的描述，或者说图像的一种高级表示</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220307112842906.png" alt="矢量图"></p>
+<h3 id="5-3-点位图"><a href="#5-3-点位图" class="headerlink" title="5.3 点位图"></a>5.3 点位图</h3><p>点位图其实就是用像素表示的图像，是图像的低级表示</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220307113029856.png" alt="点位图"></p>
+<h3 id="5-4-图形学"><a href="#5-4-图形学" class="headerlink" title="5.4 图形学"></a>5.4 图形学</h3><p>图形学其实就是研究根据给定的描述，用计算机生成相应的图形、图像的领域。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220307113055596.png" alt="计算机图形学"></p>
+<h3 id="5-5-涉及图形图像的研究"><a href="#5-5-涉及图形图像的研究" class="headerlink" title="5.5 涉及图形图像的研究"></a>5.5 涉及图形图像的研究</h3><p>因为图形学、计算机视觉、图像处理都涉及到了图像，因此下面根据输入输出给出来了一张表来表示计算机视觉、图像处理和计算机图形学之间的关系。</p>
+<p>狭义的计算机视觉是输入图像，输出图像的高级表示，例如图像中的物体、类别等等，而图像处理则是输入图像，输出图像。图形学则是输入图像的描述，输出图像</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220307113133326.png" alt="image-20220307113133326"></p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Jack Wang</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://jackwang0107.github.io/2022/03/06/xjtu-ji-suan-ji-shi-jue-2022-spring-2-shu-zi-tu-xiang-ji-chu/">https://jackwang0107.github.io/2022/03/06/xjtu-ji-suan-ji-shi-jue-2022-spring-2-shu-zi-tu-xiang-ji-chu/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Jack Wang</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/">
+                                    <span class="chip bg-color">计算机视觉</span>
+                                </a>
+                            
+                                <a href="/tags/%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB/">
+                                    <span class="chip bg-color">模式识别</span>
+                                </a>
+                            
+                                <a href="/tags/Computer-Vision/">
+                                    <span class="chip bg-color">Computer Vision</span>
+                                </a>
+                            
+                                <a href="/tags/Pattern-Recognition/">
+                                    <span class="chip bg-color">Pattern Recognition</span>
+                                </a>
+                            
+                                <a href="/tags/Fundamentals-of-digital-image/">
+                                    <span class="chip bg-color">Fundamentals of digital image</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.png" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2022/03/07/xjtu-ji-suan-ji-shi-jue-2022-spring-3-cheng-xiang-yuan-li/">
+                    <div class="card-image">
+                        
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220306215122381.png" class="responsive-img" alt="XJTU计算机视觉2022-Spring-3: 成像原理与相机模型">
+                        
+                        <span class="card-title">XJTU计算机视觉2022-Spring-3: 成像原理与相机模型</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            本文是XJTU计算机视觉2022-Spring第三节课的笔记
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-03-07
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/XJTU%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%892022-Spring/" class="post-category">
+                                    XJTU计算机视觉2022-Spring
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/">
+                        <span class="chip bg-color">计算机视觉</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB/">
+                        <span class="chip bg-color">模式识别</span>
+                    </a>
+                    
+                    <a href="/tags/Computer-Vision/">
+                        <span class="chip bg-color">Computer Vision</span>
+                    </a>
+                    
+                    <a href="/tags/Pattern-Recognition/">
+                        <span class="chip bg-color">Pattern Recognition</span>
+                    </a>
+                    
+                    <a href="/tags/Imaging-Principle/">
+                        <span class="chip bg-color">Imaging Principle</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/03/06/zui-jin-de-yi-xie-qing-kuang-1/">
+                    <div class="card-image">
+                        
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220306220558702.png" class="responsive-img" alt="最近的一些情况">
+                        
+                        <span class="card-title">最近的一些情况</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            本文记录了我的一些最近的情况
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-06
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%9D%82%E9%A1%B9/" class="post-category">
+                                    杂项
+                                </a>
+                            
+                            <a href="/categories/%E6%9D%82%E9%A1%B9/%E4%B8%AA%E4%BA%BA%E6%83%85%E5%86%B5/" class="post-category">
+                                    个人情况
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E6%9D%82%E9%A1%B9/">
+                        <span class="chip bg-color">杂项</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: JackWang&#39;s Blog<br />'
+            + '文章作者: Jack Wang<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2021-2022</span>
+            
+            <a href="/about" target="_blank">Jack Wang</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">297k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+                <span id="sitetime"> Loading ...</span>
+                <script>
+                    var calcSiteTime = function () {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2021";
+                        var startMonth = "11";
+                        var startDate = "12";
+                        var startHour = "0";
+                        var startMinute = "0";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+
+                        // 区分是否有年份.
+                        var language = 'zh-CN';
+                        if (startYear === String(todayYear)) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            var daysTip = 'This site has been running for ' + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                daysTip = '本站已运行 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                daysTip = '本站已運行 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = daysTip;
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            var yearsAndDaysTip = 'This site has been running for ' + diffYears + ' years and '
+                                + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                yearsAndDaysTip = '本站已运行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                yearsAndDaysTip = '本站已運行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+                        }
+                    }
+
+                    calcSiteTime();
+                </script>
+            
+            <br>
+            
+                <span id="icp"><img src="/medias/icp.png"
+                                    style="vertical-align: text-bottom;"/>
+                <a href="https://beian.miit.gov.cn" target="_blank">陕ICP备2021014294号-1</a>
+            </span>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+    <a href="mailto:2232123545@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2232123545" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2232123545" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+        
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/sakura.js"><\/script>');
+            }
+        </script>
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

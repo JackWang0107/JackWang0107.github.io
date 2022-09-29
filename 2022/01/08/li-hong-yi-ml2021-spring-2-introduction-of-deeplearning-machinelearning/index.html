@@ -1,0 +1,1673 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="李宏毅ML2021-Spring-2: Introduction of Machine/Deep Learning, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
+    <meta name="description" content="本文是李宏毅Machine Learning 2021 Spring 第二节课Introduction of Machine / Deep Learning的笔记，本节课主要结合YouTube观看人数预测案例讲解了机器学习/深度学习的基本概念">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>李宏毅ML2021-Spring-2: Introduction of Machine/Deep Learning | JackWang&#39;s Blog</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.2">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+
+   <style>
+    body{
+       background-image: url(https://cdn.jsdelivr.net/gh/Tokisaki-Galaxy/res/site/medias/background.jpg);
+       background-repeat:no-repeat;
+       background-size: 100% 100%;
+       background-attachment:fixed;
+    }
+</style>
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">JackWang&#39;s Blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-book-reader" style="zoom: 0.6;"></i>
+      
+      <span>博客</span>
+      <i class="fas fa-chevron-down" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/tags">
+          
+          <i class="fas fa-tags" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按标签归类文章</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories">
+          
+          <i class="fas fa-bookmark" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按目录归类文章</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/archives">
+          
+          <i class="fas fa-archive" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按日期分类文章</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">JackWang&#39;s Blog</div>
+        <div class="logo-desc">
+            
+            JackWang的个人博客
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-book-reader"></i>
+			
+			博客
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>
+
+                  <a href="/tags " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-tags" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按标签归类文章</    span>
+
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/categories " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-bookmark" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按目录归类文章</    span>
+
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/archives " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-archive" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按日期分类文章</    span>
+
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('抱歉，这篇文章并不想让所有人都看到，请输入授权密码观看')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220109135954313.png')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">李宏毅ML2021-Spring-2: Introduction of Machine/Deep Learning</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Deep-Learning/">
+                                <span class="chip bg-color">Deep Learning</span>
+                            </a>
+                        
+                            <a href="/tags/Hungyi-Li/">
+                                <span class="chip bg-color">Hungyi Li</span>
+                            </a>
+                        
+                            <a href="/tags/Machine-Learning/">
+                                <span class="chip bg-color">Machine Learning</span>
+                            </a>
+                        
+                            <a href="/tags/Neural-Network/">
+                                <span class="chip bg-color">Neural Network</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E6%9D%8E%E5%AE%8F%E6%AF%85ML2021-Spring-Notes/" class="post-category">
+                                李宏毅ML2021 Spring Notes
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2022-01-09
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2022-09-28
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    7.2k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    26 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <blockquote>
+<p>本文是李宏毅Machine Learning 2021 Spring 第二节课Introduction of Machine / Deep Learning的笔记，本节课主要结合案例讲解了机器学习/深度学习的基本概念</p>
+</blockquote>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220109135954313.png" alt="第二节课：Introduction of Machine/Deep Learning"></p>
+<h1 id="李宏毅ML2021-Spring-2-Introduction-of-Machine-Deep-Learning"><a href="#李宏毅ML2021-Spring-2-Introduction-of-Machine-Deep-Learning" class="headerlink" title="李宏毅ML2021-Spring-2: Introduction of Machine/Deep Learning"></a>李宏毅ML2021-Spring-2: Introduction of Machine/Deep Learning</h1><h2 id="1-What-is-Machine-Learning"><a href="#1-What-is-Machine-Learning" class="headerlink" title="1. What is Machine Learning"></a>1. What is Machine Learning</h2><p>到底什么是机器学习呢？</p>
+<p>从一个角度来说，机器学习其实就是让机器去找函数，例如：</p>
+<ul>
+<li>对于语音识别来说，函数的输入是一段语音信号而输出是这段语音信号对应的文本</li>
+<li>对于图像识别来说，输入是一张图片，而输出是一段描述图片类别的文本</li>
+<li>对于下围棋来说，函数的输入是当前棋盘上的状态，输出是机器下一步落子的位置</li>
+</ul>
+<p>从上面的例子我们能够想象得到这些函数会非常非常复杂，人类没有办法写出他们的解析式，因此我们预期希望机器能够自动寻找这个函数</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220109140806853.png" alt="机器学习等价于寻找函数" style="zoom:50%;"></p>
+<h2 id="2-Different-types-of-Functions"><a href="#2-Different-types-of-Functions" class="headerlink" title="2. Different types of Functions"></a>2. Different types of Functions</h2><p>  因为要找的函数不同，机器学习可以分为不同的类别。下面就是一些专有的名词：</p>
+<ul>
+<li><p>Regression: 机器需要寻找的函数的输出是一个（连续的）数值</p>
+<p>例如，让机器预测未来的PM2.5的数值。函数的输出是明天中午的PM2.5的指数，而输入则是今天可能影响到明天PM2.5数值的因素的值，例如今天的PM2.5、今天的问题、今天的臭氧浓度等等。像这样，寻找输出是一个连续数值的函数的任务就是Regression的任务</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220109141428084.png" alt="Regression任务" style="zoom:50%;"></p>
+</li>
+<li><p>Classification: 机器的输出是多个选项中正确的一个（类别） ，这些选项都是人类提前给定的</p>
+<p>例如，让机器判断一封邮件是不是垃圾邮件。那么机器的输入就是这封电子邮件，而输出就是Yes或者No两个选项中的一个。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220109142452666.png" alt="Classification任务" style="zoom:50%;"></p>
+<p>当然，Classification任务的选线可以不止有两个，像上面这样只有两个选项的Classification任务是Binary的。而对于下围棋来说，我们如果把棋盘上$19\times19$个可以落子的位置当做$19\times19$个类的话，那么让机器下围棋这个任务就是一个有$19\times19$的选择题，让机器从$19\times19$个选项中选出正确的选项（下一步要下的位置）</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220109142920372.png" alt="Classification任务：多分类" style="zoom:50%;"></p>
+</li>
+</ul>
+<p>然而Classification和Regression都只是机器学习任务中的一小部分，还有一类很大的问题，即Structure Learning</p>
+<ul>
+<li>Structured Learning: 机器不只需要做选择题、产生一个数字，还要去产生一个有结构的物体。例如让机器去画一张画、写一篇文章。形象的理解就是让机器学会创造</li>
+</ul>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220109143127219.png" alt="Classification和Regression都只是巨大世界的一小部分" style="zoom: 80%;"></p>
+<h2 id="3-Case-Study-How-does-machine-find-a-function"><a href="#3-Case-Study-How-does-machine-find-a-function" class="headerlink" title="3. Case Study: How does machine find a function?"></a>3. Case Study: How does machine find a function?</h2><h3 id="A-Background"><a href="#A-Background" class="headerlink" title="A. Background"></a>A. Background</h3><p>自从2014年开始上课以来，李宏毅老师就会把自己的课程视频上传到YouTube频道上。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220109143614678.png" alt="李宏毅老师的YouTube频道" style="zoom:50%;"></p>
+<p>而对于一个YouTuber来说，他最在意的就是这个频道的流量有多少。因为对于一个全职Youtuber来说，流量决定了一个YouTuber的收益有多少。</p>
+<p>那么我们就想，能否找到一个函数输入是YouTub后台的数据，而输出是未来的点阅率</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220109144001795.png" alt="希望找到的函数" style="zoom:50%;"></p>
+<h3 id="B-How-to-find-the-function"><a href="#B-How-to-find-the-function" class="headerlink" title="B. How to find the function?"></a>B. How to find the function?</h3><p>接下来我们就要问该怎么样寻找这个输入是今天的数据，输出是未来数据的函数呢？</p>
+<p>那么对于机器学习来说，整个过程分为三步</p>
+<ol>
+<li><p><strong>第一个步骤就是写出一个带有未知参数的函数解析式</strong>。简单来说就是我们先猜测一下这个函数$f$的到底长什么样子。</p>
+<p>那么我们先猜测一下，这个函数可能是下面这样</p>
+<script type="math/tex; mode=display">
+y=b+wx_1</script><p>其中$y$是明天的观看人数，例如2月26号的观看人数，而$x_1$是今天的观看人数，例如2月25号的观看人数；$b$和$w$都是未知的参数，后面我们准备让机器学习的就是这两个未知的参数</p>
+<p>那么我们为什么猜测这个函数会是$y=b+wx_1$这个样子呢？其实这个猜测是来自于我们先前对这个问题的理解，即我们的<strong>domain knowledge</strong>。而常听有人会说做机器学习需要一些domain knowledge，那其实domain knowledge的左右就是帮助我们写出来这个函数解析式。考虑到在真实的一个神经网络中，模型就是我们需要找的一个函数，因此domain knowledge的作用就是指导我们该如何设计网络。</p>
+<p>对于上面的问题来说，我们的domain knowledge就是明天的观看人数应该会和昨天的人数有关。虽然有关但又不是相同，因此我们就乘以一个数字在加上一个数字 。而<strong>我们猜测得到的带有未知参数的函数就称为我们的Model</strong></p>
+<p>我们的猜测是基于我们现有的认识（现有的Domain Knowledge）提出的，而由于我们的认知是受限的，我们的模型又是在当下的认知下提出的，因此可能不对，或者说表现不佳。那么未来随着我们对问题研究的深入，我们对问题的认识越发深刻，我们就可以根绝我们更加完善、正确的Domain Knowledge来指导我们修改模型。</p>
+<p>例如明天的观看次数是不是有可能和过去几天都有关系？也即今天一天的观看人数无法完全决定明天的观看人数。当然这需要我们对问题进行探索，验证当前的Domain Knowledge才行。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220109144812145.png" alt="第一步：根据Domain Knowledge写出含参函数解析式" style="zoom:50%;"></p>
+</li>
+<li><p>定义一个Loss。Loss其实也是一个函数，这个函数的输入是我们函数的参数，即</p>
+<script type="math/tex; mode=display">
+L=L(b,w)</script><p>而Loss这个函数输出的值就是值当前的参数的好坏，好坏的衡量可以用一个数值来描述（有点模糊数学隶属度的意思）。</p>
+<p>这样说比较抽象，我们举一个具体的例子。假设，我们现在让上模型中的参数$b=0.5k,w=1$，那么我们的模型就变成了</p>
+<script type="math/tex; mode=display">
+b=0.5k,w=1 \rightarrow y=0.5k+x_1</script><p>那么上面$y=0.5k+x_1$这个模型到底有多好呢？这就是Loss来衡量的。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220109151732346.png" alt="Loss衡量模型有多好" style="zoom:50%;"></p>
+<p>而要衡量Loss就要从训练资料来入手。假设我们现在的输入的数据是从2017年1月1日到2020年12月31日的观看数据。那么我们就可以通过下面的方式来计算Loss。</p>
+<p>我们把2017年1月1日的观看人数带入到模型中去，计算得到模型预测的2017年1月2日观看的人数为5.3k，接下来我们用模型预测的结果和真实的值来进行比较，计算得到一个误差$e_1$。<strong>这个真实的值就称为label</strong>。当然误差计算的方式不止一种，我们这里就去绝对值，即$e_1=|y-\hat y|=0.4k$</p>
+<p>当然，我们现在有的数据不止有1月1日这一天，我们也可以用1月2日的值预测1月3日的值，然后计算$e_2$。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220109151755049.png" alt="Loss衡量模型的好坏-1" style="zoom:50%;"></p>
+<p>同样的方法，为我们可以算到三年来每一天预测的误差。然后我们把这三年的误差加起来取平均，就得到的了模型在所有数据上的表现。而这个平均的Loss越大，就表明模型的表现越差。</p>
+<p>此外，计算Loss的方法不止一种，我们上面是对绝对值取平均，因此称为Mean Absolute Error（MAE），此外还有Mean Square Error（MSE）的Loss</p>
+<p>我们这个任务很明显是一个Regression的任务，而对于Classification的任务，我们的loss function就可以取Cross-Ectropy Loss</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220109152002306.png" alt="Loss衡量模型的好坏-2" style="zoom:50%;"></p>
+<p>对于$y=b+wx_1$这个模型，我们可以取不同的$w$和$b$计算得到一个loss surface，下面就是这个模型用真实的数据计算得到的Error Surface。越偏红色系Loss就越大，而越偏蓝色系Loss就越小。绘制的线是等高线。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220109152855407.png" alt="image-20220109152855407" style="zoom:50%;"></p>
+</li>
+<li><p>机器学习的第三步就是Optimization问题，即找到让模型的Loss最小的参数。对于上面的问题，我们要找的就是让模型loss最小的$w$和$b$，将其记为$w^*$和$b^*$，那么优化这一步就是</p>
+<script type="math/tex; mode=display">
+w^*,b^*=arg\min_{w,b} L</script><p>在数学上求解优化问题有很多方法，我们这里只讲Gradient Descent这一种方法。为了简单起见，我们线假设$b$不动的情况下，寻找让Loss最小的$w$</p>
+<p>那么$w$取不同的值的时候，就会得到一条Loss曲线。那么我们的目的就是找到这个loss曲线中最低的那一个点。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220109153602769.png" alt="b不变的情况下w的loss曲线" style="zoom:50%;"></p>
+<p>Gradient Descent的步骤如下：</p>
+<ol>
+<li><p>（随机）选择一个初始值$w^0$。注意，现在确实有研究怎么样选择这个初始值会更好，但是我们这里先不关注这些，即假装不存在这些选择初始值的方法，我们就是随机选择一个初始值。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220109154027659.png" alt="随机初始一个值" style="zoom:50%;"></p>
+</li>
+<li><p>接下来我们计算Loss对w的微分$\frac{\partial L}{\partial w}|_{w=w^0}$ ，即曲线的斜率</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220109153945061.png" alt="计算微分" style="zoom:50%;"></p>
+</li>
+<li><p>如果曲线的斜率是负的，那就表示Loss曲线左边高右边低；反之如果曲线的斜率是正的，那就表示Loss曲线右边高左边低。为了能够达到较低的Loss，我们的模型就应该往Loss曲线上低的地方去。 </p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220109155244574.png" alt="向梯度较小的方向前进" style="zoom: 33%;"></p>
+<p>那在前进的时候就会有一个问题，就是到底该前进（下降）多少。由于我们无法控制求导得到的值的大小，因此我们引入一个参数$\eta$来控制下降的多少。这个参数$\eta$称为学习率。由于$\eta$使我们事先设定的，机器没有办法学习这样的参数，因此我们称这些需要自己设定的参数为<strong>超参数</strong>，Hyperparameter</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220109161600158.png" alt="梯度下降" style="zoom: 33%;"></p>
+<p>接下来我们要做的事情，就是重复梯度下降的过程，不断地更新$w$的值。直到最后求到的梯度为0，这样无论$\eta$怎样的变都没有办法继续下降。</p>
+<p>然而使用梯度下降有一个很大的问题就是我们没有找到真正最好的解。我们只会找到一次次好的值。我们称全局最好的值为global minima而局部最小的值为local minima。</p>
+<p>因此就会有人说，深度学习使用梯度下降的一个缺点就是会卡在Local Minima。当然，现在有一些研究就是对梯度下降进行了优化，使得其具有避免卡在local minima的能力</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220109161732671.png" alt="Gradient Descent卡在local minima" style="zoom:33%;"></p>
+<p>上面我们是只给出了单变量$w$的优化，下面我们给出两个变量的优化</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220109162311503.png" alt="两个变量的优化" style="zoom: 33%;"></p>
+<p>在刚才的loss surface上，我们整个的优化过程为</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220109162523548.png" alt="Loss Surface上的优化"></p>
+</li>
+</ol>
+</li>
+</ol>
+<p>最后通过上面的三步：</p>
+<ol>
+<li>根据Domain Knowledge猜测函数的形式（构建模型）</li>
+<li>定义loss function</li>
+<li>利用Gradient Descent进行优化</li>
+</ol>
+<p>我们就找到了最佳的函数。这三步就像把大象放进冰箱里去一样。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220109163001969.png" alt="image-20220109163001969"></p>
+<p>最后我们需要注意的是，在上面的这个case中，我们的loss的最佳值是0，而模型其实训练到最后都没有达到最佳的loss，这个时候其实就是我们的模型的极限只能到这里了，这就是我们 $y=b+wx_1$这个model 的 bias。想要进一步的提升我们的模型，就需要通过我们的Domain Knowledge来设计更好地和函数。</p>
+<h3 id="C-Training-and-Testing"><a href="#C-Training-and-Testing" class="headerlink" title="C. Training and Testing"></a>C. Training and Testing</h3><p>我们前面的三步加在一起，称为Training。在Training阶段我们通过训练得到了最优的解。</p>
+<p>然而有一个问题就是这些解真的是最优解么？答案其实并不是。因为我们现在的阶段是Training阶段，我们其实是在已经知道答案的数据上计算loss。我们这里只是在自嗨而已，我们假装不知道第二天的观看次数然后预测完了之后进行计算。</p>
+<p>而我们真正关心的，应该是在我们不知道答案的数据上，模型也能给出这么好的结果。因此我们接下来要做的，就是用这个函数真的来进行预测。即我们在2020年末用新的数据来预测2021年的观看人数。最后，真实带入进去计算之后得到的在真实的不知道答案的数据上，跑下来的结果是Loss等于0.58</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220109163417888.png" alt="Training阶段"></p>
+<h2 id="4-Linear-Models"><a href="#4-Linear-Models" class="headerlink" title="4. Linear Models"></a>4. Linear Models</h2><p>正如前面所说，我们的模型在训练阶段得到了模型之后要在测试阶段用从来没有见过的数据（不在测试集中的数据）验证一下看看模型的效果如何。那么上面的线性模型跑下来的结果就如下图</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220109164043776.png" alt="线性模型的预测额真实值"></p>
+<p>每天观看的矢量基本上就在4~5k左右，而预测的误差达到了0.58k，即平均每天差了600多人次，误差大概20%左右。</p>
+<p>此外，我们可以看到，蓝色的线基本上就是红色的线向右平移过去了而已。这就意味着机器的预测基本上就是把前一天的拿来作为第二天的预测。</p>
+<p>此外，从红色的真实曲线上，我们其实也能够从中得到一些新的“知识“：</p>
+<ul>
+<li>观看的人数的涨跌具有周期性。每个七天都会有两天观看人数很低。这两天对应的就是周五和周六。周末毕竟大家都不想学习，所以已能够理解</li>
+</ul>
+<p>因此在我们通过对原始数据的观察之后，我们有了新的Domain Knowledge，因此根据新的Domain Knowledge，我们向能不能让模型每次预测下一天的时候都会看看前面几天的数据？这样的话模型就有可能学到当前是周几，然后就会有更好的表现。</p>
+<p>退一万步来讲，模型直接把前七天的数据复制过来作为预测也是未尝不可的，也许会预测的更准说不定。</p>
+<p>因此，我们现在新的模型如下</p>
+<script type="math/tex; mode=display">
+y=b+\sum_{j=1}^7w_jx_j</script><p>其中，$j$表示几天前。</p>
+<p>那么新的模型训练之后在预测集上进行预测，确实发现我们的性能有了不错的提升</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220109185737315.png" alt="考虑前7天和前1天的模型性能对比" style="zoom:50%;"></p>
+<p>由于我们考虑了前七天的数据，因此我们会有七个$w_j$的值，计算下来具体的结果如下：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220109190112726.png" alt="7天模型的所有参数的值" style="zoom:50%;"></p>
+<p>类似的，我们就想模型既然看了前七天的数据，他的性能有所提升，那么如果模型看了前一个月的数据呢？因此，我们可以修改我们的模型为</p>
+<script type="math/tex; mode=display">
+y=b+\sum_{j=1}^{28}w_jx_j</script><p>最后训练下来的结果，确实看了前一个月数据的模型的性能还会有所提升</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220109190621320.png" alt="看了一个月数据的模型" style="zoom:50%;"></p>
+<p>我们更进一步，让模型看一下前两个月的数据，即</p>
+<script type="math/tex; mode=display">
+y=b+\sum_{j=1}^{56}w_jx_j</script><p>可是这个时候尽管在训练集上模型的精度有所提升，但是在没有见过的数据（测试集）上，模型的精度并没有提升</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220109211728804.png" alt="看了两个月数据的模型" style="zoom:50%;"></p>
+<p>那么这就意味着，考虑天数的这个模型已经到了其极限了。</p>
+<p>上面的，给feature直接乘以一个数值然后再加上一个数值的模型，我们称为Linear Model</p>
+<h2 id="5-From-Linear-Model-to-New-Model"><a href="#5-From-Linear-Model-to-New-Model" class="headerlink" title="5. From Linear Model to New Model"></a>5. From Linear Model to New Model</h2><h3 id="A-Limited-Linear-Model"><a href="#A-Limited-Linear-Model" class="headerlink" title="A. Limited Linear Model"></a>A. Limited Linear Model</h3><p>在上面，我们其实已经将Linear的Model发挥到了极限。然而即便如此，每天还是有500多人数的预测的误差，因此我们就像能不能进一步提升我们的模型。</p>
+<p>一个合理的质疑就是Linear的Model是不是太简单了？</p>
+<p>为什么这样说呢？我们其实可以想象得到，$x_1$和$y$之间可能具有复杂的关系，例如下图的红线。而Linear的Model不管怎么样的改变$w$和$b$，都只能改变直线的倾斜程度和与$y$轴的截距，无法从根本上改变线型。即第二天的观看人数一定前一天的观看人数越多，第二天的观看人数越多/少。</p>
+<p>然而就像红色的线，有可能前一天看得人多过了某一个程度之后，第二天看的人就越少。然而对于Linear的Model而言，不管怎么样的改变$w$和$b$，都无法产生红色的线。</p>
+<p><strong>因此Linear的Model有很大的limitation</strong>。这种<strong>来自于Model的限制，称为Model的Bias</strong>。即Model能力的上限。</p>
+<p>为此，我们就需要一个更加有弹性的，上限更高的一个Model。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220109212237817.png" alt="Linear Model具有非常大的Model Bias" style="zoom:50%;"></p>
+<h3 id="B-Synthesis-of-Piecewise-Curve"><a href="#B-Synthesis-of-Piecewise-Curve" class="headerlink" title="B. Synthesis of Piecewise-Curve"></a>B. Synthesis of Piecewise-Curve</h3><p>为了产生红色这样的曲线，我们其实可以用一个常数再加上一群不同的蓝色的函数来得到上面红色的曲线。蓝色的函数在输入的值很大或者很小的时候都是一个常数，只有值在中间恰好的时候是Slope。</p>
+<p>下面蓝色的函数其实有自己专有的名字，但是我们现在先称呼他为一个“蓝方 ”</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220109213739995.png" alt="使用蓝方来合成红方" style="zoom:50%;"></p>
+<p>那么首先这个常数项，我们可以通过红方和$y$轴的交点获得</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220109214104095.png" alt="获得常数项" style="zoom:50%;"></p>
+<p>那么要怎么样加上蓝方才能够得到红方呢？我们首先可以这样加：我们让1号蓝方的slope的起点设在红方的第一个拐点，终点设在红方的第二个拐点，并且保持坡度一样。那么这样，1号、2号蓝方相加，就可以得到红方第二个拐点前的部分</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220109214211825.png" alt="合成第一段红方" style="zoom:50%;"></p>
+<p>接下来如法炮制，加上第二个蓝方，就可以得到红方的第二段曲线</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220109214525965.png" alt="合成红方第二段曲线" style="zoom:50%;"></p>
+<p>接下来，红方的最后一段，就用第三个蓝方来合成</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220109214634948.png" alt="合成整个红方" style="zoom:50%;"></p>
+<p>最后，我们把0、1、2、3个蓝方相加，就可以得到红方。</p>
+<p>其实对于所有的Piecewise的Cureve，都能够通过蓝方来合成，例如下面的一些Piecewise的红方，只是不同的Piecewise的红方需要不同的数量、不同形状的蓝方。通常而言，越复杂的Piecewise的红方需要的蓝方就越多</p>
+<blockquote>
+<p>Piecewise的curve指的是由线段所组成的Curve</p>
+</blockquote>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220109215345481.png" alt="不同数量、形状的蓝方可以合成任意的Piecewise的红方" style="zoom:50%;"></p>
+<h3 id="C-Beyond-Piecewise-Curve"><a href="#C-Beyond-Piecewise-Curve" class="headerlink" title="C. Beyond Piecewise Curve"></a>C. Beyond Piecewise Curve</h3><p>在我们日常中，我们其实更常见的函数并不是Piecewise的曲线，而是光滑的、没有间断点的函数，例如下面的函数。但是我们的蓝方函数都是合成有间断点的Piecewise的曲线。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220109220451867.png" alt="更常见的函数" style="zoom: 80%;"></p>
+<p>其实问题也不大，我们主需要在连续的光滑曲线上取有点即可，只要我们取的点越多，就越接近原来的光滑函数，拟合的结果就越好。</p>
+<p>因此，只要我们取的点够多、取的点位置适当，我们就可以逼近这条不是Piecewise的曲线。因此，我们实际上可以用足够多的蓝方来拟合任意的曲线</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110002728915.png" alt="在不是Piecewise的曲线上取点" style="zoom: 50%;"></p>
+<h3 id="D-From-Hard-to-Soft"><a href="#D-From-Hard-to-Soft" class="headerlink" title="D. From Hard to Soft"></a>D. From Hard to Soft</h3><p>我们就是要写出来蓝方的表达式。因为上面的蓝方我们给的是分段的函数，并且由于在拟合的时候不同的蓝方需要的开始转折的$x$的不同，因此比较难写出来蓝方的表达式。而且在计算的时候由于分段会导致条件比较，因此就是用一条曲线来逼近、表示蓝方。</p>
+<p>用于逼近蓝方的曲线就叫做$Sigmoid$函数，其表达式如下</p>
+<script type="math/tex; mode=display">
+y=c\frac 1{1+e^{-(b+wx_1)}}=csigmoid(b+wx_1)</script><p>Sigmoid和蓝方非常相近，在$x$很大或者很小的时候，$y$都是常数，在中间是非线性的上升。</p>
+<p>Sigmoid如果要翻译中文，可以是S型曲线。</p>
+<p>其实在历史上，是先出现了Sigmoid函数才出现了我们上面的蓝方，不过为了方便讲解，因此我们先介绍的蓝方再介绍的Sigmoid函数。所以上面一直再说的蓝方，其实称为Hard Sigmoid</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110101912902.png" alt="用Sigmoid拟合蓝方" style="zoom:67%;"></p>
+<p>那么还有一个问题，就是我们上面的蓝方的slope是可以左右平移的，那么Sigmoid又该如何去平移呢？</p>
+<p>事实上，我们改变Sigmoid中的$c$、$b$、$w$即可制造出不同的Sigmoid函数。而有了不同的Sigmoid函数之后，我们叠加起来就可以去逼近不同的Piecewise的曲线，而Piecewise的曲线又可以去逼近各种各样光滑的曲线</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110103006819.png" alt="不同的Sigmoid函数" style="zoom:50%;"></p>
+<p>所以对于上面的红方，我们就可以用几个Sigmoid来逼近</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110103451654.png" alt="使用Sigmoid逼近红方" style="zoom:50%;"></p>
+<h3 id="E-From-Linear-to-New-Model"><a href="#E-From-Linear-to-New-Model" class="headerlink" title="E. From Linear to New Model"></a>E. From Linear to New Model</h3><p>总结一下上面，由于Linear Model存在非常大的Model Bias，而我们首先通过Hard Sigmoid来拟合任意的函数，最后用Sigmoid来拟合Hard Sigmoid。所以我们现在就获得了一个更加flexible的model </p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110103722736.png" alt="从Linear到Sigmoid"></p>
+<p>那么其实，$y=b+wx_1$这个并不是我们表现最好的Linear Model，上面我们的最好的Linear Model是看多个feature的Linear Model，即</p>
+<script type="math/tex; mode=display">
+y=b+\sum_{j=1}^nw_jx_j</script><p>那么我们现在要把这个Linear的Model扩展成Sigmoid这种Model的话，只需要把Sigmoid里面的东西换掉即可，则式子如下：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110105012755.png" alt="扩展看多个Feature的Linear Model"></p>
+<p>上面的这个如果看起来头痛的话，我们用更直观的方式把他来画出来。我们现在先假设$j=1,2,3$，即只有三个Feature，模型只会看前三天的观看人数。我们还假设$i=1,2,3$，即我们用三个Sigmoid Function来拟合曲线。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110105431002.png" alt="Model的表达式"></p>
+<p>那么我们首先先画出来输入</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110105307581.png" alt="输入只有前三天的人数"></p>
+<p>然后我们再画出来三个Sigmoid函数，一个黑色的圆圈表示一个Sigmoid函数，由于我们有三个Sigmoid函数，因此就有三个黑色的圆圈</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110105909018.png" alt="三个Sigmoid函数"></p>
+<p>画完了基础的元素之后，我们就开始画出来运算的步骤。</p>
+<p>我们首先看要怎么样画出来Sigmoid内部括号里的东西。括号里的东西就是给每个$x$乘以一个数字$w$，然后再把三者相加，最后加一个$b$，所以我们下面这样画括号内部的东西</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110110548596.png" alt="画出括号内的东西"></p>
+<p>同理，我们画出来第二个、第三个Sigmoid函数，我们就不写出来所有的$w$了，那么最后画下来的结果如下图</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110111044131.png" alt="画完三个Sigmoid之后的函数"></p>
+<p>为了简单期间，我们把每个括号内计算的结果记为$r$，那么最后的结果就是</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110111305968.png" alt="最终的计算结果"></p>
+<p>我们把上面三个括号的式子向量化，用矩阵乘法的形式来表达，就有向量$\vec x$乘以一个矩阵$W$在加上一个向量$\vec b$就得到了一个向量$\vec r$</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110111423642.png" alt="矩阵乘法表示的括号内的运算" style="zoom:50%;"></p>
+<p>所以括号里干事事情就是下面的图</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110111758709.png" alt="三个Sigmoid括号内计算的示意" style="zoom:67%;"></p>
+<p>接下来，赛算完括号里的东西后，要通过Sigmoid函数，所以三个$r$要分别通过三个Sigmoid函数。我们同样简写一下，用一个小写的希腊字母sigma来表示Sigmoid函数，即</p>
+<script type="math/tex; mode=display">
+\begin{cases}
+a_1=sigmiod(r_1)\\
+a_2=sigmiod(r_2)\\
+a_3=sigmiod(r_3)
+\end{cases}
+\Leftrightarrow
+\vec a = \sigma(\vec r)</script><p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110112031971.png" alt="通过三个Sigmoid函数" style="zoom:50%;"></p>
+<p>我们最后一步，就是把三个$a$再用一个Linear Model，即乘以权重再相加，用矩阵表示，就是</p>
+<script type="math/tex; mode=display">
+y=\vec b + {\vec c^T} \vec a</script><p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110113027230.png" alt="最后一步" style="zoom:50%;"></p>
+<p>所以我们上面一连串的运算，用矩阵表示出来就是</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110113246168.png" alt="矩阵运算表示的模型" style="zoom:50%;"></p>
+<p>最后，我们用一个式子表示就是</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110113410265.png" alt="矩阵表示的模型" style="zoom:50%;"></p>
+<p>上面就是我们得到的New Model</p>
+<h2 id="6-New-Model"><a href="#6-New-Model" class="headerlink" title="6. New Model"></a>6. New Model</h2><p>上面我们通过Linear的Model不断深入，得到了New Model。那么我们下面就将聚焦于New Model的优化</p>
+<h3 id="A-Model-Parameter-Function-with-Unknow-Parameter"><a href="#A-Model-Parameter-Function-with-Unknow-Parameter" class="headerlink" title="A. Model Parameter / Function with Unknow Parameter"></a>A. Model Parameter / Function with Unknow Parameter</h3><p>我们在前面说过，机器学习的模型其实都是带有参数的函数，New Model也不例外，例如我们上边的New Model</p>
+<script type="math/tex; mode=display">
+y=b+c^T\sigma(b+Wx)</script><p>我们先重新定义一下符号。</p>
+<p>在上式中，$x$称为feature，而所有未知的参数是$W$、$b$、$c$、$b$。注意我们有两个$b$，一个$b$是向量，另外一个是标量</p>
+<p>由于$x$是feature，是一开始就给定的，因此我们实际上需要让机器去寻找的参数就是$W$、$b$、$c$、$b$</p>
+<p>我们把这四个未知的参数拿出来，拉直，拼成一个很长的向量，我们用$\theta$来表示这个向量，如下图。</p>
+<p>那么$\theta$中有一些值来自于W，有一些值来自于$b$，还有一些来自于$c$，我们这里就不去管他们了，把模型中所有未知的参数统称为模型的参数$\theta$</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110114652967.png" alt="定义模型的参数" style="zoom:50%;"></p>
+<h3 id="B-Back-to-ML-Framework-Define-Loss"><a href="#B-Back-to-ML-Framework-Define-Loss" class="headerlink" title="B. Back to ML Framework: Define Loss"></a>B. Back to ML Framework: Define Loss</h3><p>我们在前面讲Linear Model的时候，说道：模型就是函数，而机器学习就是让机器去找函数的最佳参数。我们找这个函数的过程包括三步：</p>
+<ol>
+<li>定义模型 / 定义参数</li>
+<li>定义Loss</li>
+<li>使用Gradient Descent来优化参数，找到最佳的参数</li>
+</ol>
+<p>那么对于New Model来说，我们上面定义了New Model的含参函数表达式（function with unknown parameter），接下来就到了第二步骤，要定义Loss</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110115348831.png" alt="ML Framework第二步：定义Loss" style="zoom:50%;"></p>
+<p>我们前面说过，loss function是模型参数的函数，对于Linear的Model来说，$L=L(w,b)$，而对于New Model来说，我们上面已经定义了模型的参数为$\theta$，所以对于神经网络来说，$L=L(\theta)$</p>
+<p>而对于Loss具体的计算来说，由于Loss的计算是根据数据定义的，而我们的数据其实没有变，只是变了模型，所以loss function的计算其实没有变，只是符号改变了一下。</p>
+<p>我们给定一组参数的值$b,c,b,W$，然后让模型用这套参数给出预测$y$，再和真实的label $\hat y$作比较，计算一个error $e$，最后做平均即可</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110115944808.png" alt="神经网络模型计算Loss" style="zoom:50%;"></p>
+<h3 id="C-Back-to-ML-Framework-Optimize"><a href="#C-Back-to-ML-Framework-Optimize" class="headerlink" title="C. Back to ML Framework: Optimize"></a>C. Back to ML Framework: Optimize</h3><p>在定义完模型和损失函数之后，接下来的一步就是对模型进行优化了。</p>
+<p>而对New Model进行Optimization和对Linear的Model进行Optimization的算法是一模一样的，就是Gradient Descent</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110120242698.png" alt="ML Framework第三步：优化模型" style="zoom:50%;"></p>
+<p>我们这里的目标就是</p>
+<script type="math/tex; mode=display">
+\theta^* = arg\min_\theta L</script><p>而</p>
+<script type="math/tex; mode=display">
+\theta = \begin{bmatrix}
+\theta_1\\
+\theta_2\\
+\theta_3\\
+\vdots
+\end{bmatrix}</script><p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110120608012.png" alt="优化模型" style="zoom:50%;"></p>
+<p>那么同样的，我们还是三步走：</p>
+<ol>
+<li><p>首先随机初始化一个$\theta$的初始值$\theta^0$</p>
+</li>
+<li><p>接下来根据损失函数得到的Loss计算参数的微分，得到g。因为我们的参数是一个向量，所以计算得到的微分也是一个向量，这个微分向量称为Gradient</p>
+<script type="math/tex; mode=display">
+g=\begin{bmatrix}
+\frac{\partial L}{\partial \theta_1}|_{\theta=\theta^0}\\
+\frac{\partial L}{\partial \theta_2}|_{\theta=\theta^0}\\
+\frac{\partial L}{\partial \theta_3}|_{\theta=\theta^0}\\
+\frac{\partial L}{\partial \theta_4}|_{\theta=\theta^0}\\
+\vdots
+\end{bmatrix}</script><p>上面的式子可以简写为</p>
+<script type="math/tex; mode=display">
+g=\nabla L(\theta^0)</script></li>
+<li><p>第三步就是利用计算得到的Gradient来更新我们的参数，即</p>
+<script type="math/tex; mode=display">
+\begin{bmatrix}
+\theta_1^1\\
+\theta_2^1\\
+\theta_3^1\\
+\vdots
+\end{bmatrix}
+\leftarrow
+\begin{bmatrix}
+\theta_1^0\\
+\theta_2^0\\
+\theta_3^0\\
+\vdots
+\end{bmatrix}
+-
+\begin{bmatrix}
+\eta \frac{\partial L}{\partial \theta_1}|_{\theta=\theta^0}\\
+\eta \frac{\partial L}{\partial \theta_2}|_{\theta=\theta^0}\\
+\eta \frac{\partial L}{\partial \theta_3}|_{\theta=\theta^0}\\
+\vdots
+\end{bmatrix}</script><p>简写上面的式子就是</p>
+<script type="math/tex; mode=display">
+\theta^1\leftarrow \theta^0-\eta g</script></li>
+<li><p>然后重复上面的步骤，不断计算梯度、进行优化，直到我们不想继续算下去或者算出来的Gradient全是0.</p>
+<p>当然在实际上，基本上都是我们不想继续算了，很少会有算到的Gradient全是0</p>
+<script type="math/tex; mode=display">
+\theta^2\leftarrow \theta^1-\eta g\\
+\theta^3\leftarrow \theta^2-\eta g\\
+\theta^4\leftarrow \theta^3-\eta g\\
+\vdots</script></li>
+</ol>
+<h3 id="D-Mini-Batch"><a href="#D-Mini-Batch" class="headerlink" title="D. Mini-Batch"></a>D. Mini-Batch</h3><p>上面其实已经介绍完了New Mode的训练。其实在训练过程中还有一个小问题，就是在实际的计算的过程中，我们每次计算梯度并不是直接用所有的数据，而是用所有的数据中的一小部分。</p>
+<p>我们用这一小部分数据在一起算一个Loss，然后用这一小部分的数据算到一个Loss $L^1$。然后用这个Loss去算一个梯度$g=\nabla L^1(\theta^0)$</p>
+<p>这一小部分数据就称为一个<strong>Batch</strong>。一个Batch里的数据直接随机抽样就可以得到</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110123138076.png" alt="Mini-Batch"></p>
+<p>然后我们继续取第二个Batch计算、第三个Batch计算……</p>
+<p>直到我们用完所有的数据。把所有的Batch都计算过一遍就称为一个<strong>epoch</strong></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110123426817.png" alt="Update with different Batches" style="zoom:50%;"></p>
+<p>至于为什么要使用Batch？下个文章再说（下节课老师才讲），毕竟这个文章以及有8500字了。</p>
+<p>为了加深影响，举两个例子来说，</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110123625439.png" alt="两个例子" style="zoom:50%;"></p>
+<p>此外，由于Batch的大小也是我们自己定的，因此一个Batch有多少个数据，即Batch Size也是一个由我们决定的Hyper-Parameter</p>
+<h3 id="E-ReLu-Rectified-Linear-Unit-ReLU"><a href="#E-ReLu-Rectified-Linear-Unit-ReLU" class="headerlink" title="E. ReLu: Rectified Linear Unit (ReLU)"></a>E. ReLu: Rectified Linear Unit (ReLU)</h3><p>我们其实还可以对模型做更多的变形。例如上面我们是用Sigmoid来替换Hard的Sigmoid。其实我们也可以用别的来代替Sigmoid</p>
+<p>例如用下面的函数</p>
+<script type="math/tex; mode=display">
+y=\begin{cases}
+x, & x> 0\\
+0, & x <0
+\end{cases}</script><p>简写为</p>
+<script type="math/tex; mode=display">
+y=c\max(0, b+wx_1)</script><p>我们只需要改变$0$、w、$w$、$b$就同样可以实现线的平移。</p>
+<p>其实用两个ReLu就可以合成Hard Sigmoid，例如下面的图</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110124230269.png" alt="从Sigmoid到ReLu" style="zoom:50%;"></p>
+<p>所以如果想在模型中使用Hard Sigmoid而非Sigmoid的话，每个Sigmoid用两个Relu代替就行。</p>
+<p>类似的，Sigmoid、ReLu、Hard Sigmoid这些函数在神经网络中，我们称其为<strong>Activation Function</strong></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110124446031.png" alt="两个ReLu代替Sigmoid" style="zoom:50%;"></p>
+<p>当然，还有其他的Activation Function。至于哪种激活函数比较好呢？下次再讲（写），这里快写不下了</p>
+<h2 id="7-Case-Study-Neural-Network-Application"><a href="#7-Case-Study-Neural-Network-Application" class="headerlink" title="7. Case Study: Neural Network Application"></a>7. Case Study: Neural Network Application</h2><p>我们上面讲解了新模型的训练，那么接下来就把神经网络运用到上面YouTube观看次数预测的案例中去</p>
+<h3 id="A-单层"><a href="#A-单层" class="headerlink" title="A. 单层"></a>A. 单层</h3><p>我们首先用上面的New Model，表达式如下，然后选用不同的ReLu的数量。</p>
+<p>我们可以看到使用了新的模型的性能确实相比于Linear的Model有所提升，但是到了1000个ReLu之后，性能又到了瓶颈</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110125607587.png" alt="单层网络实验结果"></p>
+<h3 id="B-多层"><a href="#B-多层" class="headerlink" title="B. 多层"></a>B. 多层</h3><p>我们上面都是只用了一层的新模型，即只有一层Activation Function。我们其实可以把第一层输出的$a$当做输入的$x$丢给下一层继续去计算</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110125940383.png" alt="Deeper Network"></p>
+<p>那么通过这样不断地重复，我们就可以获得更深的模型。这里到底要叠多深，也是一个超参数。</p>
+<p>我们继续进行实验，每一层用100个ReLu，实验的结果如下</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110130241302.png" alt="深层网络的实验结果"></p>
+<p>下面就是真实的通过三层ReLu的实验结果</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110130440493.png" alt="三层ReLu的结果"></p>
+<p>我们能够看到，不断叠深的模型确实学到了周期这个规律，并且大部分时间预测的都很准。</p>
+<p>但是还是有一个问题，就在最右边出现了一个低谷，当天机器并没有预测到低谷，而是在第二天才出现了低谷。</p>
+<p>那么这一天其实就是过年，这一天是除夕，没人会在除夕学机器学习吧？<span class="github-emoji"><span>😂</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f602.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110130633256.png" alt="机器没有预测到低谷" style="zoom:50%;"></p>
+<h2 id="8-Origin-of-Name"><a href="#8-Origin-of-Name" class="headerlink" title="8. Origin of Name"></a>8. Origin of Name</h2><p>就像Linear Model一样，我们上面的模型也要有一个名字，毕竟有了一个Fancy的名字才能够吸引人 </p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110130908501.png" alt="给模型一个Fancy的名字"></p>
+<p>对于每一个激活函数，我们把他们称为一个Neural，那么整个模型就成为Neural Network</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110131017180.png" alt="Neural Network"></p>
+<p>然而Neural Network这个名词在80、90年代其实就已经被玩烂了。那时候的人们对Neural Network的预期很高。可是最后受到当时技术的限制，Neural Network的表现让人大跌眼镜。所以Neural Network的名字就被搞臭掉了。</p>
+<p>基本上Paper里有Neural Network，Paper就会被据掉。所以后来，为了重振Neural Network的雄风，就给了Neural Network新的名字。</p>
+<p>我们把每一层称为一个Hidden Layer，很多层在一起那就是一个Deep的Network，那么就把这个技术称为Deep Learning。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110131425996.png" alt="Deep Learning"></p>
+<h2 id="9-Deep-Network"><a href="#9-Deep-Network" class="headerlink" title="9. Deep Network"></a>9. Deep Network</h2><p>后来随着深度学习技术的发展，人们把网络越叠越深，2012年AlexNet有8层，在图像分类上的错误率为16.4%。到了2014年，牛津的VGG叠了19层，错误率为7.3%。在同一年谷歌的GoogleNet叠了22层，错误率降到了6.7%。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110131545131.png" alt="网络在逐渐变深"></p>
+<p>然而他们都不是最深的模型，到了2015年，何凯明的Residual Network有152层，比台湾最高的楼台北101还要高</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110132028268.png" alt="ResNet非常深"></p>
+<p> 当然，ResNet能训练的这么深其实是由于他用了特殊的结构，这个结构以后再讲</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110132212409.png" alt="ResNet特殊的结构"></p>
+<p>到这里，我们其实就已经讲完了深度学习</p>
+<h2 id="10-Why-Deep-Nor-Fat？"><a href="#10-Why-Deep-Nor-Fat？" class="headerlink" title="10. Why Deep Nor Fat？"></a>10. Why Deep Nor Fat？</h2><p>最后，其实有一个微妙的问题，就是我们前面说所有曲线都可以用Piecewise的曲线来逼近，因此对于Neural Network来说，只要有足够多的Neural就可以逼近任意的函数了</p>
+<p>那么有一个问题，我们为什么要把网络叠深而不是把所有的神经元放到同一层，即为什么不是把网络变宽而不是变深？</p>
+<p>这个留着下节课讲</p>
+<h2 id="11-Why-don’t-we-go-deeper"><a href="#11-Why-don’t-we-go-deeper" class="headerlink" title="11. Why don’t we go deeper?"></a>11. Why don’t we go deeper?</h2><p>同样是上面的例子，我们可能觉得越深的网络越好，可是事实却是四层的模型不如三层的模型。</p>
+<p>这其实是由于出现了Overfitting，即在训练数据上的表现变好而在没看过的数据上的表现变差。</p>
+<p>关于Overfitting，我们下次再讲</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110133856191.png" alt="Overfitting"></p>
+<h2 id="12-To-learn-More"><a href="#12-To-learn-More" class="headerlink" title="12. To learn More"></a>12. To learn More</h2><p>最后，是关于这节课一些没有讲到，未来也不一定会用，但是很有用的知识，由于本次课程完全关注深度学习，因此并不会讲解。这是之前的课程的讲解</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110134223640.png" alt="image-20220110134223640"></p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Jack Wang</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://jackwang0107.github.io/2022/01/08/li-hong-yi-ml2021-spring-2-introduction-of-deeplearning-machinelearning/">https://jackwang0107.github.io/2022/01/08/li-hong-yi-ml2021-spring-2-introduction-of-deeplearning-machinelearning/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Jack Wang</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/Deep-Learning/">
+                                    <span class="chip bg-color">Deep Learning</span>
+                                </a>
+                            
+                                <a href="/tags/Hungyi-Li/">
+                                    <span class="chip bg-color">Hungyi Li</span>
+                                </a>
+                            
+                                <a href="/tags/Machine-Learning/">
+                                    <span class="chip bg-color">Machine Learning</span>
+                                </a>
+                            
+                                <a href="/tags/Neural-Network/">
+                                    <span class="chip bg-color">Neural Network</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.png" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2022/01/10/li-hong-yi-ml2021-spring-3-neural-network-training-manual/">
+                    <div class="card-image">
+                        
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110183944100.png" class="responsive-img" alt="李宏毅ML2021-Spring-3: Neural Network Training Guidance">
+                        
+                        <span class="card-title">李宏毅ML2021-Spring-3: Neural Network Training Guidance</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            本文是李宏毅Machine Learning 2021 Spring 第三节课General Guidance的笔记，本节课主要讲解了深度学习的训练攻略
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-01-10
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%9D%8E%E5%AE%8F%E6%AF%85ML2021-Spring-Notes/" class="post-category">
+                                    李宏毅ML2021 Spring Notes
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Deep-Learning/">
+                        <span class="chip bg-color">Deep Learning</span>
+                    </a>
+                    
+                    <a href="/tags/Hungyi-Li/">
+                        <span class="chip bg-color">Hungyi Li</span>
+                    </a>
+                    
+                    <a href="/tags/Machine-Learning/">
+                        <span class="chip bg-color">Machine Learning</span>
+                    </a>
+                    
+                    <a href="/tags/Neural-Network/">
+                        <span class="chip bg-color">Neural Network</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/01/08/li-hong-yi-ml2021-spring-1-introduction/">
+                    <div class="card-image">
+                        
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220109122555074.png" class="responsive-img" alt="李宏毅ML2021-Spring-1: Introduction">
+                        
+                        <span class="card-title">李宏毅ML2021-Spring-1: Introduction</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            本文是李宏毅Machine Learning 2021 Spring 第一节课Introduction的笔记，记录了课程相关的要求
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-01-09
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%9D%8E%E5%AE%8F%E6%AF%85ML2021-Spring-Notes/" class="post-category">
+                                    李宏毅ML2021 Spring Notes
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Deep-Learning/">
+                        <span class="chip bg-color">Deep Learning</span>
+                    </a>
+                    
+                    <a href="/tags/Hungyi-Li/">
+                        <span class="chip bg-color">Hungyi Li</span>
+                    </a>
+                    
+                    <a href="/tags/Machine-Learning/">
+                        <span class="chip bg-color">Machine Learning</span>
+                    </a>
+                    
+                    <a href="/tags/Neural-Network/">
+                        <span class="chip bg-color">Neural Network</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: JackWang&#39;s Blog<br />'
+            + '文章作者: Jack Wang<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    });
+</script>
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2021-2022</span>
+            
+            <a href="/about" target="_blank">Jack Wang</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">297k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+                <span id="sitetime"> Loading ...</span>
+                <script>
+                    var calcSiteTime = function () {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2021";
+                        var startMonth = "11";
+                        var startDate = "12";
+                        var startHour = "0";
+                        var startMinute = "0";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+
+                        // 区分是否有年份.
+                        var language = 'zh-CN';
+                        if (startYear === String(todayYear)) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            var daysTip = 'This site has been running for ' + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                daysTip = '本站已运行 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                daysTip = '本站已運行 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = daysTip;
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            var yearsAndDaysTip = 'This site has been running for ' + diffYears + ' years and '
+                                + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                yearsAndDaysTip = '本站已运行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                yearsAndDaysTip = '本站已運行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+                        }
+                    }
+
+                    calcSiteTime();
+                </script>
+            
+            <br>
+            
+                <span id="icp"><img src="/medias/icp.png"
+                                    style="vertical-align: text-bottom;"/>
+                <a href="https://beian.miit.gov.cn" target="_blank">陕ICP备2021014294号-1</a>
+            </span>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+    <a href="mailto:2232123545@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2232123545" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2232123545" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+        
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/sakura.js"><\/script>');
+            }
+        </script>
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

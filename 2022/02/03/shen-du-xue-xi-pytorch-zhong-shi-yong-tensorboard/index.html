@@ -1,0 +1,1520 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Pytorch中使用TensorBoard, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
+    <meta name="description" content="本文记录了如何在Pytorch中使用Tensorboard（备忘录）">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>Pytorch中使用TensorBoard | JackWang&#39;s Blog</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.2">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+
+   <style>
+    body{
+       background-image: url(https://cdn.jsdelivr.net/gh/Tokisaki-Galaxy/res/site/medias/background.jpg);
+       background-repeat:no-repeat;
+       background-size: 100% 100%;
+       background-attachment:fixed;
+    }
+</style>
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">JackWang&#39;s Blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-book-reader" style="zoom: 0.6;"></i>
+      
+      <span>博客</span>
+      <i class="fas fa-chevron-down" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/tags">
+          
+          <i class="fas fa-tags" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按标签归类文章</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories">
+          
+          <i class="fas fa-bookmark" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按目录归类文章</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/archives">
+          
+          <i class="fas fa-archive" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按日期分类文章</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">JackWang&#39;s Blog</div>
+        <div class="logo-desc">
+            
+            JackWang的个人博客
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-book-reader"></i>
+			
+			博客
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>
+
+                  <a href="/tags " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-tags" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按标签归类文章</    span>
+
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/categories " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-bookmark" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按目录归类文章</    span>
+
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/archives " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-archive" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按日期分类文章</    span>
+
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('抱歉，这篇文章并不想让所有人都看到，请输入授权密码观看')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/tensorboard.gif')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Pytorch中使用TensorBoard</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Python/">
+                                <span class="chip bg-color">Python</span>
+                            </a>
+                        
+                            <a href="/tags/Deep-Learning/">
+                                <span class="chip bg-color">Deep Learning</span>
+                            </a>
+                        
+                            <a href="/tags/Pytorch/">
+                                <span class="chip bg-color">Pytorch</span>
+                            </a>
+                        
+                            <a href="/tags/AI/">
+                                <span class="chip bg-color">AI</span>
+                            </a>
+                        
+                            <a href="/tags/TensorBoard/">
+                                <span class="chip bg-color">TensorBoard</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Deep-Learning-Blogs/" class="post-category">
+                                Deep Learning Blogs
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2022-02-04
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2022-09-28
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    3.5k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    13 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <blockquote>
+<p>本文记录了如何在Pytorch中使用Tensorboard（主要是为了备忘）</p>
+</blockquote>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/tensorboard.gif" alt="TensorBoard的界面"></p>
+<h1 id="Pytorch中使用TensorBoard"><a href="#Pytorch中使用TensorBoard" class="headerlink" title="Pytorch中使用TensorBoard"></a>Pytorch中使用TensorBoard</h1><p>虽然我本身就会用TensorBoard，但是因为TensorBoard只有在写训练代码的框架的时候才会写，因此实际上写的频率的还是很低的，所以我每次要写训练代码、使用TensorBoard的时候都需要看自己之前写的代码，或者查一下别人写的博客。而且不少博客写的都是一鳞半爪的，不少用法都要查很多博客，久而久之就会觉得很烦。而且很多技巧随着时间的流逝也逐渐的忘记。</p>
+<p>因此为了方便以后自己的查询（备忘），同时也是能够留下一个不错的教程，因此决定自己写一个比较全面的TensorBoard的教程。</p>
+<h2 id="1-Introduction-to-TensorBoard"><a href="#1-Introduction-to-TensorBoard" class="headerlink" title="1. Introduction to TensorBoard"></a>1. Introduction to TensorBoard</h2><p>在炼丹的时候，经常需要追踪模型在训练过程中性能的变化，例如：Regression任务中的MSE、分类任务中的准确率、生成（图片）任务中图片的生成质量、此外还有合成语音的质量……</p>
+<p>大体上来说，所有需要追踪的数据包括：标量（scalar）、图像（image）、统计图（diagram）、视频（video）、音频（audio）、文本（text）、Embedding等等</p>
+<p>除了有大量的数据需要追踪外，我们还需要很好的把这些数据显示出来，即数据的写入和显示（读取）要有异步IO，有的时候服务器在学校的机房托管，因此还需要能够通过内网提供可视化……</p>
+<p>因此，在种种需求之下，使用一个网页程序来帮助我们进行数据的追踪就成了一个很好的解决方案。具体来说，网页程序实现了前后端的分离，后端只需要专注于数据的记录，而前端专注于数据的显示。此外，网页程序可以进一步扩展，提供网络服务。</p>
+<p>因此，就有了TensorBoard这个网页程序实现了我们上面的需求。TensorBoard最早是TensorFlow中的模块，不过现在经过Pytorch团队的努力，TensorBoard已经集成到了Pytorch中。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220204112804634.png" alt="TensorFlow官网上的TensorBoard"></p>
+<blockquote>
+<p>TensorBoard的教程主要分为两部分，一部分是如何使用TensorBoard（即在训练过程中添加数据，然后在浏览器中监视训练的这整个pipeline）的教程，另外一部分是TensorBoard如何添加不同种类数据（即TensorBoard的API）的教程</p>
+</blockquote>
+<h2 id="2-TensoBoard-Pipeline"><a href="#2-TensoBoard-Pipeline" class="headerlink" title="2. TensoBoard Pipeline"></a>2. TensoBoard Pipeline</h2><p>上面说道，TensorBoard是分为前段显示和后端数据记录的，因此其Pipeline也分为两步：</p>
+<ul>
+<li>第一步：后端数据记录</li>
+<li>第二步：前段查看数据</li>
+</ul>
+<h3 id="A-后端数据记录"><a href="#A-后端数据记录" class="headerlink" title="A. 后端数据记录"></a>A. 后端数据记录</h3><p>类似于<code>Flask</code>和<code>Django</code>中把后端程序（服务器）被抽象为了一个类，然而这个类中提供了方法来开启和关闭服务，TensorBoard中也是把后端服务器抽象成了一个类：<code>SummaryWriter</code>，不过不同的是，TensorBoard中的<code>SummaryWriter</code>类在被声明后就开启了对应的服务，直到我们使用了<code>SummaryWriter</code>关闭服务的API。</p>
+<p>此外，还有一个不同的之处在于，TensorBoard的前段数据显示和后端数据记录是<code>异步I/O</code>的，即后端程序（<code>SummaryWriter</code>类的实例）将数据写入到一个文件中，而前端程序读取文件中的数据来进行显示。因此后端所谓的服务指的就是数据的记录，而非提供前端的显示。数据记录的实现方式即通过<code>SummaryWriter</code>类中的方法</p>
+<p>然后在开启了后端程序的服务器之后，我们就可以通过各种API来添加数据了</p>
+<h4 id="0-导入包"><a href="#0-导入包" class="headerlink" title="0. 导入包"></a>0. 导入包</h4><p>我们首先导入包</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> torch
+<span class="token keyword">from</span> torch<span class="token punctuation">.</span>utils<span class="token punctuation">.</span>tensorboard <span class="token keyword">import</span> SummaryWriter
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h4 id="1-SummaryWriter类"><a href="#1-SummaryWriter类" class="headerlink" title="1. SummaryWriter类"></a>1. SummaryWriter类</h4><p><code>SummaryWriter</code>声明之后就会开启后端数据记录的服务，因此在实例化该类的时候我们就需要保存数据的位置。声明保存数据的位置有好几种方式</p>
+<p><code>SummaryWriter</code>的签名如下：</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">torch</span><span class="token punctuation">.</span>utils<span class="token punctuation">.</span>tensorboard<span class="token punctuation">.</span>writer<span class="token punctuation">.</span>SummaryWriter<span class="token punctuation">(</span>log_dir<span class="token operator">=</span>None<span class="token punctuation">,</span> comment<span class="token operator">=</span><span class="token string">''</span><span class="token punctuation">,</span> purge_step<span class="token operator">=</span>None<span class="token punctuation">,</span> max_queue<span class="token operator">=</span><span class="token number">10</span><span class="token punctuation">,</span> flush_secs<span class="token operator">=</span><span class="token number">120</span><span class="token punctuation">,</span> filename_suffix<span class="token operator">=</span><span class="token string">''</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>其中：</p>
+<ul>
+<li><code>log_dir</code> (str)：指定了数据保存的文件夹的位置，如果该文件夹不存在则会创建一个出来。如果没有指定的话，默认的保存的文件夹是<code>./runs/现在的时间_主机名</code>，例如：<code>Feb04_22-42-47_Alienware</code>，因此每次运行之后都会创建一个新的文件夹。在写论文的时候我们会涉及一系列实验，从不同的角度来说明一些问题，例如我们的假设是否正确、模型性能是否更好……因此最好不要用默认的实现来直接作为存放数据的文件夹，而是使用具有含义的二级结构，例如：<code>runs/exp1</code>。这样的话，所有的实验1的数据都在这个文件夹下，这样我们就可以方便的进行比较。</li>
+<li><code>comment</code> (string)：给默认的<code>log_dir</code>添加的后缀，如果我们已经指定了<code>log_dir</code>具体的值，那么这个参数就不会有任何的效果</li>
+<li><code>purge_step</code> (int)：TensorBoard在记录数据的时候有可能会崩溃，例如在某一个epoch中，进行到第$T+X$个step的时候由于各种原因（内存溢出）导致崩溃，那么当服务重启之后，就会从$T$个step重新开始将数据写入文件，而中间的$X$，即<code>purge_step</code>指定的step内的数据都被被丢弃。</li>
+<li><code>max_queue</code> (int)：在记录数据的时候，在内存中开的队列的长度，当队列慢了之后就会把数据写入磁盘（文件）中。</li>
+<li><code>flush_secs</code> (int)：以秒为单位的写入磁盘的间隔，默认是120秒，即两分钟。</li>
+<li><code>filename_suffix</code> (string)：添加到<code>log_dir</code>中每个文件的后缀。更多文件名称设置要参考<code>tensorboard.summary.writer.event_file_writer.EventFileWriter</code>类。</li>
+</ul>
+<p>因此，一个成熟的数据记录方式就是在<code>runs</code>文件夹下按照一定的意义来划分二级文件夹，例如<code>网络结构1</code>、<code>网络结构2</code>、<code>实验1</code>、<code>实验2</code>等等。</p>
+<h4 id="2-添加数据"><a href="#2-添加数据" class="headerlink" title="2. 添加数据"></a>2. 添加数据</h4><p>想后端服务程序添加数据使用的是<code>SummaryWriter</code>类中的一系列方法，这些方法都以<code>add_</code>开头，例如：<code>add_scalar</code>、<code>add_scalars</code>、<code>add_image</code>……具体来说，所有的方法有：</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> pprint
+pprint<span class="token punctuation">.</span>pprint<span class="token punctuation">(</span><span class="token punctuation">[</span>i <span class="token keyword">for</span> i <span class="token keyword">in</span> SummaryWriter<span class="token punctuation">.</span>__dict__<span class="token punctuation">.</span>keys<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">if</span> i<span class="token punctuation">.</span>startwith<span class="token punctuation">(</span><span class="token string">"add_"</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<ul>
+<li>add_hparams，add_scalar，add_scalars，add_histogram，add_histogram_raw，add_image，add_images，add_image_with_boxes，add_figure，add_video，add_audio，add_text，add_onnx_graph，add_graph，add_embedding，add_pr_curve，add_pr_curve_raw，add_custom_scalars_multilinechart，add_custom_scalars_marginchart，add_custom_scalars，add_mesh</li>
+</ul>
+<p>后面在第二部分会详细的讲解每个方法，这里先讲共性。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220205000043632.png" alt="SummaryWriter中所有添加数据的API" style="zoom:67%;"></p>
+<p>每个方法根据需要添加的数据的不同，方法中具体的参数也不同，但是所有的方法终归都是要添加数据的，因此会存在相同的参数。具体来说，相同的参数包括：</p>
+<ul>
+<li><p><code>tag</code> (str)：用于给数据进行分类的标签，标签中可以包含父级和子级标签。例如给训练的loss以<code>loss/train</code>的tag，而给验证以<code>loss/val</code>的tag，这样的话，最终的效果就是训练的loss和验证的loss都被分到了<code>loss</code>这个父级标签下。而<code>train</code>和<code>val</code>则是具体用于区分两个参数的标识符（identifier）。例如我们现在有两个tag，<code>cos/dense</code>和<code>cos/sparse</code>，那么最终展示下来的效果是这样的。此外，<strong>只支持二级标签</strong></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220205003612607.png" alt="二级标签可视化后的效果"></p>
+</li>
+<li><p><code>globa_step</code> (int)：首先，每个epoch中我们都会更新固定的step。因此，在一个数据被加入的时候，有两种step，第一种step是数据被加入时当前epoch已经进行了多少个step，第二种step是数据被加入时候，累计（包括之前的epoch）已经进行了多少个step。而考虑到我们在绘图的时候往往是需要观察所有的step下的数据的变化，因此<code>global_step</code>指的就是当前数据被加入的时候已经计算了多少个step。计算<code>global_step</code>的步骤很简单，就是$global_step=epoch * len(dataloader) + current_step$</p>
+</li>
+<li><p><code>wlltime</code> (int)：从<code>SummaryWriter</code>实例化开始到当前数据被加入时候所经历时间（以秒计算），默认是使用<code>time.time()</code>来自动计算的，当然我们也可以指定这个参数来进行修改。这个参数一般不改</p>
+</li>
+</ul>
+<p>以添加标量（add_scalar）为例，演示一下添加数据的方法的用法。其他的方法第二部分会讲</p>
+<pre class="line-numbers language-python"><code class="language-python">writer <span class="token operator">=</span> SummaryWriter<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">for</span> epoch <span class="token keyword">in</span> range<span class="token punctuation">(</span>n_epoch <span class="token punctuation">:</span><span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">for</span> step <span class="token keyword">in</span> range<span class="token punctuation">(</span>total_step <span class="token punctuation">:</span><span class="token operator">=</span> <span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token comment" spellcheck="true"># 训练代码</span>
+        <span class="token comment" spellcheck="true"># ...</span>
+        <span class="token comment" spellcheck="true"># ...</span>
+
+        <span class="token comment" spellcheck="true"># 计算 loss</span>
+        loss <span class="token operator">=</span> np<span class="token punctuation">.</span>sin<span class="token punctuation">(</span>step <span class="token operator">*</span> <span class="token number">0.01</span><span class="token punctuation">)</span>
+
+        <span class="token comment" spellcheck="true"># 添加标量</span>
+        writer<span class="token punctuation">.</span>add_scalar<span class="token punctuation">(</span>tag<span class="token operator">=</span><span class="token string">"loss/train"</span><span class="token punctuation">,</span> scalar_value<span class="token operator">=</span>loss<span class="token punctuation">,</span>
+                          global_step<span class="token operator">=</span>epoch <span class="token operator">*</span> total_step <span class="token operator">+</span> step<span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>然后可以看到的效果如下：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220205010449745.png" alt="添加数据的效果"></p>
+<h4 id="3-关闭SummaryWriter"><a href="#3-关闭SummaryWriter" class="headerlink" title="3. 关闭SummaryWriter"></a>3. 关闭SummaryWriter</h4><p>我们刚才说过，SummaryWriter这样的后端程序在被实例化出来就自动开启了数据记录的服务，而我们在完成了所有的数据记录只有，需要关闭服务。</p>
+<p>关闭服务很简单，就是直接调用<code>close</code>方法即可</p>
+<pre class="line-numbers language-python"><code class="language-python">writer<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h4 id="4-Summary"><a href="#4-Summary" class="headerlink" title="4. Summary"></a>4. Summary</h4><p>最终，总结一下整个后端数据记录的流程，其实就三步：</p>
+<ul>
+<li>实例化<code>SummaryWriter</code>类，同时指定数据保存的文件夹</li>
+<li>利用<code>SummaryWriter</code>类提供的方法，添加不同类型的的数据</li>
+<li>关闭<code>SummaryWriter</code>类，中止服务</li>
+</ul>
+<h3 id="B-前端显示数据"><a href="#B-前端显示数据" class="headerlink" title="B. 前端显示数据"></a>B. 前端显示数据</h3><p>因为TensorBoard是异步I/O的网页服务程序，因此后端程序在把数据写入到文件的时候，前端程序可以读取数据来进行显示。</p>
+<p>具体来说，后端数据记录程序会把所有的数据记录到同一个文件夹下的一个文件内。<strong>因此，前端显示程序在启动的时候需要指定读取的文件夹</strong>。多次实验就会产生多个文件，我们通过显示这个文件夹，就可以很方便的来进行多个实验的比较</p>
+<h4 id="1-默认使用"><a href="#1-默认使用" class="headerlink" title="1. 默认使用"></a>1. 默认使用</h4><p>前端显示程序提供了CLI（命令行）界面，因此我们直接在命令行启动就行了</p>
+<pre class="line-numbers language-shell"><code class="language-shell">tensorboard --logdir=数据文件夹
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>其中数据文件夹就是在声明SummaryWriter时候指定的文件夹。</p>
+<p>例如：</p>
+<pre class="line-numbers language-shell"><code class="language-shell">tensorboard --logdir=./Feb05_01-00-48_Alienware/
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>而在我们启动前端显示程序之后，就会得到一个端口，访问这个端口就能看到显示的效果</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220205012353764.png" alt="命令行启动tensorboard后会看到程序启动的端口" style="zoom: 67%;"></p>
+<p>访问该端口就能看到程序</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220205012630314.png" alt="浏览器中访问就能看到效果" style="zoom:67%;"></p>
+<h4 id="2-修改端口"><a href="#2-修改端口" class="headerlink" title="2. 修改端口"></a>2. 修改端口</h4><p>有的时候，在服务器上训练模型的时候为了避免和别人的TensorBoard的端口撞了，我们需要指定新的端口。或者有的时候我们在docker容器里跑TensorBoard，我们通过一个端口映射到主机上去，这个时候就需要指定TensorBoard使用特定的端口。</p>
+<p>具体来说就是通过CLI的<code>--port</code>参数</p>
+<pre class="line-numbers language-shell"><code class="language-shell">tensorboard --logdir=数据文件夹 --port=端口
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>例如我们现在指定上面的例子端口为10000</p>
+<pre class="line-numbers language-shell"><code class="language-shell">tensorboard --logdir=./Feb05_01-00-48_Alienware/ --port=10000
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220205013842301.png" alt="修改后的端口"></p>
+<h3 id="C-Summary"><a href="#C-Summary" class="headerlink" title="C. Summary"></a>C. Summary</h3><p>最后，总结一下使用TensorFlow的Pipeline，首先在训练的过程中使用SummaryWriter来记录数据，记录的过程中需要注意文件夹需要来合理的划分。</p>
+<p>然后我们在前端查看的时候，运行<code>tensorboard</code>的CLI程序即可，一般用的最多的就是<code>--log_dir</code>和<code>--port</code>两个参数。</p>
+<p>此外，如果是服务器上的话，那么tensorboard的CLI运行在服务器上，然后在自己的电脑上，利用浏览器，通过内网来查看训练过程。</p>
+<h2 id="3-SummaryWriter-APIs"><a href="#3-SummaryWriter-APIs" class="headerlink" title="3. SummaryWriter APIs"></a>3. SummaryWriter APIs</h2><p>上面讲完了SummaryWriter的Workflow/Pipeline，剩下的就是SummaryWriter添加数据的API的讲解了。关于这些API的话，正如上面介绍的，他们都以<code>add_</code>开头，具体有：</p>
+<ul>
+<li>标量类：<code>add_scalar</code>、<code>add_scalars</code>、<code>add_custom_scalars</code>、<code>add_custom_scalars_marginchart</code>、<code>add_custom_scalars_multilinechart</code>、</li>
+<li>数据显示类：<ul>
+<li>图像：<code>add_image</code>、<code>add_images</code>、<code>add_image_with_boxes</code>、<code>add_figure</code></li>
+<li>视频：<code>add_video</code></li>
+<li>音频：<code>add_audio</code></li>
+<li>文本：<code>add_text</code></li>
+<li>Embedding：<code>add_embedding</code></li>
+<li>点云：<code>add_mesh</code></li>
+</ul>
+</li>
+<li>统计图：<code>add_histogram</code>、<code>add_histogram_raw</code>、<code>add_pr_curve</code>、add_pr_curve_raw</li>
+<li>网络图：<code>add_onnx_graph</code>、<code>add_graph</code></li>
+<li>超参数图：<code>add_hparams</code></li>
+</ul>
+<p>因为我目前主要在做CV、点云和NLP，对于语音、视频设计的比较少，因此关于这些API以后用到了我再慢慢补充。</p>
+<p>其实主要就是对官网上的翻译，可以直接看官网上的<a target="_blank" rel="noopener" href="https://pytorch.org/docs/stable/tensorboard.html">介绍</a>：<a target="_blank" rel="noopener" href="https://pytorch.org/docs/stable/tensorboard.html">https://pytorch.org/docs/stable/tensorboard.html</a></p>
+<h3 id="1-add-scalar"><a href="#1-add-scalar" class="headerlink" title="1. add_scalar"></a>1. add_scalar</h3><p><code>add_scalar</code>主要用于添加一个标量。其签名为</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">add_scalar</span><span class="token punctuation">(</span>tag<span class="token punctuation">,</span> scalar_value<span class="token punctuation">,</span> global_step<span class="token operator">=</span>None<span class="token punctuation">,</span> walltime<span class="token operator">=</span>None<span class="token punctuation">,</span> new_style<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">,</span> double_precision<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>其中：</p>
+<ul>
+<li><code>tag</code>、<code>global_step</code>、<code>walltime</code>是前面讲过的，这里不再细讲</li>
+<li><code>scalar_value</code> (float or string/blobname) ：是要保存的值</li>
+<li><code>new_style</code> (boolean)：是否使用新的内存格式，即把值保存为tensor的形式。新的格式读取速度会快一点</li>
+<li><code>double_precision</code>(boolean)：是否使用双精度(double)来保存每个值</li>
+</ul>
+<p>例如：</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">with</span> SummaryWriter<span class="token punctuation">(</span>log_dir<span class="token operator">=</span><span class="token string">"./runs/add_scalar"</span><span class="token punctuation">)</span> <span class="token keyword">as</span> writer<span class="token punctuation">:</span>
+    <span class="token keyword">for</span> epoch <span class="token keyword">in</span> range<span class="token punctuation">(</span>n_epoch <span class="token punctuation">:</span><span class="token operator">=</span> <span class="token number">200</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">for</span> step <span class="token keyword">in</span> range<span class="token punctuation">(</span>total_len <span class="token punctuation">:</span><span class="token operator">=</span> <span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            writer<span class="token punctuation">.</span>add_scalar<span class="token punctuation">(</span>tag<span class="token operator">=</span><span class="token string">"sin/1"</span><span class="token punctuation">,</span> scalar_value<span class="token operator">=</span>np<span class="token punctuation">.</span>sin<span class="token punctuation">(</span>step<span class="token punctuation">)</span><span class="token punctuation">,</span>
+                            global_step<span class="token operator">=</span>epoch <span class="token operator">*</span> total_len <span class="token operator">+</span> step<span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>效果如下</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220205105158529.png" alt="add_scalar徐爱公益"></p>
+<h3 id="2-add-hparams"><a href="#2-add-hparams" class="headerlink" title="2. add_hparams"></a>2. add_hparams</h3><p><code>add_hparams</code>用于添加超参数列表，主要用于调参。</p>
+<pre class="line-numbers language-shell"><code class="language-shell">def add_hparams(hparam_dict, metric_dict, hparam_domain_discrete=None, run_name=None)
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>其中：</p>
+<ul>
+<li><code>hparam_dict</code> (dict)：字典中的每个键都是一个超参数的名字，而对应的值就是该超参数的值。参数的值可以是bool、string、float、int或者None</li>
+<li><code>metric_dict</code> (dict)：字典中的每个键都是衡量标准的名字，对应的值就是该衡量标准的值。注意，<code>metric_dict</code>字典中的键要在tensorboard所有的记录（<code>tag</code>、其他的dict的键）中唯一。</li>
+<li><code>hparam_domain_discrete</code> (Optional[Dict[str, List[Any]]])：有的超参数只是一个值，而有的超参数在训练过程中是动态变化的，因此对于这些动态变化的超参数，使用该参数来进行传递，其中储存了动态变化的超参数的名字和他们的值的字典</li>
+<li><code>run_name</code> (str)：本次运行时候的名称，如果没有指定的话就默认用现在的时间</li>
+</ul>
+<p>一般来说有特殊需求的话不用指定第三个参数，第四个看个人</p>
+<p>例子如下：</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> torch
+<span class="token keyword">from</span> torch<span class="token punctuation">.</span>utils<span class="token punctuation">.</span>tensorboard <span class="token keyword">import</span> SummaryWriter
+
+
+
+<span class="token keyword">with</span> SummaryWriter<span class="token punctuation">(</span>log_dir<span class="token operator">=</span><span class="token string">"./runs/add_hparams"</span><span class="token punctuation">)</span> <span class="token keyword">as</span> writer<span class="token punctuation">:</span>
+    <span class="token comment" spellcheck="true"># train codes</span>
+    <span class="token comment" spellcheck="true"># ...</span>
+    <span class="token comment" spellcheck="true"># ...</span>
+    <span class="token comment" spellcheck="true"># ...</span>
+
+    <span class="token comment" spellcheck="true"># add hparams</span>
+    writer<span class="token punctuation">.</span>add_hparams<span class="token punctuation">(</span>
+        hparam_dict<span class="token operator">=</span><span class="token punctuation">{</span>
+            <span class="token string">"lr"</span><span class="token punctuation">:</span> <span class="token number">5e</span><span class="token operator">-</span><span class="token number">4</span><span class="token punctuation">,</span>
+            <span class="token string">"batch_size"</span><span class="token punctuation">:</span> <span class="token number">64</span><span class="token punctuation">,</span>
+            <span class="token string">"optimizer"</span><span class="token punctuation">:</span> <span class="token string">"SGD"</span><span class="token punctuation">,</span>
+            <span class="token string">"weight_decay"</span><span class="token punctuation">:</span> <span class="token number">1e</span><span class="token operator">-</span><span class="token number">5</span><span class="token punctuation">,</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        metric_dict<span class="token operator">=</span><span class="token punctuation">{</span>
+            <span class="token string">"accuracy"</span><span class="token punctuation">:</span> <span class="token number">0.76</span><span class="token punctuation">,</span>
+            <span class="token string">"cross-entropy"</span><span class="token punctuation">:</span> <span class="token number">0.01</span><span class="token punctuation">,</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>显示的效果如下：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220205120855376.png" alt="hparam的效果"></p>
+<p>需要注意的是，我们多个实验就会在同一个文件夹下面得到多个数据，例如我们改一下上面的参数，再跑一遍，生成新的数据。然后刷新一下tensorboard就可以看到第二次实验的数据。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220205132631667.png" alt="第二组实验"></p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Jack Wang</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://jackwang0107.github.io/2022/02/03/shen-du-xue-xi-pytorch-zhong-shi-yong-tensorboard/">https://jackwang0107.github.io/2022/02/03/shen-du-xue-xi-pytorch-zhong-shi-yong-tensorboard/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Jack Wang</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/Python/">
+                                    <span class="chip bg-color">Python</span>
+                                </a>
+                            
+                                <a href="/tags/Deep-Learning/">
+                                    <span class="chip bg-color">Deep Learning</span>
+                                </a>
+                            
+                                <a href="/tags/Pytorch/">
+                                    <span class="chip bg-color">Pytorch</span>
+                                </a>
+                            
+                                <a href="/tags/AI/">
+                                    <span class="chip bg-color">AI</span>
+                                </a>
+                            
+                                <a href="/tags/TensorBoard/">
+                                    <span class="chip bg-color">TensorBoard</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.png" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2022/02/05/li-hong-yi-ml2021-spring-9-transformer/">
+                    <div class="card-image">
+                        
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220205185856666.png" class="responsive-img" alt="李宏毅ML2021-Spring-9: Transformer">
+                        
+                        <span class="card-title">李宏毅ML2021-Spring-9: Transformer</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            本文是Machine Learning 2021 Spring 第九节课的笔记，本节课主要讲解了基于Attention（Self-Attention）机制的网络：Transformer，包括Self-Attention和Seq2Seq的网络结构。
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-02-05
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%9D%8E%E5%AE%8F%E6%AF%85ML2021-Spring-Notes/" class="post-category">
+                                    李宏毅ML2021 Spring Notes
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Deep-Learning/">
+                        <span class="chip bg-color">Deep Learning</span>
+                    </a>
+                    
+                    <a href="/tags/Hungyi-Li/">
+                        <span class="chip bg-color">Hungyi Li</span>
+                    </a>
+                    
+                    <a href="/tags/Machine-Learning/">
+                        <span class="chip bg-color">Machine Learning</span>
+                    </a>
+                    
+                    <a href="/tags/Neural-Network/">
+                        <span class="chip bg-color">Neural Network</span>
+                    </a>
+                    
+                    <a href="/tags/Self-Attention/">
+                        <span class="chip bg-color">Self-Attention</span>
+                    </a>
+                    
+                    <a href="/tags/Attention/">
+                        <span class="chip bg-color">Attention</span>
+                    </a>
+                    
+                    <a href="/tags/Transformer/">
+                        <span class="chip bg-color">Transformer</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/02/02/li-hong-yi-ml2021-spring-8-self-attention/">
+                    <div class="card-image">
+                        
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220203105511476.png" class="responsive-img" alt="李宏毅ML2021-Spring-8: Self-Attention">
+                        
+                        <span class="card-title">李宏毅ML2021-Spring-8: Self-Attention</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            本文是Machine Learning 2021 Spring 第八节课的笔记，本节课主要讲解了Neural Network中的Attention机制以及常见的Attention的架构（Module）：Self-Attention。
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-02-03
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%9D%8E%E5%AE%8F%E6%AF%85ML2021-Spring-Notes/" class="post-category">
+                                    李宏毅ML2021 Spring Notes
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Deep-Learning/">
+                        <span class="chip bg-color">Deep Learning</span>
+                    </a>
+                    
+                    <a href="/tags/Hungyi-Li/">
+                        <span class="chip bg-color">Hungyi Li</span>
+                    </a>
+                    
+                    <a href="/tags/Machine-Learning/">
+                        <span class="chip bg-color">Machine Learning</span>
+                    </a>
+                    
+                    <a href="/tags/Neural-Network/">
+                        <span class="chip bg-color">Neural Network</span>
+                    </a>
+                    
+                    <a href="/tags/Self-Attention/">
+                        <span class="chip bg-color">Self-Attention</span>
+                    </a>
+                    
+                    <a href="/tags/Attention/">
+                        <span class="chip bg-color">Attention</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: JackWang&#39;s Blog<br />'
+            + '文章作者: Jack Wang<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2021-2022</span>
+            
+            <a href="/about" target="_blank">Jack Wang</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">297k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+                <span id="sitetime"> Loading ...</span>
+                <script>
+                    var calcSiteTime = function () {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2021";
+                        var startMonth = "11";
+                        var startDate = "12";
+                        var startHour = "0";
+                        var startMinute = "0";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+
+                        // 区分是否有年份.
+                        var language = 'zh-CN';
+                        if (startYear === String(todayYear)) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            var daysTip = 'This site has been running for ' + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                daysTip = '本站已运行 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                daysTip = '本站已運行 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = daysTip;
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            var yearsAndDaysTip = 'This site has been running for ' + diffYears + ' years and '
+                                + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                yearsAndDaysTip = '本站已运行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                yearsAndDaysTip = '本站已運行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+                        }
+                    }
+
+                    calcSiteTime();
+                </script>
+            
+            <br>
+            
+                <span id="icp"><img src="/medias/icp.png"
+                                    style="vertical-align: text-bottom;"/>
+                <a href="https://beian.miit.gov.cn" target="_blank">陕ICP备2021014294号-1</a>
+            </span>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+    <a href="mailto:2232123545@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2232123545" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2232123545" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+        
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/sakura.js"><\/script>');
+            }
+        </script>
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

@@ -1,0 +1,1428 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="心法, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
+    <meta name="description" content="本文记录了我的心得与感悟，并将记录实践的结果">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>心法 | JackWang&#39;s Blog</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.2">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+
+   <style>
+    body{
+       background-image: url(https://cdn.jsdelivr.net/gh/Tokisaki-Galaxy/res/site/medias/background.jpg);
+       background-repeat:no-repeat;
+       background-size: 100% 100%;
+       background-attachment:fixed;
+    }
+</style>
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">JackWang&#39;s Blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-book-reader" style="zoom: 0.6;"></i>
+      
+      <span>博客</span>
+      <i class="fas fa-chevron-down" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/tags">
+          
+          <i class="fas fa-tags" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按标签归类文章</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories">
+          
+          <i class="fas fa-bookmark" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按目录归类文章</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/archives">
+          
+          <i class="fas fa-archive" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按日期分类文章</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">JackWang&#39;s Blog</div>
+        <div class="logo-desc">
+            
+            JackWang的个人博客
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-book-reader"></i>
+			
+			博客
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>
+
+                  <a href="/tags " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-tags" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按标签归类文章</    span>
+
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/categories " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-bookmark" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按目录归类文章</    span>
+
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/archives " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-archive" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按日期分类文章</    span>
+
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '406eb68cce12fdf72f8e2e1af16f6e1fe2e931377278534f5351a2fcd77d5a99';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('抱歉，这篇文章并不想让所有人都看到，请输入授权密码观看')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://jack-1307599355.cos.ap-shanghai.myqcloud.com/背景.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">心法</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E6%9D%82%E9%A1%B9/">
+                                <span class="chip bg-color">杂项</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E6%9D%82%E9%A1%B9/" class="post-category">
+                                杂项
+                            </a>
+                        
+                            <a href="/categories/%E6%9D%82%E9%A1%B9/%E4%B8%AA%E4%BA%BA%E6%83%85%E5%86%B5/" class="post-category">
+                                个人情况
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2022-07-25
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2022-09-28
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    4.8k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    16 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <blockquote>
+<p>Money never lies.</p>
+</blockquote>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/背景.jpg" alt="资本永不眠"></p>
+<h1 id="心法"><a href="#心法" class="headerlink" title="心法"></a>心法</h1><blockquote>
+<p>实践是检验真理的唯一标准</p>
+</blockquote>
+<p>在我进行投资的时候，常常会有很多的感悟，但是往往都是在脑中一闪而过的。因此为了形成我自己的交易体系，我决定把我的这些感悟记录下来，并且付诸实践，以观后效。</p>
+<h2 id="1-原理篇"><a href="#1-原理篇" class="headerlink" title="1. 原理篇"></a>1. 原理篇</h2><blockquote>
+<p>原理篇顾名思义，记录了我对一些现象的理解。从现象中去感悟规律，而后将感悟到的规律付诸实践，以观其成效，正确规律的就加以保留，而错误的规律就加以改进。</p>
+</blockquote>
+<ol>
+<li><strong>低于一百五十万的本金，不要做长线投资了，太慢太慢了，做短线。资金量大了，再去低位吸筹码，价值投资个几年。</strong>因为散户拿10万和大资金拿几百万做价值投资根本不是一回事。放三年翻三倍，散户的钱到了30万，而大资金的钱到了近千万。用样的时间，赚的钱差的太多太多了，根本不是公平的游戏。<strong>散户有散户的玩法，大资金有大资金的玩法，多大的胃吃多大的菜，什么样的体量玩什么样的玩法</strong>，看人下菜。</li>
+<li><strong>小资金赚钱时候要看赚了多少钱，而不是赚了多少点</strong>。还是一个道理，对于散户和大资金来说，赚同样10个点，大资金完全盈利几十几百万，而散户盈利大多是几千，少数到几万，根本就不是一回事。<strong>快速翻倍才是散户的目的，保值的基础上稳定增值那是大资金的目的</strong>。</li>
+<li><strong>散户跟着游资才能赚钱</strong>，大资金才是真正的价值投资，基金十有八九不是什么好东西，毕竟不是自己的钱，自己每个月领15万的高工资，拿别人的钱来投资，亏了也是别人的钱。烂的基金给别人接盘。</li>
+<li><strong>人气所向，龙头所在，财富所往</strong>。</li>
+<li><strong>连板容易出龙头</strong>，因为游资会接力。这就要求每天仔细观察每日的冲高涨停。</li>
+<li><strong>游资也是人，所以要把自己当成游资，思考自己的成本、自救等等操作</strong></li>
+<li><strong>涨幅已经比较高的股票，放量冲涨，第二天不是一字板就冲高跑路吧</strong>。因为会在涨幅很高的情况下，会买入的只有散户和游资（泛指大户、券商游资、私募），公募基金受限于会受限于基金的规矩不能买入。游资亏损的情况下要么冲高自救，要么割肉，很少或持币观望再拉第二波。<ul>
+<li>2022年7月26日，南威软件观察。2022年7月27日回复，重大事项停牌</li>
+<li>2022年7月26日，泉阳泉观察。2022年7月27日回复，泉阳泉高开后冲高跑路</li>
+<li>2022年7月26日，双星新材观察（26日没有放量）。2022年7月27日回复，双星新材收大阳线，稍后需要观察一下今日早盘的活跃度</li>
+<li>2022年7月26日，卓翼科技观察。2022年7月27日回复，跳空低开后走强涨停。稍后需要观察一下今日早盘的活跃度</li>
+<li>2022年7月27日，双象股份观察。</li>
+<li>2022年7月27日，怡球资源观察。明日准备冲高跑路</li>
+</ul>
+</li>
+<li>T+1对每个人都是成立的，游资也不例外，所以游资买入当天亏损，第二天要么冲高自救，要么割肉，很少持币吸筹再拉第二波。而且再拉第二波的股票都是前期的龙头没有死，市场热点依旧时。</li>
+<li>人气旺盛的股票，日内突然封板，可能是有游资打板，没有封住则会在短时间的内再次尝试封板，如果日内维持不跌，则在尾盘也可能冲高尝试封板。如果没有成功，则当日尾盘大概率回吐涨幅，次日转第七条处理。可能会<ul>
+<li>在2022年7月26日、27日，海汽集团。</li>
+</ul>
+</li>
+<li>拉萨家人被套，次日一般不会一字跌停，一般在早盘冲高出逃，割肉一般五六个点。</li>
+<li>神奇两点半，交易量会突然放大，此时一些没封住板的会再次尝试封板，一些早市走强的股会冲高。</li>
+<li>次新股、人气股和龙头股往往是游资之所在。<ul>
+<li>2022年7月25日望变电器。</li>
+</ul>
+</li>
+<li>高位股，连续阴跌几日，突然转强，跌转涨，乃至一度收复失地，则一日未来必涨，视后市而定第二日是否冲高跑路。<ul>
+<li>2022年7月4日上海沿浦</li>
+<li>2022年7月14日上海沿浦</li>
+<li>2022年7月25日上海沿浦待观察，观察回复：并不精确成立，还有其他因素要看。7月28日回复：连涨三天</li>
+</ul>
+</li>
+<li>高位股大跌破高位之后的连续阴跌，某短时间连续阴跌，某日大跌后次日大阳收复大跌失地，则开始转强势，未来涨势一定要配合筹码分布，利用阴跌阶段的量价分析，筹码若集中于阴跌处，则未来连阳。2022年7月18日皇庭国际。</li>
+<li><strong>自己的决定，要坚决执行。看好的冲高跑路，一定要执行，不要再买入，即便后市走强，也不要再买入。因为后市走强往往是因为有新的资金进入，这是不可预料的。这个钱赚不到</strong></li>
+<li><strong>如果早上9点十几分刚睡醒，坚决不要有操作，前一日有规划者坚决执行前一日的规划。</strong></li>
+<li>看好一只股分两种，一种是炒作情绪的人气股，一种是有内在看涨逻辑的股票。<strong>对于有看涨逻辑的股票，设定预期目标后坚定持有</strong>。<ul>
+<li>2022年7月25日买入信达地产，2022年7月26日卖飞</li>
+</ul>
+</li>
+<li>资金就是子弹，T+1机制下，子弹打完了就要被动挨打了。散户的子弹少，打完了就要挨打了。而大资金的子弹几千万，两三层仓就可以随便打。所以不是非常看好散户交易时候</li>
+<li>前期的龙头深跌一段时间后往往会有一段反抽，大概十几多点，前期会有两三天的信号，而后会有一波猛涨，如果遇到游资还可能会两、三连板。注意，交易量放大，没有封板，则次日冲高跑路。</li>
+<li>前日有游资打板的，今天放量没涨停，则可能有游资接力，次日会拉涨停，注意确认次日早盘强势、活跃程度。早盘不强势直接冲高跑路，即便后市涨停也别买了因为你不知道什么会有游资进来打板<ul>
+<li>2022年7月26日，泉峰汽车。7月28日回复：7月27日涨停，</li>
+</ul>
+</li>
+<li><strong>前期放量涨停，突然缩量涨停，警惕警惕警惕</strong><ul>
+<li>2022年7月26日，皇庭国际观察。2022年7月27日回复，今日皇庭国际涨停开，开市后开板，随后冲高跑路，午盘2点多再读走高。</li>
+<li>2022年7月28日，秦川机床观察。</li>
+</ul>
+</li>
+<li><strong>除了9号规则的次日冲高涨停外，早盘10点10分以前的确定强势和弱势股。</strong></li>
+<li>主力吸货往往会大单买入，给散户造成抢筹的感觉。而主力出货则是通过大单拆小单的方式跑路，所以头一日大单净流入高涨，次日如果只有小单净流出，同时交易量放大或者相差不多，那么主力已经跑路了。如果小单净流出同时大单净流入，那么就是有游资在接力。</li>
+<li>连班股某日巨量上影线，则为游资接力。之前没见过这个，需要在观察一下<ul>
+<li>2022年7月27日，后市观察通润装备，赵老哥净买，但盘口上净超大单和净大单留出，净小单流入。</li>
+</ul>
+</li>
+<li>天量买单封板，一定是多家配合封板<ul>
+<li>2022年7月27日，杭萧钢构多家游资合力封板。</li>
+</ul>
+</li>
+<li>早盘低开走高后市冲涨停的股，强势封板股绝大多数交易发生在涨停前，涨停后的交易只占全天交易的10%左右。因此，<strong>前期已经涨停的股早盘能否涨停的关键在于早盘能否承受住先前的游资抛盘的冲击</strong>。<strong>判断能否承受住的关键在于内盘外盘比，凡外盘始终大于内盘，则必为当日强势股</strong><ul>
+<li>2022年7月27日，杭萧钢构早盘冲涨停。</li>
+<li>2022年7月27日，恒大高新早盘冲涨停。</li>
+<li>2022年7月27日，兰黛科技早盘冲涨停。</li>
+</ul>
+</li>
+<li><strong>外盘持续大于内盘，则当日为强势股</strong>。日内外盘超过内盘，则日内弱转强。<strong>内盘外盘只能用于参考，不能用于下决定</strong><ul>
+<li>2022年7月27日，科陆电子日内持续强势。</li>
+<li>2022年7月27日，鑫铂股份日内持续强势。</li>
+<li>2022年7月27日，禾盛新材日内持续强势。</li>
+<li>2022年7月27日，乐惠国际日内持续强势。</li>
+<li>2022年7月27日，鹿山新材日内弱转强。</li>
+<li>2022年7月27日，卓翼科技日内弱转强。</li>
+<li>2022年7月28日，君禾股份按照此指标买入，日内亏2个点</li>
+<li>今天仔细反思了一下，应该是出现了幸存者偏差这样的东西，导致我今天早上买了君禾股份。也就是说我昨晚在复盘的时候，只看了涨的股票，而涨的股票必然是外盘大于内盘的。但是跌的股票也有外盘大于内盘的，所以<strong>外盘持续大于内盘只是强势股的必要条件，而非充分条件</strong></li>
+</ul>
+</li>
+<li>封板期间，外盘正常情况下会慢慢增加，一秒十几手，但突然激增（一秒几千手以上），则表示有大资金在跑路，后市可能开板。若未开板，则<ul>
+<li>2022年7月27日，嵘泰股份，两次开板前外盘持续增大，直到第三次封板。</li>
+<li>2022年7月27日，钧达股份</li>
+</ul>
+</li>
+<li>当日最终能否收大涨，以前一日的判断为主，若前一日判断冲涨，则当日的情况不纳入考虑，以前一日的判断为主。若前一日对次日是否涨停拿捏不定，则看当日的强势程度</li>
+<li><strong>连板股存在溢出效应，即某只股连板几日，则会带动同板块内其他股涨，因为板块需要等待市场认可；一旦龙头开板，直接跑路。</strong>需要回测一下<ul>
+<li>2022年7月28日，佛燃能源六连板块。2022年7月21日启动，至28日六连板。<ul>
+<li>燃气板块2022年7月21日至2022年7月28日连涨，累计涨9。02个点</li>
+<li>同板块南京公用2022年7月21日至7月26日连涨，累计涨6.92个点，7月27、28两日两连板。</li>
+<li>同板块洪通燃气2022年7月21日至7月26日震荡，累计涨0.00个点，7月27涨停，28冲高跑路。</li>
+<li>同板块成都燃气2022年7月21日至7月28日连涨，累计涨6.04个点。</li>
+<li>同板块东方环宇2022年7月21日至7月26日震荡，累计跌1.21个点，7月27、28大涨。</li>
+<li>同板块德龙汇能2022年7月21日到7月26日震荡，累计涨1.10个点，7月27涨停、28冲高跑路。</li>
+<li>同板块胜利股份2022年7月21日到7月28日连涨，累计涨7.75个点。</li>
+<li>同板块蓝天燃气2022年7月21日到7月26日震荡，累计涨0.54个点，7月27、28累计涨3.92个点。</li>
+</ul>
+</li>
+<li>2022年7月28日，日上集团三连板，观察</li>
+<li>2022年7月28日，风范股份三连板，观察<ul>
+<li>特高压板块28日风范股份、积成电子、航天晨光涨停</li>
+</ul>
+</li>
+<li>2022年7月28日，通润装备六连板，观察<ul>
+<li>壳资源板块28日登云股份、东晶电子涨停</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>前一日没有找到标的，第二日宁愿空仓也不要操作</strong></li>
+<li>龙头和跟风品种之间存在套利机会：买入龙头不是因为胆子大，而是因为板块整体动能，龙头有相应溢价，但股价尚未反应时介入；买入跟风是因为龙头赚钱效应始祖，但是部分跟风品种处以低位，有时随龙头举发而具备上涨潜力</li>
+<li><strong>掌握市场之心，胜利接踵而至，心被市场掌握，失败连绵不绝；买卖一刻淡定自如，亦是自身境界的提升</strong></li>
+<li>控制回撤是避免系统性崩溃。绝大部分崩溃都有前兆，从赚钱和亏钱效应的演变就可以进行推断。</li>
+<li>看看天气，如果感觉要下雨了，就早点回家，不要贪玩，天气好了再出来。</li>
+<li>卖空涨停、卖空龙头不要可惜，赚自己改赚的钱即可。</li>
+<li><strong>持筹或者持币时候，要让自己处于主动的一方</strong>。即如果持筹，在下跌过程中想想和自己一样的持筹者怎么想的，如果大家都想的再来一波反弹就走，那么最好走；如果想的解套后就走，那么最好尽早走。持币也是同理</li>
+<li><p>从游资的角度思考问题，要考虑<strong>成交额</strong>对游资的影响。不活跃（不是成交量小）不利于出货，成交额太大不利于拉升。2亿多的成本，10-20多亿最好。相比于成交额太大的股，最好还是找成交额小的低价股。</p>
+<ul>
+<li>巨轮智能成交量太大了，第一波结束之后成交量30、40亿</li>
+<li>浙江建投第二波的时候成交额只有10多亿，接近20亿</li>
+</ul>
+</li>
+<li>游资打板会考虑题材的，如果和当下市场的题材比较接近的话，那么还是会很厉害的。</li>
+<li>游资之间不存在谁救谁，谁帮谁接力，因为游资之间是相互搏杀的关系，你赚的钱可能就是别人亏的钱 </li>
+<li>陈小群的观点，新规则出来后，市场不会再出现之前的A杀了，更流行的是反包再反包，因为现在太容易出现异动了，所以之前的龙头战法大部分都失效了。在之前看来像惠程科技这样天地板的股票，肯定是不好了，但是现在说不准。因为现在的异动太多，导致没有办法玩之前的A杀，之前的A杀龙头一个接一个。但是现在的异动，重点关注、停牌复核导致只能反包再反包。结果就是有的反包再反包进入一个平台之后，就会像上走，有的则是反包再反包之后就没了，比如恒大。</li>
+<li><p>注意冰点，余哥：连续三天冰点，基本稳赚。</p>
+<blockquote>
+<p>所谓股票的冰点是一个口头语，就是股票交易很冷清的意思。判断的股票冰点的方法可以观察成交量，一般成交量低或连续处于低位，这说明市场很冷清没有人交易，也就是所谓的冰点。</p>
+</blockquote>
+</li>
+<li><strong>赚大题材的钱更简单。如何把握主流：看盘面异动+自己判断，盘面说了算</strong>。比如机器人，一看就是小题材，<strong>大题材要看大的成交量和主流资金在哪，比如近期新能源那么好，像机器人肯定就是分支</strong>。<strong>分支只是做挖掘的赚钱方式，接力很难赚钱，除非第一天上车</strong>。</li>
+<li>一般的股，出3000就会被砸，但是如果非常大的出货还承接住了，就表示有大资金有意愿要做下去。</li>
+<li>不要和监管对着干，重点监控的就别做了。</li>
+<li>有故事，而且好懂的题材走起来会很流畅，因为难懂的题材是需要知识储备的，例如最近的光伏，上游硅料，中游组件等等都是需要知识的，但是像汽车，一体化压铸这些就很好懂。</li>
+<li>题材本质上都是资金推动，有资金看中了，那就是会不一样的。例如巨轮智能的陈小群。只要一起来，就会有跟风，只要股本身的故事能够吸引到人，比如100个人只要能够吸引到10个人，那么就可以起来。这这个就是分支起来的原因。所以要看准大资金在哪，而小分支速度快。</li>
+<li>小作文的判断，如果不看小作文的话，还可以自己去发掘一下，但是看了小作文就知道谁进去了，就不知道该怎么操作。余哥一般是正好看到了小作文，就会稍微看几眼，但是不是特别仔细地看，如果走的特别好，就会去稍微锦上添花一下，但是如果一旦走的不行了，那就及时跑路。小作文最好的方式是跟随，而且还要看小作文是谁发的，有些人的小作文的成功率很高，比如轮回666</li>
+<li>市场是在不断变化的，要根据市场的变化不断改变自己的模式。找到短时间内的模式和规律，没有无敌的方法，任何的方法都是需要不断修正的。</li>
+<li>市场是存在短期风格的，例如最近都是低价股连板，或者最近都是高位股连创新高。类似于抖音上某段时间内某些舞蹈很火，那么就会有很多跟风的发布同样的舞蹈的。<strong>市场短期的风格也是一样的，所以要识别市场的短期风格</strong>。识别出来了，就要去做，识别不出来了，就尽量保本，度过当下的时间。例如2022年7月最近的风格就是高位股下跌一段时间后继续打板，以及反包在反包。</li>
+<li><strong>游资买单只股一般都在4000万左右，所以如果看到涨停板几千万跑路，那么出掉就对了</strong></li>
+<li>如同发工资一样，如果一家公司十个月发不出来工资了，那么你最好离远一点，而有一些股、一些板块也是这个道理。你知道某家公司、某些板块不行，那么你最好还是离远点，因为<strong>船大难掉头</strong>。某个板块，某家公司的转好，都不是一朝一夕的事情，从底部走出来，是需要一定时间的。因此，对于业绩不好，前景不好的股票，早早远离，不要想着你拿着它，他就会转好。</li>
+</ol>
+<h2 id="2-技法篇"><a href="#2-技法篇" class="headerlink" title="2. 技法篇"></a>2. 技法篇</h2><p>技法篇顾名思义，记录了我买卖时候的技法。</p>
+<ul>
+<li>使用分时图的区间统计来计算短时间内买卖量，以判断交易是否活跃</li>
+</ul>
+<h2 id="3-大盘篇"><a href="#3-大盘篇" class="headerlink" title="3. 大盘篇"></a>3. 大盘篇</h2><ol>
+<li>午盘之后的消息对股市的影响，将会体现在<strong>富时A50指数</strong>上，因为<strong>富时A50指数</strong>在下午收盘了之后也可以交易，所以会有直接体现。例如：2022年7月29日下午的全面注册制，</li>
+</ol>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Jack Wang</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://jackwang0107.github.io/2022/07/25/xin-fa/">https://jackwang0107.github.io/2022/07/25/xin-fa/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Jack Wang</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E6%9D%82%E9%A1%B9/">
+                                    <span class="chip bg-color">杂项</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.png" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2022/07/25/paper-yue-du-bi-ji-1-imagenet-classification-with-deep-convolutional-neural-networks-qian-yan/">
+                    <div class="card-image">
+                        
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220725205629608.png" class="responsive-img" alt="Paper阅读笔记-1-ImageNet-Classification-with-Deep-Convolutional-Neural-Networks（前言）">
+                        
+                        <span class="card-title">Paper阅读笔记-1-ImageNet-Classification-with-Deep-Convolutional-Neural-Networks（前言）</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            本文是NIPS 2012的ImageNet Classification with Deep Convolutional Neural Networks的阅读笔记的前言
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-07-25
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Paper%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" class="post-category">
+                                    Paper阅读笔记
+                                </a>
+                            
+                            <a href="/categories/Paper%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/Image-Classification/" class="post-category">
+                                    Image Classification
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/AlexNet/">
+                        <span class="chip bg-color">AlexNet</span>
+                    </a>
+                    
+                    <a href="/tags/NIPS/">
+                        <span class="chip bg-color">NIPS</span>
+                    </a>
+                    
+                    <a href="/tags/NIPS-2012/">
+                        <span class="chip bg-color">NIPS 2012</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">
+                        <span class="chip bg-color">深度学习</span>
+                    </a>
+                    
+                    <a href="/tags/Deep-Learning/">
+                        <span class="chip bg-color">Deep Learning</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/07/24/paper-yue-du-bi-ji-0-chu-xin/">
+                    <div class="card-image">
+                        
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220725151308937.png" class="responsive-img" alt="Paper阅读笔记 0: 初心">
+                        
+                        <span class="card-title">Paper阅读笔记 0: 初心</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            本文作为Paper阅读笔记的第0篇，记录了我为什么要写Paper阅读笔记专栏，以及未来这一专栏文章的组织形式
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-07-25
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Paper%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" class="post-category">
+                                    Paper阅读笔记
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: JackWang&#39;s Blog<br />'
+            + '文章作者: Jack Wang<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2021-2022</span>
+            
+            <a href="/about" target="_blank">Jack Wang</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">297k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+                <span id="sitetime"> Loading ...</span>
+                <script>
+                    var calcSiteTime = function () {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2021";
+                        var startMonth = "11";
+                        var startDate = "12";
+                        var startHour = "0";
+                        var startMinute = "0";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+
+                        // 区分是否有年份.
+                        var language = 'zh-CN';
+                        if (startYear === String(todayYear)) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            var daysTip = 'This site has been running for ' + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                daysTip = '本站已运行 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                daysTip = '本站已運行 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = daysTip;
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            var yearsAndDaysTip = 'This site has been running for ' + diffYears + ' years and '
+                                + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                yearsAndDaysTip = '本站已运行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                yearsAndDaysTip = '本站已運行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+                        }
+                    }
+
+                    calcSiteTime();
+                </script>
+            
+            <br>
+            
+                <span id="icp"><img src="/medias/icp.png"
+                                    style="vertical-align: text-bottom;"/>
+                <a href="https://beian.miit.gov.cn" target="_blank">陕ICP备2021014294号-1</a>
+            </span>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+    <a href="mailto:2232123545@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2232123545" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2232123545" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+        
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/sakura.js"><\/script>');
+            }
+        </script>
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

@@ -1,0 +1,1537 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="李宏毅ML2021-Spring-3: Neural Network Training Guidance, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
+    <meta name="description" content="本文是李宏毅Machine Learning 2021 Spring 第三节课General Guidance的笔记，本节课主要讲解了深度学习的训练攻略">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>李宏毅ML2021-Spring-3: Neural Network Training Guidance | JackWang&#39;s Blog</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.2">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+
+   <style>
+    body{
+       background-image: url(https://cdn.jsdelivr.net/gh/Tokisaki-Galaxy/res/site/medias/background.jpg);
+       background-repeat:no-repeat;
+       background-size: 100% 100%;
+       background-attachment:fixed;
+    }
+</style>
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">JackWang&#39;s Blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-book-reader" style="zoom: 0.6;"></i>
+      
+      <span>博客</span>
+      <i class="fas fa-chevron-down" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/tags">
+          
+          <i class="fas fa-tags" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按标签归类文章</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories">
+          
+          <i class="fas fa-bookmark" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按目录归类文章</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/archives">
+          
+          <i class="fas fa-archive" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按日期分类文章</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">JackWang&#39;s Blog</div>
+        <div class="logo-desc">
+            
+            JackWang的个人博客
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-book-reader"></i>
+			
+			博客
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>
+
+                  <a href="/tags " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-tags" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按标签归类文章</    span>
+
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/categories " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-bookmark" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按目录归类文章</    span>
+
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/archives " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-archive" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按日期分类文章</    span>
+
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('抱歉，这篇文章并不想让所有人都看到，请输入授权密码观看')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110183944100.png')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">李宏毅ML2021-Spring-3: Neural Network Training Guidance</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Deep-Learning/">
+                                <span class="chip bg-color">Deep Learning</span>
+                            </a>
+                        
+                            <a href="/tags/Hungyi-Li/">
+                                <span class="chip bg-color">Hungyi Li</span>
+                            </a>
+                        
+                            <a href="/tags/Machine-Learning/">
+                                <span class="chip bg-color">Machine Learning</span>
+                            </a>
+                        
+                            <a href="/tags/Neural-Network/">
+                                <span class="chip bg-color">Neural Network</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E6%9D%8E%E5%AE%8F%E6%AF%85ML2021-Spring-Notes/" class="post-category">
+                                李宏毅ML2021 Spring Notes
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2022-01-10
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2022-09-28
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    7.3k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    25 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <blockquote>
+<p>本文是李宏毅Machine Learning 2021 Spring 第三节课General Guidance的笔记，本节课主要讲解了深度学习的训练攻略</p>
+</blockquote>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110183944100.png" alt="第二节课：Neural Network Training Manual"></p>
+<h1 id="李宏毅ML2021-Spring-3-Neural-Network-Training-Guidance"><a href="#李宏毅ML2021-Spring-3-Neural-Network-Training-Guidance" class="headerlink" title="李宏毅ML2021-Spring-3: Neural Network Training Guidance"></a>李宏毅ML2021-Spring-3: Neural Network Training Guidance</h1><p>我们在前面的一节课以Youtube人数预测这个案例贯穿始终，在介绍Machine Learning / Deep Learning基础概念的同时，从线性模型入手，讲解了神经网络模型。</p>
+<p>此外，我们还讲解了Machine Learning中训练一个模型的流程（Procedure）。我们复习一下，这三步分别是：</p>
+<ol>
+<li>定义模型（含参函数）</li>
+<li>定义损失函数（根据我们的数据）</li>
+<li>优化（训练）模型（神经网络是通过梯度下降）</li>
+</ol>
+<p>然而其实神经网络中进行训练的时候，直接使用梯度下降往往会出现很多的问题，导致模型训练不出来。除此以外，我们上节课其实海遗留了不少问题，例如为什么神经网络要用Deep的而不是Fat的。这些内容在本节课都会进行讲解。</p>
+<h2 id="1-Framework-of-ML"><a href="#1-Framework-of-ML" class="headerlink" title="1. Framework of ML"></a>1. Framework of ML</h2><p>我们首先规范化一下我们的（训练）模型（神经网络）时候整体的框架。</p>
+<p>首先，我们根据我们需要完成的任务来收集数据，所有的数据被分为两部分，<strong>一部分是包含label的训练数据</strong>，而<strong>另外一部分是不包含label的测试数据</strong>：</p>
+<ul>
+<li><strong>Training Data</strong>：${(x^1,\hat y^1),(x^2,\hat y^2),(x^3,\hat y^3),\cdots,(x^N,\hat y^N)}$</li>
+<li><strong>Testing Data</strong>：${x^{N+1},x^{N+2},x^{N+3},\cdots,x^{N+M}}$</li>
+</ul>
+<blockquote>
+<p>PS：其实，我们在手机数据的时候是不会划分测试数据和训练数据的，换而言之我们收集数据的时候都是$(x,\hat y)$这样的键值对。然后我们收集完数据之后再对数据进行拆分，其中一部分分为训练数据，而另外一部分分为测试数据。</p>
+<p><strong>这就意味我们其实是有测试数据的label的</strong>。但是注意，我们要当做没有，原因会在本文的后面讲解</p>
+</blockquote>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110212204164.png" alt="训练和测试数据"></p>
+<p>而具体每一个具有label的数据，我们称为一个示例（example），即$(x^i,\hat y^i),i=1,\cdots,N$。在不同的问题中，$x^i$和$y^i$的表现形式不同。例如：</p>
+<ul>
+<li>在语音辨识（Speech Recognition）问题中，$x^i$是输入的音频，而输出的$\hat y$是音素(Phoneme，类似于音标)</li>
+<li>在图像识别（Image Recognition）问题中，$x^i$是输入的图片，而输出的$\hat y$是图片中的物品的名称/类别(Class)</li>
+<li>在语者辨识（Speaker Recognition）问题中，$x^i$是输入的音频，而输出的$\hat y$是说话的人的名字</li>
+<li>在机器翻译（Machine Translation）问题中，$x^i$是带翻译的文本，而输出的$\hat y$是目标语言的文本</li>
+</ul>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110214031998.png" alt="不通问题中x和y的形式不同"></p>
+<p>接下来，有了训练数据和测试数据之后，我们就能够训练、测试我们的模型</p>
+<ul>
+<li><p>首先是训练阶段</p>
+<ol>
+<li>训练阶段的第一件事，就是定义出来一个含有位置参数的函数$y=f_\theta(x)$，注意，以后我们用$\theta$表示模型中的参数</li>
+<li>接下来，我们要定义一个loss，loss是一个函数，因此有的时候又被称为loss function。Loss function的输入是模型中的参数，用于判定这组参数是好还是不好</li>
+<li>最后一步就是求解一个Optimization的问题，即找一个$\theta^*$，能够让$L(\theta)$最小</li>
+</ol>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110214209790.png" alt="训练阶段"></p>
+</li>
+<li><p>在训练阶段之后，就是测试阶段</p>
+<ol>
+<li><p>我们用得到的$\theta^*$来对所有的测试数据中的数据进行预测，即</p>
+<script type="math/tex; mode=display">
+y^i=f_{\theta^*}(x^i), \qquad\qquad i=N+1,N+2,\cdots,N+M</script></li>
+<li><p>接下来就可以用我们预测得到的${y^{N+1},y^{N+2},\cdots,y^{N+M}}$，例如把预测得到的结果上传到Kaggle上去（后面的课程的作业的要求）</p>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="2-General-Guide"><a href="#2-General-Guide" class="headerlink" title="2. General Guide"></a>2. General Guide</h2><p>下面的这张图就是神经网络训练的攻略手册，可以帮助我们训练出来高精度的模型。当然适用于我们前期训练模型</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110223158424.png" alt="模型训练攻略"></p>
+<p>整个攻略是从上到下的，因此当我们发现模型得到的精度不高，或者是模型根本没有训练起来的时候，第一步就是先检查模型在训练数据上的损失。</p>
+<p>有人可能会问，为什么模型在测试集上的表现不好反而要先去检查训练集上的损失呢？</p>
+<p>其实检查训练集上的损失是为了先检查模型有没有学习到东西。虽然说模型可能表现很差，但是通过这一步能看到模型训练时候的loss有没有下降，如果没有下降，那么就意味着很可能代码写错了</p>
+<h3 id="A-Large-Loss-on-Training-Data"><a href="#A-Large-Loss-on-Training-Data" class="headerlink" title="A. Large Loss on Training Data"></a>A. Large Loss on Training Data</h3><p>我们如果检查发现，在训练集上模型的表现确实有提升，但是最终模型收敛到的loss却很大，那么此时就有两个可能，第一个是Model Bias，第二个就是Optimization的问题</p>
+<h4 id="1-Model-Bias"><a href="#1-Model-Bias" class="headerlink" title="1. Model Bias"></a>1. Model Bias</h4><p>对于Model Bias而言，其实在上周就已经讲过了。具体而言就是我们的模型太简单，其学习能力太弱难以充分的学习当前的任务。或者说模型的潜力太小，最终开发/学习到极致的模型也无法胜任当前的任务。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110221632640.png" alt="模型训练攻略" style="zoom: 33%;"></p>
+<p>那么到底什么是模型的学习能力/潜力呢？</p>
+<p>举例来说，我们现在设计了一个含有参数$\theta$的模型$f_\theta(x)$，即</p>
+<script type="math/tex; mode=display">
+y=f_\theta(x)</script><p>由于模型中的参数是可以变化的，而一个参数就对应一个具体的模型，例如$y=2x^2$和$y=3x^3$，这两个模型都平方模型这一类模型，但是却是两个不同的模型。</p>
+<p>因此，我们让模型$f<em>\theta(x)$中的参数$\theta$取不同的值，就有了不同的具体的模型，例如：$f</em>\theta^1(x)$、$f<em>\theta^2(x)$、$f</em>\theta^3(x)$、$\cdots$、$f_\theta^N(x)$、$\cdots$</p>
+<p>那么我们把这些模型当做高维（维数大于等于$len(\theta)$，因为可能存在参数更多的模型）空间中的一个点，那么我们把所有的模型集合起来，就可以得到一个模型的Set。</p>
+<p>然而当前模型所构成Function Set太小了，无法包含到让模型损失最小的模型。换而言之，可以让Model表现最好的模型（模型由参数描述）是无法用当前模型来描述的</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110224645545.png" alt="当前模型的Function Set不包含最佳的Function" style="zoom:50%;"></p>
+<p>那么这个时候，即便是当前模型所能够描述的Function Set中最好的模型，他的Loss依然很高。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110225130533.png" alt="image-20220110225130533"></p>
+<p>这个时候问题就类似于我们是在大海里捞针（表现最好的参数），然而大海里并没有针（当前模型并不存在全局/全模型最佳的参数）</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110225344433.png" alt="大海捞针却没有针" style="zoom:50%;"></p>
+<p>那么这个时候，我们要做的就是重新设计我们的模型，让他具有更大的潜力/更加可塑（more flexible）。所谓更加可塑，其实指的就是结构更加复杂、参数更加多、能够表达更多的模型。</p>
+<p>这样的事情其实我们在上一节课就已经做过了，我们发现线性模型只看一天前的数据不太行，那么就让他看前56天的数据，然后觉得模型还是不太行，那么就引入Sigmoid、ReLu等函数为模型添加非线性、构成深度网络、神经网络</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110230559512.png" alt="Model Bias的解决方案：重新设计模型" style="zoom:50%;"></p>
+<h4 id="2-Optimization"><a href="#2-Optimization" class="headerlink" title="2. Optimization"></a>2. Optimization</h4><p>在训练数据上loss大可能是由于Model Bias造成的，但并不是说所有的在训练数据上loss大就是由于Model Bias造成的，还有一种可能就是Optimization的问题。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110231923155.png" alt="Optimization的问题" style="zoom: 33%;"></p>
+<p>所谓Optimization的问题，其实指的就是我们没有做好Optimization这一步。在我们的预期里，我们通过Optimization就能够让模型的表现得到提升，然而这都是建立在我们做好了Optimization这一步的基础山的，因此如果我们没有做好Optimization，模型的表现也是上不去的。</p>
+<p>Optimization这一步出问题，其实由很多种可能，例如我们的学习率设的太大或者太小等等。当然，我们在上一节课其实也讲了一种Optimization中可能出现的问题，就是Local Minima的问题</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110231450099.png" alt="梯度下降卡在了Local Minima上" style="zoom:33%;"></p>
+<p>同样，用图像来形象的表示的话，就是问题的最佳的模型的参数确实可能由我们的模型来描述，然而在Gradient Descent的时候，由于某些原因（例如局部最优点），我们无法得到这个全局最优点。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110231557891.png" alt="无法得到最优值，只能得到次优值" style="zoom: 50%;"></p>
+<p>形象的比喻，我们这个时候面临的问题就是针确实在海里，只是我们没有办法找到这根针</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110232047999.png" alt="大海捞针找不到针" style="zoom:50%;"></p>
+<p>而对于Optimization做的不好的话，到底该怎么解决呢？</p>
+<p>Optimization问题的Solution我们下节课再说。</p>
+<h4 id="3-Diagnosis-between-Model-Bias-and-Optimization"><a href="#3-Diagnosis-between-Model-Bias-and-Optimization" class="headerlink" title="3. Diagnosis between Model Bias and Optimization"></a>3. Diagnosis between Model Bias and Optimization</h4><p>那么这个时候问题来了，既然模型在训练数据上的表现糟糕可能是由Model Bias造成的，也有可能是由Optimization造成的。那么在当我们真实遇到了模型在训练数据集上的表现糟糕的情况的时候，到底那个才是我们的处境？</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110232503590.png" alt="到底哪个才是我们现在所处的问题呢？" style="zoom: 33%;"></p>
+<p>那么这个时候，判断我们所处的情况的关键就是我们的模型到底有没有足够的潜力，或者说我们的模型到底够不够flexible（可塑）？</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110233144866.png" alt="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110233055346.png" style="zoom: 33%;"></p>
+<p>那么这个时候我们可以通过下面的几个方法来进行判断：</p>
+<ul>
+<li><p>通过不同的模型之间的比较来获得insight，即我们的模型是否足够的flexible</p>
+<blockquote>
+<p><strong>举一个通过比较或者insight的例子</strong></p>
+<p>这个例子是来自与2015年的Paper：Residual Network中的例子。这个Paper在一开头就讲了一个故事。这个故事是说，现在针对同一个任务，训练两个基本的结构相同而层数不同的Network。一个Network是20层网络，而另外一个是56层的模型。然后把这两个模型随着训练的进行，在测试集的表现记录了下来：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110234234395.png" alt="两个模型随着训练的进行在测试数据上的表现" style="zoom: 33%;"></p>
+<p>在2015年的时候，大家对Deep Learning了解的还不是非常透彻。人们往往都认为，模型是越深越好的。一旦出现了上面的问题，就是Overfitting的问题（关于Overfitting后面会讲）。</p>
+<p>但是这个问题到底真的是由Overfitting造成的吗？这个不是由Overfitting造成的。虽然我们现在知道，Overfitting还要检查在训练集上的表现。</p>
+<p>可是在2015年ResNet的文章发现，如果发生了过拟合那么就应该是56层的模型的性能应该要优于20层的模型，因为56层毕竟都已经发生了过拟合（后面会介绍Overfitting，我们这里只需要知道Overfitting的一个特征就是在训练数据上表现超乎寻常的好而在测试数据上格外的烂）</p>
+<p>可以检查在训练数据上的表现发现即便是在训练数据上，深层的模型的表现也不好。因此，这个问题其实是20层的模型Optimization比56层的模型Optimization要容易。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110234459938.png" alt="两个模型在训练和测试数据上的表现" style="zoom: 33%;"></p>
+<p>因此当时认为这个是Overfitting的现象，其实是由于Optimization没有做好导致的。</p>
+<p>我们可能还有一个疑问，就是，诶，为什么说是Optimization没有做好而不是Model的Bias呢？</p>
+<p>其实我们在上面就已经说过了，一般来说，模型的参数越多，模型就越复杂，模型就更加的flexible。</p>
+<p>而且对于20层的模型来说，它能够做到的事情56层一定也能做到，就让前20层保持一样，后面的层全部复制前一层的输出就行了呀。因此56层的模型一定比20层的模型更加flexible。这就意味着，如果56层的模型Optimization成功的话，他的表现一定是比20层的模型要好的。</p>
+<p>因此，这个现象不是Overfitting，也不是Model Bias，而是Optimization做的不好</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220111000827744.png" alt="Optimization做的不好才是原因" style="zoom:33%;"></p>
+</blockquote>
+<p>所以上面这个例子给我们的启示就是（上面这个例子教会我们这样去判断是否是Optimization的问题）：</p>
+<ol>
+<li><p>我们首先训练一个浅层的网络，因为浅层的网络不容易Optimization失败，或者我们可以用一些其他易于训练的机器学习的模型而不是神经网络，例如决策树或者支持向量机（Support Vector Machine）。</p>
+<p><strong>用这些比较简单的模型训练得到的结果可以作为我们的下界</strong></p>
+</li>
+<li><p>接下来训练一个比较深的Model、更加Flexible的Model。如果更加Flexible的Model的表现没有第一步简单的Model的表现好，那么就很有可能是发生了Optimization的问题。那么这个时候我们就需要通过一些手段来进行更加有效的Optimization。例如使用带有策略的Gradient Descent或者直接换一种优化的算法。</p>
+<p>举例来说，之前讲的YouTube观看人数预测问题。明明四层都能做到的事情五层却做不到，那肯定就是Optimization的问题了</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220111002524007.png" alt="不同层网络在训练集上的表现" style="zoom: 33%;"></p>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="B-Small-on-Training-Data-Large-on-Training-Data"><a href="#B-Small-on-Training-Data-Large-on-Training-Data" class="headerlink" title="B. Small on Training Data, Large on Training Data"></a>B. Small on Training Data, Large on Training Data</h3><p>那么接下来，假设我们通过努力，已经成功的让模型在训练数据上的表现变小了，那么我们接下来需要关注的就是模型在测试数据上的表现</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220111003035078.png" alt="关注模型在测试数据上的表现" style="zoom: 33%;"></p>
+<h4 id="1-Happy-Ending"><a href="#1-Happy-Ending" class="headerlink" title="1. Happy Ending"></a>1. Happy Ending</h4><p>如果模型在测试数据上的表现也很小，那么其实就表明我们的模型已经很OK了，可以直接用于下一步了，所以这样就是Happy Ending</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220111003447758.png" alt="Happy Ending" style="zoom: 33%;"></p>
+<h4 id="2-Small-on-Training-Data-Large-on-Testing"><a href="#2-Small-on-Training-Data-Large-on-Testing" class="headerlink" title="2. Small on Training Data, Large on Testing"></a>2. Small on Training Data, Large on Testing</h4><h5 id="A-Overfitting"><a href="#A-Overfitting" class="headerlink" title="A. Overfitting"></a>A. Overfitting</h5><p>在遇到了训练数据上loss小而测试数据上loss大，那确实有可能是遇到了Overfitting的问题。</p>
+<p>但是要注意，Overfitting是在训练数据上的loss小而在测试数据上的loss大才可能会发生的，因此在判断发生了Overfitting这个现象之前，要先排除掉Model Bias和Optimization这两个问题。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220111003930645.png" alt="遇到1Overfitting的问题" style="zoom:33%;"></p>
+<p>那么为什么会发生Overfitting（在训练集上表现好而在测试集上表现差的）问题呢？</p>
+<p>我们下面通过举一个极端的例子来进行说明。</p>
+<blockquote>
+<p><strong>极端的例子</strong></p>
+<p>假设我们现在的训练集是${(x^1,{\hat y}^1),(x^2,{\hat y}^2),(x^3,{\hat y}^3),\cdots,(x^N,{\hat y}^N)}$</p>
+<p>而我们通过训练之后找到了一个很废的模型，这个模型做的就是单纯记住见过的example。然后当见过的输入进来了知乎就能够给出正确的label作为预测，而没见过的输入进来了之后直接随便给答案，即</p>
+<script type="math/tex; mode=display">
+y=f(x)=\begin{cases}
+\hat y^i, &\exist x^i = x\\
+random, & otherwise
+\end{cases}</script><p>那么这个模型其实一点用处都没有，因为完全不能用于帮助我们进行预测。可是即便是在测试数据上的loss很大，可是这个模型在测试数据上的loss却是0</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220111005639000.png" alt="极端的例子" style="zoom:33%;"></p>
+</blockquote>
+<p>当然，上面例子是非常极端的，一般是不会存在这样的模型的。我们下面举一个更加常见的例子</p>
+<blockquote>
+<p><strong>常见的例子</strong></p>
+<p>假设我们现在所有的example都是从一个二次曲线上获得的，那么我们现在的任务就是根据这有限个已知的点来预测未来给一个$x$，对应的$y$会在哪里。</p>
+<p>那么对于我们来说，我们其实是通过有限次观测从曲线上采集得到的点，因此这个曲线的全体对于我们来说是不可见的。我们可见的只有这有限个数据点。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220111005859570.png" alt="真实数据的分布" style="zoom:33%;"></p>
+<p>那么如果我们的模型非常的Flexible，那么就可以逼近更加复杂的函数。而为了让loss最小，我们Flexible的模型其实是有可能学成下面这样的模型。在我们有观察到的地方，模型还是好好的进行了拟合，而在没有采集到的地方，模型就有FreeStyle了</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220111010430501.png" alt="学的太用功以至于出现了FreeStyle" style="zoom: 33%;"></p>
+<p>而我们的测试数据也是从真实数据的分布上观测得到的，而且往往和我们的训练数据不同，那么可想而知，学出FreeStyle的模型的表现肯定不好</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220111010613893.png" alt="学出了Freestyle的模型在面临Testing数据时候的表现很烂" style="zoom: 33%;"></p>
+</blockquote>
+<p>那么该如何解决Overfitting的问题呢？</p>
+<p>其实有两个解决的思路：</p>
+<ol>
+<li><p>第一个方向就是受到上面的例子的启发，Overfitting的发生是由于我们对原始数据分布的观测存在没有观测到的区域造成的。那么很简单，我们直接对其进行观测即可。<strong>换而言之，我们收集更多的数据来限制模型发挥它的Freestyle</strong>。那么这样模型能够发挥Freestyle的地方比较少，最后还是会很接近我们数据的原始分布</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220111011141469.png" alt="收集更多的数据" style="zoom:50%;"></p>
+<p>为了要收集更多的数据，我们确实可以真的去收集数据然后来进行训练。可是这样的问题就是费时费力。</p>
+<p>一个替代的方案就是，我们根据我们对问题、对数据的认识来创造出来一些新的数据。例如对于图像识别问题来说，我们把图像水平翻转过来，或者把猫放大，那他都是猫。这一招叫做数据增强（Data Augmentation）</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220111011711883.png" alt="数据增强" style="zoom:33%;"></p>
+<p>但是我们在做Data Augmentation的时候要注意，不能随便乱进行数据增强，我们数据增强一定要有道理的。例如我们把一只猫翻过来。那么机器并不知道这只猫反过来了，反而认为猫有可能是浮在空中（毕竟机器没有学习背景、周围的环境，因此他没法发现周围的环境也反过来了），那么机器在学习的时候就会感到困惑，因为之前他学习的内容并没有说明猫可以浮在空中。因此用这样的数据来进行训练其实会降低模型的准确率，因为让他学到了错误的知识</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220111011820991.png" alt="image-20220111011820991" style="zoom: 50%;"></p>
+</li>
+<li><p>第二个方向就是从源头探究一下为什么会发生Overfitting。Overfitting发生的原因其实是模型的太大，模型能够学习到非常复杂的函数。而在损失函数的强迫下，模型不得不学习到更加复杂的、能够拟合所有训练数据的函数。因此，另外一种方式就是通过给模型增加限制，，限制模型的潜力，避免模型学习到复杂的函数。</p>
+<p>例如，对于上面的例子，我们somehow，通过某种方式（例如通灵），得知了模型是一个二次的曲线，即$y=a+bx+cx^2$。那么这个时候，模型能够学到的函数其实来来回回也就那么多种，因此我们的模型很有可能就会学到正确的函数</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220111163712808.png" alt="在限制的作用下模型可以学到正确的函数"></p>
+<p>而我们具体是怎么样知道这个模型就是一个二次函数的呢？其实这就依靠于我们的Domain Knowledge，或者说是先验知识。</p>
+<p>具体来说，有哪些方法来给模型添加限制呢？具体有下面的几种：</p>
+<ol>
+<li>更少的参数（共享参数），对于神经网络来说就是更少的神经元</li>
+<li>更少的feature</li>
+<li>Early Stopping</li>
+<li>Regularization</li>
+<li>Dropout</li>
+</ol>
+<p>关于3、4、5我们下节课再讲。不过关于更少的参数我们其实可以先简单的介绍一个例子</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220111164307226.png" alt="对模型添加限制的手段" style="zoom:50%;"></p>
+<blockquote>
+<p><strong>对模型进行限制从而提升了模型表现的例子</strong></p>
+<p>我们之前讲的网络的架构其实称为Fully-Connected Neural Network，即全连接神经网络</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220110131017180.png" alt="全连接神经网络" style="zoom: 80%;"></p>
+<p>而全连接网络其实是一个比较Flexible的model，这就意味这全连接网络的学习能力很强。与此同时带来的问题就是对全连接进行Optimization比较困难。或者说通过Optimization让全连接网络在任务上表现出色是一件比较难的事情，例如让全连接去进行图像识别就很难训练的好。</p>
+<p>而另外一种架构的网络称为卷积神经网络（Convolutional Neural Network，CNN），这种网络非常善于图像识别。但在实际上，卷积神经网络是一种限制非常大的网络，我们后面会具体讲到，对全连接网络添加参数共享，就成为了卷积神经网络。然而卷积神经网络这种限制是针对图像的特性进行的限制。换而言之，为卷积神经网络添加的这种限制限制了全连接神经网络学习到其他任务（例如语音辨识、文本翻译等任务）对应的函数。</p>
+<p>因此，CNN这个架构的网络能够表达的模型的集合其实是比较小的，是包含在全连接网络所能表示的集合的，如下图。然而，正是我们对全连接进行了这样的限制，提升了模型（在特定任务上）的表现。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220111171451812.png" alt="CNN表示的模型包含在全连接表示的模型内" style="zoom:50%;"></p>
+</blockquote>
+</li>
+</ol>
+<p>但是要注意，我们给模型的限制并不是越多越好，如果我们给模型的限制过多，就会导致模型的能力不足，从而出现Model Bias的问题。例如对于上面的问题，我们假设Model是一个Linear的Model，那么模型其实无法学习到一个非常满意的Model，因此最终极限的loss（最优的loss）还是会很大</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220111173106046.png" alt="太强的限制导致模型出现了Model Bias"></p>
+<p>那么其实到了这里，我们会发现有一个有点矛盾的地方，那就是我们让模型边的越来越复杂，越来越Flexible，那么模型Training时候的loss其实就会变低，但是模型在Testing时候的loss反而会变高，因此我们其实是需要在模型的能力和当前任务上的精度之间做一个取舍，选择一个中庸的模型</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220111173803782.png" alt="选择中庸的模型"></p>
+<p>那么要怎么样去选择中庸的模型呢？这点我们在本文的后面：Cross Validation部分进行讲解</p>
+<h5 id="B-Mismatch"><a href="#B-Mismatch" class="headerlink" title="B. Mismatch"></a>B. Mismatch</h5><p>另外一种导致模型在训练时候的loss小而在测试的时候loss大的情况就是mismatch。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220111205023454.png" alt="Mismatch" style="zoom:33%;"></p>
+<p>Mismatch指的就是训练和测试的数据是来自于不同的分布。例如我们训练的数据是从二次曲线上采集到的，而我们测试的数据是从三次曲线上来的。</p>
+<p>在Mismatch的情况下，不管训练数据怎样的增加其实都没有用，因为要预测的数据的函数和学到的函数就是两码事。因此，Overfitting和Mismatch最大的区别就是对于Mismatch而言，单纯的增加训练数据没有办法提升模型的表现。</p>
+<p>在这个时候我们就要注意我们的测试数据和训练数据的来源。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220111205326197.png" alt="处理Mismatch：关注数据的来源" style="zoom: 33%;"></p>
+<p>在绝大多数的情况下其实我们也并不会遇到Mismatch的情况。当然，现在也有不少的研究是关于如何处理Mismatch的情况。我们在未来的作业11就会专门的讲解处理Mismatch的方法。</p>
+<p>作业11里面我们的训练图片是正常的图片，但是测试数据确实简笔画，那么模型其实不论怎么学其实都是学不好的。</p>
+<p>当然除了作业11的情况，在作业一预测Covid19的确诊病例的时候我们如果用2020年的数据进行训练，而用2021年的数据作为预测，那么也会发生Mismatch的问题。原因也很好想，因为2020年的Covid19刚出来，人们还不是很有经验来应对Covid19，但是到了2021年，人们就有经验多了。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220111205751538.png" alt="作业11的Mismatch问题"></p>
+<h2 id="3-Cross-Validation"><a href="#3-Cross-Validation" class="headerlink" title="3. Cross Validation"></a>3. Cross Validation</h2><h3 id="A-Why-not-fine-tuning-Model-on-Testing-Set"><a href="#A-Why-not-fine-tuning-Model-on-Testing-Set" class="headerlink" title="A. Why not fine-tuning Model on Testing Set?"></a>A. Why not fine-tuning Model on Testing Set?</h3><p>接上面Overfitting部分，我们说道要选出来一个中庸的模型</p>
+<p>其实选择中庸的模型的根本目的还是选出来在Testing数据上表现最好的模型。那我们其实可能想到的一个方法，就是不断地做在Testing上跑模型、计算分数，然后选择出来在Testing上表现最好的模型。例如在Kaggle上（老师的作业有一部分是以Kaggle），计算分数是根据在Testing的数据上计算得到的。而所有的Testing的数据又被分为两部分，一部分是Private的Testing数据，另外一部分是Public的Testing数据。</p>
+<p>对应到我们真实的场景中，我们收集的数据被分成了两部分，一部分是Training Set，另外一部分就是测试数据，对影Public的Testing Set。而在我们的模型部署上线后见到的真实的业务数据就是Private的Testing Set。</p>
+<p>那么假设我们现在有三个模型，这三个模型我们并不知道用哪个好，然后我们就在Public的Testing上来进行挑选。将选好的模型用于Private的测试，得到最终的分数，那么最终的分数其实有可能会更低。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220111174712562.png" alt="用Private的测试数据来选择模型" style="zoom: 33%;"></p>
+<p>具体的原因，我们同样用一个非常极限的例子来阐述。模型同样只是记住数据，而对没有见过的数据随机给出结果。那么由于所有的模型都没有见过Testing的数据，而有可能编号56789的模型给出的Random的结果更好，然后我们用这个模型选为最终的模型，在Public Testing上测试。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220111175123278.png" alt="一个极限的例子" style="zoom:33%;"></p>
+<p>而由于在Private的测试数据上计算最终分数是在ddl结束之后，因此很有可能发生的事情在Public上表现好的模型在Private上表现糟糕</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220111175506687.png" alt="模型提交截止日期后心态崩了" style="zoom: 33%;"></p>
+<p>那么这个原因又是为什么呢？</p>
+<p>这个原因其实就是我们过拟合了测试数据。因为测试数据毕竟也是我们收集到的有限数据，因此我们不断地用测试数据来进行测试的话，那么其实就相当于我们在不选选择在我们收集到的Testing的数据上表现良好的模型。然而真实的数据是无穷的，我们只看模型在Testing数据上的表现，就和我们在训练阶段只看Training数据上的表现一样，发生了过拟合。</p>
+<p>因此我们其实是不能够用Testing的数据来帮助我们选择模型的。</p>
+<h3 id="B-Fine-tuning-on-Validation-Set"><a href="#B-Fine-tuning-on-Validation-Set" class="headerlink" title="B. Fine-tuning on Validation Set"></a>B. Fine-tuning on Validation Set</h3><p>那么我们既然不能够用Testing Set来进行调试，那么我们该怎么样来挑选模型呢？这个方法就是进行Validation，即对模型进行验证。</p>
+<p>具体而言，就是我们把训练数据再拆成两部分，随机取其中的10%作为Validation Set，剩余的90%作为Training Set。然后我们所有的模型用Validation Set来测试其好坏。我们根据在Validation Set上的表现，选出最好的模型，然后在Testing Set上进行验证。这样做的话，我们如果进行大量的调试的话，过拟合的其实是Validation Set。那么这个时候，使用Testing Set就可以真实的测试出来我们模型的好坏了。此时，对于我们采集的Testing Set还是我们模型部署上线后业务中真实的数据对于模型来说都是没有见过的数据，因此表现会非常稳定。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220111201016255.png" alt="使用Validation数据来测试模型" style="zoom: 33%;"></p>
+<p>当然，由于我们还是有Public的Testing数据因此我们在见到在Public的Testing Set上的表现后还是忍不住的会去调试。这个时候就建议不要调试太多次，否则最终还是会过拟合Public Testing Set。最好的其实就是只看Validation Set的结果，而不去理会Public上的数据</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220111201734188.png" alt="不建议用Public Testing Set来调参" style="zoom:33%;"></p>
+<h3 id="C-N-fold-Cross-Validation"><a href="#C-N-fold-Cross-Validation" class="headerlink" title="C. N-fold Cross Validation"></a>C. N-fold Cross Validation</h3><p>我们上面介绍了为什么要做Cross Validation以及怎么做Cross Validation。那么就存在一个问题，因为Validation Set的选取是依赖于我们的选法的。因此我们如果在选在Validation Set的时候存在偏差，那么就有可能导致我们Validation的结果是偏低或者偏高的。</p>
+<p>换而言之，可能会由于我们的选法导致选出来了奇怪的Validation Set，进而导致无法真实的反映模型的性能，因此模型最后的性能可能很差。因此，为了处理这种问题，我们就可以用N-fold Cross Validation。</p>
+<p>N-fold Cross Validation指的是把训练集切成N等份。然后取其中的一份作为Validation Set，剩下的作为Training Set，然后训练得到结果。然后更换Validation Set，继续训练然后得到结果，这个过程重复N次，得到N个结果。最后N个结果平均就得到了最终的结果。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220111202859393.png" alt="使用N-fold Cross Validation" style="zoom:33%;"></p>
+<h2 id="4-上周的结果"><a href="#4-上周的结果" class="headerlink" title="4. 上周的结果"></a>4. 上周的结果</h2><p>最后在上节课结束的时候，老师让同学们选择模型来预测这个周的视频的观看人数。最后大家选择了三层的模型。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220111203303645.png" alt="预测这周的视频观看人数" style="zoom: 33%;"></p>
+<p>那么最后的结果如下，可以看到，大家上周猛点老师的YouTube，让模型的表现烂掉<span class="github-emoji"><span>😂</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f602.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220111203825585.png" alt="机器预测的很烂" style="zoom:50%;"></p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Jack Wang</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://jackwang0107.github.io/2022/01/10/li-hong-yi-ml2021-spring-3-neural-network-training-manual/">https://jackwang0107.github.io/2022/01/10/li-hong-yi-ml2021-spring-3-neural-network-training-manual/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Jack Wang</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/Deep-Learning/">
+                                    <span class="chip bg-color">Deep Learning</span>
+                                </a>
+                            
+                                <a href="/tags/Hungyi-Li/">
+                                    <span class="chip bg-color">Hungyi Li</span>
+                                </a>
+                            
+                                <a href="/tags/Machine-Learning/">
+                                    <span class="chip bg-color">Machine Learning</span>
+                                </a>
+                            
+                                <a href="/tags/Neural-Network/">
+                                    <span class="chip bg-color">Neural Network</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.png" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2022/01/11/shu-xue-jian-mo-bei-sai-shu-xue-jian-mo-ti-xing-hua-fen-chang-yong-suan-fa-fen-lei-ji-qi-gua-yong-chang-jing/">
+                    <div class="card-image">
+                        
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220112134606210.png" class="responsive-img" alt="数学建模备赛：数学建模题型划分、常用算法分类及其适用场景">
+                        
+                        <span class="card-title">数学建模备赛：数学建模题型划分、常用算法分类及其适用场景</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            本文主要讲解了数学建模的题型划分、常用算法分类以及常用算法的适用场景
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-01-12
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E5%A4%87%E8%B5%9B/" class="post-category">
+                                    数学建模备赛
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E9%A2%98%E5%9E%8B/">
+                        <span class="chip bg-color">数学建模题型</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E7%AE%97%E6%B3%95%E4%BD%93%E7%B3%BB/">
+                        <span class="chip bg-color">数学建模算法体系</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E5%B8%B8%E7%94%A8%E8%A7%A3%E9%A2%98%E6%96%B9%E6%B3%95/">
+                        <span class="chip bg-color">数学建模常用解题方法</span>
+                    </a>
+                    
+                    <a href="/tags/Math-Modeling/">
+                        <span class="chip bg-color">Math Modeling</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/01/08/li-hong-yi-ml2021-spring-2-introduction-of-deeplearning-machinelearning/">
+                    <div class="card-image">
+                        
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220109135954313.png" class="responsive-img" alt="李宏毅ML2021-Spring-2: Introduction of Machine/Deep Learning">
+                        
+                        <span class="card-title">李宏毅ML2021-Spring-2: Introduction of Machine/Deep Learning</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            本文是李宏毅Machine Learning 2021 Spring 第二节课Introduction of Machine / Deep Learning的笔记，本节课主要结合YouTube观看人数预测案例讲解了机器学习/深度学习的基本概念
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-01-09
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%9D%8E%E5%AE%8F%E6%AF%85ML2021-Spring-Notes/" class="post-category">
+                                    李宏毅ML2021 Spring Notes
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Deep-Learning/">
+                        <span class="chip bg-color">Deep Learning</span>
+                    </a>
+                    
+                    <a href="/tags/Hungyi-Li/">
+                        <span class="chip bg-color">Hungyi Li</span>
+                    </a>
+                    
+                    <a href="/tags/Machine-Learning/">
+                        <span class="chip bg-color">Machine Learning</span>
+                    </a>
+                    
+                    <a href="/tags/Neural-Network/">
+                        <span class="chip bg-color">Neural Network</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: JackWang&#39;s Blog<br />'
+            + '文章作者: Jack Wang<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    });
+</script>
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2021-2022</span>
+            
+            <a href="/about" target="_blank">Jack Wang</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">297k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+                <span id="sitetime"> Loading ...</span>
+                <script>
+                    var calcSiteTime = function () {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2021";
+                        var startMonth = "11";
+                        var startDate = "12";
+                        var startHour = "0";
+                        var startMinute = "0";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+
+                        // 区分是否有年份.
+                        var language = 'zh-CN';
+                        if (startYear === String(todayYear)) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            var daysTip = 'This site has been running for ' + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                daysTip = '本站已运行 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                daysTip = '本站已運行 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = daysTip;
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            var yearsAndDaysTip = 'This site has been running for ' + diffYears + ' years and '
+                                + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                yearsAndDaysTip = '本站已运行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                yearsAndDaysTip = '本站已運行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+                        }
+                    }
+
+                    calcSiteTime();
+                </script>
+            
+            <br>
+            
+                <span id="icp"><img src="/medias/icp.png"
+                                    style="vertical-align: text-bottom;"/>
+                <a href="https://beian.miit.gov.cn" target="_blank">陕ICP备2021014294号-1</a>
+            </span>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+    <a href="mailto:2232123545@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2232123545" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2232123545" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+        
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/sakura.js"><\/script>');
+            }
+        </script>
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
