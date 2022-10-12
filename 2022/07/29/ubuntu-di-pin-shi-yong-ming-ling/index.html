@@ -411,21 +411,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-09-29
+                    2022-10-11
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    961
+                    1.7k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    3 分
+                    6 分
                 </div>
                 
 
@@ -523,6 +523,44 @@ tar -czvf ./*
 <h3 id="C-解压"><a href="#C-解压" class="headerlink" title="C. 解压"></a>C. 解压</h3><p>解压使用下面的组合</p>
 <pre class="line-numbers language-shell"><code class="language-shell">tar -xzvf 要解压的文件名
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="3-非交互式SSH连接：sshpass"><a href="#3-非交互式SSH连接：sshpass" class="headerlink" title="3. 非交互式SSH连接：sshpass"></a>3. 非交互式SSH连接：sshpass</h2><p>在开发的过程中，很多时候我们都需要干一些重复的事情。因此如果有一些任务在未来一段时间我们重复会干的话，那么我们就可以把这一系列任务写成一个Shell脚本，以后直接调用即可。</p>
+<p>而很多时候，我们在本机上完成好了开发之后，需要上传到内网的机器中进行测试。手动的用<code>tar</code>打包完了之后再用<code>scp</code>命令上传到内网服务器中是真的很麻烦。因此我们就想能不能把代码的打包以及上传写成一个脚本。</p>
+<p>可是这样干优惠存在一个问题，就是<code>scp</code>或者<code>ssh</code>这样涉及到链接远程服务器的命令都是交互式的，换而言之需要我们手动输入密码，这样就为我们在<code>Shell</code>中集成工作流造成了很大的不便。</p>
+<p>因此，我们就在想能不能把密码当成参数传给<code>scp</code>或者<code>ssh</code>，很可惜，这样不行。所以这个时候就有<code>sshpass</code>这个工具来帮助我们了。</p>
+<h3 id="A-p-指定密码"><a href="#A-p-指定密码" class="headerlink" title="A. -p 指定密码"></a>A. -p 指定密码</h3><p>使用<code>-p</code>参数直接指定<code>ssh</code>和<code>scp</code>登录时的密码</p>
+<pre class="line-numbers language-shell"><code class="language-shell"># 免密码登录
+sshpass -p password ssh username@host
+
+# 远程执行命令
+sshpass -p password ssh username@host <cmd>
+
+# 通过scp上传文件
+sshpass -p password scp local_file root@host:remote_file 
+
+# 通过scp下载文件
+sshpass -p password scp root@host:remote_file local_file
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>所以组合在一起，我们首先在本地使用<code>tar</code>打包，然后使用<code>scp</code>把压缩好的文件上传到远程服务器上去，接下来使用<code>ssh</code>命令远程执行解压、编译、测试的命令。</p>
+<p>类似的，如果想在远程执行多个命令，我们可以先用<code>scp</code>把写好的<code>shell</code>脚本上传到远程服务器上去，然后再使用<code>ssh</code>命令远程执行<code>shell</code>脚本。</p>
+<h3 id="B-o-忽略RAS-Key检查"><a href="#B-o-忽略RAS-Key检查" class="headerlink" title="B. -o 忽略RAS Key检查"></a>B. -o 忽略RAS Key检查</h3><p>在第一次链接到远程服务器的时候，第一次认证时，一般会有<code>RSA Key</code>验证的提示：</p>
+<pre class="line-numbers language-shell"><code class="language-shell">The authenticity of host ’10.x.x.x (10.x.x.x)' can't be established.
+RSA key fingerprint is a4:eb:8c:7d:2a:ef:d6:1c:a3:0c:e8:e5:00:d2:eb:60.
+Are you sure you want to continue connecting (yes/no)?
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>这个时候可以指定<code>-o</code>参数来忽略<code>RSA Key</code>的验证</p>
+<pre class="line-numbers language-shell"><code class="language-shell">sshpass -p "$SSH_PASSWD" ssh root@"$host" -o StrictHostKeyChecking=no "$@" 2>/dev/null
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="C-f-从文件中读取密码"><a href="#C-f-从文件中读取密码" class="headerlink" title="C. -f 从文件中读取密码"></a>C. -f 从文件中读取密码</h3><p>使用<code>-f</code>参数从文件中读取密码</p>
+<pre class="line-numbers language-shell"><code class="language-shell">echo "password" > userpasswd
+sshpass -f userpasswd ssh username@x.x.x.x
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>当然可以配合<code>gpg</code>来加密密码，而使用时候把解密后的密码传给<code>sshpass</code>，最后再删掉即可。</p>
+<pre class="line-numbers language-shell"><code class="language-shell">gpg -d -q .sshpassword.gpg > fifo; sshpass -f fifo ssh; rm fifo
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="D-e-从环境变量中读取密码"><a href="#D-e-从环境变量中读取密码" class="headerlink" title="D. -e 从环境变量中读取密码"></a>D. -e 从环境变量中读取密码</h3><p>使用<code>-e</code>参数从环境变量中读取密码</p>
+<pre class="line-numbers language-shell"><code class="language-shell">export SSHPASS="password"
+sshpass -e ssh username@x.x.x.x
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
                 
             </div>
@@ -771,7 +809,7 @@ tar -czvf ./*
                 <a href="/2022/09/27/add-system-call-for-xv6/">
                     <div class="card-image">
                         
-                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220127120521462.png" class="responsive-img" alt="Add System Call for XV6 (Unix Version 6)">
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220928233603685.png" class="responsive-img" alt="Add System Call for XV6 (Unix Version 6)">
                         
                         <span class="card-title">Add System Call for XV6 (Unix Version 6)</span>
                     </div>
@@ -961,8 +999,8 @@ tar -czvf ./*
             tocSelector: '#toc-content',
             contentSelector: '#articleContent',
             headingsOffset: -($(window).height() * 0.4 - 45),
-            collapseDepth: Number('0'),
-            headingSelector: 'h2, h3, h4'
+            collapseDepth: Number('3'),
+            headingSelector: 'h2, h3, h4, h5, h6'
         });
 
         // modify the toc link href to support Chinese.
@@ -974,7 +1012,7 @@ tar -czvf ./*
 
         // modify the heading title id to support Chinese.
         i = 0;
-        $('#articleContent').children('h2, h3, h4').each(function () {
+        $('#articleContent').children('h2, h3, h4, h5, h6').each(function () {
             $(this).attr('id', tocHeading + (++i));
         });
 
@@ -1053,7 +1091,7 @@ tar -czvf ./*
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">297k</span>
+                        class="white-color">307.8k</span>
             
             
             

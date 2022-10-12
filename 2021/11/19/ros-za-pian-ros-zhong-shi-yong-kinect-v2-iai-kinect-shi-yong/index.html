@@ -379,8 +379,8 @@
                                 <span class="chip bg-color">ROS</span>
                             </a>
                         
-                            <a href="/tags/Kinect-V2/">
-                                <span class="chip bg-color">Kinect V2</span>
+                            <a href="/tags/cv-bridge/">
+                                <span class="chip bg-color">cv_bridge</span>
                             </a>
                         
                             <a href="/tags/Ubuntu/">
@@ -395,20 +395,20 @@
                                 <span class="chip bg-color">OpenCv</span>
                             </a>
                         
-                            <a href="/tags/cv-bridge/">
-                                <span class="chip bg-color">cv_bridge</span>
-                            </a>
-                        
                             <a href="/tags/sensor-msgs/">
                                 <span class="chip bg-color">sensor_msgs</span>
                             </a>
                         
-                            <a href="/tags/iai-kinect2/">
-                                <span class="chip bg-color">iai-kinect2</span>
-                            </a>
-                        
                             <a href="/tags/roslaunch/">
                                 <span class="chip bg-color">roslaunch</span>
+                            </a>
+                        
+                            <a href="/tags/Kinect-V2/">
+                                <span class="chip bg-color">Kinect V2</span>
+                            </a>
+                        
+                            <a href="/tags/iai-kinect2/">
+                                <span class="chip bg-color">iai-kinect2</span>
                             </a>
                         
                     </div>
@@ -1170,8 +1170,8 @@ temp_path <span class="token operator">=</span> None
                                     <span class="chip bg-color">ROS</span>
                                 </a>
                             
-                                <a href="/tags/Kinect-V2/">
-                                    <span class="chip bg-color">Kinect V2</span>
+                                <a href="/tags/cv-bridge/">
+                                    <span class="chip bg-color">cv_bridge</span>
                                 </a>
                             
                                 <a href="/tags/Ubuntu/">
@@ -1186,20 +1186,20 @@ temp_path <span class="token operator">=</span> None
                                     <span class="chip bg-color">OpenCv</span>
                                 </a>
                             
-                                <a href="/tags/cv-bridge/">
-                                    <span class="chip bg-color">cv_bridge</span>
-                                </a>
-                            
                                 <a href="/tags/sensor-msgs/">
                                     <span class="chip bg-color">sensor_msgs</span>
                                 </a>
                             
-                                <a href="/tags/iai-kinect2/">
-                                    <span class="chip bg-color">iai-kinect2</span>
-                                </a>
-                            
                                 <a href="/tags/roslaunch/">
                                     <span class="chip bg-color">roslaunch</span>
+                                </a>
+                            
+                                <a href="/tags/Kinect-V2/">
+                                    <span class="chip bg-color">Kinect V2</span>
+                                </a>
+                            
+                                <a href="/tags/iai-kinect2/">
+                                    <span class="chip bg-color">iai-kinect2</span>
                                 </a>
                             
                         </div>
@@ -1413,6 +1413,10 @@ temp_path <span class="token operator">=</span> None
                         <span class="chip bg-color">ROS</span>
                     </a>
                     
+                    <a href="/tags/cv-bridge/">
+                        <span class="chip bg-color">cv_bridge</span>
+                    </a>
+                    
                     <a href="/tags/Ubuntu/">
                         <span class="chip bg-color">Ubuntu</span>
                     </a>
@@ -1425,8 +1429,8 @@ temp_path <span class="token operator">=</span> None
                         <span class="chip bg-color">OpenCv</span>
                     </a>
                     
-                    <a href="/tags/cv-bridge/">
-                        <span class="chip bg-color">cv_bridge</span>
+                    <a href="/tags/tf2/">
+                        <span class="chip bg-color">tf2</span>
                     </a>
                     
                     <a href="/tags/sensor-msgs/">
@@ -1435,10 +1439,6 @@ temp_path <span class="token operator">=</span> None
                     
                     <a href="/tags/roslaunch/">
                         <span class="chip bg-color">roslaunch</span>
-                    </a>
-                    
-                    <a href="/tags/tf2/">
-                        <span class="chip bg-color">tf2</span>
                     </a>
                     
                 </div>
@@ -1489,16 +1489,16 @@ temp_path <span class="token operator">=</span> None
                         <span class="chip bg-color">ROS</span>
                     </a>
                     
-                    <a href="/tags/Kinect-V2/">
-                        <span class="chip bg-color">Kinect V2</span>
-                    </a>
-                    
                     <a href="/tags/Ubuntu/">
                         <span class="chip bg-color">Ubuntu</span>
                     </a>
                     
                     <a href="/tags/melodic/">
                         <span class="chip bg-color">melodic</span>
+                    </a>
+                    
+                    <a href="/tags/Kinect-V2/">
+                        <span class="chip bg-color">Kinect V2</span>
                     </a>
                     
                 </div>
@@ -1593,8 +1593,8 @@ temp_path <span class="token operator">=</span> None
             tocSelector: '#toc-content',
             contentSelector: '#articleContent',
             headingsOffset: -($(window).height() * 0.4 - 45),
-            collapseDepth: Number('0'),
-            headingSelector: 'h2, h3, h4'
+            collapseDepth: Number('3'),
+            headingSelector: 'h2, h3, h4, h5, h6'
         });
 
         // modify the toc link href to support Chinese.
@@ -1606,7 +1606,7 @@ temp_path <span class="token operator">=</span> None
 
         // modify the heading title id to support Chinese.
         i = 0;
-        $('#articleContent').children('h2, h3, h4').each(function () {
+        $('#articleContent').children('h2, h3, h4, h5, h6').each(function () {
             $(this).attr('id', tocHeading + (++i));
         });
 
@@ -1685,7 +1685,7 @@ temp_path <span class="token operator">=</span> None
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">297k</span>
+                        class="white-color">307.8k</span>
             
             
             
