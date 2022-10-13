@@ -419,7 +419,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-10-12
+                    2022-10-14
                 </div>
                 
 
@@ -549,23 +549,23 @@
 <p>使用<code>shell</code>标签的原因是因为在<code>Windows</code>上有两个命令行，一个是<code>cmd</code>一个是<code>powershell</code>。而<code>mkdir</code>这个命令是在<code>powershell</code>中的，因此我们需要特殊指明在<code>Windwos</code>上需要使用<code>powershell.exe</code>作为Shell的解释器</p>
 <h3 id="D-input标签"><a href="#D-input标签" class="headerlink" title="D. input标签"></a>D. input标签</h3><p><code>input</code>标签用于生成一个选项卡，接收用户的输入，一般是和<code>args</code>标签一起使用我们稍后再讲解这个标签的用法。</p>
 <h2 id="3-启动调试器：launch-json"><a href="#3-启动调试器：launch-json" class="headerlink" title="3. 启动调试器：launch.json"></a>3. 启动调试器：launch.json</h2><h3 id="A-launch-json的结构"><a href="#A-launch-json的结构" class="headerlink" title="A. launch.json的结构"></a>A. launch.json的结构</h3><p><code>launch.json</code>的结构一般如下</p>
-<pre class="line-numbers language-shell"><code class="language-shell">{
+<pre class="line-numbers language-json"><code class="language-json"><span class="token punctuation">{</span>
     // 使用 IntelliSense 了解相关属性。 
     // 悬停以查看现有属性的描述。
-    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "type": "gdb",
-            "request": "launch",
-            "name": "GDB",
-            "program": "${workspaceFolder}/${command:AskForProgramName}",
-            "stopOnEntry": true,
-            "arguments": ""，
-            "preLaunchTask": ""
-        }
-    ]
-}
+    // 欲了解更多信息，请访问<span class="token operator">:</span> https<span class="token operator">:</span>//go.microsoft.com/fwlink/?linkid=<span class="token number">830387</span>
+    <span class="token property">"version"</span><span class="token operator">:</span> <span class="token string">"0.2.0"</span><span class="token punctuation">,</span>
+    <span class="token property">"configurations"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+            <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"gdb"</span><span class="token punctuation">,</span>
+            <span class="token property">"request"</span><span class="token operator">:</span> <span class="token string">"launch"</span><span class="token punctuation">,</span>
+            <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"GDB"</span><span class="token punctuation">,</span>
+            <span class="token property">"program"</span><span class="token operator">:</span> <span class="token string">"${workspaceFolder}/${command:AskForProgramName}"</span><span class="token punctuation">,</span>
+            <span class="token property">"stopOnEntry"</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+            <span class="token property">"arguments"</span><span class="token operator">:</span> <span class="token string">""</span>，
+            <span class="token property">"preLaunchTask"</span><span class="token operator">:</span> <span class="token string">""</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221011145556587.png" alt="launch.json的结构"></p>
 <h3 id="B-version标签-1"><a href="#B-version标签-1" class="headerlink" title="B. version标签"></a>B. version标签</h3><p><code>launch.json</code>中的<code>version</code>标签和<code>tasks.json</code>中的<code>version</code>标签作用是一样的，一般都用<code>0.2.0</code>。</p>
@@ -1790,59 +1790,45 @@ target_link_libraries(wish libwish)
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2022/10/10/vscode-diao-shi-c-c-xiang-mu/">
+                <a href="/2022/10/12/gams-jiao-cheng-1-shu-ju-lei-xing-yi-ji-cheng-xu-jie-gou/">
                     <div class="card-image">
                         
-                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221011012250590.png" class="responsive-img" alt="VSCode调试C/C++项目">
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221012223017100.png" class="responsive-img" alt="GAMS教程 1：数据类型及程序结构">
                         
-                        <span class="card-title">VSCode调试C/C++项目</span>
+                        <span class="card-title">GAMS教程 1：数据类型及程序结构</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            本文介绍了如何使用VSCode来调试C/C++工程
+                            本文介绍了GAMS的数据类型及程序结构
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-10-11
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-10-12
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%9D%82%E9%A1%B9/" class="post-category">
-                                    杂项
+                            <a href="/categories/GAMS/" class="post-category">
+                                    GAMS
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E6%9D%82%E9%A1%B9/">
-                        <span class="chip bg-color">杂项</span>
-                    </a>
-                    
-                    <a href="/tags/VSCode/">
-                        <span class="chip bg-color">VSCode</span>
-                    </a>
-                    
-                    <a href="/tags/tasks-json/">
-                        <span class="chip bg-color">tasks.json</span>
-                    </a>
-                    
-                    <a href="/tags/launch-json/">
-                        <span class="chip bg-color">launch.json</span>
+                    <a href="/tags/GAMS/">
+                        <span class="chip bg-color">GAMS</span>
                     </a>
                     
                 </div>
@@ -2078,7 +2064,7 @@ target_link_libraries(wish libwish)
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">307.8k</span>
+                        class="white-color">313.6k</span>
             
             
             

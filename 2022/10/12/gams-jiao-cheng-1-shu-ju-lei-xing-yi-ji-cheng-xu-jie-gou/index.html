@@ -1,0 +1,1999 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="GAMS教程 1：数据类型及程序结构, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
+    <meta name="description" content="本文介绍了GAMS的数据类型及程序结构">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>GAMS教程 1：数据类型及程序结构 | JackWang&#39;s Blog</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.2">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+
+   <style>
+    body{
+       background-image: url(https://cdn.jsdelivr.net/gh/Tokisaki-Galaxy/res/site/medias/background.jpg);
+       background-repeat:no-repeat;
+       background-size: 100% 100%;
+       background-attachment:fixed;
+    }
+</style>
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">JackWang&#39;s Blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-book-reader" style="zoom: 0.6;"></i>
+      
+      <span>博客</span>
+      <i class="fas fa-chevron-down" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/tags">
+          
+          <i class="fas fa-tags" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按标签归类文章</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories">
+          
+          <i class="fas fa-bookmark" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按目录归类文章</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/archives">
+          
+          <i class="fas fa-archive" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按日期分类文章</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">JackWang&#39;s Blog</div>
+        <div class="logo-desc">
+            
+            JackWang的个人博客
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-book-reader"></i>
+			
+			博客
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>
+
+                  <a href="/tags " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-tags" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按标签归类文章</    span>
+
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/categories " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-bookmark" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按目录归类文章</    span>
+
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/archives " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-archive" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按日期分类文章</    span>
+
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('抱歉，这篇文章并不想让所有人都看到，请输入授权密码观看')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221012223017100.png')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">GAMS教程 1：数据类型及程序结构</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/GAMS/">
+                                <span class="chip bg-color">GAMS</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/GAMS/" class="post-category">
+                                GAMS
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2022-10-12
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2022-10-14
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    4.6k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    19 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221012223017100.png" alt="GAMS基础语法"></p>
+<h1 id="GAMS教程-1：数据类型及程序结构"><a href="#GAMS教程-1：数据类型及程序结构" class="headerlink" title="GAMS教程 1：数据类型及程序结构"></a>GAMS教程 1：数据类型及程序结构</h1><h2 id="1-GAMS的数据类型"><a href="#1-GAMS的数据类型" class="headerlink" title="1. GAMS的数据类型"></a>1. GAMS的数据类型</h2><p>GAMS中一种有5种数据类型，分别是：</p>
+<ul>
+<li><strong>集合（Set)</strong></li>
+<li><strong>参数（Parameter）</strong></li>
+<li><strong>标量（Scalar）</strong></li>
+<li><strong>变量（Variable）</strong></li>
+<li><strong>表格（Table）</strong></li>
+</ul>
+<p>其中：</p>
+<ul>
+<li>标量是一种独立的数据类型</li>
+<li>参数、变量和列表具有相互依赖关系</li>
+</ul>
+<p>而由于变量是特殊的数据类型，因此下面将单独变量。</p>
+<h3 id="A-集合（Set）"><a href="#A-集合（Set）" class="headerlink" title="A. 集合（Set）"></a>A. 集合（Set）</h3><p>集合是<code>GAMS</code>中最基础的数据类型，其他的数据类型，例如参数、变量和表格都依赖于集合。</p>
+<h4 id="集合的声明"><a href="#集合的声明" class="headerlink" title="集合的声明"></a>集合的声明</h4><p>数学上我们按照下面的方式声明一个集合</p>
+<script type="math/tex; mode=display">
+S = \{a,b,c\}</script><p>而在GAMS中，我们按照下面的方式声明一个集合</p>
+<pre class="line-numbers language-gas"><code class="language-gas">Set S / a, b, c /;
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>详细的声明规则如下</p>
+<pre class="line-numbers language-gas"><code class="language-gas">Set[s] set_name ["text"] [/element [text] {,element [text]} /]
+     {,set_name ["text"] [/element [text] {,element [text]} /] } ;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>其中：</p>
+<ul>
+<li><code>text</code>表示注释，如果我们为集合整体注释的话，必须要加<code>""</code>，但是为集合中的元素注释则不需要</li>
+<li><code>[]</code>表示可选项，因此在声明集合的时刻可以只声明集合的名称，而不用声明集合中的元素，也可以不用对集合整体或者每个元素进行注释</li>
+<li><code>{}</code>表示可重复项</li>
+<li>我们可以同时声明多个集合，如果声明多个集合的话，就必须使用<code>Sets</code></li>
+</ul>
+<p>通常来说，我们认识中的集合的作用就是收集并保存一堆元素。<strong>GAMS中的集合更多的其实起着数组下标的作用，每个元素没有具体得数值</strong>。关于这个作用在稍后的参数和表格中会涉及到。</p>
+<p>一个集合的例子为</p>
+<pre class="line-numbers language-gas"><code class="language-gas">Set letters /a, b, c, d/;
+
+Sets numbers /1, 2, 3, 4, 5/,
+     cities "我去过的   所有城市"
+            / Edmonton  "2019去的埃德蒙顿", Xian  "2021年在西安读大学", Madison  "2022年在麦迪逊交换"/;
+
+
+display letters, numbers, cities;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>需要注意的是：</p>
+<ul>
+<li><p><code>GAMS</code>语言和一般的编程语言不同，<code>GAMS</code>变成语言并没有整数、浮点书、字符串这些数据类型，在<code>GAMS</code>看来，他们都是<code>element</code></p>
+</li>
+<li><p><code>display</code>类似于<code>printf</code>，即输出变量的值。</p>
+</li>
+</ul>
+<p>运行后<code>lst</code>文件中的结果表明，我们在第8行输出了前面定义的三个集合</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221012225725245.png" alt="lst文件中的结果"></p>
+<h3 id="B-参数（Parameter）"><a href="#B-参数（Parameter）" class="headerlink" title="B. 参数（Parameter）"></a>B. 参数（Parameter）</h3><p>上面我们说过，<code>GAMS</code>中的集合起着数组下标的作用，那么<code>GAMS</code>中的参数其实起着数组的作用。一般来说，我们的模型中约束的系数就保存在参数这个数据结构中。既然参数更多起着数组的作用，那么参数可以声明，可以赋值也可以取值。我们下面先介绍参数的声明，然后再介绍参数的赋值与取值。</p>
+<h4 id="参数的声明"><a href="#参数的声明" class="headerlink" title="参数的声明"></a>参数的声明</h4><p>声明Parameter数据类型的语法如下</p>
+<pre class="line-numbers language-gas"><code class="language-gas">parameter[s] param_name[(index_list)] [text] [/ element [=] numerical_value
+                                              {,element [=] numerical_value} /]
+           {,param_name[(index_list)] [text] [/ element [=] numerical_value
+                                              {,element [=] numerical_value} /]} ;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>其中：</p>
+<ul>
+<li><code>[]</code>是可选项，<code>text</code>是注释，<code>{}</code>表示可重复项</li>
+<li><code>index_list</code>表示选用做下标的集合</li>
+<li>需要注意，<code>element</code>必须是索引集合中的元素，<code>numerical_value</code>必须是可以解释的数值，要么是字面量的数值，要么是稍后介绍的标量，要么是稍后介绍的参数、表格的取值。</li>
+</ul>
+<p>声明参数的例子如下</p>
+<pre class="line-numbers language-gas"><code class="language-gas">Set letters /a, b, c, d/;
+
+Sets numbers /1, 2, 3, 4, 5/,
+     cities "我去过的   所有城市"
+            / Edmonton  "2019去的埃德蒙顿", Xian  "2021年在西安读大学", Madison  "2022年在麦迪逊交换"/;
+
+
+Parameters
+    param_letter(letters)   "以letters集合作为索引集合的参数"
+        / a    1, b    2, c    3, d    4 /,
+
+    param_num(numbers)      "以numbers集合作为索引集合的参数"
+        / 1 = 11, 2 = 12, 3 = 13, 4 = 14, 5 = 15 /,
+
+    param_city(cities)      "以cities集合作为索引集合的参数"
+        / Edmonton   2019, Xian = 2021/;
+
+
+display letters, param_letter;
+display numbers, param_num;
+display cities, param_city;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>其中：</p>
+<ul>
+<li>我们对<code>param_letter</code>和<code>param_num</code>这两个参数在声明的时候就进行了初始化，即为每一个下标赋值</li>
+<li><code>param_city</code>参数只进行了部分赋值</li>
+</ul>
+<p>运行之后的结果中需要注意的是：</p>
+<ul>
+<li>每一个数值</li>
+<li><code>param_city</code>中只有<code>Edmonton</code>和<code>Xian</code>这两个下标有值</li>
+</ul>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221012232511788.png" alt="lst文件中的结果"></p>
+<h4 id="参数的赋值"><a href="#参数的赋值" class="headerlink" title="参数的赋值"></a>参数的赋值</h4><p>我们其实可以在参数初始化借助之后单独对某些下标赋值，语法如下</p>
+<pre class="line-numbers language-gas"><code class="language-gas">prameter_name('element') = neumerical_value;
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>注意：</p>
+<ul>
+<li><code>element</code>的值必须是在索引集合中的元素</li>
+<li><code>neumerical_value</code>必须是可以解释的数值，包括整数和浮点数</li>
+</ul>
+<p>继续利用上面的那个例子，为<code>param_city</code>中的<code>Madison</code>这个元素赋值</p>
+<pre class="line-numbers language-gas"><code class="language-gas">Set letters /a, b, c, d/;
+
+Sets numbers /1, 2, 3, 4, 5/,
+     cities "我去过的   所有城市"
+            / Edmonton  "2019去的埃德蒙顿", Xian  "2021年在西安读大学", Madison  "2022年在麦迪逊交换"/;
+
+
+Parameters
+    param_letter(letters)   "以letters集合作为索引集合的参数"
+        / a    1, b    2, c    3, d    4 /,
+
+    param_num(numbers)      "以numbers集合作为索引集合的参数"
+        / 1 = 11, 2 = 12, 3 = 13, 4 = 14, 5 = 15 /,
+
+    param_city(cities)      "以cities集合作为索引集合的参数"
+        / Edmonton   2019, Xian = 2021/;
+
+
+param_city('Madison') = 2022;
+
+
+display letters, param_letter;
+display numbers, param_num;
+display cities, param_city;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>运行的结果中，可以发现<code>Madison</code>的值已经成了2022</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221012234419981.png" alt="lst文件中的结果"></p>
+<h4 id="参数的取值"><a href="#参数的取值" class="headerlink" title="参数的取值"></a>参数的取值</h4><p>参数的取值语法其实和参数的赋值语法没什么两样</p>
+<pre class="line-numbers language-gas"><code class="language-gas">param_name("element")
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>结合上面的例子，我们把<code>param_num('1')</code>的值赋给<code>param_city('Madison')</code></p>
+<pre class="line-numbers language-gas"><code class="language-gas">Set letters /a, b, c, d/;
+
+Sets numbers /1, 2, 3, 4, 5/,
+     cities "我去过的   所有城市"
+            / Edmonton  "2019去的埃德蒙顿", Xian  "2021年在西安读大学", Madison  "2022年在麦迪逊交换"/;
+
+
+Parameters
+    param_letter(letters)   "以letters集合作为索引集合的参数"
+        / a    1, b    2, c    3, d    4 /,
+
+    param_num(numbers)      "以numbers集合作为索引集合的参数"
+        / 1 = 11, 2 = 12, 3 = 13, 4 = 14, 5 = 15 /,
+
+    param_city(cities)      "以cities集合作为索引集合的参数"
+        / Edmonton   2019, Xian = 2021/;
+
+
+param_city('Madison') = param_num('1') * 20;
+
+
+display letters, param_letter;
+display numbers, param_num;
+display cities, param_city;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>运行之后的结果为</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221013000948870.png" alt="lst文件中的结果"></p>
+<h3 id="C-表格（Table）"><a href="#C-表格（Table）" class="headerlink" title="C. 表格（Table）"></a>C. 表格（Table）</h3><p>表格其实就是多维数组（一般都用作二维数组），因此和参数相比，表格在声明的时候需要两个集合作为索引集合，而在取值、索引的时候需要两个索引。</p>
+<p>和参数一样下面将按照表格的声明、赋值和取值来介绍</p>
+<h4 id="表格的声明"><a href="#表格的声明" class="headerlink" title="表格的声明"></a>表格的声明</h4><p><code>GAMS</code>中表格声明的语法如下</p>
+<pre class="line-numbers language-gas"><code class="language-gas">table table_name[(index_list)]  [text] [EOL
+                element               { element }     EOL
+  element    numerical_value       { numerical_value} EOL
+ {element    numerical_value       { numerical_value} EOL}] ;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>其中：</p>
+<ul>
+<li><code>[]</code>是可选项，<code>text</code>是注释，<code>{}</code>表示可重复项</li>
+<li><code>element</code>必须是来自于索引集合中的元素</li>
+<li><code>neumerical_value</code>必须是可解释的数值</li>
+<li><code>EOL</code>表示回车换行</li>
+</ul>
+<p>一个表格声明的例子如下</p>
+<pre class="line-numbers language-gas"><code class="language-gas">Sets
+    r_idx   "行索引"    /r1 * r4/,
+    c_idx   "列索引"    /a * e/;
+
+
+Table t_example(r_idx, c_idx)       "一个Table Example"
+        a       b       c       d       e
+r1      0       1       2       3       4
+r2      5       6       7       8       
+r3      10      11      12      13      14
+r4              16      17      18      19
+;
+
+
+
+display r_idx, c_idx;
+display t_example;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>需要注意的是：</p>
+<ul>
+<li>我们在声明参数的时候，可以使用<code>*</code>来进行省略声明，只需要元素内是有序的即可</li>
+<li>赋值是按照分隔符来给的，具体效果可以看下面的运行结果</li>
+</ul>
+<p>运行结果如下，</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221013003553953.png" alt="lst文件中的结果"></p>
+<h4 id="表格的赋值与取值"><a href="#表格的赋值与取值" class="headerlink" title="表格的赋值与取值"></a>表格的赋值与取值</h4><p>表格的赋值与取值其实和参数一样的，语法为</p>
+<pre class="line-numbers language-gas"><code class="language-gas">table_name('element1', 'element2') = table_name('element3', 'element4')
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>下面给出一个表格赋值与取值的例子</p>
+<pre class="line-numbers language-gas"><code class="language-gas">Sets
+    r_idx   "行索引"    /r1 * r4/,
+    c_idx   "列索引"    /a * e/;
+
+
+Table t_example(r_idx, c_idx)       "一个Table Example"
+        a       b       c       d       e
+r1      0       1       2       3       4
+r2      5       6       7       8       
+r3      10      11      12      13      14
+r4              16      17      18      19
+;
+
+
+t_example('r4', 'a') = -2;
+t_example('r2', 'e') = t_example('r2', 'c');
+
+display r_idx, c_idx;
+display t_example;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>运行结果如下</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221013003918044.png" alt="lst文件中的结果"></p>
+<h3 id="D-标量（Scalar）"><a href="#D-标量（Scalar）" class="headerlink" title="D. 标量（Scalar）"></a>D. 标量（Scalar）</h3><p><code>GAMS</code>中的标量就相当于C语言中的符号常量，非常简单。</p>
+<h4 id="标量的声明"><a href="#标量的声明" class="headerlink" title="标量的声明"></a>标量的声明</h4><p><code>Scalar</code>的声明如下</p>
+<pre class="line-numbers language-gas"><code class="language-gas">scalar[s] scalar_name [text] [/numerical_value/]
+       {  scalar_name [text] [/numerical_value/]} ;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>其中：</p>
+<ul>
+<li><code>[]</code>表示可选项，<code>text</code>表示注释，<code>{}</code>表示可重复项</li>
+<li><code>neumerical_value</code>表示可解释的数值，可以是整数或浮点数</li>
+</ul>
+<p>标量声明的一个例子为</p>
+<pre class="line-numbers language-gas"><code class="language-gas">Sets
+    idx   "索引"    /i1 * i4/;
+
+
+Scalar
+    day     "今天是这个月的第几天"      / 13 /;
+
+
+display idx;
+display day;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221013011344971.png" alt="lst文件中的结果"></p>
+<h4 id="标量的赋值与取值"><a href="#标量的赋值与取值" class="headerlink" title="标量的赋值与取值"></a>标量的赋值与取值</h4><p>标量的赋值与取值非常简单，如下</p>
+<pre class="line-numbers language-gas"><code class="language-gas">Sets
+    idx   "索引"    /i1 * i4/;
+
+
+Scalars
+    day         "今天是这个月的第几天"      / 13 /,
+    day_copy    "天数的一个备份";
+
+day_copy = day;
+
+
+display idx;
+display day, day_copy;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221013011540814.png" alt="lst文件中的结果"></p>
+<h3 id="E-向量化操作"><a href="#E-向量化操作" class="headerlink" title="E. 向量化操作"></a>E. 向量化操作</h3><p><code>Python</code>中的<code>Numpy</code>包中提供了向量化操作以及广播机制，类似的，<code>GAMS</code>中也支持向量化操作，但是需要注意的是，<code>GAMS</code>不支持广播。</p>
+<p>所谓向量化操作，意思就是逐元素操作。</p>
+<p>向量化操作的例子如下</p>
+<pre class="line-numbers language-gas"><code class="language-gas">Sets
+    r_idx   "行索引"    /r1 * r4/,
+    c_idx   "列索引"    /a * e/;
+
+Parameters
+    p0(r_idx)   "待向量化操作以逐元素赋值的参数",
+    p1(r_idx)   "第一个参数"    / "r1"   -1, "r2"   -2, "r3"    -3, "r4"    -4/,
+    p2(c_idx)   "第二个参数"    / "a"    10, "b"    20, "c"     30, "d"     40, "e"     50/;
+
+
+Table t_example(r_idx, c_idx)       "待向量化逐元素赋值的列表"
+        a       c       d       e
+r1      0       2       3       4
+r3      10      12      13      14
+r4      21      17      18      19
+;
+
+* 参数与参数的逐元素赋值
+p0(r_idx) = p1(r_idx) * 10;
+
+* 列表和参数的逐元素赋值
+t_example(r_idx, 'b') = p1(r_idx);
+t_example('r2', c_idx) = p2(c_idx);
+
+
+
+display r_idx, c_idx;
+display p0;
+display p1, p2;
+display t_example;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>需要注意的是：</p>
+<ul>
+<li>向量化操作的时候需要指明逐元素逐的是哪个索引集合</li>
+<li><code>*</code>表示这一行为注释</li>
+</ul>
+<p>运行的结果如下</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221013010042336.png" alt="lst文件中的结果"></p>
+<h2 id="2-GAMS中的变量（Variable）"><a href="#2-GAMS中的变量（Variable）" class="headerlink" title="2. GAMS中的变量（Variable）"></a>2. GAMS中的变量（Variable）</h2><p>通常我们的优化模型有下面几个部分组成：</p>
+<ul>
+<li><strong>目标变量</strong></li>
+<li><strong>决策变量</strong></li>
+<li><strong>约束（等式约束、不等式约束）</strong></li>
+</ul>
+<p>在约束和目标变量中，我们会有许多的参数，因此在<code>GAMS</code>中，使用上面介绍的Scalar、Parameter和Table三类数据类型来存储模型中的参数。</p>
+<p>模型中的参数往往是已知值，而决策变量就是我们要求解的未知值，例如前面介绍的<code>Top Brass Company</code>的例子中的生产足球和橄榄球的个数。</p>
+<p>因此，在本质上变量（Variable）是一类不同的数据类型，相比于普通的参数，会有额外的特殊属性，因此要额外介绍。</p>
+<h3 id="A-变量的声明"><a href="#A-变量的声明" class="headerlink" title="A. 变量的声明"></a>A. 变量的声明</h3><p>所谓变量，值得其实就是值不知道的量，具体可以是值不知道的Scalar、值不知道的Parameter、值不知道的Table（一般多是Scalar和Parameter）。</p>
+<p>因此变量的声明其实和前面说的三种数据类型的声明差不多的。</p>
+<p>具体来说，变量声明的语法如下</p>
+<pre class="line-numbers language-gas"><code class="language-gas">[var_type] variable[s] var_name [(index_list)] [text] [/var_data/] {, var_name [(index_list)] [text] [/var_data/]}
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>其中：</p>
+<ul>
+<li><code>[]</code>表示可选项，<code>text</code>表示注释，<code>{}</code>表示可重复项</li>
+<li><code>var_type</code>表示变量的类型，可以是<code>free</code>、<code>positive</code>等等，反正具体的含义就是表示了变量的取值范围。<code>var_type</code>所有可能的取值如下</li>
+</ul>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221013014833623.png" alt="image-20221013014833623"></p>
+<p>下面给出一个变量声明的例子。</p>
+<p>注意：</p>
+<ul>
+<li>在下面的例子中，我们声明了一个标量类型的变量和一个参数类型的变量</li>
+<li>我们使用了变量的<code>.l</code>属性，变量的属性将在下面介绍，在这里<code>.l</code>属性表示变量的值</li>
+</ul>
+<pre class="line-numbers language-gas"><code class="language-gas">Sets
+    m           "月份"                    / m1 * m4/;
+
+Scalar
+    today         "今天是这个月的第几天"      / 13 /;
+
+Parameter
+    month_sale(m)  "每个月的销售额"           / 'm1'    1, 'm2'    2, 'm3'    3, 'm4'    4/;
+
+Variables
+    what_day    "今天是第几天?",
+    month_earn(m)  "每个月的利润";
+
+
+
+what_day.l = today;
+month_earn.l(m) = month_sale(m) * 20;
+
+
+display what_day.l, month_earn.l;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>运行的结果如下</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221013015230758.png" alt="lst文件中的结果"></p>
+<h3 id="B-变量的属性"><a href="#B-变量的属性" class="headerlink" title="B. 变量的属性"></a>B. 变量的属性</h3><p>每一个变量都有多个属性，例如上限、下限、变量的值等等。我们可以通过特殊的后缀来访问这些属性。</p>
+<p>具体来说，所有的属性如下表所示，一般常用的就是<code>.lo</code>、<code>.up</code>和<code>.l</code>这三个属性</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221013015914710.png" alt="一个变量所具有的所有属性"></p>
+<p>此外，需要注意的是，变量是什么了类型，对应的属性就是什么类型，例如上面的例子中<code>month_earn(m)</code>是参数类型的变量。</p>
+<p>那么<code>month_earn.l</code>就是一个参数，我们对<code>month_earn.l</code>这个参数的取值和上面的参数没有任何不同。</p>
+<p>例如下面的例子</p>
+<pre class="line-numbers language-gas"><code class="language-gas">Sets
+    m           "月份"                    / m1 * m4/;
+
+Scalar
+    today         "今天是这个月的第几天"      / 13 /;
+
+Parameter
+    month_sale(m)  "每个月的销售额"           / 'm1'    1, 'm2'    2, 'm3'    3, 'm4'    4/;
+
+Variables
+    what_day    "今天是第几天?",
+    month_earn(m)  "每个月的利润";
+
+
+
+what_day.l = today;
+month_earn.l(m) = month_sale(m) * 20;
+month_earn.l('m3') = -100;
+
+
+display what_day.l, month_earn.l;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221013021154180.png" alt="lst文件中的结果"></p>
+<h2 id="3-GAMS程序的结构"><a href="#3-GAMS程序的结构" class="headerlink" title="3. GAMS程序的结构"></a>3. GAMS程序的结构</h2><h3 id="A-概述"><a href="#A-概述" class="headerlink" title="A. 概述"></a>A. 概述</h3><p><code>GAMS</code>程序通常包含如下的四个部分：</p>
+<ul>
+<li>数据声明：包括Variable、Scalar、Set、Parameter和Table的声明</li>
+<li>约束声明：声明所有模型中的所有约束（包含目标变量的计算式）</li>
+<li>模型声明：声明某个模型包含的约束</li>
+<li>求解声明：声明求解某个模型使用哪个求解器</li>
+</ul>
+<p>我们前面介绍了数据声明，下面节将介绍如何声明约束、模型和求解。</p>
+<h3 id="B-约束声明"><a href="#B-约束声明" class="headerlink" title="B. 约束声明"></a>B. 约束声明</h3><p>约束包含两种：</p>
+<ul>
+<li>等式约束</li>
+<li>不等式约束</li>
+</ul>
+<p>此外，<code>GAMS</code>中把目标变量的计算也视为约束。</p>
+<p>约束的声明分为两步：</p>
+<ul>
+<li>第一步：声明约束名称</li>
+<li>第二步：定义约束计算</li>
+</ul>
+<h4 id="声明约束名称"><a href="#声明约束名称" class="headerlink" title="声明约束名称"></a>声明约束名称</h4><p>约束名称的声明规则如下</p>
+<pre class="line-numbers language-gas"><code class="language-gas">Equation[s] eqn_name [(index_list)] [explanatory text] [/eqn_data/] {, eqn_name [(index_list)] [explanatory text] [/eqn_data/]} ;
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>其中：</p>
+<ul>
+<li><code>[]</code>表示可选项，<code>text</code>表示注释，<code>{}</code>表示可重复项</li>
+</ul>
+<p>声明约束的例子如下：</p>
+<pre class="line-numbers language-gas"><code class="language-gas">Sets
+  sl                      'supply locations'               /s1, s2/
+  wh                      'warehouse locations'            /a, b, c/;
+
+Equations
+  tcost_eq                'total cost accounting equation'
+  supply_eq(sl)           'limit on supply available at supply location'
+  capacity_eq(wh)         'warehouse capacity'  /a.scale 50, a.l 10, b.m 20/;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这里需要注意的是，理论上来说，一个约束就是一个等式，那为什么约束<code>supply_eq</code>和<code>capacity_eq</code>还和<code>sl</code>、<code>wh</code>这样的索引集合关联起来呢？</p>
+<p>原因是这样的：</p>
+<p>我们考虑一个真实的优化问题</p>
+<script type="math/tex; mode=display">
+max_{x_1, x_2}\ 12 x_1 + 8 x_2\\
+\left\{
+    \begin{array}{**lr**}
+        mx_1 &+& nx_2 &= &z\\
+        ox_2 &+& px_2 &\leq &q\\
+        a_{11} x_1 &+& a_{12} x_2 &\leq &b_1\\
+    a_{21} x_1 &+& a_{22} x_2 &\leq &b_2\\
+    \end{array}
+\right.</script><p>那么上面这个这个优化问题用矩阵来描述实际上可以写成下面的样子</p>
+<script type="math/tex; mode=display">
+max_{x_1, x_2}\ 12 x_1 + 8 x_2\\
+\left\{
+    \begin{array}{**lr**}
+        mx_1 &+& nx_2 &= &z\\
+        ox_2 &+& px_2 &\leq &q\\
+        \begin{bmatrix}
+            a_{11} & a_{12}\\
+            a_{21} & a_{22}
+        \end{bmatrix} &\cdot&
+        \begin{bmatrix}
+            x_1\\ x_2
+        \end{bmatrix} &\leq& 
+        \begin{bmatrix}
+            b_1\\ b_2
+        \end{bmatrix} 
+    \end{array}
+\right.</script><p>那么上面的约束实际上只有三个，其中：</p>
+<ul>
+<li>第一个约束是一个标量等式约束</li>
+<li>第二个约束是一个标量不等式约束</li>
+<li>第三个约束是一个矩阵不等式约束</li>
+</ul>
+<p>但是第三个约束实际上是对$x_1$和$x_2$和两个变量的约束，因此我们在GAMS中声明矩阵约束的时候，实际上就需要和索引集合关联起来。</p>
+<h4 id="定义约束计算"><a href="#定义约束计算" class="headerlink" title="定义约束计算"></a>定义约束计算</h4><p>约束计算的式子如下</p>
+<pre class="line-numbers language-gas"><code class="language-gas">eqn_name(index_list)[$logical_condition(s)].. expression eqn_type expression ;
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>其中：</p>
+<ul>
+<li><code>[]</code>是可选项</li>
+<li><code>eqn_type</code>是约束的类型，<code>expression</code>就是加减乘除的表达式</li>
+<li><code>$logical_condition</code>是逻辑表达式，我们在下一讲中将涵盖这个主题</li>
+</ul>
+<p>所有的<code>eqn_type</code>有</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221013145104831.png" alt="所有的eqn_type"></p>
+<p>定义约束计算的一个例子如下</p>
+<pre class="line-numbers language-gas"><code class="language-gas">Variables  phi, phipsi, philam, phipi, phieps ;
+Equations  obj ;
+
+obj.. 
+    phi  =e=  phipsi + philam + phipi - phieps ;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="标量约束"><a href="#标量约束" class="headerlink" title="标量约束"></a>标量约束</h4><p>我们在上面介绍了标量约束和矩阵约束，下面将给出下面这个约束问题代码</p>
+<script type="math/tex; mode=display">
+max_{x_1, x_2}\ 12 x_1 + 8 x_2\\
+\left\{
+    \begin{array}{**lr**}
+        mx_1 &+& nx_2 &= &z\\
+        ox_2 &+& px_2 &\leq &q\\
+        \begin{bmatrix}
+            a_{11} & a_{12}\\
+            a_{21} & a_{22}
+        \end{bmatrix} &\cdot&
+        \begin{bmatrix}
+            x_1\\ x_2
+        \end{bmatrix} &\leq& 
+        \begin{bmatrix}
+            b_1\\ b_2
+        \end{bmatrix} 
+    \end{array}
+\right.</script><p>首先是标量约束的定义和声明</p>
+<script type="math/tex; mode=display">
+\left\{
+    \begin{array}{**lr**}
+        mx_1 &+& nx_2 &= &z\\
+        ox_2 &+& px_2 &\leq &q\\
+    \end{array}
+\right.</script><pre class="line-numbers language-gas"><code class="language-gas">Scalars
+    m  /1/,
+    n  /2/,
+    z  /3/,
+    o  /4/,
+    p  /5/,
+    q  /6/;
+
+Set
+    position        "位置索引"            /1, 2/;
+
+Parameters
+    eq1_p(position)                "第一个等式约束的参数"      /    "1"    1, "2"   2 /,
+    eq2_p(position)                "第二个不等式约束的参数"  / "1"    4, "2"   5 /;
+
+
+
+Free Variable 
+    objective,
+    decision(position);
+
+
+Equations
+    eq1,
+    eq2;
+
+
+eq1..
+    sum(position, eq1_p(position) * decision(position)) =e= z;
+
+eq2..
+    sum(position, eq2_p(position) * decision(position)) =l= q;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="矩阵约束"><a href="#矩阵约束" class="headerlink" title="矩阵约束"></a>矩阵约束</h4><p>然后我们再定义矩阵约束</p>
+<script type="math/tex; mode=display">
+\left\{
+    \begin{array}{**lr**}
+                \begin{bmatrix}
+            a_{11} & a_{12}\\
+            a_{21} & a_{22}
+        \end{bmatrix} &\cdot&
+        \begin{bmatrix}
+            x_1\\ x_2
+        \end{bmatrix} &\leq& 
+        \begin{bmatrix}
+            b_1\\ b_2
+        \end{bmatrix} 
+    \end{array}
+\right.</script><p>注意，这里使用<code>alias</code>的原因是因为我们的等式应该是对每行循环的，而求和是对每个变量循环的。</p>
+<pre class="line-numbers language-gas"><code class="language-gas">Scalars
+    a11 /7/,
+    a12 /8/,
+    a21 /9/,
+    a22 /10/,
+    b1  /11/,
+    b2  /12/;
+
+
+Set
+    position        "位置索引"            /1, 2/;
+
+alias (row, position);
+
+Parameters
+  eq3_b(row)             "第三个矩阵约束"         / "1"    11, "2"  12 /;
+
+
+
+Table a(row, position) "系数矩阵a"
+        "1"     "2"
+"1"     7       8
+"2"     9       10
+;
+
+Free Variable 
+    objective,
+    decision(position);
+
+
+Equations
+
+    eq3(row);
+
+
+eq3(row)..
+    sum(position, a(row, position) * decision(position)) =l= eq3_b(row);
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="C-模型声明"><a href="#C-模型声明" class="headerlink" title="C. 模型声明"></a>C. 模型声明</h3><p>模型声明很简单，语法如下</p>
+<pre class="line-numbers language-gas"><code class="language-gas">model[s] model_name [text] [/ (all | eqn_name {, eqn_name}) {, var_name(set_name)} /]
+       {,model_name [text] [/ (all | eqn_name {, eqn_name}) {, var_name(set_name)} /]} ;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>其中：</p>
+<ul>
+<li><code>[]</code>表示可选项，<code>{}</code>表示可重复项，<code>text</code>表示注释</li>
+</ul>
+<p>语法具体来说就先声明模型的名字，然后在<code>//</code>中声明模型包含的约束</p>
+<p>例如对上面的例子，我们声明的模型为</p>
+<pre class="line-numbers language-gas"><code class="language-gas">model example "示例"    /eq1, eq2, eq3/;
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="D-求解声明"><a href="#D-求解声明" class="headerlink" title="D. 求解声明"></a>D. 求解声明</h3><p>求解声明其实就是说明我们需要使用哪个求解器求解模型，具体语法如下</p>
+<pre class="line-numbers language-gas"><code class="language-gas">solve model_name using model_type maximizing|minimizing var_name;
+solve model_name maximizing|minimizing var_name using model_type ;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>其中：</p>
+<ul>
+<li><code>model_name</code>就是需要求接的模型名称</li>
+<li><code>model_type</code>就是使用的求解器的名称</li>
+<li><code>var_name</code>就是需要最大或者最小化的目标变量</li>
+</ul>
+<p>常用的求解器有：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221013163050320.png" alt="常见的求解器" style="zoom: 50%;"></p>
+<p>对于上面的模型，我们的求解声明如下</p>
+<pre class="line-numbers language-gas"><code class="language-gas">Set
+    position        "位置索引"            /1, 2/;
+
+Free Variable 
+    objective,
+    decision(position);
+
+
+Equations
+    obj_eq;
+
+
+obj_eq..
+    objective =e= 12 * decision("1") + 8 * decision("2");
+
+
+model example "示例"    /obj_eq/;
+
+solve example using lp maximizing objective;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="E-总结"><a href="#E-总结" class="headerlink" title="E. 总结"></a>E. 总结</h3><p>最后，我们把上面所有的内容结合起来，就完成下属优化模型的GAMS程序描述</p>
+<script type="math/tex; mode=display">
+max_{x_1, x_2}\ 12 x_1 + 8 x_2\\
+\left\{
+    \begin{array}{**lr**}
+        mx_1 &+& nx_2 &= &z\\
+        ox_2 &+& px_2 &\leq &q\\
+        \begin{bmatrix}
+            a_{11} & a_{12}\\
+            a_{21} & a_{22}
+        \end{bmatrix} &\cdot&
+        \begin{bmatrix}
+            x_1\\ x_2
+        \end{bmatrix} &\leq& 
+        \begin{bmatrix}
+            b_1\\ b_2
+        \end{bmatrix} 
+    \end{array}
+\right.</script><p>GAMS程序为</p>
+<pre class="line-numbers language-gas"><code class="language-gas">Scalars
+    m  /1/,
+    n  /2/,
+    z  /3/,
+    o  /4/,
+    p  /5/,
+    q  /6/,
+    a11 /7/,
+    a12 /8/,
+    a21 /9/,
+    a22 /10/,
+    b1  /11/,
+    b2  /12/;
+
+
+Set
+    position        "位置索引"            /1, 2/;
+
+alias (row, position);
+
+Parameters
+    eq1_p(position)                "第一个等式约束的参数"      /    "1"    1, "2"   2 /,
+    eq2_p(position)                "第二个不等式约束的参数"  / "1"    4, "2"   5 /,
+    eq3_b(row)             "第三个矩阵约束"         / "1"    11, "2"  12 /;
+
+
+
+Table a(row, position) "系数矩阵a"
+        "1"     "2"
+"1"     7       8
+"2"     9       10
+;
+
+Free Variable 
+    objective,
+    decision(position);
+
+
+Equations
+    eq1,
+    eq2,
+    eq3(row),
+    obj_eq;
+
+
+eq1..
+    sum(position, eq1_p(position) * decision(position)) =e= z;
+
+
+eq2..
+    sum(position, eq2_p(position) * decision(position)) =l= q;
+
+
+eq3(row)..
+    sum(position, a(row, position) * decision(position)) =l= eq3_b(row);
+
+
+obj_eq..
+    objective =e= 12 * decision("1") + 8 * decision("2");
+
+
+model example "示例"    /eq1, eq2, eq3, obj_eq/;
+
+solve example using lp maximizing objective;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>最后的结果如下，变量<code>objective</code>的最大值是4</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221013154207091.png" alt="lst文件中的结果"></p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Jack Wang</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://jackwang0107.github.io/2022/10/12/gams-jiao-cheng-1-shu-ju-lei-xing-yi-ji-cheng-xu-jie-gou/">https://jackwang0107.github.io/2022/10/12/gams-jiao-cheng-1-shu-ju-lei-xing-yi-ji-cheng-xu-jie-gou/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Jack Wang</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/GAMS/">
+                                    <span class="chip bg-color">GAMS</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.png" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2022/10/13/gams-jiao-cheng-2-sum-qiu-he-ord-han-shu-yi-ji-tiao-jian-biao-da-shi/">
+                    <div class="card-image">
+                        
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221012223017100.png" class="responsive-img" alt="GAMS教程 2：sum求和、ord函数以及条件表达式">
+                        
+                        <span class="card-title">GAMS教程 2：sum求和、ord函数以及条件表达式</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            本文介绍了GAMS的sum求和表达式、ord函数以及条件表达式
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-10-13
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/GAMS/" class="post-category">
+                                    GAMS
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/GAMS/">
+                        <span class="chip bg-color">GAMS</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/10/10/vscode-diao-shi-c-c-xiang-mu/">
+                    <div class="card-image">
+                        
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221011012250590.png" class="responsive-img" alt="VSCode调试C/C++项目">
+                        
+                        <span class="card-title">VSCode调试C/C++项目</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            本文介绍了如何使用VSCode来调试C/C++工程
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-10-11
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%9D%82%E9%A1%B9/" class="post-category">
+                                    杂项
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E6%9D%82%E9%A1%B9/">
+                        <span class="chip bg-color">杂项</span>
+                    </a>
+                    
+                    <a href="/tags/VSCode/">
+                        <span class="chip bg-color">VSCode</span>
+                    </a>
+                    
+                    <a href="/tags/tasks-json/">
+                        <span class="chip bg-color">tasks.json</span>
+                    </a>
+                    
+                    <a href="/tags/launch-json/">
+                        <span class="chip bg-color">launch.json</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: JackWang&#39;s Blog<br />'
+            + '文章作者: Jack Wang<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('3'),
+            headingSelector: 'h2, h3, h4, h5, h6'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4, h5, h6').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    });
+</script>
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2021-2022</span>
+            
+            <a href="/about" target="_blank">Jack Wang</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">313.6k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+                <span id="sitetime"> Loading ...</span>
+                <script>
+                    var calcSiteTime = function () {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2021";
+                        var startMonth = "11";
+                        var startDate = "12";
+                        var startHour = "0";
+                        var startMinute = "0";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+
+                        // 区分是否有年份.
+                        var language = 'zh-CN';
+                        if (startYear === String(todayYear)) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            var daysTip = 'This site has been running for ' + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                daysTip = '本站已运行 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                daysTip = '本站已運行 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = daysTip;
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            var yearsAndDaysTip = 'This site has been running for ' + diffYears + ' years and '
+                                + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                yearsAndDaysTip = '本站已运行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                yearsAndDaysTip = '本站已運行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+                        }
+                    }
+
+                    calcSiteTime();
+                </script>
+            
+            <br>
+            
+                <span id="icp"><img src="/medias/icp.png"
+                                    style="vertical-align: text-bottom;"/>
+                <a href="https://beian.miit.gov.cn" target="_blank">陕ICP备2021014294号-1</a>
+            </span>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+    <a href="mailto:2232123545@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2232123545" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2232123545" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+        
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/sakura.js"><\/script>');
+            }
+        </script>
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
