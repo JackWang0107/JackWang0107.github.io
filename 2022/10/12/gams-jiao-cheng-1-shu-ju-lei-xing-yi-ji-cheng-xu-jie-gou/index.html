@@ -834,11 +834,12 @@ display what_day.l, month_earn.l;
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221013021154180.png" alt="lst文件中的结果"></p>
 <h2 id="3-GAMS程序的结构"><a href="#3-GAMS程序的结构" class="headerlink" title="3. GAMS程序的结构"></a>3. GAMS程序的结构</h2><h3 id="A-概述"><a href="#A-概述" class="headerlink" title="A. 概述"></a>A. 概述</h3><p><code>GAMS</code>程序通常包含如下的四个部分：</p>
 <ul>
-<li>数据声明：包括Variable、Scalar、Set、Parameter和Table的声明</li>
+<li>数据声明：包括Set、Scalar、Parameter和Table的声明，这里把Variable的声明也包含在内了</li>
 <li>约束声明：声明所有模型中的所有约束（包含目标变量的计算式）</li>
 <li>模型声明：声明某个模型包含的约束</li>
 <li>求解声明：声明求解某个模型使用哪个求解器</li>
 </ul>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221013164516195.png" alt="GAMS的结构"></p>
 <p>我们前面介绍了数据声明，下面节将介绍如何声明约束、模型和求解。</p>
 <h3 id="B-约束声明"><a href="#B-约束声明" class="headerlink" title="B. 约束声明"></a>B. 约束声明</h3><p>约束包含两种：</p>
 <ul>
@@ -1410,15 +1411,15 @@ solve example using lp maximizing objective;
                 <a href="/2022/10/13/gams-jiao-cheng-2-sum-qiu-he-ord-han-shu-yi-ji-tiao-jian-biao-da-shi/">
                     <div class="card-image">
                         
-                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221012223017100.png" class="responsive-img" alt="GAMS教程 2：sum求和、ord函数以及条件表达式">
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221012223017100.png" class="responsive-img" alt="GAMS教程 2：GAMS中的运算符与函数">
                         
-                        <span class="card-title">GAMS教程 2：sum求和、ord函数以及条件表达式</span>
+                        <span class="card-title">GAMS教程 2：GAMS中的运算符与函数</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            本文介绍了GAMS的sum求和表达式、ord函数以及条件表达式
+                            本文介绍了GAMS中的运算符与函数
                         
                     </div>
                     <div class="publish-info">
@@ -1695,7 +1696,7 @@ solve example using lp maximizing objective;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">313.6k</span>
+                        class="white-color">314.8k</span>
             
             
             

@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="GAMS教程 2：sum求和、ord函数以及条件表达式, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
-    <meta name="description" content="本文介绍了GAMS的sum求和表达式、ord函数以及条件表达式">
+    <meta name="keywords" content="GAMS教程 2：GAMS中的运算符与函数, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
+    <meta name="description" content="本文介绍了GAMS中的运算符与函数">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>GAMS教程 2：sum求和、ord函数以及条件表达式 | JackWang&#39;s Blog</title>
+    <title>GAMS教程 2：GAMS中的运算符与函数 | JackWang&#39;s Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -259,7 +259,7 @@
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">GAMS教程 2：sum求和、ord函数以及条件表达式</h1>
+                    <h1 class="description center-align post-title">GAMS教程 2：GAMS中的运算符与函数</h1>
                 </div>
             </div>
         </div>
@@ -414,14 +414,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    0
+                    1.2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    4 分
                 </div>
                 
 
@@ -441,7 +441,114 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221012223017100.png" alt="GAMS基础语法"></p>
+<h1 id="GAMS教程-2：GAMS中的运算符与函数"><a href="#GAMS教程-2：GAMS中的运算符与函数" class="headerlink" title="GAMS教程 2：GAMS中的运算符与函数"></a>GAMS教程 2：GAMS中的运算符与函数</h1><p>GAMS作为一门用于科学家计算的语言，那么常见的求余、指数计算等等都不能少。本文就将介绍GAMS中的运算符、常见的函数。</p>
+<p>此外，在常见的函数中有一个特殊的函数<code>ord</code>函数，这个函数非常重要，本文还将讲解这个特殊的函数。</p>
+<h2 id="1-GAMS中的运算符"><a href="#1-GAMS中的运算符" class="headerlink" title="1. GAMS中的运算符"></a>1. GAMS中的运算符</h2><p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221013170535852.png" alt="GAMS中常见的运算符" style="zoom:33%;"></p>
+<h3 id="A-概述"><a href="#A-概述" class="headerlink" title="A. 概述"></a>A. 概述</h3><p>GAMS中的运算符包含两类：</p>
+<ul>
+<li>算术运算符（Algebra Operator）</li>
+<li>索引运算符（Indexed Operator）</li>
+</ul>
+<p>算术运算符指的就是就是一般见到的加减乘除等等运算符，具体来说包括<code>+</code>、<code>-</code>、<code>*</code>、<code>/</code>、<code>**</code>。这些运算符我们都这些都不会讲解，直接用就行了，非常简单。</p>
+<p>我们真正关注的、具有难度的、需要讲解的就是索引运算符，索引运算符具体来说包含下面的几个</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221013174314966.png" alt="GAMS中的索引运算符" style="zoom: 67%;"></p>
+<p>下面将详细讲解索引运算符</p>
+<h3 id="B-索引运算符"><a href="#B-索引运算符" class="headerlink" title="B. 索引运算符"></a>B. 索引运算符</h3><p>所谓索引运算符，值的其实就是循环计算，例如在数学上，我们经常会有下面的表达式</p>
+<script type="math/tex; mode=display">
+\begin{array}{**lr**}
+    x &=& \sum_{i=1}^{20}a_{i}\\
+    y &=& \prod_{j=1}^{15}b_{j}\\
+    z &=& \land_{k=1}^{5} c_{k}\\
+\end{array}</script><p>GAMS中实现这些运算的的方式就是通过索引运算符。</p>
+<p>GAMS中索引运算符的调用方式如下</p>
+<pre class="line-numbers language-gas"><code class="language-gas">indexed_op( (index_list), expression);
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>其中：</p>
+<ul>
+<li><code>index_list</code>指明了需要求和的维度</li>
+<li><code>expression</code>指明了需要求和的维度</li>
+</ul>
+<h4 id="1-sum运算符"><a href="#1-sum运算符" class="headerlink" title="1 ) sum运算符"></a>1 ) sum运算符</h4><p><code>sum</code>用于求set indexed expression的累加和</p>
+<p>我们下面给出几个数学式的GAMS实现</p>
+<script type="math/tex; mode=display">
+count = \sum_{i}A_i</script><pre class="line-numbers language-gas"><code class="language-gas">* Set    i;
+* Parameter A(i);
+count = sum(i, A(i));
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<script type="math/tex; mode=display">
+size = \sum_{i}\sum_{j}B_{ij}</script><pre class="line-numbers language-gas"><code class="language-gas">* Set i, j;
+* Table B(i,j);
+size = sum(i, sum(j, B(i,j)));
+* 简化的写法为
+size = sum((i,j), B(i,j));
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<script type="math/tex; mode=display">
+prodcution = \sum_{i} C_{i}D_{i}</script><pre class="line-numbers language-gas"><code class="language-gas">* Set i;
+* Parameter C(i)， D(i);
+production = sum(i, C(i) * D(i));
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h4 id="2-prod运算符"><a href="#2-prod运算符" class="headerlink" title="2 ) prod运算符"></a>2 ) prod运算符</h4><p><code>prod</code>运算符其实和<code>sum</code>运算符是一样的，只不过从加法变成了乘法，因此略。</p>
+<h4 id="3-smin运算符"><a href="#3-smin运算符" class="headerlink" title="3 ) smin运算符"></a>3 ) smin运算符</h4><p><code>smin</code>运算符用于求一个set indexed expression中的最小值</p>
+<p>下面给出几个例子</p>
+<script type="math/tex; mode=display">
+x = \min\{1,2, 3,-1,-2,100,-14\}</script><pre class="line-numbers language-gas"><code class="language-gas">* Set i;
+* Parameter S(i);
+x = smin(i, S(i));
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<script type="math/tex; mode=display">
+S = \{-2, -1, 0, 1, 2\}\\
+x=\min\{\ i^2+2i+1,\qquad for\ i\in S\}</script><pre class="line-numbers language-gas"><code class="language-gas">* Set i;
+* Parameter S(i);
+x = smin(i, S(i)**2 + 2*S(i) + 1);
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h4 id="4-smax运算符"><a href="#4-smax运算符" class="headerlink" title="4 ) smax运算符"></a>4 ) smax运算符</h4><p><code>smax</code>运算符和<code>smin</code>运算符类似，只不过是用于求最大值。故略。</p>
+<h4 id="5-sand运算符"><a href="#5-sand运算符" class="headerlink" title="5 ) sand运算符"></a>5 ) sand运算符</h4><p><code>sand</code>运算符和前面的类似，只不过是求多个值相与的结果。</p>
+<h4 id="6-sor运算符"><a href="#6-sor运算符" class="headerlink" title="6 ) sor运算符"></a>6 ) sor运算符</h4><p><code>sor</code>运算符求多个值相或的结果。</p>
+<h2 id="2-GAMS中的函数"><a href="#2-GAMS中的函数" class="headerlink" title="2. GAMS中的函数"></a>2. GAMS中的函数</h2><p>GAMS中的函数可以分为两种：</p>
+<ul>
+<li><strong>内部函数</strong>：GAMS语言本身所支持的函数</li>
+<li><strong>外部函数</strong>：用户自己自定义的函数</li>
+</ul>
+<p>我们这里不讲解外部函数，主要讲解GAMS中的内部函数。</p>
+<p>GAMS中的内部函数可以分为五种：</p>
+<ul>
+<li><strong>数学函数（Mathematical Functions）</strong></li>
+<li><strong>字符串处理函数（String Manipulation Functions）</strong></li>
+<li><strong>逻辑函数（Logical Functions）</strong></li>
+<li><strong>时间日期函数（Time and Calendar Functions）</strong></li>
+<li><strong>GAMS系统内置函数（GAMS Utility and Performance Functions）</strong></li>
+</ul>
+<p>因为每类函数都很多，所以先对每类函数进行介绍，至于具体的函数等以后用到了再具体介绍。</p>
+<h3 id="A-数学函数（Mathematical-Functions）"><a href="#A-数学函数（Mathematical-Functions）" class="headerlink" title="A. 数学函数（Mathematical Functions）"></a>A. 数学函数（Mathematical Functions）</h3><p>数学函数顾名思义，就是我们数学中见到的函数，例如：<code>cos</code>、<code>sin</code>等等</p>
+<p>GAMS中支持的数学函数有很多，这里就不一一列举了，具体可以参阅官方手册：<a target="_blank" rel="noopener" href="https://www.gams.com/40/docs/UG_Parameters.html#UG_Parameters_MathFunctions">https://www.gams.com/40/docs/UG_Parameters.html#UG_Parameters_MathFunctions</a></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221014003221610.png" alt="GAMS中的数学函数-1"></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221014003307362.png" alt="GAMS中的数学函数-2"></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221014003403903.png" alt="GAMS中的数学函数-3"></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221014003454517.png" alt="GAMS中的数学函数-4"></p>
+<h3 id="B-字符串处理函数（String-Manipulation-Functions）"><a href="#B-字符串处理函数（String-Manipulation-Functions）" class="headerlink" title="B. 字符串处理函数（String Manipulation Functions）"></a>B. 字符串处理函数（String Manipulation Functions）</h3><p>虽然说字符串处理函数名字是字符串处理函数，但其实从它们的功能上来看更加类似于集合处理函数。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221014003812311.png" alt="GAMS中的字符串处理函数"></p>
+<h4 id="card函数"><a href="#card函数" class="headerlink" title="card函数"></a>card函数</h4><p><code>card</code>函数用于返回一个集合中元素的个数</p>
+<pre class="line-numbers language-gas"><code class="language-gas">Set i /1, 2, 3, 4, 5/;
+Scalar num_i;
+
+num_i = card(i);   * num_i = 5
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="ord函数"><a href="#ord函数" class="headerlink" title="ord函数"></a>ord函数</h4><p><code>ord</code>函数接受一个集合，返回一个参数。参数中索引的值就是相应的位置。</p>
+<pre class="line-numbers language-gas"><code class="language-gas">Set i /a, b, c, d/;
+Parameter ord_i(i);
+
+ord_i = ord(i);     * ord_i(i) = /"a" 1, "b" 2, "c" 3, "d" 4/;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="C-逻辑函数（Logical-Functions）"><a href="#C-逻辑函数（Logical-Functions）" class="headerlink" title="C. 逻辑函数（Logical Functions）"></a>C. 逻辑函数（Logical Functions）</h3><p>GAMS中提供了逻辑函数用于计算逻辑表达式的值。</p>
+<p>关于逻辑函数、逻辑表达式具体内容将在下一节进行讲解</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221014021442474.png" alt="GAMS中的逻辑函数"></p>
+<h3 id="D-时间日期函数（Time-and-Calendar-Functions）"><a href="#D-时间日期函数（Time-and-Calendar-Functions）" class="headerlink" title="D. 时间日期函数（Time and Calendar Functions）"></a>D. 时间日期函数（Time and Calendar Functions）</h3><p>GAMS中的时间日期处理函数专门用于处理时间和日期的相关内容</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221014022511046.png" alt="GAMS中的时间日期处理函数-1"></p>
+<h3 id="E-GAMS系统内置函数（GAMS-Utility-and-Performance-Functions）"><a href="#E-GAMS系统内置函数（GAMS-Utility-and-Performance-Functions）" class="headerlink" title="E. GAMS系统内置函数（GAMS Utility and Performance Functions）"></a>E. GAMS系统内置函数（GAMS Utility and Performance Functions）</h3><p>GAMS的系统内置函数主要是用于或许系统一些内置信息，或者设置系统的内置信息。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221014025253813.png" alt="GAMS的系统内置函数-1"></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221014025353325.png" alt="GAMS的系统内置函数-2"></p>
+
                 
             </div>
             <hr/>
@@ -686,15 +793,15 @@
                 <a href="/2022/10/13/gams-jiao-cheng-2-sum-qiu-he-ord-han-shu-yi-ji-tiao-jian-biao-da-shi/">
                     <div class="card-image">
                         
-                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221012223017100.png" class="responsive-img" alt="GAMS教程 2：sum求和、ord函数以及条件表达式">
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221012223017100.png" class="responsive-img" alt="GAMS教程 2：GAMS中的运算符与函数">
                         
-                        <span class="card-title">GAMS教程 2：sum求和、ord函数以及条件表达式</span>
+                        <span class="card-title">GAMS教程 2：GAMS中的运算符与函数</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            本文介绍了GAMS的sum求和表达式、ord函数以及条件表达式
+                            本文介绍了GAMS中的运算符与函数
                         
                     </div>
                     <div class="publish-info">
@@ -960,7 +1067,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">313.6k</span>
+                        class="white-color">314.8k</span>
             
             
             
