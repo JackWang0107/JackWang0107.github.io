@@ -411,7 +411,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-10-12
+                    2022-10-23
                 </div>
                 
 
@@ -766,7 +766,6 @@ alltraps:
 <p>What matters is:</p>
 <ol>
 <li><code>trap</code> takes an argument <code>struct trapframe *tf</code>. Calling a function and passing argument is easy within <code>C</code>, we can call <code>trap</code> like <code>trap(mytf)</code> in <code>my_trap_call_test.c</code>. But how to pass argument when we call <code>C</code> functions in assembly codes like <code>trapasm.S</code>?</li>
-<li></li>
 </ol>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">//PAGEBREAK: 41</span>
 <span class="token keyword">void</span>
@@ -1116,12 +1115,12 @@ alltraps<span class="token punctuation">:</span>
 <span class="token macro property">#<span class="token directive keyword">define</span> SYS_trace  22</span>
 <span class="token macro property">#<span class="token directive keyword">define</span> SYS_getcount  23</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/%E6%88%AA%E5%B1%8F2022-09-26%20%E4%B8%8B%E5%8D%882.02.24.png" alt="截屏2022-09-26 下午2.02.24"></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/%E6%88%AA%E5%B1%8F2022-09-26%20%E4%B8%8B%E5%8D%882.02.24.png" alt="Add Syscall number"></p>
 <h3 id="2-Add-SYSCALL-Macro"><a href="#2-Add-SYSCALL-Macro" class="headerlink" title="2. Add SYSCALL Macro"></a>2. Add <code>SYSCALL</code> Macro</h3><p>The second step is to add <code>SYSCALL</code> macro in <code>usys.S</code></p>
 <pre class="line-numbers language-assembly"><code class="language-assembly">SYSCALL(trace)
 SYSCALL(getcount)
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/%E6%88%AA%E5%B1%8F2022-09-26%20%E4%B8%8B%E5%8D%882.04.52.png" alt="截屏2022-09-26 下午2.04.52"></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/%E6%88%AA%E5%B1%8F2022-09-26%20%E4%B8%8B%E5%8D%882.04.52.png" alt="Add SYSCALL Macro"></p>
 <h3 id="3-Add-prototype-in-syscall-c"><a href="#3-Add-prototype-in-syscall-c" class="headerlink" title="3. Add prototype in syscall.c"></a>3. Add prototype in <code>syscall.c</code></h3><p>Add my system call function prototype in <code>syscall.c</code></p>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">// my syscall</span>
 <span class="token keyword">extern</span> <span class="token keyword">int</span> <span class="token function">sys_trace</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -1191,7 +1190,8 @@ tracing_file<span class="token punctuation">.</span>open_counter <span class="to
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="as-well-as-modify-sysopen"><a href="#as-well-as-modify-sysopen" class="headerlink" title="as well as modify sysopen"></a>as well as modify <code>sysopen</code></h3><pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">int</span>
+<p>as well as modify <code>sysopen</code></p>
+<pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">int</span>
 <span class="token function">sys_open</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
   <span class="token keyword">char</span> <span class="token operator">*</span>path<span class="token punctuation">;</span>
@@ -1251,14 +1251,14 @@ tracing_file<span class="token punctuation">.</span>open_counter <span class="to
   <span class="token keyword">return</span> fd<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/%E6%88%AA%E5%B1%8F2022-09-26%20%E4%B8%8B%E5%8D%882.12.01.png" alt="截屏2022-09-26 下午2.12.01"></p>
-<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/%E6%88%AA%E5%B1%8F2022-09-26%20%E4%B8%8B%E5%8D%882.11.49.png" alt="截屏2022-09-26 下午2.11.49"></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/%E6%88%AA%E5%B1%8F2022-09-26%20%E4%B8%8B%E5%8D%882.12.01.png" alt="Add sys_trace and sys_getcount"></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/%E6%88%AA%E5%B1%8F2022-09-26%20%E4%B8%8B%E5%8D%882.11.49.png" alt="Modify sys_open"></p>
 <h2 id="5-Result"><a href="#5-Result" class="headerlink" title="5. Result"></a>5. Result</h2><p>Since this blog is actually a project of CS537: Operating System of UW-Madison, so the course do offer a test script to test the system call you developed.</p>
 <p>PS: The courses material is open source, and serves as material of the book Operating System: Three Easy Piece by Remzi, the lecture of this course. He create a repository called OS Steps, and pull all course materials like project introduction, project testing tools in that material. So maybe you can find the testing script in Remzi’s github.</p>
 <p>To strat test, simply</p>
 <pre class="line-numbers language-shell"><code class="language-shell">~cs537-1/test/p1b/runtest.sh -c
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/%E6%88%AA%E5%B1%8F2022-09-26%20%E4%B8%8B%E5%8D%882.14.21.png" alt="截屏2022-09-26 下午2.14.21"></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/%E6%88%AA%E5%B1%8F2022-09-26%20%E4%B8%8B%E5%8D%882.14.21.png" alt="Test Result"></p>
 
                 
             </div>
@@ -1777,7 +1777,7 @@ tracing_file<span class="token punctuation">.</span>open_counter <span class="to
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">324.3k</span>
+                        class="white-color">331.5k</span>
             
             
             

@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="GAMS教程 7：网络模型, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
-    <meta name="description" content="本文介绍了GAMS如何解决网络模型">
+    <meta name="keywords" content="GAMS教程 7：最佳匹配集合问题/分配问题, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
+    <meta name="description" content="本文介绍了GAMS如何解决网络模型中的最佳子集问题（分配问题）">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>GAMS教程 7：网络模型 | JackWang&#39;s Blog</title>
+    <title>GAMS教程 7：最佳匹配集合问题/分配问题 | JackWang&#39;s Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -259,7 +259,7 @@
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">GAMS教程 7：网络模型</h1>
+                    <h1 class="description center-align post-title">GAMS教程 7：最佳匹配集合问题/分配问题</h1>
                 </div>
             </div>
         </div>
@@ -414,14 +414,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.9k
+                    2.2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    8 分
+                    9 分
                 </div>
                 
 
@@ -442,8 +442,9 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221017010621239.png" alt="GAMS解决网络模型"></p>
-<h1 id="GAMS教程-7：网络模型"><a href="#GAMS教程-7：网络模型" class="headerlink" title="GAMS教程 7：网络模型"></a>GAMS教程 7：网络模型</h1><p>前面我们介绍了如何使用<code>GAMS</code>解决线性模型、时序模型。本文将介绍第三类模型，即网络模型。</p>
-<h2 id="1-网络模型"><a href="#1-网络模型" class="headerlink" title="1. 网络模型"></a>1. 网络模型</h2><p>类似前面的时序模型，我们通过一个例子来引入网络模型。</p>
+<h1 id="GAMS教程-7：最佳匹配集合问题"><a href="#GAMS教程-7：最佳匹配集合问题" class="headerlink" title="GAMS教程 7：最佳匹配集合问题"></a>GAMS教程 7：最佳匹配集合问题</h1><p>前面我们介绍了如何使用<code>GAMS</code>解决线性模型、时序模型。本文将介绍第三类模型，即网络模型。</p>
+<p>网络模型中有很多的问题，今天讲介绍网络模型中的最佳匹配集合问题</p>
+<h2 id="1-网络模型与最佳匹配集合问题"><a href="#1-网络模型与最佳匹配集合问题" class="headerlink" title="1. 网络模型与最佳匹配集合问题"></a>1. 网络模型与最佳匹配集合问题</h2><p>类似前面的时序模型，我们通过一个例子来引入网络模型。而后再介绍最佳匹配集合问题。其实最佳匹配集合问题就是分配问题。</p>
 <h3 id="A-问题背景：作业分配问题"><a href="#A-问题背景：作业分配问题" class="headerlink" title="A. 问题背景：作业分配问题"></a>A. 问题背景：作业分配问题</h3><p>假设某门课上一共有五个学生，而老师一共布置了五个Project。每个学生对不同的项目有不同的喜好，这个喜好具体可以用0-10的preference score来衡量。0表示最不喜欢该项目，而10表示最喜欢该项目。</p>
 <p>现在我们作为教师，希望能够通过合理的分配为每个学生分配一个项目，从而使得总体的满意度最高。</p>
 <h3 id="B-问题抽象"><a href="#B-问题抽象" class="headerlink" title="B. 问题抽象"></a>B. 问题抽象</h3><h4 id="描述满意度"><a href="#描述满意度" class="headerlink" title="描述满意度"></a>描述满意度</h4><p>我们接下来的第一个问题就是该如何描述学生对每个项目的满意度。</p>
@@ -454,6 +455,7 @@
 <li>我们把每个学生抽象为一个节点，把每个项目抽象为一个节点</li>
 <li>我们把学生对项目的满意抽象为节点与检点之间的边</li>
 </ul>
+<p><strong>通过这种方式，我们就实现了用图来描述匹配问题</strong>。</p>
 <p>因此，我们就可以使用一个矩阵来描述</p>
 <script type="math/tex; mode=display">
 c_{ij} = 学生i对项目j的偏好</script><p>其中：</p>
@@ -486,7 +488,7 @@ x_{ij}=
 <ul>
 <li>$x_{ij}\in{0,1},i\in I, j\in J$</li>
 </ul>
-<h3 id="C-数学模型"><a href="#C-数学模型" class="headerlink" title="C. 数学模型"></a>C. 数学模型</h3><p>我们接下来综合上面的三个部分，得到作业分配问题的数学模型</p>
+<h3 id="C-数学模型"><a href="#C-数学模型" class="headerlink" title="C. 数学模型"></a>C. 数学模型</h3><p>我们接下来综合上面的三个部分，得到作业分配问题的数学模型。</p>
 <p>首先是决策变量，我们需要决定的就是那个作业被分配给那个学生，因此，决策变量其实就是</p>
 <script type="math/tex; mode=display">
 x_{ij}=
@@ -512,15 +514,15 @@ x_{ij}=
 \sum_j x_{ij} &=& 1\\
 x_{ij} &\in&\{0,1\}
 \end{array}
-\right.</script><h3 id="D-网络"><a href="#D-网络" class="headerlink" title="D. 网络"></a>D. 网络</h3><p>我们上面虽然成功建立了作业分配问题的数学模型，但是我们到目前为止都不知道作业分配问题和网络模型之间的联系。</p>
+\right.</script><h3 id="D-网络"><a href="#D-网络" class="headerlink" title="D. 网络"></a>D. 网络</h3><p>我们上面虽然成功建立了作业分配问题的数学模型，但是我们到目前为止都不知道作业分配问题和网络模型以及最佳匹配集合问题之间的联系。</p>
 <p>我们接下来首先给出网络在数学上的定义，而后介绍分配问题和网络之间的关系。</p>
 <h4 id="图的定义"><a href="#图的定义" class="headerlink" title="图的定义"></a>图的定义</h4><p>定义：图 $G$ 是定义在结点集合 $V$ 和边集 $E\subseteq V\times V$，即 $G=(V,E)$</p>
-<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221017180701073.png" alt="图的定义"></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221017180701073.png" alt="图的定义" style="zoom:50%;"></p>
 <h4 id="二分图的定义"><a href="#二分图的定义" class="headerlink" title="二分图的定义"></a>二分图的定义</h4><p>二分图：图 $G=(V,E)$ 是一个二分图，若节点 $V$可以分为两个集合，即 $V=L\cup R$，使得所有的边都是在这两个集合间的，即</p>
 <script type="math/tex; mode=display">
 图G=(V,E)是二分图，当且仅当\\
 \exists L,R, 使得,V=L\cup R, 且\\
-e=(i,j)\in E\Rightarrow((i\in L)\cap (j\in R))\cup ((i\in R)\cap (j\in L))</script><p>因此，分配问题的分配图其实就是一个二分图。我们接下来将介绍网络的定义，并将分配问题与网络结合起来。</p>
+e=(i,j)\in E\Rightarrow((i\in L)\cap (j\in R))\cup ((i\in R)\cap (j\in L))</script><p>因此，描述分配问题的图其实就是一个二分图。我们接下来将介绍网络的定义，并将分配问题与网络结合起来。</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221017182525685.png" alt="分配问题就是一个二分图" style="zoom:33%;"></p>
 <h4 id="网络的定义"><a href="#网络的定义" class="headerlink" title="网络的定义"></a>网络的定义</h4><p>定义：网络 $G=(N,A)$ 是由一系列结点 $N$ 和弧 $A$ 所组成的图。</p>
 <p>注意，当有方向的边(edge)成为弧(arc)，因此网络即有向图。</p>
@@ -534,9 +536,12 @@ e=(i,j)\in E\Rightarrow((i\in L)\cap (j\in R))\cup ((i\in R)\cap (j\in L))</scri
 <li>若边进入节点，则值为<code>-1</code>，若边从节点离开，则值为<code>1</code></li>
 <li>节点-边链接矩阵最大的形状是$n\times 2\cdot C_n^2$</li>
 </ul>
-<h4 id="匹配问题"><a href="#匹配问题" class="headerlink" title="匹配问题"></a>匹配问题</h4><p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221017191039934.png" alt="匹配问题"></p>
-<p>因此，作业分配问题其实就是图的匹配问题</p>
-<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221017191114353.png" alt="作业分配问题"></p>
+<h4 id="匹配集合"><a href="#匹配集合" class="headerlink" title="匹配集合"></a>匹配集合</h4><p>匹配集合 $M\subseteq E$ 指的是对于结点集合 $V$ 中的每一个节点 $v$，$M$ 中至少有一个边是与节点 $v$ 连接的</p>
+<p>而完美匹配集合指的是对于节点集合 $V$ 中的每一个节点 $v$，$M$ 中恰好有一个边是与节点 $v$ 连接 </p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221017191039934.png" alt="匹配问题" style="zoom:50%;"></p>
+<p>因此，作业分配问题其实就是在一个带权二分图中寻找到一个最大权的最佳匹配集合。</p>
+<p>有很多算法都能解决任务分配问题，例如匈牙利算法，时间复杂度是$O(n^3)$。目前做的最好的算法的时间复杂度是$O(m+n^2)$。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221017191114353.png" alt="作业分配问题" style="zoom:50%;"></p>
 <h2 id="2-GAMS求解网络模型"><a href="#2-GAMS求解网络模型" class="headerlink" title="2. GAMS求解网络模型"></a>2. GAMS求解网络模型</h2><p>我们接下来讲解<code>GAMS</code>中如何求解网络模型</p>
 <h3 id="A-数据声明"><a href="#A-数据声明" class="headerlink" title="A. 数据声明"></a>A. 数据声明</h3><p>数据声明其实很简单，就是两个集合，分别对应学生和项目。然后还有学生对每个项目的满意度，是一个表格。</p>
 <p>而决策变量$x_{ij}$要么就是1，要么就是0，因此是一个二元的变量。所以我们下面声明决策变量<code>x</code>是一个表格形式的变量</p>
@@ -885,29 +890,28 @@ solve happyclass using mip maximizing satisfaction;
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2022/10/16/gams-jiao-cheng-7-wang-luo-mo-xing/">
+                <a href="/2022/10/17/gams-jiao-cheng-8-zui-xiao-fei-yong-liu-wen-ti/">
                     <div class="card-image">
                         
-                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221017010621239.png" class="responsive-img" alt="GAMS教程 7：网络模型">
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221017221456195.png" class="responsive-img" alt="GAMS教程 8：最小费用流问题">
                         
-                        <span class="card-title">GAMS教程 7：网络模型</span>
+                        <span class="card-title">GAMS教程 8：最小费用流问题</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            本文介绍了GAMS如何解决网络模型
+                            本文介绍了GAMS如何解决最小费用流问题
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-10-17
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-10-17
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -920,7 +924,6 @@ solve happyclass using mip maximizing satisfaction;
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
@@ -1167,7 +1170,7 @@ solve happyclass using mip maximizing satisfaction;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">324.3k</span>
+                        class="white-color">331.5k</span>
             
             
             
