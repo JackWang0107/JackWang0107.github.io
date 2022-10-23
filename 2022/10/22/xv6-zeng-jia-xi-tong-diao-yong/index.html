@@ -418,14 +418,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    4.6k
+                    5.1k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    22 分
+                    23 分
                 </div>
                 
 
@@ -1031,7 +1031,8 @@ alltraps<span class="token punctuation">:</span>
   <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="F-传递参数"><a href="#F-传递参数" class="headerlink" title="F. 传递参数"></a>F. 传递参数</h3><p>用户想要使用系统调用的话，需要include <code>user.h</code>这个头文件，其中提供了所有系统调用的函数原型</p>
+<h3 id="F-传递参数"><a href="#F-传递参数" class="headerlink" title="F. 传递参数"></a>F. 传递参数</h3><p>在<code>XV6</code>的实现中，<code>syscall</code>中使用函数数组就是为了方便未来扩展系统调用，这样未来我们如果自己想要添加系统调用的话，直接给数组中新增加函数就行了。可是这样做又会造成新的问题，即参数传递问题。</p>
+<p>用户想要使用系统调用的话，需要include <code>user.h</code>这个头文件，其中提供了所有系统调用的函数原型</p>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">// user.h</span>
 
 <span class="token comment" spellcheck="true">// system calls</span>
@@ -1080,11 +1081,11 @@ alltraps<span class="token punctuation">:</span>
 <span class="token keyword">extern</span> <span class="token keyword">int</span> <span class="token function">sys_write</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">extern</span> <span class="token keyword">int</span> <span class="token function">sys_uptime</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>但是很多系统调用都是需要参数的，例如<code>kill</code>就需要进程的PID。</p>
-<p>在<code>XV6</code>的实现中，</p>
-<p>As explained ahead, <code>C</code> uses stack to pass the argument when calling function. So, <strong>we can actually get argument via calling program’s stack</strong>.</p>
-<p>Here, we remain the pototype argument void is because the function array <code>syscall</code> that forces us keeping the prototype same argument.</p>
-<p>To get the argument from calling program’s stack, we can use function <code>argstr</code> and <code>argint</code> defined in <code>syscall.c</code></p>
+<p>但是很多系统调用都是需要参数的，例如<code>kill</code>就需要进程的PID。因此，为了解决参数传递问题，<code>XV6</code>中又提供了新的机制。</p>
+<p>前面解释过，C语言通过栈传递参数。而我们C语言再声明函数的时候，通过<code>int xxx(char a, int b)</code>来通知编译器，主调函数调用函数前把一个<code>char</code>类型的数据（一般是一个字节）先压入栈中，而后再把一个<code>int</code>类型的数据（一般是四个字节）压入栈中。而后进入被调函数之后就从栈中弹出五个字节即可。</p>
+<p><strong>因此，我们其实在知道的了一个函数接受的所有的参数的数据类型的情况下，我们其实可以手动从栈中去读取数据</strong></p>
+<p>而<code>XV6</code>中提供了两个函数去从当前栈（中间<code>sp</code>和<code>ss</code>一直没变）中获取参数。</p>
+<p>这两个函数分别是<code>argstr</code>和<code>argint</code>，定义在<code>syscall.c</code>中。</p>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">// Fetch the int at addr from the current process.</span>
 <span class="token keyword">int</span>
 <span class="token function">fetchint</span><span class="token punctuation">(</span>uint addr<span class="token punctuation">,</span> <span class="token keyword">int</span> <span class="token operator">*</span>ip<span class="token punctuation">)</span>
@@ -1137,19 +1138,27 @@ alltraps<span class="token punctuation">:</span>
   <span class="token keyword">return</span> <span class="token function">fetchstr</span><span class="token punctuation">(</span>addr<span class="token punctuation">,</span> pp<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="3-Add-trace-and-getcount"><a href="#3-Add-trace-and-getcount" class="headerlink" title="3. Add trace and getcount"></a>3. Add <code>trace</code> and <code>getcount</code></h2><p>After figuring out how the system call works in <code>xv6</code> system, we start to add <code>trace</code> and <code>getcount</code> systemcall.</p>
-<h3 id="1-Add-system-call-number"><a href="#1-Add-system-call-number" class="headerlink" title="1. Add system call number"></a>1. Add system call number</h3><p>First, we need to add system call number in <code>syscall.h</code></p>
+<h4 id="argint和fetchint函数"><a href="#argint和fetchint函数" class="headerlink" title="argint和fetchint函数"></a>argint和fetchint函数</h4><p><code>argint</code>函数用于从程序的栈中获取第<code>n</code>个<code>int</code>数据。而<code>fetchint</code>则是给定一个地址，而后在进行完地址检查之后，从该地址中取一个<code>int</code>出来。</p>
+<p>因此<code>argint</code>中计算完偏移量之后，直接把<code>程序当前的栈顶地址+偏移量</code>传给<code>fectint</code>函数。而<code>fetchint</code>函数中直接进行的值复制，因此最后传入<code>argint</code>的<code>ip</code>（integer· pointer）就储存了整数值的拷贝。</p>
+<p>而在<code>argstr</code>函数中，首先调用了<code>argint</code>。而调用<code>argint</code>的目的是：</p>
+<ul>
+<li>利用<code>argint</code>计算偏移地址，从而得到字符串的开头地址，而后通过<code>fetchint</code>检查字符串的开头地址是否非法（地址高于栈底地址）。</li>
+</ul>
+<p>最后，<code>argstr</code>调用<code>fetchstr</code>将字符串指针<code>pp</code>指向了字符串开头的地址。</p>
+<p>到此为止，我们就介绍完了<code>XV6</code>中系统调用的全部流程以及必要的函数</p>
+<h2 id="3-增加trace和getcount系统调用"><a href="#3-增加trace和getcount系统调用" class="headerlink" title="3. 增加trace和getcount系统调用"></a>3. 增加<code>trace</code>和<code>getcount</code>系统调用</h2><p>接下来，我们就将添加<code>trace</code>和<code>getcount</code>这两个系统调用</p>
+<h3 id="1-增加系统调用号"><a href="#1-增加系统调用号" class="headerlink" title="1. 增加系统调用号"></a>1. 增加系统调用号</h3><p><code>syscall.h</code>中定义了所有的系统调用号，而系统调用号将会在<code>syscall.c</code>和<code>usys.S</code>中用的</p>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">// my syscall</span>
 <span class="token macro property">#<span class="token directive keyword">define</span> SYS_trace  22</span>
 <span class="token macro property">#<span class="token directive keyword">define</span> SYS_getcount  23</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/%E6%88%AA%E5%B1%8F2022-09-26%20%E4%B8%8B%E5%8D%882.02.24.png" alt="Add Syscall number"></p>
-<h3 id="2-Add-SYSCALL-Macro"><a href="#2-Add-SYSCALL-Macro" class="headerlink" title="2. Add SYSCALL Macro"></a>2. Add <code>SYSCALL</code> Macro</h3><p>The second step is to add <code>SYSCALL</code> macro in <code>usys.S</code></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/%E6%88%AA%E5%B1%8F2022-09-26%20%E4%B8%8B%E5%8D%882.02.24.png" alt="增加两个系统调用号"></p>
+<h3 id="2-增加SYSCALL宏函数"><a href="#2-增加SYSCALL宏函数" class="headerlink" title="2. 增加SYSCALL宏函数"></a>2. 增加SYSCALL宏函数</h3><p>接下来要做的，就是在<code>usys.S</code>文件中为我们的系统调用增加宏函数。</p>
 <pre class="line-numbers language-assembly"><code class="language-assembly">SYSCALL(trace)
 SYSCALL(getcount)
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/%E6%88%AA%E5%B1%8F2022-09-26%20%E4%B8%8B%E5%8D%882.04.52.png" alt="Add SYSCALL Macro"></p>
-<h3 id="3-Add-prototype-in-syscall-c"><a href="#3-Add-prototype-in-syscall-c" class="headerlink" title="3. Add prototype in syscall.c"></a>3. Add prototype in <code>syscall.c</code></h3><p>Add my system call function prototype in <code>syscall.c</code></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/%E6%88%AA%E5%B1%8F2022-09-26%20%E4%B8%8B%E5%8D%882.04.52.png" alt="增加SYSCALL宏函数"></p>
+<h3 id="3-syscall-c中定义函数原型"><a href="#3-syscall-c中定义函数原型" class="headerlink" title="3.  syscall.c中定义函数原型"></a>3.  <code>syscall.c</code>中定义函数原型</h3><p>接下来我们要做的就是在<code>syscall.c</code>中增加我们的函数到<code>syscalls</code>函数数组中去</p>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">// my syscall</span>
 <span class="token keyword">extern</span> <span class="token keyword">int</span> <span class="token function">sys_trace</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">extern</span> <span class="token keyword">int</span> <span class="token function">sys_getcount</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -1180,7 +1189,7 @@ SYSCALL(getcount)
 <span class="token punctuation">[</span>SYS_getcount<span class="token punctuation">]</span> sys_getcount
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="4-Realize-trace-and-getcount"><a href="#4-Realize-trace-and-getcount" class="headerlink" title="4. Realize trace and getcount"></a>4. Realize <code>trace</code> and <code>getcount</code></h3><p>Finally, realize <code>trace</code> and <code>getcount</code> in <code>sysfile.c</code></p>
+<h3 id="4-实现trace和getcount"><a href="#4-实现trace和getcount" class="headerlink" title="4. 实现trace和getcount"></a>4. 实现<code>trace</code>和<code>getcount</code></h3><p>最后，我们要实现这<code>trace</code>和<code>getcount</code>这两个系统调用，因为需要和<code>open</code>系统调用配合，所以就在 <code>sysfile.c</code>中定义了</p>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">// sysfile.c</span>
 
 <span class="token comment" spellcheck="true">// my syscall data structure</span>
@@ -1218,7 +1227,7 @@ tracing_file<span class="token punctuation">.</span>open_counter <span class="to
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>as well as modify <code>sysopen</code></p>
+<p>最后修改 <code>sys_open</code>使得每次打开都会增加计数。</p>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">int</span>
 <span class="token function">sys_open</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
@@ -1279,14 +1288,8 @@ tracing_file<span class="token punctuation">.</span>open_counter <span class="to
   <span class="token keyword">return</span> fd<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/%E6%88%AA%E5%B1%8F2022-09-26%20%E4%B8%8B%E5%8D%882.12.01.png" alt="Add sys_trace and sys_getcount"></p>
-<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/%E6%88%AA%E5%B1%8F2022-09-26%20%E4%B8%8B%E5%8D%882.11.49.png" alt="Modify sys_open"></p>
-<h2 id="4-Result"><a href="#4-Result" class="headerlink" title="4. Result"></a>4. Result</h2><p>Since this blog is actually a project of CS537: Operating System of UW-Madison, so the course do offer a test script to test the system call you developed.</p>
-<p>PS: The courses material is open source, and serves as material of the book Operating System: Three Easy Piece by Remzi, the lecture of this course. He create a repository called OS Steps, and pull all course materials like project introduction, project testing tools in that material. So maybe you can find the testing script in Remzi’s github.</p>
-<p>To strat test, simply</p>
-<pre class="line-numbers language-shell"><code class="language-shell">~cs537-1/test/p1b/runtest.sh -c
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/%E6%88%AA%E5%B1%8F2022-09-26%20%E4%B8%8B%E5%8D%882.14.21.png" alt="Test Result"></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/%E6%88%AA%E5%B1%8F2022-09-26%20%E4%B8%8B%E5%8D%882.12.01.png" alt="增加sys_trace和sys_getcount"></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/%E6%88%AA%E5%B1%8F2022-09-26%20%E4%B8%8B%E5%8D%882.11.49.png" alt="修改sys_open"></p>
 
                 
             </div>
@@ -1809,7 +1812,7 @@ tracing_file<span class="token punctuation">.</span>open_counter <span class="to
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">337.4k</span>
+                        class="white-color">337.9k</span>
             
             
             
