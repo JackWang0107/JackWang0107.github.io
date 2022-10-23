@@ -1,0 +1,1530 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="健身教程, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
+    <meta name="description" content="健身教程，自律给我自由">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>健身教程 | JackWang&#39;s Blog</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.2">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+
+   <style>
+    body{
+       background-image: url(https://cdn.jsdelivr.net/gh/Tokisaki-Galaxy/res/site/medias/background.jpg);
+       background-repeat:no-repeat;
+       background-size: 100% 100%;
+       background-attachment:fixed;
+    }
+</style>
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">JackWang&#39;s Blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-book-reader" style="zoom: 0.6;"></i>
+      
+      <span>博客</span>
+      <i class="fas fa-chevron-down" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/tags">
+          
+          <i class="fas fa-tags" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按标签归类文章</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories">
+          
+          <i class="fas fa-bookmark" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按目录归类文章</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/archives">
+          
+          <i class="fas fa-archive" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按日期分类文章</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">JackWang&#39;s Blog</div>
+        <div class="logo-desc">
+            
+            JackWang的个人博客
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-book-reader"></i>
+			
+			博客
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>
+
+                  <a href="/tags " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-tags" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按标签归类文章</    span>
+
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/categories " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-bookmark" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按目录归类文章</    span>
+
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/archives " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-archive" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按日期分类文章</    span>
+
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('抱歉，这篇文章并不想让所有人都看到，请输入授权密码观看')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221022203720074.png')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">健身教程</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E6%9D%82%E9%A1%B9/">
+                                <span class="chip bg-color">杂项</span>
+                            </a>
+                        
+                            <a href="/tags/%E5%81%A5%E8%BA%AB/">
+                                <span class="chip bg-color">健身</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E6%9D%82%E9%A1%B9/" class="post-category">
+                                杂项
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2022-10-22
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2022-10-23
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    4.3k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    14 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221022203720074.png" alt="健硕的身材真的很帅" style="zoom:50%;"></p>
+<p>图片来源于B站我喜欢的几个健身UP主中的Gandy。最近系统的学习了他的健身教程，写下来了笔记。</p>
+<h1 id="健身教程"><a href="#健身教程" class="headerlink" title="健身教程"></a>健身教程</h1><h2 id="一、增肌健身思路"><a href="#一、增肌健身思路" class="headerlink" title="一、增肌健身思路"></a>一、增肌健身思路</h2><h3 id="1-健身场所"><a href="#1-健身场所" class="headerlink" title="1. 健身场所"></a>1. 健身场所</h3><p>健身的第一步就是先确定健身的场所。健身的场所分为：</p>
+<ul>
+<li><p>健身房：四个杠（<strong>自由深蹲架、自由杠铃卧推架、史密斯架、双杠臂屈伸架</strong>）</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220904151010363.png" alt="image-20220904151010363" style="zoom: 80%;"></p>
+</li>
+<li><p>家里</p>
+</li>
+<li><p>户外单双杠</p>
+</li>
+</ul>
+<h3 id="2-确立健身目的"><a href="#2-确立健身目的" class="headerlink" title="2. 确立健身目的"></a>2. 确立健身目的</h3><p>健身无非三个目的：</p>
+<ul>
+<li><p><strong>强身健体</strong>：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220904151351253-20221022204042849.png" alt="image-20220904151351253" style="zoom:50%;"></p>
+</li>
+<li><p><strong>塑形</strong>：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220904151409371.png" alt="image-20220904151409371" style="zoom:50%;"></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220904151428140.png" alt="image-20220904151428140" style="zoom:67%;"></p>
+</li>
+<li><p><strong>减肥</strong>：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220904151455875-20221022204045762.png" alt="image-20220904151455875" style="zoom:50%;"></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220904151549233.png" alt="image-20220904151549233" style="zoom: 67%;"></p>
+</li>
+</ul>
+<h3 id="3-训练顺序"><a href="#3-训练顺序" class="headerlink" title="3. 训练顺序"></a>3. 训练顺序</h3><p>到底先增肌还是先减脂？<strong>健身房的免费测试体脂比真实的体脂要低3-5%。</strong></p>
+<p><strong>如果体脂大于18%的，先减肥；反之先增肌</strong>。</p>
+<p><strong>如果四肢细、肚子大的人，那么增肌的同时减脂</strong>。</p>
+<h3 id="4-健身前必须学会的技巧"><a href="#4-健身前必须学会的技巧" class="headerlink" title="4. 健身前必须学会的技巧"></a>4. 健身前必须学会的技巧</h3><p>首先是必须要学会：<strong>收紧核心</strong></p>
+<p>其次由其引出的呼吸技巧：</p>
+<ul>
+<li>胸式呼吸：<strong>吸气时肋骨向上提，肚子凹陷</strong></li>
+<li>腹式呼吸：<strong>吸气时肚子突出，肋骨基本没有变化</strong></li>
+<li>瓦式呼吸：不常用</li>
+</ul>
+<p><strong>我们一般呼吸都是胸式呼吸，但是健身的时候，我们需要的是腹式呼吸，因为腹式呼吸我们在相同的时间内能够吸入更多的气体，并且腹式呼吸是收紧核心的基础</strong>。</p>
+<p><strong>呼吸的方式表现为：肌肉收紧的时候吐气，直到肌肉收缩到顶端，气体吐全。肌肉拉伸的时候吸气，直到底端，气体吸满。</strong></p>
+<p><strong>呼吸必须要学会，因为对于不同的动作呼吸的节奏不同，所以在练习的时候我们需要去改变自己的呼吸节奏</strong>。</p>
+<h3 id="5-基础概念"><a href="#5-基础概念" class="headerlink" title="5. 基础概念"></a>5. 基础概念</h3><ul>
+<li><strong>RM（Repetition Maximum）</strong>：某个重量下能够一组（连续）能够做的最大次数，如果为5个那就是5RM。 随着训练时间的增加，组数要增加，RM数要减少，重量要增大。</li>
+<li><strong>三大肌群</strong>：<strong>人体有三大肌群，分别是：胸、背、腿，这三大肌群决定了人的形体是否好看</strong>。</li>
+<li>人体其他部分的肌肉都是小肌群</li>
+</ul>
+<h3 id="6-训练计划"><a href="#6-训练计划" class="headerlink" title="6. 训练计划"></a>6. 训练计划</h3><p>先对自己进行分类</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220904152657645.png" alt="image-20220904152657645" style="zoom:50%;"></p>
+<p>对于没有基础的，增肌分成两个阶段：</p>
+<ul>
+<li>提升体能</li>
+<li>分化训练</li>
+</ul>
+<p>而对于有运动基础的以及健身房划水的，则直接从分化训练阶段开始训练。</p>
+<h4 id="1-增加体能阶段"><a href="#1-增加体能阶段" class="headerlink" title="1. 增加体能阶段"></a>1. 增加体能阶段</h4><p>训练的基础就是有一个好的体能，因此想要增肌我们首先要提升体能，也就是提升体力</p>
+<ul>
+<li><strong>每次去健身房练全身，以增加体能为主要目的</strong></li>
+<li><strong>此时由于关节韧带比较脆弱，所以需要慢慢增强，因此训练的方式以固定器械为主</strong></li>
+<li><strong>三个大肌群分别练习三组，每组的重量从最轻的开始尝试，直到确定了我们20-25RM的重量</strong></li>
+<li><strong>训练的时候每组的组间休息建议在90s</strong></li>
+<li><strong>训练频率建议练一休一，或者练一休二，关键核心是肌肉酸痛感不是那么强了就开始练。</strong></li>
+<li><strong>一周过后慢慢增加组数，每周提高1-2组</strong>。</li>
+<li><strong>两周过后训练结束之后开始增加有氧</strong>。</li>
+</ul>
+<p>按照这个计划进行训练，一个月之后体能就会有所提升。在这一个月期间，最重要的就是：<strong>做相应的动作时候，要知道那块肌肉在发力，找到肌肉的发力感了，那么就成功了</strong>。</p>
+<h4 id="2-分化训练阶段"><a href="#2-分化训练阶段" class="headerlink" title="2. 分化训练阶段"></a>2. 分化训练阶段</h4><p>分化训练阶段的目的主要是在具有体能的基础上对不同部位的肌肉进行训练，从而实现增肌。</p>
+<p><strong>分化是指将全身肌肉的训练进行拆分，每天训练不同部位的肌肉，从而实现全身肌肉的协调训练</strong>。以三分化为例，三分化就将全身肌肉分成三天进行训练，分别是腿日、推日、拉日。</p>
+<p><strong>而在每一个循环之后，可以休息1-2天</strong>。</p>
+<p>分化训练根据细分的部位不同，具有多种不同的分法：</p>
+<ul>
+<li><strong>二分化</strong>：<em>上半身</em>和<em>下半身</em></li>
+<li><strong>三分化</strong>：<em>腿日</em>、<em>推日</em>、<em>拉日</em></li>
+<li><strong>四分化</strong>：<em>腿日</em>、<em>推日</em>、<em>拉日</em>、<em>肩日</em></li>
+<li><strong>五分化</strong>：<em>胸日</em>、<em>背日</em>、<em>腿日</em>、<em>肩日</em>、<em>手臂日</em></li>
+</ul>
+<p>新手一般推荐进行二分化，待二分化练的成熟之后再慢慢升级。三分化的效率比较高，因此新手也推荐三分化。</p>
+<p><strong>在分化阶段就需要学习自由复合性动作了，先学三大项：深蹲、卧推、硬拉。</strong></p>
+<p>这个阶段每天可以训练7组，分别是自由重量3组，固定器械4组。每组用15-20RM，2天训练一个循环。期间休息1-2天，然后再开始下一个循环。</p>
+<p>而在每1-2个循环之后，要么是自由重量占比增高，要么是总组数增加1-2组。当然这并不是强制的，如果进步慢的话可以慢慢加。</p>
+<p>此外，第一个月的练后有氧到这里就不要做了。</p>
+<p>分化训练阶段在一开始我们的目的就是：<strong>虽然发力感不明显，但是对自由符合性动作有比较好的行程轨迹</strong>。</p>
+<p>在实现了这个目的之后我们就可以进行下一阶段的学习了。</p>
+<h3 id="7-分化"><a href="#7-分化" class="headerlink" title="7. 分化"></a>7. 分化</h3><p>上面说到，对于健身新手，第一个阶段是</p>
+<p>三分化：<em>腿日</em>、<em>推日</em>、<em>拉日</em></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220905121807632.png" alt="image-20220905121807632" style="zoom:50%;"></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220905121827120.png" alt="image-20220905121827120" style="zoom:50%;"></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220905121840477.png" alt="image-20220905121840477" style="zoom:50%;"></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220905121848916.png" alt="image-20220905121848916" style="zoom:50%;"></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220905121907142.png" alt="image-20220905121907142" style="zoom:67%;"></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220905121948665.png" alt="image-20220905121948665" style="zoom: 50%;"></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220905122000589.png" alt="image-20220905122000589" style="zoom:50%;"></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220905122117198.png" alt="image-20220905122117198" style="zoom:50%;"></p>
+<h3 id="8-增肌流程"><a href="#8-增肌流程" class="headerlink" title="8. 增肌流程"></a>8. 增肌流程</h3><p>我们在进行增肌的过程中，<strong>一开始进行多分化训练，那么我们可能会有持续半年左右的增肌。然后就会到达瓶颈期。在瓶颈期，我们要是是肌肉量无法增加，要么是重量上不去。</strong></p>
+<p><strong>在这个时候我们就需要去降低重量，复盘动作，提升法力感，这样才能够有效刺激肌肉。</strong></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220905122220078.png" alt="image-20220905122220078"></p>
+<h3 id="9-增强发力感"><a href="#9-增强发力感" class="headerlink" title="9. 增强发力感"></a>9. 增强发力感</h3><p>增强发力感主要有三点：</p>
+<ul>
+<li><strong>慢速离心下放</strong></li>
+<li><strong>顶峰收缩停顿</strong></li>
+<li><strong>动作训练技巧</strong></li>
+</ul>
+<h3 id="10-力量提升阶段"><a href="#10-力量提升阶段" class="headerlink" title="10. 力量提升阶段"></a>10. 力量提升阶段</h3><p>在力量提升阶段，影响我们力量提升的因素有如下几个，如果我们将这几个因素处理好，就可以高效的提升力量。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220905123145896.png" alt="image-20220905123145896" style="zoom:50%;"></p>
+<h3 id="11-卸载阶段"><a href="#11-卸载阶段" class="headerlink" title="11. 卸载阶段"></a>11. 卸载阶段</h3><p>力量提升阶段1-2个月之后，就会出现神经疲劳，此时又是一个新的瓶颈期。</p>
+<p>因此为了缓解神经的疲劳，就有了卸载阶段。卸载阶段的目的就是恢复神经。</p>
+<p>卸载阶段有四种训练方式：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220905134304119.png" alt="image-20220905134304119" style="zoom:50%;"></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220905134316352.png" alt="image-20220905134316352" style="zoom:50%;"></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220905134324522.png" alt="image-20220905134324522" style="zoom:50%;"></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220905134339169.png" alt="image-20220905134339169" style="zoom:50%;"></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220905134404841.png" alt="image-20220905134404841"></p>
+<h2 id="二、减脂健身思路"><a href="#二、减脂健身思路" class="headerlink" title="二、减脂健身思路"></a>二、减脂健身思路</h2><h3 id="方案一"><a href="#方案一" class="headerlink" title="方案一"></a>方案一</h3><h4 id="1-原则"><a href="#1-原则" class="headerlink" title="1. 原则"></a>1. 原则</h4><ul>
+<li><p><strong>不要相信快速减脂，也不要相信局部减脂</strong></p>
+</li>
+<li><p><strong>不要滥用任何减脂、减肥产品</strong></p>
+</li>
+<li><p><strong>不要被网红的一些减脂对比图蒙骗</strong></p>
+</li>
+<li><p><strong>不要过度饮食，即不要过度的吃太少，也不要过度的清淡</strong></p>
+</li>
+<li><p><strong>少吃多餐非常好，每顿吃六、七分饱，然后一天可以安排四餐、五餐</strong></p>
+</li>
+<li><p><strong>戒掉所有的垃圾食品</strong></p>
+</li>
+<li><p><strong>每天摄入一些优质脂肪，例如：牛油果、橄榄油、坚果等等</strong></p>
+</li>
+<li><p><strong>小白要根据自己的能力去进行训练，根据自己的能力循序渐进，不要一昧跟随别人的方案，别人的方案不一定适合你</strong></p>
+<blockquote>
+<p>例如网上有一些人说跑步20分钟后开始消耗脂肪，这个确实有科学依据在的，但是作为一个小白我们不要想着我要跑40分钟，后面20分钟纯燃脂。</p>
+<p><em>作为小白，我们能走20分钟就走20分钟，能跑20分钟就跑20分钟，做到我们现在能做到的，就已经是最好的了</em></p>
+</blockquote>
+</li>
+<li><p><strong>减脂一定要注重可持续性，保持你的身材，而不是说两个月减下来之后，你保持不了又反弹回去了</strong></p>
+<blockquote>
+<p>因此，减脂一定要通过长期合理的饮食，合理的运动，才能够达到我们希望的效果</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="2-训练计划"><a href="#2-训练计划" class="headerlink" title="2. 训练计划"></a>2. 训练计划</h4><p>作为一个减脂的小白，可以按照如下的方式进行训练：</p>
+<ul>
+<li><p><em>先进行30-40分钟、一个小时的力量训练</em></p>
+<blockquote>
+<p>从长期来看，力量训练可以提高我们每日的代谢 </p>
+<p>从短期来看，力量训练可以对我们的糖原进行充分的消耗，在力量训练完了之后，再进行有氧训练就会最大化的消耗我们的脂肪</p>
+</blockquote>
+</li>
+<li><p>有氧运动也分级，有初级、中级、高级</p>
+<blockquote>
+<p>很多博主、教程会推荐HIIT减脂。HIIT确实是最快的减脂，但是并不建议新手去做。</p>
+<p>HIIT是一个高级的有氧运动，里面有很多的动作，看似很简单，但是让一个没有运动经历的新手去做，可能一、两组就不行了，完全达不到减脂要求的高心率</p>
+<p><strong>HIIT不适合大多数减脂人群</strong></p>
+</blockquote>
+</li>
+</ul>
+<p>对需要进行减脂的人群进行分类，分成三类：</p>
+<ul>
+<li>第一类：超级胖，或者膝盖会有一些损伤，或者体能超级差，或者完全没有运动基础<ul>
+<li><strong>这类人适合做一些慢走、椭圆机，包括游泳，等等在内这类相对来说比较轻松一些的有氧运动</strong></li>
+</ul>
+</li>
+<li><p>第二类：有一定的训练基础，身体素质正常的</p>
+<ul>
+<li>这类人建议能跑就跑，随便做HIIT，或者跑步都能够瘦下来</li>
+</ul>
+</li>
+<li><p>第三类：专业选手，跟随自己的计划即可</p>
+</li>
+</ul>
+<h4 id="3-计划饮食"><a href="#3-计划饮食" class="headerlink" title="3. 计划饮食"></a>3. 计划饮食</h4><p>减脂最重要的就是要规划饮食，而关于规划怎样的饮食，即吃什么、怎么吃、我到底该怎么吃的问题。</p>
+<p>其实这个时候我们不要去问、去查，就是我们正常的饮食。<strong>该怎么吃、那些东西可以吃这些问题我们其实都是知道的，用心去想，因为大家都是成年人了，用我们最基本的认知先去做，然后慢慢去调整就可以了</strong></p>
+<p><em>如果我们问健身教练这个能不能吃，那个能不能吃，那么其实我们问的百分之七十、八十、九十都是不能吃的，因为我们想吃他了</em></p>
+<p>以我们的认知，我们肯定知道那些东西该吃，那些东西不该吃。谁都知道吃五谷杂粮容易瘦、吃炸鸡汉堡容易胖。</p>
+<p>这些最基本的东西，例如高糖分的水果不能吃，西瓜能不能吃、哈密瓜能不能吃等等，这些问题的答案我们其实都是知道的</p>
+<p>哪些食物有益于健康，那些利于减肥我们心里都是知道的，先去做，而后看看体重有没有变化，然后配合上运动</p>
+<h3 id="方案二：热量缺口法"><a href="#方案二：热量缺口法" class="headerlink" title="方案二：热量缺口法"></a>方案二：热量缺口法</h3><p>热量缺口法是最传统的减脂方法，也是最适合大部分人的方法，因为<strong>热量缺口法的成功率高</strong></p>
+<p>因此下面就将建立热量缺口法的框架，帮助我们理清思路。</p>
+<h4 id="1-青铜段位"><a href="#1-青铜段位" class="headerlink" title="1. 青铜段位"></a>1. 青铜段位</h4><p><strong>青铜段位是经常吃不健康食物的人。对于这类人来说，不需要做别的，只需要把食谱改成别的，体重就会下降。</strong></p>
+<p>具体的修改方式如下：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220906013638320.png" alt="image-20220906013638320" style="zoom: 67%;"></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220906013745918.png" alt="image-20220906013745918" style="zoom:67%;"></p>
+<p>这里所谓的清淡食物，指的并不是水煮青菜、水煮鸡胸肉等等这类食物，而是除了上面四类食物以外的所有食物</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220906013853994.png" alt="image-20220906013853994" style="zoom:67%;"></p>
+<p><strong>上面四类食物中有大量的<em>反式脂肪</em>和<em>人工果糖</em>，这两个摄入过多就会导致内脏脂肪堆积，直观的表现就是肚子大，除去肚子上的赘肉之后肚子依旧很大</strong></p>
+<p>含有反式脂肪和人工果糖的食物包含：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220906014049591.png" alt="image-20220906014049591" style="zoom:67%;"></p>
+<p>此外，需要减少糖的摄入</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220906014235907.png" alt="image-20220906014235907" style="zoom:50%;"></p>
+<p>但是由于生活中平常吃的菜经常会添加糖，因此很容易添加糖很容易就会吃超</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220906014531744.png" alt="image-20220906014531744" style="zoom:50%;"></p>
+<p>添加糖吃多的结果，就是很多人减肥，四肢瘦了但是肚子还是很大，这个就是添加糖吃多了的结果。</p>
+<p>因此，我们平时的生活中要控制住自己食用添加糖，代糖往往是更好的选择。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220906014844302.png" alt="image-20220906014844302" style="zoom:67%;"></p>
+<p><strong>当我们完全改变清单饮食之后，我们的体重会下降3%-5%，体重下降的程度取决于我们之前吃的健康的程度，随后体重保持不变，这个时候我们就升级到了白银阶段</strong>。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220906015007878.png" alt="image-20220906015007878" style="zoom: 67%;"></p>
+<h4 id="2-白银段位"><a href="#2-白银段位" class="headerlink" title="2. 白银段位"></a>2. 白银段位</h4><p><strong>白银段位的定义如下：</strong></p>
+<ul>
+<li><strong>基本不吃垃圾食品</strong></li>
+<li><strong>吃家常菜（油盐含量较高）</strong></li>
+<li><strong>不怎么运动</strong></li>
+</ul>
+<p>从青铜段位升级到白银段位需要过程，我们需要慢慢来，让身体逐渐适应，慢慢降低你对垃圾食品的欲望。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220906075437366.png" alt="image-20220906075437366" style="zoom:50%;"></p>
+<p>如果第一周马上改成只喝白开水，那么身体会崩溃的，一旦这种饮食坚持不下去，我们就会反弹。</p>
+<p>当然，在白银段位偶尔嘴馋是当然没有问题的，就像打排位偶尔会输几把。</p>
+<p>从白银段位升级到黄金段位，我们需要的就是要减少饮食的摄入。</p>
+<h4 id="3-黄金段位"><a href="#3-黄金段位" class="headerlink" title="3. 黄金段位"></a>3. 黄金段位</h4><p><strong>黄金段位的定义为：不怎么运动，通过控制饮食的摄入达到减肥的目的</strong></p>
+<p><strong>对于黄金段位的人群，首先要做的就是确立好一个能够维持体重不变的食谱</strong></p>
+<p>确立好食谱的方法就是：</p>
+<ul>
+<li>首先选择一个打饭用的饭盒</li>
+<li>然后随便定一个目标，例如50%糙米，20%青菜，30%肉类；或者用自己的手来作参考，比如一个拳头大小的米饭，一个手掌的肉等等，主要目的就是确定一个目标</li>
+<li>而后根据体重动态调整量，例如体重增加了就饮食减少，体重减少了就饮食增加。调整的时候优先调整主食，如果不想调整主食则优先调整肉类。此外食材的变动不要太大，持续几天维持同一个食谱，直到确定让我们维持体重不变的食谱（体重在±0.2kg以内变动）。此外，进行的调整一定要记录下来。当我们已经确定好食谱，并且维持一个星期不变了，我们就可以进行下一步</li>
+<li>下一步就是逐步减少餐食的量，第一周的时候需要我们在每天晚餐的主食上减少1/5的量，其余不动。此时我们的体重应该就会慢慢下降，如果没有下降也要维持至少一个星期左右。当体重再次停止下降之后，再减少1/5。一直持续下去，直到晚餐减少过半了，就减少午餐的主食。等午餐减少过半了，循环就结束。不需要减少早餐。</li>
+</ul>
+<h4 id="4-铂金段位"><a href="#4-铂金段位" class="headerlink" title="4. 铂金段位"></a>4. 铂金段位</h4><p><strong>铂金段位的定义就是：不怎么运动，严格限制每日的饮食摄入。</strong></p>
+<p>首先我们需要知道我们每天的热量消耗的组成。非运动消耗指的就是我们在做低强度有氧的时候，静息状态下的消耗。食物热效应在很多APP里面都有所计算</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220906125915372.png" alt="image-20220906125915372"></p>
+<p>因此，对于铂金段位的人，就是在黄金段位的基础上，每次进食都要对食材进行称重，而且吃的食材越干净越好</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220906143936288.png" alt="image-20220906143936288"></p>
+<p>食材称重有很多APP都支持</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220906144221799.png" alt="image-20220906144221799" style="zoom: 67%;"></p>
+<p>在确定了每天的饮食摄入的基础上，我们要做到每天300-500大卡的热量缺口</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220906144934561.png" alt="image-20220906144934561" style="zoom:50%;"></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220906145216564.png" alt="image-20220906145216564" style="zoom: 67%;"></p>
+<p>而常见的非运动消耗如下</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220906145246384.png" alt="image-20220906145246384"></p>
+<p>而自己做菜的时候放的油，量大概如下</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220906145325226.png" alt="image-20220906145325226"></p>
+<h4 id="5-钻石段位"><a href="#5-钻石段位" class="headerlink" title="5. 钻石段位"></a>5. 钻石段位</h4><p>从钻石段位开始，想要减肥就需要加上运动了。</p>
+<p>而钻石段位的减肥其实就是在铂金段位的基础上加上了运动消耗。</p>
+<p>有规律的锻炼可以提升胰岛素的敏感性，而胰岛素敏感性提升将会帮助我们合成更多的蛋白</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220906145624075.png" alt="image-20220906145624075"></p>
+<p>而进行运动的消耗如下</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220906145702809.png" alt="image-20220906145702809"></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220906145721982.png" alt="image-20220906145721982" style="zoom:50%;"></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220906145730031.png" alt="image-20220906145730031" style="zoom:50%;"></p>
+<p>运动和饮食一样，也是需要遵循循序渐进的原则</p>
+<p>对于钻石段位的人，进行有氧运动的时候的建议如下</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220906151149446.png" alt="image-20220906151149446" style="zoom:50%;"></p>
+<p>此外，运动的强度在刚开始的时候目标不要太大，有那种你出汗了，但是不要太累了就好，而后再慢慢提升强度</p>
+<p>以跑步为例，理想的强度增加如下</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220906151904600.png" alt="image-20220906151904600" style="zoom:67%;"></p>
+<p>一般建议有氧运动不要超过一个小时</p>
+<h4 id="6-大师段位"><a href="#6-大师段位" class="headerlink" title="6. 大师段位"></a>6. 大师段位</h4><p><strong>大师段位的定义如下：</strong></p>
+<ul>
+<li><strong>可以控制饮食</strong></li>
+<li><strong>善于计算食物热量</strong></li>
+<li><strong>只做无氧运动</strong></li>
+</ul>
+<p>那么对于大师段位的人，只需要按照前面介绍的训练方法进行训练即可</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220906152310276.png" alt="image-20220906152310276" style="zoom:67%;"></p>
+<p>如果是有基础的，那么进行三分化即可。</p>
+<p>而三分化的训练周期分为力量周期和容量周期。减肥要放在容量周期</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220906152503131.png" alt="image-20220906152503131" style="zoom:67%;"></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220906152528168.png" alt="image-20220906152528168" style="zoom:67%;"></p>
+<h4 id="7-宗师段位"><a href="#7-宗师段位" class="headerlink" title="7. 宗师段位"></a>7. 宗师段位</h4><p>宗师段位的定义如下</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220906152551347.png" alt="image-20220906152551347" style="zoom:67%;"></p>
+<p>对于宗师，没有什么好说的</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220906152606977.png" alt="image-20220906152606977" style="zoom:67%;"></p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Jack Wang</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://jackwang0107.github.io/2022/10/22/jian-shen-jiao-cheng/">https://jackwang0107.github.io/2022/10/22/jian-shen-jiao-cheng/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Jack Wang</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E6%9D%82%E9%A1%B9/">
+                                    <span class="chip bg-color">杂项</span>
+                                </a>
+                            
+                                <a href="/tags/%E5%81%A5%E8%BA%AB/">
+                                    <span class="chip bg-color">健身</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.png" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2022/10/22/jian-shen-jiao-cheng/">
+                    <div class="card-image">
+                        
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221022203720074.png" class="responsive-img" alt="健身教程">
+                        
+                        <span class="card-title">健身教程</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            健身教程，自律给我自由
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-10-22
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%9D%82%E9%A1%B9/" class="post-category">
+                                    杂项
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E6%9D%82%E9%A1%B9/">
+                        <span class="chip bg-color">杂项</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%81%A5%E8%BA%AB/">
+                        <span class="chip bg-color">健身</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/10/22/xv6-zeng-jia-xi-tong-diao-yong/">
+                    <div class="card-image">
+                        
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221022160403946.png" class="responsive-img" alt="XV6：增加系统调用">
+                        
+                        <span class="card-title">XV6：增加系统调用</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            本文介绍了如何为XV6增加系统调用
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-10-22
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/xv6/" class="post-category">
+                                    xv6
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Operating-System/">
+                        <span class="chip bg-color">Operating System</span>
+                    </a>
+                    
+                    <a href="/tags/xv6/">
+                        <span class="chip bg-color">xv6</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: JackWang&#39;s Blog<br />'
+            + '文章作者: Jack Wang<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('3'),
+            headingSelector: 'h2, h3, h4, h5, h6'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4, h5, h6').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2021-2022</span>
+            
+            <a href="/about" target="_blank">Jack Wang</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">337.4k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+                <span id="sitetime"> Loading ...</span>
+                <script>
+                    var calcSiteTime = function () {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2021";
+                        var startMonth = "11";
+                        var startDate = "12";
+                        var startHour = "0";
+                        var startMinute = "0";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+
+                        // 区分是否有年份.
+                        var language = 'zh-CN';
+                        if (startYear === String(todayYear)) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            var daysTip = 'This site has been running for ' + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                daysTip = '本站已运行 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                daysTip = '本站已運行 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = daysTip;
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            var yearsAndDaysTip = 'This site has been running for ' + diffYears + ' years and '
+                                + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                yearsAndDaysTip = '本站已运行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                yearsAndDaysTip = '本站已運行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+                        }
+                    }
+
+                    calcSiteTime();
+                </script>
+            
+            <br>
+            
+                <span id="icp"><img src="/medias/icp.png"
+                                    style="vertical-align: text-bottom;"/>
+                <a href="https://beian.miit.gov.cn" target="_blank">陕ICP备2021014294号-1</a>
+            </span>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+    <a href="mailto:2232123545@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2232123545" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2232123545" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+        
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/sakura.js"><\/script>');
+            }
+        </script>
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
