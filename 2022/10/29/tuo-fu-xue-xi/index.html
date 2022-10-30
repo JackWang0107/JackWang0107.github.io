@@ -1,0 +1,1586 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="托福学习笔记, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
+    <meta name="description" content="托福笔记，免得以后复习都要重新找">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>托福学习笔记 | JackWang&#39;s Blog</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.2">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+
+   <style>
+    body{
+       background-image: url(https://cdn.jsdelivr.net/gh/Tokisaki-Galaxy/res/site/medias/background.jpg);
+       background-repeat:no-repeat;
+       background-size: 100% 100%;
+       background-attachment:fixed;
+    }
+</style>
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">JackWang&#39;s Blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-book-reader" style="zoom: 0.6;"></i>
+      
+      <span>博客</span>
+      <i class="fas fa-chevron-down" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/tags">
+          
+          <i class="fas fa-tags" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按标签归类文章</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories">
+          
+          <i class="fas fa-bookmark" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按目录归类文章</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/archives">
+          
+          <i class="fas fa-archive" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按日期分类文章</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">JackWang&#39;s Blog</div>
+        <div class="logo-desc">
+            
+            JackWang的个人博客
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-book-reader"></i>
+			
+			博客
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>
+
+                  <a href="/tags " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-tags" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按标签归类文章</    span>
+
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/categories " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-bookmark" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按目录归类文章</    span>
+
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/archives " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-archive" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按日期分类文章</    span>
+
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('抱歉，这篇文章并不想让所有人都看到，请输入授权密码观看')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221029220722902.png')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">托福学习笔记</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E6%9D%82%E9%A1%B9/">
+                                <span class="chip bg-color">杂项</span>
+                            </a>
+                        
+                            <a href="/tags/%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0/">
+                                <span class="chip bg-color">英语学习</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                英语学习
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2022-10-29
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2022-10-30
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    6.8k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    25 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221029220722902.png" alt="托福官网"></p>
+<h1 id="托福学习笔记"><a href="#托福学习笔记" class="headerlink" title="托福学习笔记"></a>托福学习笔记</h1><p>托福这个东西，有用确实是有用，但是比较烦的就是每次考试有两年的有效期，成绩每次快过期了就得重新考一场续上。可是关键为题就是，每次成绩考出来了之后，所有的东西全部都抛之脑后了，然后等差不多一年半之后，要重新考的时候又得重新复习，所以就很烦。</p>
+<p>所以相比于每次复习都要重头学一遍，干脆把以前学习托福时候的笔记记录下来，这样能够方便未来的复习备考，同时未来也能够不断地去完善这个笔记，以其实现更好的效果。</p>
+<h2 id="托福阅读"><a href="#托福阅读" class="headerlink" title="托福阅读"></a>托福阅读</h2><h3 id="1-变化"><a href="#1-变化" class="headerlink" title="1. 变化"></a>1. 变化</h3><p>2019年8月1日托福iBT考试正式改革，考试题目和时间都被相应缩减：阅读从44题减少为30题。具体来说，变化如下</p>
+<h4 id="答题总时间减少"><a href="#答题总时间减少" class="headerlink" title="答题总时间减少"></a>答题总时间减少</h4><p>新版：<strong>54分钟三篇（平均每篇18分钟）</strong></p>
+<p>旧版：60分钟三篇（平均每篇20分钟）</p>
+<h4 id="答题数量减少"><a href="#答题数量减少" class="headerlink" title="答题数量减少"></a>答题数量减少</h4><p>新版：<strong>共30道题（每篇10道题）</strong></p>
+<p>旧版：共42道题（每篇14道题）</p>
+<p><strong>简而言之，2019年改革之后托福的变化就是答题时间减少了，题目数量减少了，整体考察的题型没有变化</strong>。</p>
+<p>减少的题目大多属于：</p>
+<ul>
+<li><em>词汇题</em></li>
+<li><em>句子简化题</em></li>
+<li><em>直接定位题</em></li>
+</ul>
+<h3 id="2-评分标准"><a href="#2-评分标准" class="headerlink" title="2. 评分标准"></a>2. 评分标准</h3><p>考试题目减少，算分标准也会相应变化，ETS早前发布了的<strong>托福官方指南第六版，更新了托福改革后的算分表。</strong></p>
+<p>阅读首先会根据每个问题计算一个原始分。阅读每篇文章是10道题，三篇文章就是30道题。一般一道题是1分，而最后一道六选三的题目是2分，因此最终原始分的满分是33分。</p>
+<p>而从原始分的33分转换到托福的满分30分的对照表如下：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/v2-c93b4212f1507f35511f374d2b363e27_1440w.jpg" alt="评分标准" style="zoom:50%;"></p>
+<p>从中能看出，<strong>托福的阅读的分数判定是区间性的，错3道题之内，有可能是30分，也有可能是28分。</strong></p>
+<p>因为不是所有题都是完美的，假如你对宗教、性别、取向等敏感问题有偏见，那么就有可能会选错。ETS针对这种情况，会酌情把分数给到学生，比如本来是28分，但是ETS酌情会给到29分甚至30分，这也体现了ETS的人性化和灵活性。</p>
+<p>同时，ETS要平衡所有考区的分数，设置区间分数更方便ETS控制每个考区之间的分数差距。</p>
+<p>在最新的分数等级标准中，<strong>阅读依旧强调三个方面：词汇、段落间的逻辑关系和推理、文章的组织结构和主题。</strong></p>
+<ul>
+<li>托福考试的最终成绩是先算出一个原始分数，再讲过换算得出实际分数；</li>
+<li>由于每道题的难度不同，所以可能每道题的实际得分会有所差异。</li>
+<li>单选题答对1题得1分，答错1题得0分；多选题答对1题得2分，答错1题得0-1分。</li>
+</ul>
+<p>通过算分表可知：<strong>托福算分机制存在一定容错率，想要获得托福阅读满分，不一定要每道题目都做对；</strong>不同难度试卷，错题数量一致，实际分数也可能不同。</p>
+<h2 id="托福听力"><a href="#托福听力" class="headerlink" title="托福听力"></a>托福听力</h2><h3 id="1-托福听力考试形式"><a href="#1-托福听力考试形式" class="headerlink" title="1. 托福听力考试形式"></a>1. 托福听力考试形式</h3><p>没有加试的托福听力一般是两个部分：</p>
+<ul>
+<li><strong>第一个部分</strong>：1个<code>Conversation</code> + 1个<code>Lecture</code></li>
+<li><strong>第二个部分</strong>：1个<code>Conversation</code> + 2个<code>Lecture</code></li>
+<li><strong>加试</strong>（如果有）：1个<code>Conversation</code> + 1个<code>Lecture</code></li>
+</ul>
+<h3 id="2-Lecture和Conversation介绍"><a href="#2-Lecture和Conversation介绍" class="headerlink" title="2. Lecture和Conversation介绍"></a>2. Lecture和Conversation介绍</h3><p>接下来对<code>Conversation</code>和<code>Lecture</code>的一些基本概念进行简单介绍</p>
+<h4 id="Conversation"><a href="#Conversation" class="headerlink" title="Conversation"></a>Conversation</h4><p><strong><code>Conversation</code>旨在于模拟日常生活中可能出现场景，从而测试考生日常生活中的英语能力</strong>。</p>
+<p><code>Conversation</code>中听力一般的结构是：<strong>提出问题-分析问题-解决问题</strong></p>
+<blockquote>
+<p>例如托福听力中有这样一个题目：</p>
+<p>学生住的宿舍的暖气坏了，于是学生就打电话给管理方沟通，询问什么时候来修。然后管理员说现在维修档期满了，得下个周才能修（一般都不是一帆风顺的）。然后学生又说现在太冷了，等一个周实在是等不下去。最后管理员说先借给学生一个电暖炉先用着，学生说谢谢。最后到这里听力就结束了。</p>
+</blockquote>
+<p><code>Conversation</code>中可能出现的场景有：</p>
+<ul>
+<li><strong>完全生活场景</strong>（图书馆、书店、社团、校内工作、宿舍、食堂、选课、问询）</li>
+<li><strong>偏学术场景</strong>（作业、论文、课堂内容）</li>
+</ul>
+<p><code>Conversation</code>的特点为：</p>
+<ul>
+<li><code>Conversation</code>语速较快，对考生准确快速辨析信息点要求较高。</li>
+<li><code>Conversation</code>通常包含大量的语音细节，需要根据这些信息把握微妙的感情变化。</li>
+</ul>
+<h4 id="Lecture"><a href="#Lecture" class="headerlink" title="Lecture"></a>Lecture</h4><p><strong><code>Lecture</code>旨在于模拟课堂场景，从而测试考生面对学术场景的英语能力</strong></p>
+<p><code>Lecture</code>一般的结构是：<strong>总-分/总-分-总</strong></p>
+<blockquote>
+<p>例如托福听力中有这样一个题目：</p>
+<p><strong>总分结构</strong></p>
+<p>教授介绍沙漠中植物为了生存而保存水分的方式。首先介绍了第一类植物是通过把叶子变小以减少水分蒸发、让地面上的植物变矮，同时植物的根茎会扎根到沙漠很深的地方去汲取水分。第二类植物是通过变大主干，同时把水分保存到主干中，从而实现保存水分。</p>
+<p><strong>总分总结构</strong></p>
+<p>略，我忘记了</p>
+</blockquote>
+<p><code>Lecture</code>中可能出现的学科有：</p>
+<ul>
+<li><strong>高频</strong>：艺术、生物、环境科学、历史学、考古学、天文学</li>
+<li><strong>其他</strong>：建筑、心理学、经济学、地质学</li>
+</ul>
+<p>Lecture的特点是：</p>
+<ul>
+<li><code>Lecture</code>篇章较长，需要考生耐心听的程度更高。</li>
+<li><code>Lecture</code>文章结构相较于<code>Conversation</code>而言更为复杂，需要精确把握。</li>
+</ul>
+<h2 id="托福口语"><a href="#托福口语" class="headerlink" title="托福口语"></a>托福口语</h2><h3 id="1-变化-1"><a href="#1-变化-1" class="headerlink" title="1. 变化"></a>1. 变化</h3><p>2019年托福进行了改革。在改革前口语有六道题，改革后只有四道题。改革其实就是删去了原有的六道题中的两道题。具体变化如下：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/e3d7f7bdecdb4940bbeb30e3ae516a81.png" alt="托福改革后题目变化"></p>
+<p>乍一看，似乎只是单纯地<strong>删除了原来的Task1和Task5</strong>两道题，对于大家答题得分似乎并没有什么影响？<strong>对，但是也不对</strong>。</p>
+<ul>
+<li>说对，是因为确实，<strong>原先的备考方法和做题方法，现在也还是一样可以用的</strong>，毕竟题目本身没有变化，只是少了两道题目而已。</li>
+<li>说不对，是因为明显地少了两道需要自己发挥自己思路的题（被删去的第一题自然是独立话题，原来的第五题可也是要大量自己发挥理由的），<strong>口语的分数大规模地倾向了听力+复述类的话题</strong>。</li>
+</ul>
+<h3 id="2-题型"><a href="#2-题型" class="headerlink" title="2. 题型"></a>2. 题型</h3><p>下面将介绍一下改革后现在的口语四道题的情况。</p>
+<h4 id="A-Task1"><a href="#A-Task1" class="headerlink" title="A. Task1"></a>A. Task1</h4><p><strong>Task 1是一个二选一的题目</strong>。题目一般是给一个问题，然后问学生的观点。</p>
+<p>一个经典的例子如下：</p>
+<blockquote>
+<p>If you have a misunderstanding with your friend, do you prefer talking about it out in a public place or in a private place?</p>
+</blockquote>
+<p><em>这道题有15秒的准备时间，然后45秒来回答问题。</em></p>
+<p>Task 1没有答题模板，得靠自己发挥</p>
+<h4 id="B-Task-2"><a href="#B-Task-2" class="headerlink" title="B. Task 2"></a>B. Task 2</h4><p><strong>Task 2的题目是总结学生说的话</strong>。</p>
+<p>其题目通常是首先会让学生看一段文章，通常是由学校给出的某个通告、通知或者某个学生的建议，而通知中会给出来两个支持的原因。在听力中则是有两个学生，表达是支持还是反对还是辩证/中立学校发出来的通知中的行为：</p>
+<ul>
+<li>如果是反对的话，那么就会针对阅读中的原因进行反对</li>
+<li>如果是支持的话，就会针对每个原因进行加强</li>
+</ul>
+<p>例如下面的例子：</p>
+<blockquote>
+<p>学校要安装太阳能板节约能源。</p>
+<p>1、安装的位置在屋顶上,因为面积大吸收的能量多</p>
+<p>2、为了空出位置,要拆掉一些seat,因为平时也没人坐</p>
+<p>学生的观点是使用混合能源。</p>
+<p>1、安装的位置确实不错,因为学校所在的地方阳光充足。而且,学校有很多较高的建筑,肯定也可以节约一些能源消耗。</p>
+<p>2、但是座位有人坐,白天大家在学校,晚上去坐会,可以消除压力,还可以仰望星空。</p>
+</blockquote>
+<p><em>Task 2文章有45秒的阅读时间，听力对话的时长为60-90秒，在回答部分有60s答题时间。</em></p>
+<p>完成这道题的关键为：</p>
+<ul>
+<li>首先用一句话大概7-8秒说出来学校要干什么。</li>
+<li>然后说明学生的态度</li>
+<li>然后针对两个文中的原因给出学生的反对或者加强</li>
+<li><strong>完全转述听到的内容，不要自己加工</strong></li>
+</ul>
+<p>Task 2的答题模板为：</p>
+<blockquote>
+<p>答题模板</p>
+<p>According  to  the  reading  passage,  there  is   a  notice /   there   is  a  letter  suggesting  that  ………In  the  listening,  the  man\woman  agrees\disagrees  with  it,  because  firstly  he\she  claims  that………..in  addition  he /she points  out  ………….  That’s why  he\she  supports\opposes  it.</p>
+<p>Tips:</p>
+<ul>
+<li>阅读的原因可以不用总结 看时间决定</li>
+</ul>
+</blockquote>
+<h4 id="C-Task-3"><a href="#C-Task-3" class="headerlink" title="C. Task 3"></a>C. Task 3</h4><p><strong>Task 3模拟学生课下读Reading，然后课堂上教授讲解某个概念、现象。这道题要求总结教授对概念的介绍</strong>。</p>
+<p>Task 3会首先给出来一个文章，文章中会给一个概念。然后给出来一个初步的介绍或者举例。接下来会听到一段lecture。lecture中就是一个教授通过举例来解释或者反对文章中的概念。</p>
+<p>例如下面的例子</p>
+<blockquote>
+<p>Impression Management</p>
+<p>According to some sociologists, as we go about our lives, we try to control or manage the impression that we make on others in social situations. When we do this, we are practicing what sociologists call impression management. Even in everyday, ordinary interactions, we make special preparations—sometimes unconsciously—to convey certain information about ourselves that influences how others perceive us. These preparations often involve our personal appearance—how we look during the social interaction—as well as the social setting, which is the place where the social interaction occurs.</p>
+</blockquote>
+<p><em>这道题有30秒的准备时间，然后用60秒来进行回答。</em></p>
+<p>这道题的关键就是：</p>
+<ul>
+<li>首先简单的说一下xxx概念是什么（根据阅读，就几秒）</li>
+<li><strong>然后详细的复述老师举得例子</strong></li>
+</ul>
+<p>关键的得分点在于老师为了讲解该概念时候举的例子</p>
+<p>答题模板如下：</p>
+<blockquote>
+<p>The  reading  passage   talks  about xxxx ,which means / refers to the concept/phenomenon/idea that ………….. . The professor further illustrate that by citing an example of himself. xxxxx   The   first  one  is ……………..and  the  second  one  is………….. </p>
+</blockquote>
+<h4 id="C-Task4"><a href="#C-Task4" class="headerlink" title="C. Task4"></a>C. Task4</h4><p>Task 4模拟上课听老师讲解的场景。要求我们完整说明老师讲的概念和例子</p>
+<p>和类似于Task 3的阅读和听力的结合。也是先给出来一个概念，然后举例解释。但是没有阅读，直接听老师讲。</p>
+<p>例如</p>
+<blockquote>
+<p> 听力中教授讲解动物高效捕食的两种策略。</p>
+<p>1、可以设陷阱。有一种蚂蚁会在地上挖坑，小昆虫就会掉进去，这样蚂蚁就节省了到处觅食的能量。</p>
+<p>2、掩饰在周围的环境中，利用诱饵去捕猎。一种鸟叫Haren，会把植物的种子扔到水面上，假装是鱼的食物，当鱼类来觅食的时候，就被抓走了。</p>
+</blockquote>
+<p><em>这道题有20秒的准备时间，然后60秒来回答。</em></p>
+<p>这道题的答题关键就是：</p>
+<ul>
+<li>先说讲的是什么</li>
+<li>然后详细复述举得例子。例子中的原因和结果要详细的讲出来</li>
+</ul>
+<p>例如：</p>
+<blockquote>
+<p>In the lecture, the professor talks about one effective way that animals use to hunt food. Some animals prefer to use this way that could save their energy.  For example, they would like to build traps and just wait for their prey to come instead of directly hunting them which will cost them more energy. There is one kind of bird that likes to dig holes in the sand. Once the insects pass by and fall into <a target="_blank" rel="noopener" href="https://www.zhihu.com/search?q=the+holes&amp;search_source=Entity&amp;hybrid_search_source=Entity&amp;hybrid_search_extra={&quot;sourceType&quot;%3A&quot;answer&quot;%2C&quot;sourceId&quot;%3A1454335106}">the holes</a>, they would just catch them without much effort. Another example is one type of birds that has long legs. They like the way using seeds as lures to attract the fish to come to the surface and then catch them quickly with their long legs.</p>
+</blockquote>
+<p>这道题的答题模板是：</p>
+<blockquote>
+<p>The  lecture  mainly  talks  about………… For  example…………/the  first  one  is…………for  example  ………..the  second  one   is  …….   for   instance……….</p>
+</blockquote>
+<h3 id="3-评分标准"><a href="#3-评分标准" class="headerlink" title="3. 评分标准"></a>3. 评分标准</h3><p>首先，在托福考试中，判分员分为E-Rater和Human-Rater：</p>
+<ul>
+<li>E-Rater即机器判分，比如我们的托福阅读和听力部分，包括写作也会用E-Rater先粗判一下基本的拼写和语法方面</li>
+<li>Human-Rater则是主要负责口语部分和写作更高层级的判分工作。</li>
+</ul>
+<p>判分员来源于不同的岗位，比如大学教授、国际学校教师、美国高等院校考试测评专业的学生等。在经过了笔试、面试和严格的筛选培训流程后才能上岗。然后分配到具体的某个科目专人专项进行判分。以托福口语为例，每个评分员开始判分工作之前都需要完成当日校准。即他们会被要求给一些“预置答案”判分，这些答案都是由资深判分小组提前定义好了分数，用来检测当日判分员是否能达到准确判分的要求。只有通过了才会被分配真实考生的答案并进行判分。在当天的真实考试判分过程中，系统还会给他们随机分配这样的“预置答案”，以便监控全天判分过程中的准确度。</p>
+<p>在我们的考试结束后，考生的口语部分录音回答将被送到 ETS总部，由 3 到 6 位经认证的评分员按照 0 到 4 的评分标准(五个整数分数段)进行全面评分。判分员在进行判分时，判分系统上会有4、3、2、1、0各个档位的标准答案，供判分员参考以便矫正自己判分的准确度。若判分标答参考不足以帮助判分员界定分数，他们可以申请组长来帮助自己完成判分。最终四道口语题的分数加在一起(0-16分)，取算数平均值(0-4分之间，但会出现小数点后0/.83/.66/.50/.33/.16六种不同情况)根据转换表，来转换为0-30分的总分。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220303231022578.png" alt="平均值转换表" style="zoom: 50%;"></p>
+<p>其中，大家的成绩单上还会根据不同题型，按照Familiar Topics，Campus Situations，Academic Course Content三个部分对大家进行评价，均是通过每道题目的分数，根据算术平均数的计算结果，结果分为4个标准，每个标准对应的分数如下：</p>
+<ul>
+<li>Good：3.5-4.0</li>
+<li>Fair：2.5-3.0</li>
+<li>Limited：1.5-2.0</li>
+<li>Weak：0-1.0</li>
+</ul>
+<p>根据以上对应关系和转换表，我们大致可以推算出以下结果：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/7dff58_f7cb416a5164431fb6f9c191a86709d9~mv2.webp" alt="托福口语分数对照表详细版" style="zoom: 50%;"></p>
+<p>根据新托福OG中的评分标准，新托福口语要求的七个方面的标准，具体如下：</p>
+<ol>
+<li><strong>中心是否切题：</strong>考察考生所表达的口语内容是否完整、准确地回答了题目的要求。考察重点在于考生是否能够准确理解题意和准确迎合题意两个层次。</li>
+<li><strong>意思是否明白：</strong>考察考生所表达的口语内容是否能够被明白地理解，还是表面上很流利，而实际上语义含糊、不知所云。</li>
+<li><strong>结构是否严密：</strong>考察考生是否有能力将口语用严密的结构和逻辑表达出来，还是缺乏层次，信马由缰。</li>
+<li><strong>表达是否连贯：</strong>考察考生口语的语流是否有停顿，这包括思维停顿和表达停顿两方面的原因或表现。但此标准并未对考生的口语表达速度作硬性的要求</li>
+<li><strong>发音是否清楚：</strong>考察考生的发音是否能够做到纯正、清晰。起码理解起来并不因为口音的问题存在障碍。</li>
+<li><strong>语法是否正确：</strong>考察考生是否能够熟练的使用较复杂的句子结构表达思想，同时尽量避免错误。</li>
+<li><strong>词汇是否熟练：</strong>考察考生是否可以掌握足够的英语词汇进行表达，考察重点在熟练度和准确度两个方面。但此标准并未对考生的用词难度作硬性的要求。</li>
+</ol>
+<p>考官在评分时，会根据以上七个衡量标准，对自己听到的答案进行给分。各位同学也可以经常录下自己的答案，按照上面的标准一一对应的来分析自己的回答。看看自己的答案究竟有哪些不足之处。</p>
+<h2 id="托福写作"><a href="#托福写作" class="headerlink" title="托福写作"></a>托福写作</h2><p>托福写作有两个题, 分别是:</p>
+<ul>
+<li>综合写作</li>
+<li>独立写作</li>
+</ul>
+<h3 id="1-综合写作"><a href="#1-综合写作" class="headerlink" title="1. 综合写作"></a>1. 综合写作</h3><h4 id="A-综合写作介绍"><a href="#A-综合写作介绍" class="headerlink" title="A. 综合写作介绍"></a>A. 综合写作介绍</h4><p><strong>综合写作会首先看到一篇文章, 然后接下来就会听到一篇相关的文章. 我们要做的就是根据文章和听力来进行写作.</strong></p>
+<p>具体的流程就是:</p>
+<ul>
+<li>首先我们会看到一篇文章, 但是这篇文章的时间是有限的, 我们需要在3分钟内读完</li>
+<li>接下来我们会听到一个几分钟的讲座, 讲座的内容和文章的内容息息相关</li>
+<li>然后我们需要在20分钟写出来文章, 这个时候文章又可以看到了（字数要求在150-225个字以内）</li>
+</ul>
+<p>一般来说, 阅读中会先说出来一个东西, 然后在分出来几点说. 在听力中则是一一反驳了这些点. 我们这道题的关键就是把听力的内容详细的听下来.</p>
+<p>然后使用总分的结构来写出来文章. 具体来说:</p>
+<ul>
+<li>开头段：总话题(一句话)，阅读听力逻辑对应,</li>
+<li>主体段：阅读要点，听力要点，听力细节<ul>
+<li>阅读：略写+改写</li>
+<li>听力：详写+保留听力原词</li>
+<li>注意, <strong>听力才是重点</strong></li>
+</ul>
+</li>
+</ul>
+<p>举例来说</p>
+<blockquote>
+<p>某个tpo中说的因为人类破坏环境, 某种动物现在马上濒临灭绝, 然后阅读文章给了三个方法挽救这类动物. </p>
+<p>在听力部分, 教授一一反驳了这三个方法, 因为他们都不能有效的挽救这些动物.</p>
+<p>所以开头段就要说, 背景(动物濒临灭绝, 人们提出方法来挽救), 阅读听力逻辑对应(阅读提出了三种方法来挽救, 但是听力中一一反驳了他们)</p>
+</blockquote>
+<p>答题模板为：</p>
+<blockquote>
+<p>接下来开头段就是固定的模式：</p>
+<ul>
+<li>阅读要点: The reading passage proposes that … 注意一定要加原因</li>
+<li>反驳: However, the professor questions the idea by pointing out … 注意也一定要加听力反驳的原因</li>
+<li>然后是听力内容的详写.</li>
+</ul>
+</blockquote>
+<h4 id="B-综合写作一些常用语"><a href="#B-综合写作一些常用语" class="headerlink" title="B. 综合写作一些常用语"></a>B. 综合写作一些常用语</h4><p><strong>下面是综合写作的常用语</strong></p>
+<h5 id="表示然而这类转折"><a href="#表示然而这类转折" class="headerlink" title="表示然而这类转折:"></a>表示然而这类转折:</h5><ul>
+<li>However</li>
+<li>Nevertheless</li>
+<li>Nonetheless</li>
+<li>Conversely</li>
+<li>On the other hand</li>
+<li>On the contrary</li>
+<li>In contrast</li>
+<li>By contrast</li>
+</ul>
+<h5 id="表示反驳的词语"><a href="#表示反驳的词语" class="headerlink" title="表示反驳的词语"></a>表示反驳的词语</h5><ul>
+<li>Refutes</li>
+<li>rebut</li>
+<li>contradicts</li>
+<li>opposes</li>
+<li>challenges</li>
+<li>questions</li>
+<li>doubts</li>
+<li>Casts doubt on</li>
+<li>disagrees with</li>
+<li>argues against</li>
+</ul>
+<h5 id="表示是因为词语"><a href="#表示是因为词语" class="headerlink" title="表示是因为词语:"></a>表示是因为词语:</h5><ul>
+<li>More specifically,…</li>
+<li>To elaborate/illustrate,…</li>
+<li>It is because that…</li>
+<li>That is to say,</li>
+<li>In other words,…</li>
+<li>…, which means…/meaning that/indicating that/demonstrating</li>
+</ul>
+<h3 id="2-独立写作"><a href="#2-独立写作" class="headerlink" title="2. 独立写作"></a>2. 独立写作</h3><p>略</p>
+<h3 id="3-托福写作的一些技巧"><a href="#3-托福写作的一些技巧" class="headerlink" title="3. 托福写作的一些技巧"></a>3. 托福写作的一些技巧</h3><h4 id="A-心经-投机取巧提分专用—如何打败E-rate"><a href="#A-心经-投机取巧提分专用—如何打败E-rate" class="headerlink" title="A. [心经] 投机取巧提分专用—如何打败E-rate"></a>A. [心经] 投机取巧提分专用—如何打败E-rate</h4><p>链接：<a target="_blank" rel="noopener" href="https://forum.chasedream.com/thread-1314497-1-1.html">https://forum.chasedream.com/thread-1314497-1-1.html</a></p>
+<p>此贴致力于回答两个问题：<br>a. 为什么读了很多作文书、套了很多高分模板我还是得不了高分？<br>b. 都说作文靠积累，我应该被很多好词好句么？<br>先报成绩，17年9月解决了托福，之后一直很忙。看着18fall申请已经全部结束，希望借发帖给自己攒攒人品。托福作文21-27，封神做不到，全是靠取巧！价值观太正者慎入。</p>
+<p>根据本人特点概括，此帖尤其适用于以下人士：</p>
+<ol>
+<li>需要几天内提分</li>
+<li>正道坦途走的太累，不排斥试试旁门左道、功利主义</li>
+</ol>
+<p>要练神功必先自宫，为了无心理压力地来取这个巧，一起先来洗~洗~脑~</p>
+<p>考托福是为了什么？官网上写的好，此考试能科学地证明英语能力，所以考托福是为了证明英语能力？NO！对大多数人来说还是为了一个得分吧？得分等于能力不？</p>
+<blockquote>
+<p>我认识两个妹子，小A英语专业出身，做过各种随身翻译挣外快，然而托福口语成绩不如小B，一个数学专业的妹子。要知道小B仅仅集中练了一个月托福口语。为啥呢？小A虽然发音好，词汇多，但是遇到不够熟悉的场景总要一定时间反应，造成了“不连贯”的答题效果，再加上没有仔细研究答题思路，对一些“套路”不够熟悉；而小B每天认真研究答题套路，提前设想各种场景及回答自然得分高。但是谁的能力强呢？恐怕还是小A。由此可见，能力是虚的得分是实的，不然哪来的各种所谓“技巧”呢。</p>
+</blockquote>
+<p>有人问我托福为什么会造成小A和小B的情况？这可不能怨托福，凡是“考核”就有这个问题。因为所有考核都是把能力做了“指标化”，所以我们不一定需要达到对应的能力，为了分数只要达到对应的指标，达到了指标就被认为有了“能力”。</p>
+<p>所以托福写作的指标是什么呢？如果你读了很多写作书，读了很多“高分模板”，就会发现每一个都在介绍要分几段、要怎么开头怎么结尾，要用firstly，besides，furthermore等等等等。错了么？没错为啥我用了一样得不了高分啊？浪费这么多钱。一气之下我决定放弃所有作文书、范文模板，从头开始自己研究套路，无论什么成型套路不都是从ETS官方标准出来的么。</p>
+<p><strong>ETS官网对作文能力的解释非常的虚、空，只告诉说他们重视Structure、Organization、Content等等，量化的实质指标显然不在这里，它被藏在官网一个看起来完全不相关的部分了，相信绝大多数人没有注意过</strong>。</p>
+<p><strong>首先，ETS说托福作文由E-rater和一个trained human readers共同给分。这里大有玄机，humanreader是怎么trained没人知道，但是E-rater就是一个突破口了。因为E-rater作为一个电脑程序要与人保持一致必然要有固定的编程指示，不然要怎么给分，而这个编程里的指标则反过来能体现人工批改的量化指标。因此地因此，我们只要研究明白E-rater其它的都好办。为了证明E-rater是科学的，ETS可是在自己的官网挂了很多对E-rater有效性证明的科研文章，里面涉及了每一项的赋权权重，多好的解读资源，简直就是逆天秘籍一样的存在。GRE、托福等都用到E-rater。</strong></p>
+<p>楼主在这个帖子里附上最有参考价值的两篇“Stumping E-Rater:Challenging the Validity of Automated Essay Scoring”和“Beyond essay Length Evaluating erater’s Performance on TOEFL  Essays”，并在这段里做一些简要概括（其它参考文章可以在ETS官网搜索E-rater得到，有的文章需要自己费点事去下载，楼主还有几个因为下载之后整理电脑删掉了）。</p>
+<p>这两篇文章正文用了各种统计方法做了有效性检验，可以略过阅读。正文重点是：</p>
+<ul>
+<li><p>E-rater通过feed samples的方式进行自我学习；</p>
+</li>
+<li><p>E-rater也在不断升级，现在用的版本对写作字数的给分权重已经降低，再也不会出现500词作文写的一般分却逆天的情况，所以提示大家，不要再盲目相信“写的越多越好”了。</p>
+</li>
+</ul>
+<p><strong>附表比正文更值得细读，重点楼主已画</strong>。</p>
+<p>在此举两例说明附表的重要性：</p>
+<h5 id="1-structure"><a href="#1-structure" class="headerlink" title="1. structure"></a>1. structure</h5><p><strong>the number of subjunctive modal auxiliary verbs (would, could,should, might, may)是E-rater评判structure的加分项，赋予正权重。</strong></p>
+<p>但是但是但是但是，<strong>subjunctive modal auxiliary verbs占全文的比例在E-rater评分系统里是被赋予负权重的！！！！！！！！</strong></p>
+<p>意思就是，你写500词用10 个情态动词和你写300词用4个情态动词可能在structure上得分一样，但是剩下200词的时间完全可以用来提升其它部分啊。E-rater的评分标准里给情态动词的权重准则显然是双刃剑。</p>
+<h5 id="2-Organization、Content"><a href="#2-Organization、Content" class="headerlink" title="2. Organization、Content"></a>2. Organization、Content</h5><p>附表中Organization和Content部分里则很明确给出了E-rater词库里的“加分词”情况（这里需要注意，不是每个词都加分的，每个词加分的多少也有权重区别，具体需要细读这篇文章。）：</p>
+<blockquote>
+<p><strong>The two most highly weighted words in essays that received the lowest score were “picture” and “percent.” Both of these words received much lower weights in essays that got higher scores.</strong> </p>
+<p><strong>On the other hand, the two most heavily weighted words (“recognition”and “local”) in the best essays received much lower weights in the poorer essays.</strong></p>
+<p>For example, terms such as “in summary” and”in conclusion” are used for summarizing. Words and phrases like the following are used to express opinions or beliefs:</p>
+<ul>
+<li>certainly, clearly, obviously, plainly, possibly, perhaps, potentially, probably,fortunately</li>
+<li>generally, maybe, presumably, unless, albeit, luckily, normally, apparently,herein, likely, surely, ideally, undoubtedly</li>
+<li>naturally, forcertain, for sure, of course, to some extent, above all, if only, in order to,in order for, so that, so as to</li>
+</ul>
+</blockquote>
+<p>到这里就可以回答文章开始的两个问题了：</p>
+<ol>
+<li><p><strong>为什么读了很多作文书、套了很多高分模板我还是得不了高分？</strong></p>
+<p>很多高分模板、所谓“原则”是符合了E-rater评分规则的。但是E-rater是一个动态评分过程，写的多需要多用情态动词，写的少就要考虑比例减分效应。</p>
+<p>因为我们不可能用一模一样的模板文章，在改写的过程中死死抓着一些地方不变反而容易低分。</p>
+<p>了解评分权重原则可以随时更改策略，更加灵活。重点要从中总结出适合自己英语水平的原则！！</p>
+</li>
+</ol>
+<ol>
+<li><p>都说作文靠积累，我应该被很多好词好句么？</p>
+<p><strong>短时间内把E-rater附表里的加分词背下来就很够用了。</strong></p>
+<p>磨刀不误砍柴工，楼主用了一天去读E-rater的四五篇长长的研究文章</p>
+</li>
+</ol>
+<p>一开始对这个方法能不能有效还是很没底气的，27分出来的时候简直太惊喜。希望对后来者有用，也希望所有和我一样的18fall小伙伴们申请顺利。</p>
+<h4 id="B-托福写作E-Rater评分标准"><a href="#B-托福写作E-Rater评分标准" class="headerlink" title="B. 托福写作E-Rater评分标准"></a>B. 托福写作E-Rater评分标准</h4><p><a target="_blank" rel="noopener" href="https://michaelchen.xyz/2020/07/19/TOFEL-Writing-E-Rater/">https://michaelchen.xyz/2020/07/19/TOFEL-Writing-E-Rater/</a></p>
+<h4 id="C-使用托福e-rater"><a href="#C-使用托福e-rater" class="headerlink" title="C. 使用托福e-rater"></a>C. 使用托福e-rater</h4><p><a target="_blank" rel="noopener" href="https://toefl.kmf.com/erater/index">https://toefl.kmf.com/erater/index</a></p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Jack Wang</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://jackwang0107.github.io/2022/10/29/tuo-fu-xue-xi/">https://jackwang0107.github.io/2022/10/29/tuo-fu-xue-xi/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Jack Wang</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E6%9D%82%E9%A1%B9/">
+                                    <span class="chip bg-color">杂项</span>
+                                </a>
+                            
+                                <a href="/tags/%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0/">
+                                    <span class="chip bg-color">英语学习</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.png" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2022/10/29/tuo-fu-xue-xi/">
+                    <div class="card-image">
+                        
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221029220722902.png" class="responsive-img" alt="托福学习笔记">
+                        
+                        <span class="card-title">托福学习笔记</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            托福笔记，免得以后复习都要重新找
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-10-29
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                    英语学习
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E6%9D%82%E9%A1%B9/">
+                        <span class="chip bg-color">杂项</span>
+                    </a>
+                    
+                    <a href="/tags/%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0/">
+                        <span class="chip bg-color">英语学习</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/10/29/tuo-fu-bei-kao-ji-lu/">
+                    <div class="card-image">
+                        
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221029214115913.png" class="responsive-img" alt="托福备考记录">
+                        
+                        <span class="card-title">托福备考记录</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            托福这个东西吧，有用是真有用，就是每次有效期快到了之后就得重新去考
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-10-29
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                    英语学习
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E6%9D%82%E9%A1%B9/">
+                        <span class="chip bg-color">杂项</span>
+                    </a>
+                    
+                    <a href="/tags/%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0/">
+                        <span class="chip bg-color">英语学习</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: JackWang&#39;s Blog<br />'
+            + '文章作者: Jack Wang<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('3'),
+            headingSelector: 'h2, h3, h4, h5, h6'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4, h5, h6').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2021-2022</span>
+            
+            <a href="/about" target="_blank">Jack Wang</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">348.8k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+                <span id="sitetime"> Loading ...</span>
+                <script>
+                    var calcSiteTime = function () {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2021";
+                        var startMonth = "11";
+                        var startDate = "12";
+                        var startHour = "0";
+                        var startMinute = "0";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+
+                        // 区分是否有年份.
+                        var language = 'zh-CN';
+                        if (startYear === String(todayYear)) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            var daysTip = 'This site has been running for ' + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                daysTip = '本站已运行 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                daysTip = '本站已運行 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = daysTip;
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            var yearsAndDaysTip = 'This site has been running for ' + diffYears + ' years and '
+                                + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                yearsAndDaysTip = '本站已运行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                yearsAndDaysTip = '本站已運行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+                        }
+                    }
+
+                    calcSiteTime();
+                </script>
+            
+            <br>
+            
+                <span id="icp"><img src="/medias/icp.png"
+                                    style="vertical-align: text-bottom;"/>
+                <a href="https://beian.miit.gov.cn" target="_blank">陕ICP备2021014294号-1</a>
+            </span>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+    <a href="mailto:2232123545@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2232123545" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2232123545" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+        
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/sakura.js"><\/script>');
+            }
+        </script>
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
