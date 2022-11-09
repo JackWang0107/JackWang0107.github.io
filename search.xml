@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>bash的特性</title>
+      <link href="/2022/11/08/bash-de-te-xing/"/>
+      <url>/2022/11/08/bash-de-te-xing/</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>托福学习笔记</title>
       <link href="/2022/10/29/tuo-fu-xue-xi/"/>
       <url>/2022/10/29/tuo-fu-xue-xi/</url>
@@ -1649,13 +1662,13 @@
       
         <tags>
             
+            <tag> Math Modeling </tag>
+            
             <tag> 数学建模题型 </tag>
             
             <tag> 数学建模算法体系 </tag>
             
             <tag> 数学建模常用解题方法 </tag>
-            
-            <tag> Math Modeling </tag>
             
         </tags>
       
@@ -2043,9 +2056,9 @@
             
             <tag> Python </tag>
             
-            <tag> Math Modeling </tag>
-            
             <tag> Linear Programming </tag>
+            
+            <tag> Math Modeling </tag>
             
             <tag> 01规划 </tag>
             
@@ -2101,9 +2114,9 @@
             
             <tag> Python </tag>
             
-            <tag> Math Modeling </tag>
-            
             <tag> Linear Programming </tag>
+            
+            <tag> Math Modeling </tag>
             
             <tag> 整数规划 </tag>
             
@@ -2132,11 +2145,11 @@
             
             <tag> Python </tag>
             
-            <tag> Math Modeling </tag>
-            
             <tag> 线性规划 </tag>
             
             <tag> Linear Programming </tag>
+            
+            <tag> Math Modeling </tag>
             
         </tags>
       
@@ -2308,13 +2321,13 @@
             
             <tag> Ubuntu </tag>
             
+            <tag> Linux </tag>
+            
             <tag> QQ </tag>
             
             <tag> 微信 </tag>
             
             <tag> Wechat </tag>
-            
-            <tag> Linux </tag>
             
             <tag> Virtualbox </tag>
             
