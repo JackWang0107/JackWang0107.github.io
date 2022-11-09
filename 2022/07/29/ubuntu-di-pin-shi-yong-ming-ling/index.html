@@ -411,21 +411,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-10-11
+                    2022-11-10
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.7k
+                    2.4k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    6 分
+                    8 分
                 </div>
                 
 
@@ -561,6 +561,108 @@ sshpass -f userpasswd ssh username@x.x.x.x
 <pre class="line-numbers language-shell"><code class="language-shell">export SSHPASS="password"
 sshpass -e ssh username@x.x.x.x
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h2 id="4-测试程序用时：time"><a href="#4-测试程序用时：time" class="headerlink" title="4.  测试程序用时：time"></a>4.  测试程序用时：time</h2><p>很多时候，我们需要测试一个程序、命令运行所花费的时间，为此，我们可以使用<code>Linux</code>中的<code>time</code>命令</p>
+<h3 id="A-基本使用"><a href="#A-基本使用" class="headerlink" title="A. 基本使用"></a>A. 基本使用</h3><pre class="line-numbers language-sh"><code class="language-sh">time 需要计算时间的程序
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>例如我们下面测试<code>ls</code>的用时</p>
+<pre class="line-numbers language-sh"><code class="language-sh">time ls
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>其中：</p>
+<ul>
+<li><code>real</code>时间是指挂钟时间，也就是命令开始执行到结束的时间。这个短时间包括其他进程所占用的时间片，和进程被阻塞时所花费的时间。</li>
+<li><code>user</code>时间是指进程花费在用户模式中的CPU时间，这是唯一真正用于执行进程所花费的时间，其他进程和花费阻塞状态中的时间没有计算在内。</li>
+<li><code>sys</code>时间是指花费在内核模式中的CPU时间，代表在内核中执系统调用所花费的时间，这也是真正由进程使用的CPU时间。</li>
+</ul>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221109131731051.png" alt="time结果" style="zoom: 50%;"></p>
+<p>但是需要注意的是，这里使用的<code>time</code>是<code>shell</code>这个程序的内置命令，而非在<code>PATH</code>中的可执行程序<code>/usr/bin/time</code>，因此，直接使用<code>time</code>的功能有限。</p>
+<p><code>shell</code>搜索命令的次序依次为：</p>
+<ol>
+<li>检测命令是否为<code>alias</code>的命令</li>
+<li>对命令进行参数扩展</li>
+<li>检测命令是否是<code>shell</code>脚本中定义的函数<code>functions</code></li>
+<li>检测命令是否是<code>shell</code>的内建命令<code>BUILTIN commands</code></li>
+<li>检测<code>HASH table</code></li>
+<li>搜索<code>PATH</code>中是否存在同名程序</li>
+</ol>
+<p>因此，由于<code>shell</code>的<code>BUILTIN commands</code>就有<code>time</code>，所以如果直接使用的话，用的就是<code>BUILTIN commands</code>而非<code>PATH</code>中的可执行的<code>time</code>二进制文件</p>
+<p>为此，可以在<code>time</code>命令前加上<code>\</code>表示强制使用<code>PATH</code>中的命令，则此时</p>
+<pre class="line-numbers language-sh"><code class="language-sh">\time ls
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221109133352779.png" alt="time结果"></p>
+<h3 id="B-f-格式化输出"><a href="#B-f-格式化输出" class="headerlink" title="B. -f 格式化输出"></a>B. -f 格式化输出</h3><p>使用<code>-f</code>选项格式化时间输出：</p>
+<pre class="line-numbers language-shell"><code class="language-shell">\time -f "time: %U" ls
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221109133539162.png" alt="time结果"></p>
+<p><code>-f</code>选项后的参数：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>%E</code></td>
+<td>real时间，显示格式为[小时:]分钟:秒</td>
+</tr>
+<tr>
+<td><code>%U</code></td>
+<td>user时间。</td>
+</tr>
+<tr>
+<td><code>%S</code></td>
+<td>sys时间。</td>
+</tr>
+<tr>
+<td><code>%C</code></td>
+<td>进行计时的命令名称和命令行参数。</td>
+</tr>
+<tr>
+<td><code>%D</code></td>
+<td>进程非共享数据区域，以KB为单位。</td>
+</tr>
+<tr>
+<td><code>%x</code></td>
+<td>命令退出状态。</td>
+</tr>
+<tr>
+<td><code>%k</code></td>
+<td>进程接收到的信号数量。</td>
+</tr>
+<tr>
+<td><code>%w</code></td>
+<td>进程被交换出主存的次数。</td>
+</tr>
+<tr>
+<td><code>%Z</code></td>
+<td>系统的页面大小，这是一个系统常量，不用系统中常量值也不同。</td>
+</tr>
+<tr>
+<td><code>%P</code></td>
+<td>进程所获取的CPU时间百分百，这个值等于 <code>user+system</code> 时间除以总共的运行时间。</td>
+</tr>
+<tr>
+<td><code>%K</code></td>
+<td>进程的平均总内存使用量（data+stack+text），单位是 <code>KB</code>。</td>
+</tr>
+<tr>
+<td><code>%w</code></td>
+<td>进程放弃CPU的次数，即主动进行上下文切换的次数，例如等待I/O操作完成。</td>
+</tr>
+<tr>
+<td><code>%c</code></td>
+<td>进程被抢占CPU的次数，即被迫进行上下文切换的次数（由于时间片到期）。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="C-o-写入到文件中"><a href="#C-o-写入到文件中" class="headerlink" title="C. -o 写入到文件中"></a>C. -o 写入到文件中</h3><p>使用<code>-o</code>选项将执行时间写入到文件中：</p>
+<pre class="line-numbers language-shell"><code class="language-shell">\time -o outfile.txt ls
+cat outfile.txt
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221109133737939.png" alt="time结果"></p>
 
                 
             </div>
@@ -1091,7 +1193,7 @@ sshpass -e ssh username@x.x.x.x
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">359.6k</span>
+                        class="white-color">360.3k</span>
             
             
             
