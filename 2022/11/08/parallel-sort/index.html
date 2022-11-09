@@ -452,7 +452,7 @@
                 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221108225726700.png" alt="Parallel Sort"></p>
 <h2 id="Parallel-Sort"><a href="#Parallel-Sort" class="headerlink" title="Parallel Sort"></a>Parallel Sort</h2><p>最近在CS537这门课程上学习了<code>Mutex</code>、<code>Conditional Variable (CV)</code>、<code>Semaphore</code>等等用于线程同步与互斥的量。</p>
 <p>当然，光说不练假把式。作为练习，写了一个多线程排序的项目出来。</p>
-<p>个人觉得，这个项目对我的多线程编程能力有很大的提升，所以特地把这个项目记录一下。</p>
+<p>个人觉得，这个项目对多线程编程能力有很大的提升，尤其是死锁的DEBUG，所以特地把这个项目记录一下。</p>
 <h2 id="项目说明"><a href="#项目说明" class="headerlink" title="项目说明"></a>项目说明</h2><p>本项目要求对一个包含多个记录（<code>record</code>）的二进制文件进行排序。二进制文件中，每一个记录（<code>record</code>）占100个字节。前4个字节作为该记录的键（<code>key</code>），后6个字节作为该记录的值（<code>value</code>）。</p>
 <p>项目要求对所有的记录，按照其键的值进行排序，并将排序后的结果写入到新的二进制文件中。</p>
 <p>生成待排序二进制文件的代码如下：</p>
@@ -2398,7 +2398,7 @@ gentest.sh 10
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">359.4k</span>
+                        class="white-color">359.6k</span>
             
             
             
