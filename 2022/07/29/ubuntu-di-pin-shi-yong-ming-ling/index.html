@@ -411,21 +411,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-11-10
+                    2022-11-14
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.4k
+                    3.4k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    8 分
+                    12 分
                 </div>
                 
 
@@ -663,6 +663,71 @@ sshpass -e ssh username@x.x.x.x
 cat outfile.txt
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221109133737939.png" alt="time结果"></p>
+<h2 id="5-标准输入作为参数：xargs"><a href="#5-标准输入作为参数：xargs" class="headerlink" title="5. 标准输入作为参数：xargs"></a>5. 标准输入作为参数：xargs</h2><p><code>xargs</code>是 <code>Linux</code> 系统的一个很有用的命令，但是常常被忽视，很多人不了解它的用法。</p>
+<h3 id="A-介绍"><a href="#A-介绍" class="headerlink" title="A. 介绍"></a>A. 介绍</h3><p><code>Linux</code> 命令都带有参数，有些命令可以接受<code>标准输入</code>（<code>Stdin</code>）作为参数，例如<code>grep</code>命令：</p>
+<pre class="line-numbers language-sh"><code class="language-sh">cat /etc/passwd | grep root
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>上面的代码使用了管道命令（<code>|</code>）。管道命令的作用，是将左侧命令（<code>cat /etc/passwd</code>）的<code>标准输出</code>转换为<code>标准输入</code>，提供给右侧命令（<code>grep root</code>）作为参数。</p>
+<p>因为<code>grep</code>命令可以接受标准输入作为参数，所以上面的代码等同于下面的代码。</p>
+<pre class="line-numbers language-sh"><code class="language-sh">grep root /etc/passwd
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><strong>然而，能够接收标准输入作为参数的命令只是少数，大多数命令都不接受标准输入作为参数，只能直接在命令行输入参数，这导致无法用管道命令传递参数</strong>。例如，<code>echo</code>命令就不接受管道传参。</p>
+<pre class="line-numbers language-sh"><code class="language-sh">echo "hello world" | echo
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>上面的代码不会有输出。因为管道右侧的<code>echo</code>不接受管道传来的标准输入作为参数。因此，这就极大地限制了我们使用管道符来连接多个命令，从而实现整个工作流。</p>
+<p>因此，如果我们有命令，能够让所有的命令接收标准输入作为参数，那么就可以极大地提高我们的工作效率，而<code>xargs</code>就是这个命令。</p>
+<h3 id="B-基本使用"><a href="#B-基本使用" class="headerlink" title="B. 基本使用"></a>B. 基本使用</h3><p><code>xargs</code>命令的基本用法如下</p>
+<pre class="line-numbers language-sh"><code class="language-sh">xargs [options] [command]
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>其中：</p>
+<ul>
+<li><code>options</code>是命令行参数</li>
+<li><code>command</code>是将要传入参数的命令</li>
+</ul>
+<p>如果没有指定<code>command</code>的话，那么默认将运行<code>echo</code>。例如</p>
+<pre class="line-numbers language-sh"><code class="language-sh">ps aux | grep grep | xargs
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221113115938026.png" alt="xargs默认运行echo"></p>
+<h3 id="C-p-确认运行"><a href="#C-p-确认运行" class="headerlink" title="C. -p 确认运行"></a>C. -p 确认运行</h3><p>有的时候可能会运行诸如<code>rm</code>等高危命令，因此<code>xargs</code>提供了<code>-p</code>参数来向用户确认是否运行命令</p>
+<pre class="line-numbers language-sh"><code class="language-sh">ps aux | grep grep | awk '{print $2}' | xargs -p kill -9
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>此时输入<code>y/Y</code>来确认运行，其他的字符都视为不运行。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221113120705847.png" alt="-p确认运行"></p>
+<h3 id="D-t-输出执行的命令"><a href="#D-t-输出执行的命令" class="headerlink" title="D. -t 输出执行的命令"></a>D. -t 输出执行的命令</h3><p><code>-p</code>会阻塞程序，直到用户输入。有的时候我们只希望需要输出一下将要执行的命令，而不阻塞程序运行，这个时候就可以使用<code>-t</code>参数。</p>
+<pre class="line-numbers language-sh"><code class="language-sh">ps aux | grep grep | awk '{print $2}' | xargs -t kill -9
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221113132018397.png" alt="-t输出执行的命令"></p>
+<h3 id="E-I-保存输出到变量"><a href="#E-I-保存输出到变量" class="headerlink" title="E. -I 保存输出到变量"></a>E. -I 保存输出到变量</h3><p>有的时候我们希望能够将标准输出的内容传递给多个命令，例如：</p>
+<pre class="line-numbers language-sh"><code class="language-sh">echo dirs.txt | xargs .... echo dirs_to_make; mkdir dirs_to_make
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>这个情况下，解决办法就是我们将前一个命令的输出保存到一个变量中，而后通过取值就可以多次使用前一个命令的输出值。</p>
+<p><code>xargs</code>中通过指定<code>-I</code>参数，来指定变量名</p>
+<pre class="line-numbers language-sh"><code class="language-sh">echo "one\ntwo\nthree" > foo.txt
+cat foo.txt
+cat foo.txt | xargs -I files echo files
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221113183745670.png" alt="保存输出到变量中"></p>
+<p>但是，如果我们想用多次调用的话，使用<code>;</code>链接是不行的，因为<code>shell</code>会认为<code>;</code>前的是一个命令，即如果我们使用下面的命令来尝试运行多个命令</p>
+<pre class="line-numbers language-sh"><code class="language-sh">cat foo.txt | xargs -I files echo files; echo files
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>那么在<code>shell</code>中，这就成了两个命令</p>
+<pre class="line-numbers language-shell"><code class="language-shell">cat foo.txt | xargs -I files echo files
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>和</p>
+<pre class="line-numbers language-sh"><code class="language-sh">echo files
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>那么这样，第二个命令中的<code>file</code>自然无法被<code>xargs</code>替换，所以运行结果如下</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221113184113074.png" alt="运行结果"></p>
+<p>所以如果我们想要使用<code>xargs</code>讲输出传给多个命令的话，就要用下面的调用方法</p>
+<pre class="line-numbers language-sh"><code class="language-sh">cat foo.txt | xargs -I files $SHELL -c 'echo files;echo files'
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221113184533047.png" alt="运行结果"></p>
+<h3 id="F-d-指定分隔符"><a href="#F-d-指定分隔符" class="headerlink" title="F. -d 指定分隔符"></a>F. -d 指定分隔符</h3><p><code>xargs</code>默认上一个命令输出的分隔符是空格和换行，而<code>$PATH</code>的分隔符是<code>:</code>。所以这种时候，可以使用<code>xargs</code>的<code>-d</code>参数来指定分隔符。</p>
+<p>注意<code>-d</code>参数在<code>macOS</code>上的<code>xargs</code>不支持，不过可以使用<code>awk</code>的<code>RS</code>和<code>ORS</code>来实现类似的替换效果</p>
+<pre class="line-numbers language-sh"><code class="language-sh">echo $PATH | xargs -d ':' -I p bash -c 'echo -e "p"' > searching_path.txt
+cat searchin_path.txt
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221113190232452.png" alt="运行结果"></p>
 
                 
             </div>
@@ -1193,7 +1258,7 @@ cat outfile.txt
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">369.4k</span>
+                        class="white-color">370.4k</span>
             
             
             
