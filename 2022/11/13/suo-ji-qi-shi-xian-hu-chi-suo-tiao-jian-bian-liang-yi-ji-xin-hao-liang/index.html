@@ -4,13 +4,13 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="锁及其实现：互斥锁、条件锁（条件变量）以及信号量, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
+    <meta name="keywords" content="锁及其实现：自旋锁、互斥锁、条件锁（条件变量）以及信号量, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
     <meta name="description" content="
-锁及其实现：互斥锁、条件锁（条件变量）以及信号量
+锁及其实现：自旋锁、互斥锁、条件锁（条件变量）以及信号量
 高性能编程中，锁是真的有用
 
 锁这个东西，学的时候是真的学明白了。但是用的时候，却又忘了，所以特地写一篇文章记录一下。
-一、锁的介绍：以互斥锁为例我们首先先介绍为什么要有锁，而后介绍锁的意">
+一、锁的介绍：以互斥锁为例我们首先先介绍为什么要有锁，而后介">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -22,7 +22,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>锁及其实现：互斥锁、条件锁（条件变量）以及信号量 | JackWang&#39;s Blog</title>
+    <title>锁及其实现：自旋锁、互斥锁、条件锁（条件变量）以及信号量 | JackWang&#39;s Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -264,7 +264,7 @@
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">锁及其实现：互斥锁、条件锁（条件变量）以及信号量</h1>
+                    <h1 class="description center-align post-title">锁及其实现：自旋锁、互斥锁、条件锁（条件变量）以及信号量</h1>
                 </div>
             </div>
         </div>
@@ -451,14 +451,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    6.8k
+                    8.8k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    25 分
+                    33 分
                 </div>
                 
 
@@ -479,7 +479,7 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221113224353603.png" alt="锁"></p>
-<h1 id="锁及其实现：互斥锁、条件锁（条件变量）以及信号量"><a href="#锁及其实现：互斥锁、条件锁（条件变量）以及信号量" class="headerlink" title="锁及其实现：互斥锁、条件锁（条件变量）以及信号量"></a>锁及其实现：互斥锁、条件锁（条件变量）以及信号量</h1><blockquote>
+<h1 id="锁及其实现：自旋锁、互斥锁、条件锁（条件变量）以及信号量"><a href="#锁及其实现：自旋锁、互斥锁、条件锁（条件变量）以及信号量" class="headerlink" title="锁及其实现：自旋锁、互斥锁、条件锁（条件变量）以及信号量"></a>锁及其实现：自旋锁、互斥锁、条件锁（条件变量）以及信号量</h1><blockquote>
 <p>高性能编程中，锁是真的有用</p>
 </blockquote>
 <p>锁这个东西，学的时候是真的学明白了。但是用的时候，却又忘了，所以特地写一篇文章记录一下。</p>
@@ -715,7 +715,7 @@ mov %eax, 0x8049a1c
 </ul>
 <p>而通过<code>xchg</code>这个原子操作，我们就可以去构建不同的锁。</p>
 <p>接下来，我们就要讲解不同的锁的实现。</p>
-<h2 id="三、自旋锁（Spin-Lock）"><a href="#三、自旋锁（Spin-Lock）" class="headerlink" title="三、自旋锁（Spin Lock）"></a>三、自旋锁（Spin Lock）</h2><p>上面我们讲了<code>xchg</code>这个原子指令之后，我们接下将讲解<code>自旋锁（Spin Lock)</code>的原理及其作用。</p>
+<h2 id="三、自旋锁（Spin-Lock）"><a href="#三、自旋锁（Spin-Lock）" class="headerlink" title="三、自旋锁（Spin Lock）"></a>三、自旋锁（Spin Lock）</h2><p>上面我们讲了<code>xchg</code>这个原子指令之后，我们接下将讲解<code>自旋锁（Spin Lock)</code>。</p>
 <p><strong><code>自旋锁</code>简单的来说就是：自旋锁就是资金进不去就在门外等着，自己进去了就让别人在门外等着</strong>。作用和前面讲的互斥锁一样的，都是保证临界区唯一访问，从而解决数据不一致问题。</p>
 <h3 id="1-自旋锁实现——TestAndSwap"><a href="#1-自旋锁实现——TestAndSwap" class="headerlink" title="1. 自旋锁实现——TestAndSwap"></a>1. 自旋锁实现——TestAndSwap</h3><h4 id="A-实现"><a href="#A-实现" class="headerlink" title="A. 实现"></a>A. 实现</h4><p>讲解<code>自旋锁</code>的<code>TestAndSwap</code>实现前，首先需要讲解<code>TestAndSwap</code>函数。</p>
 <p><code>TestAndSwap</code>函数中调用了<code>xchg</code>指令最终是一个原子函数，<strong>而其实现的功能</strong>如下（注意，这里只是给出了C代码的解释，真实情况下并不是这样的实现）：</p>
@@ -841,7 +841,7 @@ mov %eax, 0x8049a1c
 <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="五、条件锁（Conditional-Variable）"><a href="#五、条件锁（Conditional-Variable）" class="headerlink" title="五、条件锁（Conditional Variable）"></a>五、条件锁（Conditional Variable）</h2><p>前面介绍的<code>互斥锁</code>和<code>自旋锁</code>都是用于保证临界区唯一访问的，而<strong>条件锁则是用于保证在满足条件时访问临界区</strong>。</p>
-<h3 id="1-条件锁的背景"><a href="#1-条件锁的背景" class="headerlink" title="1. 条件锁的背景"></a>1. 条件锁的背景</h3><p>我们上面说到，条件锁是用于在满足条件时访问临界区。条件锁最初出现的背景，就是生产者和消费者模型。</p>
+<h3 id="1-条件锁的背景：生产者——消费者问题"><a href="#1-条件锁的背景：生产者——消费者问题" class="headerlink" title="1. 条件锁的背景：生产者——消费者问题"></a>1. 条件锁的背景：生产者——消费者问题</h3><p>我们上面说到，条件锁是用于在满足条件时访问临界区。条件锁最初出现的背景，就是生产者和消费者模型。</p>
 <p>为此，我们先举出下面的生产者和消费者的例子：</p>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">int</span> max <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span>
 <span class="token keyword">int</span> loops <span class="token operator">=</span> <span class="token number">20</span><span class="token punctuation">;</span>
@@ -909,9 +909,86 @@ mutex_t m<span class="token punctuation">;</span>
 </ul>
 <p>虽然我们上面的代码中，使用了<code>useptr = (userptr + 1) % max</code>和<code>fillptr = (fillptr + 1) % max</code>来避免溢出，但是会出现获取到错误的产品和覆盖未使用的产品。</p>
 <p><strong>最后，导致该问题发生的根本，依旧是因为共享数据问题。而与自旋锁、互斥锁所解决的共享数据问题是数据不一致问题，而这里，我们遇到了共享数据问题中全新的一类问题：数据溢出问题</strong></p>
-<h3 id="3-数据溢出问题：不可知的条件"><a href="#3-数据溢出问题：不可知的条件" class="headerlink" title="3. 数据溢出问题：不可知的条件"></a>3. 数据溢出问题：不可知的条件</h3><p>我们分析一下导致数据溢出的问题的根本。根本问题就是因为由于不可知的条件，即我们的<code>producer</code>填充缓冲区前、<code>consumer</code>在从缓冲区中获取数据前，不知道缓冲区的状态，从而导致发生了数据溢出问题。</p>
-<h3 id="4-解决办法：条件锁"><a href="#4-解决办法：条件锁" class="headerlink" title="4. 解决办法：条件锁"></a>4. 解决办法：条件锁</h3><p>为了解决数据溢出问题，我们就有了条件锁。</p>
-<p>类似于</p>
+<h3 id="3-解决办法：条件锁"><a href="#3-解决办法：条件锁" class="headerlink" title="3. 解决办法：条件锁"></a>3. 解决办法：条件锁</h3><h4 id="A-条件锁的实现"><a href="#A-条件锁的实现" class="headerlink" title="A. 条件锁的实现"></a>A. 条件锁的实现</h4><p>为了解决数据溢出问题，我们就有了条件锁。条件锁的定义以及初始化函数如下</p>
+<pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">typedef</span> <span class="token keyword">struct</span> __cond_t <span class="token punctuation">{</span>
+  <span class="token keyword">int</span> flag<span class="token punctuation">;</span>
+  <span class="token keyword">int</span> guard<span class="token punctuation">;</span>
+  queue_t <span class="token operator">*</span>q<span class="token punctuation">;</span>
+<span class="token punctuation">}</span> cond_t<span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token function">cond_init</span><span class="token punctuation">(</span>cond_t <span class="token operator">*</span>cond<span class="token punctuation">)</span><span class="token punctuation">{</span>
+  cond<span class="token operator">-></span>flag <span class="token operator">=</span> cond<span class="token operator">-></span>guard <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  cond<span class="token operator">-></span>q <span class="token operator">=</span> <span class="token function">queue_init</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>条件锁中有有一个队列，这个队列是在后面针对条件锁的操作中使用到的。此外，条件锁的英文是<code>Conditional Variable</code>，因此一般缩写直接用的是<code>cond</code></p>
+<p>自旋锁和互斥锁有<code>lock</code>和<code>unlock</code>两种操作，对应的，条件锁也有两种操作，只不过这两种操作称为<code>wait</code>和<code>signal</code>。</p>
+<p>这两种操作的实现如下</p>
+<pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">// 实现代码</span>
+
+<span class="token keyword">void</span> <span class="token function">wait</span><span class="token punctuation">(</span>cond_t <span class="token operator">*</span>cond<span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token function">xchg</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>cond<span class="token operator">-></span>guard<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span>
+    <span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// spin</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>cond<span class="token operator">-></span>flag <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">{</span>  <span class="token comment" spellcheck="true">// lock is free, grab it!</span>
+    cond<span class="token operator">-></span>flag <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    cond<span class="token operator">-></span>guard <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>  <span class="token comment" spellcheck="true">// lock not free, sleep!</span>
+    <span class="token function">queue_push</span><span class="token punctuation">(</span>cond<span class="token operator">-></span>q<span class="token punctuation">,</span> <span class="token function">gettid</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    cond<span class="token operator">-></span>guard <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token function">park</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">// put caller to sleep</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">signal</span><span class="token punctuation">(</span>cond_t <span class="token operator">*</span>cond<span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token function">xchg</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>cond<span class="token operator">-></span>guard<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span>
+    <span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// spin</span>
+  <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">queue_empty</span><span class="token punctuation">(</span>cond<span class="token operator">-></span>q<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        lock<span class="token operator">-></span>flag <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  <span class="token keyword">else</span>
+        <span class="token function">unpark</span><span class="token punctuation">(</span><span class="token function">queue_pop</span><span class="token punctuation">(</span>cond<span class="token operator">-></span>q<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  lock<span class="token operator">-></span>guard <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>其中：</p>
+<ul>
+<li><p><code>park</code>和<code>unpark</code>操作是操作系统提供的函数</p>
+<ul>
+<li><code>park</code>的作用就是让调用的线程进入睡眠状态</li>
+<li><code>unpark</code>的作用就是唤醒指定的线程<code>tid</code></li>
+</ul>
+</li>
+<li><p><code>cond-&gt;queue</code>保存了所有睡眠线程</p>
+</li>
+<li><p><strong><code>guard</code>相当于条件锁<code>cond</code>自身的自旋锁，因为<code>wait</code>和<code>signal</code>中都修改了共享变量<code>cond-&gt;flag</code>和<code>cond-queue</code>，因此锁内部还需要一个自旋锁来保护<code>cond-&gt;flag</code>和<code>cond-&gt;queue</code>这两个共享的变量</strong></p>
+</li>
+<li><p><code>flag</code>是条件锁<code>cond</code>的内部状态，而<code>cond</code>条件锁本身用于保护外部的临界区，例如</p>
+<pre class="line-numbers language-c"><code class="language-c">cond_t c<span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">thread_A</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token function">wait</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>c<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// critical section</span>
+  <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+  <span class="token function">signal</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>c<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+</ul>
+<p>因此，条件锁的两种操作的含义就是：</p>
+<ul>
+<li><code>wait</code>操作：<ul>
+<li>如果有别的线程正在操作条件锁<code>cond</code>，则循环等待（实现代码<code>4-5</code>行）。</li>
+<li>获得自旋锁<code>cond-&gt;guard</code>后，首先尝试获得条件锁<code>cond</code>，如果能够获得锁（实现代码<code>6-8</code>行），那么占用锁，而后释放自旋锁</li>
+<li>如果无法获得条件锁<code>cond</code>（实现代码<code>9-12</code>行），那么首先将当前线程放入睡眠线程队列中，而后释放自旋锁，而后让当前调用的进程睡眠，运行其他程序</li>
+</ul>
+</li>
+<li><code>signal</code>操作：<ul>
+<li>如果有别的线程正在操作条件锁<code>cond</code>，则循环等待（实现代码<code>17-18</code>行）。</li>
+<li>获得自旋锁<code>cond-&gt;guard</code>后，若睡眠线程队列中没有正在睡眠的线程，则直接释放锁即可。</li>
+<li>若睡眠线程队列中有正在睡眠的线程，则唤醒队列中的一个线程，而后释放锁。</li>
+</ul>
+</li>
+</ul>
+<h4 id="B-条件锁解决数据溢出问题"><a href="#B-条件锁解决数据溢出问题" class="headerlink" title="B. 条件锁解决数据溢出问题"></a>B. 条件锁解决数据溢出问题</h4><p>到这里，我们只是明白了条件锁的工作机制，但是还并不明白条件锁将如何帮助我们解决生产者——消费者中的数据溢出问题。下面我们就将讲解如何使用条件锁来解决数据溢出问题。</p>
 <p>加上条件锁后，<code>consumer</code>和<code>producer</code>就成了下面这样：</p>
 <pre class="line-numbers language-c"><code class="language-c">cond_t c<span class="token punctuation">;</span>
 
@@ -947,25 +1024,170 @@ mutex_t m<span class="token punctuation">;</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="3-自旋锁实现——FetchAndAdd"><a href="#3-自旋锁实现——FetchAndAdd" class="headerlink" title="3. 自旋锁实现——FetchAndAdd"></a>3. 自旋锁实现——FetchAndAdd</h3><p>自旋锁这里给出的最后一种实现，就是<code>FetchAndAdd</code>实现</p>
-<h4 id="A-实现-2"><a href="#A-实现-2" class="headerlink" title="A. 实现"></a>A. 实现</h4><p>类似于前两个函数都是原子函数，<code>FetchAndAdd</code>也是原子函数，其功能的C语言描述（非实现）如下：</p>
+<p>上述程序中：</p>
+<ul>
+<li><code>producer</code>首先检查缓冲区是否满了，如果满了，则调用<code>wait</code>操作，将当前进程陷入睡眠，而后等待<code>consumer</code>消耗掉产品。</li>
+<li><code>consumer</code>首先检查缓冲区是否空了，如果空了，则调用<code>wait</code>操作，将当前进程陷入睡眠，而后等待<code>producer</code>生产产品。</li>
+</ul>
+<p>所以：</p>
+<ul>
+<li>假设缓冲区为满，此时<code>producer</code>正在运行，则<code>producer</code>陷入睡眠，而后<code>consumer</code>运行，缓冲区有新的位置，<code>consumer</code>运行完毕后，调用<code>signal</code>操作，唤醒<code>producer</code>继续运行</li>
+<li>假设缓冲区为空，此时<code>consumer</code>正在运行，则<code>consumer</code>陷入睡眠，而后<code>producer</code>运行，缓冲区有新的产品，<code>producer</code>运行完毕后，调用<code>signal</code>操作，唤醒<code>consumer</code>继续运行</li>
+</ul>
+<p>因此，通过条件锁，我们最终解决了共享拜年了中的数据溢出问题。</p>
+<p><strong>而条件锁之所以称为条件锁，就是因为条件锁保证了只有在满足条件（缓冲区为空/不为空）的前提下，程序（<code>producer</code>/<code>consumer</code>）才会继续运行（想缓冲区添加产品/从缓冲区获取产品），从而避免了数据溢出问题</strong></p>
+<h3 id="4-条件锁释放互斥锁"><a href="#4-条件锁释放互斥锁" class="headerlink" title="4. 条件锁释放互斥锁"></a>4. 条件锁释放互斥锁</h3><p>我们上面有一个地方没讲到，就是我们互斥锁实现的时候是</p>
+<pre class="line-numbers language-c"><code class="language-c"><span class="token function">mutex_lock</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>m<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// 条件锁：wait操作</span>
+<span class="token keyword">while</span> <span class="token punctuation">(</span>numfull <span class="token operator">==</span> max<span class="token punctuation">)</span>
+  <span class="token function">cond_wait</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>cond<span class="token punctuation">,</span> <span class="token operator">&amp;</span>m<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">do_fill</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// 条件锁：signal操作</span>
+<span class="token function">cond_signal</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>cond<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><code>cond_signal(&amp;cond)</code>操作还好理解，毕竟是针对条件锁的操作。但是为什么<code>cond_wait(&amp;cond, &amp;m)</code>还需要接受互斥锁作为参数？</p>
+<p>事实上，<code>producer</code>是先获得互斥锁<code>m</code>，然后再去尝试获得条件锁<code>cond</code>的，而在获取条件锁<code>cond</code>的时候，如果直接<code>sleep</code>了，那么互斥锁就一直被<code>producer</code>占用了，而互斥锁保证了临界区只能由一个线程访问，因此即便是让<code>producer</code>睡眠了，<code>consumer</code>也没有办法运行。</p>
+<p>因此，我们必须在<code>cond_wait</code>导致线程<code>sleep</code>前释放互斥锁。这就是为什么我们需要把互斥锁传入到<code>cond_wait</code>中去。而关于具体的线程<code>sleep</code>前如何释放互斥锁、线程被唤醒后如何重新获得互斥锁就不是我们所关心的了，由线程库的实现来负责。</p>
+<h2 id="六、信号量（Semaphore）"><a href="#六、信号量（Semaphore）" class="headerlink" title="六、信号量（Semaphore）"></a>六、信号量（Semaphore）</h2><p>我们上面讲解了两大类不同的锁，一类是用于共享变量同步的自旋锁、互斥锁，还有一类是用于解决共享变量溢出的条件锁。而如果将两者结合起来，我们就得到了信号量，即信号量 = 互斥锁 + 条件锁。</p>
+<p>接下来我们将讲解信号量。</p>
+<h3 id="1-信号量定义及操作"><a href="#1-信号量定义及操作" class="headerlink" title="1. 信号量定义及操作"></a>1. 信号量定义及操作</h3><p>锁都有上锁（<code>lock</code>）和解锁（<code>unlock</code>）两种操作，虽然不同的锁可能对这两种操作的名字不一样，例如条件锁将这两个操作称为<code>wait</code>和<code>signal</code></p>
+<p>信号量中将这两个操作称为<code>wait</code>和<code>post</code>，有时候也称为<code>P</code>和<code>V</code>。<code>P</code>和<code>V</code>的来就是发明信号量的是计算机届的神仙<code>Dijkstra</code>，迪杰斯特拉是荷兰人，所以<code>P</code>和<code>V</code>其实就是荷兰语中的两个单词的首字母。</p>
+<p>信号量的定义、初始化操作以及<code>wait</code>和<code>post</code>操作的定义如下：</p>
+<p><strong>注意，我们这里只是给出了最核心的概念，具体得实现比较复杂</strong></p>
+<pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">typedef</span> <span class="token keyword">struct</span> __sem_t <span class="token punctuation">{</span>
+  <span class="token keyword">int</span> value<span class="token punctuation">;</span>
+  <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span> sem_t<span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token function">sem_init</span><span class="token punctuation">(</span>sem_t <span class="token operator">*</span>s， <span class="token keyword">int</span> value<span class="token punctuation">)</span><span class="token punctuation">{</span>
+  s<span class="token operator">-></span>value <span class="token operator">=</span> value<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">sem_wait</span><span class="token punctuation">(</span>sem_t <span class="token operator">*</span>s<span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token comment" spellcheck="true">// decrease value of sem_t *s by one</span>
+  <span class="token comment" spellcheck="true">// wait if value of sem_t *s is negative</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">sem_post</span><span class="token punctuation">(</span>sem_t <span class="token operator">*</span>s<span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token comment" spellcheck="true">// increase value of sem_t *s by one</span>
+  <span class="token comment" spellcheck="true">// if 1 or more threads are waiting, wake one</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>我们能够看到，信号量和前面的自旋锁、互斥锁、条件锁最大的不同之处就在于，我们在初始化信号量的时候，可以指定其内部的初始值。而正是因为我们可以指定其初值，信号量可以实现互斥锁和条件锁的功能。</p>
+<h3 id="2-信号量实现互斥"><a href="#2-信号量实现互斥" class="headerlink" title="2. 信号量实现互斥"></a>2. 信号量实现互斥</h3><p>如果将信号量的初值设为<code>1</code>，那么此时信号量就可以用于实现互斥访问。</p>
+<pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">int</span> counter <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+sem_t lock<span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token operator">*</span><span class="token function">worker</span><span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token operator">*</span>arg<span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token comment" spellcheck="true">// 获得锁</span>
+  <span class="token function">sem_wait</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">1e6</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+    counter<span class="token operator">++</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// 释放锁</span>
+  <span class="token function">sem_post</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  pthread_t pid<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// 初始化value为1，表示只有一个资源</span>
+  <span class="token function">sem_init</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>lock<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">5</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token function">pthread_create</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>pid<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> worker<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// 等待线程结束</span>
+  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">5</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token function">pthread_join</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>pid<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"counter = %d\n"</span><span class="token punctuation">,</span> counter<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="3-信号量实现Fork-Join"><a href="#3-信号量实现Fork-Join" class="headerlink" title="3. 信号量实现Fork/Join"></a>3. 信号量实现Fork/Join</h3><p>信号量还可以实现保证在子线程运行特定行代码后再运行主线程/其他线程</p>
+<pre class="line-numbers language-c"><code class="language-c">sem_t s<span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token operator">*</span><span class="token function">child</span><span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token operator">*</span>arg<span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"child\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// 将子线程是否运行到这里视为一个资源，运行到这里表示有一个资源了</span>
+  <span class="token function">sem_post</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  pthread_t p<span class="token punctuation">;</span>
+  <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"parent: begin\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// 将子线程是否运行到特定行视为一个资源，一开始没有运行到，所以没有资源</span>
+  <span class="token function">sem_init</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>s<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">pthread_create</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>p<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> child<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// 等待子线程放入资源</span>
+  <span class="token function">sem_wait</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="4-信号量实现读者写者锁"><a href="#4-信号量实现读者写者锁" class="headerlink" title="4. 信号量实现读者写者锁"></a>4. 信号量实现读者写者锁</h3><p>读者写者锁允许多个读者线程访问（只读）共享资源，而只允许一个写者访问（修改）共享资源</p>
+<pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">typedef</span> struc __rwlock_t <span class="token punctuation">{</span>
+  sem_t write_lock<span class="token punctuation">;</span>
+  sem_t lock<span class="token punctuation">;</span>
+  <span class="token keyword">int</span> readers<span class="token punctuation">;</span>
+<span class="token punctuation">}</span> rwlock_t<span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token function">rw_init</span><span class="token punctuation">(</span>rwlock_t <span class="token operator">*</span>L<span class="token punctuation">)</span><span class="token punctuation">{</span>
+  L<span class="token operator">-></span>readers <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  <span class="token function">sem_init</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>L<span class="token operator">-></span>lock<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">sem_init</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>L<span class="token operator">-></span>write_lock<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">acquire_readlock</span><span class="token punctuation">(</span>rwlock_t <span class="token operator">*</span>L<span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token function">sem_wait</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>L<span class="token operator">-></span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  L<span class="token operator">-></span>readers<span class="token operator">++</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>L<span class="token operator">-></span>readers <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span>
+    <span class="token function">sem_wait</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>L<span class="token operator">-></span>write_lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">sem_post</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>L<span class="token operator">-></span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">release_readlock</span><span class="token punctuation">(</span>rwlock_t <span class="token operator">*</span>L<span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token function">sem_wait</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>L<span class="token operator">-></span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  L<span class="token operator">-></span>reader<span class="token operator">--</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>L<span class="token operator">-></span>reader <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+    <span class="token function">sem_post</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>L<span class="token operator">-></span>write_lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">sem_post</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>L<span class="token operator">-></span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">acquire_writelock</span><span class="token punctuation">(</span>rwlock_t <span class="token operator">*</span>L<span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token function">sem_wait</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>L<span class="token operator">-></span>write_lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">release_writelock</span><span class="token punctuation">(</span>rwlock_t <span class="token operator">*</span>L<span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token function">sem_post</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>L<span class="token operator">-></span>write_lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="七、Ticket-Lock"><a href="#七、Ticket-Lock" class="headerlink" title="七、Ticket Lock"></a>七、Ticket Lock</h2><p>我们前面讲了各种不同的锁，我们接下来给出一个自定义的锁<code>Ticket Lock</code>的视线</p>
+<h3 id="1-FetchAndAdd操作"><a href="#1-FetchAndAdd操作" class="headerlink" title="1. FetchAndAdd操作"></a>1. FetchAndAdd操作</h3><p>我们接下来给出一个新的原子函数，下面只是解释，而不是真实的实现：</p>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">int</span> <span class="token function">FetchAndAdd</span><span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token operator">*</span>ptr<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">int</span> old <span class="token operator">=</span> <span class="token operator">*</span>ptr<span class="token punctuation">;</span>
     <span class="token operator">*</span>ptr <span class="token operator">=</span> old <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> old<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>所以，自旋锁的<code>FetchAndAdd</code>实现中，<code>lock</code>和<code>unlock</code>函数都发生了改变</p>
-<pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">lock</span><span class="token punctuation">(</span>lock_t <span class="token operator">*</span>lock<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">int</span> myturn <span class="token operator">=</span> <span class="token function">FetchAndAdd</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>lock<span class="token operator">-></span>ticket<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">while</span> <span class="token punctuation">(</span>lock<span class="token operator">-></span>turn <span class="token operator">!=</span> myturn<span class="token punctuation">)</span>
-        <span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// spin</span>
+<h3 id="2-Ticket-Lock实现"><a href="#2-Ticket-Lock实现" class="headerlink" title="2. Ticket Lock实现"></a>2. Ticket Lock实现</h3><p>我们这里通过<code>FetchAndAdd</code>实现<code>Ticket Lock</code>。</p>
+<pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">typedef</span> <span class="token keyword">struct</span> __lock_t <span class="token punctuation">{</span>
+  <span class="token keyword">int</span> ticket<span class="token punctuation">;</span>
+  <span class="token keyword">int</span> turn<span class="token punctuation">;</span>
+<span class="token punctuation">}</span> lock_t<span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token function">lock_init</span><span class="token punctuation">(</span>lock_t <span class="token operator">*</span>lock<span class="token punctuation">)</span><span class="token punctuation">{</span>
+  lock<span class="token operator">-></span>ticket <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  lock<span class="token operator">-></span>turn <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
-<span class="token keyword">void</span> <span class="token function">unlock</span><span class="token punctuation">(</span>lock_t <span class="token operator">*</span>lock<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    lock<span class="token operator">-></span>turn <span class="token operator">=</span> lock<span class="token operator">-></span>turn <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">acquire</span><span class="token punctuation">(</span>lock_t <span class="token operator">*</span>lock<span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token keyword">int</span> myturn <span class="token operator">=</span> <span class="token function">FetchAndAdd</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>lock<span class="token operator">-></span>ticket<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">while</span> <span class="token punctuation">(</span>lock<span class="token operator">-></span>turn <span class="token operator">!=</span> myturn<span class="token punctuation">)</span>
+    <span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// spin</span>
 <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<span class="token keyword">void</span> <span class="token function">release</span><span class="token punctuation">(</span>lock_t <span class="token operator">*</span>lock<span class="token punctuation">)</span><span class="token punctuation">{</span>
+  lock<span class="token operator">-></span>turn <span class="token operator">+</span><span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
                 
             </div>
@@ -1243,9 +1465,9 @@ mutex_t m<span class="token punctuation">;</span>
                 <a href="/2022/11/13/suo-ji-qi-shi-xian-hu-chi-suo-tiao-jian-bian-liang-yi-ji-xin-hao-liang/">
                     <div class="card-image">
                         
-                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221113224353603.png" class="responsive-img" alt="锁及其实现：互斥锁、条件锁（条件变量）以及信号量">
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221113224353603.png" class="responsive-img" alt="锁及其实现：自旋锁、互斥锁、条件锁（条件变量）以及信号量">
                         
-                        <span class="card-title">锁及其实现：互斥锁、条件锁（条件变量）以及信号量</span>
+                        <span class="card-title">锁及其实现：自旋锁、互斥锁、条件锁（条件变量）以及信号量</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1541,12 +1763,12 @@ mutex_t m<span class="token punctuation">;</span>
                 <span id="year">2021-2022</span>
             
             <a href="/about" target="_blank">Jack Wang</a>
-            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
-            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <!-- |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a> -->
+            <!-- |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a> -->
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">377.2k</span>
+                        class="white-color">379.2k</span>
             
             
             
