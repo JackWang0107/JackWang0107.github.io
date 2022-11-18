@@ -5,12 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="锁及其实现：自旋锁、互斥锁、条件锁（条件变量）以及信号量, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
-    <meta name="description" content="
-锁及其实现：自旋锁、互斥锁、条件锁（条件变量）以及信号量
-高性能编程中，锁是真的有用
-
-锁这个东西，学的时候是真的学明白了。但是用的时候，却又忘了，所以特地写一篇文章记录一下。
-一、锁的介绍：以互斥锁为例我们首先先介绍为什么要有锁，而后介">
+    <meta name="description" content="本文介绍了各种锁：自旋锁、互斥锁、条件锁、信号量及其实现">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -380,10 +375,6 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
-                                <span class="chip bg-color">操作系统</span>
-                            </a>
-                        
                             <a href="/tags/Operating-System/">
                                 <span class="chip bg-color">Operating System</span>
                             </a>
@@ -444,7 +435,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-11-15
+                    2022-11-17
                 </div>
                 
 
@@ -1252,10 +1243,6 @@ sem_t lock<span class="token punctuation">;</span>
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
-                                    <span class="chip bg-color">操作系统</span>
-                                </a>
-                            
                                 <a href="/tags/Operating-System/">
                                     <span class="chip bg-color">Operating System</span>
                                 </a>
@@ -1457,29 +1444,28 @@ sem_t lock<span class="token punctuation">;</span>
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2022/11/13/suo-ji-qi-shi-xian-hu-chi-suo-tiao-jian-bian-liang-yi-ji-xin-hao-liang/">
+                <a href="/2022/11/15/cao-zuo-xi-tong-fang-wen-nei-cun/">
                     <div class="card-image">
                         
-                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221113224353603.png" class="responsive-img" alt="锁及其实现：自旋锁、互斥锁、条件锁（条件变量）以及信号量">
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221116050320819.png" class="responsive-img" alt="操作系统访问内存：实模式与保护模式">
                         
-                        <span class="card-title">锁及其实现：自旋锁、互斥锁、条件锁（条件变量）以及信号量</span>
+                        <span class="card-title">操作系统访问内存：实模式与保护模式</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
+                            本文介绍了操作系统在实模式和保护模式下访问内存的方式。此外还讲解了包括物理地址、逻辑地址、有效地址和虚拟地址等等在内的概念
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-11-13
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-11-15
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -1492,44 +1478,63 @@ sem_t lock<span class="token punctuation">;</span>
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
-                        <span class="chip bg-color">操作系统</span>
+                    <a href="/tags/%E7%89%A9%E7%90%86%E5%9C%B0%E5%9D%80/">
+                        <span class="chip bg-color">物理地址</span>
                     </a>
                     
-                    <a href="/tags/Operating-System/">
-                        <span class="chip bg-color">Operating System</span>
+                    <a href="/tags/%E9%80%BB%E8%BE%91%E5%9C%B0%E5%9D%80/">
+                        <span class="chip bg-color">逻辑地址</span>
                     </a>
                     
-                    <a href="/tags/%E9%94%81/">
-                        <span class="chip bg-color">锁</span>
+                    <a href="/tags/%E6%9C%89%E6%95%88%E5%9C%B0%E5%9D%80/">
+                        <span class="chip bg-color">有效地址</span>
                     </a>
                     
-                    <a href="/tags/%E4%BF%A1%E5%8F%B7%E9%87%8F/">
-                        <span class="chip bg-color">信号量</span>
+                    <a href="/tags/%E7%BA%BF%E6%80%A7%E5%9C%B0%E5%9D%80/">
+                        <span class="chip bg-color">线性地址</span>
                     </a>
                     
-                    <a href="/tags/%E4%BA%92%E6%96%A5%E9%94%81/">
-                        <span class="chip bg-color">互斥锁</span>
+                    <a href="/tags/%E8%99%9A%E6%8B%9F%E5%9C%B0%E5%9D%80/">
+                        <span class="chip bg-color">虚拟地址</span>
                     </a>
                     
-                    <a href="/tags/%E8%87%AA%E6%97%8B%E9%94%81/">
-                        <span class="chip bg-color">自旋锁</span>
+                    <a href="/tags/%E5%AE%9E%E6%A8%A1%E5%BC%8F/">
+                        <span class="chip bg-color">实模式</span>
                     </a>
                     
-                    <a href="/tags/%E6%9D%A1%E4%BB%B6%E9%94%81/">
-                        <span class="chip bg-color">条件锁</span>
+                    <a href="/tags/%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F/">
+                        <span class="chip bg-color">保护模式</span>
                     </a>
                     
-                    <a href="/tags/%E6%9D%A1%E4%BB%B6%E5%8F%98%E9%87%8F/">
-                        <span class="chip bg-color">条件变量</span>
+                    <a href="/tags/%E6%AE%B5%E9%80%89%E6%8B%A9%E5%AD%90/">
+                        <span class="chip bg-color">段选择子</span>
                     </a>
                     
-                    <a href="/tags/%E9%94%81%E7%9A%84%E5%AE%9E%E7%8E%B0/">
-                        <span class="chip bg-color">锁的实现</span>
+                    <a href="/tags/%E6%AE%B5%E6%8F%8F%E8%BF%B0%E7%AC%A6%E8%A1%A8/">
+                        <span class="chip bg-color">段描述符表</span>
+                    </a>
+                    
+                    <a href="/tags/%E7%9F%AD%E6%8F%8F%E8%BF%B0%E7%AC%A6/">
+                        <span class="chip bg-color">短描述符</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%86%85%E5%AD%98%E5%88%86%E6%AE%B5/">
+                        <span class="chip bg-color">内存分段</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%86%85%E5%AD%98%E5%88%86%E9%A1%B5/">
+                        <span class="chip bg-color">内存分页</span>
+                    </a>
+                    
+                    <a href="/tags/%E9%A1%B5%E8%A1%A8/">
+                        <span class="chip bg-color">页表</span>
+                    </a>
+                    
+                    <a href="/tags/%E9%A1%B5%E8%A1%A8%E9%A1%B9/">
+                        <span class="chip bg-color">页表项</span>
                     </a>
                     
                 </div>
@@ -1768,7 +1773,7 @@ sem_t lock<span class="token punctuation">;</span>
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">379.2k</span>
+                        class="white-color">393.4k</span>
             
             
             
