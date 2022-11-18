@@ -575,7 +575,7 @@
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221117001500629.png" alt="各段之间的关系" style="zoom: 33%;"></p>
 <h3 id="5-总结"><a href="#5-总结" class="headerlink" title="5. 总结"></a>5. 总结</h3><p>最后，实模式下内存的访问方式就是内存分段是访问，而我们用一张图来总结总存分段式访问：</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221117001836348.png" alt="总结：实模式内存分段访问"></p>
-<h2 id="三、保护模式下访问内存：内存分段"><a href="#三、保护模式下访问内存：内存分段" class="headerlink" title="三、保护模式下访问内存：内存分段"></a>三、保护模式下访问内存：内存分段</h2><p>我们上面讲了<code>8086</code>的实模式，以及实模式下CPU访问内存的方式。我们接下来就要讲保护模式了。类似于实模式是伴随<code>Intel 8086 CPU</code>一起诞生的，保护模式是伴随<code>Intel 80386 CPU</code>一起诞生的。因此，我们下面也是一百年讲解<code>Intel 80386 CPU</code>，一边讲解伴随<code>Intel 80386 CPU</code>所提出的保护模式。</p>
+<h2 id="三、保护模式下访问内存：内存分段与内存分页"><a href="#三、保护模式下访问内存：内存分段与内存分页" class="headerlink" title="三、保护模式下访问内存：内存分段与内存分页"></a>三、保护模式下访问内存：内存分段与内存分页</h2><p>我们上面讲了<code>8086</code>的实模式，以及实模式下CPU访问内存的方式。我们接下来就要讲保护模式了。类似于实模式是伴随<code>Intel 8086 CPU</code>一起诞生的，保护模式是伴随<code>Intel 80386 CPU</code>一起诞生的。因此，我们下面也是一百年讲解<code>Intel 80386 CPU</code>，一边讲解伴随<code>Intel 80386 CPU</code>所提出的保护模式。</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221117011130197.png" alt="Intel 80386 CPU" style="zoom:50%;"></p>
 <h3 id="1-实模式的问题"><a href="#1-实模式的问题" class="headerlink" title="1. 实模式的问题"></a>1. 实模式的问题</h3><p>在讲解保护模式之前，我们先讲讲实模式的优点和缺点，也只有这样我们才能更好的明白为什么会有保护模式。</p>
 <h4 id="实模式的优点"><a href="#实模式的优点" class="headerlink" title="实模式的优点"></a>实模式的优点</h4><p><strong>实模式的优点主要就是简洁、好理解</strong>。可能一个小时左右就能够学明白实模式。</p>
