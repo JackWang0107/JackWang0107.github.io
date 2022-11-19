@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>Shell处理文件路径</title>
+      <link href="/2022/11/18/shell-chu-li-wen-jian-lu-jing/"/>
+      <url>/2022/11/18/shell-chu-li-wen-jian-lu-jing/</url>
+      
+        <content type="html"><![CDATA[<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221118162836713.png" alt="文件路径"></p><h1 id="Shell处理文本路径"><a href="#Shell处理文本路径" class="headerlink" title="Shell处理文本路径"></a>Shell处理文本路径</h1><p>编写<code>Shell</code>脚本的过程中，经常会和文件名和文件路径打交道。如果用户输入了一个文件的全名（可能包含绝对路径和文件后缀），如何得到文件的路径名，文件名，文件后缀这些信息呢?</p><p>本文就介绍了如何获得文件路径名、文件名、文件后缀等等信息。</p><h2 id="获取文件名与目录名：basename与dirname"><a href="#获取文件名与目录名：basename与dirname" class="headerlink" title="获取文件名与目录名：basename与dirname"></a>获取文件名与目录名：basename与dirname</h2><p><code>Shell</code>中提供了<code>basename</code>与<code>dirname</code>两个命令来获得<strong>文件的名字（不是文件的路径）</strong>与<strong>文件的目录名</strong>。</p><pre class="line-numbers language-shell"><code class="language-shell">fullfile=/the/path/foo.txtecho $fullfilefullname=$(basename $fullfile)echo $fullnamedir=$(dirname $fullfile)echo $dir<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>运行结果为：</p><p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221118162103706.png" alt="basename和dirname获取文件名与目录名"></p><h2 id="单后缀文件stem与suffix：cut"><a href="#单后缀文件stem与suffix：cut" class="headerlink" title="单后缀文件stem与suffix：cut"></a>单后缀文件stem与suffix：cut</h2><p>我们上面通过<code>basename</code>获得的文件名是文件的完整名字，包含后缀名在内。但是有的时候我们可能只想要这个文件名不包含后缀的部分。因此，这里先讲解如何切分只有一个后缀名的文件的后缀和不含后缀的名字。</p><p>事实上，<code>basename</code>最后获得的文件名其实就是一个字符串，所以针对只有一个后缀名的后缀，直接用<code>cut</code>命令从<code>.</code>出切分即可。</p><pre class="line-numbers language-shell"><code class="language-shell">fullfile=/the/path/foo.txtecho $fullfilefullname=$(basename $fullfile)echo $fullnamestem=$(echo $fullname | cut -d . -f1)suffix=$(echo $fullname | cut -d . -f2)echo $stemecho $suffix<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>运行结果为：</p><p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221118163646888.png" alt="cut切分单后缀文件名"></p><h2 id="多后缀文件stem与suffix：sed"><a href="#多后缀文件stem与suffix：sed" class="headerlink" title="多后缀文件stem与suffix：sed"></a>多后缀文件stem与suffix：sed</h2><p>有时候文件可能不止有一个后缀，比如<code>*.tar.gz</code>，此时该怎么得到文件的名字、全部后缀，或者最后一个后缀呢？再cut一回？当然可以，但是如果文件名是<code>mylib.1.0.1a.zip</code>这样的呢？</p><p>因为文件名本身就是字符串所以这个时候，就需要更加强大的文本处理工具。而说到文本处理工具，那就是<code>sed</code>了，所以就利用<code>sed</code>和正则表达式，通过掐头去尾留下我们想要的部分来实现获取各种名字。</p><pre class="line-numbers language-shell"><code class="language-shell">fullname=mylib.1.0.1a.ziplast_suffix=$(echo $fullname | sed 's/\.[^.]*$//')name=$(echo $fullname | sed 's/^.*\.//')echo $fullname, $last_suffix, $name<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>运行结果为：</p><p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221118164329527.png" alt="sed切分多后缀文件名"></p><p>这里面的两个正则表达式逻辑是这样的：</p><ul><li><code>文件名</code>：把以<code>.</code>字符开头以后一直到行尾都是非<code>.</code>字符的子串替换为空。</li><li><code>后缀名</code>：把从行首开始以<code>.</code>字符结尾的子串替换为空。</li></ul><p>光用语言把这两个正则表达式描述出来脑细胞也要死不少。有没有像上面cut版本一样简单容易理解的方法呢？由于<code>.</code>分隔符的个数不确定，正常使用cut来分割最后一个<code>.</code>字符是不太可能的。但是我们可使用 <a href="http://man7.org/linux/man-pages/man1/rev.1.html">rev</a> 命令将字符串反转一下，区分后缀和文件名的<code>.</code>字符位置就确定了。截取了想要的部分之后，再次反转就得到了我们想要的内容。</p><pre class="line-numbers language-shell"><code class="language-shell">fullname=mylib.1.0.1a.zipstem=$(rev <<< $fullname | cut -d . -f2- | rev)suffix=$(rev <<< $fullname | cut -d . -f1 | rev)echo $stem, $suffix<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>运行结果为：</p><p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221118192049918.png" alt="rev获取最后一个后缀"></p><h2 id="使用Bash扩展"><a href="#使用Bash扩展" class="headerlink" title="使用Bash扩展"></a>使用Bash扩展</h2><h3 id="1-Bash扩展介绍"><a href="#1-Bash扩展介绍" class="headerlink" title="1. Bash扩展介绍"></a>1. Bash扩展介绍</h3><p>在前面介绍<code>Bash</code>特性的文章中，我们介绍<code>Bash</code>中有很多的扩展。实际上，针对文本路径，<code>Bash</code>也提供了非常多的扩展。<code>Bash</code>扩展类似于预定义宏，我们直接用就行了，<code>Bash</code>解释器会帮助我们处理扩展。</p><p>看下面的例子：</p><pre class="line-numbers language-shell"><code class="language-shell">fullfile=/the/path/mylib.1.0.1a.zipdir="${fullfile%/*}"fullname="${fullfile##*/}"stem="${fullname%.*}"extension="${fullname##*.}"echo $direcho $fullnameecho $stemecho $extension<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>运行后的结果：</p><p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221118193340340.png" alt="Bash扩展运行结果"></p><p>使用<code>Bash</code>扩展来获得文件名、文件目录什么的，真是不能再简洁了。<strong>大括号之内变量名配合几个神奇的字符，就是Shell的参数扩展(<a href="https://www.gnu.org/software/bash/manual/html_node/Shell-Parameter-Expansion.html">Parameter Extension</a>)功能</strong>。</p><ul><li><code>${fullfile##*/}</code>：从前面开始删除fullfile中最大匹配(longest matching pattern) <code>*/</code> 的字符串</li><li><code>${fullfile%/*}</code>：从后面开始删除fullfile中最小匹配(shortest matching pattern) <code>/*</code> 的字符串</li><li><code>${fullname##*.}</code>：从前面开始删除fullname中最大匹配(longest matching pattern) <code>*.</code> 的字符串</li><li><code>${fullname%.*}</code>：从后面开始删除fullname中最小匹配(shortest matching pattern) <code>.*</code> 的字符串</li></ul><p>参数扩展有多种形式，在shell编程中可以用作参数的拼接，字符串的替换，参数列表截取，变量初值等操作，这里不再详述，请参考后面的功能列表和<a href="https://www.gnu.org/software/bash/manual/html_node/Shell-Parameter-Expansion.html">官方文档</a></p><h3 id="2-参数扩展功能列表"><a href="#2-参数扩展功能列表" class="headerlink" title="2. 参数扩展功能列表"></a>2. 参数扩展功能列表</h3><div class="table-container"><table><thead><tr><th style="text-align:center">参数形式</th><th>扩展后</th></tr></thead><tbody><tr><td style="text-align:center"><code>x{y,z}</code></td><td><code>xy xz</code>，这里<code>xyz</code>都是字符</td></tr><tr><td style="text-align:center"><code>${x}{y, z}</code></td><td><code>${x}y ${x}z</code>，这里<code>x</code>是一个变量</td></tr><tr><td style="text-align:center"><code>${x}{y, $z}</code></td><td><code>${x}y ${x}${z}</code>，这里<code>x</code>和<code>z</code>都是变量</td></tr><tr><td style="text-align:center"><code>${param#pattern}</code></td><td>从<code>param</code>前面删除<code>pattern</code>的最小匹配</td></tr><tr><td style="text-align:center"><code>${param##pattern}</code></td><td>从<code>param</code>前面删除<code>pattern</code>的最大匹配</td></tr><tr><td style="text-align:center"><code>${param%pattern}</code></td><td>从<code>param</code>后面删除<code>pattern</code>的最小匹配</td></tr><tr><td style="text-align:center"><code>${param%%pattern}</code></td><td>从<code>param</code>后面删除<code>pattern</code>的最大匹配</td></tr><tr><td style="text-align:center"><code>${param/pattern/string}</code></td><td>从<code>param</code>中用<code>string</code>替换<code>pattern</code>的第一次匹配，<code>string</code>可为空</td></tr><tr><td style="text-align:center"><code>${param//pattern/string}</code></td><td>从<code>param</code>中用<code>string</code>替换<code>pattern</code>的所有匹配，<code>string</code>可为空</td></tr><tr><td style="text-align:center"><code>${param:3:2}</code></td><td>截取<code>$param</code>中索引<code>3</code>开始的<code>2</code>个字符</td></tr><tr><td style="text-align:center"><code>${param:3}</code></td><td>截取<code>$param</code>中索引<code>3</code>至末尾的字符</td></tr><tr><td style="text-align:center"><code>${@:3:2}</code></td><td>截取参数列表<code>$@</code>中第<code>3</code>个开始的<code>2</code>个参数</td></tr><tr><td style="text-align:center"><code>${param:-word}</code></td><td>若<code>$param</code>为空或未设置，则参数式返回<code>word</code>，<code>$param</code>不变</td></tr><tr><td style="text-align:center"><code>${param:+word}</code></td><td>若<code>$param</code>为非空，则参数式返回<code>word</code>，<code>$param</code>不变</td></tr><tr><td style="text-align:center"><code>${param:=word}</code></td><td>若<code>$param</code>为空或未设置，则参数式返回<code>word</code>，同时<code>$param</code>设置为<code>word</code></td></tr><tr><td style="text-align:center"><code>${param:?message}</code></td><td>若<code>$param</code>为空或未设置，则输出错误信息<code>message</code>，若包含空白符，则需引号</td></tr></tbody></table></div>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux实用技巧 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Linux </tag>
+            
+            <tag> Ubuntu </tag>
+            
+            <tag> Shell </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>操作系统访问内存：实模式与保护模式</title>
       <link href="/2022/11/15/cao-zuo-xi-tong-fang-wen-nei-cun/"/>
       <url>/2022/11/15/cao-zuo-xi-tong-fang-wen-nei-cun/</url>
@@ -1814,6 +1843,8 @@
       
         <tags>
             
+            <tag> Math Modeling </tag>
+            
             <tag> COMAP </tag>
             
             <tag> 数学建模美赛 </tag>
@@ -1825,8 +1856,6 @@
             <tag> Mathematical Contest in Modeling </tag>
             
             <tag> The Interdisciplinary Contest in Modeling </tag>
-            
-            <tag> Math Modeling </tag>
             
         </tags>
       
@@ -1851,13 +1880,13 @@
       
         <tags>
             
-            <tag> Math Modeling </tag>
-            
             <tag> 数学建模题型 </tag>
             
             <tag> 数学建模算法体系 </tag>
             
             <tag> 数学建模常用解题方法 </tag>
+            
+            <tag> Math Modeling </tag>
             
         </tags>
       
@@ -2851,9 +2880,9 @@
             
             <tag> ROS </tag>
             
-            <tag> cv_bridge </tag>
-            
             <tag> melodic </tag>
+            
+            <tag> cv_bridge </tag>
             
             <tag> OpenCv </tag>
             
@@ -2890,17 +2919,17 @@
             
             <tag> ROS </tag>
             
-            <tag> cv_bridge </tag>
+            <tag> Kinect V2 </tag>
             
             <tag> melodic </tag>
+            
+            <tag> cv_bridge </tag>
             
             <tag> OpenCv </tag>
             
             <tag> sensor_msgs </tag>
             
             <tag> roslaunch </tag>
-            
-            <tag> Kinect V2 </tag>
             
             <tag> iai-kinect2 </tag>
             
@@ -2931,9 +2960,9 @@
             
             <tag> ROS </tag>
             
-            <tag> melodic </tag>
-            
             <tag> Kinect V2 </tag>
+            
+            <tag> melodic </tag>
             
         </tags>
       
