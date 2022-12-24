@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="操作系统访问内存：实模式与保护模式, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
-    <meta name="description" content="本文介绍了操作系统在实模式和保护模式下访问内存的方式。此外还讲解了包括物理地址、逻辑地址、有效地址和虚拟地址等等在内的概念">
+    <meta name="keywords" content="CPU访问内存：内存分段与内存分页, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
+    <meta name="description" content="本文介绍了CPU访问内存的两种方式：内存分段式访问与内存分页式访问。此外还讲解了包括物理地址、逻辑地址、有效地址和虚拟地址等等在内的概念">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>操作系统访问内存：实模式与保护模式 | JackWang&#39;s Blog</title>
+    <title>CPU访问内存：内存分段与内存分页 | JackWang&#39;s Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -259,7 +259,7 @@
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">操作系统访问内存：实模式与保护模式</h1>
+                    <h1 class="description center-align post-title">CPU访问内存：内存分段与内存分页</h1>
                 </div>
             </div>
         </div>
@@ -459,7 +459,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-11-18
+                    2022-11-30
                 </div>
                 
 
@@ -497,8 +497,8 @@
 <blockquote>
 <p>这张图，包含了操作系统访问内存的所有内容，看懂这张图，就看明白了操作系统是如何访问内存的。</p>
 </blockquote>
-<h1 id="操作系统访问内存：实模式与保护模式"><a href="#操作系统访问内存：实模式与保护模式" class="headerlink" title="操作系统访问内存：实模式与保护模式"></a>操作系统访问内存：实模式与保护模式</h1><h2 id="一、各种地址"><a href="#一、各种地址" class="headerlink" title="一、各种地址"></a>一、各种地址</h2><p>操作系统中有很多的地址，包括：<code>物理地址</code>、<code>逻辑地址</code>、<code>有效地址</code>、<code>线性地址</code>、<code>虚拟地址</code>……</p>
-<p>所以在介绍操作系统访问内存的方式前（也是为了后面的复习），先介绍一下各种地址。</p>
+<h1 id="CPU访问内存：内存分段与内存分页"><a href="#CPU访问内存：内存分段与内存分页" class="headerlink" title="CPU访问内存：内存分段与内存分页"></a>CPU访问内存：内存分段与内存分页</h1><h2 id="一、各种地址"><a href="#一、各种地址" class="headerlink" title="一、各种地址"></a>一、各种地址</h2><p>CPU访问物理内存的过程中有很多的地址，包括：<code>物理地址</code>、<code>逻辑地址</code>、<code>有效地址</code>、<code>线性地址</code>、<code>虚拟地址</code>……</p>
+<p>所以在介绍CPU访问内存的方式前（也是为了后面的复习），先介绍一下各种地址。</p>
 <h3 id="1-物理地址"><a href="#1-物理地址" class="headerlink" title="1. 物理地址"></a>1. 物理地址</h3><p><strong><code>物理地址</code>就是物理内存真正的地址，相当于内存中每个存储单元的门牌号，具有唯一性。不管在什么模式下，只有通过<code>物理地址</code>去访问内存，才能够获得数据。什么<code>虚拟地址</code>、<code>线性地址</code>，最终都要转换为<code>物理地址</code>，然后再去访问内存</strong>。</p>
 <p>在实模式下，并不是直接直接给CPU<code>物理地址</code>，然后CPU去访问内存，而是通过<code>段基址＋段内偏移地址</code>，经过段部件的处理，得到物理地址，而后CPU再通过此地址访问内存。</p>
 <h3 id="2-线性地址-虚拟地址"><a href="#2-线性地址-虚拟地址" class="headerlink" title="2. 线性地址/虚拟地址"></a>2. 线性地址/虚拟地址</h3><blockquote>
@@ -1425,7 +1425,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">410.6k</span>
+                        class="white-color">415.2k</span>
             
             
             
@@ -1510,6 +1510,10 @@
             
         </div>
         <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/jackwang0108" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
 
 
     <a href="mailto:2232123545@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
