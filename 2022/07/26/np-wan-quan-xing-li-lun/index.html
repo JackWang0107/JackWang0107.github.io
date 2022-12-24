@@ -30,10 +30,10 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.2">
+<meta name="generator" content="Hexo 5.4.2"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
-<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+</head>
 
 
 
@@ -530,13 +530,13 @@
 <p>简单的理解确定性算法，就是我们知道这个算法的实现，写不住来只是因为单纯的码力问题。</p>
 <p>举一个确定性算法的例子，下面这个算法是利用<code>OrbSLAM2</code>算法对周围环境建立三维地图的程序。</p>
 <pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">// 需要opencv</span>
-<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;opencv2/opencv.hpp></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;opencv2/opencv.hpp&gt;</span></span>
 
 <span class="token comment" spellcheck="true">// ORB-SLAM的系统接口</span>
 <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"System.h"</span></span>
-<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;string></span></span>
-<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;chrono></span>   </span><span class="token comment" spellcheck="true">// for time stamp</span>
-<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;string&gt;</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;chrono&gt;</span>   </span><span class="token comment" spellcheck="true">// for time stamp</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
 
 <span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
 
@@ -544,7 +544,7 @@ string parameterFile <span class="token operator">=</span> <span class="token st
 string vocFile <span class="token operator">=</span> <span class="token string">"./Vocabulary/ORBvoc.txt"</span><span class="token punctuation">;</span>
 string videoFile <span class="token operator">=</span> <span class="token string">"./myvideo.mp4"</span><span class="token punctuation">;</span>
 
-<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">int</span> argc<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token operator">*</span><span class="token operator">*</span>argv<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">int</span> argc<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token operator">*</span><span class="token operator">*</span>argv<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">// 声明 ORB-SLAM2 系统</span>
     ORB_SLAM2<span class="token operator">::</span>System <span class="token function">SLAM</span><span class="token punctuation">(</span>vocFile<span class="token punctuation">,</span> parameterFile<span class="token punctuation">,</span> ORB_SLAM2<span class="token operator">::</span>System<span class="token operator">::</span>MONOCULAR<span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">// 获取视频图像</span>
@@ -552,9 +552,9 @@ string videoFile <span class="token operator">=</span> <span class="token string
     <span class="token comment" spellcheck="true">// 记录系统时间</span>
     <span class="token keyword">auto</span> start <span class="token operator">=</span> chrono<span class="token operator">::</span>system_clock<span class="token operator">::</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
         cv<span class="token operator">::</span>Mat frame<span class="token punctuation">;</span>
-        cap <span class="token operator">>></span> frame<span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">// 读取相机数据</span>
+        cap <span class="token operator">&gt;&gt;</span> frame<span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">// 读取相机数据</span>
         <span class="token keyword">if</span> <span class="token punctuation">(</span> frame<span class="token punctuation">.</span>data <span class="token operator">==</span> <span class="token keyword">nullptr</span> <span class="token punctuation">)</span>
             <span class="token keyword">break</span><span class="token punctuation">;</span>
 
@@ -563,14 +563,14 @@ string videoFile <span class="token operator">=</span> <span class="token string
         cv<span class="token operator">::</span><span class="token function">resize</span><span class="token punctuation">(</span>frame<span class="token punctuation">,</span> frame_resized<span class="token punctuation">,</span> cv<span class="token operator">::</span><span class="token function">Size</span><span class="token punctuation">(</span><span class="token number">640</span><span class="token punctuation">,</span><span class="token number">360</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
         <span class="token keyword">auto</span> now <span class="token operator">=</span> chrono<span class="token operator">::</span>system_clock<span class="token operator">::</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">auto</span> timestamp <span class="token operator">=</span> chrono<span class="token operator">::</span>duration_cast<span class="token operator">&lt;</span>chrono<span class="token operator">::</span>milliseconds<span class="token operator">></span><span class="token punctuation">(</span>now <span class="token operator">-</span> start<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">auto</span> timestamp <span class="token operator">=</span> chrono<span class="token operator">::</span>duration_cast<span class="token operator">&lt;</span>chrono<span class="token operator">::</span>milliseconds<span class="token operator">&gt;</span><span class="token punctuation">(</span>now <span class="token operator">-</span> start<span class="token punctuation">)</span><span class="token punctuation">;</span>
         SLAM<span class="token punctuation">.</span><span class="token function">TrackMonocular</span><span class="token punctuation">(</span>frame_resized<span class="token punctuation">,</span> <span class="token keyword">double</span><span class="token punctuation">(</span>timestamp<span class="token punctuation">.</span><span class="token function">count</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">/</span><span class="token number">1000.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         cv<span class="token operator">::</span><span class="token function">waitKey</span><span class="token punctuation">(</span><span class="token number">30</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
 
     SLAM<span class="token punctuation">.</span><span class="token function">Shutdown</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>虽然<strong>我</strong>不知道<code>OrbSLAM2</code>算法的底层实现，即我们不知道诸如<code>SLAM.TrackMonocular()</code>、<code>chrono::system_clock::now()</code>等函数/方法的内部是怎么写的，<strong>但是OrbSLAM2算法的原理我们（人类）是知道的，只要我们花时间去学习，假以时日我们就能自己写出来</strong>。</p>
 <h4 id="非确定性算法"><a href="#非确定性算法" class="headerlink" title="非确定性算法"></a>非确定性算法</h4><p>既然确定性算法是我们知道原理的算法，那么<strong>非确定算法就是我们不知道原理的算法</strong>，而不是我们没有学习原理的算法。<strong>我们没有学习原理的算法，他的原理已经被人发现了，就放在那里，是你不学</strong>。而非确定性算法，其原理还没有人发现过，目前还是未知。</p>
@@ -582,23 +582,23 @@ string videoFile <span class="token operator">=</span> <span class="token string
 <blockquote>
 <p>N-Search问题：给定一个随机数组A，和一个值key，要求值key是否存在于数组A中。</p>
 <p>求解这个问题最简单的算法就是遍历数组A就行了，这样的话得到的算法时间复杂度是$\mathcal{O}(n)$。而我们能够写出这样的算法，因此，下面的<code>n-search1</code>算法就是确定性的算法</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">bool</span> n<span class="token operator">-</span><span class="token function">search1</span><span class="token punctuation">(</span><span class="token keyword">int</span> A<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token keyword">int</span> n<span class="token punctuation">,</span> <span class="token keyword">int</span> key<span class="token punctuation">)</span><span class="token punctuation">{</span>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">bool</span> n<span class="token operator">-</span><span class="token function">search1</span><span class="token punctuation">(</span><span class="token keyword">int</span> A<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token keyword">int</span> n<span class="token punctuation">,</span> <span class="token keyword">int</span> key<span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
     <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
         <span class="token keyword">if</span> <span class="token punctuation">(</span>A<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">==</span> key<span class="token punctuation">)</span>
             retutrn <span class="token boolean">true</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>因此，目前我们能够找到的N-Search问题最好的算法是$\mathcal{O}(n)$的，因此N-Search问题是$\mathcal{O}(n)$问题。</p>
 <p>那么我们接下来就要问了，N-Search问题是否存在$\mathcal{O}(1)$的算法？你当然可能会想，肯定不存在这样的算法，因为要挨个比较每个元素，因为……诸如此类的原因其实都是我们人认为的。可是，<strong>在数学上，我们否定一个问题是需要给出严格的证明的</strong>。可是，对于”N-Search问题不存在$\mathcal{O}(1)$的算法“这个问题，我们在数学上没有办法给出严格的证明。</p>
 <p>因此，我们其实没法否认”N-Search问题存在$\mathcal{O}(1)$的算法“这个命题，有可能在未来某一天，我们就真的找到了的算法。但至少在目前，我们是不知道这个算法的。为此，我们可以用下面的方式来表示</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">bool</span> n<span class="token operator">-</span><span class="token function">search2</span><span class="token punctuation">(</span><span class="token keyword">int</span> A<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token keyword">int</span> n<span class="token punctuation">,</span> <span class="token keyword">int</span> key<span class="token punctuation">)</span><span class="token punctuation">{</span>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">bool</span> n<span class="token operator">-</span><span class="token function">search2</span><span class="token punctuation">(</span><span class="token keyword">int</span> A<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token keyword">int</span> n<span class="token punctuation">,</span> <span class="token keyword">int</span> key<span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">// choice函数是n-search的O(1)的解法</span>
     <span class="token keyword">int</span> idx <span class="token operator">=</span> <span class="token function">choice</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span>A<span class="token punctuation">[</span>idx<span class="token punctuation">]</span> <span class="token operator">==</span> key<span class="token punctuation">)</span>
         <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>那么这样，<code>n-search2</code>算法就是n-search问题的一个$\mathcal{O}(1)$的算法，只不过其中的操作我们并不知道原理，即<code>choice</code>语句到底是怎么样用$\mathcal{O}(1)$来找到一个idx的？</p>
 <p>这就是为什么我们说<code>n-search2</code>算法是non-deterministic的。而对于<code>choice</code>语句来说：</p>
@@ -1290,7 +1290,7 @@ P\subset NP</script><p>到这里，我们其实已经完成了NP完全性理论�
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">415.2k</span>
+                        class="white-color">429.2k</span>
             
             
             

@@ -30,10 +30,10 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.2">
+<meta name="generator" content="Hexo 5.4.2"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
-<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+</head>
 
 
 
@@ -418,14 +418,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    6.9k
+                    13.5k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    27 分
+                    54 分
                 </div>
                 
 
@@ -470,12 +470,12 @@
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>因为这种用法更加灵活，我们先写好需要查询的模式，而后再根据需要写好选项。</p>
 <h4 id="无参数查找文本"><a href="#无参数查找文本" class="headerlink" title="无参数查找文本"></a>无参数查找文本</h4><p>使用<code>grep</code>的基础语法，会待查找到内容输出到屏幕上</p>
-<pre class="line-numbers language-sh"><code class="language-sh">cat /etc/passwd > test.txt
+<pre class="line-numbers language-sh"><code class="language-sh">cat /etc/passwd &gt; test.txt
 grep "root" test.txt
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221110023014668.png" alt="查找文本结果"></p>
 <p>也可以使用正则表达式来匹配</p>
-<pre class="line-numbers language-sh"><code class="language-sh">cat /etc/passwd > test.txt
+<pre class="line-numbers language-sh"><code class="language-sh">cat /etc/passwd &gt; test.txt
 grep "^#" test.txt
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221110024906699.png" alt="正则表达式查找结果"></p>
@@ -483,55 +483,55 @@ grep "^#" test.txt
 <pre class="line-numbers language-sh"><code class="language-sh">grep [option] [pattern] file1 file2 file3 ...
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>例如</p>
-<pre class="line-numbers language-sh"><code class="language-sh">cat /etc/passwd > test1.txt
-cat /etc/ssh/sshd_config >> test2.txt
+<pre class="line-numbers language-sh"><code class="language-sh">cat /etc/passwd &gt; test1.txt
+cat /etc/ssh/sshd_config &gt;&gt; test2.txt
 grep "root" test1.txt test2.txt
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221110180003818.png" alt="多个文件查找结果"></p>
 <p>事实上，我们可以使用<code>Bash</code>的花括号扩展来直接多次查询</p>
-<pre class="line-numbers language-sh"><code class="language-sh">cat /etc/passwd > test1.txt
-cat /etc/ssh/sshd_config >> test2.txt
+<pre class="line-numbers language-sh"><code class="language-sh">cat /etc/passwd &gt; test1.txt
+cat /etc/ssh/sshd_config &gt;&gt; test2.txt
 grep "root" test{1,2}.txt
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221110180158767.png" alt="Bash花括号扩展多个文件查找结果"></p>
 <h4 id="E-使用扩展正则表达式"><a href="#E-使用扩展正则表达式" class="headerlink" title="-E 使用扩展正则表达式"></a>-E 使用扩展正则表达式</h4><p>如果要使用扩展正则表达式的话，需要使用<code>-E</code>参数</p>
-<pre class="line-numbers language-sh"><code class="language-sh">cat /etc/passwd > test.txt
+<pre class="line-numbers language-sh"><code class="language-sh">cat /etc/passwd &gt; test.txt
 grep -e "(root)+" -e "(.:)" test.txt  -i -n -E
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221110163925123.png" alt="扩展正则表达式查找结果"></p>
 <h4 id="i-忽略大小写"><a href="#i-忽略大小写" class="headerlink" title="-i 忽略大小写"></a>-i 忽略大小写</h4><p>使用<code>-i</code>参数忽略大小写</p>
-<pre class="line-numbers language-sh"><code class="language-sh">cat /etc/passwd > test.txt
+<pre class="line-numbers language-sh"><code class="language-sh">cat /etc/passwd &gt; test.txt
 grep -i "root" test.txt
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221110023319122.png" alt="忽略大小写查找文本结果"></p>
 <h4 id="n-显示行数"><a href="#n-显示行数" class="headerlink" title="-n 显示行数"></a>-n 显示行数</h4><p>使用<code>-n</code>参数显示匹配的行的行号</p>
-<pre class="line-numbers language-sh"><code class="language-sh">cat /etc/passwd > test.txt
+<pre class="line-numbers language-sh"><code class="language-sh">cat /etc/passwd &gt; test.txt
 grep -n "root" test.txt
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221110023811448.png" alt="显示行号查找文本结果"></p>
 <h4 id="c-统计行数"><a href="#c-统计行数" class="headerlink" title="-c 统计行数"></a>-c 统计行数</h4><p>使用<code>-c</code>参数输出匹配到的行数</p>
-<pre class="line-numbers language-sh"><code class="language-sh">cat /etc/passwd > test.txt
+<pre class="line-numbers language-sh"><code class="language-sh">cat /etc/passwd &gt; test.txt
 grep -c "root" test.txt
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221110024107114.png" alt="统计行数查找文本结果"></p>
 <h4 id="v-反向匹配"><a href="#v-反向匹配" class="headerlink" title="-v 反向匹配"></a>-v 反向匹配</h4><p>使用<code>-v</code>来反向匹配，即排除给定的关键字</p>
-<pre class="line-numbers language-sh"><code class="language-sh">cat /etc/passwd > test.txt
+<pre class="line-numbers language-sh"><code class="language-sh">cat /etc/passwd &gt; test.txt
 grep -v "root" test.txt
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221110025542782.png" alt="反向匹配查找文本结果"></p>
 <h4 id="e-多个模式匹配"><a href="#e-多个模式匹配" class="headerlink" title="-e 多个模式匹配"></a>-e 多个模式匹配</h4><p>使用<code>-e</code>参数匹配多个模式</p>
-<pre class="line-numbers language-sh"><code class="language-sh">cat /etc/passwd > test.txt
+<pre class="line-numbers language-sh"><code class="language-sh">cat /etc/passwd &gt; test.txt
 grep -e "root" -e "install" test.txt -i -n
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221110030958329.png" alt="多模式匹配查找文本结果"></p>
 <h4 id="o-输出匹配内容"><a href="#o-输出匹配内容" class="headerlink" title="-o 输出匹配内容"></a>-o 输出匹配内容</h4><p>使用<code>-o</code>参数输出匹配到的内容，一般和<code>-n</code>联合使用</p>
-<pre class="line-numbers language-sh"><code class="language-sh">cat /etc/passwd > test.txt
+<pre class="line-numbers language-sh"><code class="language-sh">cat /etc/passwd &gt; test.txt
 grep -o "install" test.txt -i -n
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221110031321143.png" alt="输出匹配内容查找文本结果"></p>
 <h4 id="q-条件测试"><a href="#q-条件测试" class="headerlink" title="-q 条件测试"></a>-q 条件测试</h4><p>一般<code>grep</code>的结果都会在屏幕上输出，使用<code>-q</code>将会强制不输出。</p>
 <p>一般来说使用<code>-q</code>参数都是为了在<code>shell</code>脚本中使用，用于条件测试。例如：</p>
-<pre class="line-numbers language-sh"><code class="language-sh">cat /etc/passwd > test.txt
+<pre class="line-numbers language-sh"><code class="language-sh">cat /etc/passwd &gt; test.txt
 grep "root" test.txt -q
 echo $?
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
@@ -616,7 +616,7 @@ cat test.txt
 <li><code>file</code>是将源文件</li>
 </ul>
 <p>一个简单的例子为：</p>
-<pre class="line-numbers language-sh"><code class="language-sh">echo "First Line.\nThis is my book.\nLook at my book.\nBefore last line.\nLast Line." > test.txt
+<pre class="line-numbers language-sh"><code class="language-sh">echo "First Line.\nThis is my book.\nLook at my book.\nBefore last line.\nLast Line." &gt; test.txt
 cat test.txt
 sed '1d;$d' test.txt
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
@@ -740,7 +740,7 @@ sed '1d;$d' test.txt
 <li><strong><code>macOS</code>中<code>echo</code>会自动转移<code>\n</code>，但是在<code>Linux</code>中需要加上<code>-e</code>参数</strong></li>
 <li>此外，<code>macOS</code>上原生的<code>sed</code>和<code>GNU</code>的<code>gnn-sed</code>不同，如果要在<code>macOS</code>上使用<code>GNU</code>的<code>sed</code>，使用<code>brew install gnu-sed</code>然后使用<code>gsed</code>即可</li>
 </ul>
-<h4 id="输出文件第二、三行内容"><a href="#输出文件第二、三行内容" class="headerlink" title="输出文件第二、三行内容"></a>输出文件第二、三行内容</h4><pre class="line-numbers language-sh"><code class="language-sh">echo "My name is Jack Wang.\nI like Linux.\nI like writing computer programs.\nMy email is 123456789@gmail.com.\nMy website is http://jackwang.cafe ." > test.txt
+<h4 id="输出文件第二、三行内容"><a href="#输出文件第二、三行内容" class="headerlink" title="输出文件第二、三行内容"></a>输出文件第二、三行内容</h4><pre class="line-numbers language-sh"><code class="language-sh">echo "My name is Jack Wang.\nI like Linux.\nI like writing computer programs.\nMy email is 123456789@gmail.com.\nMy website is http://jackwang.cafe ." &gt; test.txt
 sed -n "2p;3p" test.txt
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221111005940455.png" alt="运行结果"></p>
@@ -750,74 +750,74 @@ sed -n "2p;3p" test.txt
 <li>对于匹配失败的行，直接打印</li>
 </ul>
 <p>所以如果我们没有指定<code>-n</code>参数，那么结果如下：</p>
-<pre class="line-numbers language-sh"><code class="language-sh">echo "My name is Jack Wang.\nI like Linux.\nI like writing computer programs.\nMy email is 123456789@gmail.com.\nMy website is http://jackwang.cafe ." > test.txt
+<pre class="line-numbers language-sh"><code class="language-sh">echo "My name is Jack Wang.\nI like Linux.\nI like writing computer programs.\nMy email is 123456789@gmail.com.\nMy website is http://jackwang.cafe ." &gt; test.txt
 sed "2p;3p" test.txt
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221111010218672.png" alt="无-n参数运行结果"></p>
 <p><strong>发现第二、第三行输出了两次，这其实就是<code>sed</code>的两条路径的处理方式</strong>。</p>
 <h4 id="输出含有指定单词的行"><a href="#输出含有指定单词的行" class="headerlink" title="输出含有指定单词的行"></a>输出含有指定单词的行</h4><p><code>sed</code>中可以利用正则表达式来指定行，因此我们可以使用<code>sed</code>输出含有指定单词的行。</p>
 <p>例如：</p>
-<pre class="line-numbers language-sh"><code class="language-sh">echo "My name is Jack Wang.\nI like Linux.\nI like writing computer programs.\nMy email is 123456789@gmail.com.\nMy website is http://jackwang.cafe ." > test.txt
+<pre class="line-numbers language-sh"><code class="language-sh">echo "My name is Jack Wang.\nI like Linux.\nI like writing computer programs.\nMy email is 123456789@gmail.com.\nMy website is http://jackwang.cafe ." &gt; test.txt
 sed -n '/like/p' test.txt
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>结果如下：</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221111011520458.png" alt="输出含有特定单词的行"></p>
 <h4 id="删除含有特定单词的行"><a href="#删除含有特定单词的行" class="headerlink" title="删除含有特定单词的行"></a>删除含有特定单词的行</h4><p>查找特定单词简单，使用正则表达式即可，删除则使用<code>d</code>操作命令即可。</p>
 <p>例如删除所有含有<code>like</code>的行：</p>
-<pre class="line-numbers language-sh"><code class="language-sh">echo "My name is Jack Wang.\nI like Linux.\nI like writing computer programs.\nMy email is 123456789@gmail.com.\nMy website is http://jackwang.cafe ." > test.txt
+<pre class="line-numbers language-sh"><code class="language-sh">echo "My name is Jack Wang.\nI like Linux.\nI like writing computer programs.\nMy email is 123456789@gmail.com.\nMy website is http://jackwang.cafe ." &gt; test.txt
 sed '/like/d' test.txt
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>结果如下：</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221111011808030.png" alt="删除含有特定次的行"></p>
 <h4 id="输出第三到最后一行"><a href="#输出第三到最后一行" class="headerlink" title="输出第三到最后一行"></a>输出第三到最后一行</h4><p>在输出范围中使用<code>$</code>来表示最后一行</p>
-<pre class="line-numbers language-sh"><code class="language-sh">echo "My name is Jack Wang.\nI like Linux.\nI like writing computer programs.\nMy email is 123456789@gmail.com.\nMy website is http://jackwang.cafe ." > test.txt
+<pre class="line-numbers language-sh"><code class="language-sh">echo "My name is Jack Wang.\nI like Linux.\nI like writing computer programs.\nMy email is 123456789@gmail.com.\nMy website is http://jackwang.cafe ." &gt; test.txt
 sed -n '3,$p' test.txt
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>运行结果如下：</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221111012606454.png" alt="输出第三到最后一行"></p>
 <h4 id="替换某个单词"><a href="#替换某个单词" class="headerlink" title="替换某个单词"></a>替换某个单词</h4><p>使用<code>s</code>操作命令来进行替换</p>
-<pre class="line-numbers language-sh"><code class="language-sh">echo "My name is Jack Wang.\nI like Linux.\nI like writing computer programs.\nMy email is 123456789@gmail.com.\nMy website is http://jackwang.cafe ." > test.txt
+<pre class="line-numbers language-sh"><code class="language-sh">echo "My name is Jack Wang.\nI like Linux.\nI like writing computer programs.\nMy email is 123456789@gmail.com.\nMy website is http://jackwang.cafe ." &gt; test.txt
 cat test.txt
 sed -n 's/My/His/g' test.txt
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>运行结果如下：</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221111013012023.png" alt="替换某个单词的结果"></p>
 <p>我们可以使用<code>-e</code>来指定多个<code>sed</code>命令</p>
-<pre class="line-numbers language-sh"><code class="language-sh">echo "My name is Jack Wang.\nI like Linux.\nI like writing computer programs.\nMy email is 123456789@gmail.com.\nMy website is http://jackwang.cafe ." > test.txt
+<pre class="line-numbers language-sh"><code class="language-sh">echo "My name is Jack Wang.\nI like Linux.\nI like writing computer programs.\nMy email is 123456789@gmail.com.\nMy website is http://jackwang.cafe ." &gt; test.txt
 cat test.txt
 sed -n 's/My/His/g' test.txt
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221111014049591.png" alt="-e指定多个sed命令"></p>
 <h4 id="增加（Append）一行"><a href="#增加（Append）一行" class="headerlink" title="增加（Append）一行"></a>增加（Append）一行</h4><p>使用<code>a</code>操作命令来在某行后面添加一行。</p>
 <p>例如在第二行后添加<code>My Linux skill is good.</code></p>
-<pre class="line-numbers language-sh"><code class="language-sh">echo "My name is Jack Wang.\nI like Linux.\nI like writing computer programs.\nMy email is 123456789@gmail.com.\nMy website is http://jackwang.cafe ." > test.txt
+<pre class="line-numbers language-sh"><code class="language-sh">echo "My name is Jack Wang.\nI like Linux.\nI like writing computer programs.\nMy email is 123456789@gmail.com.\nMy website is http://jackwang.cafe ." &gt; test.txt
 sed '2a My Linux skill is good.' test.txt
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>运行结果如下：</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221111024115325.png" alt="增加一行运行结果"></p>
 <p>再举一个例子，在每行后增加<code>----------</code>作为分隔符。</p>
 <p>因为要匹配每行，直接使用空地址即可</p>
-<pre class="line-numbers language-sh"><code class="language-sh">echo "My name is Jack Wang.\nI like Linux.\nI like writing computer programs.\nMy email is 123456789@gmail.com.\nMy website is http://jackwang.cafe ." > test.txt
+<pre class="line-numbers language-sh"><code class="language-sh">echo "My name is Jack Wang.\nI like Linux.\nI like writing computer programs.\nMy email is 123456789@gmail.com.\nMy website is http://jackwang.cafe ." &gt; test.txt
 gsed "a ----------------" test.txt
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221111024709336.png" alt="每行增加分隔符结果"></p>
 <p>但是注意，<code>macOS</code>原生的<code>sed</code>在<code>a</code>之后必须要加<code>\ + &lt;Enter&gt;</code>换行来输入需要插入的内容</p>
 <p>例如：</p>
-<pre class="line-numbers language-sh"><code class="language-sh">echo "My name is Jack Wang.\nI like Linux.\nI like writing computer programs.\nMy email is 123456789@gmail.com.\nMy website is http://jackwang.cafe ." > test.txt
-sed '2a\<回车键
-quote> My Linux skill is good' test.txt
+<pre class="line-numbers language-sh"><code class="language-sh">echo "My name is Jack Wang.\nI like Linux.\nI like writing computer programs.\nMy email is 123456789@gmail.com.\nMy website is http://jackwang.cafe ." &gt; test.txt
+sed '2a\&lt;回车键
+quote&gt; My Linux skill is good' test.txt
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>运行结果如下：</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/%E5%B1%8F%E5%B9%95%E5%BD%95%E5%88%B62022-11-11-%E4%B8%8A%E5%8D%881.50.08.gif" alt="屏幕录制2022-11-11-上午1.50.08"></p>
 <h4 id="插入（Insert）一行"><a href="#插入（Insert）一行" class="headerlink" title="插入（Insert）一行"></a>插入（Insert）一行</h4><p>我们接下来使用<code>insert</code>插入一行</p>
-<pre class="line-numbers language-sh"><code class="language-sh">echo "My name is Jack Wang.\nI like Linux.\nI like writing computer programs.\nMy email is 123456789@gmail.com.\nMy website is http://jackwang.cafe ." > test.txt
+<pre class="line-numbers language-sh"><code class="language-sh">echo "My name is Jack Wang.\nI like Linux.\nI like writing computer programs.\nMy email is 123456789@gmail.com.\nMy website is http://jackwang.cafe ." &gt; test.txt
 gsed "4i My phone number is 00000000" test.txt
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221111024342796.png" alt="image-20221111024342796"></p>
 <p>类似于<code>a</code>，<code>i</code>的表现在<code>Linux</code>和<code>macOS</code>上也不同，<code>macOS</code>上的<code>sed</code>的<code>i</code>表现如下：</p>
-<pre class="line-numbers language-sh"><code class="language-sh">echo "My name is Jack Wang.\nI like Linux.\nI like writing computer programs.\nMy email is 123456789@gmail.com.\nMy website is http://jackwang.cafe ." > test.txt
-sed '4i\<回车键
-quote> My phone number is 00000000' test.txt
+<pre class="line-numbers language-sh"><code class="language-sh">echo "My name is Jack Wang.\nI like Linux.\nI like writing computer programs.\nMy email is 123456789@gmail.com.\nMy website is http://jackwang.cafe ." &gt; test.txt
+sed '4i\&lt;回车键
+quote&gt; My phone number is 00000000' test.txt
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>运行结果为：</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/%E5%B1%8F%E5%B9%95%E5%BD%95%E5%88%B62022-11-11-%E4%B8%8A%E5%8D%882.05.56.gif" alt="屏幕录制2022-11-11-上午2.05.56"></p>
@@ -902,7 +902,7 @@ Jack16 Jack17 Jack18 Jack19 Jack20
 </ol>
 <p><strong>关于<code>BEGIN</code>、<code>END</code>这些<code>awk</code>程序具体得解释将在下面介绍<code>awk</code>程序的部分进行介绍</strong>。</p>
 <p>下面举一个真实的例子（中间的<code>pattern</code>为空表示匹配所有行）：</p>
-<pre class="line-numbers language-sh"><code class="language-sh">echo Jack{1..5} > test.txt && echo Jack{6..10} >> test.txt && echo Jack{11..15} >> test.txt && echo Jack{16..20} >> test.txt
+<pre class="line-numbers language-sh"><code class="language-sh">echo Jack{1..5} &gt; test.txt &amp;&amp; echo Jack{6..10} &gt;&gt; test.txt &amp;&amp; echo Jack{11..15} &gt;&gt; test.txt &amp;&amp; echo Jack{16..20} &gt;&gt; test.txt
 cat test.txt
 awk 'BEGIN{print "Start"} {print $1,$3,$5} END{print "End"}' test.txt
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
@@ -928,7 +928,7 @@ awk 'BEGIN{print "Start"} {print $1,$3,$5} END{print "End"}' test.txt
 </li>
 </ul>
 <p>举一个例子，下面的例子是输出每行中的第二个字段的值</p>
-<pre class="line-numbers language-sh"><code class="language-sh">echo Jack{1..5} > test.txt && echo Jack{6..10} >> test.txt && echo Jack{11..15} >> test.txt && echo Jack{16..20} >> test.txt
+<pre class="line-numbers language-sh"><code class="language-sh">echo Jack{1..5} &gt; test.txt &amp;&amp; echo Jack{6..10} &gt;&gt; test.txt &amp;&amp; echo Jack{11..15} &gt;&gt; test.txt &amp;&amp; echo Jack{16..20} &gt;&gt; test.txt
 cat test.txt
 awk '{print $2}' test.txt
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
@@ -949,8 +949,8 @@ awk '{print $2}' test.txt
 </li>
 </ul>
 <p>上面输出每行中的第二个字段的值的脚本文件的方式如下</p>
-<pre class="line-numbers language-sh"><code class="language-sh">echo Jack{1..5} > test.txt && echo Jack{6..10} >> test.txt && echo Jack{11..15} >> test.txt && echo Jack{16..20} >> test.txt
-echo '{print $2}' > cmd.awk
+<pre class="line-numbers language-sh"><code class="language-sh">echo Jack{1..5} &gt; test.txt &amp;&amp; echo Jack{6..10} &gt;&gt; test.txt &amp;&amp; echo Jack{11..15} &gt;&gt; test.txt &amp;&amp; echo Jack{16..20} &gt;&gt; test.txt
+echo '{print $2}' &gt; cmd.awk
 awk -f cmd.awk test.txt
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221111154253015.png" alt="脚本文件调用方式运行结果"></p>
@@ -975,7 +975,7 @@ awk -f cmd.awk test.txt
 </li>
 </ol>
 <p>例如：</p>
-<pre class="line-numbers language-shell"><code class="language-shell">echo Jack{1..5} > test.txt && echo Jack{6..10} >> test.txt && echo Jack{11..15} >> test.txt && echo Jack{16..20} >> test.txt
+<pre class="line-numbers language-shell"><code class="language-shell">echo Jack{1..5} &gt; test.txt &amp;&amp; echo Jack{6..10} &gt;&gt; test.txt &amp;&amp; echo Jack{11..15} &gt;&gt; test.txt &amp;&amp; echo Jack{16..20} &gt;&gt; test.txt
 awk 'NR==2{print $1,$3,$5}' test.txt
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>其中：</p>
@@ -1023,7 +1023,7 @@ awk 'NR==2{print $1,$3,$5}' test.txt
 <li><strong>END语句块</strong>：在awk从输入流中读取完所有的行 <strong>之后</strong> 即被执行，比如打印所有行的分析结果这类信息汇总都是在END语句块中完成，它也是一个可选语句块</li>
 </ul>
 <p>这三个部分是可选的。<strong>任意一个部分都可以不出现在脚本中</strong>，脚本通常是被 <strong>单引号</strong> 中，例如：</p>
-<pre class="line-numbers language-sh"><code class="language-sh">echo Jack{1..5} > test.txt && echo Jack{6..10} >> test.txt && echo Jack{11..15} >> test.txt && echo Jack{16..20} >> test.txt
+<pre class="line-numbers language-sh"><code class="language-sh">echo Jack{1..5} &gt; test.txt &amp;&amp; echo Jack{6..10} &gt;&gt; test.txt &amp;&amp; echo Jack{11..15} &gt;&gt; test.txt &amp;&amp; echo Jack{16..20} &gt;&gt; test.txt
 cat test.txt
 awk 'BEGIN{print "Start"} {print $1,$3,$5} END{print "End"}' test.txt
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
@@ -1307,8 +1307,8 @@ $ 行尾
 [A-Z] 大写字母
 [a-Z] 小写和大写字母
 [0-9] 数字
-\< 单词头单词一般以空格或特殊字符做分隔,连续的字符串被当做单词
-\> 单词尾
+\&lt; 单词头单词一般以空格或特殊字符做分隔,连续的字符串被当做单词
+\&gt; 单词尾
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>如果要使用正则表达式的话，需要用<code>/正则/</code>的形式使用。</p>
 <h5 id="关系运算符"><a href="#关系运算符" class="headerlink" title="关系运算符"></a>关系运算符</h5><div class="table-container">
@@ -1373,10 +1373,10 @@ else
 <p>示例：</p>
 <pre class="line-numbers language-shell"><code class="language-shell">awk 'BEGIN{
 test=100;
-if(test>90){
+if(test&gt;90){
   print "very good";
   }
-  else if(test>60){
+  else if(test&gt;60){
     print "good";
   }
   else{
@@ -1394,7 +1394,7 @@ very good
 <pre class="line-numbers language-shell"><code class="language-shell">awk 'BEGIN{
 test=100;
 total=0;
-while(i<=test){
+while(i&lt;=test){
   total+=i;
   i++;
 }
@@ -1431,7 +1431,7 @@ SSH_CLIENT=192.168.1.21 53087 22
 <p>示例：</p>
 <pre class="line-numbers language-shell"><code class="language-shell">awk 'BEGIN{
 total=0;
-for(i=0;i<=100;i++){
+for(i=0;i&lt;=100;i++){
   total+=i;
 }
 print total;
@@ -1445,7 +1445,7 @@ print total;
 <pre class="line-numbers language-shell"><code class="language-shell">awk 'BEGIN{ 
 total=0;
 i=0;
-do {total+=i;i++;} while(i<=100)
+do {total+=i;i++;} while(i&lt;=100)
   print total;
 }'
 5050
@@ -1469,7 +1469,7 @@ Array["birth"]="1987"
 <p>使用中<code>print Array[1]</code>会打印出sun；使用<code>print Array[2]</code>会打印出kai；使用<code>print["birth"]</code>会得到1987。</p>
 <p><strong>读取数组的值</strong></p>
 <pre class="line-numbers language-shell"><code class="language-shell">{ for(item in array) {print array[item]}; }       #输出的顺序是随机的
-{ for(i=1;i<=len;i++) {print array[i]}; }         #Len是数组的长度
+{ for(i=1;i&lt;=len;i++) {print array[i]}; }         #Len是数组的长度
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <h6 id="数组相关函数"><a href="#数组相关函数" class="headerlink" title="数组相关函数"></a>数组相关函数</h6><p><strong>得到数组长度：</strong></p>
 <pre class="line-numbers language-shell"><code class="language-shell">awk 'BEGIN{info="it is a test";lens=split(info,tA," ");print length(tA),lens;}'
@@ -1488,7 +1488,7 @@ Array["birth"]="1987"
 3 a
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><code>for…in</code>输出，因为数组是关联数组，默认是无序的。所以通过<code>for…in</code>得到是无序的数组。如果需要得到有序数组，需要通过下标获得。</p>
-<pre class="line-numbers language-shell"><code class="language-shell">awk 'BEGIN{info="it is a test";tlen=split(info,tA," ");for(k=1;k<=tlen;k++){print k,tA[k];}}'
+<pre class="line-numbers language-shell"><code class="language-shell">awk 'BEGIN{info="it is a test";tlen=split(info,tA," ");for(k=1;k&lt;=tlen;k++){print k,tA[k];}}'
 1 it
 2 is
 3 a
@@ -1518,8 +1518,8 @@ b b1
 <h6 id="二维、多维数组使用"><a href="#二维、多维数组使用" class="headerlink" title="二维、多维数组使用"></a>二维、多维数组使用</h6><p>awk的多维数组在本质上是一维数组，更确切一点，awk在存储上并不支持多维数组。awk提供了逻辑上模拟二维数组的访问方式。例如，<code>array[2,4]=1</code>这样的访问是允许的。awk使用一个特殊的字符串<code>SUBSEP(�34)</code>作为分割字段，在上面的例子中，关联数组array存储的键值实际上是2�344。</p>
 <p>类似一维数组的成员测试，多维数组可以使用<code>if ( (i,j) in array)</code>这样的语法，但是下标必须放置在圆括号中。类似一维数组的循环访问，多维数组使用<code>for ( item in array )</code>这样的语法遍历数组。与一维数组不同的是，多维数组必须使用<code>split()</code>函数来访问单独的下标分量。</p>
 <pre class="line-numbers language-shell"><code class="language-shell">awk 'BEGIN{
-for(i=1;i<=9;i++){
-  for(j=1;j<=9;j++){
+for(i=1;i&lt;=9;i++){
+  for(j=1;j&lt;=9;j++){
     tarr[i,j]=i*j; print i,"*",j,"=",tarr[i,j];
   }
 }
@@ -1539,8 +1539,8 @@ for(i=1;i<=9;i++){
 <p>可以通过<code>array[k,k2]</code>引用获得数组内容。</p>
 <p>另一种方法：</p>
 <pre class="line-numbers language-shell"><code class="language-shell">awk 'BEGIN{
-for(i=1;i<=9;i++){
-  for(j=1;j<=9;j++){
+for(i=1;i&lt;=9;i++){
+  for(j=1;j&lt;=9;j++){
     tarr[i,j]=i*j;
   }
 }
@@ -1785,7 +1785,7 @@ bin:x:1:1:bin:/bin:/sbin/nologin
 daemon:x:2:2:daemon:/sbin:/sbin/nologin
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>逐行读取外部文件(getline使用方法）</strong></p>
-<pre class="line-numbers language-shell"><code class="language-shell">awk 'BEGIN{while(getline < "/etc/passwd"){print $0;};close("/etc/passwd");}'
+<pre class="line-numbers language-shell"><code class="language-shell">awk 'BEGIN{while(getline &lt; "/etc/passwd"){print $0;};close("/etc/passwd");}'
 root:x:0:0:root:/root:/bin/bash
 bin:x:1:1:bin:/bin:/sbin/nologin
 daemon:x:2:2:daemon:/sbin:/sbin/nologin
@@ -1943,7 +1943,7 @@ awk 'BEGIN{tstamp1=mktime("2001 01 01 12 12 12");tstamp2=mktime("2001 02 01 0 0 
 <h3 id="3-awk基础案例"><a href="#3-awk基础案例" class="headerlink" title="3. awk基础案例"></a>3. awk基础案例</h3><p>其实说老实话，上面说的一堆语法，很多都平时都应不大，需要用了现查就行。</p>
 <p>因为我们的目的是面向运用的，因此我们下面将结合案例来学习<code>awk</code></p>
 <h4 id="输出文件第二列的信息"><a href="#输出文件第二列的信息" class="headerlink" title="输出文件第二列的信息"></a>输出文件第二列的信息</h4><p>因为<code>awk</code>对输入的文件是按行处理的，所以我们针对每行输出第二个字段的值即可，即输出<code>$2</code>的内容即可。</p>
-<pre class="line-numbers language-sh"><code class="language-sh">echo Jack{1..5} > test.txt && echo Jack{6..10} >> test.txt && echo Jack{11..15} >> test.txt && echo Jack{16..20} >> test.txt
+<pre class="line-numbers language-sh"><code class="language-sh">echo Jack{1..5} &gt; test.txt &amp;&amp; echo Jack{6..10} &gt;&gt; test.txt &amp;&amp; echo Jack{11..15} &gt;&gt; test.txt &amp;&amp; echo Jack{16..20} &gt;&gt; test.txt
 cat test.txt
 awk '{print $2}' test.txt
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
@@ -1951,14 +1951,14 @@ awk '{print $2}' test.txt
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221111182158707.png" alt="输出文本第二列"></p>
 <p>注意，默认<code>awk</code>是以空格作为分隔符的，并且多个空格在一起也视为一个空格。</p>
 <p>同样，我们也能够输出倒数第二列和最后一列。</p>
-<pre class="line-numbers language-sh"><code class="language-sh">echo Jack{1..5} > test.txt && echo Jack{6..10} >> test.txt && echo Jack{11..15} >> test.txt && echo Jack{16..20} >> test.txt
+<pre class="line-numbers language-sh"><code class="language-sh">echo Jack{1..5} &gt; test.txt &amp;&amp; echo Jack{6..10} &gt;&gt; test.txt &amp;&amp; echo Jack{11..15} &gt;&gt; test.txt &amp;&amp; echo Jack{16..20} &gt;&gt; test.txt
 cat test.txt
 awk '{print $(NF-1),$NF}' test.txt
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221111193428523.png" alt="输出倒数第二列和最后一列运行结果"></p>
 <h4 id="输出文件第二行信息"><a href="#输出文件第二行信息" class="headerlink" title="输出文件第二行信息"></a>输出文件第二行信息</h4><p>因为我们只需要输出文件第二行，所以只需要在要执行的命令前增加匹配第二行的模式即可，即<code>NR==1</code>。<code>NR</code>即<code>Number of Record</code>，即当前处理的行数，从1开始。</p>
 <p>此外，因为要输出一整行，所以使用<code>$0</code>变量即可。</p>
-<pre class="line-numbers language-sh"><code class="language-sh">echo Jack{1..5} > test.txt && echo Jack{6..10} >> test.txt && echo Jack{11..15} >> test.txt && echo Jack{16..20} >> test.txt
+<pre class="line-numbers language-sh"><code class="language-sh">echo Jack{1..5} &gt; test.txt &amp;&amp; echo Jack{6..10} &gt;&gt; test.txt &amp;&amp; echo Jack{11..15} &gt;&gt; test.txt &amp;&amp; echo Jack{16..20} &gt;&gt; test.txt
 cat test.txt
 awk 'NR==2{print $0}' test.txt
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
@@ -1966,7 +1966,7 @@ awk 'NR==2{print $0}' test.txt
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221111194138685.png" alt="输出第二行的信息运行结果"></p>
 <h4 id="自定义输出内容"><a href="#自定义输出内容" class="headerlink" title="自定义输出内容"></a>自定义输出内容</h4><p>我们前面都是通过引用变量来输出了文件本身的内容，但是如果我们想要在输出文件本身内容的基础上，输出诸如表头等等信息的时候，这个就需要进行自定义输出内容了。</p>
 <p>其实实现的方法也很简单，就是使用字符串，<code>awk</code>将所有被<code>""</code>包围的都视为是字符串。所以我们只需要使用<code>""</code>添加字符串即可。例如</p>
-<pre class="line-numbers language-sh"><code class="language-sh">echo Jack{1..5} > test.txt && echo Jack{6..10} >> test.txt && echo Jack{11..15} >> test.txt && echo Jack{16..20} >> test.txt
+<pre class="line-numbers language-sh"><code class="language-sh">echo Jack{1..5} &gt; test.txt &amp;&amp; echo Jack{6..10} &gt;&gt; test.txt &amp;&amp; echo Jack{11..15} &gt;&gt; test.txt &amp;&amp; echo Jack{16..20} &gt;&gt; test.txt
 cat test.txt
 awk '{print "第一列："$1,"第二列："$2}' test.txt
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
@@ -1996,20 +1996,20 @@ tail /etc/passed | awk -F ':' -v OFS='\t\t' '{print $0, $NF}'
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221111214055884.png" alt="修改输出分隔符"></p>
 <h4 id="显示文件2-4行"><a href="#显示文件2-4行" class="headerlink" title="显示文件2-4行"></a>显示文件2-4行</h4><p>输出2-4行的难点在于模式怎么写，因为前面的<code>NR==2</code>只是指定了输出一行。</p>
 <p><code>sed</code>中使用<code>start,end</code>来指定范围，<code>awk</code>中也可以通过类似的方法来实现范围输出。</p>
-<pre class="line-numbers language-shell"><code class="language-shell">echo Jack{1..5} > test.txt && echo Jack{6..10} >> test.txt && echo Jack{11..15} >> test.txt && echo Jack{16..20} >> test.txt
+<pre class="line-numbers language-shell"><code class="language-shell">echo Jack{1..5} &gt; test.txt &amp;&amp; echo Jack{6..10} &gt;&gt; test.txt &amp;&amp; echo Jack{11..15} &gt;&gt; test.txt &amp;&amp; echo Jack{16..20} &gt;&gt; test.txt
 cat test.txt
 awk '{print "第一列："$1,"第二列："$2}' test.txt
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>注意，我们这里省略了<code>{}</code>里面的<code>action</code>，在省略<code>action</code>的时候，<code>awk</code>默认输出这一行的内容，即默认的<code>action</code>是<code>{print $0}</code></p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221111203320473.png" alt="显示文件2-4行"></p>
 <p>结合前面的关系运算符，我们其实还可以用下面的方式来指定范围</p>
-<pre class="line-numbers language-sh"><code class="language-sh">echo Jack{1..5} > test.txt && echo Jack{6..10} >> test.txt && echo Jack{11..15} >> test.txt && echo Jack{16..20} >> test.txt
+<pre class="line-numbers language-sh"><code class="language-sh">echo Jack{1..5} &gt; test.txt &amp;&amp; echo Jack{6..10} &gt;&gt; test.txt &amp;&amp; echo Jack{11..15} &gt;&gt; test.txt &amp;&amp; echo Jack{16..20} &gt;&gt; test.txt
 cat test.txt
-awk '2<=NR,NR<=4' test.txt
+awk '2&lt;=NR,NR&lt;=4' test.txt
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221111203631491.png" alt="image-20221111203631491"></p>
 <h4 id="在每一行的内容前添加行号"><a href="#在每一行的内容前添加行号" class="headerlink" title="在每一行的内容前添加行号"></a>在每一行的内容前添加行号</h4><p>每一行的行号其实就是<code>NR</code>变量，所以我们只需要在这一行的内容，即<code>$0</code>前加上行号即可</p>
-<pre class="line-numbers language-sh"><code class="language-sh">echo Jack{1..5} > test.txt && echo Jack{6..10} >> test.txt && echo Jack{11..15} >> test.txt && echo Jack{16..20} >> test.txt
+<pre class="line-numbers language-sh"><code class="language-sh">echo Jack{1..5} &gt; test.txt &amp;&amp; echo Jack{6..10} &gt;&gt; test.txt &amp;&amp; echo Jack{11..15} &gt;&gt; test.txt &amp;&amp; echo Jack{16..20} &gt;&gt; test.txt
 cat test.txt
 awk '{print NR":",$0}' test.txt
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
@@ -2129,7 +2129,7 @@ ifconfig en0 | awk 'NR==5{print $2}'
 </table>
 </div>
 <h3 id="6-awk格式化输出案例"><a href="#6-awk格式化输出案例" class="headerlink" title="6. awk格式化输出案例"></a>6. awk格式化输出案例</h3><h4 id="printf和print的不同"><a href="#printf和print的不同" class="headerlink" title="printf和print的不同"></a>printf和print的不同</h4><p>我们上面说过，<code>print</code>处理完每一行后，默认会添加换行符号，而<code>printf</code>不会添加换行符号。</p>
-<pre class="line-numbers language-shell"><code class="language-shell">echo Jack{1..5} > test.txt && echo Jack{6..10} >> test.txt && echo Jack{11..15} >> test.txt && echo Jack{16..20} >> test.txt
+<pre class="line-numbers language-shell"><code class="language-shell">echo Jack{1..5} &gt; test.txt &amp;&amp; echo Jack{6..10} &gt;&gt; test.txt &amp;&amp; echo Jack{11..15} &gt;&gt; test.txt &amp;&amp; echo Jack{16..20} &gt;&gt; test.txt
 cat test.txt
 
 awk '{print $1}' test.txt
@@ -2138,7 +2138,7 @@ awk '{printf $1}' test.txt
 <p>运行结果如下</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221111232555002.png" alt="运行结果"></p>
 <h4 id="printf按行输出"><a href="#printf按行输出" class="headerlink" title="printf按行输出"></a>printf按行输出</h4><p><code>printf</code>默认是不会换行的，但是实际上我们可以手动添加换行符</p>
-<pre class="line-numbers language-sh"><code class="language-sh">echo Jack{1..5} > test.txt && echo Jack{6..10} >> test.txt && echo Jack{11..15} >> test.txt && echo Jack{16..20} >> test.txt
+<pre class="line-numbers language-sh"><code class="language-sh">echo Jack{1..5} &gt; test.txt &amp;&amp; echo Jack{6..10} &gt;&gt; test.txt &amp;&amp; echo Jack{11..15} &gt;&gt; test.txt &amp;&amp; echo Jack{16..20} &gt;&gt; test.txt
 cat test.txt
 
 awk '{print $0}' test.txt
@@ -2702,7 +2702,7 @@ tail /etc/passwd | awk -F ':' 'BEGIN{printf "%-22s\t%-10s\t%-4s\t%-4s\t%-35s\t%-
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">415.2k</span>
+                        class="white-color">429.2k</span>
             
             
             

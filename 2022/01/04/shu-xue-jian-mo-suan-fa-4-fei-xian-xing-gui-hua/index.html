@@ -30,10 +30,10 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.2">
+<meta name="generator" content="Hexo 5.4.2"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
-<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+</head>
 
 
 
@@ -426,14 +426,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.8k
+                    1.9k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    7 分
+                    8 分
                 </div>
                 
 
@@ -501,7 +501,7 @@ lb\leq x \leq ub
 </li>
 <li><p>constrains：元组形式的约束条件，其中每个约束条件是元组中的一个项，用一个字典表示</p>
 <p>以字典形式表示的约束条件按照如下方式</p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token punctuation">{</span><span class="token string">'type'</span><span class="token punctuation">:</span> <span class="token string">'ineq'</span><span class="token punctuation">,</span> <span class="token string">'fun'</span><span class="token punctuation">:</span> functionname<span class="token punctuation">}</span>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#123;'type': 'ineq', 'fun': functionname&amp;#125;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>其中：</p>
 <ul>
@@ -551,13 +551,13 @@ x_1,x_2,x_3\ge 0
     <span class="token keyword">return</span> x<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">0</span>
 
 constrains <span class="token operator">=</span> <span class="token punctuation">(</span>
-    <span class="token punctuation">{</span><span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"ineq"</span><span class="token punctuation">,</span> <span class="token string">"fun"</span><span class="token punctuation">:</span> constrain1<span class="token punctuation">}</span><span class="token punctuation">,</span>
-    <span class="token punctuation">{</span><span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"ineq"</span><span class="token punctuation">,</span> <span class="token string">"fun"</span><span class="token punctuation">:</span> constrain2<span class="token punctuation">}</span><span class="token punctuation">,</span>
-    <span class="token punctuation">{</span><span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"eq"</span><span class="token punctuation">,</span> <span class="token string">"fun"</span><span class="token punctuation">:</span> constrain3<span class="token punctuation">}</span><span class="token punctuation">,</span>
-    <span class="token punctuation">{</span><span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"eq"</span><span class="token punctuation">,</span> <span class="token string">"fun"</span><span class="token punctuation">:</span> constrain4<span class="token punctuation">}</span><span class="token punctuation">,</span>
-    <span class="token punctuation">{</span><span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"ineq"</span><span class="token punctuation">,</span> <span class="token string">"fun"</span><span class="token punctuation">:</span> x0_bound<span class="token punctuation">}</span><span class="token punctuation">,</span>
-    <span class="token punctuation">{</span><span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"ineq"</span><span class="token punctuation">,</span> <span class="token string">"fun"</span><span class="token punctuation">:</span> x1_bound<span class="token punctuation">}</span><span class="token punctuation">,</span>
-    <span class="token punctuation">{</span><span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"ineq"</span><span class="token punctuation">,</span> <span class="token string">"fun"</span><span class="token punctuation">:</span> x2_bound<span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#123;"type": "ineq", "fun": constrain1&amp;#125;,</span>
+    <span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#123;"type": "ineq", "fun": constrain2&amp;#125;,</span>
+    <span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#123;"type": "eq", "fun": constrain3&amp;#125;,</span>
+    <span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#123;"type": "eq", "fun": constrain4&amp;#125;,</span>
+    <span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#123;"type": "ineq", "fun": x0_bound&amp;#125;,</span>
+    <span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#123;"type": "ineq", "fun": x1_bound&amp;#125;,</span>
+    <span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#123;"type": "ineq", "fun": x2_bound&amp;#125;,</span>
 <span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="C-调用求解"><a href="#C-调用求解" class="headerlink" title="C. 调用求解"></a>C. 调用求解</h3><p>调用函数求解，依次填入参数即可</p>
@@ -600,13 +600,13 @@ result<span class="token punctuation">:</span> scopt<span class="token punctuati
     <span class="token keyword">return</span> x<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">0</span>
 
 constrains <span class="token operator">=</span> <span class="token punctuation">(</span>
-    <span class="token punctuation">{</span><span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"ineq"</span><span class="token punctuation">,</span> <span class="token string">"fun"</span><span class="token punctuation">:</span> constrain1<span class="token punctuation">}</span><span class="token punctuation">,</span>
-    <span class="token punctuation">{</span><span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"ineq"</span><span class="token punctuation">,</span> <span class="token string">"fun"</span><span class="token punctuation">:</span> constrain2<span class="token punctuation">}</span><span class="token punctuation">,</span>
-    <span class="token punctuation">{</span><span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"eq"</span><span class="token punctuation">,</span> <span class="token string">"fun"</span><span class="token punctuation">:</span> constrain3<span class="token punctuation">}</span><span class="token punctuation">,</span>
-    <span class="token punctuation">{</span><span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"eq"</span><span class="token punctuation">,</span> <span class="token string">"fun"</span><span class="token punctuation">:</span> constrain4<span class="token punctuation">}</span><span class="token punctuation">,</span>
-    <span class="token comment" spellcheck="true"># {"type": "ineq", "fun": x0_bound},</span>
-    <span class="token comment" spellcheck="true"># {"type": "ineq", "fun": x1_bound},</span>
-    <span class="token comment" spellcheck="true"># {"type": "ineq", "fun": x2_bound},</span>
+    <span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#123;"type": "ineq", "fun": constrain1&amp;#125;,</span>
+    <span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#123;"type": "ineq", "fun": constrain2&amp;#125;,</span>
+    <span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#123;"type": "eq", "fun": constrain3&amp;#125;,</span>
+    <span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#123;"type": "eq", "fun": constrain4&amp;#125;,</span>
+    <span class="token comment" spellcheck="true"># &amp;#123;"type": "ineq", "fun": x0_bound&amp;#125;,</span>
+    <span class="token comment" spellcheck="true"># &amp;#123;"type": "ineq", "fun": x1_bound&amp;#125;,</span>
+    <span class="token comment" spellcheck="true"># &amp;#123;"type": "ineq", "fun": x2_bound&amp;#125;,</span>
 <span class="token punctuation">)</span>
 
 bounds <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> None<span class="token punctuation">)</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
@@ -1193,7 +1193,7 @@ result<span class="token punctuation">:</span> scopt<span class="token punctuati
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">415.2k</span>
+                        class="white-color">429.2k</span>
             
             
             

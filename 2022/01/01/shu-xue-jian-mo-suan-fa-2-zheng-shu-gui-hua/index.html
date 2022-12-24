@@ -30,10 +30,10 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.2">
+<meta name="generator" content="Hexo 5.4.2"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
-<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+</head>
 
 
 
@@ -426,14 +426,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    5.6k
+                    6.4k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    22 分
+                    26 分
                 </div>
                 
 
@@ -746,7 +746,7 @@ problem <span class="token operator">+=</span> pulp<span class="token punctuatio
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>上面我们设定优化目标是$x_1+x_2$，然后分别通过problem重载的+=符号、提供的类进行约束添加</p>
 <p>我们此时可以打印一下problem，就能够看到添加了目标和约束之后的问题</p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">>></span><span class="token operator">></span> <span class="token keyword">print</span><span class="token punctuation">(</span>problem<span class="token punctuation">)</span>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> <span class="token keyword">print</span><span class="token punctuation">(</span>problem<span class="token punctuation">)</span>
 线性规划例子<span class="token punctuation">:</span>
 MAXIMIZE
 <span class="token number">1</span><span class="token operator">*</span>x1 <span class="token operator">+</span> <span class="token number">1</span><span class="token operator">*</span>x2 <span class="token operator">+</span> <span class="token number">0</span>
@@ -761,13 +761,13 @@ VARIABLES
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220103151645040.png" alt="运行结果"></p>
 <h3 id="D-求解"><a href="#D-求解" class="headerlink" title="D. 求解"></a>D. 求解</h3><p>由于并不是所有的问题都是可解的因此在对问题进行求解后，实际上问题会有很多种状态，所有的解的状态保存在pulp.LpStatus这个常量中</p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">>></span><span class="token operator">></span> <span class="token keyword">import</span> pprint
-<span class="token operator">>></span><span class="token operator">></span> pprint<span class="token punctuation">.</span><span class="token keyword">print</span><span class="token punctuation">(</span>pulp<span class="token punctuation">.</span>LpStatus<span class="token punctuation">)</span>
-<span class="token punctuation">{</span><span class="token operator">-</span><span class="token number">3</span><span class="token punctuation">:</span> <span class="token string">'Undefined'</span><span class="token punctuation">,</span>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> <span class="token keyword">import</span> pprint
+<span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> pprint<span class="token punctuation">.</span><span class="token keyword">print</span><span class="token punctuation">(</span>pulp<span class="token punctuation">.</span>LpStatus<span class="token punctuation">)</span>
+<span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#123;-3: 'Undefined',</span>
  <span class="token operator">-</span><span class="token number">2</span><span class="token punctuation">:</span> <span class="token string">'Unbounded'</span><span class="token punctuation">,</span>
  <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">:</span> <span class="token string">'Infeasible'</span><span class="token punctuation">,</span>
  <span class="token number">0</span><span class="token punctuation">:</span> <span class="token string">'Not Solved'</span><span class="token punctuation">,</span>
- <span class="token number">1</span><span class="token punctuation">:</span> <span class="token string">'Optimal'</span><span class="token punctuation">}</span>
+ <span class="token number">1</span><span class="token punctuation">:</span> <span class="token string">'Optimal'</span><span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#125;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>其中，</p>
 <ul>
@@ -783,7 +783,7 @@ VARIABLES
 <span class="token keyword">if</span> pulp<span class="token punctuation">.</span>LpStatus<span class="token punctuation">[</span>status<span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">"Optimal"</span><span class="token punctuation">:</span>
     variable<span class="token punctuation">:</span> pulp<span class="token punctuation">.</span>LpVariable
     <span class="token keyword">for</span> variable <span class="token keyword">in</span> problem<span class="token punctuation">.</span>variables<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">print</span><span class="token punctuation">(</span>f<span class="token string">"{variable.name}={variable.varValue}"</span><span class="token punctuation">)</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span>f<span class="token string">"&amp;#123;variable.name&amp;#125;=&amp;#123;variable.varValue&amp;#125;"</span><span class="token punctuation">)</span>
     <span class="token keyword">print</span><span class="token punctuation">(</span>pulp<span class="token punctuation">.</span>value<span class="token punctuation">(</span>problem<span class="token punctuation">.</span>objective<span class="token punctuation">)</span><span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="E-完整代码"><a href="#E-完整代码" class="headerlink" title="E. 完整代码"></a>E. 完整代码</h3><p>完整代码如下</p>
@@ -809,7 +809,7 @@ status <span class="token operator">=</span> problem<span class="token punctuati
 <span class="token keyword">if</span> pulp<span class="token punctuation">.</span>LpStatus<span class="token punctuation">[</span>status<span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">"Optimal"</span><span class="token punctuation">:</span>
     variable<span class="token punctuation">:</span> pulp<span class="token punctuation">.</span>LpVariable
     <span class="token keyword">for</span> variable <span class="token keyword">in</span> problem<span class="token punctuation">.</span>variables<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">print</span><span class="token punctuation">(</span>f<span class="token string">"{variable.name}={variable.varValue}"</span><span class="token punctuation">)</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span>f<span class="token string">"&amp;#123;variable.name&amp;#125;=&amp;#123;variable.varValue&amp;#125;"</span><span class="token punctuation">)</span>
     <span class="token keyword">print</span><span class="token punctuation">(</span>pulp<span class="token punctuation">.</span>value<span class="token punctuation">(</span>problem<span class="token punctuation">.</span>objective<span class="token punctuation">)</span><span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>运行后的输出</p>
@@ -859,13 +859,13 @@ Total time (CPU seconds):       0.00   (Wallclock seconds):       0.00
 MAXIMIZE
 1*x1 + 1*x2 + 0
 SUBJECT TO
-约束1: x1 + 0.642857142857 x2 <= 3.64285714286
+约束1: x1 + 0.642857142857 x2 &lt;= 3.64285714286
 
-约束2: - 2 x1 + x2 <= 0.333333333333
+约束2: - 2 x1 + x2 &lt;= 0.333333333333
 
 VARIABLES
-0 <= x1 Integer
-0 <= x2 Integer
+0 &lt;= x1 Integer
+0 &lt;= x2 Integer
 
 x1=2.0
 x2=2.0
@@ -900,7 +900,7 @@ x_i \ge 0,&i=1,\cdots,6
 
 problem<span class="token punctuation">:</span> pulp<span class="token punctuation">.</span>LpProblem <span class="token operator">=</span> pulp<span class="token punctuation">.</span>LpProblem<span class="token punctuation">(</span>name<span class="token operator">=</span><span class="token string">"玩具最优生产问题"</span><span class="token punctuation">,</span> sense<span class="token operator">=</span>pulp<span class="token punctuation">.</span>LpMaximize<span class="token punctuation">)</span>
 
-variables <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span>pulp<span class="token punctuation">.</span>LpVariable<span class="token punctuation">(</span>name<span class="token operator">=</span>f<span class="token string">"x_{i}"</span><span class="token punctuation">,</span> cat<span class="token operator">=</span>pulp<span class="token punctuation">.</span>LpInteger<span class="token punctuation">,</span> lowBound<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span> dtype<span class="token operator">=</span>object<span class="token punctuation">)</span>
+variables <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span>pulp<span class="token punctuation">.</span>LpVariable<span class="token punctuation">(</span>name<span class="token operator">=</span>f<span class="token string">"x_&amp;#123;i&amp;#125;"</span><span class="token punctuation">,</span> cat<span class="token operator">=</span>pulp<span class="token punctuation">.</span>LpInteger<span class="token punctuation">,</span> lowBound<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span> dtype<span class="token operator">=</span>object<span class="token punctuation">)</span>
 
 jia <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">0.01</span><span class="token punctuation">,</span> <span class="token number">0.01</span><span class="token punctuation">,</span><span class="token number">0.01</span><span class="token punctuation">,</span><span class="token number">0.03</span><span class="token punctuation">,</span><span class="token number">0.03</span><span class="token punctuation">,</span><span class="token number">0.03</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
 yi <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">0.02</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0.05</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
@@ -920,7 +920,7 @@ problem<span class="token punctuation">.</span>setObjective<span class="token pu
 <span class="token keyword">if</span> pulp<span class="token punctuation">.</span>LpStatus<span class="token punctuation">[</span>problem<span class="token punctuation">.</span>solve<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">"Optimal"</span><span class="token punctuation">:</span>
     variable<span class="token punctuation">:</span> pulp<span class="token punctuation">.</span>LpVariable
     <span class="token keyword">for</span> variable <span class="token keyword">in</span> problem<span class="token punctuation">.</span>variables<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">print</span><span class="token punctuation">(</span>f<span class="token string">"{variable.name} = {variable.varValue}"</span><span class="token punctuation">)</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span>f<span class="token string">"&amp;#123;variable.name&amp;#125; = &amp;#123;variable.varValue&amp;#125;"</span><span class="token punctuation">)</span>
     <span class="token keyword">print</span><span class="token punctuation">(</span>pulp<span class="token punctuation">.</span>value<span class="token punctuation">(</span>problem<span class="token punctuation">.</span>objective<span class="token punctuation">)</span><span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>输出</p>
@@ -1518,7 +1518,7 @@ x_5 <span class="token operator">=</span> <span class="token number">0.0</span>
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">415.2k</span>
+                        class="white-color">429.2k</span>
             
             
             

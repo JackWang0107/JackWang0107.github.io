@@ -30,10 +30,10 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.2">
+<meta name="generator" content="Hexo 5.4.2"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
-<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+</head>
 
 
 
@@ -539,7 +539,7 @@ sshpass -p password scp local_file root@host:remote_file
 
 # 通过scp下载文件
 sshpass -p password scp root@host:remote_file local_file
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></cmd></code></pre>
 <p>所以组合在一起，我们首先在本地使用<code>tar</code>打包，然后使用<code>scp</code>把压缩好的文件上传到远程服务器上去，接下来使用<code>ssh</code>命令远程执行解压、编译、测试的命令。</p>
 <p>类似的，如果想在远程执行多个命令，我们可以先用<code>scp</code>把写好的<code>shell</code>脚本上传到远程服务器上去，然后再使用<code>ssh</code>命令远程执行<code>shell</code>脚本。</p>
 <h3 id="B-o-忽略RAS-Key检查"><a href="#B-o-忽略RAS-Key检查" class="headerlink" title="B. -o 忽略RAS Key检查"></a>B. -o 忽略RAS Key检查</h3><p>在第一次链接到远程服务器的时候，第一次认证时，一般会有<code>RSA Key</code>验证的提示：</p>
@@ -548,14 +548,14 @@ RSA key fingerprint is a4:eb:8c:7d:2a:ef:d6:1c:a3:0c:e8:e5:00:d2:eb:60.
 Are you sure you want to continue connecting (yes/no)?
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>这个时候可以指定<code>-o</code>参数来忽略<code>RSA Key</code>的验证</p>
-<pre class="line-numbers language-shell"><code class="language-shell">sshpass -p "$SSH_PASSWD" ssh root@"$host" -o StrictHostKeyChecking=no "$@" 2>/dev/null
+<pre class="line-numbers language-shell"><code class="language-shell">sshpass -p "$SSH_PASSWD" ssh root@"$host" -o StrictHostKeyChecking=no "$@" 2&gt;/dev/null
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <h3 id="C-f-从文件中读取密码"><a href="#C-f-从文件中读取密码" class="headerlink" title="C. -f 从文件中读取密码"></a>C. -f 从文件中读取密码</h3><p>使用<code>-f</code>参数从文件中读取密码</p>
-<pre class="line-numbers language-shell"><code class="language-shell">echo "password" > userpasswd
+<pre class="line-numbers language-shell"><code class="language-shell">echo "password" &gt; userpasswd
 sshpass -f userpasswd ssh username@x.x.x.x
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>当然可以配合<code>gpg</code>来加密密码，而使用时候把解密后的密码传给<code>sshpass</code>，最后再删掉即可。</p>
-<pre class="line-numbers language-shell"><code class="language-shell">gpg -d -q .sshpassword.gpg > fifo; sshpass -f fifo ssh; rm fifo
+<pre class="line-numbers language-shell"><code class="language-shell">gpg -d -q .sshpassword.gpg &gt; fifo; sshpass -f fifo ssh; rm fifo
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <h3 id="D-e-从环境变量中读取密码"><a href="#D-e-从环境变量中读取密码" class="headerlink" title="D. -e 从环境变量中读取密码"></a>D. -e 从环境变量中读取密码</h3><p>使用<code>-e</code>参数从环境变量中读取密码</p>
 <pre class="line-numbers language-shell"><code class="language-shell">export SSHPASS="password"
@@ -702,7 +702,7 @@ cat outfile.txt
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>这个情况下，解决办法就是我们将前一个命令的输出保存到一个变量中，而后通过取值就可以多次使用前一个命令的输出值。</p>
 <p><code>xargs</code>中通过指定<code>-I</code>参数，来指定变量名</p>
-<pre class="line-numbers language-sh"><code class="language-sh">echo "one\ntwo\nthree" > foo.txt
+<pre class="line-numbers language-sh"><code class="language-sh">echo "one\ntwo\nthree" &gt; foo.txt
 cat foo.txt
 cat foo.txt | xargs -I files echo files
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
@@ -724,7 +724,7 @@ cat foo.txt | xargs -I files echo files
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221113184533047.png" alt="运行结果"></p>
 <h3 id="F-d-指定分隔符"><a href="#F-d-指定分隔符" class="headerlink" title="F. -d 指定分隔符"></a>F. -d 指定分隔符</h3><p><code>xargs</code>默认上一个命令输出的分隔符是空格和换行，而<code>$PATH</code>的分隔符是<code>:</code>。所以这种时候，可以使用<code>xargs</code>的<code>-d</code>参数来指定分隔符。</p>
 <p>注意<code>-d</code>参数在<code>macOS</code>上的<code>xargs</code>不支持，不过可以使用<code>awk</code>的<code>RS</code>和<code>ORS</code>来实现类似的替换效果</p>
-<pre class="line-numbers language-sh"><code class="language-sh">echo $PATH | xargs -d ':' -I p bash -c 'echo -e "p"' > searching_path.txt
+<pre class="line-numbers language-sh"><code class="language-sh">echo $PATH | xargs -d ':' -I p bash -c 'echo -e "p"' &gt; searching_path.txt
 cat searchin_path.txt
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221113190232452.png" alt="运行结果"></p>
@@ -1258,7 +1258,7 @@ cat searchin_path.txt
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">415.2k</span>
+                        class="white-color">429.2k</span>
             
             
             

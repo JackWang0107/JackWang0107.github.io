@@ -30,10 +30,10 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.2">
+<meta name="generator" content="Hexo 5.4.2"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
-<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+</head>
 
 
 
@@ -426,14 +426,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    3.8k
+                    3.9k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    15 分
+                    16 分
                 </div>
                 
 
@@ -605,14 +605,14 @@ self<span class="token punctuation">.</span>network<span class="token punctuatio
     <span class="token keyword">else</span><span class="token punctuation">:</span>
         earl_stop <span class="token operator">+=</span> <span class="token number">1</span>
 
-    <span class="token keyword">if</span> earl_stop <span class="token operator">></span> self<span class="token punctuation">.</span>early_stop_cnt<span class="token punctuation">:</span>
-        <span class="token keyword">print</span><span class="token punctuation">(</span>f<span class="token string">"{Fore.YELLOW}Early Stoped at epoch: {epoch}"</span><span class="token punctuation">)</span>
+    <span class="token keyword">if</span> earl_stop <span class="token operator">&gt;</span> self<span class="token punctuation">.</span>early_stop_cnt<span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span>f<span class="token string">"&amp;#123;Fore.YELLOW&amp;#125;Early Stoped at epoch: &amp;#123;epoch&amp;#125;"</span><span class="token punctuation">)</span>
         <span class="token keyword">break</span>
 
     <span class="token comment" spellcheck="true"># print logs</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span>f<span class="token string">"Epoch: {Fore.GREEN + Style.BRIGHT}{epoch}/{n_epoch}{Style.RESET_ALL}, "</span>
-        <span class="token string">"val_loss: {Fore.GREEN + Style.BRIGHT}{loss:>.5f}{Style.RESET_ALL}, "</span>
-        <span class="token string">"min_val_loss: {Fore.GREEN + Style.BRIGHT}{min_val_loss:>.5f}{Style.RESET_ALL}"</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>f<span class="token string">"Epoch: &amp;#123;Fore.GREEN + Style.BRIGHT&amp;#125;&amp;#123;epoch&amp;#125;/&amp;#123;n_epoch&amp;#125;&amp;#123;Style.RESET_ALL&amp;#125;, "</span>
+        <span class="token string">"val_loss: &amp;#123;Fore.GREEN + Style.BRIGHT&amp;#125;&amp;#123;loss:&gt;.5f&amp;#125;&amp;#123;Style.RESET_ALL&amp;#125;, "</span>
+        <span class="token string">"min_val_loss: &amp;#123;Fore.GREEN + Style.BRIGHT&amp;#125;&amp;#123;min_val_loss:&gt;.5f&amp;#125;&amp;#123;Style.RESET_ALL&amp;#125;"</span><span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="4-训练阶段Early-Stop"><a href="#4-训练阶段Early-Stop" class="headerlink" title="4. 训练阶段Early Stop"></a>4. 训练阶段Early Stop</h2><p>在训练网络的过程中，可能会出现过拟合，因此就需要用Early Stop技术来防止过拟合。判断是否过拟合的依据是看训练和验证阶段的loss曲线，但在真实训练的时候是没办法人工一直查看损失曲线的，因此我们更希望在代码里面能够进行判断。</p>
 <p>相比于记录下来每一个epoch的性能，Early Stop其实更加简单粗暴，<strong>Early Stop指的其实就是如果网络在N个epoch中性能都没有下降，那么就停止训练</strong>。</p>
@@ -640,8 +640,8 @@ self<span class="token punctuation">.</span>network<span class="token punctuatio
     <span class="token keyword">else</span><span class="token punctuation">:</span>
         earl_stop <span class="token operator">+=</span> <span class="token number">1</span>
 
-    <span class="token keyword">if</span> earl_stop <span class="token operator">></span> self<span class="token punctuation">.</span>early_stop_cnt<span class="token punctuation">:</span>
-        <span class="token keyword">print</span><span class="token punctuation">(</span>f<span class="token string">"{Fore.YELLOW}Early Stoped at epoch: {epoch}"</span><span class="token punctuation">)</span>
+    <span class="token keyword">if</span> earl_stop <span class="token operator">&gt;</span> self<span class="token punctuation">.</span>early_stop_cnt<span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span>f<span class="token string">"&amp;#123;Fore.YELLOW&amp;#125;Early Stoped at epoch: &amp;#123;epoch&amp;#125;"</span><span class="token punctuation">)</span>
         <span class="token keyword">break</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="5-代码里使用SummaryWriter"><a href="#5-代码里使用SummaryWriter" class="headerlink" title="5. 代码里使用SummaryWriter"></a>5. 代码里使用SummaryWriter</h2><p>如果代码里使用了SummaryWriter，那么调试的时候有一个问题，就是Python是遇到报错之后就直接退出，不会运行完所有的代码。</p>
@@ -693,7 +693,7 @@ self<span class="token punctuation">.</span>network<span class="token punctuatio
             self<span class="token punctuation">.</span>writer<span class="token punctuation">.</span>add_scalar<span class="token punctuation">(</span>tag<span class="token operator">=</span><span class="token string">"acc"</span><span class="token punctuation">,</span> scalar_value<span class="token operator">=</span><span class="token punctuation">(</span>cur_acc <span class="token punctuation">:</span><span class="token operator">=</span> acc <span class="token operator">/</span> all<span class="token punctuation">)</span><span class="token punctuation">,</span> global_step<span class="token operator">=</span>epoch<span class="token punctuation">)</span>
 
             <span class="token comment" spellcheck="true"># early stop</span>
-            <span class="token keyword">if</span> cur_acc <span class="token operator">></span> max_acc<span class="token punctuation">:</span>
+            <span class="token keyword">if</span> cur_acc <span class="token operator">&gt;</span> max_acc<span class="token punctuation">:</span>
                 max_acc <span class="token operator">=</span> cur_acc
                 early_stop_cnt <span class="token operator">=</span> <span class="token number">0</span>
                 <span class="token keyword">if</span> <span class="token operator">not</span> self<span class="token punctuation">.</span>checkpoint_path<span class="token punctuation">.</span>parent<span class="token punctuation">.</span>exists<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
@@ -704,15 +704,15 @@ self<span class="token punctuation">.</span>network<span class="token punctuatio
 
             <span class="token comment" spellcheck="true"># 注意，这里调用了tqdm的trange对象的write方法，其实别的对象也是可以的</span>
             tt<span class="token punctuation">.</span>write<span class="token punctuation">(</span>
-                f<span class="token string">"Epoch [{epoch:>5d}|{n_epoch:>5d}], train_loss {train_loss:>7.4f}, val_loss {val_loss:>7.4f}, "</span>
-                f<span class="token string">"early_stop_cnt: [{early_stop_cnt:>5d}|{early_stop:>5d}]"</span><span class="token punctuation">)</span>
-            <span class="token keyword">if</span> early_stop_cnt <span class="token operator">>=</span> early_stop<span class="token punctuation">:</span>
+                f<span class="token string">"Epoch [&amp;#123;epoch:&gt;5d&amp;#125;|&amp;#123;n_epoch:&gt;5d&amp;#125;], train_loss &amp;#123;train_loss:&gt;7.4f&amp;#125;, val_loss &amp;#123;val_loss:&gt;7.4f&amp;#125;, "</span>
+                f<span class="token string">"early_stop_cnt: [&amp;#123;early_stop_cnt:&gt;5d&amp;#125;|&amp;#123;early_stop:&gt;5d&amp;#125;]"</span><span class="token punctuation">)</span>
+            <span class="token keyword">if</span> early_stop_cnt <span class="token operator">&gt;=</span> early_stop<span class="token punctuation">:</span>
                 <span class="token keyword">break</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="7-网络中含有线性层的问题"><a href="#7-网络中含有线性层的问题" class="headerlink" title="7. 网络中含有线性层的问题"></a>7. 网络中含有线性层的问题</h2><p>很多时候网络中都需要写线性层，尤其是对于分类网络或者Self-Attention的结构来说。在网络中经常出现的一个情况就是前面的层不是线性层，而后面接的是线性层。这个时候就需要注意一下特征数量的问题。</p>
 <p>以图像分类的卷积网络为例，输入要求的形状是：$[Batch, Channel, Width, Height]$，经过前面几个用于特征提取的层之后，feature map的形状是：$[Batch, Channel<em>{new}, Width</em>{new}, Height_{new}]$。但是对于全连接层来说，他其实干的事情就是矩阵相乘，因此要求输入的形状是$[Batch,feature_num]$。所以<strong>直接把前面层的输出丢给线性层往往是会有问题的，这个时候就需要对前面层的输出进行变换</strong>。</p>
 <p>对于上面的分类的卷积网络来说，就需要把$Batch$维度之后的$Channel<em>{new}$、$Width</em>{new}$和$Height_{new}$三个维度拉平成一个向量丢给分类网络。</p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">forward</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> x<span class="token punctuation">:</span> torch<span class="token punctuation">.</span>Tensor<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> torch<span class="token punctuation">.</span>Tensor<span class="token punctuation">:</span>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">forward</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> x<span class="token punctuation">:</span> torch<span class="token punctuation">.</span>Tensor<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> torch<span class="token punctuation">.</span>Tensor<span class="token punctuation">:</span>
         x <span class="token operator">=</span> self<span class="token punctuation">.</span>conv1<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
         x <span class="token operator">=</span> self<span class="token punctuation">.</span>pool1<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
         x <span class="token operator">=</span> self<span class="token punctuation">.</span>activation<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
@@ -1333,7 +1333,7 @@ b <span class="token operator">=</span> torch<span class="token punctuation">.</
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">415.2k</span>
+                        class="white-color">429.2k</span>
             
             
             

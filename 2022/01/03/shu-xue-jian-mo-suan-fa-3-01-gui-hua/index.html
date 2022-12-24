@@ -30,10 +30,10 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.2">
+<meta name="generator" content="Hexo 5.4.2"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
-<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+</head>
 
 
 
@@ -674,7 +674,7 @@ x_i=0或1, & i=1,\cdots,5
 problem<span class="token punctuation">:</span> pulp<span class="token punctuation">.</span>LpProblem <span class="token operator">=</span> pulp<span class="token punctuation">.</span>LpProblem<span class="token punctuation">(</span>name<span class="token operator">=</span><span class="token string">"最大化投资问题"</span><span class="token punctuation">,</span> sense<span class="token operator">=</span>pulp<span class="token punctuation">.</span>LpMaximize<span class="token punctuation">)</span>
 
 
-xs <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span>pulp<span class="token punctuation">.</span>LpVariable<span class="token punctuation">(</span>name<span class="token operator">=</span>f<span class="token string">"x{i}"</span><span class="token punctuation">,</span> lowBound<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span> cat<span class="token operator">=</span>pulp<span class="token punctuation">.</span>LpBinary<span class="token punctuation">)</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+xs <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span>pulp<span class="token punctuation">.</span>LpVariable<span class="token punctuation">(</span>name<span class="token operator">=</span>f<span class="token string">"x&amp;#123;i&amp;#125;"</span><span class="token punctuation">,</span> lowBound<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span> cat<span class="token operator">=</span>pulp<span class="token punctuation">.</span>LpBinary<span class="token punctuation">)</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
 profits <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">150</span><span class="token punctuation">,</span> <span class="token number">210</span><span class="token punctuation">,</span> <span class="token number">60</span><span class="token punctuation">,</span> <span class="token number">80</span><span class="token punctuation">,</span> <span class="token number">180</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
 
 contrain1 <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
@@ -689,8 +689,8 @@ problem <span class="token operator">+=</span> <span class="token punctuation">(
 <span class="token keyword">if</span> pulp<span class="token punctuation">.</span>LpStatus<span class="token punctuation">[</span>problem<span class="token punctuation">.</span>solve<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">"Optimal"</span><span class="token punctuation">:</span>
     v<span class="token punctuation">:</span> pulp<span class="token punctuation">.</span>LpVariable
     <span class="token keyword">for</span> v <span class="token keyword">in</span> problem<span class="token punctuation">.</span>variables<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">print</span><span class="token punctuation">(</span>f<span class="token string">"{v.name}={v.varValue}"</span><span class="token punctuation">)</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span>f<span class="token string">"max Z={pulp.value(problem.objective)}"</span><span class="token punctuation">)</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span>f<span class="token string">"&amp;#123;v.name&amp;#125;=&amp;#123;v.varValue&amp;#125;"</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>f<span class="token string">"max Z=&amp;#123;pulp.value(problem.objective)&amp;#125;"</span><span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>运行后的结果为</p>
 <pre class="line-numbers language-shell"><code class="language-shell">Result - Optimal solution found
@@ -1265,7 +1265,7 @@ max Z=410.0
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">415.2k</span>
+                        class="white-color">429.2k</span>
             
             
             
