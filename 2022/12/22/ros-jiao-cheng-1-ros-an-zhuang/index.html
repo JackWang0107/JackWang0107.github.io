@@ -30,10 +30,10 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.2"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
-<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css">
+<meta name="generator" content="Hexo 5.4.2">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-</head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
 
@@ -422,7 +422,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2k
+                    1.9k
                 </div>
                 
 
@@ -466,14 +466,14 @@
 <p>一个应用商城中不可能有所有的软件，例如在<code>VIVO</code>应用商城中没有<code>Gmail</code>，如果我们想要安装<code>Gmail</code>，我们就得安装<code>Google</code>应用商城。</p>
 <p>同样的道理，<code>Ubuntu</code>中使用的<code>APT</code>这个“软件商城”（术语：<code>包管理器</code>）中并不是所有软件都会有的，有的时候我们需要向其中添加软件源，这样<code>APT</code>包管理器才能知道去哪下载我们要安装的软件。</p>
 <p><code>ROS</code>本质上还是一个框架，因此我们依旧使用<code>APT</code>进行下载。但是<code>ROS</code>并不在<code>APT</code>默认的下载源中，因此我们首先需要使用下面的命令添加<code>ROS</code>的下载地址（术语：<code>安装源</code>）到<code>APT</code>中：</p>
-<pre class="line-numbers language-sh"><code class="language-sh">sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" &gt; /etc/apt/sources.list.d/ros-latest.list'
+<pre class="line-numbers language-sh"><code class="language-sh">sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>但是注意，上面的命令是添加官方的安装源，但是由于官方的服务器在国外，所以在国内下载就会很慢，因此国内更加推荐使用国内的镜像源。所谓镜像源指的其实就是国内的人花费比较长的时间从国外下载了之后上传到国内的服务器中供大家下载，并且保持和国外同步更新，从而加速了国内的下载。</p>
 <p>国内可以使用清华源来安装：</p>
-<pre class="line-numbers language-sh"><code class="language-sh">sudo sh -c '. /etc/lsb-release &amp;&amp; echo "deb http://mirrors.tuna.tsinghua.edu.cn/ros/ubuntu/ `lsb_release -cs` main" &gt; /etc/apt/sources.list.d/ros-latest.list'
+<pre class="line-numbers language-sh"><code class="language-sh">sudo sh -c '. /etc/lsb-release && echo "deb http://mirrors.tuna.tsinghua.edu.cn/ros/ubuntu/ `lsb_release -cs` main" > /etc/apt/sources.list.d/ros-latest.list'
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>也可以使用中科大源来安装：</p>
-<pre class="line-numbers language-sh"><code class="language-sh">sudo sh -c '. /etc/lsb-release &amp;&amp; echo "deb http://mirrors.ustc.edu.cn/ros/ubuntu/ `lsb_release -cs` main" &gt; /etc/apt/sources.list.d/ros-latest.list'
+<pre class="line-numbers language-sh"><code class="language-sh">sudo sh -c '. /etc/lsb-release && echo "deb http://mirrors.ustc.edu.cn/ros/ubuntu/ `lsb_release -cs` main" > /etc/apt/sources.list.d/ros-latest.list'
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>我这里就直接用了清华源：</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221223002148873.png" alt="添加ROS清华镜像源"></p>
@@ -495,11 +495,11 @@
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221223014741231.png" alt="下载、安装ROS"></p>
 <h3 id="1-5-配置环境变量"><a href="#1-5-配置环境变量" class="headerlink" title="1.5 配置环境变量"></a>1.5 配置环境变量</h3><p>最后，需要配置一下<code>ROS</code>相关的环境变量，这样我们后面在编译程序的时候，能够找到<code>ROS</code>的库。</p>
 <p>对于<code>Bash</code>用户，使用下面的命令来添加环境变量</p>
-<pre class="line-numbers language-sh"><code class="language-sh">echo "source /opt/ros/noetic/setup.bash" &gt;&gt; ~/.bashrc
+<pre class="line-numbers language-sh"><code class="language-sh">echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
 source ~/.bashrc
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>对于<code>Zsh</code>用户，使用下面的命令来添加环境变量</p>
-<pre class="line-numbers language-sh"><code class="language-sh">echo "source /opt/ros/noetic/setup.zsh" &gt;&gt; ~/.zshrc
+<pre class="line-numbers language-sh"><code class="language-sh">echo "source /opt/ros/noetic/setup.zsh" >> ~/.zshrc
 source ~/.zshrc
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <h3 id="1-6-配置ROS依赖"><a href="#1-6-配置ROS依赖" class="headerlink" title="1.6 配置ROS依赖"></a>1.6 配置ROS依赖</h3><p>因为<code>ROS</code>包含了非常多的软件包，而我们上面在下载的时候只是下载了<code>ROS</code>最基础的组件，还有更多的组件是我们用到了才会去下载，例如我们的机器人中有激光雷达的话，我们才会去下载激光雷达相关的组件。因此，这一步就是先配置ROS各个组件之间的依赖关系。</p>
@@ -1080,7 +1080,7 @@ rosrun turtlesim turtle_teleop_key            # 启动第二个节点，键盘�
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">429.2k</span>
+                        class="white-color">424.4k</span>
             
             
             

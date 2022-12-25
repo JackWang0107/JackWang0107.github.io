@@ -30,10 +30,10 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.2"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
-<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css">
+<meta name="generator" content="Hexo 5.4.2">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-</head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
 
@@ -422,14 +422,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.3k
+                    2.2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    8 分
+                    7 分
                 </div>
                 
 
@@ -458,7 +458,7 @@
 <p>下面，本文就将介绍什么是命令以及如何编写新的命令。</p>
 <h2 id="1-Commands"><a href="#1-Commands" class="headerlink" title="1. Commands"></a>1. Commands</h2><h3 id="A-Introduction-to-Commands"><a href="#A-Introduction-to-Commands" class="headerlink" title="A. Introduction to Commands"></a>A. Introduction to Commands</h3><p><strong>Latex中的命令是由词语和符号组成的一段具有特殊的语义和功能的、能被Latex编译器识别的字符序列</strong>。</p>
 <p>例如下面这段代码</p>
-<pre class="line-numbers language-latex"><code class="language-latex">In a document there are different types of <span class="token function selector">\textbf</span><span class="token punctuation">&amp;</span>#123;commands<span class="token punctuation">&amp;</span>#125; 
+<pre class="line-numbers language-latex"><code class="language-latex">In a document there are different types of <span class="token function selector">\textbf</span><span class="token punctuation">{</span>commands<span class="token punctuation">}</span> 
 that define the way the elements are displayed. This 
 commands may insert special elements: <span class="token equation string">$<span class="token equation-command regex">\alpha</span> <span class="token equation-command regex">\beta</span> <span class="token equation-command regex">\Gamma</span>$</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
@@ -485,16 +485,16 @@ commands may insert special elements: <span class="token equation string">$<span
 <p>而在Latex中，环境即指一段文本周围的状况。状况包括：行间距、对齐格式、字号、字体等等因素。因此在一个环境内的文本都将会具有该环境特定的行间距、字号、对齐方式等格式。</p>
 <p>例如下面一段文本，我们开始了一个<code>itemize</code>环境和<code>center</code>环境。在<code>itemize</code>环境中，我们可以进行编号项的排序。而在<code>center</code>环境中，一句话将会居中对齐</p>
 <pre class="line-numbers language-latex"><code class="language-latex">This is a normal sentence. It will with a tab in front of it. and automatically return to another line.
-<span class="token function selector">\begin</span><span class="token punctuation">&amp;</span>#123;itemize<span class="token punctuation">&amp;</span>#125;
-    <span class="token function selector">\item</span> This is an <span class="token function selector">\textbf</span><span class="token punctuation">&amp;</span>#123;itemize<span class="token punctuation">&amp;</span>#125; environment
+<span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">itemize</span><span class="token punctuation">}</span>
+    <span class="token function selector">\item</span> This is an <span class="token function selector">\textbf</span><span class="token punctuation">{</span>itemize<span class="token punctuation">}</span> environment
     <span class="token function selector">\item</span> To begin an item in itemize environment, use <span class="token equation string">$<span class="token equation-command regex">\backslash</span>$</span>item command.
-<span class="token function selector">\end</span><span class="token punctuation">&amp;</span>#123;itemize<span class="token punctuation">&amp;</span>#125;
+<span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">itemize</span><span class="token punctuation">}</span>
 
 This is a sentence without center environment. It will starts from the left with a tab in front of it.
-<span class="token function selector">\begin</span><span class="token punctuation">&amp;</span>#123;center<span class="token punctuation">&amp;</span>#125;
+<span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">center</span><span class="token punctuation">}</span>
     A sentence nested in center environment<span class="token function selector">\\</span>
     will be placed in the center of the page.
-<span class="token function selector">\end</span><span class="token punctuation">&amp;</span>#123;center<span class="token punctuation">&amp;</span>#125;
+<span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">center</span><span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>具体的效果如下</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220128142131557.png" alt="itemize环境和center环境的效果"></p>
@@ -509,10 +509,10 @@ This is a sentence without center environment. It will starts from the left with
 <h2 id="2-Defining-a-new-command"><a href="#2-Defining-a-new-command" class="headerlink" title="2. Defining a new command"></a>2. Defining a new command</h2><p>虽然Latex本身自带了很多命令以满足不同需求的任务，然而在有的时候，我们确实有需要来自己定义一些新的特殊的命令来简化不必要的重复或者简化复杂格式的创建。</p>
 <p>例如在每一页都需要设置页眉，那么如果我们写一个命令来自动的执行设置页眉的一系列命令，那么在20多页的PDF里我们在新的一页只需要调用我们新建的命令即可，而避免了每页都要进行复杂的格式设置</p>
 <h3 id="A-新建简单命令"><a href="#A-新建简单命令" class="headerlink" title="A. 新建简单命令"></a>A. 新建简单命令</h3><p>在Latex中提供了<code>\newcommand</code>命令帮助我们新建一个简单命令，新建简单命令的格式如下</p>
-<pre class="line-numbers language-latex"><code class="language-latex"><span class="token function selector">\newcommand</span><span class="token punctuation">&amp;</span>#123;调用格式<span class="token punctuation">&amp;</span>#125;<span class="token punctuation">&amp;</span>#123;实际执行的代码<span class="token punctuation">&amp;</span>#125;
+<pre class="line-numbers language-latex"><code class="language-latex"><span class="token function selector">\newcommand</span><span class="token punctuation">{</span>调用格式<span class="token punctuation">}</span><span class="token punctuation">{</span>实际执行的代码<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>例如我们为一个专用词语新建一个简单命令</p>
-<pre class="line-numbers language-latex"><code class="language-latex"><span class="token function selector">\newcommand</span><span class="token punctuation">&amp;</span>#123;<span class="token function selector">\PRC</span><span class="token punctuation">&amp;</span>#125;<span class="token punctuation">&amp;</span>#123;<span class="token function selector">\textbf</span><span class="token punctuation">&amp;</span>#123;People's Republic of China<span class="token punctuation">&amp;</span>#125;<span class="token punctuation">&amp;</span>#125;
+<pre class="line-numbers language-latex"><code class="language-latex"><span class="token function selector">\newcommand</span><span class="token punctuation">{</span><span class="token function selector">\PRC</span><span class="token punctuation">}</span><span class="token punctuation">{</span><span class="token function selector">\textbf</span><span class="token punctuation">{</span>People's Republic of China<span class="token punctuation">}</span><span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>然后我们写出来下面的一句话来调用我们新建的简单命令</p>
 <pre class="line-numbers language-latex"><code class="language-latex">I'm Jack, I live in <span class="token function selector">\PRC</span>. There is the Grate Wall in <span class="token function selector">\PRC</span>, welcome to <span class="token function selector">\PRC</span>.
@@ -522,47 +522,47 @@ This is a sentence without center environment. It will starts from the left with
 <p>所以我们通过新建命令的一个好处就是可以减少重复。</p>
 <p>一般来说，自己定义的命令最好放在文章的最前面，这样的话实现定义和内容的分离。</p>
 <h3 id="B-接受参数的命令"><a href="#B-接受参数的命令" class="headerlink" title="B. 接受参数的命令"></a>B. 接受参数的命令</h3><p>命令我们可以视为参数来对待，因此我们自己定义的命令也可以接受新的参数，具体而言，定义接受新的参数的命令如下</p>
-<pre class="line-numbers language-latex"><code class="language-latex"><span class="token function selector">\newcommand</span><span class="token punctuation">&amp;</span>#123;调用格式<span class="token punctuation">&amp;</span>#125;<span class="token punctuation">[</span>参数个数<span class="token punctuation">]</span><span class="token punctuation">&amp;</span>#123;实际执行的代码<span class="token punctuation">&amp;</span>#125;
+<pre class="line-numbers language-latex"><code class="language-latex"><span class="token function selector">\newcommand</span><span class="token punctuation">{</span>调用格式<span class="token punctuation">}</span><span class="token punctuation">[</span>参数个数<span class="token punctuation">]</span><span class="token punctuation">{</span>实际执行的代码<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>而在实际执行的代码（即函数体中），通过<code>#1</code>、<code>#2</code>等方式来调用实际传入的参数。</p>
 <p>而我们在调用命令的时候，我们写参数个数个<code>{}</code>，并在括号里写入真实的参数值</p>
-<pre class="line-numbers language-latex"><code class="language-latex"><span class="token function selector">\调</span>用命令<span class="token punctuation">&amp;</span>#123;参数1的值<span class="token punctuation">&amp;</span>#125;<span class="token punctuation">&amp;</span>#123;参数2的值<span class="token punctuation">&amp;</span>#125;...<span class="token punctuation">&amp;</span>#123;参数n的值<span class="token punctuation">&amp;</span>#125;
+<pre class="line-numbers language-latex"><code class="language-latex"><span class="token function selector">\调</span>用命令<span class="token punctuation">{</span>参数1的值<span class="token punctuation">}</span><span class="token punctuation">{</span>参数2的值<span class="token punctuation">}</span>...<span class="token punctuation">{</span>参数n的值<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>注意，Latex中最多支持九个参数</p>
 <p>例如下面的命令</p>
-<pre class="line-numbers language-latex"><code class="language-latex"><span class="token function selector">\newcommand</span><span class="token punctuation">&amp;</span>#123;<span class="token function selector">\generatePolynomial</span><span class="token punctuation">&amp;</span>#125;<span class="token punctuation">[</span>3<span class="token punctuation">]</span><span class="token punctuation">&amp;</span>#123;<span class="token equation string">$$</span>#1^3+#2^2+#3^1<span class="token equation string">$$</span><span class="token punctuation">&amp;</span>#125;
+<pre class="line-numbers language-latex"><code class="language-latex"><span class="token function selector">\newcommand</span><span class="token punctuation">{</span><span class="token function selector">\generatePolynomial</span><span class="token punctuation">}</span><span class="token punctuation">[</span>3<span class="token punctuation">]</span><span class="token punctuation">{</span><span class="token equation string">$$</span>#1^3+#2^2+#3^1<span class="token equation string">$$</span><span class="token punctuation">}</span>
 
 We just define a command to generate a polynomial, so we next call it and see what happened:
-<span class="token function selector">\generatePolynomial</span><span class="token punctuation">&amp;</span>#123;x<span class="token punctuation">&amp;</span>#125;<span class="token punctuation">&amp;</span>#123;y<span class="token punctuation">&amp;</span>#125;<span class="token punctuation">&amp;</span>#123;z<span class="token punctuation">&amp;</span>#125;
+<span class="token function selector">\generatePolynomial</span><span class="token punctuation">{</span>x<span class="token punctuation">}</span><span class="token punctuation">{</span>y<span class="token punctuation">}</span><span class="token punctuation">{</span>z<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>编译之后的效果如下</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220128145129309.png" alt="接受参数的命令"></p>
 <h3 id="C-带默认参数-可选参数的命令"><a href="#C-带默认参数-可选参数的命令" class="headerlink" title="C. 带默认参数/可选参数的命令"></a>C. 带默认参数/可选参数的命令</h3><p>同样类比于编程语言的中的函数，我们同样可以给一些参数指定默认值，这样的话我们在调用命令的时候其实就可以不用指定这些参数的值。格式如下</p>
-<pre class="line-numbers language-latex"><code class="language-latex"><span class="token function selector">\newcommand</span><span class="token punctuation">&amp;</span>#123;<span class="token function selector">\调</span>用格式<span class="token punctuation">&amp;</span>#125;<span class="token punctuation">[</span>参数个数<span class="token punctuation">]</span><span class="token punctuation">[</span>第一个参数的默认值<span class="token punctuation">]</span>...<span class="token punctuation">[</span>第n个参数的默认值<span class="token punctuation">]</span><span class="token punctuation">&amp;</span>#123;实际执行的代码<span class="token punctuation">&amp;</span>#125;
+<pre class="line-numbers language-latex"><code class="language-latex"><span class="token function selector">\newcommand</span><span class="token punctuation">{</span><span class="token function selector">\调</span>用格式<span class="token punctuation">}</span><span class="token punctuation">[</span>参数个数<span class="token punctuation">]</span><span class="token punctuation">[</span>第一个参数的默认值<span class="token punctuation">]</span>...<span class="token punctuation">[</span>第n个参数的默认值<span class="token punctuation">]</span><span class="token punctuation">{</span>实际执行的代码<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>而在实际调用的时候，我们通过<code>{}</code>指定的参数就是第一个没有默认值的参数</p>
 <p>例如下面</p>
-<pre class="line-numbers language-latex"><code class="language-latex"><span class="token function selector">\newcommand</span><span class="token punctuation">&amp;</span>#123;<span class="token function selector">\sumSquare</span><span class="token punctuation">&amp;</span>#125;<span class="token punctuation">[</span>3<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token function selector">\alpha</span><span class="token punctuation">]</span><span class="token punctuation">&amp;</span>#123;<span class="token equation string">$$</span>(#2+#3)^#1<span class="token equation string">$$</span><span class="token punctuation">&amp;</span>#125;
-<span class="token function selector">\sumSquare</span><span class="token punctuation">&amp;</span>#123;x<span class="token punctuation">&amp;</span>#125;<span class="token punctuation">&amp;</span>#123;y<span class="token punctuation">&amp;</span>#125;
+<pre class="line-numbers language-latex"><code class="language-latex"><span class="token function selector">\newcommand</span><span class="token punctuation">{</span><span class="token function selector">\sumSquare</span><span class="token punctuation">}</span><span class="token punctuation">[</span>3<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token function selector">\alpha</span><span class="token punctuation">]</span><span class="token punctuation">{</span><span class="token equation string">$$</span>(#2+#3)^#1<span class="token equation string">$$</span><span class="token punctuation">}</span>
+<span class="token function selector">\sumSquare</span><span class="token punctuation">{</span>x<span class="token punctuation">}</span><span class="token punctuation">{</span>y<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>我们首先指定了这个命令接受三个参数，然后指定第一个参数的默认值是\alpha。</p>
 <p>编译之后的效果如下</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220128160734885.png" alt="使用参数的默认值"></p>
 <p>如果我们想要改变默认参数的值的话，我们就在一半参数前用<code>[]</code>来指定这些默认参数的新的值</p>
-<pre class="line-numbers language-latex"><code class="language-latex"><span class="token function selector">\newcommand</span><span class="token punctuation">&amp;</span>#123;<span class="token function selector">\sumSquare</span><span class="token punctuation">&amp;</span>#125;<span class="token punctuation">[</span>3<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token function selector">\alpha</span><span class="token punctuation">]</span><span class="token punctuation">&amp;</span>#123;<span class="token equation string">$$</span>(#2+#3)^<span class="token punctuation">&amp;</span>#123;#1<span class="token punctuation">&amp;</span>#125;<span class="token equation string">$$</span><span class="token punctuation">&amp;</span>#125;
-<span class="token function selector">\sumSquare</span><span class="token punctuation">[</span>12<span class="token punctuation">]</span><span class="token punctuation">&amp;</span>#123;x<span class="token punctuation">&amp;</span>#125;<span class="token punctuation">&amp;</span>#123;y<span class="token punctuation">&amp;</span>#125;
+<pre class="line-numbers language-latex"><code class="language-latex"><span class="token function selector">\newcommand</span><span class="token punctuation">{</span><span class="token function selector">\sumSquare</span><span class="token punctuation">}</span><span class="token punctuation">[</span>3<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token function selector">\alpha</span><span class="token punctuation">]</span><span class="token punctuation">{</span><span class="token equation string">$$</span>(#2+#3)^<span class="token punctuation">{</span>#1<span class="token punctuation">}</span><span class="token equation string">$$</span><span class="token punctuation">}</span>
+<span class="token function selector">\sumSquare</span><span class="token punctuation">[</span>12<span class="token punctuation">]</span><span class="token punctuation">{</span>x<span class="token punctuation">}</span><span class="token punctuation">{</span>y<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>编译之后的效果如下</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220128161038000.png" alt="改变参数的默认值"></p>
 <h2 id="3-Overwrite-a-command"><a href="#3-Overwrite-a-command" class="headerlink" title="3. Overwrite a command"></a>3. Overwrite a command</h2><p>Latex中其实是有条件判断语句的，因此我们其实可以搭配着条件判断语句来实现程序流程的控制。因此，在有些情况下我们就需要重写一下已经定义过的命令。此时如果我们使用<code>\newcommand</code>的话编译器就会报错。</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220128161742577.png" alt="直接使用newcommand会报错"></p>
 <p>因此，我们此时就需要用<code>\renewcommand</code>来重写一个命令。<code>\renewcommand</code>和<code>\newcommand</code>一模一样，只不过重复的时候会重写。因此下面就举一个简单的例子</p>
-<pre class="line-numbers language-latex"><code class="language-latex"><span class="token function selector">\newcommand</span><span class="token punctuation">&amp;</span>#123;<span class="token function selector">\overWrite</span><span class="token punctuation">&amp;</span>#125;<span class="token punctuation">&amp;</span>#123;x+y<span class="token punctuation">&amp;</span>#125;
+<pre class="line-numbers language-latex"><code class="language-latex"><span class="token function selector">\newcommand</span><span class="token punctuation">{</span><span class="token function selector">\overWrite</span><span class="token punctuation">}</span><span class="token punctuation">{</span>x+y<span class="token punctuation">}</span>
 <span class="token function selector">\overWrite</span>
 <span class="token function selector">\newline</span>
 
 
-<span class="token function selector">\renewcommand</span><span class="token punctuation">&amp;</span>#123;<span class="token function selector">\overWrite</span><span class="token punctuation">&amp;</span>#125;<span class="token punctuation">&amp;</span>#123;a+b<span class="token punctuation">&amp;</span>#125;
+<span class="token function selector">\renewcommand</span><span class="token punctuation">{</span><span class="token function selector">\overWrite</span><span class="token punctuation">}</span><span class="token punctuation">{</span>a+b<span class="token punctuation">}</span>
 <span class="token function selector">\overWrite</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220128162613742.png" alt="重写命令的例子"></p>
@@ -1104,7 +1104,7 @@ We just define a command to generate a polynomial, so we next call it and see wh
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">429.2k</span>
+                        class="white-color">424.4k</span>
             
             
             

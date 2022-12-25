@@ -30,10 +30,10 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.2"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
-<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css">
+<meta name="generator" content="Hexo 5.4.2">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-</head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
 
@@ -415,21 +415,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-12-24
+                    2022-12-25
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.3k
+                    2.7k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    8 分
+                    9 分
                 </div>
                 
 
@@ -499,13 +499,30 @@
 <li><strong>免费且开源：</strong>开发者众多，功能包多</li>
 </ul>
 <p>正是因为<code>ROS</code>有如此多的优点，目前为止，软件层面上开发机器人就等价于<code>ROS</code>开发。</p>
-<h3 id="2-3-ROS的发展历程"><a href="#2-3-ROS的发展历程" class="headerlink" title="2.3 ROS的发展历程"></a>2.3 <code>ROS</code>的发展历程</h3><p>学习一个东西，我们还需要知道这个东西的发展历史：</p>
+<h3 id="2-3-ROS的发展历程"><a href="#2-3-ROS的发展历程" class="headerlink" title="2.3 ROS的发展历程"></a>2.3 <code>ROS</code>的发展历程</h3><blockquote>
+<p>学习一个东西，我们还需要知道这个东西的发展历史</p>
+</blockquote>
+<p>在<code>ROS</code>诞生之前，很多学者认为，机器人研究需要一个开放式的协作框架，并且已经有不少类似的项目致力于实现这样的框架。这些工作有：</p>
 <ul>
-<li><code>ROS</code>是一个由来已久、贡献者众多的大型软件项目。在<code>ROS</code>诞生之前，很多学者认为，机器人研究需要一个开放式的协作框架，并且已经有不少类似的项目致力于实现这样的框架。在这些工作中，斯坦福大学在2000年年中开展了一系列相关研究项目，如斯坦福人工智能机器人（STandford AI Robot, STAIR）项目、个人机器人（Personal Robots, PR）项目等，在上述项目中，在研究具有代表性、集成式人工智能系统的过程中，创立了用于室内场景的高灵活性、动态软件系统，其可以用于机器人学研究。</li>
-<li>2007年，柳树车库（Willow Garage）提供了大量资源，用于将斯坦福大学机器人项目中的软件系统进行扩展与完善，同时，在无数研究人员的共同努力下，斯坦福大学中的诸多项目逐渐汇集在一起，最终形成了<code>ROS</code></li>
-<li>在<code>ROS</code>形成后，类似于操作系统，<code>ROS</code>每年也会发行不同的版本（<code>ROS Distribution, ROS Distro</code>）。不同的<code>ROS</code>发行版中<code>ROS</code>的一些工具、软件包的版本不同。而推出<code>ROS</code>发行版本的目的在于使开发人员可以使用相对稳定的代码库，直到其准备好将所有内容进行版本升级为止。</li>
-<li>每一个发行版在推出的时候都会有一个生命周期（<code>End of Life, EOL</code>），根据生命期的长短，分为<strong>长版本</strong>和<strong>短版本</strong>。<strong>长版本</strong>一般会持续四五年，而<strong>短版本</strong>一般就一两年。在生命周期内的<code>ROS</code>发行版，<code>ROS</code>官方会对这一版本的<code>ROS</code>中的bug进行修复，同时提供对核心软件包的改进。直到这一版本的<code>ROS</code>发行版生命期结束。</li>
+<li>斯坦福<code>STandford AI Robot, STAIR</code>（人工智能机器人）项目</li>
+<li><code>Personal Robots, PR</code>（个人机器人）项目</li>
 </ul>
+<p>在上述项目中，创建了一系列用于机器人开发的软件，可以用于机器人学研究。</p>
+<p>2007年，一家名为<code>Willow Garage</code>（柳树车库）的公司，为斯坦福大学机器人项目提供了大量资金支持，并自愿将项目中的软件系统进行扩展与完善，最终，在无数研究人员的共同努力下，斯坦福大学中的诸多项目逐渐汇集在一起，最终形成了<code>ROS</code></p>
+<p><code>ROS</code> 的完善是<code>Willow Garage</code>在开发<code>PR2</code>机器人时候完成的。<code>PR2</code>是一种人形机器人（即上文说的<code>Android</code>），可以在已知环境中自主导航。<code>Willow Garage</code>知道 <code>PR2</code>不会是市场上唯一的机器人，所以在完善斯坦福的程序的时候，预期把这些程序写成<code>PR2</code>的个性化程序，不如该进程一个通用的、可扩展的标准软件，以在未来改进或修改机器人。</p>
+<p>因此，他们通过定义对其他机器人有用的抽象级别来开发中间件<code>ROS</code>。他们以<code>PR2</code>特征为指导：</p>
+<ul>
+<li>单体机器人</li>
+<li>无实时要求</li>
+<li>出色的网络连接</li>
+<li>跨平台（例如，在移动基地和人形机器人上同样有效）</li>
+</ul>
+<p>最终就得到了<code>ROS</code>的早期版本。</p>
+<p>需要注意的是，早期版本的<code>ROS</code>其实依旧非常不完善，在后续的版本中<code>ROS</code>经过不断改进，才形成了现在这样完善的机器人开发框架。<code>ROS</code>每年会发行一个新的版本，称为发行版（<code>ROS Distribution, ROS Distro</code>），类似于<code>Ubuntu</code>的长期支持版，新的发行版中对旧的发行版的一些工具、软件包进行了升级。</p>
+<p>推出<code>ROS</code>发行版本的目的在于使开发人员可以使用相对稳定的代码库的同时不断更新工具，而为了实现这么目的，每一个发行版都有一个生命周期（<code>End of Life, EOL</code>）的概念。</p>
+<p><strong>所谓生命周期的概念，指的是在生命周期内，<code>ROS</code>官方会对这一版本的<code>ROS</code>中的工具、软件库中的bug进行修复，同时提供对核心软件包的效率上的改进，直到这一版本的<code>ROS</code>发行版生命期结束</strong>。因此，这样做的好处就是给使用者提前进行了通知，给用户预留了足够的时间让用户提前学习、切换到新的发行版。</p>
+<p>需要说明的是，版本之间的工具的升级可能是功能上的升级，例如为函数添加了新的参数，从在原有的功能的基础上新加了功能，生命周期内同一个版本的工具的升级，往往是效率上的升级，而非功能上的增加。</p>
+<p>下面是<code>ROS</code>的所有公开的版本，每个版本都有自己的名称、海报、生命周期和乌龟标志。</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/%E7%89%88%E6%9C%AC.png" alt="ROS各个发行版的名称、发行日期以及生命期"></p>
 <p><code>ROS</code>版本特点: 按照英文字母顺序命名，<code>ROS</code> 目前已经发布了<code>ROS1</code> 的终极版本: <code>noetic</code>。在<code>noetic</code>版本之后，<code>ROS</code>官方推出的发行版就将是基于<code>ROS2</code>的发行版</p>
 
@@ -753,29 +770,28 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2022/12/22/ros-jiao-cheng-0-ros-jie-shao/">
+                <a href="/2022/12/23/ros-jiao-cheng-2-ros-kai-fa-huan-jing-da-jian/">
                     <div class="card-image">
                         
-                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221222234619457.png" class="responsive-img" alt="ROS教程 0：ROS介绍">
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/%E5%B1%8F%E5%B9%95%E5%BD%95%E5%88%B62022-12-24%20%E4%B8%8B%E5%8D%881.26.48.gif" class="responsive-img" alt="ROS教程 2：ROS开发环境搭建">
                         
-                        <span class="card-title">ROS教程 0：ROS介绍</span>
+                        <span class="card-title">ROS教程 2：ROS开发环境搭建</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            本文是ROS系列教程的前言，介绍了什么是ROS
+                            本文是ROS系列教程的第二篇文章，介绍了如何搭建ROS开发环境
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-12-22
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-12-23
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -788,7 +804,6 @@
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
@@ -800,8 +815,8 @@
                         <span class="chip bg-color">ROS教程</span>
                     </a>
                     
-                    <a href="/tags/ROS%E5%AE%89%E8%A3%85/">
-                        <span class="chip bg-color">ROS安装</span>
+                    <a href="/tags/ROS%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
+                        <span class="chip bg-color">ROS开发环境搭建</span>
                     </a>
                     
                 </div>
@@ -1044,7 +1059,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">429.2k</span>
+                        class="white-color">424.4k</span>
             
             
             

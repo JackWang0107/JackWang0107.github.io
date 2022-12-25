@@ -30,10 +30,10 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.2"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
-<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css">
+<meta name="generator" content="Hexo 5.4.2">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-</head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
 
@@ -451,7 +451,7 @@
 <p><code>Bash</code>是一个命令处理器，通常运行于文本窗口中，并能执行用户直接输入的命令。<code>Bash</code>还能从文件中读取命令，这样的文件称为脚本。和其他<code>Unix shell</code> 一样，它支持文件名替换（通配符匹配）、管道、<code>here</code>文档、命令替换、变量，以及条件判断和循环遍历的结构控制语句。包括关键字、语法在内的基本特性全部是从<code>sh</code>借鉴过来的。其他特性，例如历史命令，是从<code>csh</code>和<code>ksh</code>借鉴而来。</p>
 <p>总的来说，<code>Bash</code>虽然是一个满足<code>POSIX</code>规范的<code>shell</code>，但有很多扩展。因此，本文中就将介绍<code>Bash</code>的这些特性。（虽然本文是用<code>zsh</code>为例，但是这些特性一般是通用的）</p>
 <h2 id="1-花括号-展开"><a href="#1-花括号-展开" class="headerlink" title="1. 花括号{}展开"></a>1. 花括号<code>{}</code>展开</h2><h3 id="A-基本用法"><a href="#A-基本用法" class="headerlink" title="A. 基本用法"></a>A. 基本用法</h3><p><code>Bash</code>会自动对花括号的内的内容进行展开。例如：</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token keyword">echo</span> <span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#123;change1,change2,change3&amp;#125;</span>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token keyword">echo</span> <span class="token punctuation">{</span>change1,change2,change3<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>相当于下面三个命令</p>
 <pre class="line-numbers language-bash"><code class="language-bash"><span class="token keyword">echo</span> change1
@@ -462,7 +462,7 @@
 <p>得到的输出如下：</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221109214732456.png" alt="花括号展开基本用法"></p>
 <h3 id="B-省略写法"><a href="#B-省略写法" class="headerlink" title="B. 省略写法"></a>B. 省略写法</h3><p>我们其实可以省略相同的地方，只展开不同的地方。例如上面的例子中，执行的三条命令的输出内容的前半部分都是<code>change</code>。所以我们可以使用下述的省略写法</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token keyword">echo</span> change<span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#123;1,2,3&amp;#125;</span>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token keyword">echo</span> change<span class="token punctuation">{</span>1,2,3<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>同样，<code>Bash</code>展开后其实就是三条命令</p>
 <pre class="line-numbers language-bash"><code class="language-bash"><span class="token keyword">echo</span> change1
@@ -474,7 +474,7 @@
 <h3 id="C-有序省略"><a href="#C-有序省略" class="headerlink" title="C. 有序省略"></a>C. 有序省略</h3><p>我们其实不仅可以省略相同的内容，对于括号内需要展开的内容也可以进行省略。我们使用<code>..</code>来进行有顺序省略。</p>
 <p>具体语法为<code>{start..end}</code></p>
 <p>例如：</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token keyword">echo</span> change<span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#123;1..10&amp;#125;</span>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token keyword">echo</span> change<span class="token punctuation">{</span>1<span class="token punctuation">..</span>10<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>展开后得到下述命令</p>
 <pre class="line-numbers language-bash"><code class="language-bash"><span class="token keyword">echo</span> change1
@@ -491,7 +491,7 @@
 <p>运行结果如下：</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221109220002593.png" alt="花括号展开有序省略-数字序"></p>
 <p>当然，<strong>只要是顺序的，包括数字序、字母序都可以进行有序省略</strong>。例如</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token keyword">echo</span> change_<span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#123;a..d&amp;#125;</span>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token keyword">echo</span> change_<span class="token punctuation">{</span>a<span class="token punctuation">..</span>d<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>运行结果为：</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221109220446324.png" alt="花括号展开有序省略-字母序"></p>
@@ -502,12 +502,12 @@
 <p>结果为：</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221109221426287.png" alt="花括号展开有序省略-指定间隔"></p>
 <h3 id="E-有序省略——对齐"><a href="#E-有序省略——对齐" class="headerlink" title="E. 有序省略——对齐"></a>E. 有序省略——对齐</h3><p>有序省略输出数字序的时候，我们可以在前面补0来实现对齐，例如</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token keyword">echo</span> change<span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#123;01..10&amp;#125;</span>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token keyword">echo</span> change<span class="token punctuation">{</span>01<span class="token punctuation">..</span>10<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>运行结果为：</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221109222233556.png" alt="花括号展开有序省略-对齐1"></p>
 <p><strong>我们补充多少个0，就会对齐多少位</strong>。所以我们补充三个0，就会对齐三位</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token keyword">echo</span> change<span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#123;001..10&amp;#125;</span>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token keyword">echo</span> change<span class="token punctuation">{</span>001<span class="token punctuation">..</span>10<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221109222402406.png" alt="花括号展开有序省略-对齐2"></p>
 <p>​    </p>
@@ -1071,7 +1071,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">429.2k</span>
+                        class="white-color">424.4k</span>
             
             
             

@@ -30,10 +30,10 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.2"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
-<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css">
+<meta name="generator" content="Hexo 5.4.2">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-</head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
 
@@ -422,14 +422,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.4k
+                    751
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    5 分
+                    2 分
                 </div>
                 
 
@@ -498,8 +498,8 @@ echo $fullname, $last_suffix, $name
 <p>光用语言把这两个正则表达式描述出来脑细胞也要死不少。有没有像上面cut版本一样简单容易理解的方法呢？由于<code>.</code>分隔符的个数不确定，正常使用cut来分割最后一个<code>.</code>字符是不太可能的。但是我们可使用 <a target="_blank" rel="noopener" href="http://man7.org/linux/man-pages/man1/rev.1.html">rev</a> 命令将字符串反转一下，区分后缀和文件名的<code>.</code>字符位置就确定了。截取了想要的部分之后，再次反转就得到了我们想要的内容。</p>
 <pre class="line-numbers language-shell"><code class="language-shell">fullname=mylib.1.0.1a.zip
 
-stem=$(rev &lt;&lt;&lt; $fullname | cut -d . -f2- | rev)
-suffix=$(rev &lt;&lt;&lt; $fullname | cut -d . -f1 | rev)
+stem=$(rev <<< $fullname | cut -d . -f2- | rev)
+suffix=$(rev <<< $fullname | cut -d . -f1 | rev)
 echo $stem, $suffix
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>运行结果为：</p>
@@ -1182,7 +1182,7 @@ echo $extension
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">429.2k</span>
+                        class="white-color">424.4k</span>
             
             
             

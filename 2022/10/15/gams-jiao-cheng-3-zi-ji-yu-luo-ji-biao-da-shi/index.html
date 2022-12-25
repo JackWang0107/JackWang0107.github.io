@@ -30,10 +30,10 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.2"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
-<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css">
+<meta name="generator" content="Hexo 5.4.2">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-</head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
 
@@ -509,19 +509,19 @@ subitem2('perfume')  = no ;   * subitem2 = /disk, ink, lipstick, pen, pencil/;
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>条件表达式类似于C语言中的三元运算符，但是相比于三元运算符能够根据逻辑表达语句的值在两个项中选择，<strong><code>GAMS</code>中的条件表达式只能根据逻辑表达式的值在有项和无项之间选择</strong>。</p>
 <p>例如下面这段C语言代码</p>
-<pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">if</span> <span class="token punctuation">(</span>b <span class="token operator">&gt;</span> <span class="token number">1.5</span><span class="token punctuation">)</span>
+<pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">if</span> <span class="token punctuation">(</span>b <span class="token operator">></span> <span class="token number">1.5</span><span class="token punctuation">)</span>
   a <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
 <span class="token keyword">else</span>
     a <span class="token operator">=</span> null<span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>注意，这里的<code>null</code>并不是C语言中的<code>null</code>，而是直接没有这项。上面的C语言的描述使用<code>GAMS</code>的条件表达式描述，如下</p>
-<pre class="line-numbers language-gas"><code class="language-gas">a $ (b &gt; 1.5) = 2 ;
+<pre class="line-numbers language-gas"><code class="language-gas">a $ (b > 1.5) = 2 ;
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>再举例来说</p>
 <pre class="line-numbers language-gas"><code class="language-gas">Scalar x /15/;
 Scalar y;
 
-y = 12$(x &lt; 20);
+y = 12$(x < 20);
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>表示如果<code>x</code>的值小于<code>20</code>，那么<code>y=12</code>，否则<code>y</code>的值就依旧是待定的。</p>
 <p>再举一个例子，如果我们想要实现下面这段C语言程序</p>
@@ -534,13 +534,13 @@ y = 12$(x &lt; 20);
 <pre class="line-numbers language-gas"><code class="language-gas">Scalar x /15/;
 Scalar y;
 
-y = 12$(x &lt; 20) + 21$(x &gt;= 20);
+y = 12$(x < 20) + 21$(x >= 20);
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>注意<code>GAMS</code>中的条件语句在条件不成立的时候直接就没有这一项，所以不要看这里有两个条件语句，<code>y = 12$(x &lt; 20) + 21$(x &gt;= 20)</code>这个表达式，其实在任何时候都只有一项。当然这个其实还和我们的条件有关。</p>
 <pre class="line-numbers language-gas"><code class="language-gas">Set A /1, 2, 3, 4, 5, 6/;
 Parameter param(A);
 
-param(A) = 1$(ord(A) &lt; 4);
+param(A) = 1$(ord(A) < 4);
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="2-条件表达式与参数"><a href="#2-条件表达式与参数" class="headerlink" title="2. 条件表达式与参数"></a>2. 条件表达式与参数</h3><p>我们上面的例子中展示了如何使用条件表达式为一个标量赋值，条件表达式其实也能够为参数赋值</p>
 <h4 id="子集"><a href="#子集" class="headerlink" title="子集"></a>子集</h4><p>对于逻辑表达式与子集的结合，我们举例如下</p>
@@ -560,7 +560,7 @@ t(i) $ j(i) = s(i) + 3;
 Parameter  s(i)  / i1 3, i2 5, i3 11, i4 8, i5 1 /
            t(i);
 
-t(i) $ (s(i) &lt; 6) = s(i) + 3;
+t(i) $ (s(i) < 6) = s(i) + 3;
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>首先，<code>s(i)</code>与<code>t(i)</code>都是参数，而逻辑表达式<code>t(i) $ (s(i) &lt; 6)</code>表示遍历<code>s</code>中的所有元素。当<code>s(i)</code>的值小于6时，存在<code>t(i)</code>这一项，否则就不存在。</p>
 <p>所以<code>t(i)</code>最终的值为</p>
@@ -571,7 +571,7 @@ t(i) $ (s(i) &lt; 6) = s(i) + 3;
 Parameter X(I) /"a" -1, "b" -2, "c" -3, "d" -4, "e" -5, "f" -6/;
 Parameter A(I);
 
-A(I) = 1$(ord(I) &lt;= 2) + X(I-2)$(ord(I) &gt; 2);
+A(I) = 1$(ord(I) <= 2) + X(I-2)$(ord(I) > 2);
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><code>ord</code>函数将会返回一个参数，具体来说，该参数的值为<code>/"a" 1, "b" 2, "c" 3, "d" 4, "e" 5, "f" 6/</code></p>
 <p>那么这个时候，情况就转为了上面逻辑表达式与参数的情况。此外，还需要注意的是<code>X(I-2)</code>这一项。<code>GAMS</code>中对参数取值的时候，对<code>index</code>集合进行减法，则只有当括号里的值大于0的时候，才会获取参数的内容。</p>
@@ -637,7 +637,7 @@ display u;
 <p>其实这两者还是存在微妙的不同的，下面我们就将介绍之间的不同。</p>
 <h4 id="xxx：条件表达式在左"><a href="#xxx：条件表达式在左" class="headerlink" title="$() = xxx：条件表达式在左"></a>$() = xxx：条件表达式在左</h4><p><strong>条件表达式在<code>=</code>左边表示只有当条件表达式值为真的时候，才会有整个赋值表达式</strong>。</p>
 <p>例如下面的例子</p>
-<pre class="line-numbers language-gas"><code class="language-gas">rho(i) $ (sig(i) &lt;&gt; 0) = (1./sig(i)) - 1. ;
+<pre class="line-numbers language-gas"><code class="language-gas">rho(i) $ (sig(i) <> 0) = (1./sig(i)) - 1. ;
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>假设<code>sig</code>是一个参数，则只有当<code>sig(i)</code>不等于0的时候，才会有<code>rho(i) = (1./sig(I)) -1.</code>这个赋值表达式。</p>
 <p>当然，上面说过了只有非0值的逻辑表达式的值为True，所以上面的式子其实可以这样简写</p>
@@ -660,7 +660,7 @@ d3(i) $= d2(i);
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h4 id="xxx-：条件表达式在右边"><a href="#xxx-：条件表达式在右边" class="headerlink" title="xxx = $()：条件表达式在右边"></a>xxx = $()：条件表达式在右边</h4><p><strong>当条件表达式在<code>=</code>右侧的时候，表示逻辑表达式的值不为0时，条件表达式的值为项的值，否则为0</strong>。</p>
 <p>例子就是前面的例子：</p>
-<pre class="line-numbers language-gas"><code class="language-gas">A(I) = 1$(ord(I) &lt;= 2) + X(I-2)$(ord(I) &gt; 2);
+<pre class="line-numbers language-gas"><code class="language-gas">A(I) = 1$(ord(I) <= 2) + X(I-2)$(ord(I) > 2);
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <h3 id="6-条件表达式与等式（Equation）"><a href="#6-条件表达式与等式（Equation）" class="headerlink" title="6. 条件表达式与等式（Equation）"></a>6. 条件表达式与等式（Equation）</h3><p><code>GAMS</code>中的等式与赋值语句是完全不同的两码事。等式就是首先使用<code>equation</code>声明，而后具体定义的式子。等式中使用的符号和正常的<code>=</code>、<code>&lt;</code>、<code>&gt;</code>不同，就是因为等式是和赋值语句是完全不同的两码事。</p>
 <p>上面介绍了赋值语句和条件表达式的细节，下面将介绍等式与条件表达式之间的细节。</p>
@@ -1198,7 +1198,7 @@ eq1(i) $ b..
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">429.2k</span>
+                        class="white-color">424.4k</span>
             
             
             

@@ -30,10 +30,10 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.2"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
-<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css">
+<meta name="generator" content="Hexo 5.4.2">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-</head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
 
@@ -446,14 +446,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    7.2k
+                    7.1k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    33 分
+                    32 分
                 </div>
                 
 
@@ -721,7 +721,7 @@ RegionOfInterest roi
         struct _IplImage *maskROI; /* 在 OpenCV中必须置NULL */  
         void  *imageId;     /* 同上*/  
         struct _IplTileInfo *tileInfo; /*同上*/  
-        int  imageSize;     /* 图像数据大小(在交叉存取格式下imageSize=image-&gt;height*image-&gt;widthStep），单位字节*/  
+        int  imageSize;     /* 图像数据大小(在交叉存取格式下imageSize=image->height*image->widthStep），单位字节*/  
         char *imageData;  /* 指向排列的图像数据 */  
         int  widthStep;   /* 排列的图像行大小，以字节为单位 */  
         int  BorderMode[4]; /* 边际结束模式, 被OpenCV忽略 */  
@@ -780,61 +780,61 @@ RegionOfInterest roi
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="C-launch启动节点时候指定参数"><a href="#C-launch启动节点时候指定参数" class="headerlink" title="C. launch启动节点时候指定参数"></a>C. launch启动节点时候指定参数</h3><p>由于iai-kinect2自成一套系统，因此我们没有必要也很难修改他的代码来完成我们需要的功能。为此<code>iai-kinect2</code>的<code>launch</code>文件支持在启动的时候指定参数，来实现不同的功能，具体所有的参数如下</p>
 <pre class="line-numbers language-bash"><code class="language-bash">roslaunch kinect2_bridge kinect2_bridge.launch <span class="token punctuation">[</span>options:<span class="token operator">=</span>value<span class="token punctuation">]</span>
-base_name:<span class="token operator">=</span><span class="token operator">&lt;</span>string<span class="token operator">&gt;</span>
+base_name:<span class="token operator">=</span><span class="token operator">&lt;</span>string<span class="token operator">></span>
     default: kinect2
     info:    <span class="token keyword">set</span> base name <span class="token keyword">for</span> all topics
-sensor:<span class="token operator">=</span><span class="token operator">&lt;</span>string<span class="token operator">&gt;</span>
+sensor:<span class="token operator">=</span><span class="token operator">&lt;</span>string<span class="token operator">></span>
     default:
     info:    serial of the sensor to use
-fps_limit:<span class="token operator">=</span><span class="token operator">&lt;</span>double<span class="token operator">&gt;</span>
+fps_limit:<span class="token operator">=</span><span class="token operator">&lt;</span>double<span class="token operator">></span>
     default: -1.0
     info:    limit the frames per second
-calib_path:<span class="token operator">=</span><span class="token operator">&lt;</span>string<span class="token operator">&gt;</span>
+calib_path:<span class="token operator">=</span><span class="token operator">&lt;</span>string<span class="token operator">></span>
     default: /home/wiedemeyer/work/src/iai_kinect2/kinect2_bridge/data/
     info:    path to the calibration files
-use_png:<span class="token operator">=</span><span class="token operator">&lt;</span>bool<span class="token operator">&gt;</span>
+use_png:<span class="token operator">=</span><span class="token operator">&lt;</span>bool<span class="token operator">></span>
     default: <span class="token boolean">false</span>
     info:    Use PNG compression instead of TIFF
-jpeg_quality:<span class="token operator">=</span><span class="token operator">&lt;</span>int<span class="token operator">&gt;</span>
+jpeg_quality:<span class="token operator">=</span><span class="token operator">&lt;</span>int<span class="token operator">></span>
     default: 90
     info:    JPEG quality level from 0 to 100
-png_level:<span class="token operator">=</span><span class="token operator">&lt;</span>int<span class="token operator">&gt;</span>
+png_level:<span class="token operator">=</span><span class="token operator">&lt;</span>int<span class="token operator">></span>
     default: 1
     info:    PNG compression level from 0 to 9
-depth_method:<span class="token operator">=</span><span class="token operator">&lt;</span>string<span class="token operator">&gt;</span>
+depth_method:<span class="token operator">=</span><span class="token operator">&lt;</span>string<span class="token operator">></span>
     default: cuda
     info:    Use specific depth processing: default, cpu, opengl, opencl, cuda, clkde, cudakde
-depth_device:<span class="token operator">=</span><span class="token operator">&lt;</span>int<span class="token operator">&gt;</span>
+depth_device:<span class="token operator">=</span><span class="token operator">&lt;</span>int<span class="token operator">></span>
     default: -1
     info:    openCL device to use <span class="token keyword">for</span> depth processing
-reg_method:<span class="token operator">=</span><span class="token operator">&lt;</span>string<span class="token operator">&gt;</span>
+reg_method:<span class="token operator">=</span><span class="token operator">&lt;</span>string<span class="token operator">></span>
     default: opencl
     info:    Use specific depth registration: default, cpu, opencl
-reg_device:<span class="token operator">=</span><span class="token operator">&lt;</span>int<span class="token operator">&gt;</span>
+reg_device:<span class="token operator">=</span><span class="token operator">&lt;</span>int<span class="token operator">></span>
     default: -1
     info:    openCL device to use <span class="token keyword">for</span> depth registration
-max_depth:<span class="token operator">=</span><span class="token operator">&lt;</span>double<span class="token operator">&gt;</span>
+max_depth:<span class="token operator">=</span><span class="token operator">&lt;</span>double<span class="token operator">></span>
     default: 12.0
     info:    max depth value
-min_depth:<span class="token operator">=</span><span class="token operator">&lt;</span>double<span class="token operator">&gt;</span>
+min_depth:<span class="token operator">=</span><span class="token operator">&lt;</span>double<span class="token operator">></span>
     default: 0.1
     info:    min depth value
-queue_size:<span class="token operator">=</span><span class="token operator">&lt;</span>int<span class="token operator">&gt;</span>
+queue_size:<span class="token operator">=</span><span class="token operator">&lt;</span>int<span class="token operator">></span>
     default: 2
     info:    queue size of publisher
-bilateral_filter:<span class="token operator">=</span><span class="token operator">&lt;</span>bool<span class="token operator">&gt;</span>
+bilateral_filter:<span class="token operator">=</span><span class="token operator">&lt;</span>bool<span class="token operator">></span>
     default: <span class="token boolean">true</span>
     info:    <span class="token function">enable</span> bilateral filtering of depth images
-edge_aware_filter:<span class="token operator">=</span><span class="token operator">&lt;</span>bool<span class="token operator">&gt;</span>
+edge_aware_filter:<span class="token operator">=</span><span class="token operator">&lt;</span>bool<span class="token operator">></span>
     default: <span class="token boolean">true</span>
     info:    <span class="token function">enable</span> edge aware filtering of depth images
-publish_tf:<span class="token operator">=</span><span class="token operator">&lt;</span>bool<span class="token operator">&gt;</span>
+publish_tf:<span class="token operator">=</span><span class="token operator">&lt;</span>bool<span class="token operator">></span>
     default: <span class="token boolean">false</span>
     info:    publish static tf transforms <span class="token keyword">for</span> camera
-base_name_tf:<span class="token operator">=</span><span class="token operator">&lt;</span>string<span class="token operator">&gt;</span>
+base_name_tf:<span class="token operator">=</span><span class="token operator">&lt;</span>string<span class="token operator">></span>
     default: as base_name
     info:    base name <span class="token keyword">for</span> the tf frames
-worker_threads:<span class="token operator">=</span><span class="token operator">&lt;</span>int<span class="token operator">&gt;</span>
+worker_threads:<span class="token operator">=</span><span class="token operator">&lt;</span>int<span class="token operator">></span>
     default: 4
     info:    number of threads used <span class="token keyword">for</span> processing the images
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
@@ -873,7 +873,7 @@ sys<span class="token punctuation">.</span>path<span class="token punctuation">.
 
 <span class="token keyword">class</span> <span class="token class-name">iaiKinect2Viewer</span><span class="token punctuation">(</span>object<span class="token punctuation">)</span><span class="token punctuation">:</span>
     bridge <span class="token operator">=</span> CvBridge<span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> args<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> None<span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> args<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> None<span class="token punctuation">:</span>
         super<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span><span class="token punctuation">)</span>
         self<span class="token punctuation">.</span>subcribers<span class="token punctuation">:</span> List<span class="token punctuation">[</span>rospy<span class="token punctuation">.</span>Subscriber<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
         self<span class="token punctuation">.</span>windows_idx <span class="token operator">=</span> <span class="token number">0</span>
@@ -932,24 +932,24 @@ sys<span class="token punctuation">.</span>path<span class="token punctuation">.
             self<span class="token punctuation">.</span>subcribers<span class="token punctuation">.</span>append<span class="token punctuation">(</span>rospy<span class="token punctuation">.</span>Subscriber<span class="token punctuation">(</span>name<span class="token operator">=</span><span class="token string">"/"</span><span class="token punctuation">.</span>join<span class="token punctuation">(</span><span class="token punctuation">[</span>prefix<span class="token punctuation">,</span> quality<span class="token punctuation">,</span> <span class="token string">"image_ir"</span><span class="token punctuation">,</span> <span class="token string">"compressed"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span> data_class<span class="token operator">=</span>CompressedImage<span class="token punctuation">,</span> callback<span class="token operator">=</span>self<span class="token punctuation">.</span>show_compressed_image<span class="token punctuation">,</span> queue_size<span class="token operator">=</span><span class="token number">10</span><span class="token punctuation">,</span> callback_args<span class="token operator">=</span>self<span class="token punctuation">.</span>windows_idx<span class="token punctuation">)</span><span class="token punctuation">)</span>
             self<span class="token punctuation">.</span>windows_idx <span class="token operator">+=</span> <span class="token number">1</span>
         <span class="token keyword">else</span><span class="token punctuation">:</span>
-            <span class="token keyword">assert</span> <span class="token boolean">False</span><span class="token punctuation">,</span> f<span class="token string">"无效的参数：qualitt=&amp;#123;quality&amp;#125;, topic=&amp;#123;topic&amp;#125;"</span>
+            <span class="token keyword">assert</span> <span class="token boolean">False</span><span class="token punctuation">,</span> f<span class="token string">"无效的参数：qualitt={quality}, topic={topic}"</span>
 
     <span class="token keyword">def</span> <span class="token function">show_images</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> img<span class="token punctuation">,</span> window_idx<span class="token punctuation">)</span><span class="token punctuation">:</span>
         cv_img <span class="token operator">=</span> self<span class="token punctuation">.</span>bridge<span class="token punctuation">.</span>imgmsg_to_cv2<span class="token punctuation">(</span>img_msg<span class="token operator">=</span>img<span class="token punctuation">)</span>
-        cv2<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span>f<span class="token string">"viewer_&amp;#123;window_idx&amp;#125;"</span><span class="token punctuation">,</span> cv_img<span class="token punctuation">)</span>
+        cv2<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span>f<span class="token string">"viewer_{window_idx}"</span><span class="token punctuation">,</span> cv_img<span class="token punctuation">)</span>
         <span class="token keyword">if</span> cv2<span class="token punctuation">.</span>waitKey<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">27</span><span class="token punctuation">:</span>
             cv2<span class="token punctuation">.</span>destroyAllWindows<span class="token punctuation">(</span><span class="token punctuation">)</span>
             rospy<span class="token punctuation">.</span>signal_shutdown<span class="token punctuation">(</span>reason<span class="token operator">=</span><span class="token string">"pressed esc"</span><span class="token punctuation">)</span>
 
     <span class="token keyword">def</span> <span class="token function">show_compressed_image</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> img<span class="token punctuation">:</span> CompressedImage<span class="token punctuation">,</span> windows_idx<span class="token punctuation">)</span><span class="token punctuation">:</span>
         cv_img <span class="token operator">=</span> self<span class="token punctuation">.</span>bridge<span class="token punctuation">.</span>compressed_imgmsg_to_cv2<span class="token punctuation">(</span>cmprs_img_msg<span class="token operator">=</span>img<span class="token punctuation">)</span>
-        cv2<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span>f<span class="token string">"viewer_&amp;#123;windows_idx&amp;#125;"</span><span class="token punctuation">,</span> cv_img<span class="token punctuation">)</span>
+        cv2<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span>f<span class="token string">"viewer_{windows_idx}"</span><span class="token punctuation">,</span> cv_img<span class="token punctuation">)</span>
         <span class="token keyword">if</span> cv2<span class="token punctuation">.</span>waitKey<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">27</span><span class="token punctuation">:</span>
             cv2<span class="token punctuation">.</span>destroyAllWindows<span class="token punctuation">(</span><span class="token punctuation">)</span>
             rospy<span class="token punctuation">.</span>signal_shutdown<span class="token punctuation">(</span>reason<span class="token operator">=</span><span class="token string">"pressed esc"</span><span class="token punctuation">)</span>
 
 
-<span class="token keyword">def</span> <span class="token function">arg_parser</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> argparse<span class="token punctuation">.</span>Namespace<span class="token punctuation">:</span>
+<span class="token keyword">def</span> <span class="token function">arg_parser</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> argparse<span class="token punctuation">.</span>Namespace<span class="token punctuation">:</span>
     parser <span class="token operator">=</span> argparse<span class="token punctuation">.</span>ArgumentParser<span class="token punctuation">(</span>description<span class="token operator">=</span><span class="token string">"本程序用于可视化显示iai-kinect2的不同话题中的图片，以对比他们的不同"</span><span class="token punctuation">)</span>
     parser<span class="token punctuation">.</span>add_argument<span class="token punctuation">(</span><span class="token string">"-q"</span><span class="token punctuation">,</span> <span class="token string">"--quality"</span><span class="token punctuation">,</span> dest<span class="token operator">=</span><span class="token string">"quality"</span><span class="token punctuation">,</span> nargs<span class="token operator">=</span><span class="token string">"*"</span><span class="token punctuation">,</span> type<span class="token operator">=</span>str<span class="token punctuation">,</span> help<span class="token operator">=</span><span class="token string">"指定需要显示图像的话题组"</span><span class="token punctuation">)</span>
     parser<span class="token punctuation">.</span>add_argument<span class="token punctuation">(</span><span class="token string">"-t"</span><span class="token punctuation">,</span> <span class="token string">"--topic"</span><span class="token punctuation">,</span> dest<span class="token operator">=</span><span class="token string">"topic"</span><span class="token punctuation">,</span> nargs<span class="token operator">=</span><span class="token string">"+"</span><span class="token punctuation">,</span> type<span class="token operator">=</span>str<span class="token punctuation">,</span> help<span class="token operator">=</span><span class="token string">"指定需要显示图像的话题"</span><span class="token punctuation">)</span>
@@ -1021,9 +1021,9 @@ temp_path <span class="token operator">=</span> None
     bridge <span class="token operator">=</span> CvBridge<span class="token punctuation">(</span><span class="token punctuation">)</span>
     font <span class="token operator">=</span> cv2<span class="token punctuation">.</span>FONT_HERSHEY_DUPLEX
 
-    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> rgb_img_topic<span class="token punctuation">:</span> str<span class="token punctuation">,</span> depth_img_topic<span class="token punctuation">:</span> str<span class="token punctuation">,</span> if_detection_only<span class="token punctuation">:</span> bool <span class="token operator">=</span> <span class="token boolean">False</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> None<span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> rgb_img_topic<span class="token punctuation">:</span> str<span class="token punctuation">,</span> depth_img_topic<span class="token punctuation">:</span> str<span class="token punctuation">,</span> if_detection_only<span class="token punctuation">:</span> bool <span class="token operator">=</span> <span class="token boolean">False</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> None<span class="token punctuation">:</span>
         super<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span><span class="token punctuation">)</span>
-        rospy<span class="token punctuation">.</span>loginfo<span class="token punctuation">(</span>msg<span class="token operator">=</span>f<span class="token string">"&amp;#123;Fore.GREEN&amp;#125;启动物体检测节点！&amp;#123;Style.RESET_ALL&amp;#125;"</span><span class="token punctuation">)</span>
+        rospy<span class="token punctuation">.</span>loginfo<span class="token punctuation">(</span>msg<span class="token operator">=</span>f<span class="token string">"{Fore.GREEN}启动物体检测节点！{Style.RESET_ALL}"</span><span class="token punctuation">)</span>
         <span class="token keyword">if</span> if_detection_only<span class="token punctuation">:</span>
             rospy<span class="token punctuation">.</span>Subscriber<span class="token punctuation">(</span>name<span class="token operator">=</span>rgb_img_topic<span class="token punctuation">,</span> data_class<span class="token operator">=</span>CompressedImage<span class="token punctuation">,</span> callback<span class="token operator">=</span>self<span class="token punctuation">.</span>_detect_only_cb<span class="token punctuation">,</span>
                              queue_size<span class="token operator">=</span><span class="token number">10</span><span class="token punctuation">)</span>
@@ -1039,7 +1039,7 @@ temp_path <span class="token operator">=</span> None
         cv_image<span class="token punctuation">:</span> np<span class="token punctuation">.</span>ndarray <span class="token operator">=</span> self<span class="token punctuation">.</span>bridge<span class="token punctuation">.</span>compressed_imgmsg_to_cv2<span class="token punctuation">(</span>cmprs_img_msg<span class="token operator">=</span>img<span class="token punctuation">)</span>
         result_dict<span class="token punctuation">,</span> draw_img <span class="token operator">=</span> self<span class="token punctuation">.</span>yolo<span class="token punctuation">.</span>inference<span class="token punctuation">(</span>cv_image<span class="token punctuation">,</span> if_absolute<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> if_show<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
         t2 <span class="token operator">=</span> time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span>
-        draw_img <span class="token operator">=</span> cv2<span class="token punctuation">.</span>putText<span class="token punctuation">(</span>draw_img<span class="token punctuation">,</span> f<span class="token string">"fps: &amp;#123;1 / (t2 - self.last_time_rgb):&gt;5.2f&amp;#125;, seq_id: &amp;#123;img.header.seq&amp;#125;"</span><span class="token punctuation">,</span>
+        draw_img <span class="token operator">=</span> cv2<span class="token punctuation">.</span>putText<span class="token punctuation">(</span>draw_img<span class="token punctuation">,</span> f<span class="token string">"fps: {1 / (t2 - self.last_time_rgb):>5.2f}, seq_id: {img.header.seq}"</span><span class="token punctuation">,</span>
                                <span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">,</span> self<span class="token punctuation">.</span>font<span class="token punctuation">,</span> <span class="token number">0.8</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">255</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span>
         self<span class="token punctuation">.</span>last_time_rgb <span class="token operator">=</span> t2
         cv2<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span><span class="token string">"color_detections"</span><span class="token punctuation">,</span> draw_img<span class="token punctuation">)</span>
@@ -1063,9 +1063,9 @@ temp_path <span class="token operator">=</span> None
 
         rospy<span class="token punctuation">.</span>loginfo<span class="token punctuation">(</span>msg<span class="token operator">=</span><span class="token string">"Done inference, start to draw"</span><span class="token punctuation">)</span>
         <span class="token comment" spellcheck="true"># draw basic info</span>
-        cv_rgb_draw <span class="token operator">=</span> cv2<span class="token punctuation">.</span>putText<span class="token punctuation">(</span>cv_rgb_draw<span class="token punctuation">,</span> f<span class="token string">"FPS:&amp;#123;fps&amp;#125;, seq:&amp;#123;depth_img.header.seq&amp;#125;"</span><span class="token punctuation">,</span>
+        cv_rgb_draw <span class="token operator">=</span> cv2<span class="token punctuation">.</span>putText<span class="token punctuation">(</span>cv_rgb_draw<span class="token punctuation">,</span> f<span class="token string">"FPS:{fps}, seq:{depth_img.header.seq}"</span><span class="token punctuation">,</span>
                                   org<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">,</span> fontFace<span class="token operator">=</span>self<span class="token punctuation">.</span>font<span class="token punctuation">,</span> fontScale<span class="token operator">=</span><span class="token number">0.8</span><span class="token punctuation">,</span> color<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">255</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> thickness<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">)</span>
-        cv_depth_draw <span class="token operator">=</span> cv2<span class="token punctuation">.</span>putText<span class="token punctuation">(</span>cv_depth_draw<span class="token punctuation">,</span> f<span class="token string">"FPS:&amp;#123;fps&amp;#125;, seq:&amp;#123;depth_img.header.seq&amp;#125;"</span><span class="token punctuation">,</span>
+        cv_depth_draw <span class="token operator">=</span> cv2<span class="token punctuation">.</span>putText<span class="token punctuation">(</span>cv_depth_draw<span class="token punctuation">,</span> f<span class="token string">"FPS:{fps}, seq:{depth_img.header.seq}"</span><span class="token punctuation">,</span>
                                     org<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">,</span> fontFace<span class="token operator">=</span>self<span class="token punctuation">.</span>font<span class="token punctuation">,</span> fontScale<span class="token operator">=</span><span class="token number">0.8</span><span class="token punctuation">,</span> color<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">255</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> thickness<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">)</span>
 
         <span class="token comment" spellcheck="true"># draw depth</span>
@@ -1075,7 +1075,7 @@ temp_path <span class="token operator">=</span> None
                 <span class="token comment" spellcheck="true"># 周围100个点的平均，yolo的结果已经确保点在图像内</span>
                 depth <span class="token operator">=</span> self<span class="token punctuation">.</span>__get_depth<span class="token punctuation">(</span><span class="token punctuation">(</span>x <span class="token punctuation">:</span><span class="token operator">=</span> item<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>y <span class="token punctuation">:</span><span class="token operator">=</span> item<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span> depth_image<span class="token operator">=</span>cv_depth<span class="token punctuation">,</span> area_size<span class="token operator">=</span><span class="token number">20</span><span class="token punctuation">)</span>
                 x<span class="token punctuation">,</span> y <span class="token operator">=</span> int<span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">,</span> int<span class="token punctuation">(</span>y<span class="token punctuation">)</span>
-                cv_depth_draw <span class="token operator">=</span> cv2<span class="token punctuation">.</span>putText<span class="token punctuation">(</span>cv_depth_draw<span class="token punctuation">,</span> text<span class="token operator">=</span>f<span class="token string">"&amp;#123;d_type&amp;#125;, &amp;#123;depth / 10:&gt;.2f&amp;#125;m"</span><span class="token punctuation">,</span> org<span class="token operator">=</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token number">-5</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                cv_depth_draw <span class="token operator">=</span> cv2<span class="token punctuation">.</span>putText<span class="token punctuation">(</span>cv_depth_draw<span class="token punctuation">,</span> text<span class="token operator">=</span>f<span class="token string">"{d_type}, {depth / 10:>.2f}m"</span><span class="token punctuation">,</span> org<span class="token operator">=</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token number">-5</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
                                             fontFace<span class="token operator">=</span>self<span class="token punctuation">.</span>font<span class="token punctuation">,</span> fontScale<span class="token operator">=</span><span class="token number">0.8</span><span class="token punctuation">,</span> color<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">255</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> lineType<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">)</span>
                 cv_depth_draw <span class="token operator">=</span> cv2<span class="token punctuation">.</span>circle<span class="token punctuation">(</span>cv_depth_draw<span class="token punctuation">,</span> center<span class="token operator">=</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">,</span> radius<span class="token operator">=</span><span class="token number">5</span><span class="token punctuation">,</span> color<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">255</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
                                            thickness<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> lineType<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">)</span>
@@ -1088,7 +1088,7 @@ temp_path <span class="token operator">=</span> None
             rospy<span class="token punctuation">.</span>signal_shutdown<span class="token punctuation">(</span>reason<span class="token operator">=</span><span class="token string">"pressed esc"</span><span class="token punctuation">)</span>
 
     @staticmethod
-    <span class="token keyword">def</span> <span class="token function">__get_depth</span><span class="token punctuation">(</span>x<span class="token punctuation">:</span> float<span class="token punctuation">,</span> y<span class="token punctuation">:</span> float<span class="token punctuation">,</span> depth_image<span class="token punctuation">:</span> np<span class="token punctuation">.</span>ndarray<span class="token punctuation">,</span> area_size<span class="token punctuation">:</span> int <span class="token operator">=</span> <span class="token number">20</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> float<span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__get_depth</span><span class="token punctuation">(</span>x<span class="token punctuation">:</span> float<span class="token punctuation">,</span> y<span class="token punctuation">:</span> float<span class="token punctuation">,</span> depth_image<span class="token punctuation">:</span> np<span class="token punctuation">.</span>ndarray<span class="token punctuation">,</span> area_size<span class="token punctuation">:</span> int <span class="token operator">=</span> <span class="token number">20</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> float<span class="token punctuation">:</span>
         boundary <span class="token operator">=</span> <span class="token punctuation">[</span>int<span class="token punctuation">(</span>position<span class="token punctuation">)</span> <span class="token keyword">for</span> position <span class="token keyword">in</span>
                     <span class="token punctuation">[</span>y <span class="token operator">-</span> area_size <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">,</span> y <span class="token operator">+</span> area_size <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">,</span> x <span class="token operator">-</span> area_size <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">,</span> x <span class="token operator">+</span> area_size <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
         <span class="token keyword">return</span> depth_image<span class="token punctuation">[</span>boundary<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">:</span>boundary<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> boundary<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">:</span>boundary<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">.</span>mean<span class="token punctuation">(</span><span class="token punctuation">)</span>
@@ -1685,7 +1685,7 @@ temp_path <span class="token operator">=</span> None
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">429.2k</span>
+                        class="white-color">424.4k</span>
             
             
             

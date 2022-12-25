@@ -30,10 +30,10 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.2"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
-<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css">
+<meta name="generator" content="Hexo 5.4.2">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-</head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
 
@@ -597,14 +597,14 @@
 </ul>
 <p>具体的时序图如下：</p>
 <pre class="line-numbers language-mermaid"><code class="language-mermaid">    sequenceDiagram
-    CPU-&gt;&gt;USB Port 1: Fetch the data from file zzzzzz for me
-    USB Port 1 --&gt;&gt; Main Memory: Put data1： xxxxxxx on yyyyyyy
-    USB Port 1 --&gt;&gt; Main Memory: Put data2： xxxxxxx on yyyyyyy
-    USB Port 1 --&gt;&gt; Main Memory: .....
-    USB Port 1 --&gt;&gt; Main Memory: Put dataN： xxxxxxx on yyyyyyy
-    USB Port 1 --&gt;&gt; CPU: All data you need is put on yyyyyyy
-    CPU --&gt;&gt; Main Memory: I need data on yyyyyy
-    Main Memory --&gt;&gt; CPU: Here is your data: xxxxxxx
+    CPU->>USB Port 1: Fetch the data from file zzzzzz for me
+    USB Port 1 -->> Main Memory: Put data1： xxxxxxx on yyyyyyy
+    USB Port 1 -->> Main Memory: Put data2： xxxxxxx on yyyyyyy
+    USB Port 1 -->> Main Memory: .....
+    USB Port 1 -->> Main Memory: Put dataN： xxxxxxx on yyyyyyy
+    USB Port 1 -->> CPU: All data you need is put on yyyyyyy
+    CPU -->> Main Memory: I need data on yyyyyy
+    Main Memory -->> CPU: Here is your data: xxxxxxx
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211230191239374.png" alt="CPU与控制器的交互"></p>
 <p>因此，称在某些情况下计算机中止当前程序的运行，并转而去运行其他的程序的现象为<strong>中断(Interruput)</strong>。上面的例子就是典型的I/O中断，即由于输入输出导致的中断。而导致中断发生的事件称为<strong>中断事件(Interrupt Event)</strong>。</p>
@@ -1239,7 +1239,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">429.2k</span>
+                        class="white-color">424.4k</span>
             
             
             

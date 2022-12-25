@@ -30,10 +30,10 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.2"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
-<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css">
+<meta name="generator" content="Hexo 5.4.2">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-</head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
 
@@ -469,20 +469,20 @@
 <pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/blog-test$ <span class="token function">touch</span> before_gen.txt
 <span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/blog-test$ <span class="token function">touch</span> after_gen.txt
 <span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/blog-test$ <span class="token function">touch</span> added_gen.txt
-<span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/blog-test$ tree <span class="token operator">&gt;&gt;</span> before_gen.txt
+<span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/blog-test$ tree <span class="token operator">>></span> before_gen.txt
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="3-生成博客-——-hexo-clean-amp-hexo-generate"><a href="#3-生成博客-——-hexo-clean-amp-hexo-generate" class="headerlink" title="3. 生成博客 —— hexo clean &amp; hexo generate"></a>3. 生成博客 —— <code>hexo clean</code> &amp; <code>hexo generate</code></h3><p>前面说道，<code>Hexo</code>的工作原理是通过<code>Markdown</code>引擎将<code>Markdown</code>格式的文本渲染成<code>HTML</code>，因此每一次我们在写完文章之后都需要生成一下博文，注意<code>hexo</code>提供了简写命令，因此g、gen、generate都是可以的</p>
 <pre><code>(base) jack@jack-Alienware-m15-R3:~/project/blog-test$ hexo gen
 </code></pre><p>可以看到生成了不少文件内容</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211113215116668.png" alt="hexo gen生成博文"></p>
 <p>最后输出一下目录方便后面查看hexo的运行原理</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/blog-test$ tree <span class="token operator">&gt;&gt;</span> after_gen.txt
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/blog-test$ tree <span class="token operator">>></span> after_gen.txt
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <h3 id="4-新加一篇博客-——-hexo-new"><a href="#4-新加一篇博客-——-hexo-new" class="headerlink" title="4. 新加一篇博客 —— hexo new"></a>4. 新加一篇博客 —— <code>hexo new</code></h3><p>我们自己添加博客，需要使用<code>hexo new 文章名</code>，如果文章名称中含有特殊字符，需要用<code>''</code>包裹起来</p>
 <pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/blog-test$ hexo new 第一篇博文
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>新添加的博客在<code>source/_posts/</code>下，使用编辑器打开即可，后面会写一个<code>Typora + 腾讯云床</code>的博客编写环境教程，挖个坑</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/blog-test$ <span class="token keyword">echo</span> <span class="token string">"# 大标题"</span> <span class="token operator">&gt;&gt;</span> source/_posts/第一篇博文.md
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/blog-test$ <span class="token keyword">echo</span> <span class="token string">"# 大标题"</span> <span class="token operator">>></span> source/_posts/第一篇博文.md
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>接下来继续生成博客，然后我们启动server来看看我们新写的博文，server的简写是s</p>
 <p>注意，在生成前需要用clean清除一下中间的文件</p>
@@ -493,7 +493,7 @@
 <p>可以看到多了一篇文章</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211113220330894.png" alt="添加文章之后的结果"></p>
 <p>同样，我们记录一下，方便后面讲解原理</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/blog-test$ tree <span class="token operator">&gt;&gt;</span> added_gen.txt
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/blog-test$ tree <span class="token operator">>></span> added_gen.txt
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>以上就是关于<code>Hexo</code>的一些基础命令使用</p>
 <h2 id="2-Hexo的运行原理"><a href="#2-Hexo的运行原理" class="headerlink" title="2. Hexo的运行原理"></a>2. Hexo的运行原理</h2><h3 id="1-Hexo的目录结构"><a href="#1-Hexo的目录结构" class="headerlink" title="1. Hexo的目录结构"></a>1. Hexo的目录结构</h3><p>我们通过<code>tree</code>命令来查看</p>
@@ -1046,7 +1046,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">429.2k</span>
+                        class="white-color">424.4k</span>
             
             
             

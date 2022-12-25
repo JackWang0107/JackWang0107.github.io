@@ -1,0 +1,1550 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="ROS教程 2：ROS开发环境搭建, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
+    <meta name="description" content="本文是ROS系列教程的第二篇文章，介绍了如何搭建ROS开发环境">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>ROS教程 2：ROS开发环境搭建 | JackWang&#39;s Blog</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.2">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+
+   <style>
+    body{
+       background-image: url(https://cdn.jsdelivr.net/gh/Tokisaki-Galaxy/res/site/medias/background.jpg);
+       background-repeat:no-repeat;
+       background-size: 100% 100%;
+       background-attachment:fixed;
+    }
+</style>
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">JackWang&#39;s Blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-book-reader" style="zoom: 0.6;"></i>
+      
+      <span>博客</span>
+      <i class="fas fa-chevron-down" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/tags">
+          
+          <i class="fas fa-tags" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按标签归类文章</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories">
+          
+          <i class="fas fa-bookmark" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按目录归类文章</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/archives">
+          
+          <i class="fas fa-archive" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按日期分类文章</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">JackWang&#39;s Blog</div>
+        <div class="logo-desc">
+            
+            JackWang的个人博客
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-book-reader"></i>
+			
+			博客
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>
+
+                  <a href="/tags " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-tags" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按标签归类文章</    span>
+
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/categories " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-bookmark" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按目录归类文章</    span>
+
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/archives " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-archive" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按日期分类文章</    span>
+
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('抱歉，这篇文章并不想让所有人都看到，请输入授权密码观看')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://jack-1307599355.cos.ap-shanghai.myqcloud.com/%E5%B1%8F%E5%B9%95%E5%BD%95%E5%88%B62022-12-24%20%E4%B8%8B%E5%8D%881.26.48.gif')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">ROS教程 2：ROS开发环境搭建</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/ROS/">
+                                <span class="chip bg-color">ROS</span>
+                            </a>
+                        
+                            <a href="/tags/ROS%E6%95%99%E7%A8%8B/">
+                                <span class="chip bg-color">ROS教程</span>
+                            </a>
+                        
+                            <a href="/tags/ROS%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
+                                <span class="chip bg-color">ROS开发环境搭建</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/ROS%E6%95%99%E7%A8%8B/" class="post-category">
+                                ROS教程
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2022-12-23
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2022-12-25
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    3.9k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    14 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/%E5%B1%8F%E5%B9%95%E5%BD%95%E5%88%B62022-12-24%20%E4%B8%8B%E5%8D%881.26.48.gif" alt="ROS开发环境搭建"></p>
+<h1 id="ROS教程-2：ROS开发环境搭建"><a href="#ROS教程-2：ROS开发环境搭建" class="headerlink" title="ROS教程 2：ROS开发环境搭建"></a>ROS教程 2：ROS开发环境搭建</h1><p>在上一个教程中，我们成功安装了<code>ROS</code>。但是截止目前为止，我们还没有办法进行开发，或者说没有办法舒服的进行开发。因为我们没有搭建出来开发环境，所以本文就将介绍如何搭建<code>ROS</code>开发环境，从而实现诸如代码补全等等功能，最终实现一个舒服的开发环境。</p>
+<h2 id="1-终端安装"><a href="#1-终端安装" class="headerlink" title="1. 终端安装"></a>1. 终端安装</h2><p>我们在前面的一节中讲到，一个机器人，在软件层面想要正常运行的话，肯定是需要多个不同的进程相互配合的，例如：有的进程负责视觉，有的进程负责运动，有的进程负责定位和导航。</p>
+<p>而<code>ROS</code>作为软件层面机器人的开发工具，具备了是负责统一去管理进程的能力。<code>ROS</code>中将每个进程抽象为一个节点（<code>Node</code>），而将某两个有数据交互的进程视为视为有边连接的结点。因此就将机器人的进程管理抽象为了图，从而就可以把数学上的有向图、无向图、有向无环图等等概念运用进来，从而实现了用节点图来描述机器人的正常运行状态。</p>
+<p>例如下面这个极简的例子：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221223234224196.png" alt="机器人需要多进程控制" style="zoom: 50%;"></p>
+<p><strong>因此，未来我们是一定需要运行多个进程的，为此我们就一定需要在终端中同时运行多个进程</strong>。为此，我们需要一个能够支持多终端或者终端复用的软件。目前有两个解决方案：</p>
+<ul>
+<li><code>Termination</code></li>
+<li><code>Tmux</code></li>
+</ul>
+<h3 id="1-1-Terminator"><a href="#1-1-Terminator" class="headerlink" title="1.1 Terminator"></a>1.1 Terminator</h3><p><code>Terminator</code>本质上是让多个终端合并到一个窗口中，最终效果如下：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/terminator%E6%95%88%E6%9E%9C.png" alt="Terminator效果"></p>
+<h4 id="1-1-1-安装Terminator"><a href="#1-1-1-安装Terminator" class="headerlink" title="1.1.1 安装Terminator"></a>1.1.1 安装Terminator</h4><p>运行下面的命令安装<code>Terminator</code></p>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">sudo</span> apt <span class="token function">install</span> terminator
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>然后安装完了之后默认会修改<code>Ctrl+Alt+T</code>键为打开<code>Terminator</code></p>
+<h4 id="1-1-2-使用Terminator"><a href="#1-1-2-使用Terminator" class="headerlink" title="1.1.2 使用Terminator"></a>1.1.2 使用Terminator</h4><p>使用<code>Terminator</code>的时候可以点击右键来在左侧还是右侧创建新的终端，也可以使用快捷键来快速的创建。</p>
+<p>下面是快捷键的列表，但是说咯啊黄思华，用不到这么多，只会用到<code>水平分割</code>、<code>垂直分割</code>、<code>移动到上面的终端</code>这几个快捷键</p>
+<pre class="line-numbers language-bash`"><code class="language-bash`">Alt+Up                          //移动到上面的终端
+Alt+Down                        //移动到下面的终端
+Alt+Left                        //移动到左边的终端
+Alt+Right                       //移动到右边的终端
+Ctrl+Shift+O                    //水平分割终端
+Ctrl+Shift+E                    //垂直分割终端
+Ctrl+Shift+Right                //在垂直分割的终端中将分割条向右移动
+Ctrl+Shift+Left                 //在垂直分割的终端中将分割条向左移动
+Ctrl+Shift+Up                   //在水平分割的终端中将分割条向上移动
+Ctrl+Shift+Down                 //在水平分割的终端中将分割条向下移动
+Ctrl+Shift+S                    //隐藏/显示滚动条
+Ctrl+Shift+F                    //搜索
+Ctrl+Shift+C                    //复制选中的内容到剪贴板
+Ctrl+Shift+V                    //粘贴剪贴板的内容到此处
+Ctrl+Shift+W                    //关闭当前终端
+Ctrl+Shift+Q                    //退出当前窗口，当前窗口的所有终端都将被关闭
+Ctrl+Shift+X                    //最大化显示当前终端
+Ctrl+Shift+Z                    //最大化显示当前终端并使字体放大
+Ctrl+Shift+N or Ctrl+Tab        //移动到下一个终端
+Ctrl+Shift+P or Ctrl+Shift+Tab  //Crtl+Shift+Tab 移动到之前的一个终端
+F11                             //全屏开关
+Ctrl+Shift+T                    //打开一个新的标签
+Ctrl+PageDown                   //移动到下一个标签
+Ctrl+PageUp                     //移动到上一个标签
+Ctrl+Shift+PageDown             //将当前标签与其后一个标签交换位置
+Ctrl+Shift+PageUp               //将当前标签与其前一个标签交换位置
+Ctrl+Plus (+)                   //增大字体
+Ctrl+Minus (-)                  //减小字体
+Ctrl+Zero (0)                   //恢复字体到原始大小
+Ctrl+Shift+R                    //重置终端状态
+Ctrl+Shift+G                    //重置终端状态并clear屏幕
+Super+g                         //绑定所有的终端，以便向一个输入能够输入到所有的终端
+Super+Shift+G                   //解除绑定
+Super+t                         //绑定当前标签的所有终端，向一个终端输入的内容会自动输入到其他终端
+Super+Shift+T                   //解除绑定
+Ctrl+Shift+I                    //打开一个窗口，新窗口与原来的窗口使用同一个进程
+Super+i                         //打开一个新窗口，新窗口与原来的窗口使用不同的进程
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="1-2-Tmux"><a href="#1-2-Tmux" class="headerlink" title="1.2 Tmux"></a>1.2 Tmux</h3><p>使用<code>Tmux</code>的主要原因就是，<code>Terminator</code>比较丑，<code>zsh</code>下使用<code>toplevel 10K + Drcular Color</code>就能够实现我下面这张图的效果，明显是好看了很多。</p>
+<p>使用的工具美观了，自然开发的时候心情就会好很多，代码写起来也舒服 :)</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221223235951645.png" alt="zsh + toplevel 10K + Drcular Theme实现的绝美终端"></p>
+<p>和<code>Temernator</code>是多个终端拼接到一个窗口，而<code>Tmux</code>则是一个终端中维护多个输入输出缓冲区，从而模拟多个终端。<strong>因此，<code>Tmux</code>中的每一个终端称为一个面板</strong></p>
+<h4 id="1-2-1-安装Tmux"><a href="#1-2-1-安装Tmux" class="headerlink" title="1.2.1 安装Tmux"></a>1.2.1 安装Tmux</h4><p>使用下面的命令安装<code>Tmux</code></p>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> tmux
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h4 id="1-2-2-配置Tmux"><a href="#1-2-2-配置Tmux" class="headerlink" title="1.2.2 配置Tmux"></a>1.2.2 配置Tmux</h4><p>刚下载的<code>Tmux</code>其实并不是很好用，需要先配置一下才好用。<code>Tmux</code>的配置文件是<code>~/.tmux.conf</code></p>
+<p>首先打开<code>Tmux</code>的配置文件</p>
+<pre class="line-numbers language-bash`"><code class="language-bash`">vim ~/.tmux.conf
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h5 id="A-支持鼠标操作"><a href="#A-支持鼠标操作" class="headerlink" title="A. 支持鼠标操作"></a>A. 支持鼠标操作</h5><p>然后添加下面的配置信息</p>
+<pre class="line-numbers language-yaml"><code class="language-yaml"><span class="token comment" spellcheck="true"># 支持鼠标调整窗口大小、鼠标点击选择终端等等</span>
+<span class="token comment" spellcheck="true"># 老版本：</span>
+<span class="token comment" spellcheck="true">#setw -g mode-mouse on # 支持鼠标选取文本等</span>
+<span class="token comment" spellcheck="true">#setw -g mouse-resize-pane on # 支持鼠标拖动调整面板的大小(通过拖动面板间的分割线)</span>
+<span class="token comment" spellcheck="true">#setw -g mouse-select-pane on # 支持鼠标选中并切换面板</span>
+<span class="token comment" spellcheck="true">#setw -g mouse-select-window on # 支持鼠标选中并切换窗口(通过点击状态栏窗口名称)</span>
+
+<span class="token comment" spellcheck="true"># v2.1及以上的版本</span>
+set<span class="token punctuation">-</span>option <span class="token punctuation">-</span>g mouse on
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h5 id="B-修改前缀快捷键"><a href="#B-修改前缀快捷键" class="headerlink" title="B. 修改前缀快捷键"></a>B. 修改前缀快捷键</h5><p><code>Tmux</code>中的快捷键是首先需要按下前缀快捷键，然后再按下需要执行的命令键，例如先按下<code>Ctrl + b</code>，然后再按<code>"</code>来水平分割窗口</p>
+<p>但是由于<code>Ctrl + b</code>实在是不方便按，因此我们可以添加一个新的不常用的案件作为前缀快捷键，例如<strong>`</strong>这个键</p>
+<p>使用下面的配置添加前缀快捷键</p>
+<pre class="line-numbers language-yaml"><code class="language-yaml">set<span class="token punctuation">-</span>option <span class="token punctuation">-</span>g prefix2 ` <span class="token comment" spellcheck="true"># 设置一个不常用的`键作为指令前缀，按键更快些</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h5 id="C-设置多面板快捷键"><a href="#C-设置多面板快捷键" class="headerlink" title="C. 设置多面板快捷键"></a>C. 设置多面板快捷键</h5><p><code>tmux</code>中，使用最多的功能之一就是新增一个面板。水平方向新增面板的指令是 <code>prefix + "</code> ，垂直方向是 <code>prefix + %</code>，<code>"</code> 和 <code>%</code>需要两个键同时按下才能完成，加上指令前缀至少需要3~4次按键才能组成一个完整的指令，同时这个两个键也不够醒目和方便，因此我们可以绑定两个更常用的指令 <code>-</code>、<code>|</code>，如下所示：</p>
+<pre class="line-numbers language-yaml"><code class="language-yaml">unbind '"'
+bind <span class="token punctuation">-</span> splitw <span class="token punctuation">-</span>v <span class="token punctuation">-</span>c '<span class="token comment" spellcheck="true">#{pane_current_path}' # 垂直方向新增面板，默认进入当前目录</span>
+unbind %
+bind <span class="token punctuation">|</span> splitw <span class="token punctuation">-</span>h <span class="token punctuation">-</span>c '<span class="token comment" spellcheck="true">#{pane_current_path}' # 水平方向新增面板，默认进入当前目录</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h5 id="D-快速面板切换"><a href="#D-快速面板切换" class="headerlink" title="D. 快速面板切换"></a>D. 快速面板切换</h5><p>鼠标支持确实能带来很大的便捷性，特别是对于习惯了鼠标操作的<code>tmux</code>新手，但是由于手离开键盘去操作鼠标，然后再回来操作键盘，就会导致效率低很多。如果能够用键盘来实现在不同的</p>
+<p>虽然指令前缀加<code>方向键</code>可以切换面板，但<code>方向键</code>太远，不够快，所以我们可以将面板切换升级为熟悉的<code>h</code>、<code>j</code>、<code>k</code>、<code>l</code>键位。</p>
+<pre class="line-numbers language-yaml"><code class="language-yaml"><span class="token comment" spellcheck="true"># 绑定hjkl键为面板切换的上下左右键</span>
+bind <span class="token punctuation">-</span>r k select<span class="token punctuation">-</span>pane <span class="token punctuation">-</span>U <span class="token comment" spellcheck="true"># 绑定k为↑</span>
+bind <span class="token punctuation">-</span>r j select<span class="token punctuation">-</span>pane <span class="token punctuation">-</span>D <span class="token comment" spellcheck="true"># 绑定j为↓</span>
+bind <span class="token punctuation">-</span>r h select<span class="token punctuation">-</span>pane <span class="token punctuation">-</span>L <span class="token comment" spellcheck="true"># 绑定h为←</span>
+bind <span class="token punctuation">-</span>r l select<span class="token punctuation">-</span>pane <span class="token punctuation">-</span>R <span class="token comment" spellcheck="true"># 绑定l为→</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><code>-r</code>表示可重复按键，大概500ms之内，重复的<code>h</code>、<code>j</code>、<code>k</code>、<code>l</code>按键都将有效，完美支持了快速切换的Geek需求。</p>
+<p>除了上下左右外， 还有几个快捷指令可以设置。s</p>
+<pre class="line-numbers language-yaml"><code class="language-yaml">bind <span class="token punctuation">-</span>r e lastp <span class="token comment" spellcheck="true"># 选择最后一个面板</span>
+bind <span class="token punctuation">-</span>r ^e last <span class="token comment" spellcheck="true"># 选择最后一个窗口</span>
+
+bind <span class="token punctuation">-</span>r ^u swapp <span class="token punctuation">-</span>U <span class="token comment" spellcheck="true"># 与前一个面板交换位置</span>
+bind <span class="token punctuation">-</span>r ^d swapp <span class="token punctuation">-</span>D <span class="token comment" spellcheck="true"># 与后一个面板交换位置</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h5 id="E-调整面板"><a href="#E-调整面板" class="headerlink" title="E. 调整面板"></a>E. 调整面板</h5><p>习惯了全键盘操作后，命令的便捷性不言而喻。因此设置一下面板大小调整的指令，配置如下：</p>
+<pre class="line-numbers language-yaml"><code class="language-yaml"><span class="token comment" spellcheck="true"># 绑定Ctrl+hjkl键为面板上下左右调整边缘的快捷指令</span>
+bind <span class="token punctuation">-</span>r ^k resizep <span class="token punctuation">-</span>U 10 <span class="token comment" spellcheck="true"># 绑定Ctrl+k为往↑调整面板边缘10个单元格</span>
+bind <span class="token punctuation">-</span>r ^j resizep <span class="token punctuation">-</span>D 10 <span class="token comment" spellcheck="true"># 绑定Ctrl+j为往↓调整面板边缘10个单元格</span>
+bind <span class="token punctuation">-</span>r ^h resizep <span class="token punctuation">-</span>L 10 <span class="token comment" spellcheck="true"># 绑定Ctrl+h为往←调整面板边缘10个单元格</span>
+bind <span class="token punctuation">-</span>r ^l resizep <span class="token punctuation">-</span>R 10 <span class="token comment" spellcheck="true"># 绑定Ctrl+l为往→调整面板边缘10个单元格</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>注意，<code>resizep</code>即<code>resize-pane</code>的别名。</p>
+<h4 id="1-2-3-使用Tmux"><a href="#1-2-3-使用Tmux" class="headerlink" title="1.2.3 使用Tmux"></a>1.2.3 使用Tmux</h4><p>最后，经过上面的设置后按照下面的方法使用<code>Tmux</code>：</p>
+<ul>
+<li><strong>` + |</strong>：垂直分割</li>
+<li><strong>` + -</strong>：水平分割</li>
+</ul>
+<h2 id="2-VSCode"><a href="#2-VSCode" class="headerlink" title="2. VSCode"></a>2. VSCode</h2><p><code>VSCode</code>编辑器作为万能编辑器，连开发操作系统都不在话下，<code>ROS</code>自然也是能够开发的。我们安装几个插件即可</p>
+<p><code>VSCode</code>的安装就不说了，下面直接说一些需要安装的插件。</p>
+<h3 id="2-1-C-C-Extension-Pack"><a href="#2-1-C-C-Extension-Pack" class="headerlink" title="2.1 C/C++ Extension Pack"></a>2.1 C/C++ Extension Pack</h3><p><code>ROS</code>本身是一个语言弱相关的框架，支持用<code>Python</code>、<code>C++</code>、<code>Java</code>等多种语言去开发。由于我们未来会讲解如何使用<code>C++</code>来开发<code>ROS</code>，因此我们需要再<code>VSCode</code>中安装支持<code>C++</code>的插件，即<code>C/C++ Extension Pack</code>。</p>
+<p>这个<code>Pack</code>里面包含了<code>C++</code>开发的基本插件，因此直接下载即可</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221224022433251.png" alt="C/C++ Extension Pack" style="zoom:33%;"></p>
+<p>然后额外安装一个<code>CMake</code>的补全工具插件，这样<code>C++</code>的开发的插件就配置好了</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221224022813259.png" alt="CMake语法提示插件" style="zoom:33%;"></p>
+<h3 id="2-2-Python-Pylance"><a href="#2-2-Python-Pylance" class="headerlink" title="2.2 Python / Pylance"></a>2.2 Python / Pylance</h3><p>同样，因为我们后面会讲解如何用<code>Python</code>来开发<code>ROS</code>，所以还得安装一下<code>Python</code>的插件</p>
+<p>首先是<code>Python</code>的基础插件，用于为VSCode添加基础的调试等功能</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221224023335827.png" alt="Python插件安装" style="zoom:33%;"></p>
+<p>然后就是<code>Python</code>的语法高亮、语法补全的插件<code>Pylance</code></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221224024408754.png" alt="Pylance安装" style="zoom:33%;"></p>
+<h3 id="2-3-ROS插件安装"><a href="#2-3-ROS插件安装" class="headerlink" title="2.3 ROS插件安装"></a>2.3 ROS插件安装</h3><p>令人惊喜的是，目前微软的<code>VSCode</code>官方也实现了对<code>ROS</code>的支持，因此我们直接下载、安装微软官方的<code>ROS</code>插件，以在<code>VSCode</code>中添加对<code>ROS</code>的支持</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221224024608972.png" alt="ROS插件安装" style="zoom:33%;"></p>
+<h2 id="3-测试开发环境：实现一个例程"><a href="#3-测试开发环境：实现一个例程" class="headerlink" title="3. 测试开发环境：实现一个例程"></a>3. 测试开发环境：实现一个例程</h2><p>我们上面就搭建完了<code>ROS</code>开发环境，接下来我们实现一下<code>Hello World</code>例程来测试一下是否搭建好了<code>VSCode</code>中的开发环境。</p>
+<p>注意，我们下面的目的是为了测试是否搭建好了开发环境，而不是介绍如何进行开发，因此我们用到的命令我们不会进行解释，我们下一节会专门的进行介绍，所以这里只会给出命令</p>
+<h3 id="3-1-创建工作空间"><a href="#3-1-创建工作空间" class="headerlink" title="3.1 创建工作空间"></a>3.1 创建工作空间</h3><p>运行下面的命令，来创建一个<code>ROS</code>工作空间</p>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">mkdir</span> -p xxx_ws/src<span class="token punctuation">(</span>必须得有 src<span class="token punctuation">)</span>
+<span class="token function">cd</span> xxx_ws
+catkin_make
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>如果编译的时候遇到下面的报错，则安装一下empy即可</p>
+<pre class="line-numbers language-bash"><code class="language-bash">python -m pip <span class="token function">install</span> empy
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221224025644260.png" alt="没有empy"></p>
+<p>如果遇到下述错误，则是没有<code>catkin_pkg</code>的<code>Python</code>库，同样运行下面的命令安装一下即可</p>
+<pre class="line-numbers language-bash"><code class="language-bash">python -m pip <span class="token function">install</span> catkin_pkg
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221224025947131.png" alt="没有catkin_pkg的Python库"></p>
+<p>最后正常编译的话，会得到下面的结果</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221224091747356.png" alt="正常编译的结果"></p>
+<h3 id="3-2-VSCode配置项目"><a href="#3-2-VSCode配置项目" class="headerlink" title="3.2 VSCode配置项目"></a>3.2 VSCode配置项目</h3><p>编译好工作空间之后，首先用<code>VSCode</code>打开工作空间：</p>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">cd</span> <span class="token operator">&lt;</span>path-to-workspace<span class="token operator">></span>/xxx_ws
+code ./
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h4 id="A-设置CMakeLists-txt位置"><a href="#A-设置CMakeLists-txt位置" class="headerlink" title="A. 设置CMakeLists.txt位置"></a>A. 设置CMakeLists.txt位置</h4><p>然后按下<code>Ctrl + P</code>，输入<code>&gt; CMake</code>，然后选择<code>CMake: Configure</code>这一项来配置<code>CMake</code>工程</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221224093627387.png" alt="配置CMake工程" style="zoom: 25%;"></p>
+<p>不过因为<code>ROS</code>工作空间的<code>CMakeLists.txt</code>不是放在根目录下的，所以一开始配置的时候会显示找不到<code>CMakeLists.txt</code>，此时我们点击<code>Locate</code>然后手动选择路径</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221224093656577.png" alt="点击Locate手动选择路径-1" style="zoom:25%;"></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221224093727465.png" alt="手动选择路径-2" style="zoom:25%;"></p>
+<p>最后，配置成功后就会在当前的工作空间下新建一个<code>.vscode</code>目录，这个目录就是<code>VSCode</code>对当前项目的配置，未来<code>VSCode</code>的一些设置就会放在这个目录中。不过目前就只有<code>cmake.sourceDirectory</code>这一个配置</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221224094551099.png" alt="VSCode生成当前项目配置" style="zoom:25%;"></p>
+<h4 id="B-配置catkin-make-build任务"><a href="#B-配置catkin-make-build任务" class="headerlink" title="B. 配置catkin_make: build任务"></a>B. 配置<code>catkin_make: build</code>任务</h4><p>什么是<code>catkin_make</code>放到下一章再讲，不过这里可以简单的说的就是<code>catkin_make</code>是<code>ROS</code>的编译工具，所以我们配置一下<code>catkin_make</code>的配置。</p>
+<p>因为我们前面已经安装过了<code>ROS</code>插件，所以这里先按快捷键<code>Ctrl + Shift + B</code>来呼出<code>build</code>界面，然后选择<code>ROS</code>插件提供的<code>catkin_make</code>的<code>build</code>选项</p>
+<p>这里直接选<code>catkin_make: build</code>这个选项。注意，这里不是点击<code>catkin_make: build</code>，而是点击边上的齿轮，即<code>配置任务</code>。如果直接点击的话，就是直接运行<code>catkin_make: build</code>的相关任务了，我们这是是对其进行配置</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221224100750894.png" alt="配置catkin_make: build"></p>
+<p>点击之后，就会生成<code>tasks.json</code>，同时<code>tasks.json</code>自动的创建了一个<code>catkin_make</code>的任务。而<code>tasks.json</code>和<code>launch.json</code>其实就是<code>VSCode</code>为了统一不同语言、不同框架的调试所创建的工具。关于具体怎么写，可以参考我之前的文章：<a target="_blank" rel="noopener" href="http://jackwang.cafe/2022/10/10/vscode-diao-shi-c-c-pei-zhi-tasks-json-he-launch-json/">VSCode调试C/C++项目：配置tasks.json和launch.json</a></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221224103729457.png" alt="自动创建的tasks.json和catkin_make的任务"></p>
+<p>默认生成的<code>catkin_make</code>的任务其实够用了，不过我们其实可以完善一下，这里我就贴出来完善之后我自己用的任务</p>
+<pre class="line-numbers language-json"><code class="language-json"><span class="token punctuation">{</span>
+    <span class="token property">"version"</span><span class="token operator">:</span> <span class="token string">"2.0.0"</span><span class="token punctuation">,</span>
+    <span class="token property">"tasks"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        // catkin_make生成可执行文件的任务
+        <span class="token punctuation">{</span>
+            <span class="token property">"label"</span><span class="token operator">:</span> <span class="token string">"catkin_make: build"</span><span class="token punctuation">,</span>                      // 当前任务的名字
+            <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"catkin_make"</span><span class="token punctuation">,</span>                              // 当前任务的类型，即调用catkin_make进行编译
+            <span class="token property">"args"</span><span class="token operator">:</span> <span class="token punctuation">[</span>                                           // 传入编译工具的参数
+                <span class="token string">"--directory"</span><span class="token punctuation">,</span>
+                <span class="token string">"/home/jack/projects/jack_ws"</span><span class="token punctuation">,</span>
+                <span class="token string">"-DCMAKE_BUILD_TYPE=RelWithDebInfo"</span>
+            <span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token property">"problemMatcher"</span><span class="token operator">:</span> <span class="token punctuation">[</span>                                 // 编译时语法检查的工具
+                <span class="token string">"$catkin-gcc"</span>
+            <span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token property">"group"</span><span class="token operator">:</span> <span class="token string">"build"</span><span class="token punctuation">,</span>                                   // 当前任务所属的调用组
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        // catkin_make debug的任务
+        <span class="token punctuation">{</span>
+            <span class="token property">"label"</span><span class="token operator">:</span> <span class="token string">"catkin_make: debug"</span><span class="token punctuation">,</span>                      // 当前任务的名字
+            <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"shell"</span><span class="token punctuation">,</span>                                    // 当前任务的类型，即执行Shell命令
+            <span class="token property">"command"</span><span class="token operator">:</span> <span class="token string">"catkin_make"</span><span class="token punctuation">,</span>                           // 要执行的命令
+            <span class="token property">"args"</span><span class="token operator">:</span> <span class="token punctuation">[</span>                                           // 传给命令的参数
+
+            <span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token property">"group"</span><span class="token operator">:</span> <span class="token punctuation">{</span>                                          // 当前任务所属的调用组
+                <span class="token property">"kind"</span><span class="token operator">:</span> <span class="token string">"build"</span><span class="token punctuation">,</span>
+                <span class="token property">"isDefault"</span><span class="token operator">:</span> <span class="token boolean">true</span>                               // 将当前任务设置为属于build组任务中默认调用的任务
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token property">"presentation"</span><span class="token operator">:</span> <span class="token punctuation">{</span>                                   // 运行当前任务时候打开输出信息
+                <span class="token property">"echo"</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+                <span class="token property">"reveal"</span><span class="token operator">:</span> <span class="token string">"always"</span><span class="token punctuation">,</span>
+                <span class="token property">"focus"</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+                <span class="token property">"panel"</span><span class="token operator">:</span> <span class="token string">"shared"</span><span class="token punctuation">,</span>
+                <span class="token property">"showReuseMessage"</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+                <span class="token property">"clear"</span><span class="token operator">:</span> <span class="token boolean">false</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token property">"problemMatcher"</span><span class="token operator">:</span> <span class="token string">"$catkin-gcc"</span>                     // 编译时语法检查的工具
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="3-3-创建功能包"><a href="#3-3-创建功能包" class="headerlink" title="3.3 创建功能包"></a>3.3 创建功能包</h3><p>这里为了方便直接对<code>src</code>目录右键，点击<code>Create Catkin Package</code>创建功能包，然后输入功能包名字，这里就是<code>test_vscode</code></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221224125114709.png" alt="创建功能包-1" style="zoom: 25%;"></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221224125208334.png" alt="创建功能包-2" style="zoom:25%;"></p>
+<p>接下来添加功能包的依赖，这里因为是测试，所以就添加<code>roscpp</code>、<code>rospy</code>和<code>std_msgs</code>三个依赖</p>
+<pre class="line-numbers language-bash"><code class="language-bash">roscpp rospy std_msgs
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221224125441539.png" alt="添加依赖" style="zoom:25%;"></p>
+<p>创建完了之后，就会在当前<code>src</code>目录下添加一个名为<code>test_vscode</code>的功能包</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221224125606345.png" alt="添加功能包" style="zoom:25%;"></p>
+<p>因为我们上面已经在<code>tasks.json</code>中把<code>catkin_make: debug</code>这个任务设置为了<code>build</code>任务组中默认运行的任务，并且现在已经有了一个功能包，所以现在我们再按下快捷键<code>Ctrl + Shift + B</code>就会开始编译功能包</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221224132201515.png" alt="按下快捷键自动编译" style="zoom: 25%;"></p>
+<h3 id="3-4-C-测试"><a href="#3-4-C-测试" class="headerlink" title="3.4 C++测试"></a>3.4 C++测试</h3><p>接下来我们在<code>test_vscode</code>的功能包的<code>src</code>文件夹下创建一个<code>test.cpp</code>，测试一下代码补全什么的是否正常工作</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">// test.cpp</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"ros/ros.h"</span></span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">int</span> argc<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token operator">*</span>argv<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+
+    ros<span class="token operator">::</span><span class="token function">init</span><span class="token punctuation">(</span>argc<span class="token punctuation">,</span> argv<span class="token punctuation">,</span> <span class="token string">"test"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">ROS_INFO</span><span class="token punctuation">(</span><span class="token string">"ROS TEST"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>可以看到，在编辑的时候补全已经出来了，所以<code>C++</code>的<code>ROS</code>开发环境已经搭建成功</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221224132803131.png" alt="C++补全-1" style="zoom:25%;"></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221224132825210.png" alt="C++补全-2" style="zoom:25%;"></p>
+<h3 id="3-5-Python测试"><a href="#3-5-Python测试" class="headerlink" title="3.5 Python测试"></a>3.5 Python测试</h3><p>上面<code>C++</code>的开发环境已经成功了，接下来测试一下<code>Python</code>的开发环境</p>
+<p>在<code>test_vscode</code>功能包目录下创建<code>scripts</code>目录，然后在其中创建<code>test.py</code></p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true"># test.py</span>
+
+<span class="token keyword">import</span> rospy
+
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">"__main__"</span><span class="token punctuation">:</span>
+
+    rospy<span class="token punctuation">.</span>init_node<span class="token punctuation">(</span><span class="token string">"Hello_Vscode_p"</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 2.初始化 ROS 节点</span>
+    rospy<span class="token punctuation">.</span>loginfo<span class="token punctuation">(</span><span class="token string">"Hello VScode, 我是 Python ...."</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true">#3.日志输出 HelloWorld</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>可以看到，在编辑的时候补全已经出来了，所以<code>Python</code>的<code>ROS</code>开发环境已经搭建成功</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221224171041205.png" alt="Python补全-1" style="zoom:25%;"></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221224171251504.png" alt="Python-2" style="zoom:25%;"></p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Jack Wang</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://jackwang0107.github.io/2022/12/23/ros-jiao-cheng-2-ros-kai-fa-huan-jing-da-jian/">https://jackwang0107.github.io/2022/12/23/ros-jiao-cheng-2-ros-kai-fa-huan-jing-da-jian/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Jack Wang</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/ROS/">
+                                    <span class="chip bg-color">ROS</span>
+                                </a>
+                            
+                                <a href="/tags/ROS%E6%95%99%E7%A8%8B/">
+                                    <span class="chip bg-color">ROS教程</span>
+                                </a>
+                            
+                                <a href="/tags/ROS%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
+                                    <span class="chip bg-color">ROS开发环境搭建</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.png" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2022/12/24/ros-jiao-cheng-3-ros-de-bian-yi-xi-tong-he-ros-de-wen-jian-xi-tong/">
+                    <div class="card-image">
+                        
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/%E5%B1%8F%E5%B9%95%E5%BD%95%E5%88%B62022-12-24%20%E4%B8%8B%E5%8D%888.22.34.gif" class="responsive-img" alt="ROS教程 3：ROS的编译系统和ROS的文件系统">
+                        
+                        <span class="card-title">ROS教程 3：ROS的编译系统和ROS的文件系统</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            本文是ROS系列教程的第三篇文章，介绍了如何搭建ROS的编译系统和ROS的文件系统
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-12-24
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/ROS%E6%95%99%E7%A8%8B/" class="post-category">
+                                    ROS教程
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/ROS/">
+                        <span class="chip bg-color">ROS</span>
+                    </a>
+                    
+                    <a href="/tags/ROS%E6%95%99%E7%A8%8B/">
+                        <span class="chip bg-color">ROS教程</span>
+                    </a>
+                    
+                    <a href="/tags/ROS%E7%BC%96%E8%AF%91%E7%B3%BB%E7%BB%9F/">
+                        <span class="chip bg-color">ROS编译系统</span>
+                    </a>
+                    
+                    <a href="/tags/catkin-make/">
+                        <span class="chip bg-color">catkin_make</span>
+                    </a>
+                    
+                    <a href="/tags/ROS%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/">
+                        <span class="chip bg-color">ROS文件系统</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/12/22/ros-jiao-cheng-0-ros-jie-shao/">
+                    <div class="card-image">
+                        
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221222234619457.png" class="responsive-img" alt="ROS教程 0：ROS介绍">
+                        
+                        <span class="card-title">ROS教程 0：ROS介绍</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            本文是ROS系列教程的前言，介绍了什么是ROS
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-12-22
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/ROS%E6%95%99%E7%A8%8B/" class="post-category">
+                                    ROS教程
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/ROS/">
+                        <span class="chip bg-color">ROS</span>
+                    </a>
+                    
+                    <a href="/tags/ROS%E6%95%99%E7%A8%8B/">
+                        <span class="chip bg-color">ROS教程</span>
+                    </a>
+                    
+                    <a href="/tags/ROS%E5%AE%89%E8%A3%85/">
+                        <span class="chip bg-color">ROS安装</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: JackWang&#39;s Blog<br />'
+            + '文章作者: Jack Wang<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('1'),
+            headingSelector: 'h2, h3, h4, h5, h6'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4, h5, h6').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2021-2022</span>
+            
+            <a href="/about" target="_blank">Jack Wang</a>
+            <!-- |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a> -->
+            <!-- |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a> -->
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">424.4k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+                <span id="sitetime"> Loading ...</span>
+                <script>
+                    var calcSiteTime = function () {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2021";
+                        var startMonth = "11";
+                        var startDate = "12";
+                        var startHour = "0";
+                        var startMinute = "0";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+
+                        // 区分是否有年份.
+                        var language = 'zh-CN';
+                        if (startYear === String(todayYear)) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            var daysTip = 'This site has been running for ' + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                daysTip = '本站已运行 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                daysTip = '本站已運行 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = daysTip;
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            var yearsAndDaysTip = 'This site has been running for ' + diffYears + ' years and '
+                                + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                yearsAndDaysTip = '本站已运行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                yearsAndDaysTip = '本站已運行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+                        }
+                    }
+
+                    calcSiteTime();
+                </script>
+            
+            <br>
+            
+                <span id="icp"><img src="/medias/icp.png"
+                                    style="vertical-align: text-bottom;"/>
+                <a href="https://beian.miit.gov.cn" target="_blank">陕ICP备2021014294号-1</a>
+            </span>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/jackwang0108" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:2232123545@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2232123545" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2232123545" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+        
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/sakura.js"><\/script>');
+            }
+        </script>
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

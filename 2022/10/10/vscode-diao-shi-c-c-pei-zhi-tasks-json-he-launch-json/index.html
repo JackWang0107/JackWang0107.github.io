@@ -30,10 +30,10 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.2"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
-<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css">
+<meta name="generator" content="Hexo 5.4.2">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-</head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
 
@@ -426,14 +426,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    7.2k
+                    6.5k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    33 分
+                    28 分
                 </div>
                 
 
@@ -480,7 +480,7 @@
 <p>因此，对于这两个阶段，VSCode中提供了<code>tasks.json</code>和<code>launch.json</code>两个文件来分别描述<code>调试前的准备工作</code>以及<code>以指定的参数启动调试器</code></p>
 <h2 id="2-调试前的准备工作：tasks-json"><a href="#2-调试前的准备工作：tasks-json" class="headerlink" title="2. 调试前的准备工作：tasks.json"></a>2. 调试前的准备工作：tasks.json</h2><p>VSCode使用<code>tasks.json</code>来描述启动调试前的准备工作。</p>
 <h3 id="A-tasks-json的结构"><a href="#A-tasks-json的结构" class="headerlink" title="A. tasks.json的结构"></a>A. tasks.json的结构</h3><p><code>tasks.json</code>的结构一般如下</p>
-<pre class="line-numbers language-json"><code class="language-json">&amp;#<span class="token number">123</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-json"><code class="language-json"><span class="token punctuation">{</span>
     <span class="token property">"version"</span><span class="token operator">:</span> <span class="token string">"2.0.0"</span><span class="token punctuation">,</span>
     <span class="token property">"tasks"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
 
@@ -488,14 +488,14 @@
     <span class="token property">"inputs"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
 
     <span class="token punctuation">]</span>
-&amp;#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221011021938530.png" alt="tasks.json的一般结构"></p>
 <h3 id="B-version标签"><a href="#B-version标签" class="headerlink" title="B.  version标签"></a>B.  version标签</h3><p><code>version</code>标签指定了<code>Tasks.json</code>的版本，因为不同的版本支持的标签不一样，所以需要使用<code>version</code>标签指明版本。</p>
 <p>目前<code>version</code>支持<code>2.0.0</code>版本，所以直接指定<code>version</code>为<code>2.0.0</code>即可。</p>
 <h3 id="C-tasks标签"><a href="#C-tasks标签" class="headerlink" title="C. tasks标签"></a>C. tasks标签</h3><p><code>tasks</code>标签是一个列表，我们在其中定义不同的<code>task</code>，而关于具体的<code>task</code>如何定义则见下</p>
 <p>我们以创建<code>build</code>文件夹这个任务为例</p>
-<pre class="line-numbers language-json"><code class="language-json">&amp;#<span class="token number">123</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-json"><code class="language-json"><span class="token punctuation">{</span>
         <span class="token property">"label"</span><span class="token operator">:</span> <span class="token string">"create dir"</span><span class="token punctuation">,</span>
         <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"shell"</span><span class="token punctuation">,</span>
         <span class="token property">"command"</span><span class="token operator">:</span> <span class="token string">"mkdir"</span><span class="token punctuation">,</span>
@@ -503,18 +503,18 @@
             <span class="token string">"-p"</span><span class="token punctuation">,</span>
             <span class="token string">"build"</span>
         <span class="token punctuation">]</span><span class="token punctuation">,</span>
-        <span class="token property">"windows"</span><span class="token operator">:</span> &amp;#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token property">"windows"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
             <span class="token property">"args"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
                 <span class="token string">"-Force"</span><span class="token punctuation">,</span>
                 <span class="token string">"build"</span>
             <span class="token punctuation">]</span><span class="token punctuation">,</span>
-            <span class="token property">"options"</span><span class="token operator">:</span> &amp;#<span class="token number">123</span><span class="token punctuation">;</span>
-                <span class="token property">"shell"</span><span class="token operator">:</span> &amp;#<span class="token number">123</span><span class="token punctuation">;</span>
+            <span class="token property">"options"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+                <span class="token property">"shell"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
                     <span class="token property">"executable"</span><span class="token operator">:</span> <span class="token string">"powershell.exe"</span>
-                &amp;#<span class="token number">125</span><span class="token punctuation">;</span>
-            &amp;#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
-        &amp;#<span class="token number">125</span><span class="token punctuation">;</span>
-&amp;#<span class="token number">125</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h4 id="1-label标签"><a href="#1-label标签" class="headerlink" title="1) label标签"></a>1) label标签</h4><p><code>label</code>标签定义了一个任务的名字，稍后我们能用通过名字取定位一个任务，从而实现诸如将多个任务合并为一个组，而后执行一组任务这样的操作。</p>
 <p><code>label</code>标签的值是随我们自己喜欢，想写什么就写什么的。</p>
@@ -549,23 +549,23 @@
 <p>使用<code>shell</code>标签的原因是因为在<code>Windows</code>上有两个命令行，一个是<code>cmd</code>一个是<code>powershell</code>。而<code>mkdir</code>这个命令是在<code>powershell</code>中的，因此我们需要特殊指明在<code>Windwos</code>上需要使用<code>powershell.exe</code>作为Shell的解释器</p>
 <h3 id="D-input标签"><a href="#D-input标签" class="headerlink" title="D. input标签"></a>D. input标签</h3><p><code>input</code>标签用于生成一个选项卡，接收用户的输入，一般是和<code>args</code>标签一起使用我们稍后再讲解这个标签的用法。</p>
 <h2 id="3-启动调试器：launch-json"><a href="#3-启动调试器：launch-json" class="headerlink" title="3. 启动调试器：launch.json"></a>3. 启动调试器：launch.json</h2><h3 id="A-launch-json的结构"><a href="#A-launch-json的结构" class="headerlink" title="A. launch.json的结构"></a>A. launch.json的结构</h3><p><code>launch.json</code>的结构一般如下</p>
-<pre class="line-numbers language-json"><code class="language-json">&amp;#<span class="token number">123</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-json"><code class="language-json"><span class="token punctuation">{</span>
     // 使用 IntelliSense 了解相关属性。 
     // 悬停以查看现有属性的描述。
     // 欲了解更多信息，请访问<span class="token operator">:</span> https<span class="token operator">:</span>//go.microsoft.com/fwlink/?linkid=<span class="token number">830387</span>
     <span class="token property">"version"</span><span class="token operator">:</span> <span class="token string">"0.2.0"</span><span class="token punctuation">,</span>
     <span class="token property">"configurations"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
-        &amp;#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token punctuation">{</span>
             <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"gdb"</span><span class="token punctuation">,</span>
             <span class="token property">"request"</span><span class="token operator">:</span> <span class="token string">"launch"</span><span class="token punctuation">,</span>
             <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"GDB"</span><span class="token punctuation">,</span>
-            <span class="token property">"program"</span><span class="token operator">:</span> <span class="token string">"$&amp;#123;workspaceFolder&amp;#125;/$&amp;#123;command:AskForProgramName&amp;#125;"</span><span class="token punctuation">,</span>
+            <span class="token property">"program"</span><span class="token operator">:</span> <span class="token string">"${workspaceFolder}/${command:AskForProgramName}"</span><span class="token punctuation">,</span>
             <span class="token property">"stopOnEntry"</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
             <span class="token property">"arguments"</span><span class="token operator">:</span> <span class="token string">""</span>，
             <span class="token property">"preLaunchTask"</span><span class="token operator">:</span> <span class="token string">""</span>
-        &amp;#<span class="token number">125</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
     <span class="token punctuation">]</span>
-&amp;#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221011145556587.png" alt="launch.json的结构"></p>
 <h3 id="B-version标签-1"><a href="#B-version标签-1" class="headerlink" title="B. version标签"></a>B. version标签</h3><p><code>launch.json</code>中的<code>version</code>标签和<code>tasks.json</code>中的<code>version</code>标签作用是一样的，一般都用<code>0.2.0</code>。</p>
@@ -605,21 +605,21 @@
 <p>所以利用这个标签，我们就可以实现从调试前的准备工作再到启动调试器这一连串的任务。</p>
 <h2 id="4-一个Toy-Example-echo-宏"><a href="#4-一个Toy-Example-echo-宏" class="headerlink" title="4. 一个Toy Example: echo 宏"></a>4. 一个Toy Example: echo 宏</h2><p>下面展示一个Toy Example来展示<code>tasks.json</code>和<code>launch.json</code>的workflow</p>
 <h3 id="A-tasks-json的内容"><a href="#A-tasks-json的内容" class="headerlink" title="A. tasks.json的内容"></a>A. tasks.json的内容</h3><p>Toy Example中<code>tasks.json</code>的内容如下</p>
-<pre class="line-numbers language-json"><code class="language-json">&amp;#<span class="token number">123</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-json"><code class="language-json"><span class="token punctuation">{</span>
     <span class="token property">"version"</span><span class="token operator">:</span> <span class="token string">"2.0.0"</span><span class="token punctuation">,</span>
     <span class="token property">"tasks"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
-        &amp;#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token punctuation">{</span>
             <span class="token property">"label"</span><span class="token operator">:</span> <span class="token string">"example"</span><span class="token punctuation">,</span>
             <span class="token property">"command"</span><span class="token operator">:</span> <span class="token string">"echo"</span><span class="token punctuation">,</span>
             <span class="token property">"args"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
-                <span class="token string">"$&amp;#123;file&amp;#125;\n"</span><span class="token punctuation">,</span>
-                <span class="token string">"$&amp;#123;fileBasename&amp;#125;\n"</span><span class="token punctuation">,</span>
-                <span class="token string">"$&amp;#123;fileBasenameNoExtension&amp;#125;\n"</span><span class="token punctuation">,</span>
-                <span class="token string">"$&amp;#123;fileDirname&amp;#125;\n"</span><span class="token punctuation">,</span>
+                <span class="token string">"${file}\n"</span><span class="token punctuation">,</span>
+                <span class="token string">"${fileBasename}\n"</span><span class="token punctuation">,</span>
+                <span class="token string">"${fileBasenameNoExtension}\n"</span><span class="token punctuation">,</span>
+                <span class="token string">"${fileDirname}\n"</span><span class="token punctuation">,</span>
             <span class="token punctuation">]</span>
-        &amp;#<span class="token number">125</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
     <span class="token punctuation">]</span>
-&amp;#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>具体来说我们就是想要执行一下下面的命令</p>
 <pre class="line-numbers language-shell"><code class="language-shell">echo "${file}\n" "${fileBasename}\n" "${fileBasenameNoExtension}\n" "${fileDirname}\n"
@@ -645,16 +645,16 @@
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>具体来说就是在启动调试器之前运行一下上面定义的<code>example</code>这个task。</p>
 <h3 id="C-hello-world-c"><a href="#C-hello-world-c" class="headerlink" title="C. hello_world.c"></a>C. hello_world.c</h3><p>我们接下来写一个<code>hello_world.c</code>，里面的内容如下：</p>
-<pre class="line-numbers language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h&gt;</span></span>
+<pre class="line-numbers language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
 
 
-<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">int</span> argc<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token operator">*</span>argv<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">int</span> argc<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token operator">*</span>argv<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
     <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> argc<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
         <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%s\n"</span><span class="token punctuation">,</span> argv<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"Hello World!\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="D-开始调试"><a href="#D-开始调试" class="headerlink" title="D. 开始调试"></a>D. 开始调试</h3><p>首先在<code>运行和调试</code>界面把调试的配置选定为<code>Toy Example</code>，然后编辑器打开<code>hello_world.c</code></p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221011163456116.png" alt="开始调试"></p>
@@ -662,63 +662,63 @@
 <p>此时我们在终端就能够看到执行的任务以及输出</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221011163622369.png" alt="执行的任务以及输出"></p>
 <p>很清楚就能看到，上面四个宏的值分别是</p>
-<pre class="line-numbers language-json"><code class="language-json">$&amp;#<span class="token number">123</span><span class="token punctuation">;</span>file&amp;#<span class="token number">125</span><span class="token punctuation">;</span>                                                    <span class="token operator">:</span>        /Users/jack/project/test/vscode_test/hello_world.c
-$&amp;#<span class="token number">123</span><span class="token punctuation">;</span>fileBasename&amp;#<span class="token number">125</span><span class="token punctuation">;</span>                                    <span class="token operator">:</span>        hello_world.c
-$&amp;#<span class="token number">123</span><span class="token punctuation">;</span>fileBasenameNoExtension&amp;#<span class="token number">125</span><span class="token punctuation">;</span>            <span class="token operator">:</span>        hello_world
-$&amp;#<span class="token number">123</span><span class="token punctuation">;</span>fileDirname&amp;#<span class="token number">125</span><span class="token punctuation">;</span>                                    <span class="token operator">:</span>        /Users/jack/project/test/vscode_test
+<pre class="line-numbers language-json"><code class="language-json">$<span class="token punctuation">{</span>file<span class="token punctuation">}</span>                                                    <span class="token operator">:</span>        /Users/jack/project/test/vscode_test/hello_world.c
+$<span class="token punctuation">{</span>fileBasename<span class="token punctuation">}</span>                                    <span class="token operator">:</span>        hello_world.c
+$<span class="token punctuation">{</span>fileBasenameNoExtension<span class="token punctuation">}</span>            <span class="token operator">:</span>        hello_world
+$<span class="token punctuation">{</span>fileDirname<span class="token punctuation">}</span>                                    <span class="token operator">:</span>        /Users/jack/project/test/vscode_test
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="5-一个Toy-Example：编译文件"><a href="#5-一个Toy-Example：编译文件" class="headerlink" title="5. 一个Toy Example：编译文件"></a>5. 一个Toy Example：编译文件</h2><p>我们对上面的Toy Example进行修改，增加一个自动编译的功能</p>
 <h3 id="A-tasks-json的内容-1"><a href="#A-tasks-json的内容-1" class="headerlink" title="A. tasks.json的内容"></a>A. tasks.json的内容</h3><p>我们给<code>tasks.json</code>新加一个task，即自动编译，此外我们修改一下输出宏的task</p>
-<pre class="line-numbers language-json"><code class="language-json">&amp;#<span class="token number">123</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-json"><code class="language-json"><span class="token punctuation">{</span>
     <span class="token property">"version"</span><span class="token operator">:</span> <span class="token string">"2.0.0"</span><span class="token punctuation">,</span>
     <span class="token property">"tasks"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
-        &amp;#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token punctuation">{</span>
             <span class="token property">"label"</span><span class="token operator">:</span> <span class="token string">"echo"</span><span class="token punctuation">,</span>
             <span class="token property">"command"</span><span class="token operator">:</span> <span class="token string">"echo"</span><span class="token punctuation">,</span>
             <span class="token property">"args"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
-                <span class="token string">"$&amp;#123;file&amp;#125;\n"</span><span class="token punctuation">,</span>
-                <span class="token string">"$&amp;#123;pathSeparator&amp;#125;\n"</span><span class="token punctuation">,</span>
-                <span class="token string">"$&amp;#123;fileBasenameNoExtension&amp;#125;\n"</span><span class="token punctuation">,</span>
-                <span class="token string">"$&amp;#123;fileDirname&amp;#125;$&amp;#123;pathSeparator&amp;#125;$&amp;#123;fileBasenameNoExtension&amp;#125;.o\n"</span>
+                <span class="token string">"${file}\n"</span><span class="token punctuation">,</span>
+                <span class="token string">"${pathSeparator}\n"</span><span class="token punctuation">,</span>
+                <span class="token string">"${fileBasenameNoExtension}\n"</span><span class="token punctuation">,</span>
+                <span class="token string">"${fileDirname}${pathSeparator}${fileBasenameNoExtension}.o\n"</span>
             <span class="token punctuation">]</span>
-        &amp;#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
-        &amp;#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
             <span class="token property">"label"</span><span class="token operator">:</span> <span class="token string">"build"</span><span class="token punctuation">,</span>
             <span class="token property">"command"</span><span class="token operator">:</span> <span class="token string">"gcc"</span><span class="token punctuation">,</span>
             <span class="token property">"args"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
-                <span class="token string">"$&amp;#123;file&amp;#125;"</span><span class="token punctuation">,</span>
+                <span class="token string">"${file}"</span><span class="token punctuation">,</span>
                 <span class="token string">"-o"</span><span class="token punctuation">,</span>
-                <span class="token string">"$&amp;#123;fileDirname&amp;#125;$&amp;#123;pathSeparator&amp;#125;$&amp;#123;fileBasenameNoExtension&amp;#125;.o"</span>
+                <span class="token string">"${fileDirname}${pathSeparator}${fileBasenameNoExtension}.o"</span>
             <span class="token punctuation">]</span>
-        &amp;#<span class="token number">125</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
     <span class="token punctuation">]</span>
-&amp;#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="B-launch-json的内容-1"><a href="#B-launch-json的内容-1" class="headerlink" title="B. launch.json的内容"></a>B. launch.json的内容</h3><p>我们再给launch.json中新加一个配置信息</p>
-<pre class="line-numbers language-json"><code class="language-json">&amp;#<span class="token number">123</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-json"><code class="language-json"><span class="token punctuation">{</span>
     // 使用 IntelliSense 了解相关属性。 
     // 悬停以查看现有属性的描述。
     // 欲了解更多信息，请访问<span class="token operator">:</span> https<span class="token operator">:</span>//go.microsoft.com/fwlink/?linkid=<span class="token number">830387</span>
     <span class="token property">"version"</span><span class="token operator">:</span> <span class="token string">"0.2.0"</span><span class="token punctuation">,</span>
     <span class="token property">"configurations"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
-        &amp;#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token punctuation">{</span>
             <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"gdb"</span><span class="token punctuation">,</span>
             <span class="token property">"request"</span><span class="token operator">:</span> <span class="token string">"launch"</span><span class="token punctuation">,</span>
             <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"Echo Macros"</span><span class="token punctuation">,</span>
-            <span class="token property">"program"</span><span class="token operator">:</span> <span class="token string">"$&amp;#123;workspaceFolder&amp;#125;/$&amp;#123;file&amp;#125;"</span><span class="token punctuation">,</span>
+            <span class="token property">"program"</span><span class="token operator">:</span> <span class="token string">"${workspaceFolder}/${file}"</span><span class="token punctuation">,</span>
             <span class="token property">"stopOnEntry"</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
             <span class="token property">"preLaunchTask"</span><span class="token operator">:</span> <span class="token string">"echo"</span>
-        &amp;#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
-        &amp;#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
             <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"gdb"</span><span class="token punctuation">,</span>
             <span class="token property">"request"</span><span class="token operator">:</span> <span class="token string">"launch"</span><span class="token punctuation">,</span>
             <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"Gcc Compile"</span><span class="token punctuation">,</span>
-            <span class="token property">"program"</span><span class="token operator">:</span> <span class="token string">"$&amp;#123;workspaceFolder&amp;#125;$&amp;#123;pathSeparator&amp;#125;$&amp;#123;fileBasenameNoExtension&amp;#125;.o"</span><span class="token punctuation">,</span>
+            <span class="token property">"program"</span><span class="token operator">:</span> <span class="token string">"${workspaceFolder}${pathSeparator}${fileBasenameNoExtension}.o"</span><span class="token punctuation">,</span>
             <span class="token property">"stopAtEntry"</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
             <span class="token property">"preLaunchTask"</span><span class="token operator">:</span> <span class="token string">"build"</span>
-        &amp;#<span class="token number">125</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
     <span class="token punctuation">]</span>
-&amp;#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="C-运行Echo-Macros"><a href="#C-运行Echo-Macros" class="headerlink" title="C. 运行Echo Macros"></a>C. 运行Echo Macros</h3><p>首先输出一下在<code>build</code>这个task中使用到的宏。</p>
 <p>具体来说在<code>运行和调试</code>界面选择配置为<code>Echo Macros</code></p>
@@ -726,10 +726,10 @@ $&amp;#<span class="token number">123</span><span class="token punctuation">;</s
 <p>然后按下<code>F5</code>开始运行</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221011173912976.png" alt="Echo Macros运行的结果"></p>
 <p>可以看到，上面四个宏的值是</p>
-<pre class="line-numbers language-json"><code class="language-json">$&amp;#<span class="token number">123</span><span class="token punctuation">;</span>file&amp;#<span class="token number">125</span><span class="token punctuation">;</span>                                                                                                                <span class="token operator">:</span>        /Users/jack/project/test/vscode_test/hello_world.c
-$&amp;#<span class="token number">123</span><span class="token punctuation">;</span>pathSeparator&amp;#<span class="token number">125</span><span class="token punctuation">;</span>                                                                                            <span class="token operator">:</span>        /
-$&amp;#<span class="token number">123</span><span class="token punctuation">;</span>fileBasenameNoExtension&amp;#<span class="token number">125</span><span class="token punctuation">;</span>                                                                        <span class="token operator">:</span>        hello_world
-$&amp;#<span class="token number">123</span><span class="token punctuation">;</span>fileDirname&amp;#<span class="token number">125</span><span class="token punctuation">;</span>$&amp;#<span class="token number">123</span><span class="token punctuation">;</span>pathSeparator&amp;#<span class="token number">125</span><span class="token punctuation">;</span>$&amp;#<span class="token number">123</span><span class="token punctuation">;</span>fileBasenameNoExtension&amp;#<span class="token number">125</span><span class="token punctuation">;</span>.o        <span class="token operator">:</span>        /Users/jack/project/test/vscode_test/hello_world.o
+<pre class="line-numbers language-json"><code class="language-json">$<span class="token punctuation">{</span>file<span class="token punctuation">}</span>                                                                                                                <span class="token operator">:</span>        /Users/jack/project/test/vscode_test/hello_world.c
+$<span class="token punctuation">{</span>pathSeparator<span class="token punctuation">}</span>                                                                                            <span class="token operator">:</span>        /
+$<span class="token punctuation">{</span>fileBasenameNoExtension<span class="token punctuation">}</span>                                                                        <span class="token operator">:</span>        hello_world
+$<span class="token punctuation">{</span>fileDirname<span class="token punctuation">}</span>$<span class="token punctuation">{</span>pathSeparator<span class="token punctuation">}</span>$<span class="token punctuation">{</span>fileBasenameNoExtension<span class="token punctuation">}</span>.o        <span class="token operator">:</span>        /Users/jack/project/test/vscode_test/hello_world.o
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="D-运行Gcc-Compile"><a href="#D-运行Gcc-Compile" class="headerlink" title="D. 运行Gcc Compile"></a>D. 运行Gcc Compile</h3><p>接下来我们运行<code>Gcc Compile</code>，类似的，还是先在<code>运行和调试</code>界面选择<code>Gcc Compile</code>，然后按下<code>F5</code>开始运行</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221011174815269.png" alt="选择配置为Gcc Compile"></p>
@@ -739,41 +739,41 @@ $&amp;#<span class="token number">123</span><span class="token punctuation">;</s
 <p>首先需要明白的是，我们如果想要使用<code>gdb</code>、<code>lldb</code>等调试器去调试一个程序的时候，我们必须要在编译的时候指定<code>-g</code>参数，这样编译器（例如<code>gcc</code>、<code>clang</code>）在编译的时候就会把源代码、符号表等等信息写入到程序里面去。</p>
 <p>而后在调试的时候，我们使用命令<code>gdb xxxx</code>/<code>lldb xxxx</code>，<code>gdb</code>/<code>lldb</code>就回去读取源代码和符号表，从而开始调试。</p>
 <h3 id="A-tasks-json的内容-2"><a href="#A-tasks-json的内容-2" class="headerlink" title="A. tasks.json的内容"></a>A. tasks.json的内容</h3><p>我们首先新增加一个名为<code>debug_build</code>的task，具体来说就是在编译的时候加上<code>-g</code>参数</p>
-<pre class="line-numbers language-json"><code class="language-json">&amp;#<span class="token number">123</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-json"><code class="language-json"><span class="token punctuation">{</span>
     <span class="token property">"version"</span><span class="token operator">:</span> <span class="token string">"2.0.0"</span><span class="token punctuation">,</span>
     <span class="token property">"tasks"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
-        &amp;#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token punctuation">{</span>
             <span class="token property">"label"</span><span class="token operator">:</span> <span class="token string">"debug_build"</span><span class="token punctuation">,</span>
             <span class="token property">"command"</span><span class="token operator">:</span> <span class="token string">"gcc"</span><span class="token punctuation">,</span>
             <span class="token property">"args"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
-                <span class="token string">"$&amp;#123;file&amp;#125;"</span><span class="token punctuation">,</span>
+                <span class="token string">"${file}"</span><span class="token punctuation">,</span>
                 <span class="token string">"-g"</span><span class="token punctuation">,</span>
                 <span class="token string">"-o"</span><span class="token punctuation">,</span>
-                <span class="token string">"$&amp;#123;fileDirname&amp;#125;$&amp;#123;pathSeparator&amp;#125;$&amp;#123;fileBasenameNoExtension&amp;#125;.o"</span>
+                <span class="token string">"${fileDirname}${pathSeparator}${fileBasenameNoExtension}.o"</span>
             <span class="token punctuation">]</span>
-        &amp;#<span class="token number">125</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
     <span class="token punctuation">]</span>
-&amp;#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="B-launch-json的内容-2"><a href="#B-launch-json的内容-2" class="headerlink" title="B. launch.json的内容"></a>B. launch.json的内容</h3><p>为了要进行debug，我们在launch.json中新加入一项，这一项可能会有些复杂</p>
-<pre class="line-numbers language-json"><code class="language-json">&amp;#<span class="token number">123</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-json"><code class="language-json"><span class="token punctuation">{</span>
     // 使用 IntelliSense 了解相关属性。 
     // 悬停以查看现有属性的描述。
     // 欲了解更多信息，请访问<span class="token operator">:</span> https<span class="token operator">:</span>//go.microsoft.com/fwlink/?linkid=<span class="token number">830387</span>
     <span class="token property">"version"</span><span class="token operator">:</span> <span class="token string">"0.2.0"</span><span class="token punctuation">,</span>
     <span class="token property">"configurations"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
-        &amp;#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token punctuation">{</span>
             <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"cppdbg"</span><span class="token punctuation">,</span>
             <span class="token property">"request"</span><span class="token operator">:</span> <span class="token string">"launch"</span><span class="token punctuation">,</span>
             <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"LLDB Debug"</span><span class="token punctuation">,</span>
-            <span class="token property">"program"</span><span class="token operator">:</span> <span class="token string">"$&amp;#123;workspaceFolder&amp;#125;$&amp;#123;pathSeparator&amp;#125;$&amp;#123;fileBasenameNoExtension&amp;#125;.o"</span><span class="token punctuation">,</span>
+            <span class="token property">"program"</span><span class="token operator">:</span> <span class="token string">"${workspaceFolder}${pathSeparator}${fileBasenameNoExtension}.o"</span><span class="token punctuation">,</span>
             <span class="token property">"stopAtEntry"</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
             <span class="token property">"preLaunchTask"</span><span class="token operator">:</span> <span class="token string">"debug_build"</span><span class="token punctuation">,</span>
-            <span class="token property">"cwd"</span><span class="token operator">:</span> <span class="token string">"$&amp;#123;workspaceFolder&amp;#125;"</span><span class="token punctuation">,</span>
+            <span class="token property">"cwd"</span><span class="token operator">:</span> <span class="token string">"${workspaceFolder}"</span><span class="token punctuation">,</span>
             <span class="token property">"MIMode"</span><span class="token operator">:</span> <span class="token string">"lldb"</span>
-        &amp;#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span>
-&amp;#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>详细的解释如下：</p>
 <ul>
@@ -800,33 +800,33 @@ $&amp;#<span class="token number">123</span><span class="token punctuation">;</s
 <li>将编译好的源文件输出到<code>bin</code>文件夹中</li>
 </ul>
 <h3 id="A-tasks-json中的内容"><a href="#A-tasks-json中的内容" class="headerlink" title="A. tasks.json中的内容"></a>A. tasks.json中的内容</h3><p>我们在<code>tasks.json</code>中创建下面的两个任务</p>
-<pre class="line-numbers language-json"><code class="language-json">&amp;#<span class="token number">123</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-json"><code class="language-json"><span class="token punctuation">{</span>
     <span class="token property">"version"</span><span class="token operator">:</span> <span class="token string">"2.0.0"</span><span class="token punctuation">,</span>
     <span class="token property">"tasks"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
-        &amp;#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token punctuation">{</span>
             <span class="token property">"label"</span><span class="token operator">:</span> <span class="token string">"create_bin"</span><span class="token punctuation">,</span>
             <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"shell"</span><span class="token punctuation">,</span>
             <span class="token property">"command"</span><span class="token operator">:</span> <span class="token string">"mkdir"</span><span class="token punctuation">,</span>
             <span class="token property">"args"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
                 <span class="token string">"-p"</span><span class="token punctuation">,</span>
-                <span class="token string">"$&amp;#123;workspaceFolder&amp;#125;$&amp;#123;pathSeparator&amp;#125;/bin"</span>
+                <span class="token string">"${workspaceFolder}${pathSeparator}/bin"</span>
             <span class="token punctuation">]</span>
-        &amp;#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
-        &amp;#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
             <span class="token property">"label"</span><span class="token operator">:</span> <span class="token string">"debug_build"</span><span class="token punctuation">,</span>
             <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"shell"</span><span class="token punctuation">,</span>
             <span class="token property">"command"</span><span class="token operator">:</span> <span class="token string">"gcc"</span><span class="token punctuation">,</span>
             <span class="token property">"group"</span><span class="token operator">:</span> <span class="token string">"build"</span><span class="token punctuation">,</span>
             <span class="token property">"args"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
-                <span class="token string">"$&amp;#123;file&amp;#125;"</span><span class="token punctuation">,</span>
+                <span class="token string">"${file}"</span><span class="token punctuation">,</span>
                 <span class="token string">"-g"</span><span class="token punctuation">,</span>
                 <span class="token string">"-o"</span><span class="token punctuation">,</span>
-                <span class="token string">"$&amp;#123;fileDirname&amp;#125;$&amp;#123;pathSeparator&amp;#125;bin$&amp;#123;pathSeparator&amp;#125;$&amp;#123;fileBasenameNoExtension&amp;#125;.o"</span>
+                <span class="token string">"${fileDirname}${pathSeparator}bin${pathSeparator}${fileBasenameNoExtension}.o"</span>
             <span class="token punctuation">]</span><span class="token punctuation">,</span>
             <span class="token property">"dependsOn"</span><span class="token operator">:</span> <span class="token string">"create_bin"</span><span class="token punctuation">,</span>
-        &amp;#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
-&amp;#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><code>create_bin</code>任务就是老三样，没啥好说的。</p>
 <p>关键就在于修改之后的<code>debug_build</code>任务，<code>debug_build</code>任务中新增加了一个<code>dependsOn</code>标签，这个标签说明了在运行<code>debug_build</code>任务之前需要运行的任务。</p>
@@ -895,16 +895,16 @@ target_link_libraries(wish libwish)
 
 <span class="token macro property">#<span class="token directive keyword">ifndef</span> _WISH_H</span>
 
-<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h&gt;</span></span>
-<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;fcntl.h&gt;</span></span>
-<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;unistd.h&gt;</span></span>
-<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdlib.h&gt;</span></span>
-<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;string.h&gt;</span></span>
-<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdbool.h&gt;</span></span>
-<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;sys/stat.h&gt;</span></span>
-<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;sys/wait.h&gt;</span></span>
-<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;sys/types.h&gt;</span></span>
-<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;sys/types.h&gt;</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;fcntl.h></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;unistd.h></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdlib.h></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;string.h></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdbool.h></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;sys/stat.h></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;sys/wait.h></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;sys/types.h></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;sys/types.h></span></span>
 
 <span class="token macro property">#<span class="token directive keyword">define</span> _WISH_H 1</span>
 <span class="token macro property">#<span class="token directive keyword">define</span> WISH_EXIT_SUCCESS 0</span>
@@ -941,41 +941,41 @@ target_link_libraries(wish libwish)
 <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"wish.h"</span></span>
 
 <span class="token comment" spellcheck="true">// path</span>
-<span class="token keyword">char</span> <span class="token operator">*</span>path<span class="token punctuation">[</span>WISH_MAX_PATH<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token keyword">char</span> <span class="token operator">*</span>path<span class="token punctuation">[</span>WISH_MAX_PATH<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
     <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">"/bin"</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
 <span class="token comment" spellcheck="true">// Shell Builtin Funtions</span>
-<span class="token keyword">char</span> <span class="token operator">*</span>builtin_str<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token keyword">char</span> <span class="token operator">*</span>builtin_str<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
     <span class="token string">"cd"</span><span class="token punctuation">,</span>
     <span class="token string">"exit"</span><span class="token punctuation">,</span>
     <span class="token string">"path"</span><span class="token punctuation">,</span>
     <span class="token string">"help"</span><span class="token punctuation">,</span>
     <span class="token string">"wenv"</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-<span class="token keyword">int</span> <span class="token punctuation">(</span><span class="token operator">*</span>builtin_func<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token punctuation">(</span><span class="token operator">*</span>builtin_func<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
     <span class="token operator">&amp;</span>wish_cd<span class="token punctuation">,</span>
     <span class="token operator">&amp;</span>wish_exit<span class="token punctuation">,</span>
     <span class="token operator">&amp;</span>wish_path<span class="token punctuation">,</span>
     <span class="token operator">&amp;</span>wish_help<span class="token punctuation">,</span>
     <span class="token operator">&amp;</span>wish_env
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
 
-<span class="token keyword">void</span> <span class="token function">wish_loop</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">wish_loop</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
     <span class="token keyword">char</span> <span class="token operator">*</span>line<span class="token punctuation">;</span>
     <span class="token keyword">char</span> <span class="token operator">*</span><span class="token operator">*</span>args<span class="token punctuation">;</span>
     bool status<span class="token punctuation">;</span>
     <span class="token keyword">do</span>
-    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"wish&gt; "</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"wish> "</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         line <span class="token operator">=</span> <span class="token function">wish_read_line</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         args <span class="token operator">=</span> <span class="token function">wish_split_line</span><span class="token punctuation">(</span>line<span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>i <span class="token operator">=</span> <span class="token function">wish_redirection</span><span class="token punctuation">(</span>args<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>i <span class="token operator">=</span> <span class="token function">wish_redirection</span><span class="token punctuation">(</span>args<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
             args<span class="token punctuation">[</span>i<span class="token operator">++</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
         status <span class="token operator">=</span> <span class="token function">wish_execute</span><span class="token punctuation">(</span>args<span class="token punctuation">,</span> i<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
         <span class="token function">free</span><span class="token punctuation">(</span>line<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -983,52 +983,52 @@ target_link_libraries(wish libwish)
             <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token constant">NULL</span> <span class="token operator">!=</span> args<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
                 <span class="token function">free</span><span class="token punctuation">(</span>args<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token function">free</span><span class="token punctuation">(</span>args<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">while</span> <span class="token punctuation">(</span>status<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">while</span> <span class="token punctuation">(</span>status<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>status<span class="token punctuation">)</span>
         <span class="token function">exit</span><span class="token punctuation">(</span>WISH_EXIT_FAILURE<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-<span class="token keyword">char</span> <span class="token operator">*</span><span class="token function">wish_read_line</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token keyword">char</span> <span class="token operator">*</span><span class="token function">wish_read_line</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
     <span class="token keyword">int</span> position <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
     <span class="token keyword">int</span> bufsize <span class="token operator">=</span> WISH_BUF_SIZE<span class="token punctuation">;</span>
     <span class="token keyword">char</span> <span class="token operator">*</span> buffer <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span><span class="token punctuation">)</span> <span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">char</span><span class="token punctuation">)</span> <span class="token operator">*</span> bufsize<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token constant">NULL</span> <span class="token operator">==</span> buffer<span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token constant">NULL</span> <span class="token operator">==</span> buffer<span class="token punctuation">)</span><span class="token punctuation">{</span>
         <span class="token function">fprintf</span><span class="token punctuation">(</span><span class="token constant">stderr</span><span class="token punctuation">,</span> <span class="token string">"wish: Memory allocation failed for read line.\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token function">exit</span><span class="token punctuation">(</span>WISH_EXIT_FAILURE<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
     <span class="token keyword">char</span> c<span class="token punctuation">;</span>
     <span class="token keyword">while</span> <span class="token punctuation">(</span>true<span class="token punctuation">)</span>
-    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token punctuation">{</span>
         <span class="token comment" spellcheck="true">// read a char</span>
         c <span class="token operator">=</span> <span class="token function">getchar</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>c <span class="token operator">==</span> <span class="token constant">EOF</span> <span class="token operator">||</span> c <span class="token operator">==</span> <span class="token string">'\n'</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>c <span class="token operator">==</span> <span class="token constant">EOF</span> <span class="token operator">||</span> c <span class="token operator">==</span> <span class="token string">'\n'</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
             buffer<span class="token punctuation">[</span>position<span class="token operator">++</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">'\0'</span><span class="token punctuation">;</span>
             <span class="token keyword">return</span> buffer<span class="token punctuation">;</span>
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">else</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span>
             buffer<span class="token punctuation">[</span>position<span class="token operator">++</span><span class="token punctuation">]</span> <span class="token operator">=</span> c<span class="token punctuation">;</span>
         <span class="token comment" spellcheck="true">// resize buffer</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>position <span class="token operator">&gt;=</span> bufsize<span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>position <span class="token operator">>=</span> bufsize<span class="token punctuation">)</span><span class="token punctuation">{</span>
             bufsize <span class="token operator">+</span><span class="token operator">=</span> WISH_BUF_SIZE<span class="token punctuation">;</span>
             <span class="token keyword">char</span> <span class="token operator">*</span> temp <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span><span class="token punctuation">)</span> <span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">char</span><span class="token punctuation">)</span> <span class="token operator">*</span> bufsize<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token constant">NULL</span> <span class="token operator">==</span> temp<span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token constant">NULL</span> <span class="token operator">==</span> temp<span class="token punctuation">)</span><span class="token punctuation">{</span>
                 <span class="token function">fprintf</span><span class="token punctuation">(</span><span class="token constant">stderr</span><span class="token punctuation">,</span> <span class="token string">"wish: Memory allocation failed for read line.\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
                 <span class="token function">exit</span><span class="token punctuation">(</span>EXIT_FAILURE<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
             <span class="token comment" spellcheck="true">// copy and reset pointer to new buffer</span>
             <span class="token keyword">int</span> num <span class="token operator">=</span> position<span class="token punctuation">;</span>
-            <span class="token keyword">while</span> <span class="token punctuation">(</span>num <span class="token operator">&gt;</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+            <span class="token keyword">while</span> <span class="token punctuation">(</span>num <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
                 temp<span class="token punctuation">[</span>num<span class="token punctuation">]</span> <span class="token operator">=</span> buffer<span class="token punctuation">[</span>num<span class="token punctuation">]</span><span class="token punctuation">;</span>
                 num<span class="token operator">--</span><span class="token punctuation">;</span>
-            <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
             <span class="token function">free</span><span class="token punctuation">(</span>buffer<span class="token punctuation">)</span><span class="token punctuation">;</span>
             buffer <span class="token operator">=</span> temp<span class="token punctuation">;</span>
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
 
-<span class="token keyword">char</span> <span class="token operator">*</span><span class="token operator">*</span><span class="token function">wish_split_line</span><span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span>line<span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token keyword">char</span> <span class="token operator">*</span><span class="token operator">*</span><span class="token function">wish_split_line</span><span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span>line<span class="token punctuation">)</span><span class="token punctuation">{</span>
     <span class="token keyword">char</span> <span class="token operator">*</span><span class="token operator">*</span>words <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">)</span> <span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span><span class="token punctuation">)</span> <span class="token operator">*</span> WISH_MAX_WORD<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> WISH_MAX_WORD<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
         words<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span><span class="token punctuation">)</span><span class="token number">0</span><span class="token punctuation">;</span>
@@ -1036,33 +1036,33 @@ target_link_libraries(wish libwish)
     <span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> k <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
     <span class="token keyword">int</span> len <span class="token operator">=</span> <span class="token function">strlen</span><span class="token punctuation">(</span>line<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">char</span> <span class="token operator">*</span>temp <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span><span class="token punctuation">)</span> <span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">char</span><span class="token punctuation">)</span> <span class="token operator">*</span> len<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> len <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> len <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
         temp<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> line<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>temp<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">' '</span> <span class="token operator">||</span> temp<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'\t'</span> <span class="token operator">||</span> temp<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'\0'</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>temp<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">' '</span> <span class="token operator">||</span> temp<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'\t'</span> <span class="token operator">||</span> temp<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'\0'</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
             temp<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">'\0'</span><span class="token punctuation">;</span>
             words<span class="token punctuation">[</span>k<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span><span class="token punctuation">)</span> <span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">char</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token punctuation">(</span>i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
             <span class="token function">strncpy</span><span class="token punctuation">(</span>words<span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">,</span> temp<span class="token punctuation">,</span> i<span class="token punctuation">)</span><span class="token punctuation">;</span>
             words<span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">'\0'</span><span class="token punctuation">;</span>
             j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> k <span class="token operator">+</span><span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">else</span> 
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> 
             j <span class="token operator">+</span><span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
     <span class="token function">free</span><span class="token punctuation">(</span>temp<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> words<span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-<span class="token keyword">int</span> <span class="token function">wish_redirection</span><span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span><span class="token operator">*</span>args<span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token function">wish_redirection</span><span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span><span class="token operator">*</span>args<span class="token punctuation">)</span><span class="token punctuation">{</span>
     <span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
     <span class="token keyword">while</span> <span class="token punctuation">(</span>args<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span>
-    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>args<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'&gt;'</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>args<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'>'</span><span class="token punctuation">)</span>
             <span class="token keyword">return</span> i<span class="token punctuation">;</span>
         i <span class="token operator">+</span><span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
     <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-<span class="token keyword">int</span> <span class="token function">wish_execute</span><span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span>args<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token keyword">int</span> rarg_sht<span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token function">wish_execute</span><span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span>args<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token keyword">int</span> rarg_sht<span class="token punctuation">)</span><span class="token punctuation">{</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token constant">NULL</span> <span class="token operator">==</span> args<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
         <span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">// run builtin command</span>
@@ -1070,135 +1070,135 @@ target_link_libraries(wish libwish)
         <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">strcmp</span><span class="token punctuation">(</span>args<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> builtin_str<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
             <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token operator">*</span>builtin_func<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">(</span>args<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> <span class="token function">wish_launch</span><span class="token punctuation">(</span>args<span class="token punctuation">,</span> rarg_sht<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-<span class="token keyword">int</span> <span class="token function">wish_launch</span><span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span>args<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token keyword">int</span> rarg_sht<span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token function">wish_launch</span><span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span>args<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token keyword">int</span> rarg_sht<span class="token punctuation">)</span><span class="token punctuation">{</span>
     <span class="token comment" spellcheck="true">// search path</span>
     <span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
     <span class="token keyword">char</span> <span class="token operator">*</span>executable_path <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span><span class="token punctuation">)</span> <span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">char</span><span class="token punctuation">)</span> <span class="token operator">*</span> WISH_MAX_FNAME<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> WISH_MAX_FNAME<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span>
         executable_path<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">'\0'</span><span class="token punctuation">;</span>
     <span class="token keyword">char</span> <span class="token operator">*</span> temp_path <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span><span class="token punctuation">)</span> <span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">char</span><span class="token punctuation">)</span> <span class="token operator">*</span> WISH_MAX_FNAME<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">while</span> <span class="token punctuation">(</span>path<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>path<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token comment" spellcheck="true">// copy path[i] to temp and then concate</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">strncpy</span><span class="token punctuation">(</span>temp_path<span class="token punctuation">,</span> path<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token function">strlen</span><span class="token punctuation">(</span>path<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">strncpy</span><span class="token punctuation">(</span>temp_path<span class="token punctuation">,</span> path<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token function">strlen</span><span class="token punctuation">(</span>path<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
             <span class="token function">wish_error</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
             <span class="token function">wish_line</span><span class="token punctuation">(</span><span class="token constant">__LINE__</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
             <span class="token keyword">return</span> WISH_EXIT_FAILURE<span class="token punctuation">;</span>
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
         <span class="token keyword">int</span> len <span class="token operator">=</span> <span class="token function">strlen</span><span class="token punctuation">(</span>temp_path<span class="token punctuation">)</span><span class="token punctuation">;</span>
         temp_path<span class="token punctuation">[</span>len<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">'/'</span><span class="token punctuation">;</span>
         temp_path<span class="token punctuation">[</span>len <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">'\0'</span><span class="token punctuation">;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">strcat</span><span class="token punctuation">(</span>temp_path<span class="token punctuation">,</span> args<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">strcat</span><span class="token punctuation">(</span>temp_path<span class="token punctuation">,</span> args<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
             <span class="token function">wish_error</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
             <span class="token function">wish_line</span><span class="token punctuation">(</span><span class="token constant">__LINE__</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
             <span class="token keyword">return</span> WISH_EXIT_FAILURE<span class="token punctuation">;</span>
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
         <span class="token comment" spellcheck="true">// check privilege</span>
-        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">access</span><span class="token punctuation">(</span>temp_path<span class="token punctuation">,</span> X_OK<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">strcpy</span><span class="token punctuation">(</span>executable_path<span class="token punctuation">,</span> temp_path<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">access</span><span class="token punctuation">(</span>temp_path<span class="token punctuation">,</span> X_OK<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">strcpy</span><span class="token punctuation">(</span>executable_path<span class="token punctuation">,</span> temp_path<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
                 <span class="token function">wish_error</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
                 <span class="token function">wish_line</span><span class="token punctuation">(</span><span class="token constant">__LINE__</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
                 <span class="token keyword">return</span> WISH_EXIT_FAILURE<span class="token punctuation">;</span>
-            <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
             <span class="token keyword">break</span><span class="token punctuation">;</span>
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
         i<span class="token operator">++</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
     <span class="token function">free</span><span class="token punctuation">(</span>temp_path<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">// print error if not found</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>executable_path<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'\0'</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>executable_path<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'\0'</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
         <span class="token function">free</span><span class="token punctuation">(</span>executable_path<span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token function">wish_error</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token function">wish_line</span><span class="token punctuation">(</span><span class="token constant">__LINE__</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token keyword">return</span> EXIT_FAILURE<span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
     <span class="token keyword">int</span> status<span class="token punctuation">;</span>
     pid_t son_pid<span class="token punctuation">,</span> wait_pid<span class="token punctuation">;</span>
     son_pid <span class="token operator">=</span> <span class="token function">fork</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>son_pid <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>son_pid <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
         <span class="token comment" spellcheck="true">// child process</span>
         <span class="token comment" spellcheck="true">// redirection</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span> <span class="token operator">!=</span> rarg_sht <span class="token operator">&amp;&amp;</span> <span class="token constant">NULL</span> <span class="token operator">!=</span> args<span class="token punctuation">[</span>rarg_sht<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span> <span class="token operator">!=</span> rarg_sht <span class="token operator">&amp;&amp;</span> <span class="token constant">NULL</span> <span class="token operator">!=</span> args<span class="token punctuation">[</span>rarg_sht<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
             <span class="token comment" spellcheck="true">// get real path</span>
             <span class="token keyword">char</span> rp<span class="token punctuation">[</span>WISH_MAX_FNAME<span class="token punctuation">]</span><span class="token punctuation">;</span>
             <span class="token function">realpath</span><span class="token punctuation">(</span>args<span class="token punctuation">[</span>rarg_sht<span class="token punctuation">]</span><span class="token punctuation">,</span> rp<span class="token punctuation">)</span><span class="token punctuation">;</span>
             <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token constant">NULL</span> <span class="token operator">==</span> <span class="token function">freopen</span><span class="token punctuation">(</span>rp<span class="token punctuation">,</span> <span class="token string">"w"</span><span class="token punctuation">,</span> <span class="token constant">stdout</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
                 <span class="token function">fprintf</span><span class="token punctuation">(</span><span class="token constant">stderr</span><span class="token punctuation">,</span> <span class="token string">"wish: redirection file %s open fail!\n"</span><span class="token punctuation">,</span> rp<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
         <span class="token comment" spellcheck="true">// run cmd</span>
         <span class="token keyword">int</span> <span class="token punctuation">(</span><span class="token operator">*</span>func<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token keyword">if</span> <span class="token punctuation">(</span>WISH_MY_SEARCH <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span>
             func <span class="token operator">=</span> execvp<span class="token punctuation">;</span>
         <span class="token keyword">else</span>
             func <span class="token operator">=</span> execv<span class="token punctuation">;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">func</span><span class="token punctuation">(</span>args<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> args<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">func</span><span class="token punctuation">(</span>args<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> args<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
             <span class="token comment" spellcheck="true">// wish_error();</span>
             <span class="token comment" spellcheck="true">// wish_line(__LINE__);</span>
             <span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
         <span class="token comment" spellcheck="true">// if run the following code, then it is wrong</span>
         <span class="token function">exit</span><span class="token punctuation">(</span>WISH_EXIT_FAILURE<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>son_pid <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span> 
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>son_pid <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span> 
         <span class="token function">perror</span><span class="token punctuation">(</span><span class="token string">"wish: son process create fail by fork"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">else</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-        <span class="token keyword">do</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> 
+    <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        <span class="token keyword">do</span> <span class="token punctuation">{</span> 
             wait_pid <span class="token operator">=</span> <span class="token function">waitpid</span><span class="token punctuation">(</span>son_pid<span class="token punctuation">,</span> <span class="token operator">&amp;</span>status<span class="token punctuation">,</span> WUNTRACED<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">WIFEXITED</span><span class="token punctuation">(</span>status<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span><span class="token function">WIFSIGNALED</span><span class="token punctuation">(</span>status<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">WIFEXITED</span><span class="token punctuation">(</span>status<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span><span class="token function">WIFSIGNALED</span><span class="token punctuation">(</span>status<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
     <span class="token keyword">return</span> true<span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-<span class="token keyword">char</span> <span class="token operator">*</span><span class="token function">wish_search</span><span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span>cmd<span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token keyword">char</span> <span class="token operator">*</span><span class="token function">wish_search</span><span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span>cmd<span class="token punctuation">)</span><span class="token punctuation">{</span>
     <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span><span class="token punctuation">)</span><span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-<span class="token keyword">void</span> <span class="token function">wish_error</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">wish_error</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
     <span class="token keyword">char</span> <span class="token operator">*</span>err_msg <span class="token operator">=</span> <span class="token string">"An error has occurred\n"</span><span class="token punctuation">;</span>
     <span class="token function">write</span><span class="token punctuation">(</span>STDERR_FILENO<span class="token punctuation">,</span> err_msg<span class="token punctuation">,</span> <span class="token function">strlen</span><span class="token punctuation">(</span>err_msg<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-<span class="token keyword">void</span> <span class="token function">wish_line</span><span class="token punctuation">(</span><span class="token keyword">int</span> lineno<span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">wish_line</span><span class="token punctuation">(</span><span class="token keyword">int</span> lineno<span class="token punctuation">)</span><span class="token punctuation">{</span>
     <span class="token macro property">#<span class="token directive keyword">ifdef</span> WISH_DEBUG</span>
         <span class="token function">fprintf</span><span class="token punctuation">(</span><span class="token constant">stderr</span><span class="token punctuation">,</span> <span class="token string">"in line %d\n"</span><span class="token punctuation">,</span> lineno<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token macro property">#<span class="token directive keyword">endif</span></span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-<span class="token keyword">int</span> <span class="token function">wish_cd</span><span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span>args<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token function">wish_cd</span><span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span>args<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token constant">NULL</span> <span class="token operator">==</span> args<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
         <span class="token function">wish_error</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">else</span>
         <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">chdir</span><span class="token punctuation">(</span>args<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span>
             <span class="token function">wish_error</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-<span class="token keyword">int</span> <span class="token function">wish_exit</span><span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span>args<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token function">wish_exit</span><span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span>args<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token constant">NULL</span> <span class="token operator">==</span> args<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
         <span class="token function">exit</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token function">wish_error</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-<span class="token keyword">int</span> <span class="token function">wish_path</span><span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span>args<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token function">wish_path</span><span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span>args<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
     <span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
     <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>path<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> args<span class="token punctuation">[</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
         i<span class="token operator">++</span><span class="token punctuation">;</span>    
     <span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-<span class="token keyword">int</span> <span class="token function">wish_env</span><span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span>args<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token function">wish_env</span><span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span>args<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token constant">NULL</span> <span class="token operator">==</span> args<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
         <span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
-    <span class="token keyword">else</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">else</span> <span class="token punctuation">{</span>
         <span class="token keyword">char</span> <span class="token operator">*</span> env <span class="token operator">=</span> <span class="token function">getenv</span><span class="token punctuation">(</span>args<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%s:\n"</span><span class="token punctuation">,</span> args<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%s\n"</span><span class="token punctuation">,</span> env<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
     <span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-<span class="token keyword">int</span> <span class="token function">wish_help</span><span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span>args<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token function">wish_help</span><span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span>args<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
     <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"WISH written by Shihong Wang.\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"Usage: command  argument [enter]\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"Builtin commands:\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -1206,28 +1206,28 @@ target_link_libraries(wish libwish)
         <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"\t%s"</span><span class="token punctuation">,</span> builtin_str<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"\nRefer man page of other command.\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h4 id="3-main-c"><a href="#3-main-c" class="headerlink" title="3 ) main.c"></a>3 ) main.c</h4><pre class="line-numbers language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"wish.h"</span></span>
 
 <span class="token keyword">extern</span> <span class="token keyword">char</span> <span class="token operator">*</span><span class="token operator">*</span>environ<span class="token punctuation">;</span>
 
 <span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">int</span> argc<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token operator">*</span>argv<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token punctuation">{</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span>argc <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span>
-    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token punctuation">{</span>
         <span class="token comment" spellcheck="true">// command loop mode</span>
         <span class="token function">wish_loop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
     <span class="token keyword">else</span>
-    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token punctuation">{</span>
         <span class="token comment" spellcheck="true">// read-parse-execute mode</span>
         FILE <span class="token operator">*</span>file<span class="token punctuation">;</span>
         <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token constant">NULL</span> <span class="token operator">==</span> <span class="token punctuation">(</span>file <span class="token operator">=</span> <span class="token function">fopen</span><span class="token punctuation">(</span>argv<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token string">"r"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-        <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token punctuation">{</span>
             <span class="token function">fprintf</span><span class="token punctuation">(</span><span class="token constant">stderr</span><span class="token punctuation">,</span> <span class="token string">"wish: read-parse mode %s file not exists!\n"</span><span class="token punctuation">,</span> argv<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
             <span class="token function">exit</span><span class="token punctuation">(</span>WISH_EXIT_FAILURE<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
         <span class="token comment" spellcheck="true">// read a line, parse and execute</span>
         <span class="token keyword">int</span> status<span class="token punctuation">;</span>
         <span class="token keyword">char</span> <span class="token operator">*</span><span class="token operator">*</span> args<span class="token punctuation">;</span>
@@ -1235,25 +1235,25 @@ target_link_libraries(wish libwish)
         ssize_t read<span class="token punctuation">;</span>
         <span class="token keyword">char</span> <span class="token operator">*</span>line <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span><span class="token punctuation">)</span> <span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">char</span><span class="token punctuation">)</span> <span class="token operator">*</span> WISH_BUF_SIZE<span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>read <span class="token operator">=</span> <span class="token function">getline</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>line<span class="token punctuation">,</span> <span class="token operator">&amp;</span>len<span class="token punctuation">,</span> file<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
-        <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token punctuation">{</span>
             <span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
             <span class="token keyword">while</span> <span class="token punctuation">(</span>line<span class="token punctuation">[</span><span class="token operator">++</span>j<span class="token punctuation">]</span> <span class="token operator">!=</span> <span class="token string">'\n'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
             line<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">'\0'</span><span class="token punctuation">;</span>
             args <span class="token operator">=</span> <span class="token function">wish_split_line</span><span class="token punctuation">(</span>line<span class="token punctuation">)</span><span class="token punctuation">;</span>
             <span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>i <span class="token operator">=</span> <span class="token function">wish_redirection</span><span class="token punctuation">(</span>args<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>i <span class="token operator">=</span> <span class="token function">wish_redirection</span><span class="token punctuation">(</span>args<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
                 args<span class="token punctuation">[</span>i<span class="token operator">++</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-            <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
             status <span class="token operator">=</span> <span class="token function">wish_execute</span><span class="token punctuation">(</span>args<span class="token punctuation">,</span> i<span class="token punctuation">)</span><span class="token punctuation">;</span>
             <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> WISH_MAX_WORD<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
                 <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token constant">NULL</span> <span class="token operator">!=</span> args<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
                     <span class="token function">free</span><span class="token punctuation">(</span>args<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
             <span class="token function">free</span><span class="token punctuation">(</span>args<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
         <span class="token function">free</span><span class="token punctuation">(</span>line<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
     <span class="token keyword">return</span> WISH_EXIT_SUCCESS<span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="B-tasks-json的内容"><a href="#B-tasks-json的内容" class="headerlink" title="B. tasks.json的内容"></a>B. tasks.json的内容</h3><p>我们在调试前，需要：</p>
 <ul>
@@ -1262,51 +1262,51 @@ target_link_libraries(wish libwish)
 <li>使用<code>make</code>或者<code>cmake --build ./ --target all</code>进行编译</li>
 </ul>
 <p>因此，我们需要再<code>tasks.json</code>中定义三个任务</p>
-<pre class="line-numbers language-json"><code class="language-json">    &amp;#<span class="token number">123</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-json"><code class="language-json">    <span class="token punctuation">{</span>
     <span class="token property">"version"</span><span class="token operator">:</span> <span class="token string">"2.0.0"</span><span class="token punctuation">,</span>
     <span class="token property">"tasks"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
-        &amp;#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token punctuation">{</span>
             <span class="token property">"label"</span><span class="token operator">:</span> <span class="token string">"create_build"</span><span class="token punctuation">,</span>
             <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"shell"</span><span class="token punctuation">,</span>
             <span class="token property">"command"</span><span class="token operator">:</span> <span class="token string">"mkdir"</span><span class="token punctuation">,</span>
             <span class="token property">"args"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
                 <span class="token string">"-p"</span><span class="token punctuation">,</span>
-                <span class="token string">"$&amp;#123;workspaceFolder&amp;#125;/build"</span>
+                <span class="token string">"${workspaceFolder}/build"</span>
             <span class="token punctuation">]</span><span class="token punctuation">,</span>
             <span class="token property">"detail"</span><span class="token operator">:</span> <span class="token string">"创建build文件夹"</span><span class="token punctuation">,</span>
-        &amp;#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
-        &amp;#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
             <span class="token property">"label"</span><span class="token operator">:</span> <span class="token string">"cmake_configure"</span><span class="token punctuation">,</span>
             <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"shell"</span><span class="token punctuation">,</span>
             <span class="token property">"command"</span><span class="token operator">:</span> <span class="token string">"cmake"</span><span class="token punctuation">,</span>
-            <span class="token property">"options"</span><span class="token operator">:</span> &amp;#<span class="token number">123</span><span class="token punctuation">;</span>
-                <span class="token property">"cwd"</span><span class="token operator">:</span> <span class="token string">"$&amp;#123;workspaceFolder&amp;#125;/build"</span>
-            &amp;#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+            <span class="token property">"options"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+                <span class="token property">"cwd"</span><span class="token operator">:</span> <span class="token string">"${workspaceFolder}/build"</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
             <span class="token property">"args"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
-                <span class="token string">"-DCMAKE_BUILD_TYPE=$&amp;#123;input:CMAKE_BUILD_TYPE&amp;#125;"</span><span class="token punctuation">,</span>
+                <span class="token string">"-DCMAKE_BUILD_TYPE=${input:CMAKE_BUILD_TYPE}"</span><span class="token punctuation">,</span>
                 <span class="token string">"-DCMAKE_EXPORT_COMPILE_COMMANDS=ON"</span><span class="token punctuation">,</span> // 生成compile_commands.json 供c/c++扩展提示使用
                 <span class="token string">"../"</span>
             <span class="token punctuation">]</span><span class="token punctuation">,</span>
             <span class="token property">"dependsOn"</span><span class="token operator">:</span> <span class="token string">"create_build"</span><span class="token punctuation">,</span>
             <span class="token property">"detail"</span><span class="token operator">:</span> <span class="token string">"CMake配置项目"</span>
-        &amp;#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
-        &amp;#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
             <span class="token property">"label"</span><span class="token operator">:</span> <span class="token string">"make_build"</span><span class="token punctuation">,</span>
             <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"shell"</span><span class="token punctuation">,</span>
             <span class="token property">"command"</span><span class="token operator">:</span> <span class="token string">"make"</span><span class="token punctuation">,</span>
-            <span class="token property">"options"</span><span class="token operator">:</span> &amp;#<span class="token number">123</span><span class="token punctuation">;</span>
-                <span class="token property">"cwd"</span><span class="token operator">:</span> <span class="token string">"$&amp;#123;workspaceFolder&amp;#125;/build"</span>
-            &amp;#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+            <span class="token property">"options"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+                <span class="token property">"cwd"</span><span class="token operator">:</span> <span class="token string">"${workspaceFolder}/build"</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
             <span class="token property">"args"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
                 <span class="token string">"all"</span>
             <span class="token punctuation">]</span><span class="token punctuation">,</span>
             <span class="token property">"dependsOn"</span><span class="token operator">:</span> <span class="token string">"cmake_configure"</span><span class="token punctuation">,</span>
             <span class="token property">"detail"</span><span class="token operator">:</span> <span class="token string">"Make构建项目"</span>
-        &amp;#<span class="token number">125</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
 
     <span class="token property">"inputs"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
-        &amp;#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token punctuation">{</span>
             <span class="token property">"id"</span><span class="token operator">:</span> <span class="token string">"CMAKE_BUILD_TYPE"</span><span class="token punctuation">,</span>
             <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"pickString"</span><span class="token punctuation">,</span>
             <span class="token property">"description"</span><span class="token operator">:</span> <span class="token string">"选择项目的编译类型(CMake Build Type)"</span><span class="token punctuation">,</span>
@@ -1317,9 +1317,9 @@ target_link_libraries(wish libwish)
                 <span class="token string">"MinSizeRel"</span><span class="token punctuation">,</span>
             <span class="token punctuation">]</span><span class="token punctuation">,</span>
             <span class="token property">"default"</span><span class="token operator">:</span> <span class="token string">"Debug"</span>
-        &amp;#<span class="token number">125</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
     <span class="token punctuation">]</span>
-&amp;#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>关于<code>input</code>标签，参考手册的这一节：<a target="_blank" rel="noopener" href="https://code.visualstudio.com/docs/editor/variables-reference">https://code.visualstudio.com/docs/editor/variables-reference</a></p>
 <h3 id="C-launch-json的内容"><a href="#C-launch-json的内容" class="headerlink" title="C. launch.json的内容"></a>C. launch.json的内容</h3><p><code>launch.json</code>的内容如下</p>
@@ -1346,12 +1346,12 @@ target_link_libraries(wish libwish)
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/%E5%B1%8F%E5%B9%95%E5%BD%95%E5%88%B62022-10-11-%E4%B8%8B%E5%8D%8811.28.15%20(1" alt="开始调试">.gif)</p>
 <h2 id="9-CMake工程常用的tasks-json和launch-json"><a href="#9-CMake工程常用的tasks-json和launch-json" class="headerlink" title="9. CMake工程常用的tasks.json和launch.json"></a>9. CMake工程常用的tasks.json和launch.json</h2><p>下面给出一个<code>CMake</code>工程常用的<code>tasks.json</code>和<code>launch.json</code></p>
 <pre class="line-numbers language-json"><code class="language-json">// tasks.json
-&amp;#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token punctuation">{</span>
     // See https<span class="token operator">:</span>//go.microsoft.com/fwlink/?LinkId=<span class="token number">733558</span>
     // for the documentation about the tasks.json format
     <span class="token property">"version"</span><span class="token operator">:</span> <span class="token string">"2.0.0"</span><span class="token punctuation">,</span>
     <span class="token property">"tasks"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
-        &amp;#<span class="token number">123</span><span class="token punctuation">;</span> 
+        <span class="token punctuation">{</span> 
             // 在根文件夹中执行创建文件夹build的命令
             // 除windows系统外执行的命令为`mkdir -p build`
             // windows系统是在powershell中执行命令`mkdir -Force build`
@@ -1362,58 +1362,58 @@ target_link_libraries(wish libwish)
                 <span class="token string">"-p"</span><span class="token punctuation">,</span>
                 <span class="token string">"build"</span>
             <span class="token punctuation">]</span><span class="token punctuation">,</span>
-            <span class="token property">"windows"</span><span class="token operator">:</span> &amp;#<span class="token number">123</span><span class="token punctuation">;</span>
-                <span class="token property">"options"</span><span class="token operator">:</span> &amp;#<span class="token number">123</span><span class="token punctuation">;</span>
-                    <span class="token property">"shell"</span><span class="token operator">:</span> &amp;#<span class="token number">123</span><span class="token punctuation">;</span>
+            <span class="token property">"windows"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+                <span class="token property">"options"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+                    <span class="token property">"shell"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
                         <span class="token property">"executable"</span><span class="token operator">:</span> <span class="token string">"powershell.exe"</span>
-                    &amp;#<span class="token number">125</span><span class="token punctuation">;</span>
-                &amp;#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">}</span><span class="token punctuation">,</span>
                 <span class="token property">"args"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
                     <span class="token string">"-Force"</span><span class="token punctuation">,</span>
                     <span class="token string">"build"</span>
                 <span class="token punctuation">]</span><span class="token punctuation">,</span>
-            &amp;#<span class="token number">125</span><span class="token punctuation">;</span>
-        &amp;#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
-        &amp;#<span class="token number">123</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
             // 在build文件夹中调用cmake进行项目配置
-            // 除windows系统外执行的命令为`cmake -DCMAKE_BUILD_TYPE=&lt;Debug|Release|RelWithDebInfo|MinSizeRel&gt; ../`
-            // windows系统是在visual stuido的环境中执行命令`cmake -DCMAKE_BUILD_TYPE=&lt;Debug|Release|RelWithDebInfo|MinSizeRel&gt;  ../ -G <span class="token string">"CodeBlocks - NMake Makefiles"</span>`
+            // 除windows系统外执行的命令为`cmake -DCMAKE_BUILD_TYPE=&lt;Debug|Release|RelWithDebInfo|MinSizeRel> ../`
+            // windows系统是在visual stuido的环境中执行命令`cmake -DCMAKE_BUILD_TYPE=&lt;Debug|Release|RelWithDebInfo|MinSizeRel>  ../ -G <span class="token string">"CodeBlocks - NMake Makefiles"</span>`
             <span class="token property">"label"</span><span class="token operator">:</span> <span class="token string">"cmake"</span><span class="token punctuation">,</span>
             <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"shell"</span><span class="token punctuation">,</span>
             <span class="token property">"command"</span><span class="token operator">:</span> <span class="token string">"cmake"</span><span class="token punctuation">,</span>
             <span class="token property">"args"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
-                <span class="token string">"-DCMAKE_BUILD_TYPE=$&amp;#123;input:CMAKE_BUILD_TYPE&amp;#125;"</span><span class="token punctuation">,</span>
+                <span class="token string">"-DCMAKE_BUILD_TYPE=${input:CMAKE_BUILD_TYPE}"</span><span class="token punctuation">,</span>
                 <span class="token string">"-DCMAKE_EXPORT_COMPILE_COMMANDS=ON"</span><span class="token punctuation">,</span> // 生成compile_commands.json 供c/c++扩展提示使用
                 <span class="token string">"../"</span>
             <span class="token punctuation">]</span><span class="token punctuation">,</span>
-            <span class="token property">"options"</span><span class="token operator">:</span> &amp;#<span class="token number">123</span><span class="token punctuation">;</span>
-                <span class="token property">"cwd"</span><span class="token operator">:</span> <span class="token string">"$&amp;#123;workspaceFolder&amp;#125;/build"</span><span class="token punctuation">,</span>
-            &amp;#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
-            <span class="token property">"windows"</span><span class="token operator">:</span> &amp;#<span class="token number">123</span><span class="token punctuation">;</span>
+            <span class="token property">"options"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+                <span class="token property">"cwd"</span><span class="token operator">:</span> <span class="token string">"${workspaceFolder}/build"</span><span class="token punctuation">,</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token property">"windows"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
                 <span class="token property">"args"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
-                    <span class="token string">"-DCMAKE_BUILD_TYPE=$&amp;#123;input:CMAKE_BUILD_TYPE&amp;#125;"</span><span class="token punctuation">,</span>
+                    <span class="token string">"-DCMAKE_BUILD_TYPE=${input:CMAKE_BUILD_TYPE}"</span><span class="token punctuation">,</span>
                     <span class="token string">"-DCMAKE_EXPORT_COMPILE_COMMANDS=ON"</span><span class="token punctuation">,</span>
                     <span class="token string">"../"</span><span class="token punctuation">,</span>
                     <span class="token string">"-G"</span><span class="token punctuation">,</span>
                     <span class="token string">"\"CodeBlocks - NMake Makefiles\""</span>
                 <span class="token punctuation">]</span><span class="token punctuation">,</span>
-                <span class="token property">"options"</span><span class="token operator">:</span> &amp;#<span class="token number">123</span><span class="token punctuation">;</span>
-                    <span class="token property">"shell"</span><span class="token operator">:</span> &amp;#<span class="token number">123</span><span class="token punctuation">;</span>
+                <span class="token property">"options"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+                    <span class="token property">"shell"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
                         // 需要根据安装的vs版本调用vs工具命令提示符，根据自己的计算机上的路径进行修改
                         <span class="token property">"executable"</span><span class="token operator">:</span> <span class="token string">"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Auxiliary\\Build\\vcvarsall.bat"</span><span class="token punctuation">,</span>
                         <span class="token property">"args"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
-                            <span class="token string">"$&amp;#123;input:PLATFORM&amp;#125;"</span><span class="token punctuation">,</span> //指定平台
-                            <span class="token string">"-vcvars_ver=$&amp;#123;input:vcvars_ver&amp;#125;"</span><span class="token punctuation">,</span> //指定vc环境版本
+                            <span class="token string">"${input:PLATFORM}"</span><span class="token punctuation">,</span> //指定平台
+                            <span class="token string">"-vcvars_ver=${input:vcvars_ver}"</span><span class="token punctuation">,</span> //指定vc环境版本
                             <span class="token string">"&amp;&amp;"</span>
                         <span class="token punctuation">]</span>
-                    &amp;#<span class="token number">125</span><span class="token punctuation">;</span>
-                &amp;#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
-            &amp;#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
             <span class="token property">"dependsOn"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
                 <span class="token string">"build_dir"</span> // 在task `build_dir` 后执行该task
             <span class="token punctuation">]</span>
-        &amp;#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
-        &amp;#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
             // 在build文件夹中调用cmake编译构建debug程序
             // 执行的命令为`cmake --build ./ --target all --`
             //  windows系统如上需要在visual stuido的环境中执行命令
@@ -1428,36 +1428,36 @@ target_link_libraries(wish libwish)
                 <span class="token string">"all"</span><span class="token punctuation">,</span>
                 <span class="token string">"--"</span>
             <span class="token punctuation">]</span><span class="token punctuation">,</span>
-            <span class="token property">"options"</span><span class="token operator">:</span> &amp;#<span class="token number">123</span><span class="token punctuation">;</span>
-                <span class="token property">"cwd"</span><span class="token operator">:</span> <span class="token string">"$&amp;#123;workspaceFolder&amp;#125;/build"</span><span class="token punctuation">,</span>
-            &amp;#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+            <span class="token property">"options"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+                <span class="token property">"cwd"</span><span class="token operator">:</span> <span class="token string">"${workspaceFolder}/build"</span><span class="token punctuation">,</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
             <span class="token property">"problemMatcher"</span><span class="token operator">:</span> <span class="token string">"$gcc"</span><span class="token punctuation">,</span>
-            <span class="token property">"windows"</span><span class="token operator">:</span> &amp;#<span class="token number">123</span><span class="token punctuation">;</span>
-                <span class="token property">"options"</span><span class="token operator">:</span> &amp;#<span class="token number">123</span><span class="token punctuation">;</span>
-                    <span class="token property">"shell"</span><span class="token operator">:</span> &amp;#<span class="token number">123</span><span class="token punctuation">;</span>
+            <span class="token property">"windows"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+                <span class="token property">"options"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+                    <span class="token property">"shell"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
                         <span class="token property">"executable"</span><span class="token operator">:</span> <span class="token string">"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Auxiliary\\Build\\vcvarsall.bat"</span><span class="token punctuation">,</span>
                         <span class="token property">"args"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
-                            <span class="token string">"$&amp;#123;input:PLATFORM&amp;#125;"</span><span class="token punctuation">,</span>
-                            <span class="token string">"-vcvars_ver=$&amp;#123;input:vcvars_ver&amp;#125;"</span><span class="token punctuation">,</span>
+                            <span class="token string">"${input:PLATFORM}"</span><span class="token punctuation">,</span>
+                            <span class="token string">"-vcvars_ver=${input:vcvars_ver}"</span><span class="token punctuation">,</span>
                             <span class="token string">"&amp;&amp;"</span>
                         <span class="token punctuation">]</span>
-                    &amp;#<span class="token number">125</span><span class="token punctuation">;</span>
-                &amp;#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">}</span><span class="token punctuation">,</span>
                 <span class="token property">"problemMatcher"</span><span class="token operator">:</span> <span class="token string">"$msCompile"</span>
-            &amp;#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
             <span class="token property">"dependsOn"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
                 <span class="token string">"cmake"</span> // 在task `cmake` 后执行该task
             <span class="token punctuation">]</span>
-        &amp;#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
-        &amp;#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
             <span class="token property">"label"</span><span class="token operator">:</span> <span class="token string">"Open Terminal"</span><span class="token punctuation">,</span>
             <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"shell"</span><span class="token punctuation">,</span>
             <span class="token property">"command"</span><span class="token operator">:</span> <span class="token string">"osascript -e 'tell application \"Terminal\"\ndo script \"echo hello\"\nend tell'"</span><span class="token punctuation">,</span>
             <span class="token property">"problemMatcher"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
-        &amp;#<span class="token number">125</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
     <span class="token property">"inputs"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
-        &amp;#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token punctuation">{</span>
             <span class="token property">"id"</span><span class="token operator">:</span> <span class="token string">"CMAKE_BUILD_TYPE"</span><span class="token punctuation">,</span>
             <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"pickString"</span><span class="token punctuation">,</span>
             <span class="token property">"description"</span><span class="token operator">:</span> <span class="token string">"指定 CMAKE_BUILD_TYPE 的值"</span><span class="token punctuation">,</span>
@@ -1468,8 +1468,8 @@ target_link_libraries(wish libwish)
                 <span class="token string">"MinSizeRel"</span><span class="token punctuation">,</span>
             <span class="token punctuation">]</span><span class="token punctuation">,</span>
             <span class="token property">"default"</span><span class="token operator">:</span> <span class="token string">"Debug"</span>
-        &amp;#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
-        &amp;#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
             <span class="token property">"id"</span><span class="token operator">:</span> <span class="token string">"PLATFORM"</span><span class="token punctuation">,</span>
             <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"pickString"</span><span class="token punctuation">,</span>
             <span class="token property">"description"</span><span class="token operator">:</span> <span class="token string">"指定 PLATFORM 的值"</span><span class="token punctuation">,</span>
@@ -1483,8 +1483,8 @@ target_link_libraries(wish libwish)
                 <span class="token string">"amd64_arm"</span><span class="token punctuation">,</span>
             <span class="token punctuation">]</span><span class="token punctuation">,</span>
             <span class="token property">"default"</span><span class="token operator">:</span> <span class="token string">"amd64"</span>
-        &amp;#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
-        &amp;#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
             <span class="token property">"id"</span><span class="token operator">:</span> <span class="token string">"vcvars_ver"</span><span class="token punctuation">,</span>
             <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"pickString"</span><span class="token punctuation">,</span>
             <span class="token property">"description"</span><span class="token operator">:</span> <span class="token string">"指定 vcvars_ver 的值"</span><span class="token punctuation">,</span>
@@ -1494,26 +1494,26 @@ target_link_libraries(wish libwish)
                 <span class="token string">"14.0"</span><span class="token punctuation">,</span> // <span class="token number">2015</span>
             <span class="token punctuation">]</span><span class="token punctuation">,</span>
             <span class="token property">"default"</span><span class="token operator">:</span> <span class="token string">"14.2"</span>
-        &amp;#<span class="token number">125</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
     <span class="token punctuation">]</span>
-&amp;#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>注意，如果是需要以<code>Attach Debug</code>方式启动的调试的话，运行中的进程在编译的时候必须要加上<code>-g</code>以将符号表写入到程序中，从而能够<code>debug</code>程序，若使用<code>CMake</code>工具的话，需要指定使用<code>Debug</code>方式来构建程序，而非<code>MinSizeRel</code>等其他构建方式</p>
 <pre class="line-numbers language-json"><code class="language-json">// launch.json
-&amp;#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token punctuation">{</span>
     // Use IntelliSense to learn about possible attributes.
     // Hover to view descriptions of existing attributes.
     // For more information<span class="token punctuation">,</span> visit<span class="token operator">:</span> https<span class="token operator">:</span>//go.microsoft.com/fwlink/?linkid=<span class="token number">830387</span>
     <span class="token property">"version"</span><span class="token operator">:</span> <span class="token string">"0.2.0"</span><span class="token punctuation">,</span>
     <span class="token property">"configurations"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
-        &amp;#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token punctuation">{</span>
             //名称
             <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"Launch Debug"</span><span class="token punctuation">,</span>
             //调试类型，除使用msvc进行调试外，均为该类型
             <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"cppdbg"</span><span class="token punctuation">,</span>
             <span class="token property">"request"</span><span class="token operator">:</span> <span class="token string">"launch"</span><span class="token punctuation">,</span>
             //指定C/C++程序位置
-            <span class="token property">"program"</span><span class="token operator">:</span> <span class="token string">"$&amp;#123;workspaceFolder&amp;#125;/bin/$&amp;#123;input:executable&amp;#125;"</span><span class="token punctuation">,</span>
+            <span class="token property">"program"</span><span class="token operator">:</span> <span class="token string">"${workspaceFolder}/bin/${input:executable}"</span><span class="token punctuation">,</span>
             //指定运行参数
             <span class="token property">"args"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
                 <span class="token string">"test.bin"</span><span class="token punctuation">,</span>
@@ -1521,76 +1521,76 @@ target_link_libraries(wish libwish)
             <span class="token punctuation">]</span><span class="token punctuation">,</span>
             <span class="token property">"stopAtEntry"</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
             //指定工作目录
-            <span class="token property">"cwd"</span><span class="token operator">:</span> <span class="token string">"$&amp;#123;workspaceFolder&amp;#125;"</span><span class="token punctuation">,</span>
+            <span class="token property">"cwd"</span><span class="token operator">:</span> <span class="token string">"${workspaceFolder}"</span><span class="token punctuation">,</span>
             //在调试前会先调用build_debug这个task编译构建程序
             <span class="token property">"preLaunchTask"</span><span class="token operator">:</span> <span class="token string">"build"</span><span class="token punctuation">,</span>
             <span class="token property">"environment"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
             //macOS的特定配置
-            <span class="token property">"osx"</span><span class="token operator">:</span> &amp;#<span class="token number">123</span><span class="token punctuation">;</span>
+            <span class="token property">"osx"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
                 //指定使用lldb进行调试
                 <span class="token property">"MIMode"</span><span class="token operator">:</span> <span class="token string">"lldb"</span><span class="token punctuation">,</span>
                 // 使用外部终端
                 <span class="token property">"externalConsole"</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-            &amp;#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
             //linux的特定配置
-            <span class="token property">"linux"</span><span class="token operator">:</span> &amp;#<span class="token number">123</span><span class="token punctuation">;</span>
+            <span class="token property">"linux"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
                 //指定使用gdb调试
                 <span class="token property">"MIMode"</span><span class="token operator">:</span> <span class="token string">"gdb"</span><span class="token punctuation">,</span>
                 <span class="token property">"setupCommands"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
-                    &amp;#<span class="token number">123</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">{</span>
                         <span class="token property">"description"</span><span class="token operator">:</span> <span class="token string">"Enable pretty-printing for gdb"</span><span class="token punctuation">,</span>
                         <span class="token property">"text"</span><span class="token operator">:</span> <span class="token string">"-enable-pretty-printing"</span><span class="token punctuation">,</span>
                         <span class="token property">"ignoreFailures"</span><span class="token operator">:</span> <span class="token boolean">true</span>
-                    &amp;#<span class="token number">125</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span>
                 <span class="token punctuation">]</span>
-            &amp;#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
             //windows的特定配置
-            <span class="token property">"windows"</span><span class="token operator">:</span> &amp;#<span class="token number">123</span><span class="token punctuation">;</span>
+            <span class="token property">"windows"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
                 //指定使用msvc进行调试
                 <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"cppdbg"</span><span class="token punctuation">,</span>
                 //指定C/C++程序位置
-                <span class="token property">"program"</span><span class="token operator">:</span> <span class="token string">"$&amp;#123;workspaceFolder&amp;#125;/build/$&amp;#123;workspaceFolderBasename&amp;#125;.exe"</span><span class="token punctuation">,</span>
-            &amp;#<span class="token number">125</span><span class="token punctuation">;</span>
-        &amp;#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
-        &amp;#<span class="token number">123</span><span class="token punctuation">;</span>
+                <span class="token property">"program"</span><span class="token operator">:</span> <span class="token string">"${workspaceFolder}/build/${workspaceFolderBasename}.exe"</span><span class="token punctuation">,</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
             //名称
             <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"Attach Debug"</span><span class="token punctuation">,</span>
             //调试类型，除使用msvc进行调试外，均为该类型
             <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"cppdbg"</span><span class="token punctuation">,</span>
             <span class="token property">"request"</span><span class="token operator">:</span> <span class="token string">"attach"</span><span class="token punctuation">,</span>
             //指定C/C++程序位置
-            <span class="token property">"program"</span><span class="token operator">:</span> <span class="token string">"$&amp;#123;workspaceFolder&amp;#125;/bin/$&amp;#123;input:executable&amp;#125;"</span><span class="token punctuation">,</span>
+            <span class="token property">"program"</span><span class="token operator">:</span> <span class="token string">"${workspaceFolder}/bin/${input:executable}"</span><span class="token punctuation">,</span>
             //指定要attach的线程
-            <span class="token property">"processId"</span><span class="token operator">:</span><span class="token string">"$&amp;#123;command:pickProcess&amp;#125;"</span><span class="token punctuation">,</span>
-            <span class="token property">"osx"</span><span class="token operator">:</span> &amp;#<span class="token number">123</span><span class="token punctuation">;</span>
+            <span class="token property">"processId"</span><span class="token operator">:</span><span class="token string">"${command:pickProcess}"</span><span class="token punctuation">,</span>
+            <span class="token property">"osx"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
                 //指定使用lldb进行调试
                 <span class="token property">"MIMode"</span><span class="token operator">:</span> <span class="token string">"lldb"</span><span class="token punctuation">,</span>
                 // 使用外部终端
                 <span class="token property">"externalConsole"</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-            &amp;#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
             //linux的特定配置
-            <span class="token property">"linux"</span><span class="token operator">:</span> &amp;#<span class="token number">123</span><span class="token punctuation">;</span>
+            <span class="token property">"linux"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
                 //指定使用gdb调试
                 <span class="token property">"MIMode"</span><span class="token operator">:</span> <span class="token string">"gdb"</span><span class="token punctuation">,</span>
                 <span class="token property">"setupCommands"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
-                    &amp;#<span class="token number">123</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">{</span>
                         <span class="token property">"description"</span><span class="token operator">:</span> <span class="token string">"Enable pretty-printing for gdb"</span><span class="token punctuation">,</span>
                         <span class="token property">"text"</span><span class="token operator">:</span> <span class="token string">"-enable-pretty-printing"</span><span class="token punctuation">,</span>
                         <span class="token property">"ignoreFailures"</span><span class="token operator">:</span> <span class="token boolean">true</span>
-                    &amp;#<span class="token number">125</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span>
                 <span class="token punctuation">]</span>
-            &amp;#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
             //windows的特定配置
-            <span class="token property">"windows"</span><span class="token operator">:</span> &amp;#<span class="token number">123</span><span class="token punctuation">;</span>
+            <span class="token property">"windows"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
                 //指定使用msvc进行调试
                 <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"cppdbg"</span><span class="token punctuation">,</span>
                 //指定C/C++程序位置
-                <span class="token property">"program"</span><span class="token operator">:</span> <span class="token string">"$&amp;#123;workspaceFolder&amp;#125;/build/$&amp;#123;workspaceFolderBasename&amp;#125;.exe"</span><span class="token punctuation">,</span>
-            &amp;#<span class="token number">125</span><span class="token punctuation">;</span>
-        &amp;#<span class="token number">125</span><span class="token punctuation">;</span>
+                <span class="token property">"program"</span><span class="token operator">:</span> <span class="token string">"${workspaceFolder}/build/${workspaceFolderBasename}.exe"</span><span class="token punctuation">,</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
     <span class="token property">"inputs"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
-        &amp;#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token punctuation">{</span>
             <span class="token property">"id"</span><span class="token operator">:</span> <span class="token string">"executable"</span><span class="token punctuation">,</span>
             <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"pickString"</span><span class="token punctuation">,</span>
             <span class="token property">"description"</span><span class="token operator">:</span> <span class="token string">"可执行文件的名称"</span><span class="token punctuation">,</span>
@@ -1598,9 +1598,9 @@ target_link_libraries(wish libwish)
             <span class="token property">"options"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
                 <span class="token string">"psort"</span>
             <span class="token punctuation">]</span>
-        &amp;#<span class="token number">125</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
     <span class="token punctuation">]</span>
-&amp;#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
                 
@@ -2125,7 +2125,7 @@ target_link_libraries(wish libwish)
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">429.2k</span>
+                        class="white-color">424.4k</span>
             
             
             

@@ -30,10 +30,10 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.2"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
-<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css">
+<meta name="generator" content="Hexo 5.4.2">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-</head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
 
@@ -418,7 +418,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    3.9k
+                    3.8k
                 </div>
                 
 
@@ -498,18 +498,18 @@
 
 <span class="token comment" spellcheck="true"># Try to infer the correct TOOLPREFIX if not set</span>
 <span class="token keyword">ifndef</span> TOOLPREFIX
-TOOLPREFIX <span class="token operator">:=</span> <span class="token variable">$</span><span class="token punctuation">(</span><span class="token keyword">shell</span> if i386-jos-elf-objdump -i 2&gt;&amp;1 <span class="token operator">|</span> grep <span class="token string">'^elf32-i386$$'</span> &gt;/dev/null 2&gt;&amp;1<span class="token punctuation">;</span> \
+TOOLPREFIX <span class="token operator">:=</span> <span class="token variable">$</span><span class="token punctuation">(</span><span class="token keyword">shell</span> if i386-jos-elf-objdump -i 2>&amp;1 <span class="token operator">|</span> grep <span class="token string">'^elf32-i386$$'</span> >/dev/null 2>&amp;1<span class="token punctuation">;</span> \
     then echo <span class="token string">'i386-jos-elf-'</span><span class="token punctuation">;</span> \
-    elif objdump -i 2&gt;&amp;1 <span class="token operator">|</span> grep <span class="token string">'elf32-i386'</span> &gt;/dev/null 2&gt;&amp;1<span class="token punctuation">;</span> \
+    elif objdump -i 2>&amp;1 <span class="token operator">|</span> grep <span class="token string">'elf32-i386'</span> >/dev/null 2>&amp;1<span class="token punctuation">;</span> \
     then echo <span class="token string">''</span><span class="token punctuation">;</span> \
-    <span class="token keyword">else</span> echo <span class="token string">"***"</span> 1&gt;&amp;2<span class="token punctuation">;</span> \
-    echo <span class="token string">"*** Error: Couldn't find an i386-*-elf version of GCC/binutils."</span> 1&gt;&amp;2<span class="token punctuation">;</span> \
-    echo <span class="token string">"*** Is the directory with i386-jos-elf-gcc in your PATH?"</span> 1&gt;&amp;2<span class="token punctuation">;</span> \
-    echo <span class="token string">"*** If your i386-*-elf toolchain is installed with a command"</span> 1&gt;&amp;2<span class="token punctuation">;</span> \
-    echo <span class="token string">"*** prefix other than 'i386-jos-elf-', set your TOOLPREFIX"</span> 1&gt;&amp;2<span class="token punctuation">;</span> \
-    echo <span class="token string">"*** environment variable to that prefix and run 'make' again."</span> 1&gt;&amp;2<span class="token punctuation">;</span> \
-    echo <span class="token string">"*** To turn off this error, run 'gmake TOOLPREFIX= ...'."</span> 1&gt;&amp;2<span class="token punctuation">;</span> \
-    echo <span class="token string">"***"</span> 1&gt;&amp;2<span class="token punctuation">;</span> exit 1<span class="token punctuation">;</span> fi<span class="token punctuation">)</span>
+    <span class="token keyword">else</span> echo <span class="token string">"***"</span> 1>&amp;2<span class="token punctuation">;</span> \
+    echo <span class="token string">"*** Error: Couldn't find an i386-*-elf version of GCC/binutils."</span> 1>&amp;2<span class="token punctuation">;</span> \
+    echo <span class="token string">"*** Is the directory with i386-jos-elf-gcc in your PATH?"</span> 1>&amp;2<span class="token punctuation">;</span> \
+    echo <span class="token string">"*** If your i386-*-elf toolchain is installed with a command"</span> 1>&amp;2<span class="token punctuation">;</span> \
+    echo <span class="token string">"*** prefix other than 'i386-jos-elf-', set your TOOLPREFIX"</span> 1>&amp;2<span class="token punctuation">;</span> \
+    echo <span class="token string">"*** environment variable to that prefix and run 'make' again."</span> 1>&amp;2<span class="token punctuation">;</span> \
+    echo <span class="token string">"*** To turn off this error, run 'gmake TOOLPREFIX= ...'."</span> 1>&amp;2<span class="token punctuation">;</span> \
+    echo <span class="token string">"***"</span> 1>&amp;2<span class="token punctuation">;</span> exit 1<span class="token punctuation">;</span> fi<span class="token punctuation">)</span>
 <span class="token keyword">endif</span>
 
 <span class="token comment" spellcheck="true"># If the makefile can't find QEMU, specify its path here</span>
@@ -517,20 +517,20 @@ TOOLPREFIX <span class="token operator">:=</span> <span class="token variable">$
 
 <span class="token comment" spellcheck="true"># Try to infer the correct QEMU</span>
 <span class="token keyword">ifndef</span> QEMU
-QEMU <span class="token operator">=</span> <span class="token variable">$</span><span class="token punctuation">(</span><span class="token keyword">shell</span> if which qemu &gt; /dev/null<span class="token punctuation">;</span> \
+QEMU <span class="token operator">=</span> <span class="token variable">$</span><span class="token punctuation">(</span><span class="token keyword">shell</span> if which qemu > /dev/null<span class="token punctuation">;</span> \
     then echo qemu<span class="token punctuation">;</span> exit<span class="token punctuation">;</span> \
-    elif which qemu-system-i386 &gt; /dev/null<span class="token punctuation">;</span> \
+    elif which qemu-system-i386 > /dev/null<span class="token punctuation">;</span> \
     then echo qemu-system-i386<span class="token punctuation">;</span> exit<span class="token punctuation">;</span> \
-    elif which qemu-system-x86_64 &gt; /dev/null<span class="token punctuation">;</span> \
+    elif which qemu-system-x86_64 > /dev/null<span class="token punctuation">;</span> \
     then echo qemu-system-x86_64<span class="token punctuation">;</span> exit<span class="token punctuation">;</span> \
     <span class="token keyword">else</span> \
     qemu<span class="token operator">=</span>/Applications/Q.app/Contents/MacOS/i386-softmmu.app/Contents/MacOS/i386-softmmu<span class="token punctuation">;</span> \
     if test -x <span class="token variable">$$qemu;</span> then echo <span class="token variable">$$qemu;</span> exit<span class="token punctuation">;</span> fi<span class="token punctuation">;</span> fi<span class="token punctuation">;</span> \
-    echo <span class="token string">"***"</span> 1&gt;&amp;2<span class="token punctuation">;</span> \
-    echo <span class="token string">"*** Error: Couldn't find a working QEMU executable."</span> 1&gt;&amp;2<span class="token punctuation">;</span> \
-    echo <span class="token string">"*** Is the directory containing the qemu binary in your PATH"</span> 1&gt;&amp;2<span class="token punctuation">;</span> \
-    echo <span class="token string">"*** or have you tried setting the QEMU variable in Makefile?"</span> 1&gt;&amp;2<span class="token punctuation">;</span> \
-    echo <span class="token string">"***"</span> 1&gt;&amp;2<span class="token punctuation">;</span> exit 1<span class="token punctuation">)</span>
+    echo <span class="token string">"***"</span> 1>&amp;2<span class="token punctuation">;</span> \
+    echo <span class="token string">"*** Error: Couldn't find a working QEMU executable."</span> 1>&amp;2<span class="token punctuation">;</span> \
+    echo <span class="token string">"*** Is the directory containing the qemu binary in your PATH"</span> 1>&amp;2<span class="token punctuation">;</span> \
+    echo <span class="token string">"*** or have you tried setting the QEMU variable in Makefile?"</span> 1>&amp;2<span class="token punctuation">;</span> \
+    echo <span class="token string">"***"</span> 1>&amp;2<span class="token punctuation">;</span> exit 1<span class="token punctuation">)</span>
 <span class="token keyword">endif</span>
 
 CC <span class="token operator">=</span> <span class="token variable">$</span><span class="token punctuation">(</span>TOOLPREFIX<span class="token punctuation">)</span>gcc
@@ -539,16 +539,16 @@ LD <span class="token operator">=</span> <span class="token variable">$</span><s
 OBJCOPY <span class="token operator">=</span> <span class="token variable">$</span><span class="token punctuation">(</span>TOOLPREFIX<span class="token punctuation">)</span>objcopy
 OBJDUMP <span class="token operator">=</span> <span class="token variable">$</span><span class="token punctuation">(</span>TOOLPREFIX<span class="token punctuation">)</span>objdump
 CFLAGS <span class="token operator">=</span> -fno-pic -static -fno-builtin -fno-strict-aliasing -O2 -Wall -MD -ggdb -m32 -Werror -fno-omit-frame-pointer
-CFLAGS <span class="token operator">+=</span> <span class="token variable">$</span><span class="token punctuation">(</span><span class="token keyword">shell</span> <span class="token variable">$</span><span class="token punctuation">(</span>CC<span class="token punctuation">)</span> -fno-stack-protector -E -x c /dev/null &gt;/dev/null 2&gt;&amp;1 &amp;&amp; echo -fno-stack-protector<span class="token punctuation">)</span>
+CFLAGS <span class="token operator">+=</span> <span class="token variable">$</span><span class="token punctuation">(</span><span class="token keyword">shell</span> <span class="token variable">$</span><span class="token punctuation">(</span>CC<span class="token punctuation">)</span> -fno-stack-protector -E -x c /dev/null >/dev/null 2>&amp;1 &amp;&amp; echo -fno-stack-protector<span class="token punctuation">)</span>
 ASFLAGS <span class="token operator">=</span> -m32 -gdwarf-2 -Wa,-divide
 <span class="token comment" spellcheck="true"># FreeBSD ld wants ``elf_i386_fbsd''</span>
-LDFLAGS <span class="token operator">+=</span> -m <span class="token variable">$</span><span class="token punctuation">(</span><span class="token keyword">shell</span> <span class="token variable">$</span><span class="token punctuation">(</span>LD<span class="token punctuation">)</span> -V <span class="token operator">|</span> grep elf_i386 2&gt;/dev/null <span class="token operator">|</span> head -n 1<span class="token punctuation">)</span>
+LDFLAGS <span class="token operator">+=</span> -m <span class="token variable">$</span><span class="token punctuation">(</span><span class="token keyword">shell</span> <span class="token variable">$</span><span class="token punctuation">(</span>LD<span class="token punctuation">)</span> -V <span class="token operator">|</span> grep elf_i386 2>/dev/null <span class="token operator">|</span> head -n 1<span class="token punctuation">)</span>
 
 <span class="token comment" spellcheck="true"># Disable PIE when possible (for Ubuntu 16.10 toolchain)</span>
-<span class="token keyword">ifneq</span> <span class="token punctuation">(</span><span class="token variable">$</span><span class="token punctuation">(</span><span class="token keyword">shell</span> <span class="token variable">$</span><span class="token punctuation">(</span>CC<span class="token punctuation">)</span> -dumpspecs 2&gt;/dev/null <span class="token operator">|</span> grep -e <span class="token string">'[^f]no-pie'</span><span class="token punctuation">)</span>,<span class="token punctuation">)</span>
+<span class="token keyword">ifneq</span> <span class="token punctuation">(</span><span class="token variable">$</span><span class="token punctuation">(</span><span class="token keyword">shell</span> <span class="token variable">$</span><span class="token punctuation">(</span>CC<span class="token punctuation">)</span> -dumpspecs 2>/dev/null <span class="token operator">|</span> grep -e <span class="token string">'[^f]no-pie'</span><span class="token punctuation">)</span>,<span class="token punctuation">)</span>
 CFLAGS <span class="token operator">+=</span> -fno-pie -no-pie
 <span class="token keyword">endif</span>
-<span class="token keyword">ifneq</span> <span class="token punctuation">(</span><span class="token variable">$</span><span class="token punctuation">(</span><span class="token keyword">shell</span> <span class="token variable">$</span><span class="token punctuation">(</span>CC<span class="token punctuation">)</span> -dumpspecs 2&gt;/dev/null <span class="token operator">|</span> grep -e <span class="token string">'[^f]nopie'</span><span class="token punctuation">)</span>,<span class="token punctuation">)</span>
+<span class="token keyword">ifneq</span> <span class="token punctuation">(</span><span class="token variable">$</span><span class="token punctuation">(</span><span class="token keyword">shell</span> <span class="token variable">$</span><span class="token punctuation">(</span>CC<span class="token punctuation">)</span> -dumpspecs 2>/dev/null <span class="token operator">|</span> grep -e <span class="token string">'[^f]nopie'</span><span class="token punctuation">)</span>,<span class="token punctuation">)</span>
 CFLAGS <span class="token operator">+=</span> -fno-pie -nopie
 <span class="token keyword">endif</span>
 
@@ -566,7 +566,7 @@ CFLAGS <span class="token operator">+=</span> -fno-pie -nopie
     <span class="token variable">$</span><span class="token punctuation">(</span>CC<span class="token punctuation">)</span> <span class="token variable">$</span><span class="token punctuation">(</span>CFLAGS<span class="token punctuation">)</span> -fno-pic -O -nostdinc -I. -c bootmain.c
     <span class="token variable">$</span><span class="token punctuation">(</span>CC<span class="token punctuation">)</span> <span class="token variable">$</span><span class="token punctuation">(</span>CFLAGS<span class="token punctuation">)</span> -fno-pic -nostdinc -I. -c bootasm.S
     <span class="token variable">$</span><span class="token punctuation">(</span>LD<span class="token punctuation">)</span> <span class="token variable">$</span><span class="token punctuation">(</span>LDFLAGS<span class="token punctuation">)</span> -N -e start -Ttext 0x7C00 -o bootblock.o bootasm.o bootmain.o
-    <span class="token variable">$</span><span class="token punctuation">(</span>OBJDUMP<span class="token punctuation">)</span> -S bootblock.o &gt; bootblock.asm
+    <span class="token variable">$</span><span class="token punctuation">(</span>OBJDUMP<span class="token punctuation">)</span> -S bootblock.o > bootblock.asm
     <span class="token variable">$</span><span class="token punctuation">(</span>OBJCOPY<span class="token punctuation">)</span> -S -O binary -j .text bootblock.o bootblock
     ./sign.pl bootblock
 
@@ -574,18 +574,18 @@ CFLAGS <span class="token operator">+=</span> -fno-pie -nopie
     <span class="token variable">$</span><span class="token punctuation">(</span>CC<span class="token punctuation">)</span> <span class="token variable">$</span><span class="token punctuation">(</span>CFLAGS<span class="token punctuation">)</span> -fno-pic -nostdinc -I. -c entryother.S
     <span class="token variable">$</span><span class="token punctuation">(</span>LD<span class="token punctuation">)</span> <span class="token variable">$</span><span class="token punctuation">(</span>LDFLAGS<span class="token punctuation">)</span> -N -e start -Ttext 0x7000 -o bootblockother.o entryother.o
     <span class="token variable">$</span><span class="token punctuation">(</span>OBJCOPY<span class="token punctuation">)</span> -S -O binary -j .text bootblockother.o entryother
-    <span class="token variable">$</span><span class="token punctuation">(</span>OBJDUMP<span class="token punctuation">)</span> -S bootblockother.o &gt; entryother.asm
+    <span class="token variable">$</span><span class="token punctuation">(</span>OBJDUMP<span class="token punctuation">)</span> -S bootblockother.o > entryother.asm
 
 <span class="token symbol">initcode</span><span class="token punctuation">:</span> initcode.S
     <span class="token variable">$</span><span class="token punctuation">(</span>CC<span class="token punctuation">)</span> <span class="token variable">$</span><span class="token punctuation">(</span>CFLAGS<span class="token punctuation">)</span> -nostdinc -I. -c initcode.S
     <span class="token variable">$</span><span class="token punctuation">(</span>LD<span class="token punctuation">)</span> <span class="token variable">$</span><span class="token punctuation">(</span>LDFLAGS<span class="token punctuation">)</span> -N -e start -Ttext 0 -o initcode.out initcode.o
     <span class="token variable">$</span><span class="token punctuation">(</span>OBJCOPY<span class="token punctuation">)</span> -S -O binary initcode.out initcode
-    <span class="token variable">$</span><span class="token punctuation">(</span>OBJDUMP<span class="token punctuation">)</span> -S initcode.o &gt; initcode.asm
+    <span class="token variable">$</span><span class="token punctuation">(</span>OBJDUMP<span class="token punctuation">)</span> -S initcode.o > initcode.asm
 
 <span class="token symbol">kernel</span><span class="token punctuation">:</span> <span class="token variable">$</span><span class="token punctuation">(</span>OBJS<span class="token punctuation">)</span> entry.o entryother initcode kernel.ld
     <span class="token variable">$</span><span class="token punctuation">(</span>LD<span class="token punctuation">)</span> <span class="token variable">$</span><span class="token punctuation">(</span>LDFLAGS<span class="token punctuation">)</span> -T kernel.ld -o kernel entry.o <span class="token variable">$</span><span class="token punctuation">(</span>OBJS<span class="token punctuation">)</span> -b binary initcode entryother
-    <span class="token variable">$</span><span class="token punctuation">(</span>OBJDUMP<span class="token punctuation">)</span> -S kernel &gt; kernel.asm
-    <span class="token variable">$</span><span class="token punctuation">(</span>OBJDUMP<span class="token punctuation">)</span> -t kernel <span class="token operator">|</span> sed <span class="token string">'1,/SYMBOL TABLE/d; s/ .* / /; /^$$/d'</span> &gt; kernel.sym
+    <span class="token variable">$</span><span class="token punctuation">(</span>OBJDUMP<span class="token punctuation">)</span> -S kernel > kernel.asm
+    <span class="token variable">$</span><span class="token punctuation">(</span>OBJDUMP<span class="token punctuation">)</span> -t kernel <span class="token operator">|</span> sed <span class="token string">'1,/SYMBOL TABLE/d; s/ .* / /; /^$$/d'</span> > kernel.sym
 
 <span class="token comment" spellcheck="true"># kernelmemfs is a copy of kernel that maintains the</span>
 <span class="token comment" spellcheck="true"># disk image in memory instead of writing to a disk.</span>
@@ -596,27 +596,27 @@ CFLAGS <span class="token operator">+=</span> -fno-pie -nopie
 MEMFSOBJS <span class="token operator">=</span> <span class="token variable">$</span><span class="token punctuation">(</span><span class="token keyword">filter-out</span> ide.o,<span class="token variable">$</span><span class="token punctuation">(</span>OBJS<span class="token punctuation">)</span><span class="token punctuation">)</span> memide.o
 <span class="token symbol">kernelmemfs</span><span class="token punctuation">:</span> <span class="token variable">$</span><span class="token punctuation">(</span>MEMFSOBJS<span class="token punctuation">)</span> entry.o entryother initcode kernel.ld fs.img
     <span class="token variable">$</span><span class="token punctuation">(</span>LD<span class="token punctuation">)</span> <span class="token variable">$</span><span class="token punctuation">(</span>LDFLAGS<span class="token punctuation">)</span> -T kernel.ld -o kernelmemfs entry.o  <span class="token variable">$</span><span class="token punctuation">(</span>MEMFSOBJS<span class="token punctuation">)</span> -b binary initcode entryother fs.img
-    <span class="token variable">$</span><span class="token punctuation">(</span>OBJDUMP<span class="token punctuation">)</span> -S kernelmemfs &gt; kernelmemfs.asm
-    <span class="token variable">$</span><span class="token punctuation">(</span>OBJDUMP<span class="token punctuation">)</span> -t kernelmemfs <span class="token operator">|</span> sed <span class="token string">'1,/SYMBOL TABLE/d; s/ .* / /; /^$$/d'</span> &gt; kernelmemfs.sym
+    <span class="token variable">$</span><span class="token punctuation">(</span>OBJDUMP<span class="token punctuation">)</span> -S kernelmemfs > kernelmemfs.asm
+    <span class="token variable">$</span><span class="token punctuation">(</span>OBJDUMP<span class="token punctuation">)</span> -t kernelmemfs <span class="token operator">|</span> sed <span class="token string">'1,/SYMBOL TABLE/d; s/ .* / /; /^$$/d'</span> > kernelmemfs.sym
 
 <span class="token symbol">tags</span><span class="token punctuation">:</span> <span class="token variable">$</span><span class="token punctuation">(</span>OBJS<span class="token punctuation">)</span> entryother.S _init
     etags *.S *.c
 
 <span class="token symbol">vectors.S</span><span class="token punctuation">:</span> vectors.pl
-    ./vectors.pl &gt; vectors.S
+    ./vectors.pl > vectors.S
 
 ULIB <span class="token operator">=</span> ulib.o usys.o printf.o umalloc.o
 
 <span class="token symbol">_%</span><span class="token punctuation">:</span> %.o <span class="token variable">$</span><span class="token punctuation">(</span>ULIB<span class="token punctuation">)</span>
     <span class="token variable">$</span><span class="token punctuation">(</span>LD<span class="token punctuation">)</span> <span class="token variable">$</span><span class="token punctuation">(</span>LDFLAGS<span class="token punctuation">)</span> -N -e main -Ttext 0 -o <span class="token variable">$@</span> <span class="token variable">$^</span>
-    <span class="token variable">$</span><span class="token punctuation">(</span>OBJDUMP<span class="token punctuation">)</span> -S <span class="token variable">$@</span> &gt; <span class="token variable">$*.asm</span>
-    <span class="token variable">$</span><span class="token punctuation">(</span>OBJDUMP<span class="token punctuation">)</span> -t <span class="token variable">$@</span> <span class="token operator">|</span> sed <span class="token string">'1,/SYMBOL TABLE/d; s/ .* / /; /^$$/d'</span> &gt; <span class="token variable">$*.sym</span>
+    <span class="token variable">$</span><span class="token punctuation">(</span>OBJDUMP<span class="token punctuation">)</span> -S <span class="token variable">$@</span> > <span class="token variable">$*.asm</span>
+    <span class="token variable">$</span><span class="token punctuation">(</span>OBJDUMP<span class="token punctuation">)</span> -t <span class="token variable">$@</span> <span class="token operator">|</span> sed <span class="token string">'1,/SYMBOL TABLE/d; s/ .* / /; /^$$/d'</span> > <span class="token variable">$*.sym</span>
 
 <span class="token symbol">_forktest</span><span class="token punctuation">:</span> forktest.o <span class="token variable">$</span><span class="token punctuation">(</span>ULIB<span class="token punctuation">)</span>
     <span class="token comment" spellcheck="true"># forktest has less library code linked in - needs to be small</span>
     <span class="token comment" spellcheck="true"># in order to be able to max out the proc table.</span>
     <span class="token variable">$</span><span class="token punctuation">(</span>LD<span class="token punctuation">)</span> <span class="token variable">$</span><span class="token punctuation">(</span>LDFLAGS<span class="token punctuation">)</span> -N -e main -Ttext 0 -o _forktest forktest.o ulib.o usys.o
-    <span class="token variable">$</span><span class="token punctuation">(</span>OBJDUMP<span class="token punctuation">)</span> -S _forktest &gt; forktest.asm
+    <span class="token variable">$</span><span class="token punctuation">(</span>OBJDUMP<span class="token punctuation">)</span> -S _forktest > forktest.asm
 
 <span class="token symbol">mkfs</span><span class="token punctuation">:</span> mkfs.c fs.h
     gcc -Werror -Wall -o mkfs mkfs.c
@@ -693,14 +693,14 @@ QEMUOPTS <span class="token operator">=</span> -drive file<span class="token ope
     <span class="token variable">$</span><span class="token punctuation">(</span>QEMU<span class="token punctuation">)</span> -nographic <span class="token variable">$</span><span class="token punctuation">(</span>QEMUOPTS<span class="token punctuation">)</span>
 
 <span class="token symbol">.gdbinit</span><span class="token punctuation">:</span> .gdbinit.tmpl
-    sed <span class="token string">"s/localhost:1234/localhost:$(GDBPORT)/"</span> &lt; <span class="token variable">$^</span> &gt; <span class="token variable">$@</span>
+    sed <span class="token string">"s/localhost:1234/localhost:$(GDBPORT)/"</span> &lt; <span class="token variable">$^</span> > <span class="token variable">$@</span>
 
 <span class="token symbol">qemu-gdb</span><span class="token punctuation">:</span> fs.img xv6.img .gdbinit
-    <span class="token operator">@</span>echo <span class="token string">"*** Now run 'gdb'."</span> 1&gt;&amp;2
+    <span class="token operator">@</span>echo <span class="token string">"*** Now run 'gdb'."</span> 1>&amp;2
 <span class="token symbol">    <span class="token variable">$</span>(QEMU) -serial mon</span><span class="token punctuation">:</span>stdio <span class="token variable">$</span><span class="token punctuation">(</span>QEMUOPTS<span class="token punctuation">)</span> -S <span class="token variable">$</span><span class="token punctuation">(</span>QEMUGDB<span class="token punctuation">)</span>
 
 <span class="token symbol">qemu-nox-gdb</span><span class="token punctuation">:</span> fs.img xv6.img .gdbinit
-    <span class="token operator">@</span>echo <span class="token string">"*** Now run 'gdb'."</span> 1&gt;&amp;2
+    <span class="token operator">@</span>echo <span class="token string">"*** Now run 'gdb'."</span> 1>&amp;2
     <span class="token variable">$</span><span class="token punctuation">(</span>QEMU<span class="token punctuation">)</span> -nographic <span class="token variable">$</span><span class="token punctuation">(</span>QEMUOPTS<span class="token punctuation">)</span> -S <span class="token variable">$</span><span class="token punctuation">(</span>QEMUGDB<span class="token punctuation">)</span>
 
 <span class="token comment" spellcheck="true"># CUT HERE</span>
@@ -721,10 +721,10 @@ EXTRA<span class="token operator">=</span>\
     mkdir dist
     for i in <span class="token variable">$</span><span class="token punctuation">(</span>FILES<span class="token punctuation">)</span><span class="token punctuation">;</span> \
     do \
-        grep -v PAGEBREAK <span class="token variable">$$i</span> &gt;dist/<span class="token variable">$$i;</span> \
+        grep -v PAGEBREAK <span class="token variable">$$i</span> >dist/<span class="token variable">$$i;</span> \
     done
-    sed <span class="token string">'/CUT HERE/,$$d'</span> Makefile &gt;dist/Makefile
-    echo &gt;dist/runoff.spec
+    sed <span class="token string">'/CUT HERE/,$$d'</span> Makefile >dist/Makefile
+    echo >dist/runoff.spec
     cp <span class="token variable">$</span><span class="token punctuation">(</span>EXTRA<span class="token punctuation">)</span> dist
 
 <span class="token symbol">dist-test</span><span class="token punctuation">:</span>
@@ -743,7 +743,7 @@ EXTRA<span class="token operator">=</span>\
     rm -rf /tmp/xv6
     mkdir -p /tmp/xv6
     cp dist/* dist/.gdbinit.tmpl /tmp/xv6
-    <span class="token punctuation">(</span>cd /tmp<span class="token punctuation">;</span> tar cf - xv6<span class="token punctuation">)</span> <span class="token operator">|</span> gzip &gt;xv6-rev10.tar.gz  <span class="token comment" spellcheck="true"># the next one will be 10 (9/17)</span>
+    <span class="token punctuation">(</span>cd /tmp<span class="token punctuation">;</span> tar cf - xv6<span class="token punctuation">)</span> <span class="token operator">|</span> gzip >xv6-rev10.tar.gz  <span class="token comment" spellcheck="true"># the next one will be 10 (9/17)</span>
 
 <span class="token builtin">.PHONY</span><span class="token punctuation">:</span> dist-test dist
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
@@ -753,7 +753,7 @@ EXTRA<span class="token operator">=</span>\
 <p>而这个命令表示我们运行<code>Makefile</code>中的 <code>qemu-nox-gdb</code>目标。</p>
 <p><code>Makefile</code>中的 <code>qemu-nox-gdb</code>目标如下：</p>
 <pre class="line-numbers language-makefile"><code class="language-makefile"><span class="token symbol">qemu-nox-gdb</span><span class="token punctuation">:</span> fs.img xv6.img .gdbinit
-    <span class="token operator">@</span>echo <span class="token string">"*** Now run 'gdb'."</span> 1&gt;&amp;2
+    <span class="token operator">@</span>echo <span class="token string">"*** Now run 'gdb'."</span> 1>&amp;2
     <span class="token variable">$</span><span class="token punctuation">(</span>QEMU<span class="token punctuation">)</span> -nographic <span class="token variable">$</span><span class="token punctuation">(</span>QEMUOPTS<span class="token punctuation">)</span> -S <span class="token variable">$</span><span class="token punctuation">(</span>QEMUGDB<span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>其中：</p>
@@ -763,20 +763,20 @@ EXTRA<span class="token operator">=</span>\
 <li><code>qemu-nox-gdb: fs.img xv6.img .gdbinit</code>表示目标<code>qemu-nox-gdb</code>依赖目标<code>fs.img</code>, <code>xv6.img</code>和 <code>.gdbinit</code>，即在build目标<code>qemu-nox-gdb</code>之前，要先build后面三个目标</li>
 </ul>
 <p>宏 <code>QEMU</code>, <code>QEMUOPTS</code>和 <code>QEMUGDB</code>的定义为</p>
-<pre class="line-numbers language-makefile"><code class="language-makefile">QEMU <span class="token operator">=</span> <span class="token variable">$</span><span class="token punctuation">(</span><span class="token keyword">shell</span> if which qemu &gt; /dev/null<span class="token punctuation">;</span> \
+<pre class="line-numbers language-makefile"><code class="language-makefile">QEMU <span class="token operator">=</span> <span class="token variable">$</span><span class="token punctuation">(</span><span class="token keyword">shell</span> if which qemu > /dev/null<span class="token punctuation">;</span> \
     then echo qemu<span class="token punctuation">;</span> exit<span class="token punctuation">;</span> \
-    elif which qemu-system-i386 &gt; /dev/null<span class="token punctuation">;</span> \
+    elif which qemu-system-i386 > /dev/null<span class="token punctuation">;</span> \
     then echo qemu-system-i386<span class="token punctuation">;</span> exit<span class="token punctuation">;</span> \
-    elif which qemu-system-x86_64 &gt; /dev/null<span class="token punctuation">;</span> \
+    elif which qemu-system-x86_64 > /dev/null<span class="token punctuation">;</span> \
     then echo qemu-system-x86_64<span class="token punctuation">;</span> exit<span class="token punctuation">;</span> \
     <span class="token keyword">else</span> \
     qemu<span class="token operator">=</span>/Applications/Q.app/Contents/MacOS/i386-softmmu.app/Contents/MacOS/i386-softmmu<span class="token punctuation">;</span> \
     if test -x <span class="token variable">$$qemu;</span> then echo <span class="token variable">$$qemu;</span> exit<span class="token punctuation">;</span> fi<span class="token punctuation">;</span> fi<span class="token punctuation">;</span> \
-    echo <span class="token string">"***"</span> 1&gt;&amp;2<span class="token punctuation">;</span> \
-    echo <span class="token string">"*** Error: Couldn't find a working QEMU executable."</span> 1&gt;&amp;2<span class="token punctuation">;</span> \
-    echo <span class="token string">"*** Is the directory containing the qemu binary in your PATH"</span> 1&gt;&amp;2<span class="token punctuation">;</span> \
-    echo <span class="token string">"*** or have you tried setting the QEMU variable in Makefile?"</span> 1&gt;&amp;2<span class="token punctuation">;</span> \
-    echo <span class="token string">"***"</span> 1&gt;&amp;2<span class="token punctuation">;</span> exit 1<span class="token punctuation">)</span>
+    echo <span class="token string">"***"</span> 1>&amp;2<span class="token punctuation">;</span> \
+    echo <span class="token string">"*** Error: Couldn't find a working QEMU executable."</span> 1>&amp;2<span class="token punctuation">;</span> \
+    echo <span class="token string">"*** Is the directory containing the qemu binary in your PATH"</span> 1>&amp;2<span class="token punctuation">;</span> \
+    echo <span class="token string">"*** or have you tried setting the QEMU variable in Makefile?"</span> 1>&amp;2<span class="token punctuation">;</span> \
+    echo <span class="token string">"***"</span> 1>&amp;2<span class="token punctuation">;</span> exit 1<span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <pre class="line-numbers language-makefile"><code class="language-makefile">QEMUOPTS <span class="token operator">=</span> -drive file<span class="token operator">=</span>fs.img,index<span class="token operator">=</span>1,media<span class="token operator">=</span>disk,format<span class="token operator">=</span>raw -drive file<span class="token operator">=</span>xv6.img,index<span class="token operator">=</span>0,media<span class="token operator">=</span>disk,format<span class="token operator">=</span>raw -smp <span class="token variable">$</span><span class="token punctuation">(</span>CPUS<span class="token punctuation">)</span> -m 512 <span class="token variable">$</span><span class="token punctuation">(</span>QEMUEXTRA<span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -797,8 +797,8 @@ EXTRA<span class="token operator">=</span>\
 <h3 id="C-kernel"><a href="#C-kernel" class="headerlink" title="C. kernel"></a>C. <code>kernel</code></h3><p><code>xv6.img</code>目标依赖了<code>bootblock</code>和<code>kernel</code>这两个目标，所以我们接下来先看看<code>kernel</code>这个目标</p>
 <pre class="line-numbers language-makefile"><code class="language-makefile"><span class="token symbol">kernel</span><span class="token punctuation">:</span> <span class="token variable">$</span><span class="token punctuation">(</span>OBJS<span class="token punctuation">)</span> entry.o entryother initcode kernel.ld
     <span class="token variable">$</span><span class="token punctuation">(</span>LD<span class="token punctuation">)</span> <span class="token variable">$</span><span class="token punctuation">(</span>LDFLAGS<span class="token punctuation">)</span> -T kernel.ld -o kernel entry.o <span class="token variable">$</span><span class="token punctuation">(</span>OBJS<span class="token punctuation">)</span> -b binary initcode entryother
-    <span class="token variable">$</span><span class="token punctuation">(</span>OBJDUMP<span class="token punctuation">)</span> -S kernel &gt; kernel.asm
-    <span class="token variable">$</span><span class="token punctuation">(</span>OBJDUMP<span class="token punctuation">)</span> -t kernel <span class="token operator">|</span> sed <span class="token string">'1,/SYMBOL TABLE/d; s/ .* / /; /^$$/d'</span> &gt; kernel.sym
+    <span class="token variable">$</span><span class="token punctuation">(</span>OBJDUMP<span class="token punctuation">)</span> -S kernel > kernel.asm
+    <span class="token variable">$</span><span class="token punctuation">(</span>OBJDUMP<span class="token punctuation">)</span> -t kernel <span class="token operator">|</span> sed <span class="token string">'1,/SYMBOL TABLE/d; s/ .* / /; /^$$/d'</span> > kernel.sym
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>看这个样子，<code>kernel</code>这个目标干的事情就是把目标<code>entry.o</code>、<code>entryother</code>等等编译出来的目标文件（<code>.o</code>）连接在一起，最终输出<code>kernel</code>这个可执行文件。</p>
 <p>而后通过<code>objdump</code>这个命令（在宏<code>OBJDUMP</code>中定义）把<code>kernel</code>反汇编出来，并且把其中的的符号全部列出来。</p>
@@ -807,7 +807,7 @@ EXTRA<span class="token operator">=</span>\
     <span class="token variable">$</span><span class="token punctuation">(</span>CC<span class="token punctuation">)</span> <span class="token variable">$</span><span class="token punctuation">(</span>CFLAGS<span class="token punctuation">)</span> -fno-pic -O -nostdinc -I. -c bootmain.c
     <span class="token variable">$</span><span class="token punctuation">(</span>CC<span class="token punctuation">)</span> <span class="token variable">$</span><span class="token punctuation">(</span>CFLAGS<span class="token punctuation">)</span> -fno-pic -nostdinc -I. -c bootasm.S
     <span class="token variable">$</span><span class="token punctuation">(</span>LD<span class="token punctuation">)</span> <span class="token variable">$</span><span class="token punctuation">(</span>LDFLAGS<span class="token punctuation">)</span> -N -e start -Ttext 0x7C00 -o bootblock.o bootasm.o bootmain.o
-    <span class="token variable">$</span><span class="token punctuation">(</span>OBJDUMP<span class="token punctuation">)</span> -S bootblock.o &gt; bootblock.asm
+    <span class="token variable">$</span><span class="token punctuation">(</span>OBJDUMP<span class="token punctuation">)</span> -S bootblock.o > bootblock.asm
     <span class="token variable">$</span><span class="token punctuation">(</span>OBJCOPY<span class="token punctuation">)</span> -S -O binary -j .text bootblock.o bootblock
     ./sign.pl bootblock
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
@@ -1362,7 +1362,7 @@ EXTRA<span class="token operator">=</span>\
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">429.2k</span>
+                        class="white-color">424.4k</span>
             
             
             

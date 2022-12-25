@@ -30,10 +30,10 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.2"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
-<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css">
+<meta name="generator" content="Hexo 5.4.2">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-</head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
 
@@ -489,7 +489,7 @@
 <h4 id="A-添加关于About页面"><a href="#A-添加关于About页面" class="headerlink" title="A. 添加关于About页面"></a>A. 添加<code>关于About</code>页面</h4><p>我们首先在根目录下使用<code>hexo new page xxx</code>命令来生成一个新的页面。同样为了后续的讲解，我们首先保存下现在的目录结构</p>
 <pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/blog-test$ <span class="token function">touch</span> before_about.txt
 <span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/blog-test$ <span class="token function">touch</span> after_about.txt
-<span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/blog-test$ tree <span class="token operator">&gt;&gt;</span> before_about.txt 
+<span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/blog-test$ tree <span class="token operator">>></span> before_about.txt 
 <span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/blog-test$ hexo new page <span class="token string">"about"</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>接下来我们需要修改刚刚新生成的<code>.md</code>来说明这个是一个页面而非博客，这样稍后生成博客的时候就会生成出来一个新的页面</p>
@@ -507,7 +507,7 @@ type: "about"
 <p>接下来我们生成一下添加后的博客，别忘了生成之前<code>clean</code>一下，清除掉之前的博客。同时下面由于要讲解原理，因此生成后我们输出一下生成之后的目录结构</p>
 <pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/blog-test$ hexo clean
 <span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/blog-test$ hexo gen
-<span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/blog-test$ tree <span class="token operator">&gt;&gt;</span> after_about.txt
+<span class="token punctuation">(</span>base<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:~/project/blog-test$ tree <span class="token operator">>></span> after_about.txt
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>然后我们运行下博客看看效果</p>
 <p>可以看到，此时点击<code>关于</code>就可以正常显示处页面了，底部则显示出我们的制作的项目</p>
@@ -1087,7 +1087,7 @@ type: "about"
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">429.2k</span>
+                        class="white-color">424.4k</span>
             
             
             
