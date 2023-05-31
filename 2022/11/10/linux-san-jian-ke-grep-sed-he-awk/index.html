@@ -1,0 +1,3010 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Linux三剑客, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
+    <meta name="description" content="本文主要介绍了Linux三剑客：grep、sed和awk">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>Linux三剑客 | JackWang&#39;s Blog</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.2">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+
+   <style>
+    body{
+       background-image: url(https://cdn.jsdelivr.net/gh/Tokisaki-Galaxy/res/site/medias/background.jpg);
+       background-repeat:no-repeat;
+       background-size: 100% 100%;
+       background-attachment:fixed;
+    }
+</style>
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">JackWang&#39;s Blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-book-reader" style="zoom: 0.6;"></i>
+      
+      <span>博客</span>
+      <i class="fas fa-chevron-down" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/tags">
+          
+          <i class="fas fa-tags" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按标签归类文章</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories">
+          
+          <i class="fas fa-bookmark" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按目录归类文章</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/archives">
+          
+          <i class="fas fa-archive" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按日期分类文章</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">JackWang&#39;s Blog</div>
+        <div class="logo-desc">
+            
+            JackWang的个人博客
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-book-reader"></i>
+			
+			博客
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>
+
+                  <a href="/tags " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-tags" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按标签归类文章</    span>
+
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/categories " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-bookmark" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按目录归类文章</    span>
+
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/archives " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-archive" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按日期分类文章</    span>
+
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('抱歉，这篇文章并不想让所有人都看到，请输入授权密码观看')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://jack-1307599355.cos.ap-shanghai.myqcloud.com/1920px-Maurice_Leloir_-_Le_ballet_de_la_Merlaison-20221112005700739.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Linux三剑客</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Linux/">
+                                <span class="chip bg-color">Linux</span>
+                            </a>
+                        
+                            <a href="/tags/Ubuntu/">
+                                <span class="chip bg-color">Ubuntu</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Linux%E5%AE%9E%E7%94%A8%E6%8A%80%E5%B7%A7/" class="post-category">
+                                Linux实用技巧
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2022-11-10
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2022-11-12
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    6.9k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    27 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/1920px-Maurice_Leloir_-_Le_ballet_de_la_Merlaison-20221112005700739.jpg" alt="达达尼昂和三个火枪手"></p>
+<h1 id="Linux三剑客"><a href="#Linux三剑客" class="headerlink" title="Linux三剑客"></a>Linux三剑客</h1><p><code>Linux</code>运维想做好，三剑客少不了。所谓<code>Linux</code>三剑客，指的是三个<code>Linux</code>程序：<code>grep</code>、<code>sed</code>和<code>awk</code>。这三个程序都是处理文本时所用的。因为三个命令具有互补性，经常一起使用，因此称为<code>Linux</code>三剑客。</p>
+<p>具体来说，三剑客的功能分别是：</p>
+<ul>
+<li><code>grep</code>：擅长单纯的查找、匹配文本</li>
+<li><code>sed</code>：擅长编辑、处理匹配到的文本</li>
+<li><code>awk</code>：擅长格式化文本，对文本进行复杂的处理</li>
+</ul>
+<p>下面我们将详细介绍<code>Linux</code>三剑客。</p>
+<h2 id="文本过滤-搜索器：grep"><a href="#文本过滤-搜索器：grep" class="headerlink" title="文本过滤/搜索器：grep"></a>文本过滤/搜索器：grep</h2><p><strong>grep</strong> （<code>Global search Regular Expression(RE) and Print out the line</code>），直白的翻译就是<code>全面搜索正则表达式并把行打印出来</code>。<code>grep</code>其实是一种强大的文本搜索工具，它能使用正则表达式搜索文本，并把匹配的行打印出来。</p>
+<p>通常，我们使用<code>grep</code>来<strong>过滤、搜索</strong>的特定字符。正是因为<code>grep</code>能够使用正则表达式，因此<code>grep</code> + 正则表达式 + 多种命令，就可以非常灵活的使用。</p>
+<h3 id="1-基础用法：查找单个文件"><a href="#1-基础用法：查找单个文件" class="headerlink" title="1. 基础用法：查找单个文件"></a>1. 基础用法：查找单个文件</h3><p><code>grep</code>的基础语法是</p>
+<pre class="line-numbers language-sh"><code class="language-sh">grep [option] [pattern] file
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>其中：</p>
+<ul>
+<li><code>option</code>是命令行选项</li>
+<li><code>partter</code>是要查找的内容或者正则表达式，统称为模式</li>
+<li><code>file</code>是将被查找的文件</li>
+</ul>
+<p>当然，一般来说更常见的用法是下面这种：</p>
+<pre class="line-numbers language-sh"><code class="language-sh">grep [pattern] file [option]
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>因为这种用法更加灵活，我们先写好需要查询的模式，而后再根据需要写好选项。</p>
+<h4 id="无参数查找文本"><a href="#无参数查找文本" class="headerlink" title="无参数查找文本"></a>无参数查找文本</h4><p>使用<code>grep</code>的基础语法，会待查找到内容输出到屏幕上</p>
+<pre class="line-numbers language-sh"><code class="language-sh">cat /etc/passwd > test.txt
+grep "root" test.txt
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221110023014668.png" alt="查找文本结果"></p>
+<p>也可以使用正则表达式来匹配</p>
+<pre class="line-numbers language-sh"><code class="language-sh">cat /etc/passwd > test.txt
+grep "^#" test.txt
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221110024906699.png" alt="正则表达式查找结果"></p>
+<h4 id="查找多个文件"><a href="#查找多个文件" class="headerlink" title="查找多个文件"></a>查找多个文件</h4><p>事实上，<code>grep</code>支持从多个文件中查询文本。只需要给出多个文件即可，即</p>
+<pre class="line-numbers language-sh"><code class="language-sh">grep [option] [pattern] file1 file2 file3 ...
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>例如</p>
+<pre class="line-numbers language-sh"><code class="language-sh">cat /etc/passwd > test1.txt
+cat /etc/ssh/sshd_config >> test2.txt
+grep "root" test1.txt test2.txt
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221110180003818.png" alt="多个文件查找结果"></p>
+<p>事实上，我们可以使用<code>Bash</code>的花括号扩展来直接多次查询</p>
+<pre class="line-numbers language-sh"><code class="language-sh">cat /etc/passwd > test1.txt
+cat /etc/ssh/sshd_config >> test2.txt
+grep "root" test{1,2}.txt
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221110180158767.png" alt="Bash花括号扩展多个文件查找结果"></p>
+<h4 id="E-使用扩展正则表达式"><a href="#E-使用扩展正则表达式" class="headerlink" title="-E 使用扩展正则表达式"></a>-E 使用扩展正则表达式</h4><p>如果要使用扩展正则表达式的话，需要使用<code>-E</code>参数</p>
+<pre class="line-numbers language-sh"><code class="language-sh">cat /etc/passwd > test.txt
+grep -e "(root)+" -e "(.:)" test.txt  -i -n -E
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221110163925123.png" alt="扩展正则表达式查找结果"></p>
+<h4 id="i-忽略大小写"><a href="#i-忽略大小写" class="headerlink" title="-i 忽略大小写"></a>-i 忽略大小写</h4><p>使用<code>-i</code>参数忽略大小写</p>
+<pre class="line-numbers language-sh"><code class="language-sh">cat /etc/passwd > test.txt
+grep -i "root" test.txt
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221110023319122.png" alt="忽略大小写查找文本结果"></p>
+<h4 id="n-显示行数"><a href="#n-显示行数" class="headerlink" title="-n 显示行数"></a>-n 显示行数</h4><p>使用<code>-n</code>参数显示匹配的行的行号</p>
+<pre class="line-numbers language-sh"><code class="language-sh">cat /etc/passwd > test.txt
+grep -n "root" test.txt
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221110023811448.png" alt="显示行号查找文本结果"></p>
+<h4 id="c-统计行数"><a href="#c-统计行数" class="headerlink" title="-c 统计行数"></a>-c 统计行数</h4><p>使用<code>-c</code>参数输出匹配到的行数</p>
+<pre class="line-numbers language-sh"><code class="language-sh">cat /etc/passwd > test.txt
+grep -c "root" test.txt
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221110024107114.png" alt="统计行数查找文本结果"></p>
+<h4 id="v-反向匹配"><a href="#v-反向匹配" class="headerlink" title="-v 反向匹配"></a>-v 反向匹配</h4><p>使用<code>-v</code>来反向匹配，即排除给定的关键字</p>
+<pre class="line-numbers language-sh"><code class="language-sh">cat /etc/passwd > test.txt
+grep -v "root" test.txt
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221110025542782.png" alt="反向匹配查找文本结果"></p>
+<h4 id="e-多个模式匹配"><a href="#e-多个模式匹配" class="headerlink" title="-e 多个模式匹配"></a>-e 多个模式匹配</h4><p>使用<code>-e</code>参数匹配多个模式</p>
+<pre class="line-numbers language-sh"><code class="language-sh">cat /etc/passwd > test.txt
+grep -e "root" -e "install" test.txt -i -n
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221110030958329.png" alt="多模式匹配查找文本结果"></p>
+<h4 id="o-输出匹配内容"><a href="#o-输出匹配内容" class="headerlink" title="-o 输出匹配内容"></a>-o 输出匹配内容</h4><p>使用<code>-o</code>参数输出匹配到的内容，一般和<code>-n</code>联合使用</p>
+<pre class="line-numbers language-sh"><code class="language-sh">cat /etc/passwd > test.txt
+grep -o "install" test.txt -i -n
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221110031321143.png" alt="输出匹配内容查找文本结果"></p>
+<h4 id="q-条件测试"><a href="#q-条件测试" class="headerlink" title="-q 条件测试"></a>-q 条件测试</h4><p>一般<code>grep</code>的结果都会在屏幕上输出，使用<code>-q</code>将会强制不输出。</p>
+<p>一般来说使用<code>-q</code>参数都是为了在<code>shell</code>脚本中使用，用于条件测试。例如：</p>
+<pre class="line-numbers language-sh"><code class="language-sh">cat /etc/passwd > test.txt
+grep "root" test.txt -q
+echo $?
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>使用<code>-q</code>参数则不会输出任何信息，如果命令运行成功返回0，失败则返回非0值。换而言之，如果在文件中找到了要查找的内容，则返回0，否则返回其他非0值。一般用于条件测试。</p>
+<p>运行结果为：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221110204122691.png" alt="条件测试运行结果"></p>
+<h3 id="2-进阶用法：递归查找"><a href="#2-进阶用法：递归查找" class="headerlink" title="2. 进阶用法：递归查找"></a>2. 进阶用法：递归查找</h3><p>有时候，我们需要对一个目录中的所有文件全部进行查找。可能有人会说，我们直接写出多个文件不就可以了么？</p>
+<p>但是更多的时候，<strong>我们需要对一个目录树进行递归查找</strong>，例如：</p>
+<pre class="line-numbers language-sh"><code class="language-sh">tree ./ -I build
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221110183823009.png" alt="tree结果"></p>
+<p>当前文件夹下既有文件，也有文件夹，而文件夹下又有文件，单纯的罗列出当前文件夹下所有的文件就很蠢笨了。</p>
+<p>所以，正式我们可能需要对一个文件夹进行递归查找，而非多文件查找，<code>grep</code>提供了特殊的功能。</p>
+<h4 id="r-递归查找"><a href="#r-递归查找" class="headerlink" title="-r 递归查找"></a>-r 递归查找</h4><p>使用<code>-r</code>参数进行递归查找，同时<code>grep</code>命令的语法格式为</p>
+<pre class="line-numbers language-sh"><code class="language-sh">grep [option] [pattern] folder -r
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><code>-r</code>参数放在<code>option</code>中还是单独放在后面都没问题，但是一般更常用的是下面这种写法</p>
+<pre class="line-numbers language-sh"><code class="language-sh">grep [pattern] folder -r [option]
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>例如查找<code>tools</code>文件夹下所有有<code>echo</code>的内容</p>
+<pre class="line-numbers language-sh"><code class="language-sh">grep "echo" ./tools -r -n
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221110202146797.png" alt="递归查找结果"></p>
+<p>​    </p>
+<h3 id="3-管道符结合其他命令"><a href="#3-管道符结合其他命令" class="headerlink" title="3. 管道符结合其他命令"></a>3. 管道符结合其他命令</h3><p>事实上，<code>grep</code>如果只是查找文件的话，那么可能还不是那么强大，<code>grep</code>真正强大的地方就再无，我们使用管道符可以把前一个命令输出到屏幕上的内容作为输入，而后进行查询。</p>
+<p>此时，<code>grep</code>的语法为</p>
+<pre class="line-numbers language-sh"><code class="language-sh">command | grep [option] [pattern]
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>其中：</p>
+<ul>
+<li><code>option</code>是命令行选项</li>
+<li><code>partter</code>是要查找的内容或者正则表达式，统称为模式</li>
+</ul>
+<p>当然，一般来说更常见的写法依旧是</p>
+<pre class="line-numbers language-sh"><code class="language-sh">command | grep [pattren] [option]
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>原因么还是一样的，先确定好<code>pattern</code>，然后再根据我们的需要给出<code>option</code></p>
+<h4 id="多次筛选-查找文件"><a href="#多次筛选-查找文件" class="headerlink" title="多次筛选/查找文件"></a>多次筛选/查找文件</h4><p><code>grep</code>命令本身会将查找的结果输出在屏幕上，因此<code>command</code>当然可以是<code>grep</code>命令。</p>
+<p>单独使用一次<code>grep</code>只能够对文本进行一次筛选，但是结合管道符<code>|</code>就可以进行多次筛选。</p>
+<p>例如下面我们先排除空行，然后再排除<code>echo</code>的行</p>
+<pre class="line-numbers language-shell"><code class="language-shell">wget https://raw.githubusercontent.com/jackwang0108/CS537-Project3/main/tools/autobuild.sh -O test.txt
+cat test.txt
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221110025931407.png" alt="下载测试文件"></p>
+<pre class="line-numbers language-shell"><code class="language-shell">grep -v "^$" test.txt | grep -v "^echo" -n
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221110030045554.png" alt="管道符多次筛选结果"></p>
+<h4 id="搜索文件"><a href="#搜索文件" class="headerlink" title="搜索文件"></a>搜索文件</h4><p><code>grep</code>和<code>ls</code>结合，就可以实现查找符合指定模式的文件。而我们找到所有的文件名后，可以在用<code>xargs</code>进一步去用一个新的程序处理这些文件，或者使用<code>awk</code>去生成报告。</p>
+<p>例如我们下面找出<code>/etc</code>中所有的配置文件。配置文件一般的名字就是<code>run config</code>，所以一般都是以<code>rc</code>为名。</p>
+<pre class="line-numbers language-sh"><code class="language-sh">ls /etc/ | grep "rc"
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221110182721874.png" alt="搜索配置文件结果"></p>
+<p>再举一个例子，我们找出所有QQ下载的图片</p>
+<pre class="line-numbers language-sh"><code class="language-sh">ls ~/Pictures | grep "QQ" -i
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221110182952082.png" alt="搜索QQ下载图片的例子"></p>
+<h2 id="流编辑器：sed"><a href="#流编辑器：sed" class="headerlink" title="流编辑器：sed"></a>流编辑器：sed</h2><p><code>sed</code>的全称是<code>Stream Editor</code>，即流编辑器。它是操作、过滤和转换文本内容的强大工具。一般来说，我们通过<code>grep</code>和<code>ls</code>命令获取到文件的名称之后，接下来就可以把文件名传给<code>sed</code>，而后由<code>sed</code>来处理文件。</p>
+<p>详细的说，<code>sed</code> 是一种流编辑器，它是文本处理中非常重要的工具，能够完美的配合正则表达式使用，功能不同凡响。处理时，把当前处理的行存储在临时缓冲区中，称为“模式空间”（<code>pattern space</code>），接着用<code>sed</code>命令处理缓冲区中的内容，处理完成后，把缓冲区的内容送往屏幕。接着处理下一行，这样不断重复，直到文件末尾。</p>
+<p><code>sed</code>处理文件时，文件的内容并没有改变，除非使用重定向存储输出。<code>sed</code>主要用来自动编辑一个或多个文件；简化对文件的反复操作；编写转换程序等。</p>
+<p>简单的来说，<strong><code>sed</code>功能结合正则表达式对文件试试快速增删改查</strong>。其中查询功能中最常用的两大功能是：</p>
+<ul>
+<li><strong>过滤</strong>：过滤指定字符串</li>
+<li><strong>取行</strong>：取出指定的行</li>
+</ul>
+<p><code>sed</code>的工作模式如下图所示：</p>
+<ul>
+<li>第一步：<code>sed</code>逐行读取输入的文件（也可以管道传入的上一个文件的输出）</li>
+<li>第二步：对读入的行进行模式匹配</li>
+<li>第三步：若匹配成功则按照指定的方式进行编辑</li>
+<li>第四步：若匹配失败则输出到屏幕（可以取消）</li>
+</ul>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221110221257887.png" alt="sed工作模式" style="zoom:50%;"></p>
+<p>举一个形象的例子：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221110223150762.png" alt="sed举例"></p>
+<h3 id="1-sed介绍"><a href="#1-sed介绍" class="headerlink" title="1. sed介绍"></a>1. sed介绍</h3><p><code>sed</code>的基础语法为：</p>
+<pre class="line-numbers language-sh"><code class="language-sh">sed [option] [command] [file]
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>其中：</p>
+<ul>
+<li><code>option</code>是命令行选项</li>
+<li><code>command</code>是<code>sed</code>命令，指定了<code>sed</code>处理文本的方式，例如删除、增加等等</li>
+<li><code>file</code>是将源文件</li>
+</ul>
+<p>一个简单的例子为：</p>
+<pre class="line-numbers language-sh"><code class="language-sh">echo "First Line.\nThis is my book.\nLook at my book.\nBefore last line.\nLast Line." > test.txt
+cat test.txt
+sed '1d;$d' test.txt
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>其中：</p>
+<ul>
+<li><code>1d</code>和<code>$d</code>是<code>sed</code>命令，表示删除第一行和第二行</li>
+</ul>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221110224945062.png" alt="sed的例子"></p>
+<h3 id="2-sed参数"><a href="#2-sed参数" class="headerlink" title="2. sed参数"></a>2. sed参数</h3><p><code>sed</code>中常用的参数如下（先写这么多，用到了再增加）：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">参数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>-n</code></td>
+<td><code>sed</code>默认会将未匹配成功的行输出，使用<code>-n</code>参数则将不会输出匹配失败的行。</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>-i</code></td>
+<td><code>sed</code>默认是对文本的副本进行处理的，所以源文件不会受到<code>sed</code>的影响。如果我们想要修改源文件，那么就需要加上<code>-i</code>参数。</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>-e</code></td>
+<td>类似于<code>grep</code>命令使用<code>-e</code>指定多个模式，<code>sed</code>命令也可以使用<code>-e</code>选项来制定多个编辑命令。</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>-r</code></td>
+<td><code>grep</code>中使用<code>-E</code>来支持扩展正则表达式，而<code>sed</code>使用<code>-r</code>来支持扩展正则表达式</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="3-sed命令"><a href="#3-sed命令" class="headerlink" title="3. sed命令"></a>3. sed命令</h3><p>一个<code>sed</code>命令由两部分组成：<code>范围命令+操作命令</code>，例如：<code>2p</code>表示将第二行的内容打印出来。</p>
+<p>多个<code>sed</code>命令可以使用<code>;</code>连接。</p>
+<h4 id="操作命令"><a href="#操作命令" class="headerlink" title="操作命令"></a>操作命令</h4><p><code>sed</code>中的操作命令具体有（目前先写这么多，后面用到了再加）：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>a</code></td>
+<td>在当前行下面插入文本，即append</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>i</code></td>
+<td>在当前行上面插入文本，即insert</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>c</code></td>
+<td>把选定的行改为新的文本，即change</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>d</code></td>
+<td>删除选定的行，即delete，一般不和<code>-n</code>参数一起使用</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>p</code></td>
+<td>打印匹配的行的内容，即print，通常与<code>-n</code>参数一起使用</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>s/正则/替换内容/g</code></td>
+<td>将匹配到的正则内容替换为替换内容，<code>g</code>表示所有匹配到的都进行替换，否则仅替换一个<br>此外，也可以是<code>s#正则#替换内容#g</code>，或者是<code>s@正则@替换内容@g</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="范围命令"><a href="#范围命令" class="headerlink" title="范围命令"></a>范围命令</h4><p><code>sed</code>中的范围命令有（先写这么多，用到了再加）：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">空范围</td>
+<td>全文</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>num</code></td>
+<td>第<code>num</code>行</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>$</code></td>
+<td>最后一行</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>/pattern/</code></td>
+<td>模式匹配成功的行</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>start,end</code></td>
+<td>从<code>start</code>行到<code>end</code>行</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>start,+offset</code></td>
+<td>从<code>start</code>行到<code>start+offset</code>行</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>start~leap</code></td>
+<td>从<code>start</code>行开始以<code>leap</code>为间隔的航</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="4-sed案例"><a href="#4-sed案例" class="headerlink" title="4. sed案例"></a>4. sed案例</h3><p>下面我们将给出一些<code>sed</code>的使用案例。</p>
+<p>注意：</p>
+<ul>
+<li><strong><code>macOS</code>中<code>echo</code>会自动转移<code>\n</code>，但是在<code>Linux</code>中需要加上<code>-e</code>参数</strong></li>
+<li>此外，<code>macOS</code>上原生的<code>sed</code>和<code>GNU</code>的<code>gnn-sed</code>不同，如果要在<code>macOS</code>上使用<code>GNU</code>的<code>sed</code>，使用<code>brew install gnu-sed</code>然后使用<code>gsed</code>即可</li>
+</ul>
+<h4 id="输出文件第二、三行内容"><a href="#输出文件第二、三行内容" class="headerlink" title="输出文件第二、三行内容"></a>输出文件第二、三行内容</h4><pre class="line-numbers language-sh"><code class="language-sh">echo "My name is Jack Wang.\nI like Linux.\nI like writing computer programs.\nMy email is 123456789@gmail.com.\nMy website is http://jackwang.cafe ." > test.txt
+sed -n "2p;3p" test.txt
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221111005940455.png" alt="运行结果"></p>
+<p>由于<code>sed</code>默认是：</p>
+<ul>
+<li>对于匹配成功的行，处理后打印</li>
+<li>对于匹配失败的行，直接打印</li>
+</ul>
+<p>所以如果我们没有指定<code>-n</code>参数，那么结果如下：</p>
+<pre class="line-numbers language-sh"><code class="language-sh">echo "My name is Jack Wang.\nI like Linux.\nI like writing computer programs.\nMy email is 123456789@gmail.com.\nMy website is http://jackwang.cafe ." > test.txt
+sed "2p;3p" test.txt
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221111010218672.png" alt="无-n参数运行结果"></p>
+<p><strong>发现第二、第三行输出了两次，这其实就是<code>sed</code>的两条路径的处理方式</strong>。</p>
+<h4 id="输出含有指定单词的行"><a href="#输出含有指定单词的行" class="headerlink" title="输出含有指定单词的行"></a>输出含有指定单词的行</h4><p><code>sed</code>中可以利用正则表达式来指定行，因此我们可以使用<code>sed</code>输出含有指定单词的行。</p>
+<p>例如：</p>
+<pre class="line-numbers language-sh"><code class="language-sh">echo "My name is Jack Wang.\nI like Linux.\nI like writing computer programs.\nMy email is 123456789@gmail.com.\nMy website is http://jackwang.cafe ." > test.txt
+sed -n '/like/p' test.txt
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>结果如下：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221111011520458.png" alt="输出含有特定单词的行"></p>
+<h4 id="删除含有特定单词的行"><a href="#删除含有特定单词的行" class="headerlink" title="删除含有特定单词的行"></a>删除含有特定单词的行</h4><p>查找特定单词简单，使用正则表达式即可，删除则使用<code>d</code>操作命令即可。</p>
+<p>例如删除所有含有<code>like</code>的行：</p>
+<pre class="line-numbers language-sh"><code class="language-sh">echo "My name is Jack Wang.\nI like Linux.\nI like writing computer programs.\nMy email is 123456789@gmail.com.\nMy website is http://jackwang.cafe ." > test.txt
+sed '/like/d' test.txt
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>结果如下：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221111011808030.png" alt="删除含有特定次的行"></p>
+<h4 id="输出第三到最后一行"><a href="#输出第三到最后一行" class="headerlink" title="输出第三到最后一行"></a>输出第三到最后一行</h4><p>在输出范围中使用<code>$</code>来表示最后一行</p>
+<pre class="line-numbers language-sh"><code class="language-sh">echo "My name is Jack Wang.\nI like Linux.\nI like writing computer programs.\nMy email is 123456789@gmail.com.\nMy website is http://jackwang.cafe ." > test.txt
+sed -n '3,$p' test.txt
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>运行结果如下：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221111012606454.png" alt="输出第三到最后一行"></p>
+<h4 id="替换某个单词"><a href="#替换某个单词" class="headerlink" title="替换某个单词"></a>替换某个单词</h4><p>使用<code>s</code>操作命令来进行替换</p>
+<pre class="line-numbers language-sh"><code class="language-sh">echo "My name is Jack Wang.\nI like Linux.\nI like writing computer programs.\nMy email is 123456789@gmail.com.\nMy website is http://jackwang.cafe ." > test.txt
+cat test.txt
+sed -n 's/My/His/g' test.txt
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>运行结果如下：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221111013012023.png" alt="替换某个单词的结果"></p>
+<p>我们可以使用<code>-e</code>来指定多个<code>sed</code>命令</p>
+<pre class="line-numbers language-sh"><code class="language-sh">echo "My name is Jack Wang.\nI like Linux.\nI like writing computer programs.\nMy email is 123456789@gmail.com.\nMy website is http://jackwang.cafe ." > test.txt
+cat test.txt
+sed -n 's/My/His/g' test.txt
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221111014049591.png" alt="-e指定多个sed命令"></p>
+<h4 id="增加（Append）一行"><a href="#增加（Append）一行" class="headerlink" title="增加（Append）一行"></a>增加（Append）一行</h4><p>使用<code>a</code>操作命令来在某行后面添加一行。</p>
+<p>例如在第二行后添加<code>My Linux skill is good.</code></p>
+<pre class="line-numbers language-sh"><code class="language-sh">echo "My name is Jack Wang.\nI like Linux.\nI like writing computer programs.\nMy email is 123456789@gmail.com.\nMy website is http://jackwang.cafe ." > test.txt
+sed '2a My Linux skill is good.' test.txt
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>运行结果如下：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221111024115325.png" alt="增加一行运行结果"></p>
+<p>再举一个例子，在每行后增加<code>----------</code>作为分隔符。</p>
+<p>因为要匹配每行，直接使用空地址即可</p>
+<pre class="line-numbers language-sh"><code class="language-sh">echo "My name is Jack Wang.\nI like Linux.\nI like writing computer programs.\nMy email is 123456789@gmail.com.\nMy website is http://jackwang.cafe ." > test.txt
+gsed "a ----------------" test.txt
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221111024709336.png" alt="每行增加分隔符结果"></p>
+<p>但是注意，<code>macOS</code>原生的<code>sed</code>在<code>a</code>之后必须要加<code>\ + &lt;Enter&gt;</code>换行来输入需要插入的内容</p>
+<p>例如：</p>
+<pre class="line-numbers language-sh"><code class="language-sh">echo "My name is Jack Wang.\nI like Linux.\nI like writing computer programs.\nMy email is 123456789@gmail.com.\nMy website is http://jackwang.cafe ." > test.txt
+sed '2a\<回车键
+quote> My Linux skill is good' test.txt
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>运行结果如下：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/%E5%B1%8F%E5%B9%95%E5%BD%95%E5%88%B62022-11-11-%E4%B8%8A%E5%8D%881.50.08.gif" alt="屏幕录制2022-11-11-上午1.50.08"></p>
+<h4 id="插入（Insert）一行"><a href="#插入（Insert）一行" class="headerlink" title="插入（Insert）一行"></a>插入（Insert）一行</h4><p>我们接下来使用<code>insert</code>插入一行</p>
+<pre class="line-numbers language-sh"><code class="language-sh">echo "My name is Jack Wang.\nI like Linux.\nI like writing computer programs.\nMy email is 123456789@gmail.com.\nMy website is http://jackwang.cafe ." > test.txt
+gsed "4i My phone number is 00000000" test.txt
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221111024342796.png" alt="image-20221111024342796"></p>
+<p>类似于<code>a</code>，<code>i</code>的表现在<code>Linux</code>和<code>macOS</code>上也不同，<code>macOS</code>上的<code>sed</code>的<code>i</code>表现如下：</p>
+<pre class="line-numbers language-sh"><code class="language-sh">echo "My name is Jack Wang.\nI like Linux.\nI like writing computer programs.\nMy email is 123456789@gmail.com.\nMy website is http://jackwang.cafe ." > test.txt
+sed '4i\<回车键
+quote> My phone number is 00000000' test.txt
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>运行结果为：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/%E5%B1%8F%E5%B9%95%E5%BD%95%E5%88%B62022-11-11-%E4%B8%8A%E5%8D%882.05.56.gif" alt="屏幕录制2022-11-11-上午2.05.56"></p>
+<h3 id="5-sed进阶案例"><a href="#5-sed进阶案例" class="headerlink" title="5. sed进阶案例"></a>5. sed进阶案例</h3><p>我们上面都只讲解了<code>sed</code>的基础用法，下面我们将讲解<code>sed</code>的进阶用法。</p>
+<h4 id="获取行内内容：掐头去尾"><a href="#获取行内内容：掐头去尾" class="headerlink" title="获取行内内容：掐头去尾"></a>获取行内内容：掐头去尾</h4><p>我们前面介绍的<code>sed</code>的用法，都是针对行进行操作的。但是很多时候，我们往往只需要获取一行中的某个内容。</p>
+<p>例如我们使用<code>ifconfig</code>查看计算机在当前网络下的<code>IP</code>地址</p>
+<pre class="line-numbers language-sh"><code class="language-sh">ifconfig
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221111025530939.png" alt="ifconfig查看IP地址"></p>
+<p>但是我们在<code>Shell</code>脚本中往往只需要本机的<code>IP</code>即可，而后在后面的脚本中使用<code>IP</code>地址，例如：</p>
+<pre class="line-numbers language-shell"><code class="language-shell">IP=魔法命令 #获取IP
+echo $IP
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>所以我们接下来将讲解<code>sed</code>如何获得一个单词。</p>
+<p><code>sed</code>获取单词的基本思路就是：</p>
+<ul>
+<li><strong>第一步</strong>：筛选出行</li>
+<li><strong>第二步</strong>：掐头去尾，用空替换所有不要的字符</li>
+</ul>
+<p>例如我们获取<code>IP</code>地址：</p>
+<ol>
+<li><p>第一步：筛选出行</p>
+<pre class="line-numbers language-sh"><code class="language-sh">ifconfig en0 | sed -n '5p'
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221111030911284.png" alt="筛选出行"></p>
+</li>
+<li><p>第二步：掐头去尾，用空替换掉<code>inet</code>之前的内容以及<code>netmask</code>之后的内容</p>
+<pre class="line-numbers language-shell"><code class="language-shell"># 首先去掉inet之前的东西
+ifconfig en0 | sed -n '5p' | sed 's/^.*inet //'
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221111031309104.png" alt="先掐头"></p>
+<pre class="line-numbers language-shell"><code class="language-shell"># 然后去掉netmask之后的内容
+ifconfig en0 | sed -n '5p' | sed 's/^.*inet //' | sed 's/netmask.*$//'
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221111031436912.png" alt="image-20221111031436912"></p>
+</li>
+</ol>
+<p>这样，我们就成功通过<code>sed</code>获取到了行内的内容。另外，我们其实可以用<code>grep</code>和匹配<code>IP</code>地址的正则表达式带代替掐头去尾。</p>
+<p>相比于管道符多次替换，我们其实可以用<code>-e</code>参数来使用多个匹配，但是在多个匹配的时候，最后一个命令必须要加上<code>p</code>来输出</p>
+<ol>
+<li><p>第一步：掐头</p>
+<pre class="line-numbers language-sh"><code class="language-sh">ifconfig en0 | gsed -e '5s/^.*inet//p' -n
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221111033306531.png" alt="第一步：掐头"></p>
+</li>
+<li><p>第二步：<strong>去尾</strong>。注意，因为两个<code>gsed command</code>的输入都是<code>ifconfig</code>的输出，所以命令都是<code>5s</code></p>
+<pre class="line-numbers language-sh"><code class="language-sh">ifconfig en0 | gsed -e '5s/^.*inet//' -n -e "5s/net.*$//p" -n
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221111033556148.png" alt="第二步：去尾"></p>
+</li>
+</ol>
+<h2 id="文本格式化工具：awk"><a href="#文本格式化工具：awk" class="headerlink" title="文本格式化工具：awk"></a>文本格式化工具：awk</h2><p><code>awk</code>是用于对文本和数据进行处理的工具。类似于<code>python</code>解释器可以解释、执行<code>python</code>语言编写的脚本，<code>awk</code>也可以解释、执行<code>awk</code>语言编写的脚本。</p>
+<p>因此<code>awk</code>根据上下文的不同，有时候指代<code>awk</code>工具本身，有时候指代的是<code>awk</code>这个编程语言。</p>
+<p><code>awk</code> 编程语言用于在<code>Linux/Unix</code>下对文本和数据进行处理。数据可以来自标准输入(<code>stdin</code>)、一个或多个文件，或其它命令的输出。它支持用户自定义函数和动态正则表达式等先进功能，是<code>Linux/Unix</code>下的一个强大编程工具。它在命令行中使用，但更多是作为脚本来使用。<code>awk</code>语言内还有很多内建的功能，比如数组、函数等，这是它和<code>C语言</code>的相同之处，灵活性是<code>awk</code>最大的优势。</p>
+<h3 id="1-awk基础"><a href="#1-awk基础" class="headerlink" title="1. awk基础"></a>1. awk基础</h3><p>学习<code>akw</code>的时候需要学习：</p>
+<ul>
+<li><code>awk</code>程序的用法</li>
+<li><code>awk</code>语言的语法</li>
+</ul>
+<p>因此，我们下面将先介绍<code>awk</code>的基础知识，而后再慢慢讲解<code>awk</code>的进阶知识</p>
+<h4 id="A-awk的工作原理"><a href="#A-awk的工作原理" class="headerlink" title="A. awk的工作原理"></a>A. awk的工作原理</h4><p>和<code>sed</code>逐行处理相似，<code>awk</code>也是从文件<code>file</code>中读取数据，而后<strong>针对每一行按照指定的命令序列（称为脚本<code>script</code>）处理该行数据</strong>。</p>
+<p><strong>对于每一行，<code>awk</code>中将其称为一个记录（Record）。每一行中使用分隔符分割出来不同的内容，称为字段（field）</strong>。例如针对<code>test.txt</code>文件：</p>
+<pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">// test.txt</span>
+Jack1 Jack2 Jack3 Jack4 Jack5
+Jack6 Jack7 Jack8 Jack9 Jack10
+Jack11 Jack12 Jack13 Jack14 Jack15
+Jack16 Jack17 Jack18 Jack19 Jack20
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><code>test.txt</code>中包含了4个记录（Record），每个记录有5个字段（Field）。</p>
+<p>举一个概念上的例子来介绍<code>awk</code>的工作原理：</p>
+<pre class="line-numbers language-shell"><code class="language-shell">awk 'BEGIN{ commands } pattern{ commands } END{ commands }' test.txt
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<ul>
+<li>第一步：读取<code>test.txt</code></li>
+<li>第二步：执行<code>awk</code>程序，这里的<code>awk</code>程序为<code>BEGIN{ commands } pattern{ commands } END{ commands }</code></li>
+</ul>
+<p>这里的<code>awk</code>程序的解释如下：</p>
+<ol>
+<li>执行<code>BEGIN{ commands }</code>语句块中的语句；</li>
+<li>逐行扫描文件，然后执行<code>pattern{ commands }</code>语句块，即首先查看该行是否和指定的模式<code>pattern</code>符合，若符合则对改行执行<code>commands</code>指令，若不符合则调到下一行。从第一行到最后一行重复这个过程，直到处理完文件所有行。</li>
+<li>当处理完最后一行后，执行<code>END{ commands }</code>语句块。</li>
+</ol>
+<p><strong>关于<code>BEGIN</code>、<code>END</code>这些<code>awk</code>程序具体得解释将在下面介绍<code>awk</code>程序的部分进行介绍</strong>。</p>
+<p>下面举一个真实的例子（中间的<code>pattern</code>为空表示匹配所有行）：</p>
+<pre class="line-numbers language-sh"><code class="language-sh">echo Jack{1..5} > test.txt && echo Jack{6..10} >> test.txt && echo Jack{11..15} >> test.txt && echo Jack{16..20} >> test.txt
+cat test.txt
+awk 'BEGIN{print "Start"} {print $1,$3,$5} END{print "End"}' test.txt
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>运行结果如下：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221111160618381.png" alt="真是的例子的运行结果"></p>
+<h4 id="B-awk调用方式"><a href="#B-awk调用方式" class="headerlink" title="B. awk调用方式"></a>B. awk调用方式</h4><p><code>awk</code>的调用方式有两种:</p>
+<ul>
+<li><strong>字符串命令方式</strong></li>
+<li><strong>脚本文件方式</strong></li>
+</ul>
+<h5 id="字符串命令方式"><a href="#字符串命令方式" class="headerlink" title="字符串命令方式"></a>字符串命令方式</h5><p>字符串命令方式的调用方式如下</p>
+<pre class="line-numbers language-sh"><code class="language-sh">awk [options] 'command' var=value file(s)
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>其中：</p>
+<ul>
+<li><p><code>options</code>指定了命令行参数</p>
+</li>
+<li><p><code>'command'</code>中指定了需要执行的命令序列，<strong>注意命令序列必须要用单引号包裹</strong></p>
+</li>
+<li><p><code>var</code>赋值一个用户定义变量，将外部变量传递给<code>awk</code></p>
+</li>
+<li><p><code>file(s)</code>指定了要读取的文件</p>
+</li>
+</ul>
+<p>举一个例子，下面的例子是输出每行中的第二个字段的值</p>
+<pre class="line-numbers language-sh"><code class="language-sh">echo Jack{1..5} > test.txt && echo Jack{6..10} >> test.txt && echo Jack{11..15} >> test.txt && echo Jack{16..20} >> test.txt
+cat test.txt
+awk '{print $2}' test.txt
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>运行结果如下：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221111153717132.png" alt="字符串命令调用方式运行结果"></p>
+<p>注意，上面的例子中我们没有使用指定命令行参数，也没有赋值用户定义变量。</p>
+<h5 id="脚本文件方式"><a href="#脚本文件方式" class="headerlink" title="脚本文件方式"></a>脚本文件方式</h5><pre class="line-numbers language-sh"><code class="language-sh">awk [options] -f scriptfile var=value file(s)
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>其中：</p>
+<ul>
+<li><p><code>options</code>指定了命令行参数</p>
+</li>
+<li><p><code>scriptfile</code>中指定了需要读取的脚本文件。需要执行的命令序列存储在脚本文件中</p>
+</li>
+<li><p><code>var</code>赋值一个用户定义变量，将外部变量传递给<code>awk</code></p>
+</li>
+<li><p><code>file(s)</code>指定了要读取的文件</p>
+</li>
+</ul>
+<p>上面输出每行中的第二个字段的值的脚本文件的方式如下</p>
+<pre class="line-numbers language-sh"><code class="language-sh">echo Jack{1..5} > test.txt && echo Jack{6..10} >> test.txt && echo Jack{11..15} >> test.txt && echo Jack{16..20} >> test.txt
+echo '{print $2}' > cmd.awk
+awk -f cmd.awk test.txt
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221111154253015.png" alt="脚本文件调用方式运行结果"></p>
+<h4 id="C-awk模式和操作"><a href="#C-awk模式和操作" class="headerlink" title="C. awk模式和操作"></a>C. awk模式和操作</h4><p>和<code>sed</code>命令类似，<code>awk</code>命令也是由模式和操作组成的，操作必须要放在<code>{}</code>中，故<code>awk</code>命令：<code>模式{操作}</code>。</p>
+<p><code>awk</code>中的模式和操作具体有：</p>
+<ol>
+<li><p>模式可以是以下任意一个：</p>
+<ul>
+<li><strong>/正则表达式/</strong>：使用通配符的扩展集</li>
+<li><strong>关系表达式</strong>：使用运算符进行操作，可以是字符串或数字的比较测试</li>
+<li><strong>模式匹配表达式</strong>：用运算符<code>~</code>（匹配）和<code>!~</code>（不匹配）</li>
+<li><strong>BEGIN语句块、pattern语句块、END语句块</strong>：稍后会进行详细的介绍</li>
+</ul>
+</li>
+<li><p>操作由一个或多个命令、函数、表达式组成，之间由换行符或分号隔开，并位于大括号内，主要部分是：</p>
+<ul>
+<li>变量或数组赋值</li>
+<li>输出命令</li>
+<li>内置函数</li>
+<li>控制流语句</li>
+</ul>
+</li>
+</ol>
+<p>例如：</p>
+<pre class="line-numbers language-shell"><code class="language-shell">echo Jack{1..5} > test.txt && echo Jack{6..10} >> test.txt && echo Jack{11..15} >> test.txt && echo Jack{16..20} >> test.txt
+awk 'NR==2{print $1,$3,$5}' test.txt
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>其中：</p>
+<ul>
+<li><code>NR==2</code>是模式，这里是表示第二行</li>
+<li><code>{print $1,$3,$5}</code>是操作。</li>
+</ul>
+<p>运行结果如下：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221111155005124.png" alt="awk模式和操作示例"></p>
+<h4 id="D-awk常用参数"><a href="#D-awk常用参数" class="headerlink" title="D. awk常用参数"></a>D. awk常用参数</h4><p>下面我们将列举<code>awk</code>中常用的参数</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>-F</code></td>
+<td>指定分割字符段</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>-v</code></td>
+<td>定义或修改一个<code>awk</code>内部的变量</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>-f</code></td>
+<td>从脚本文件中读取<code>awk</code>命令</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>​    </p>
+<h3 id="2-awk-程序及语法"><a href="#2-awk-程序及语法" class="headerlink" title="2. awk 程序及语法"></a>2. awk 程序及语法</h3><p>上面我们介绍了<code>awk</code>的基础知识，我们接下来讲介绍<code>awk</code>程序.</p>
+<p>下面这一块，随用随看。没必要一次性看完，因为语法基本上和C是一样的。</p>
+<h4 id="A-awk程序基本结构"><a href="#A-awk程序基本结构" class="headerlink" title="A. awk程序基本结构"></a>A. awk程序基本结构</h4><p><code>awk</code>程序的基本结构如下：</p>
+<pre class="line-numbers language-shell"><code class="language-shell">BEGIN{ print "start" } pattern{ commands } END{ print "end" }
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>一个<code>awk</code>程序通常由3部分组成：</p>
+<ul>
+<li><strong>BEGIN语句块</strong>：在awk开始从输入流中读取行 <strong>之前</strong> 被执行，这是一个可选的语句块，比如变量初始化、打印输出表格的表头等语句通常可以写在BEGIN语句块中</li>
+<li><strong>能够使用模式匹配的通用语句块</strong>：在读取完每一行后，如果该行符合模式匹配，则按照指令处理改行。即上面的<code>pattern { commands }</code></li>
+<li><strong>END语句块</strong>：在awk从输入流中读取完所有的行 <strong>之后</strong> 即被执行，比如打印所有行的分析结果这类信息汇总都是在END语句块中完成，它也是一个可选语句块</li>
+</ul>
+<p>这三个部分是可选的。<strong>任意一个部分都可以不出现在脚本中</strong>，脚本通常是被 <strong>单引号</strong> 中，例如：</p>
+<pre class="line-numbers language-sh"><code class="language-sh">echo Jack{1..5} > test.txt && echo Jack{6..10} >> test.txt && echo Jack{11..15} >> test.txt && echo Jack{16..20} >> test.txt
+cat test.txt
+awk 'BEGIN{print "Start"} {print $1,$3,$5} END{print "End"}' test.txt
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>运行结果如下：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221111155256676.png" alt="运行结果"></p>
+<h4 id="B-内置变量"><a href="#B-内置变量" class="headerlink" title="B. 内置变量"></a>B. 内置变量</h4><p>类似于<code>Python</code>中有<code>__name__</code>、<code>C</code>中有<code>__LINE__</code>等内置变量（不严格的说），<code>awk</code>语言也有内置的变量。</p>
+<p>这里只列出一些常用的变量，更多的变量使用<code>man</code>手册去查看即可。</p>
+<p>下表中，<code>[A][N][P][G]</code>表示第一个支持变量的<code>awk</code>实现，<code>[A]=awk</code>、<code>[N]=nawk</code>、<code>[P]=POSIXawk</code>、<code>[G]=gawk</code>。不过一般来说这些变量现在所有的实现都支持了</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">工具</th>
+<th style="text-align:center">变量</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">全部</td>
+<td style="text-align:center"><code>$n</code></td>
+<td>当前记录的第n个字段（<code>field</code>），比如n为1表示第一个字段，n为2表示第二个字段</td>
+</tr>
+<tr>
+<td style="text-align:center">全部</td>
+<td style="text-align:center"><code>$0</code></td>
+<td>这个变量包含执行过程中当前行的文本内容</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>[N]</code></td>
+<td style="text-align:center"><code>argc</code></td>
+<td>命令行参数的数目</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>[N]</code></td>
+<td style="text-align:center"><code>argv</code></td>
+<td>包含命令行参数的数组</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>[N]</code></td>
+<td style="text-align:center"><code>ERRNO</code></td>
+<td>系统错误号</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>[N]</code></td>
+<td style="text-align:center"><code>RSTART</code></td>
+<td>由match函数所匹配的字符串的第一个位置</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>[N]</code></td>
+<td style="text-align:center"><code>RLENGTH</code></td>
+<td>由match函数所匹配的字符串的长度</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>[N]</code></td>
+<td style="text-align:center"><code>SUBSEP</code></td>
+<td>数组下标分隔符（默认值是34）</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>[G]</code></td>
+<td style="text-align:center"><code>ARGIND</code></td>
+<td>命令行中当前文件的位置（从0开始算）</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>[G]</code></td>
+<td style="text-align:center"><code>CONVFMT</code></td>
+<td>数字转换格式（默认值为%.6g）</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>[G]</code></td>
+<td style="text-align:center"><code>FIELDWIDTHS</code></td>
+<td>字段宽度列表（用空格键分隔）</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>[G]</code></td>
+<td style="text-align:center"><code>IGNORECASE</code></td>
+<td>如果为真，则进行忽略大小写的匹配</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>[P]</code></td>
+<td style="text-align:center"><code>ENVIRON</code></td>
+<td>环境变量关联数组</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>[P]</code></td>
+<td style="text-align:center"><code>FNR</code></td>
+<td>同NR，但相对于当前文件</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>[A]</code></td>
+<td style="text-align:center"><code>FILENAME</code></td>
+<td>当前输入文件的名</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>[A]</code></td>
+<td style="text-align:center"><code>FS</code></td>
+<td>字段分隔符（默认是任何空格）</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>[A]</code></td>
+<td style="text-align:center"><code>NF</code></td>
+<td>当前记录分割后的字段数</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>[A]</code></td>
+<td style="text-align:center"><code>NR</code></td>
+<td>表示记录数，在执行过程中对应于当前的行号</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>[A]</code></td>
+<td style="text-align:center"><code>OFMT</code></td>
+<td>数字的输出格式（默认值是%.6g）</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>[A]</code></td>
+<td style="text-align:center"><code>OFS</code></td>
+<td>输出字段分隔符（默认值是一个空格）</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>[A]</code></td>
+<td style="text-align:center"><code>ORS</code></td>
+<td>输出记录分隔符（默认值是一个换行符）</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>[A]</code></td>
+<td style="text-align:center"><code>RS</code></td>
+<td>记录分隔符（默认是一个换行符）</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="C-转移序列"><a href="#C-转移序列" class="headerlink" title="C. 转移序列"></a>C. 转移序列</h4><p>为了能够输出控制字符，<code>awk</code>也支持转义序列。<code>awk</code>中的转义字符如下表所示：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">转义字符</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>\\</code></td>
+<td><code>\</code>自身</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>\$</code></td>
+<td>转义<code>$</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>\t</code></td>
+<td>制表符</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>\n</code></td>
+<td>换行符</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>\r</code></td>
+<td>回车符</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>\b</code></td>
+<td>退格符</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>\c</code></td>
+<td>取消换行</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="D-运算符"><a href="#D-运算符" class="headerlink" title="D. 运算符"></a>D. 运算符</h4><h5 id="算术运算符"><a href="#算术运算符" class="headerlink" title="算术运算符"></a>算术运算符</h5><p><code>awk</code>中的算术运算符有：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">算术运算符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>+ -</code></td>
+<td>加，减</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>* / &amp;</code></td>
+<td>乘，除与求余</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>+ -</code></td>
+<td>一元加，减</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>^ ***</code></td>
+<td>求幂</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>++ --</code></td>
+<td>增加或减少，作为前缀或后缀</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>注意，使用算术运算符的时候，操作数自动转为数值，所有非数值都变为0</p>
+<h5 id="赋值运算符"><a href="#赋值运算符" class="headerlink" title="赋值运算符"></a>赋值运算符</h5><p><code>awk</code>中的赋值运算符有：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">运算符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>= += -= *= /= %= ^= **=</code></td>
+<td>赋值语句</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h5 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h5><p><code>awk</code>中的逻辑运算符有：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">运算符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">`</td>
+<td></td>
+<td>`</td>
+<td>逻辑或</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>&amp;&amp;</code></td>
+<td>逻辑与</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>!</code></td>
+<td>逻辑非</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h5 id="正则运算符"><a href="#正则运算符" class="headerlink" title="正则运算符"></a>正则运算符</h5><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">运算符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>~</code></td>
+<td>匹配正则表达式</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>!~</code></td>
+<td>不匹配正则表达式</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><code>awk</code>中支持基础正则表达式：</p>
+<pre class="line-numbers language-sh"><code class="language-sh">^ 行首
+$ 行尾
+. 除了换行符以外的任意单个字符
+* 前导字符的零个或多个
+.* 所有字符
+[] 字符组内的任一字符
+[^]对字符组内的每个字符取反(不匹配字符组内的每个字符)
+^[^] 非字符组内的字符开头的行
+[a-z] 小写字母
+[A-Z] 大写字母
+[a-Z] 小写和大写字母
+[0-9] 数字
+\< 单词头单词一般以空格或特殊字符做分隔,连续的字符串被当做单词
+\> 单词尾
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>如果要使用正则表达式的话，需要用<code>/正则/</code>的形式使用。</p>
+<h5 id="关系运算符"><a href="#关系运算符" class="headerlink" title="关系运算符"></a>关系运算符</h5><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">运算符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>&lt; &lt;= &gt; &gt;= != ==</code></td>
+<td>关系运算符</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h5 id="其它运算符"><a href="#其它运算符" class="headerlink" title="其它运算符"></a>其它运算符</h5><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">运算符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>$</code></td>
+<td>字段引用</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>空格</code></td>
+<td>字符串连接符</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>?:</code></td>
+<td>C条件表达式</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>in</code></td>
+<td>数组中是否存在某键值</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="E-流程控制语句"><a href="#E-流程控制语句" class="headerlink" title="E. 流程控制语句"></a>E. 流程控制语句</h4><p><code>awk</code>的<code>while</code>、<code>do-while</code>和<code>for</code>语句中允许使用<code>break</code>，<code>continue</code>语句来控制流程走向，也允许使用<code>exit</code>这样的语句来退出。<code>break</code>中断当前正在执行的循环并跳到循环外执行下一条语句。<code>if</code>是流程选择用法。</p>
+<p><code>awk</code>中的流程控制语句、语法结构与C语言很类似。而正是因为有了这些语句，很多<code>Shell</code>程序都可以交给<code>awk</code>，而且性能是非常快的。下面是各个语句用法。</p>
+<h5 id="条件判断语句"><a href="#条件判断语句" class="headerlink" title="条件判断语句"></a>条件判断语句</h5><pre class="line-numbers language-shell"><code class="language-shell">if(表达式)
+  语句1
+else
+  语句2
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>格式中语句1可以是多个语句，为了方便判断和阅读，最好将多个语句用{}括起来。awk分枝结构允许嵌套，其格式为：</p>
+<pre class="line-numbers language-shell"><code class="language-shell">if(表达式)
+  {语句1}
+else if(表达式)
+  {语句2}
+else
+  {语句3}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>示例：</p>
+<pre class="line-numbers language-shell"><code class="language-shell">awk 'BEGIN{
+test=100;
+if(test>90){
+  print "very good";
+  }
+  else if(test>60){
+    print "good";
+  }
+  else{
+    print "no pass";
+  }
+}'
+
+very good
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>每条命令语句后面可以用<code>;</code> <strong>分号</strong> 结尾。</p>
+<h5 id="循环语句"><a href="#循环语句" class="headerlink" title="循环语句"></a>循环语句</h5><h6 id="while语句"><a href="#while语句" class="headerlink" title="while语句"></a>while语句</h6><pre class="line-numbers language-shell"><code class="language-shell">while(表达式)
+  {语句}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>示例：</p>
+<pre class="line-numbers language-shell"><code class="language-shell">awk 'BEGIN{
+test=100;
+total=0;
+while(i<=test){
+  total+=i;
+  i++;
+}
+print total;
+}'
+5050
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h6 id="for循环"><a href="#for循环" class="headerlink" title="for循环"></a>for循环</h6><p>for循环有两种格式：</p>
+<p>格式1：</p>
+<pre class="line-numbers language-shell"><code class="language-shell">for(变量 in 数组)
+  {语句}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>示例：</p>
+<pre class="line-numbers language-shell"><code class="language-shell">awk 'BEGIN{
+for(k in ENVIRON){
+  print k"="ENVIRON[k];
+}
+
+}'
+TERM=linux
+G_BROKEN_FILENAMES=1
+SHLVL=1
+pwd=/root/text
+...
+logname=root
+HOME=/root
+SSH_CLIENT=192.168.1.21 53087 22
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>注：ENVIRON是awk常量，是子典型数组。</p>
+<p>格式2：</p>
+<pre class="line-numbers language-shell"><code class="language-shell">for(变量;条件;表达式)
+  {语句}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>示例：</p>
+<pre class="line-numbers language-shell"><code class="language-shell">awk 'BEGIN{
+total=0;
+for(i=0;i<=100;i++){
+  total+=i;
+}
+print total;
+}'
+5050
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h6 id="do循环"><a href="#do循环" class="headerlink" title="do循环"></a>do循环</h6><pre class="line-numbers language-shell"><code class="language-shell">do
+{语句} while(条件)
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>例子：</p>
+<pre class="line-numbers language-shell"><code class="language-shell">awk 'BEGIN{ 
+total=0;
+i=0;
+do {total+=i;i++;} while(i<=100)
+  print total;
+}'
+5050
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h6 id="其他语句"><a href="#其他语句" class="headerlink" title="其他语句"></a>其他语句</h6><ul>
+<li><strong>break</strong> 当 break 语句用于 while 或 for 语句时，导致退出程序循环。</li>
+<li><strong>continue</strong> 当 continue 语句用于 while 或 for 语句时，使程序循环移动到下一个迭代。</li>
+<li><strong>next</strong> 能能够导致读入下一个输入行，并返回到脚本的顶部。这可以避免对当前输入行执行其他的操作过程。</li>
+<li><strong>exit</strong> 语句使主输入循环退出并将控制转移到END,如果END存在的话。如果没有定义END规则，或在END中应用exit语句，则终止脚本的执行。</li>
+</ul>
+<h4 id="F-数组应用"><a href="#F-数组应用" class="headerlink" title="F. 数组应用"></a>F. 数组应用</h4><p>数组是awk的灵魂，处理文本中最不能少的就是它的数组处理。因为数组索引（下标）可以是数字和字符串在awk中数组叫做关联数组(associative arrays)。awk 中的数组不必提前声明，也不必声明大小。数组元素用0或空字符串来初始化，这根据上下文而定。</p>
+<h6 id="数组的定义"><a href="#数组的定义" class="headerlink" title="数组的定义"></a>数组的定义</h6><p>数字做数组索引（下标）：</p>
+<pre class="line-numbers language-shell"><code class="language-shell">Array[1]="sun"
+Array[2]="kai"
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>字符串做数组索引（下标）：</p>
+<pre class="line-numbers language-shell"><code class="language-shell">Array["first"]="www"
+Array"[last"]="name"
+Array["birth"]="1987"
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>使用中<code>print Array[1]</code>会打印出sun；使用<code>print Array[2]</code>会打印出kai；使用<code>print["birth"]</code>会得到1987。</p>
+<p><strong>读取数组的值</strong></p>
+<pre class="line-numbers language-shell"><code class="language-shell">{ for(item in array) {print array[item]}; }       #输出的顺序是随机的
+{ for(i=1;i<=len;i++) {print array[i]}; }         #Len是数组的长度
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h6 id="数组相关函数"><a href="#数组相关函数" class="headerlink" title="数组相关函数"></a>数组相关函数</h6><p><strong>得到数组长度：</strong></p>
+<pre class="line-numbers language-shell"><code class="language-shell">awk 'BEGIN{info="it is a test";lens=split(info,tA," ");print length(tA),lens;}'
+4 4
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>length返回字符串以及数组长度，split进行分割字符串为数组，也会返回分割得到数组长度。</p>
+<pre class="line-numbers language-shell"><code class="language-shell">awk 'BEGIN{info="it is a test";split(info,tA," ");print asort(tA);}'
+4
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>asort对数组进行排序，返回数组长度。</p>
+<p><strong>输出数组内容（无序，有序输出）：</strong></p>
+<pre class="line-numbers language-shell"><code class="language-shell">awk 'BEGIN{info="it is a test";split(info,tA," ");for(k in tA){print k,tA[k];}}'
+4 test
+1 it
+2 is
+3 a
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><code>for…in</code>输出，因为数组是关联数组，默认是无序的。所以通过<code>for…in</code>得到是无序的数组。如果需要得到有序数组，需要通过下标获得。</p>
+<pre class="line-numbers language-shell"><code class="language-shell">awk 'BEGIN{info="it is a test";tlen=split(info,tA," ");for(k=1;k<=tlen;k++){print k,tA[k];}}'
+1 it
+2 is
+3 a
+4 test
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>注意：数组下标是从1开始，与C数组不一样。</p>
+<p><strong>判断键值存在以及删除键值：</strong></p>
+<pre class="line-numbers language-shell"><code class="language-shell"># 错误的判断方法：
+awk 'BEGIN{tB["a"]="a1";tB["b"]="b1";if(tB["c"]!="1"){print "no found";};for(k in tB){print k,tB[k];}}' 
+no found
+a a1
+b b1
+c
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>以上出现奇怪问题，<code>tB[“c”]</code>没有定义，但是循环时候，发现已经存在该键值，它的值为空，这里需要注意，awk数组是关联数组，只要通过数组引用它的key，就会自动创建改序列。</p>
+<pre class="line-numbers language-shell"><code class="language-shell"># 正确判断方法：
+awk 'BEGIN{tB["a"]="a1";tB["b"]="b1";if( "c" in tB){print "ok";};for(k in tB){print k,tB[k];}}'  
+a a1
+b b1
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p><code>if(key in array)</code>通过这种方法判断数组中是否包含<code>key</code>键值。</p>
+<pre class="line-numbers language-shell"><code class="language-shell">#删除键值：
+awk 'BEGIN{tB["a"]="a1";tB["b"]="b1";delete tB["a"];for(k in tB){print k,tB[k];}}'                     
+b b1
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p><code>delete array[key]</code>可以删除，对应数组<code>key</code>的，序列值。</p>
+<h6 id="二维、多维数组使用"><a href="#二维、多维数组使用" class="headerlink" title="二维、多维数组使用"></a>二维、多维数组使用</h6><p>awk的多维数组在本质上是一维数组，更确切一点，awk在存储上并不支持多维数组。awk提供了逻辑上模拟二维数组的访问方式。例如，<code>array[2,4]=1</code>这样的访问是允许的。awk使用一个特殊的字符串<code>SUBSEP(�34)</code>作为分割字段，在上面的例子中，关联数组array存储的键值实际上是2�344。</p>
+<p>类似一维数组的成员测试，多维数组可以使用<code>if ( (i,j) in array)</code>这样的语法，但是下标必须放置在圆括号中。类似一维数组的循环访问，多维数组使用<code>for ( item in array )</code>这样的语法遍历数组。与一维数组不同的是，多维数组必须使用<code>split()</code>函数来访问单独的下标分量。</p>
+<pre class="line-numbers language-shell"><code class="language-shell">awk 'BEGIN{
+for(i=1;i<=9;i++){
+  for(j=1;j<=9;j++){
+    tarr[i,j]=i*j; print i,"*",j,"=",tarr[i,j];
+  }
+}
+}'
+1 * 1 = 1
+1 * 2 = 2
+1 * 3 = 3
+1 * 4 = 4
+1 * 5 = 5
+1 * 6 = 6 
+...
+9 * 6 = 54
+9 * 7 = 63
+9 * 8 = 72
+9 * 9 = 81
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>可以通过<code>array[k,k2]</code>引用获得数组内容。</p>
+<p>另一种方法：</p>
+<pre class="line-numbers language-shell"><code class="language-shell">awk 'BEGIN{
+for(i=1;i<=9;i++){
+  for(j=1;j<=9;j++){
+    tarr[i,j]=i*j;
+  }
+}
+for(m in tarr){
+  split(m,tarr2,SUBSEP); print tarr2[1],"*",tarr2[2],"=",tarr[m];
+}
+}'
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="G-内置函数"><a href="#G-内置函数" class="headerlink" title="G. 内置函数"></a>G. 内置函数</h4><p>awk内置函数，主要分以下3种类似：算数函数、字符串函数、其它一般函数、时间函数。</p>
+<h5 id="算术函数"><a href="#算术函数" class="headerlink" title="算术函数"></a>算术函数</h5><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">函数名</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>atan2( y, x )</code></td>
+<td>返回 y/x 的反正切。</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>cos( x )</code></td>
+<td>返回 x 的余弦；x 是弧度。</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>sin( x )</code></td>
+<td>返回 x 的正弦；x 是弧度。</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>exp( x )</code></td>
+<td>返回 x 幂函数。</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>log( x )</code></td>
+<td>返回 x 的自然对数。</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>sqrt( x )</code></td>
+<td>返回 x 平方根。</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>int( x )</code></td>
+<td>返回 x 的截断至整数的值。</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>rand( )</code></td>
+<td>返回任意数字 n，其中 0 &lt;= n &lt; 1。</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>srand( [expr] )</code></td>
+<td>将 rand 函数的种子值设置为 Expr 参数的值，或如果省略 Expr 参数则使用某天的时间。返回先前的种子值。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>举例说明：</p>
+<pre class="line-numbers language-shell"><code class="language-shell">awk 'BEGIN{OFMT="%.3f";fs=sin(1);fe=exp(10);fl=log(10);fi=int(3.1415);print fs,fe,fl,fi;}'
+0.841 22026.466 2.303 3
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>OFMT 设置输出数据格式是保留3位小数。</p>
+<p>获得随机数：</p>
+<pre class="line-numbers language-shell"><code class="language-shell">awk 'BEGIN{srand();fr=int(100*rand());print fr;}'
+78
+awk 'BEGIN{srand();fr=int(100*rand());print fr;}'
+31
+awk 'BEGIN{srand();fr=int(100*rand());print fr;}'
+41
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h5 id="字符串函数"><a href="#字符串函数" class="headerlink" title="字符串函数"></a>字符串函数</h5><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">函数名</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>gsub( Ere, Repl, [ In ] )</code></td>
+<td>除了正则表达式所有具体值被替代这点，它和 sub 函数完全一样地执行。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>sub( Ere, Repl, [ In ] )</code></td>
+<td>用 Repl 参数指定的字符串替换 In 参数指定的字符串中的由 Ere 参数指定的扩展正则表达式的第一个具体值。sub 函数返回替换的数量。出现在 Repl 参数指定的字符串中的 &amp;（和符号）由 In 参数指定的与 Ere 参数的指定的扩展正则表达式匹配的字符串替换。如果未指定 In 参数，缺省值是整个记录（$0 记录变量）。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>index( String1, String2 )</code></td>
+<td>在由 String1 参数指定的字符串（其中有出现 String2 指定的参数）中，返回位置，从 1 开始编号。如果 String2 参数不在 String1 参数中出现，则返回 0（零）。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>length [(String)]</code></td>
+<td>返回 String 参数指定的字符串的长度（字符形式）。如果未给出 String 参数，则返回整个记录的长度（$0 记录变量）。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>blength [(String)]</code></td>
+<td>返回 String 参数指定的字符串的长度（以字节为单位）。如果未给出 String 参数，则返回整个记录的长度（$0 记录变量）。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>substr( String, M, [ N ] )</code></td>
+<td>返回具有 N 参数指定的字符数量子串。子串从 String 参数指定的字符串取得，其字符以 M 参数指定的位置开始。M 参数指定为将 String 参数中的第一个字符作为编号 1。如果未指定 N 参数，则子串的长度将是 M 参数指定的位置到 String 参数的末尾 的长度。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>match( String, Ere )</code></td>
+<td>在 String 参数指定的字符串（Ere 参数指定的扩展正则表达式出现在其中）中返回位置（字符形式），从 1 开始编号，或如果 Ere 参数不出现，则返回 0（零）。RSTART 特殊变量设置为返回值。RLENGTH 特殊变量设置为匹配的字符串的长度，或如果未找到任何匹配，则设置为 -1（负一）。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>split( String, A, [Ere] )</code></td>
+<td>将 String 参数指定的参数分割为数组元素 A[1], A[2], . . ., A[n]，并返回 n 变量的值。此分隔可以通过 Ere 参数指定的扩展正则表达式进行，或用当前字段分隔符（FS 特殊变量）来进行（如果没有给出 Ere 参数）。除非上下文指明特定的元素还应具有一个数字值，否则 A 数组中的元素用字符串值来创建。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>tolower( String )</code></td>
+<td>返回 String 参数指定的字符串，字符串中每个大写字符将更改为小写。大写和小写的映射由当前语言环境的 LC_CTYPE 范畴定义。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>toupper( String )</code></td>
+<td>返回 String 参数指定的字符串，字符串中每个小写字符将更改为大写。大写和小写的映射由当前语言环境的 LC_CTYPE 范畴定义。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>sprintf(Format, Expr, Expr, . . . )</code></td>
+<td>根据 Format 参数指定的 printf 子例程格式字符串来格式化 Expr 参数指定的表达式并返回最后生成的字符串。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>注：Ere都可以是正则表达式。</p>
+<p><strong>gsub,sub使用</strong></p>
+<pre class="line-numbers language-shell"><code class="language-shell">awk 'BEGIN{info="this is a test2010test!";gsub(/[0-9]+/,"!",info);print info}'
+this is a test!test!
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>在 info中查找满足正则表达式，<code>/[0-9]+/</code> 用<code>””</code>替换，并且替换后的值，赋值给info 未给info值，默认是<code>$0</code></p>
+<p><strong>查找字符串（index使用）</strong></p>
+<pre class="line-numbers language-shell"><code class="language-shell">awk 'BEGIN{info="this is a test2010test!";print index(info,"test")?"ok":"no found";}'
+ok
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>未找到，返回0</p>
+<p><strong>正则表达式匹配查找(match使用）</strong></p>
+<pre class="line-numbers language-shell"><code class="language-shell">awk 'BEGIN{info="this is a test2010test!";print match(info,/[0-9]+/)?"ok":"no found";}'
+ok
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p><strong>截取字符串(substr使用）</strong></p>
+<pre class="line-numbers language-shell"><code class="language-shell">[wangsl@centos5 ~]$ awk 'BEGIN{info="this is a test2010test!";print substr(info,4,10);}'
+s is a tes
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>从第 4个 字符开始，截取10个长度字符串</p>
+<p><strong>字符串分割（split使用）</strong></p>
+<pre class="line-numbers language-shell"><code class="language-shell">awk 'BEGIN{info="this is a test";split(info,tA," ");print length(tA);for(k in tA){print k,tA[k];}}'
+4
+4 test
+1 this
+2 is
+3 a
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>分割info，动态创建数组tA，这里比较有意思，<code>awk for …in</code>循环，是一个无序的循环。 并不是从数组下标1…n ，因此使用时候需要注意。</p>
+<p><strong>格式化字符串输出（sprintf使用）</strong></p>
+<p>格式化字符串格式：</p>
+<p>其中格式化字符串包括两部分内容：一部分是正常字符，这些字符将按原样输出; 另一部分是格式化规定字符，以<code>"%"</code>开始，后跟一个或几个规定字符,用来确定输出内容格式。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">格式</th>
+<th>描述</th>
+<th style="text-align:center">格式</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>%d</code></td>
+<td>十进制有符号整数</td>
+<td style="text-align:center"><code>%u</code></td>
+<td>十进制无符号整数</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>%f</code></td>
+<td>浮点数</td>
+<td style="text-align:center"><code>%s</code></td>
+<td>字符串</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>%c</code></td>
+<td>单个字符</td>
+<td style="text-align:center"><code>%p</code></td>
+<td>指针的值</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>%e</code></td>
+<td>指数形式的浮点数</td>
+<td style="text-align:center"><code>%x</code></td>
+<td>%X 无符号以十六进制表示的整数</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>%o</code></td>
+<td>无符号以八进制表示的整数</td>
+<td style="text-align:center"><code>%g</code></td>
+<td>自动选择合适的表示法</td>
+</tr>
+</tbody>
+</table>
+</div>
+<pre class="line-numbers language-shell"><code class="language-shell">awk 'BEGIN{n1=124.113;n2=-1.224;n3=1.2345; printf("%.2f,%.2u,%.2g,%X,%on",n1,n2,n3,n1,n1);}'
+124.11,18446744073709551615,1.2,7C,174
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h5 id="一般函数"><a href="#一般函数" class="headerlink" title="一般函数"></a>一般函数</h5><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>格式</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>close( Expression )</code></td>
+<td>用同一个带字符串值的 Expression 参数来关闭由 print 或 printf 语句打开的或调用 getline 函数打开的文件或管道。如果文件或管道成功关闭，则返回 0；其它情况下返回非零值。如果打算写一个文件，并稍后在同一个程序中读取文件，则 close 语句是必需的。</td>
+</tr>
+<tr>
+<td><code>system(command )</code></td>
+<td>执行 Command 参数指定的命令，并返回退出状态。等同于 system 子例程。</td>
+</tr>
+<tr>
+<td><code>Expression  getline [ Variable ]</code></td>
+<td>从来自 Expression 参数指定的命令的输出中通过管道传送的流中读取一个输入记录，并将该记录的值指定给 Variable 参数指定的变量。如果当前未打开将 Expression 参数的值作为其命令名称的流，则创建流。创建的流等同于调用 popen 子例程，此时 Command 参数取 Expression 参数的值且 Mode 参数设置为一个是 r 的值。只要流保留打开且 Expression 参数求得同一个字符串，则对 getline 函数的每次后续调用读取另一个记录。如果未指定 Variable 参数，则 $0 记录变量和 NF 特殊变量设置为从流读取的记录。</td>
+</tr>
+<tr>
+<td><code>getline [ Variable ] &lt; Expression</code></td>
+<td>从 Expression 参数指定的文件读取输入的下一个记录，并将 Variable 参数指定的变量设置为该记录的值。只要流保留打开且 Expression 参数对同一个字符串求值，则对 getline 函数的每次后续调用读取另一个记录。如果未指定 Variable 参数，则 $0 记录变量和 NF 特殊变量设置为从流读取的记录。</td>
+</tr>
+<tr>
+<td><code>getline [ Variable ]</code></td>
+<td>将 Variable 参数指定的变量设置为从当前输入文件读取的下一个输入记录。如果未指定 Variable 参数，则 $0 记录变量设置为该记录的值，还将设置 NF、NR 和 FNR 特殊变量。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>打开外部文件（close用法）</strong></p>
+<pre class="line-numbers language-shell"><code class="language-shell">awk 'BEGIN{while("cat /etc/passwd"|getline){print $0;};close("/etc/passwd");}'
+root:x:0:0:root:/root:/bin/bash
+bin:x:1:1:bin:/bin:/sbin/nologin
+daemon:x:2:2:daemon:/sbin:/sbin/nologin
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>逐行读取外部文件(getline使用方法）</strong></p>
+<pre class="line-numbers language-shell"><code class="language-shell">awk 'BEGIN{while(getline < "/etc/passwd"){print $0;};close("/etc/passwd");}'
+root:x:0:0:root:/root:/bin/bash
+bin:x:1:1:bin:/bin:/sbin/nologin
+daemon:x:2:2:daemon:/sbin:/sbin/nologin
+awk 'BEGIN{print "Enter your name:";getline name;print name;}'
+Enter your name:
+chengmo
+chengmo
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>调用外部应用程序(system使用方法）</strong></p>
+<pre class="line-numbers language-shell"><code class="language-shell">awk 'BEGIN{b=system("ls -al");print b;}'
+total 42092
+drwxr-xr-x 14 chengmo chengmo     4096 09-30 17:47 .
+drwxr-xr-x 95 root   root       4096 10-08 14:01 ..
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>b返回值，是执行结果。</p>
+<h5 id="时间函数"><a href="#时间函数" class="headerlink" title="时间函数"></a>时间函数</h5><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">函数名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>mktime( YYYY MM dd HH MM ss[ DST])</code></td>
+<td>生成时间格式</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>strftime([format [, timestamp]])</code></td>
+<td>格式化时间输出，将时间戳转为时间字符串具体格式，见下表。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>systime()</code></td>
+<td>得到时间戳，返回从1970年1月1日开始到当前时间(不计闰年)的整秒数</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>建指定时间(mktime使用）</strong></p>
+<pre class="line-numbers language-shell"><code class="language-shell">awk 'BEGIN{tstamp=mktime("2001 01 01 12 12 12");print strftime("%c",tstamp);}'
+2001年01月01日 星期一 12时12分12秒
+awk 'BEGIN{tstamp1=mktime("2001 01 01 12 12 12");tstamp2=mktime("2001 02 01 0 0 0");print tstamp2-tstamp1;}'
+2634468
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>求2个时间段中间时间差，介绍了strftime使用方法</p>
+<pre class="line-numbers language-shell"><code class="language-shell">awk 'BEGIN{tstamp1=mktime("2001 01 01 12 12 12");tstamp2=systime();print tstamp2-tstamp1;}' 
+308201392
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p><strong>strftime日期和时间格式说明符</strong></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">格式</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>%a</code></td>
+<td>星期几的缩写(Sun)</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>%A</code></td>
+<td>星期几的完整写法(Sunday)</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>%b</code></td>
+<td>月名的缩写(Oct)</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>%B</code></td>
+<td>月名的完整写法(October)</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>%c</code></td>
+<td>本地日期和时间</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>%d</code></td>
+<td>十进制日期</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>%D</code></td>
+<td>日期 08/20/99</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>%e</code></td>
+<td>日期，如果只有一位会补上一个空格</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>%H</code></td>
+<td>用十进制表示24小时格式的小时</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>%I</code></td>
+<td>用十进制表示12小时格式的小时</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>%j</code></td>
+<td>从1月1日起一年中的第几天</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>%m</code></td>
+<td>十进制表示的月份</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>%M</code></td>
+<td>十进制表示的分钟</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>%p</code></td>
+<td>12小时表示法(AM/PM)</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>%S</code></td>
+<td>十进制表示的秒</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>%U</code></td>
+<td>十进制表示的一年中的第几个星期(星期天作为一个星期的开始)</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>%w</code></td>
+<td>十进制表示的星期几(星期天是0)</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>%W</code></td>
+<td>十进制表示的一年中的第几个星期(星期一作为一个星期的开始)</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>%x</code></td>
+<td>重新设置本地日期(08/20/99)</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>%X</code></td>
+<td>重新设置本地时间(12:00:00)</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>%y</code></td>
+<td>两位数字表示的年(99)</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>%Y</code></td>
+<td>当前月份</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>%%</code></td>
+<td>百分号(%)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="3-awk基础案例"><a href="#3-awk基础案例" class="headerlink" title="3. awk基础案例"></a>3. awk基础案例</h3><p>其实说老实话，上面说的一堆语法，很多都平时都应不大，需要用了现查就行。</p>
+<p>因为我们的目的是面向运用的，因此我们下面将结合案例来学习<code>awk</code></p>
+<h4 id="输出文件第二列的信息"><a href="#输出文件第二列的信息" class="headerlink" title="输出文件第二列的信息"></a>输出文件第二列的信息</h4><p>因为<code>awk</code>对输入的文件是按行处理的，所以我们针对每行输出第二个字段的值即可，即输出<code>$2</code>的内容即可。</p>
+<pre class="line-numbers language-sh"><code class="language-sh">echo Jack{1..5} > test.txt && echo Jack{6..10} >> test.txt && echo Jack{11..15} >> test.txt && echo Jack{16..20} >> test.txt
+cat test.txt
+awk '{print $2}' test.txt
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>运行结果如下：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221111182158707.png" alt="输出文本第二列"></p>
+<p>注意，默认<code>awk</code>是以空格作为分隔符的，并且多个空格在一起也视为一个空格。</p>
+<p>同样，我们也能够输出倒数第二列和最后一列。</p>
+<pre class="line-numbers language-sh"><code class="language-sh">echo Jack{1..5} > test.txt && echo Jack{6..10} >> test.txt && echo Jack{11..15} >> test.txt && echo Jack{16..20} >> test.txt
+cat test.txt
+awk '{print $(NF-1),$NF}' test.txt
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221111193428523.png" alt="输出倒数第二列和最后一列运行结果"></p>
+<h4 id="输出文件第二行信息"><a href="#输出文件第二行信息" class="headerlink" title="输出文件第二行信息"></a>输出文件第二行信息</h4><p>因为我们只需要输出文件第二行，所以只需要在要执行的命令前增加匹配第二行的模式即可，即<code>NR==1</code>。<code>NR</code>即<code>Number of Record</code>，即当前处理的行数，从1开始。</p>
+<p>此外，因为要输出一整行，所以使用<code>$0</code>变量即可。</p>
+<pre class="line-numbers language-sh"><code class="language-sh">echo Jack{1..5} > test.txt && echo Jack{6..10} >> test.txt && echo Jack{11..15} >> test.txt && echo Jack{16..20} >> test.txt
+cat test.txt
+awk 'NR==2{print $0}' test.txt
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>运行结果如下：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221111194138685.png" alt="输出第二行的信息运行结果"></p>
+<h4 id="自定义输出内容"><a href="#自定义输出内容" class="headerlink" title="自定义输出内容"></a>自定义输出内容</h4><p>我们前面都是通过引用变量来输出了文件本身的内容，但是如果我们想要在输出文件本身内容的基础上，输出诸如表头等等信息的时候，这个就需要进行自定义输出内容了。</p>
+<p>其实实现的方法也很简单，就是使用字符串，<code>awk</code>将所有被<code>""</code>包围的都视为是字符串。所以我们只需要使用<code>""</code>添加字符串即可。例如</p>
+<pre class="line-numbers language-sh"><code class="language-sh">echo Jack{1..5} > test.txt && echo Jack{6..10} >> test.txt && echo Jack{11..15} >> test.txt && echo Jack{16..20} >> test.txt
+cat test.txt
+awk '{print "第一列："$1,"第二列："$2}' test.txt
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221111201547747.png" alt="自定义输出内容"></p>
+<h4 id="指定输入分隔符"><a href="#指定输入分隔符" class="headerlink" title="指定输入分隔符"></a>指定输入分隔符</h4><p><code>awk</code>中有两种分隔符：</p>
+<ul>
+<li>输入分隔符（<code>Field Separator</code>，<code>FS</code>），它指定了输入的文本的分隔符是什么</li>
+<li>输出分隔符（<code>Output Field Separator</code>，<code>OFS</code>），它指定了输出文本的分隔符是什么</li>
+</ul>
+<p><code>awk</code>默认使用空格来作为输入分隔符。但是很多配制文件中适用的分隔符不是空格，而是诸如<code>:</code>等分隔符。这个时候我们就需要改变分隔符了。</p>
+<p><code>awk</code>中，我们可以使用<code>-F</code>参数来指定输入分隔符。例如我们下面分割<code>/etc/passwd</code>这个文件</p>
+<pre class="line-numbers language-sh"><code class="language-sh">tail /etc/passwd
+tail /etc/passwd | awk -F ':' '{print $1}'
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221111202902060.png" alt="-F指定输入分隔符运行结果"></p>
+<p>使用<code>-F</code>来更改输入分隔符只是一种方式。输入分隔符的值其实是由内部变量<code>FS</code>指定的，所以我们也可以使用<code>-v</code>参数来修改<code>FS</code>的值，从而实现修改输入分隔符。</p>
+<pre class="line-numbers language-sh"><code class="language-sh">tail /etc/passwd
+tail /etc/passwd | awk -v FS=':' '{print $1}'
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221111211824181.png" alt="-v指定FS的值从而修改分隔符"></p>
+<p>修改输入的分隔符只是最基本的，很多时候我们使用<code>awk</code>都是为了获得更好看的报表，所以我们有很多时候需要修改输出分隔符。</p>
+<p>例如查看系统上每个用户当前的登录<code>shell</code></p>
+<pre class="line-numbers language-shell"><code class="language-shell">tail /etc/passwd
+tail /etc/passed | awk -F ':' -v OFS='\t\t' '{print $0, $NF}'
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>运行结果为：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221111214055884.png" alt="修改输出分隔符"></p>
+<h4 id="显示文件2-4行"><a href="#显示文件2-4行" class="headerlink" title="显示文件2-4行"></a>显示文件2-4行</h4><p>输出2-4行的难点在于模式怎么写，因为前面的<code>NR==2</code>只是指定了输出一行。</p>
+<p><code>sed</code>中使用<code>start,end</code>来指定范围，<code>awk</code>中也可以通过类似的方法来实现范围输出。</p>
+<pre class="line-numbers language-shell"><code class="language-shell">echo Jack{1..5} > test.txt && echo Jack{6..10} >> test.txt && echo Jack{11..15} >> test.txt && echo Jack{16..20} >> test.txt
+cat test.txt
+awk '{print "第一列："$1,"第二列："$2}' test.txt
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>注意，我们这里省略了<code>{}</code>里面的<code>action</code>，在省略<code>action</code>的时候，<code>awk</code>默认输出这一行的内容，即默认的<code>action</code>是<code>{print $0}</code></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221111203320473.png" alt="显示文件2-4行"></p>
+<p>结合前面的关系运算符，我们其实还可以用下面的方式来指定范围</p>
+<pre class="line-numbers language-sh"><code class="language-sh">echo Jack{1..5} > test.txt && echo Jack{6..10} >> test.txt && echo Jack{11..15} >> test.txt && echo Jack{16..20} >> test.txt
+cat test.txt
+awk '2<=NR,NR<=4' test.txt
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221111203631491.png" alt="image-20221111203631491"></p>
+<h4 id="在每一行的内容前添加行号"><a href="#在每一行的内容前添加行号" class="headerlink" title="在每一行的内容前添加行号"></a>在每一行的内容前添加行号</h4><p>每一行的行号其实就是<code>NR</code>变量，所以我们只需要在这一行的内容，即<code>$0</code>前加上行号即可</p>
+<pre class="line-numbers language-sh"><code class="language-sh">echo Jack{1..5} > test.txt && echo Jack{6..10} >> test.txt && echo Jack{11..15} >> test.txt && echo Jack{16..20} >> test.txt
+cat test.txt
+awk '{print NR":",$0}' test.txt
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221111205628697.png" alt="在每一行的内容前添加行号"></p>
+<p>注意输出变量的值直接使用即可，而不用像<code>shell</code>中一样需要使用<script type="math/tex">`去提取变量的值。如果使用`</script>的话，结果就会变成</p>
+<pre class="line-numbers language-sh"><code class="language-sh">awk '{print $NR":",$0}' test.txt
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>这是因为，<code>$NR</code>在<code>awk</code>眼中就成了<code>$1</code>、<code>$2</code>、<code>$3</code>等等，所以就成了提取字段的值</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221111205808815.png" alt="使用$提取变量的值的结果"></p>
+<h4 id="分行输出一行内容"><a href="#分行输出一行内容" class="headerlink" title="分行输出一行内容"></a>分行输出一行内容</h4><p>有的时候我们可能只需要输出一行信息，但是如果只用一行输出的话，可能看起来就会很麻烦，所以这个时候我们就可以指定<code>RS</code>参数，即<code>Record Separator</code>参数。</p>
+<p>类似于<code>Field  Separator</code>分为输入和输出两种，<code>awk</code>中的<code>Record Separator</code>也分为两种：输入和输出。<code>awk</code>中默认<code>Record Seperator</code>的分隔符都是换行，所以我们其实只需要更改输入的记录分隔符即可。</p>
+<pre class="line-numbers language-sh"><code class="language-sh">tail -n 1 /etc/passwd
+tail -n 1 /etc/passwd | awk -v RS=':' '{print $0}'
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>注意，因为我们现在指定记录分隔符为<code>:</code>所以现在每个<code>record</code>其实都只有一个字段</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221111223326557.png" alt="分行输出一行内容"></p>
+<h4 id="使用自定义变量"><a href="#使用自定义变量" class="headerlink" title="使用自定义变量"></a>使用自定义变量</h4><p><code>awk</code>中的变量有两种，一种是内置变量，一种是自定义变量。</p>
+<p>内置变量具有特殊的效果，而自定义变量就是单纯的变量。我们前面示范了如何通过修改内置变量来实现特殊的效果。我们下面将展示如何设置自定义变量，以及如何使用自定义变量。</p>
+<pre class="line-numbers language-shell"><code class="language-shell">awk -v myname='Jack Wang' 'BEGIN{print "我的名字是?",myname}'
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>注意，<code>BEGIN</code>模式表示在读取文件前开始执行，因此就首先输出了我的名字。而由于没有输入的文件，所以后面就没有任何输出了</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221111224246835.png" alt="使用自定义变量"></p>
+<p><code>awk</code>程序中有一套变量，而<code>Shell</code>脚本中也有一套变量。所以很多时候我们都需要讲<code>Shell</code>脚本中的变量传给<code>awk</code>程序。下面就是具体的做法</p>
+<pre class="line-numbers language-sh"><code class="language-sh">echo $USER
+awk -v user=$USER 'BEGIN{print "Who am I?",user}'
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h3 id="4-awk进阶案例"><a href="#4-awk进阶案例" class="headerlink" title="4. awk进阶案例"></a>4. awk进阶案例</h3><h4 id="获取IP地址"><a href="#获取IP地址" class="headerlink" title="获取IP地址"></a>获取IP地址</h4><p>在<code>sed</code>命令的讲解中我们讲到可以使用掐头去尾的方法来获取机器的<code>IP</code>地址。而从<code>awk</code>的角度出发，就有一种完全不同的获取方式。</p>
+<pre class="line-numbers language-sh"><code class="language-sh">ifconfig en0
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>我们可以看到，<code>ifconfig</code>命令的输出其实是使用空格分隔的。所以我们能够用<code>awk</code>来直接获得<code>IP</code>地址</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221111210754880.png" alt="ifconfig命令输出"></p>
+<p>这里<code>IP</code>地址是第五列的第二个字段，所以使用下述的<code>awk</code>命令</p>
+<pre class="line-numbers language-sh"><code class="language-sh">ifconfig
+ifconfig en0 | awk 'NR==5{print $2}'
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221111211104191.png" alt="awk获取IP地址"></p>
+<p><strong>事实上，这也就是<code>awk</code>命令最强大的地方，就是因为英文文本是以空格分割的，所以我们利用空格分割，就可以精准的定位到任何一个我们需要的字段</strong>。这也就是为什么<code>awk</code>如此强大的最根本原因。</p>
+<h3 id="5-awk格式化输出"><a href="#5-awk格式化输出" class="headerlink" title="5. awk格式化输出"></a>5. awk格式化输出</h3><p>我们前面讲了<code>awk</code>的基础用法。可是仅仅只是学会基础用法，我们其实是没有办法做到最前面说的，<code>awk</code>是用于生成专业报表（文本格式化）的。</p>
+<p>说到文本格式化，我们第一个想到的就是C语言中的<code>printf</code>。C语言中的<code>printf</code>结合各种格式控制字符，例如<code>%d</code>、<code>%.4f</code>等等，就可以实现精准的格式化输出。</p>
+<p>事实上，<code>awk</code>也借鉴了C语言中的<code>printf</code>，从而使得我们基本上可以无缝的从C语言的<code>printf</code>切换到<code>awk</code>的<code>printf</code></p>
+<h4 id="基础语法"><a href="#基础语法" class="headerlink" title="基础语法"></a>基础语法</h4><p><code>awk</code>中<code>printf</code>的基础语法为</p>
+<pre class="line-numbers language-sh"><code class="language-sh">printf f-staring, var1, var2, ...
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>其中:</p>
+<ul>
+<li>格式字符串<code>f-string</code>中的格式数量要和后面的变量对应</li>
+<li><code>printf</code>不会自动打印换行符</li>
+</ul>
+<h4 id="格式化字符"><a href="#格式化字符" class="headerlink" title="格式化字符"></a>格式化字符</h4><p><code>awk</code>支持的格式化字符有：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">控制字符</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>%c</code></td>
+<td>输出单个字符</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>%d</code></td>
+<td>输出十进制数字</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>%e/%E</code></td>
+<td>科学计数法显示数值</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>%f</code></td>
+<td>输出显示浮点数</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>%g/%G</code></td>
+<td>科学计数法显示小数</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>%o</code></td>
+<td>输出无符号的八进制数</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>%s</code></td>
+<td>输出字符串</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>%x</code></td>
+<td>输出无符号的十六进制数</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>%%</code></td>
+<td>输出一个百分号</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>此外，还可以增加修饰符：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">修饰符</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>-</code></td>
+<td>右对齐，默认左对齐</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>+</code></td>
+<td>显示数值的符号</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="6-awk格式化输出案例"><a href="#6-awk格式化输出案例" class="headerlink" title="6. awk格式化输出案例"></a>6. awk格式化输出案例</h3><h4 id="printf和print的不同"><a href="#printf和print的不同" class="headerlink" title="printf和print的不同"></a>printf和print的不同</h4><p>我们上面说过，<code>print</code>处理完每一行后，默认会添加换行符号，而<code>printf</code>不会添加换行符号。</p>
+<pre class="line-numbers language-shell"><code class="language-shell">echo Jack{1..5} > test.txt && echo Jack{6..10} >> test.txt && echo Jack{11..15} >> test.txt && echo Jack{16..20} >> test.txt
+cat test.txt
+
+awk '{print $1}' test.txt
+awk '{printf $1}' test.txt
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>运行结果如下</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221111232555002.png" alt="运行结果"></p>
+<h4 id="printf按行输出"><a href="#printf按行输出" class="headerlink" title="printf按行输出"></a>printf按行输出</h4><p><code>printf</code>默认是不会换行的，但是实际上我们可以手动添加换行符</p>
+<pre class="line-numbers language-sh"><code class="language-sh">echo Jack{1..5} > test.txt && echo Jack{6..10} >> test.txt && echo Jack{11..15} >> test.txt && echo Jack{16..20} >> test.txt
+cat test.txt
+
+awk '{print $0}' test.txt
+awk '{printf "%s\n",$0}' test.txt
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221111233810627.png" alt="printf按行输出"></p>
+<h4 id="printf格式化字符与变量匹配"><a href="#printf格式化字符与变量匹配" class="headerlink" title="printf格式化字符与变量匹配"></a>printf格式化字符与变量匹配</h4><p>C语言中，如果<code>f-string</code>中的格式化字符和后面的变量不匹配的话，在编译的时候是会报错的。</p>
+<p>而<code>awk</code>中，如果不匹配的话是不会报错的，而是不会输出没有匹配的变量</p>
+<pre class="line-numbers language-sh"><code class="language-sh">awk 'BEGIN{printf "%d\n",1,2,3}'
+awk 'BEGIN{printf "%d\n%d\n%d\n",1,2,3}'
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221111234243906.png" alt="运行结果"></p>
+<h4 id="格式化输出-etc-passwd"><a href="#格式化输出-etc-passwd" class="headerlink" title="格式化输出/etc/passwd"></a>格式化输出/etc/passwd</h4><p>最后，我们用<code>awk</code>格式化输出<code>/etc/passwd</code>中的内容</p>
+<pre class="line-numbers language-sh"><code class="language-sh">tail /etc/passwd
+tail /etc/passwd | awk -F ':' 'BEGIN{printf "%-22s\t%-10s\t%-4s\t%-4s\t%-35s\t%-20s\t%-15s\n","User Name","Password","UID","GID","User Comment","User Home","Loging Shell"} {printf "%-22s\t%-10s\t%-4s\t%-4s\t%-35s\t%-20s\t%-15s\n",$1,$2,$3,$4,$5,$6,$7}'
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221111235821711.png" alt="格式化输出结果"></p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Jack Wang</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://jackwang0107.github.io/2022/11/10/linux-san-jian-ke-grep-sed-he-awk/">https://jackwang0107.github.io/2022/11/10/linux-san-jian-ke-grep-sed-he-awk/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Jack Wang</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/Linux/">
+                                    <span class="chip bg-color">Linux</span>
+                                </a>
+                            
+                                <a href="/tags/Ubuntu/">
+                                    <span class="chip bg-color">Ubuntu</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.png" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2022/11/13/suo-ji-qi-shi-xian-hu-chi-suo-tiao-jian-bian-liang-yi-ji-xin-hao-liang/">
+                    <div class="card-image">
+                        
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221113224353603.png" class="responsive-img" alt="锁及其实现：自旋锁、互斥锁、条件锁（条件变量）以及信号量">
+                        
+                        <span class="card-title">锁及其实现：自旋锁、互斥锁、条件锁（条件变量）以及信号量</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            本文介绍了各种锁：自旋锁、互斥锁、条件锁、信号量及其实现
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-11-13
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="post-category">
+                                    操作系统
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Operating-System/">
+                        <span class="chip bg-color">Operating System</span>
+                    </a>
+                    
+                    <a href="/tags/%E9%94%81/">
+                        <span class="chip bg-color">锁</span>
+                    </a>
+                    
+                    <a href="/tags/%E4%BF%A1%E5%8F%B7%E9%87%8F/">
+                        <span class="chip bg-color">信号量</span>
+                    </a>
+                    
+                    <a href="/tags/%E4%BA%92%E6%96%A5%E9%94%81/">
+                        <span class="chip bg-color">互斥锁</span>
+                    </a>
+                    
+                    <a href="/tags/%E8%87%AA%E6%97%8B%E9%94%81/">
+                        <span class="chip bg-color">自旋锁</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%9D%A1%E4%BB%B6%E9%94%81/">
+                        <span class="chip bg-color">条件锁</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%9D%A1%E4%BB%B6%E5%8F%98%E9%87%8F/">
+                        <span class="chip bg-color">条件变量</span>
+                    </a>
+                    
+                    <a href="/tags/%E9%94%81%E7%9A%84%E5%AE%9E%E7%8E%B0/">
+                        <span class="chip bg-color">锁的实现</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/11/10/linux-zheng-ze-biao-da-shi/">
+                    <div class="card-image">
+                        
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221110004143193.png" class="responsive-img" alt="Linux正则表达式">
+                        
+                        <span class="card-title">Linux正则表达式</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            本文主要介绍了Linux中的正则表达式
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-11-10
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Linux%E5%AE%9E%E7%94%A8%E6%8A%80%E5%B7%A7/" class="post-category">
+                                    Linux实用技巧
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Linux/">
+                        <span class="chip bg-color">Linux</span>
+                    </a>
+                    
+                    <a href="/tags/Ubuntu/">
+                        <span class="chip bg-color">Ubuntu</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: JackWang&#39;s Blog<br />'
+            + '文章作者: Jack Wang<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('1'),
+            headingSelector: 'h2, h3, h4, h5, h6'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4, h5, h6').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2021-2023</span>
+            
+            <a href="/about" target="_blank">Jack Wang</a>
+            <!-- |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a> -->
+            <!-- |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a> -->
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">526.1k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+                <span id="sitetime"> Loading ...</span>
+                <script>
+                    var calcSiteTime = function () {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2021";
+                        var startMonth = "11";
+                        var startDate = "12";
+                        var startHour = "0";
+                        var startMinute = "0";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+
+                        // 区分是否有年份.
+                        var language = 'zh-CN';
+                        if (startYear === String(todayYear)) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            var daysTip = 'This site has been running for ' + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                daysTip = '本站已运行 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                daysTip = '本站已運行 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = daysTip;
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            var yearsAndDaysTip = 'This site has been running for ' + diffYears + ' years and '
+                                + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                yearsAndDaysTip = '本站已运行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                yearsAndDaysTip = '本站已運行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+                        }
+                    }
+
+                    calcSiteTime();
+                </script>
+            
+            <br>
+            
+                <span id="icp"><img src="/medias/icp.png"
+                                    style="vertical-align: text-bottom;"/>
+                <a href="https://beian.miit.gov.cn" target="_blank">陕ICP备2021014294号-1</a>
+            </span>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/jackwang0108" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:2232123545@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2232123545" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2232123545" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+        
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/sakura.js"><\/script>');
+            }
+        </script>
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

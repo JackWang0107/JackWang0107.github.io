@@ -1,0 +1,1591 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="GAMS教程 4：线性模型, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
+    <meta name="description" content="本文介绍了如何使用GAMS求解线性模型">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>GAMS教程 4：线性模型 | JackWang&#39;s Blog</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.2">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+
+   <style>
+    body{
+       background-image: url(https://cdn.jsdelivr.net/gh/Tokisaki-Galaxy/res/site/medias/background.jpg);
+       background-repeat:no-repeat;
+       background-size: 100% 100%;
+       background-attachment:fixed;
+    }
+</style>
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">JackWang&#39;s Blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-book-reader" style="zoom: 0.6;"></i>
+      
+      <span>博客</span>
+      <i class="fas fa-chevron-down" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/tags">
+          
+          <i class="fas fa-tags" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按标签归类文章</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories">
+          
+          <i class="fas fa-bookmark" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按目录归类文章</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/archives">
+          
+          <i class="fas fa-archive" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按日期分类文章</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">JackWang&#39;s Blog</div>
+        <div class="logo-desc">
+            
+            JackWang的个人博客
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-book-reader"></i>
+			
+			博客
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>
+
+                  <a href="/tags " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-tags" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按标签归类文章</    span>
+
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/categories " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-bookmark" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按目录归类文章</    span>
+
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/archives " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-archive" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按日期分类文章</    span>
+
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('抱歉，这篇文章并不想让所有人都看到，请输入授权密码观看')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221016165034176.png')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">GAMS教程 4：线性模型</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/GAMS/">
+                                <span class="chip bg-color">GAMS</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/GAMS/" class="post-category">
+                                GAMS
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2022-10-16
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2022-10-17
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    2.4k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    11 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221016165034176.png" alt="线性模型"></p>
+<h1 id="GAMS教程-4：线性模型"><a href="#GAMS教程-4：线性模型" class="headerlink" title="GAMS教程 4：线性模型"></a>GAMS教程 4：线性模型</h1><p>在前面的几讲中，我们讲解了GAMS的基础知识，也仅限于GAMS中的基础知识。但事实上，GAMS作为一个工具，我们使用GAMS是为了求解优化问题。</p>
+<p>因此，我们关于GAMS，其实要学习的内容包括两部分：</p>
+<ul>
+<li>第一部分是GAMS的基础知识，包括语法、程序结构等等</li>
+<li>第二部分是如何使用GAMS求解优化问题的知识</li>
+</ul>
+<p>从本节开始，我们就将关注与第二部分，即讲解如何使用GAMS求解优化问题。</p>
+<p>本节，我们就将讲解线性模型。我们首先给出线性模型的定义和几个特征（属性），而后再举几个线性模型的例子以及如何用GAMS求解线性模型。</p>
+<h2 id="1-线性模型"><a href="#1-线性模型" class="headerlink" title="1. 线性模型"></a>1. 线性模型</h2><h3 id="A-定义"><a href="#A-定义" class="headerlink" title="A. 定义"></a>A. 定义</h3><p>线性模型指的是模型中的约束都是线性的优化模型。</p>
+<p>用数学语言来描述，就是仅包含线性等式约束和线性不等式约束的优化模型</p>
+<h4 id="线性等式约束"><a href="#线性等式约束" class="headerlink" title="线性等式约束"></a>线性等式约束</h4><p>线性等式约束的定义如下：</p>
+<script type="math/tex; mode=display">
+f:\mathbb{R}^n\rightarrow \mathbb{R}是一个线性等式约束，当且仅当存在系数向量\ C=\{c_1,\cdots,c_n\}，\ 使得\\
+f(x_1,\cdots,x_n)=\sum_{i=1}^nc_ix_i\\
+即\\
+f(x) = c^Tx</script><h4 id="线性不等式约束"><a href="#线性不等式约束" class="headerlink" title="线性不等式约束"></a>线性不等式约束</h4><p>线性不等式约束的定义如下</p>
+<script type="math/tex; mode=display">
+f:\mathbb{R}^n\rightarrow \mathbb{R}是一个线性不等式约束，当且仅当存在系数向量\ C=\{c_1,\cdots,c_n\}，\ 使得\\
+f(x_1,\cdots,x_n)=\sum_{i=1}^nc_ix_i\leq b\\
+即\\
+f(x) = c^Tx \leq b</script><h3 id="B-线性模型的特征"><a href="#B-线性模型的特征" class="headerlink" title="B. 线性模型的特征"></a>B. 线性模型的特征</h3><p>线性模型具有以下的特征：</p>
+<ul>
+<li><strong>Proportionality</strong>： Inputs/outputs/costs must keep same proportions as levels change</li>
+<li><strong>Additivity</strong>： The activites (production amounts. etc), are an additive (linear) function of the input variables</li>
+<li><strong>Divisibility</strong>：The activity can be operated at any real level between upper and lower bounds (if any)</li>
+</ul>
+<h2 id="2-使用GAMS解决线性模型"><a href="#2-使用GAMS解决线性模型" class="headerlink" title="2. 使用GAMS解决线性模型"></a>2. 使用GAMS解决线性模型</h2><p>我们接下来举几个GAMS解决线性模型的例子。</p>
+<h3 id="A-TopBrass-Company"><a href="#A-TopBrass-Company" class="headerlink" title="A. TopBrass Company"></a>A. TopBrass Company</h3><p>第一个例子就是在前言中介绍的为<code>TopBrass Company</code>制作奖杯的问题</p>
+<blockquote>
+<p><code>Top Brass Trophy Company</code>是一家专门生产奖杯的公司，这家公司生产两种奖杯：</p>
+<ul>
+<li>足球奖杯（Soccer）</li>
+<li>橄榄球奖杯（Football）</li>
+</ul>
+<p>卖出一个橄榄球奖杯将会获得$12的利润，而卖出一个足球奖杯将会获得$9元的利润。而生产一个奖杯，两种奖杯分别需要消耗：</p>
+<ul>
+<li>木质底座：橄榄球奖杯需要4平方英寸大小的木板，足球奖杯需要2平方英尺的奖杯</li>
+<li>奖杯体：各消耗一个</li>
+<li>顶端的标志物：橄榄球顶端有一个铜制橄榄球，而足球奖杯顶端有一个铜制足球。</li>
+</ul>
+<p>假设目前库存的原材料为：</p>
+<ul>
+<li>1000个黄铜橄榄球</li>
+<li>1500个黄铜足球</li>
+<li>1750个奖杯体</li>
+<li>4900平方英寸的木板</li>
+</ul>
+<p>假设制作的所有奖杯都能够售出，那么<code>Top Brass Trophy Company</code>能够获得的最大利润是多少？</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221012215548339.png" alt="制作所需的材料表" style="zoom: 33%;"></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221012215608795-20221016151444228.png" alt="库存的原材料" style="zoom:33%;"></p>
+</blockquote>
+<p>通常，我们在求解线性问题的时候，最好先列出线性问题的数学模型。</p>
+<p>而<code>TopBrass Company</code>问题中的数学模型如下</p>
+<script type="math/tex; mode=display">
+\max p\\
+\left\{
+\begin{array}{**lr**}
+12 f + 9s &=& p\\
+4f + 2s &\leq& 4800\\
+f + s &\leq&1750\\
+0 &\leq& f &\leq& 1000\\
+0 &\leq& s &\leq& 1500\\
+\end{array}
+\right.</script><p>该优化问题中，决策变量是$f$和$s$，目标变量是$p$，<em>因此我们一共要声明三个变量</em>。</p>
+<p>此外，优化问题一共有7个约束。但是7个约束中的四个约束其实都是针对变量$f$和$s$的范围进行的约束，因此对于这四个约束，可以使用变量的属性来进行声明，即<code>.lo</code>和<code>.up</code>属性来声明变量的上下限。所以，我们<em>一共需要声明三个<code>equation</code></em>。</p>
+<p>由于有三个约束，因此就需要三个参数（Parameter）。但是由于<code>f+s</code>的参数都是1，所以<em>其实只需要两个参数即可</em>。</p>
+<p>因此，对于这个优化问题我们最终的解如下</p>
+<pre class="line-numbers language-gas"><code class="language-gas">* Top Brass 4 介绍了Parameter，Scalar，针对Parameter的Sum操作以及集合中元素的属性
+
+set I/football, soccer/;
+
+free variable profit "total profit";
+
+positive variables
+x(I) "trophies";
+
+parameters
+  profitMargin(I) / "football" 12 , "soccer" 9 /
+  boardFeet(I)    / "football"  4 , "soccer" 2 /
+  plaques(I)      / "football"  1 , "soccer" 1 /;
+
+scalar
+  plaquesMax /1750/
+  woodMax    /4800/
+  footballMax /1000/
+  soccerMax /1500/;
+
+equations
+  obj    "max total profit"
+  plaq   "bound on the number of plaques to be used",
+  wood   "bound on the amount of wood to be used";
+
+obj..
+  profit =e= sum(I, profitMargin(I)*x(I));
+
+plaq..
+  sum(I,plaques(I)*x(I)) =l= plaquesMax;
+
+wood..
+  sum(I,boardFeet(I)*x(I)) =l= woodMax;
+
+model topbrass /all/;
+
+x.up("football") = footballMax;
+x.up("soccer") = soccerMax;
+
+solve topbrass using lp maximizing profit;
+
+parameter pct(I) "holds the final percentages";
+alias (I,J);
+
+pct(I) = 100 * x.l(I)  / (sum(J,x.l(J)));
+display pct;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>当然，我们可以把两个参数（Parameter）集合起来，组成一个表格（Table）。然后我们就把两个资源限制的公式集合起来。具体代码如下：</p>
+<pre class="line-numbers language-gas"><code class="language-gas">$title Top Brass (LP) Example 5.1 of Rardin (1998)  (modified)
+
+option limrow = 0, limcol = 0;
+option solprint=off;
+
+set I /football,soccer/;
+set R /plaques,wood/;
+
+table a(R,I)  "Per-Unit resource requirements"
+         football   soccer
+plaques     1         1
+wood        4         2  ;
+
+parameters
+    c(I) / "football" 12 , "soccer" 9 /
+    u(I) / "football" 1000 , "soccer"  1500 /
+    b(R) / "plaques"  1750,  "wood"  4800 /;
+
+free variable profit "total profit";
+
+positive variables
+x(I)     "number trophies" ;
+
+equations
+    profit_eq         "profit definition"
+    resource_con(R)   "resource limit" ;
+
+profit_eq..
+  profit =E= sum(I,c(I)*x(I));
+
+resource_con(R)..
+  sum(I, a(R,I)*x(I)) =L= b(R);
+
+x.up(I) = u(I);
+
+model btb /all/;
+
+solve btb using lp maximizing profit;
+
+parameter pct(I) "holds the final percentages";
+alias (I,J);
+
+pct(I) = 100 * x.l(I)  / sum(J, x.l(J))
+display pct;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="B-BigTop-Brass"><a href="#B-BigTop-Brass" class="headerlink" title="B. BigTop Brass"></a>B. BigTop Brass</h3><p>在<code>TopBrass</code>问题中，我们只有两种奖杯、三种资源。如果我们把问题的规模在扩大一下，变成20种奖杯、200种资源呢？此时问题就会非常非常大，我们基本上没法手动解决。</p>
+<p>所以在这种时候，我们必须要用<code>GAMS</code>来帮助我们解决问题。</p>
+<p>我们可以把数据声明单独写成一个文件<code>.inc</code>文件</p>
+<pre class="line-numbers language-gas"><code class="language-gas">* bigtopbrass.inc
+set I /football,soccer/;
+set R /plaques,wood/;
+
+table a(R,I)  "Per-Unit resource requirements"
+         football   soccer
+plaques     1         1
+wood        4         2  ;
+
+parameters
+    c(I) / "football" 12 , "soccer" 9 /
+    u(I) / "football" 1000 , "soccer"  1500 /
+    b(R) / "plaques"  1750,  "wood"  4800 /
+;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>然后再描述模型的<code>.gams</code>文件中<code>include</code>数据声明文件</p>
+<pre class="line-numbers language-gas"><code class="language-gas">$ondollar
+$title Big Top Brass (LP)
+
+
+$include bigtopbrass-1.inc
+free variable profit "total profit";
+
+positive variables
+x(I)     "number trophies" ;
+
+equations
+profit_eq         "profit definition"
+resource_con(R)   "resource limit" ;
+
+profit_eq..
+  profit =E= sum(I,c(I)*x(I));
+
+resource_con(R)..
+  sum(I, a(R,I)*x(I)) =L= b(R);
+
+x.up(I) = u(I);
+
+model btb /all/;
+
+solve btb using lp maximizing profit;
+
+display x.l;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="C-McGrease营养问题"><a href="#C-McGrease营养问题" class="headerlink" title="C. McGrease营养问题"></a>C. McGrease营养问题</h3><p>通常人们认为快餐是不营养的，但是快餐的味道却非常好。不巧的是，美国有非常多的快餐。而<code>McGrease</code>问题研究的就是对于麦当劳中的每种食物，我们该如何吃、吃出什么样的配比才能够保证我们营养的同时开销最小。</p>
+<p>假设现在一共有以下几种麦当劳的食物（都是美国这里的麦当劳经典款）</p>
+<blockquote>
+<p>QP: Quarter Pounder                        // 牛肉汉堡</p>
+<p>MD: McLean Deluxe                        // 另一种汉堡</p>
+<p>BM: Big Mac                                     // 双层牛肉堡</p>
+<p>FF: Filet-O-Fish                                // 鳕鱼堡</p>
+<p>MC: McGrilled Chicken                    // 麦乐鸡</p>
+<p>FR: Small Fries                                 // 薯条</p>
+<p>SM: Sausage McMuffiffiffin          // 下午茶的香肠</p>
+<p>1M: 1% Milk                                      // 牛奶</p>
+<p>OJ: Orange Juice                            // 橙汁</p>
+</blockquote>
+<p>而我们需要的营养有以下几种</p>
+<blockquote>
+<p>Prot: Protein</p>
+<p>VitA: Vitamin A</p>
+<p>VitC: Vitamin C</p>
+<p>Calc: Calcium</p>
+<p>Iron: Iron</p>
+<p>Cals: Calories</p>
+<p>Carb: Carbohydrates</p>
+</blockquote>
+<p>而每种食物各种营养成分的含量、价格以及我们需要的营养成分如下</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221016155949636.png" alt="价格、营养成分表"></p>
+<p>拿到一个优化问题后，我们首先需要考虑的就是确定决策变量和优化目标，而后才是问题中的优化目标。</p>
+<p><code>McGrease</code>问题中的决策变量就是九种食物每种事物的食用量，而目标变量就是总价，约束就是每种食物提供的营养的总和。</p>
+<p>所以上面的优化问题的数学描述为：</p>
+<script type="math/tex; mode=display">
+\min c\\
+\left\{
+\begin{array}{**lr**}
+1.84x_{QP} &+& 2.19x_{MD} &+& 1.84x_{BM} && +1.44x_{FF} &+& 2.29x_{MC} &+& 0.77x_{FR} &+& 1.29x_{SM} &+& 0.6x_{1m} &+& 0.72x_{OJ} &=& c\\
+
+15x_{QP} &+& 15x_{MD} &+& 6x_{BM} &+& 2x_{FF} &+& 8x_{MC} &+& 0x_{FR}
+&+& 4x_{SM} &+& 10x_{1M} &+& 2x_{OJ} &\ge& VitAReq \\
+
+28x_{QP} &+& 24x_{MD} &+& 25x_{BM} &+& 14x_{FF} &+& 31x_{MC} &+& 3x_{FR}
+&+& 15x_{SM} &+& 9x_{1M} &+& x_{OJ} &\ge& ProtReq \\
+
+6x_{QP} &+& 10x_{MD} &+& 2x_{BM} &+& 15x_{FF} &+& 15x_{MC} &+& 15x_{FR}
+&+& 0x_{SM} &+& 4x_{1M} &+& 120x_{OJ} &\ge& VitCReq \\
+
+30x_{QP} &+& 20x_{MD} &+& 25x_{BM} &+& 15x_{FF} &+& 15x_{MC} &+& 0x_{FR}
+&+& 20x_{SM} &+& 30x_{1M} &+& 2x_{OJ} &\ge& Calc \\
+
+20x_{QP} &+& 20x_{MD} &+& 20x_{BM} &+& 10x_{FF} &+& 8x_{MC} &+& 2x_{FR}
+&+& 0x_{SM} &+& 15x_{1M} &+& 2x_{OJ} &\ge& Iron \\
+
+510x_{QP} &+& 370x_{MD} &+& 500x_{BM} &+& 370x_{FF} &+& 400x_{MC} &+& 220x_{FR}
+&+& 345x_{SM} &+& 110x_{1M} &+& 80x_{OJ} &\ge& Calo \\
+
+34x_{QP} &+& 35x_{MD} &+& 42x_{BM} &+& 38x_{FF} &+& 42x_{MC} &+& 26x_{FR}
+&+& 27x_{SM} &+& 12x_{1M} &+& 20x_{OJ} &\ge& Carbs \\
+
+20x_{QP} &,& 20x_{MD} &,& 20x_{BM} &,& 10x_{FF} &,& 8x_{MC} &,& 2x_{FR}
+&,& 0x_{SM} &,& 15x_{1M} &,& 2x_{OJ} &\ge& 0 \\
+
+\end{array}
+\right.</script><p>我们使用如下的记号，以简化问题</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221016163825010.png" alt="问题的记号"></p>
+<p>则<code>McGrease</code>问题可以简化为下述形式</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221016163859721.png" alt="McGrease问题"></p>
+<p>这就是典型的一个优化问题</p>
+<p>而对<code>McGrease</code>问题进行求解的<code>GAMS</code>程序为</p>
+<pre class="line-numbers language-gas"><code class="language-gas">$title McGreasy Diet Problem
+
+option limrow=10, limcol=0;
+
+set food /QP, MD, BM, FF, MC, FR, SM, 1M, OJ/;
+set nutr /Prot, VitA, VitC, Calc, Iron, Cals, Carb/;
+
+table a(nutr,food)  per unit nutrients
+        QP  MD  BM  FF  MC  FR  SM  1M   OJ
+Prot    28  24  25  14  31   3  15   9    1
+VitA    15  15   6   2   8   0   4  10    2
+VitC     6  10   2   0  15  15   0   4  120
+Calc    30  20  25  15  15   0  20  30    2
+Iron    20  20  20  10   8   2  15   0    2
+Cals   510 370 500 370 400 220 345 110   80
+Carb    34  33  42  38  42  26  27  12   20
+;
+
+
+parameter 
+        min_nutr(nutr) /Prot 55, VitA 100, VitC 100, Calc 100, Iron 100, Cals 2000, Carb 350 /;
+
+parameter
+        cost(food) /QP 1.84, MD 2.19, BM 1.84, FF 1.44, MC 2.29, FR 0.77, SM 1.29, 1M 0.6, OJ 0.72 /;
+
+free variables
+    total_cost  Total Cost of Daily Diet
+;
+
+positive variables
+    x(food)     Number of each type of food to eat
+;
+
+
+equations
+    cost_eqn        Define Objective
+    min_nutr_eqn(nutr)    Minimum Daily Requirement
+;
+
+
+min_nutr_eqn(nutr)..
+    sum(food,a(nutr,food)*x(food)) =G= min_nutr(nutr) ;
+
+cost_eqn..
+    total_cost =E= sum(food,cost(food)*x(food)) ;
+
+
+model diet1 /cost_eqn, min_nutr_eqn/;
+solve diet1 using lp min total_cost;
+
+display x.l;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Jack Wang</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://jackwang0107.github.io/2022/10/16/gams-jiao-cheng-4-xian-xing-mo-xing/">https://jackwang0107.github.io/2022/10/16/gams-jiao-cheng-4-xian-xing-mo-xing/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Jack Wang</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/GAMS/">
+                                    <span class="chip bg-color">GAMS</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.png" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2022/10/16/gams-jiao-cheng-5-shi-xu-mo-xing/">
+                    <div class="card-image">
+                        
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221016165700840.png" class="responsive-img" alt="GAMS教程 5：时序模型">
+                        
+                        <span class="card-title">GAMS教程 5：时序模型</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            本文介绍了如何使用GAMS求解时序模型
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-10-16
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/GAMS/" class="post-category">
+                                    GAMS
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/GAMS/">
+                        <span class="chip bg-color">GAMS</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/10/15/gams-jiao-cheng-3-zi-ji-yu-luo-ji-biao-da-shi/">
+                    <div class="card-image">
+                        
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221016023519058.png" class="responsive-img" alt="GAMS教程 3：子集与条件表达式">
+                        
+                        <span class="card-title">GAMS教程 3：子集与条件表达式</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            本文介绍了GAMS中的子集与条件表达式
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-10-15
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/GAMS/" class="post-category">
+                                    GAMS
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/GAMS/">
+                        <span class="chip bg-color">GAMS</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: JackWang&#39;s Blog<br />'
+            + '文章作者: Jack Wang<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('1'),
+            headingSelector: 'h2, h3, h4, h5, h6'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4, h5, h6').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    });
+</script>
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2021-2023</span>
+            
+            <a href="/about" target="_blank">Jack Wang</a>
+            <!-- |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a> -->
+            <!-- |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a> -->
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">526.1k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+                <span id="sitetime"> Loading ...</span>
+                <script>
+                    var calcSiteTime = function () {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2021";
+                        var startMonth = "11";
+                        var startDate = "12";
+                        var startHour = "0";
+                        var startMinute = "0";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+
+                        // 区分是否有年份.
+                        var language = 'zh-CN';
+                        if (startYear === String(todayYear)) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            var daysTip = 'This site has been running for ' + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                daysTip = '本站已运行 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                daysTip = '本站已運行 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = daysTip;
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            var yearsAndDaysTip = 'This site has been running for ' + diffYears + ' years and '
+                                + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                yearsAndDaysTip = '本站已运行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                yearsAndDaysTip = '本站已運行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+                        }
+                    }
+
+                    calcSiteTime();
+                </script>
+            
+            <br>
+            
+                <span id="icp"><img src="/medias/icp.png"
+                                    style="vertical-align: text-bottom;"/>
+                <a href="https://beian.miit.gov.cn" target="_blank">陕ICP备2021014294号-1</a>
+            </span>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/jackwang0108" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:2232123545@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2232123545" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2232123545" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+        
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/sakura.js"><\/script>');
+            }
+        </script>
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

@@ -1,0 +1,1581 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="编译原理 2：语言及其文法, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
+    <meta name="description" content="本章是编译原理的第二章，主要对语言进行数学上形式化的定义，即定义了语言的文法">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>编译原理 2：语言及其文法 | JackWang&#39;s Blog</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.2">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+
+   <style>
+    body{
+       background-image: url(https://cdn.jsdelivr.net/gh/Tokisaki-Galaxy/res/site/medias/background.jpg);
+       background-repeat:no-repeat;
+       background-size: 100% 100%;
+       background-attachment:fixed;
+    }
+</style>
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">JackWang&#39;s Blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-book-reader" style="zoom: 0.6;"></i>
+      
+      <span>博客</span>
+      <i class="fas fa-chevron-down" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/tags">
+          
+          <i class="fas fa-tags" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按标签归类文章</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories">
+          
+          <i class="fas fa-bookmark" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按目录归类文章</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/archives">
+          
+          <i class="fas fa-archive" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按日期分类文章</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">JackWang&#39;s Blog</div>
+        <div class="logo-desc">
+            
+            JackWang的个人博客
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-book-reader"></i>
+			
+			博客
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>
+
+                  <a href="/tags " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-tags" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按标签归类文章</    span>
+
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/categories " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-bookmark" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按目录归类文章</    span>
+
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/archives " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-archive" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按日期分类文章</    span>
+
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('抱歉，这篇文章并不想让所有人都看到，请输入授权密码观看')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://jack-1307599355.cos.ap-shanghai.myqcloud.com/51Bv6BJig-L.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">编译原理 2：语言及其文法</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">
+                                <span class="chip bg-color">编译原理</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2023-05-29
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2023-06-01
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    4.9k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    18 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/51Bv6BJig-L-20230529182221445.jpg" alt="编译原理"></p>
+<h2 id="编译原理-2：语言及其文法"><a href="#编译原理-2：语言及其文法" class="headerlink" title="编译原理 2：语言及其文法"></a>编译原理 2：语言及其文法</h2><p>编译器能够阅读高级语言的代码，而后输出低级语言的代码。因此，为了能够让编译器自动的分析语言，我们就需要将语言学相关的知识提供给计算机。因此，我们首先需要从数学上形式化的定义语言，而后再在计算机中表示语言。</p>
+<p>对语言进行数学上形式化的定义，这就是本章的任务。</p>
+<h3 id="1-基本概念"><a href="#1-基本概念" class="headerlink" title="1 基本概念"></a>1 基本概念</h3><p>我们先定义语言中的的一些基本概念</p>
+<h4 id="A-字母表-Alphabet"><a href="#A-字母表-Alphabet" class="headerlink" title="A. 字母表 Alphabet"></a>A. 字母表 Alphabet</h4><p>我们将一个有穷符号集合 $\Sigma$ 称为字母表（<code>Alphabet</code>）</p>
+<p>符号可以是：</p>
+<ul>
+<li>字母、数字、标点符号、……</li>
+</ul>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230529183115132.png" alt="字母表的例子" style="zoom:33%;"></p>
+<h4 id="B-字母表上的运算"><a href="#B-字母表上的运算" class="headerlink" title="B. 字母表上的运算"></a>B. 字母表上的运算</h4><p>既然字母表是一个集合，我们就可以利用集合的运算定义字母表上的运算。</p>
+<h5 id="1-乘积-（Product）"><a href="#1-乘积-（Product）" class="headerlink" title="1. 乘积 （Product）"></a>1. 乘积 （Product）</h5><p>定义字母表$\Sigma_1$和$\Sigma_2$的乘积为</p>
+<script type="math/tex; mode=display">
+\Sigma_1\Sigma_2 = \{ab | a \in \Sigma_1, b \in \Sigma_2\}</script><p>注意：</p>
+<ul>
+<li>字母表的乘积的结果是一个集合</li>
+<li>字母表的乘积得到的集合中每一个元素都是两个字母表中符号的拼接，长度会增加</li>
+</ul>
+<p>例如：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230529183835707.png" alt="字母表乘积举例" style="zoom:33%;"></p>
+<h5 id="2-n-次幂（Power）"><a href="#2-n-次幂（Power）" class="headerlink" title="2. $n$次幂（Power）"></a>2. $n$次幂（Power）</h5><p>定义字母表$\Sigma$的$n$次幂为：</p>
+<script type="math/tex; mode=display">
+\left \{
+\begin{aligned}
+\Sigma^0 &= \{\varepsilon\} \\
+\Sigma^n &= \Sigma^{n-1}\Sigma, &n\geq 1
+\end{aligned}
+\right .</script><p>注意：</p>
+<ul>
+<li>字母表的$n$次幂得到的就是长度为$n$的符号串构成的集合</li>
+<li>字母表的$0$次幂得到的是长度位0的串组成的集合，对于长度位$0$的串，称为<code>空串</code>，用符号$\varepsilon$表示</li>
+</ul>
+<p>例如：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230529184505150.png" alt="字母表n次幂举例" style="zoom: 25%;"></p>
+<h5 id="3-正闭包（Positive-Closure）"><a href="#3-正闭包（Positive-Closure）" class="headerlink" title="3. 正闭包（Positive Closure）"></a>3. 正闭包（Positive Closure）</h5><p>定义字母表$\Sigma$的正闭包为</p>
+<script type="math/tex; mode=display">
+\Sigma^+=\Sigma\cup\Sigma^2\cup\Sigma^3\cup\cdots</script><p>用符号$\Sigma^+$表示。</p>
+<p>注意：</p>
+<ul>
+<li>字母表的正闭包实际上就是由长度为正数的串构成的集合</li>
+</ul>
+<p>例如：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230530170315726.png" alt="字母表正闭包举例" style="zoom: 25%;"></p>
+<h5 id="4-克林闭包（Kleene-Closure）"><a href="#4-克林闭包（Kleene-Closure）" class="headerlink" title="4. 克林闭包（Kleene Closure）"></a>4. 克林闭包（Kleene Closure）</h5><p>定义字母表$\Sigma$的克林闭包为</p>
+<script type="math/tex; mode=display">
+\Sigma^*= \Sigma^0 \cup \Sigma^+ = \Sigma^0 \cup \Sigma\cup\Sigma^2\cup\Sigma^3\cup\cdots</script><p>用符号$\Sigma^*$表示。</p>
+<p>注意：</p>
+<ul>
+<li>字母表的克林闭包实际上就是字母表的正闭包再加上一个空串组成的</li>
+<li>字母表的克林闭包实际上就是任意符号串（长度可以为零）构成的集合</li>
+</ul>
+<p>例如：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230530170542005.png" alt="字母表克林闭包举例" style="zoom:25%;"></p>
+<h4 id="C-串-String"><a href="#C-串-String" class="headerlink" title="C. 串 String"></a>C. 串 String</h4><p>定义：设是$\Sigma$一个字母表，$\forall s\in\Sigma^*$，则称$s$为是$\Sigma$上的一个<code>串</code>。</p>
+<p>注意：</p>
+<ul>
+<li><strong>串实际上就是字母表中符号的一个有穷序列</strong></li>
+</ul>
+<p>串$s$的长度记为$|s|$，是指$s$中符号的个数。</p>
+<p>例如：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230530172813047.png" alt="串的长度距离" style="zoom:33%;"></p>
+<p><code>空串</code>是指长度为$0$的串，用符号$\varepsilon$表示。则有：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230530172930060.png" alt="空串长度为0" style="zoom:33%;"></p>
+<h4 id="D-串上的运算"><a href="#D-串上的运算" class="headerlink" title="D. 串上的运算"></a>D. 串上的运算</h4><p>类似于我们可以对字母表定义运算，我们也可以针对串定义串的运算</p>
+<h5 id="1-连接（Concatenation）"><a href="#1-连接（Concatenation）" class="headerlink" title="1. 连接（Concatenation）"></a>1. 连接（Concatenation）</h5><p>如果$x$和$y$是串，那么$x$和$y$的<code>连接</code>定义为将串$y$附加到串$x$后面而形成的串，记作$xy$。</p>
+<p>例如：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230530173307489.png" alt="串的连接距离" style="zoom:25%;"></p>
+<p>此外，空串是连接运算的<code>单位元</code>（<code>identity</code>），即，对于任何串$s$都有：</p>
+<script type="math/tex; mode=display">
+\varepsilon s = s\varepsilon = s</script><p>此外，根据<code>连接</code>运算，可以定义<code>前缀</code>和<code>后缀</code>：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230530174015229.png" alt="前缀和后缀的定义" style="zoom:33%;"></p>
+<h5 id="2-幂（Power）"><a href="#2-幂（Power）" class="headerlink" title="2. 幂（Power）"></a>2. 幂（Power）</h5><p>若将<code>连接</code>视为串的乘法运算，则定义串的<code>幂</code>运算为：</p>
+<script type="math/tex; mode=display">
+\left \{
+\begin{aligned}
+s^0 &= \varepsilon \\
+s^n &= s^{n-1}s, &n\geq 1
+\end{aligned}
+\right .</script><p>故：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230530174239330.png" alt="串的幂运算" style="zoom:25%;"></p>
+<p>串$s$的$n$次幂实际上就是将$n$个$s$收尾相连的拼接起来，即：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230530174357630.png" alt="串的n次幂举例" style="zoom:25%;"></p>
+<h3 id="2-文法"><a href="#2-文法" class="headerlink" title="2 文法"></a>2 文法</h3><p>前面我们在数学上定义了语言学中的基本概念：<code>字母表</code>和<code>串</code>。接下来我们给出<code>文法</code>的形式化定义。</p>
+<h4 id="A-自然语言的例子"><a href="#A-自然语言的例子" class="headerlink" title="A. 自然语言的例子"></a>A. 自然语言的例子</h4><p>什么是文法？我们先给出一个简单版本的描述英文句子的文法</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230530174809333.png" alt="英文句子的文法" style="zoom:25%;"></p>
+<p>从这个文法中我们能看出：</p>
+<ul>
+<li>一个英文句子是由一个名词短语加上一个动词短语组成的</li>
+<li>一个名词短语可以由一个形容词加上一个名词短语组成的</li>
+<li>一个名词短语也可以直接就是一个名词</li>
+<li>一个动词短语可以是一个动词加上一个名词短语</li>
+<li>形容词可以是little</li>
+<li>名词可以是boy、apple</li>
+<li>动词可以是eat</li>
+</ul>
+<p>注意，实际的英文中还有状语短语、定义短语……，而且除了boy、apple以外还会有很多的名词。</p>
+<p>但是这里，针对我们这里定义的<code>little boy eat apple</code>这句文法，只有动词短语和名词短语，名词只有boy、little</p>
+<p>从上面这个例子中我们可以看出问文法的一些要素：</p>
+<ul>
+<li>语法成分：例如动词短语、名词短语</li>
+<li>基本符号：类似于apple、boy这样组成语言的最基本的要素<ul>
+<li>如果这个文法是描述句子的语法规则的，那么这个文法的基本符号就是单词，例如我们这里的<code>little boy eats apple</code></li>
+<li>如果这个文法是描述单词的构成规则的话，那么这个文法的基本符号就是字母</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230530175720434.png" alt="文法的一些要素" style="zoom:25%;"></p>
+<h4 id="B-文法的形式化定义"><a href="#B-文法的形式化定义" class="headerlink" title="B. 文法的形式化定义"></a>B. 文法的形式化定义</h4><p><code>文法</code>用大写字母$G$表示，定义<code>文法</code>$G$为一个四元组：</p>
+<script type="math/tex; mode=display">
+G=(V_T,V_N,P,S)</script><p>其中：</p>
+<ul>
+<li>$V_T$是<code>终结符</code>集合</li>
+<li>$V_N$是<code>非终结符</code>集合</li>
+<li>$P$是<code>产生式</code>集合</li>
+<li>$S$是<code>开始符号</code></li>
+</ul>
+<p>注意：</p>
+<ul>
+<li>$V_T\cap V_N=\emptyset$，$V_T\cup V_N$称为<code>文法符号集</code></li>
+</ul>
+<p>例如，我们定义一个算是表达式的文法：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230530183412854.png" alt="算术表达式的文法" style="zoom:25%;"></p>
+<p>其中，</p>
+<ul>
+<li>终结符集合说明终结符可以是：标识符、加号、乘号、左括号、右括号</li>
+<li>非终结符集合说明非终结符就是表达式</li>
+<li>产生式集合说明了有四个产生式:：表达式加表达式等于表达式，表达式乘以表达式等于表达式，表达式加括号等于表达式，标识符是表达式</li>
+<li>因为没有其他的语法成分，所以最大的语法成分（定义在非终结符中）就是表达式<code>E</code></li>
+</ul>
+<p><strong>我们约定，在不引起歧义的前提下可以只写文法的产生式</strong>。故对于表达式的文法，有：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230530183815044.png" alt="表达式的文法" style="zoom:33%;"></p>
+<h5 id="1-终结符"><a href="#1-终结符" class="headerlink" title="1) 终结符"></a>1) 终结符</h5><p><code>终结符</code>（<code>Terminal Symbol</code>）是文法所定义的语言的基本符号，有时也称为<code>token</code>。</p>
+<p>例如上面吃苹果的英文句子文法的终结符有：<code>boy</code>、<code>apple</code>、<code>eat</code>和<code>little</code>。</p>
+<p>因此，终结符集合的$V_T$的例子为：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230530180603330.png" alt="终结符集合的例子" style="zoom:25%;"></p>
+<h5 id="2-非终结符"><a href="#2-非终结符" class="headerlink" title="2) 非终结符"></a>2) 非终结符</h5><p><code>非终结符</code>（<code>Non-Terminal</code>）是用来表示语法成分的符号，有时也称为<code>语法变量</code></p>
+<p>例如上面吃苹果的英文句子文法的非终结符有：<code>&lt;句子&gt;</code>、<code>&lt;名词短语&gt;</code>、<code>&lt;动词短语&gt;</code>、<code>&lt;名词&gt;</code>、<code>&lt;形容词&gt;</code>、……</p>
+<p>因此，非终结符集合的$V_N$的例子为：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230530180823899.png" alt="非终结符结合的例子" style="zoom:25%;"></p>
+<h5 id="3-产生式"><a href="#3-产生式" class="headerlink" title="3) 产生式"></a>3) 产生式</h5><p><code>产生式</code>（<code>Production</code>）描述了将<code>终结符</code>和<code>非终结符</code>组合成串的方法产生式的一般形式：</p>
+<script type="math/tex; mode=display">
+\alpha \rightarrow\beta</script><p>读作：$\alpha$定义为$\beta$</p>
+<p>注意：</p>
+<ul>
+<li>$\alpha\in(V_T\cup V_N)^+$，即$\alpha$是定义在以终结符和非终结符作为符号的串。且长度至少为$1$，即必须要有元素。$\alpha$称为产生式的<code>头部</code>（<code>head</code>）或<code>左部</code>（<code>left side</code>）</li>
+<li>$\beta\in(V_T\cup V_N)^*$，即$\beta$是定义在以终结符和非终结符作为符号的串，可以是空串。$\beta$称为产生式的<code>体</code>（<code>body</code>）或<code>右部</code>（<code>right side</code>）</li>
+</ul>
+<p>所以上面自然语言的例子，实际上就定义了很多个产生式</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230530181819368.png" alt="产生式的例子" style="zoom:25%;"></p>
+<p>因此，<code>产生式</code>集合的例子为：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230530181855056.png" alt="产生式集合的例子" style="zoom:33%;"></p>
+<h5 id="4-开始符号"><a href="#4-开始符号" class="headerlink" title="4) 开始符号"></a>4) 开始符号</h5><p><code>开始符号</code>是一个特殊的非终结符，即$S\in V_N$。<code>开始符号</code>（<code>Start</code> <code>Symbol</code>）特指表示的是该文法中最大的语法成分。</p>
+<p>例如，前面句子的例子中，开始符号是：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230530183318375.png" alt="开始符号的例子" style="zoom:33%;"></p>
+<h4 id="C-产生式的简写"><a href="#C-产生式的简写" class="headerlink" title="C. 产生式的简写"></a>C. 产生式的简写</h4><p>我们前面对文法进行了形式化的定义，具体来说，文法由终结符集合、非终结符集合、产生式集合和开始符号定义。</p>
+<p>而在不引起歧义的情况下，可以只写出文法的产生式来表示文法。</p>
+<p>但是在很多时候，产生式是具有共同的左部$\alpha$的。例如上面定义表示式的文法的产生式，左部均为$\alpha$。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230530184543355.png" alt="定义表达式的文法的产生式具有相同的左部" style="zoom:33%;"></p>
+<p>此时，对一组有相同左部$\alpha$的产生式</p>
+<script type="math/tex; mode=display">
+\alpha \rightarrow \beta_1, \alpha \rightarrow \beta_2, \alpha \rightarrow \beta_3,\cdots,\alpha \rightarrow \beta_n</script><p>可以简写为：</p>
+<script type="math/tex; mode=display">
+\alpha \rightarrow \beta_1 | \beta_2 | \beta_3 | \cdots |\beta_n</script><p>读作：$\alpha$定义为$\beta_1$，或者$\beta_2$，……，或者$\beta_n$</p>
+<p>此外，$\beta_1$、$\beta_2$、$\beta_3$、……、$\beta_n$称为$\alpha$的<code>候选式</code>（<code>Candidate</code>）</p>
+<p>因此，上面定义表达式的文法的产生式可以简记为：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230530185102808.png" alt="简写定义表达式文法的产生式" style="zoom:33%;"></p>
+<h4 id="D-符号约定"><a href="#D-符号约定" class="headerlink" title="D. 符号约定"></a>D. 符号约定</h4><p>为了避免每次都要说明那些符号是终结符、那些符号是非终结符。</p>
+<p>我们对终结符做出如下的约定：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230530185239560.png" alt="终结符的约定" style="zoom: 25%;"></p>
+<p>我们对非终结符做出如下的约定：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230530185315030.png" alt="非终结符的约定" style="zoom:25%;"></p>
+<p>最后，对文法符号、终结符号串和文法符号串做出如下的约定：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230530185511522.png" alt="文法符号、终结符号串文法符号串的约定" style="zoom: 25%;"></p>
+<p>总结一下各种符号使用的约定：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230530185634020.png" alt="符号约定" style="zoom:33%;"></p>
+<h3 id="3-语言"><a href="#3-语言" class="headerlink" title="3 语言"></a>3 语言</h3><p>我们前面给出了文法的形式化定义，接下来我们给出语言的定义。</p>
+<p>不过在给出语言的定义前，我们还是先从前面的例子出发，提出一个问题：</p>
+<ul>
+<li>假设我们现在已经有了文法和一个串，如何判定这个串是否是满足文法的句子？</li>
+</ul>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230530185921359.png" alt="如何判断句子是否满足文法" style="zoom: 25%;"></p>
+<p>为了回答这个问题，我们首先需要讲解推导和归约。</p>
+<h4 id="A-推导-Derivations）和规约（Reductions）"><a href="#A-推导-Derivations）和规约（Reductions）" class="headerlink" title="A 推导 (Derivations）和规约（Reductions）"></a>A 推导 (Derivations）和规约（Reductions）</h4><h5 id="1-推导的定义"><a href="#1-推导的定义" class="headerlink" title="1) 推导的定义"></a>1) 推导的定义</h5><p>我们首先给出推导的定义：</p>
+<p>给定文法$G=(V_T, V_N, P, S)$，如果$α\rightarrow \beta \in P$，那么可以将符号串$\gamma\alpha\delta$中的$\alpha$替换为$\beta$，也就是说，将符号串$\gamma\alpha\delta$<code>重写</code>（<code>rewrite</code>）为$\gamma\alpha\delta$，记作 </p>
+<script type="math/tex; mode=display">
+\gamma\alpha\delta \Rightarrow \gamma \beta\delta</script><p>此时，<strong>称文法中的符号串$\gamma\alpha\delta$直接<code>推导</code>（<code>Directly Derive</code>）出$\gamma\beta\delta$</strong></p>
+<ul>
+<li>简而言之，所谓<code>推导</code>其实就是将一个串中的产生式的左部替换为产生式的右部</li>
+</ul>
+<h5 id="2-n步推导"><a href="#2-n步推导" class="headerlink" title="2) n步推导"></a>2) n步推导</h5><p>上面我们给出了推导的定义，接下来我们给出$n$步推导的定义：</p>
+<p>如果$\alpha<em>0\Rightarrow a_1$、$\alpha_1\Rightarrow a_2$、$\alpha_2\Rightarrow a_3$、……、$\alpha</em>{n-1}\Rightarrow a_n$，则可以记为：</p>
+<script type="math/tex; mode=display">
+\alpha_0\Rightarrow \alpha_1 \Rightarrow \alpha_2 \Rightarrow \alpha_3 \Rightarrow\cdots\Rightarrow\alpha_n</script><p>称符号串$\alpha_0$经过$n$步推导出$\alpha_n$，可简记为$\alpha_0\Rightarrow^n \alpha_n$</p>
+<p>由上述定义可知：</p>
+<ul>
+<li>$\alpha\Rightarrow^0 \alpha$</li>
+<li>$\Rightarrow^+$表示经过正数步推导（至少一步推导）</li>
+<li>$\Rightarrow^*$表示经过若干步推导（可以是零步推导）</li>
+</ul>
+<h5 id="3-推导的例子"><a href="#3-推导的例子" class="headerlink" title="3) 推导的例子"></a>3) 推导的例子</h5><p>我们接下来举一个推导的例子。假设给定下述文法（注意，这里由于不会引起歧义，所以直接简写了生成式）：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230530233559892.png" alt="文法" style="zoom:25%;"></p>
+<p>那么给定一个串<code>&lt;句子&gt;</code>，我们可以进行如下的推导</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230530233712131.png" alt="对串进行推导" style="zoom:25%"></p>
+<p>注意，这里我们忽略动词单三的变化。</p>
+<p>类似这样，从文法的开始符号开始，自顶向下的不断推导，最后会得到一个串</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230530234004759.png" alt="推导最后会将开始符号转变为一个串" style="zoom:25%;"></p>
+<h5 id="4-规约"><a href="#4-规约" class="headerlink" title="4) 规约"></a>4) 规约</h5><p>我们从文法的开始符号开始，不断用生成式的右部代替左部，最终得到一个串的方式称为推导。</p>
+<p>类似的，我们从一个串开始，不断用生成式的左部代替右部，最终得到开始符号的方式称为规约</p>
+<p>例如上面的例子：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230530234249632.png" alt="规约最终讲一个串转变为开始符号" style="zoom:25%;"></p>
+<p>因此，在讲解了推导和规约之后，回答前面的问题，有了文法（语言规则），如何判定某一词串是否是该语言的句子？</p>
+<ul>
+<li>答，对句子进行规约，看能否将句子规约为开始符号</li>
+</ul>
+<h4 id="B-句型和句子"><a href="#B-句型和句子" class="headerlink" title="B 句型和句子"></a>B 句型和句子</h4><p>我们定义了推导和规约两种建立在文法上的操作后，我们接下来定义句型和句子。</p>
+<h5 id="1-句型"><a href="#1-句型" class="headerlink" title="1) 句型"></a>1) 句型</h5><p>定义：若$S\Rightarrow^<em> \alpha$，$\alpha\in(V_T\cup V_N)^</em>$，则称$\alpha$是$G$的一个<code>句型</code>（<code>Sentential Form</code>）。</p>
+<p>注意，</p>
+<ul>
+<li>一个句型中既可以包含终结符，又可以包含非终结符，也可能是空串</li>
+<li>即，句型可以全是语法成分，也可以部分含有语法成分，也可以不含有语法成分（空串或者句子）</li>
+</ul>
+<h5 id="2-句子"><a href="#2-句子" class="headerlink" title="2) 句子"></a>2) 句子</h5><p>定义：若$S\Rightarrow^<em> w$，$w\in V_T^</em>$，则称$w$是$G$的一个<code>句子</code>（<code>Sentence</code>）。</p>
+<p>注意，</p>
+<ul>
+<li>句子是不包含非终结符的句型</li>
+<li>即句子全是词语</li>
+</ul>
+<h5 id="3-句型和句子的例子"><a href="#3-句型和句子的例子" class="headerlink" title="3) 句型和句子的例子"></a>3) 句型和句子的例子</h5><p>我们还是举上面男孩吃苹果的例子来说明什么是句子，什么是句型。</p>
+<p>根据上面的讲解，对男孩吃苹果这个文法，从开始符号<code>&lt;句子&gt;</code>开始进行一系列推导得到的所有对象都可以称为句型，但只有最后全部都是词语的才是句子。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230531000741379.png" alt="句型和句子的例子" style="zoom:25%;"></p>
+<h4 id="C-语言"><a href="#C-语言" class="headerlink" title="C 语言"></a>C 语言</h4><h5 id="1-语言的定义"><a href="#1-语言的定义" class="headerlink" title="1) 语言的定义"></a>1) 语言的定义</h5><p>我们定义了句子之后，接下来给出语言的形式化定义：</p>
+<p>定义：由文法$G$的开始符号$S$推导出的所有句子构成的集合称为文法$G$生成的<code>语言</code>，记为$L(G)$。 即</p>
+<script type="math/tex; mode=display">
+L(G) = \{w|S\Rightarrow^*w, w\in V_T^*\}</script><p>注意，语言最大的好处就是，通过集合解决了无穷句子的问题。例如上面的表达式的文法，由表达式的文法就可以生成出语言，即所有的表达式。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230531003554486.png" alt="语言解决了无穷句子的问题" style="zoom:33%;"></p>
+<p>而生成的句子可以是无穷多的。即表达式可以是无穷多的。</p>
+<h5 id="2-举例"><a href="#2-举例" class="headerlink" title="2) 举例"></a>2) 举例</h5><p>我们接下来举一个语言的例子。</p>
+<p>定义文法$G$，求其生成的语言。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230531003723829.png" alt="文法G" style="zoom:33%;"></p>
+<p>注意，为了讲清楚语言，我们需要搞明白所有的产生式。前面我们约定过。<code>S</code>表示开始符号，小写字母和数字表示终结符，大写字母表示非终结符。</p>
+<p>所以：</p>
+<ul>
+<li><p>$S\rightarrow L|LT$是开始符号的产生式，表示开始符号可以被替换为语法变量<code>L</code>或<code>LT</code></p>
+</li>
+<li><p>$T\rightarrow L|D|TL|TD$是语法变量$T$的产生式，表示开头必须是字母，后面可以是字符或者数字的拼接</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230531004331456.png" alt="对T进行推导" style="zoom:25%;"></p>
+</li>
+<li><p>$L\rightarrow a|b|c|…|z$表示$L$这个语法结构就是字母</p>
+</li>
+<li><p>$D\rightarrow 0|1|…|9$表示$D$这个语法结构就是数字</p>
+</li>
+</ul>
+<p>而由于$S$开头必须是字母，所以实际上，上面的文法生成的语言是标识符</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230531004422738.png" alt="文法G生成标识符" style="zoom:33%;"></p>
+<h4 id="D-语言的运算"><a href="#D-语言的运算" class="headerlink" title="D 语言的运算"></a>D 语言的运算</h4><p>根据上面语言的定义，我们指导语言实际上就是一个句子的集合，所以类似字母表，我们可以定义语言上的运算：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230531004554690.png" alt="语言上的运算" style="zoom:33%;"></p>
+<p>注意，上面的例子中，语言$L$和语言$M$直接通过集合的形式给出了定义，所以每个元素其实都是一个句子，而非什么终结符、非终结符。</p>
+<h3 id="4-文法的分类"><a href="#4-文法的分类" class="headerlink" title="4 文法的分类"></a>4 文法的分类</h3><p>文法中最核心的就是产生式，因为产生式直接能够推导出语言。因此乔姆斯基根据对文法中产生式的不同要求，将文法分为了四种：</p>
+<ul>
+<li><code>0型文法</code>（<code>Type-0 Grammar</code>）</li>
+<li><code>1型文法</code>（<code>Type-1 Grammar</code>）</li>
+<li><code>2型文法</code>（<code>Type-2 Grammar</code>）</li>
+<li><code>3型文法</code>（<code>Type-3 Grammar</code>）</li>
+</ul>
+<p>这一种文法分类体系，称为乔姆斯基文法分类体系</p>
+<h4 id="A-0型文法-无限制文法-PSG"><a href="#A-0型文法-无限制文法-PSG" class="headerlink" title="A. 0型文法/无限制文法 PSG"></a>A. 0型文法/无限制文法 <code>PSG</code></h4><p><code>0型文法</code>又称为<code>无限制文法</code>、<code>短语结构文法</code>（<code>Phrase Structure Grammar, PSG</code>），其实就是我们前面定义的文法。</p>
+<p>这种文法对产生式几乎没有限制。只是要求产生式的左部$\alpha$中至少包含一个非终结符（语法结构），即：</p>
+<script type="math/tex; mode=display">
+\forall \alpha \rightarrow \beta \in P, \alpha中至少包含1个非终结符</script><p>由<code>0型文法</code>$G$生成的语言$L(G)$称为<code>0型语言</code>。</p>
+<h4 id="B-1型文法-上下文有关文法-CSG"><a href="#B-1型文法-上下文有关文法-CSG" class="headerlink" title="B. 1型文法/上下文有关文法 CSG"></a>B. 1型文法/上下文有关文法 <code>CSG</code></h4><p><code>1型文法</code>又称为<code>上下文有关文法</code>（<code>Context-Sensitive Grammar, CSG</code>），他要求产生式的左部$\alpha$中符号的个数必须小于右部$\beta$中符号的个数，即：</p>
+<script type="math/tex; mode=display">
+\forall \alpha \rightarrow \beta \in P, |\alpha|\leq |\beta|</script><p>注意：</p>
+<ul>
+<li>根据前面对产生式左部和右部的定义：$\alpha\in(V_T\cup V_N)^+, \beta\in(V_T\cup V_N)^*$，因此$|\alpha|$最小为1，所以$\beta$不能为空串。即1型文法中不能包含空产生式<script type="math/tex; mode=display">
+\alpha \rightarrow \varepsilon</script></li>
+</ul>
+<p>此外，之所以称为上下文有关文法，是因为这类文法中产生式的一般形式为：</p>
+<script type="math/tex; mode=display">
+\alpha_1A\alpha_2\rightarrow\alpha_1\beta\alpha_2,\qquad \beta \neq\varepsilon</script><p>PS：注意，我们前面约定了前面的大写字母表示非终结符，所以这里的意思就是把一个语法结构进行展开</p>
+<p>由<code>上下文有关文法</code>$G$生成的语言$L(G)$称为<code>上下文有关语言</code>（<code>1型语言</code>）</p>
+<h4 id="C-2型文法-上下文无关文法-CFG"><a href="#C-2型文法-上下文无关文法-CFG" class="headerlink" title="C. 2型文法/上下文无关文法 CFG"></a>C. 2型文法/上下文无关文法 <code>CFG</code></h4><p><code>2型文法</code>也称为<code>上下文无关文法</code>（<code>Context-Free Grammar</code>，<code>CFG</code>）</p>
+<p>上下文无关文法要求每个产生式的左部$\alpha$必须是一个非终结符，即：</p>
+<script type="math/tex; mode=display">
+\forall \alpha \rightarrow \beta \in P, \alpha\in V_N</script><p>前面约定大写字母表示非终结符，所以2型文法的产生式一般形式为：</p>
+<script type="math/tex; mode=display">
+A\rightarrow \beta</script><p>前面举的标识符定义文法其实就是一个上下文无关文法，因为每个产生式左部都是一个非终结符</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230531122549322.png" alt="标识符定义文法是上下文无关文法" style="zoom:33%;"></p>
+<p>由上下文无关文法$G$生成的语言$L(G)$称为称为<code>上下文无关语言</code></p>
+<h4 id="D-3型文法-正则文法-RG"><a href="#D-3型文法-正则文法-RG" class="headerlink" title="D 3型文法/正则文法 RG"></a>D 3型文法/正则文法 <code>RG</code></h4><p><code>3型文法</code>又称为<code>正则文法</code>（<code>Regular Grammer, RG</code>），具体有两种：</p>
+<ul>
+<li><code>右线性文法</code>（<code>Right Linear Grammer</code>）：其生成式的通式为$A\rightarrow wB$或$A\rightarrow w$</li>
+<li><code>左线性文法</code>（<code>Left Linear Grammer</code>）：其生成式的通式为$A\rightarrow Bw$或$A\rightarrow w$</li>
+</ul>
+<p>注意，我们在上面约定：</p>
+<ul>
+<li>靠后的小写字母$u,v,w$表示终结符</li>
+<li>考前的大写字母$A,B,C$表示非终结符</li>
+</ul>
+<p><strong>所以总的来说，正则文法表示产生式的右部至多只有一个终结符。</strong></p>
+<p>我们下买给出一个右线性文法的例子：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230601005813804.png" alt="右线性文法的例子" style="zoom: 50%;"></p>
+<p>上面的文法所有的产生式左部都是非终结符，因此是一个2型文法。接着右部要么就是字母/数字，即终结符；要么就是在字母/数字右边加一个非终结符，因此是一个右线性文法。</p>
+<p>生成式3、4和在一起说明了语法结构$T$是一个字母、数字的串，而再结合生成式1、2，则开始符号最后推导得到的句子是字母或者字母+字母数字串</p>
+<p>因此实际上上面的文法最终定义的是一个标识符的生成语法。上面给出的这种定义标识符文法其实和前面的二型文法是等价的。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230601010246237.png" alt="上下文无关文法和右线性文法定义标识符语言"></p>
+<p>类似的，由<code>正则文法</code>$G$生成的语言$L(G)$称为<code>正则语言</code></p>
+<h4 id="E-四种文法的关系"><a href="#E-四种文法的关系" class="headerlink" title="E 四种文法的关系"></a>E 四种文法的关系</h4><p>我们上面定义了四种文法，这四种文法的关系实际上是逐级限制的关系：</p>
+<ul>
+<li><code>0型文法</code>：$\alpha$中至少包含1个非终结符</li>
+<li><code>1型文法</code>/<code>上下文有关文法</code>，<code>CSG</code>：$|\alpha| \leq |\beta$</li>
+<li><code>2型文法</code>/<code>上下文有关文法</code>，<code>CFG</code>：$\alpha \in V_N$</li>
+<li><code>3型文法</code>/<code>正则文法</code>，<code>RG</code>：<ul>
+<li>$A\rightarrow wB$或$A\rightarrow w$</li>
+<li>$A\rightarrow Bw$或$A\rightarrow w$</li>
+</ul>
+</li>
+</ul>
+<p>用图来表示的话，其实就是逐级包含的关系。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230601010904302.png" alt="四种文法是逐级包含的关系" style="zoom: 50%;"></p>
+<h3 id="5-CFG的分析树"><a href="#5-CFG的分析树" class="headerlink" title="5 CFG的分析树"></a>5 CFG的分析树</h3><p>前面我们介绍了四种文法，其中：</p>
+<ul>
+<li>正则文法可以用来描述程序设计中的绝大多数单词。但是正则文法生成的正则语言的生成能力有限，几乎无法生成程序设计语言中的句子</li>
+</ul>
+<p>而上下文无关语法（CFG）可以描述绝大部分程序设计语言中的语法构造，因此也是被研究的最多的一类文法。因此，这一节主要介绍上下文无关语法的分析树。</p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Jack Wang</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://jackwang0107.github.io/2023/05/29/bian-yi-yuan-li-2/">https://jackwang0107.github.io/2023/05/29/bian-yi-yuan-li-2/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Jack Wang</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">
+                                    <span class="chip bg-color">编译原理</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.png" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2023/05/29/zhong-ke-yuan-ruan-jian-suo-shi-xi-larva-1/">
+                    <div class="card-image">
+                        
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230601033238313.png" class="responsive-img" alt="中科院软件所实习日志（LARVa）：从项目开始">
+                        
+                        <span class="card-title">中科院软件所实习日志（LARVa）：从项目开始</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            本文是中科院软件所实习日志的第一篇，主要对实习的项目（LARVa）进行了介绍
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-05-29
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            Jack Wang
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%AE%9E%E4%B9%A0%E6%97%A5%E8%AE%B0/">
+                        <span class="chip bg-color">实习日记</span>
+                    </a>
+                    
+                    <a href="/tags/%E4%B8%AD%E7%A7%91%E9%99%A2/">
+                        <span class="chip bg-color">中科院</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/05/29/zhong-ke-yuan-ruan-jian-suo-shi-xi-larva-0/">
+                    <div class="card-image">
+                        
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/13287f98-e588-11ec-8c96-b8ca3a6cb5c4.png" class="responsive-img" alt="中科院软件所实习日志（LARVa）：一切的起源">
+                        
+                        <span class="card-title">中科院软件所实习日志（LARVa）：一切的起源</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            本文是中科院软件所实习日志的第零篇，主要记录了为什么我要写实习日志以及实习日志未来的形式
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-05-29
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            Jack Wang
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%AE%9E%E4%B9%A0%E6%97%A5%E8%AE%B0/">
+                        <span class="chip bg-color">实习日记</span>
+                    </a>
+                    
+                    <a href="/tags/%E4%B8%AD%E7%A7%91%E9%99%A2/">
+                        <span class="chip bg-color">中科院</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: JackWang&#39;s Blog<br />'
+            + '文章作者: Jack Wang<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('1'),
+            headingSelector: 'h2, h3, h4, h5, h6'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4, h5, h6').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    });
+</script>
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2021-2023</span>
+            
+            <a href="/about" target="_blank">Jack Wang</a>
+            <!-- |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a> -->
+            <!-- |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a> -->
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">526.1k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+                <span id="sitetime"> Loading ...</span>
+                <script>
+                    var calcSiteTime = function () {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2021";
+                        var startMonth = "11";
+                        var startDate = "12";
+                        var startHour = "0";
+                        var startMinute = "0";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+
+                        // 区分是否有年份.
+                        var language = 'zh-CN';
+                        if (startYear === String(todayYear)) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            var daysTip = 'This site has been running for ' + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                daysTip = '本站已运行 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                daysTip = '本站已運行 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = daysTip;
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            var yearsAndDaysTip = 'This site has been running for ' + diffYears + ' years and '
+                                + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                yearsAndDaysTip = '本站已运行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                yearsAndDaysTip = '本站已運行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+                        }
+                    }
+
+                    calcSiteTime();
+                </script>
+            
+            <br>
+            
+                <span id="icp"><img src="/medias/icp.png"
+                                    style="vertical-align: text-bottom;"/>
+                <a href="https://beian.miit.gov.cn" target="_blank">陕ICP备2021014294号-1</a>
+            </span>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/jackwang0108" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:2232123545@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2232123545" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2232123545" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+        
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/sakura.js"><\/script>');
+            }
+        </script>
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

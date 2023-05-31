@@ -1,0 +1,1505 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="编译原理 1：绪论, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
+    <meta name="description" content="本章是编译原理的第一章，主要对编译和编译的各个环节进行了介绍。">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>编译原理 1：绪论 | JackWang&#39;s Blog</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.2">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+
+   <style>
+    body{
+       background-image: url(https://cdn.jsdelivr.net/gh/Tokisaki-Galaxy/res/site/medias/background.jpg);
+       background-repeat:no-repeat;
+       background-size: 100% 100%;
+       background-attachment:fixed;
+    }
+</style>
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">JackWang&#39;s Blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-book-reader" style="zoom: 0.6;"></i>
+      
+      <span>博客</span>
+      <i class="fas fa-chevron-down" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/tags">
+          
+          <i class="fas fa-tags" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按标签归类文章</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories">
+          
+          <i class="fas fa-bookmark" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按目录归类文章</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/archives">
+          
+          <i class="fas fa-archive" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按日期分类文章</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">JackWang&#39;s Blog</div>
+        <div class="logo-desc">
+            
+            JackWang的个人博客
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-book-reader"></i>
+			
+			博客
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>
+
+                  <a href="/tags " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-tags" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按标签归类文章</    span>
+
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/categories " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-bookmark" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按目录归类文章</    span>
+
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/archives " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-archive" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按日期分类文章</    span>
+
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('抱歉，这篇文章并不想让所有人都看到，请输入授权密码观看')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://jack-1307599355.cos.ap-shanghai.myqcloud.com/51Bv6BJig-L.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">编译原理 1：绪论</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">
+                                <span class="chip bg-color">编译原理</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2023-03-13
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2023-05-29
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    4.2k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    14 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/51Bv6BJig-L.jpg" alt="编译原理"></p>
+<h1 id="编译原理-1：绪论"><a href="#编译原理-1：绪论" class="headerlink" title="编译原理 1：绪论"></a>编译原理 1：绪论</h1><h2 id="1-什么是编译"><a href="#1-什么是编译" class="headerlink" title="1 什么是编译"></a>1 什么是编译</h2><p>计算机程序设计语言可以分为三个层次：</p>
+<ul>
+<li><code>机器语言</code>：<strong>能够被机器直接理解的语言，这是由计算机的硬件电路设计决定的</strong>。<ul>
+<li>例如<code>C706 0000 0002</code>，<code>C706</code>是操作码，表示移入操作。<code>0000</code>和<code>0002</code>是两个操作数。因此<code>C706 0000 0002</code>这行代码的含义就是将数值2移入到地址为0000的内存单元中。</li>
+<li>但是机器语言人类难以读懂，于是就出现了汇编语言。</li>
+</ul>
+</li>
+<li><code>汇编语言</code>：<strong>通过引入助记符，将不好记忆的数字用单词代替</strong>。<ul>
+<li>例如<code>MOV X, 2</code>，用<code>MOV</code>代替<code>C706</code>，用<code>X</code>表示地址<code>0000</code>，数值<code>2</code>保持不变。这样在逻辑上，<code>MOV X, 2</code>和<code>C706 0000 0002</code>的功能是一样的。</li>
+<li><strong>机器无法读懂字母，因此需要通过汇编器将汇编语言的代码翻译成机器语言的代码。对应的把汇编代码翻译为机器代码的过程称为汇编。</strong></li>
+<li>汇编语言需要专业的计算机从业人员编写，而且汇编语言编写效率不高，不方便编写大型程序，于是就出现了高级语言。</li>
+</ul>
+</li>
+<li><code>高级语言</code>：<strong>以一种类似于数学表达式或者自然语言的形式编写程序的语言</strong>。<ul>
+<li>例如<code>x = 2</code>，这条指令完成了和前面两条指令相同的功能。</li>
+<li><strong>机器无法理解自然语言，因此首先需要通过编译器将自然语言形式的高级语言代码翻译成汇编语言的代码，而后通过汇编器翻译成机器语言代码。对应的把高级语言代码翻译成汇编语言代码的过程称为编译</strong>。但是有的时候，编译也会包括汇编。</li>
+</ul>
+</li>
+</ul>
+<p>因此，<strong><code>编译</code>指的就是将高级语言翻译成汇编语言或机器语言的过程</strong>。其中：</p>
+<ul>
+<li>被翻译的语言称为<code>源语言</code></li>
+<li>将翻译的语言称为<code>目标语言</code></li>
+</ul>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230317152633134.png" alt="编译和汇编" style="zoom: 33%;"></p>
+<p>而从高级语言翻译到机器语言的过程中，会涉及到诸多的数学原理和算法。因此编译原理这门课，就是讲解如何把高级语言翻译为机器语言的一门课程。学完这门课程，我们可以设计自己的高级语言，并且实现对应的编译器，即发明自己的编程语言。</p>
+<h2 id="2-编译器在语言处理系统中的位置"><a href="#2-编译器在语言处理系统中的位置" class="headerlink" title="2 编译器在语言处理系统中的位置"></a>2 编译器在语言处理系统中的位置</h2><p>一个高级语言（以C语言为例）编写的程序的编译流程如下：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230317154039405.png" alt="编译流程" style="zoom:33%;"></p>
+<p>其中：</p>
+<ul>
+<li><p><code>预处理阶段</code>：我们的源程序可能存储在多个文件中，并且会有称为<code>宏</code>的缩写语句。<strong>因此预处理阶段的需要把存储在不同文件中的源程序聚合起来，并且处理宏</strong>。完成这些工作的程序称为<code>预处理器</code>。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230317161856634.png" alt="预处理阶段和预处理器" style="zoom:33%;"></p>
+</li>
+<li><p><code>编译阶段</code>： 经过预处理器预处理后我们的源程序此时就成了一个巨大的文件。这个时候，<strong>在编译阶段，编译器把我们的高级语言的代码翻译成汇编语言代码</strong>。</p>
+</li>
+<li><p><code>汇编阶段</code>：在汇编阶段，汇编器将翻译得到的汇编语言形式的代码翻译成可重定位的机器代码。未来在程序运行时，加载器会修改可重定位代码中的地址到合适的为止</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230525102840760.png" alt="汇编阶段和加载器" style="zoom:33%;"></p>
+</li>
+<li><p><code>链接阶段</code>：在链接阶段，链接器将多个可重定位的机器代码文件（包括库文件）连接到一起，解决外部内存地址问题</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230525102903461.png" alt="链接阶段和链接器" style="zoom:33%;"></p>
+</li>
+</ul>
+<h2 id="3-编译系统的结构"><a href="#3-编译系统的结构" class="headerlink" title="3 编译系统的结构"></a>3 编译系统的结构</h2><p>编译的本质就是翻译，编译器的输入是高级语言程序，输出是汇编语言程序/机器语言程序</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230525113805262.png" alt="编译的本质就是翻译" style="zoom:33%;"></p>
+<p>我们举一个人工英汉翻译的例子：<code>In the room , he broke a window with a hammer</code></p>
+<p>翻译的步骤大体有两步：</p>
+<ol>
+<li>第一步：在源语言层面，分析句子的含义，得到句子的语义，这一步称为<code>语义分析</code></li>
+<li>第二个：根据句子的语义，用目标语言将含义表达出来即可</li>
+</ol>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230525114132139.png" alt="人工英汉翻译" style="zoom:25%;"></p>
+<p><strong>我们进行语义分析，通常是从划分句子的成分开始下手</strong>。例如我们首先找出句子的核心谓语动词<code>broke</code>，这样就明白了这句话一半的意思。而后顺势找出主语、宾语、状语等成分</p>
+<p>在描述句子的语义的时候，我们希望可以借助与语言无关的对象将其描述出来，例如我们可以使用一个图。图中的节点就是句子的成分，即谓语、宾语、主语……而边则表示节点与节点间的关系，例如打的受试者是窗户，发出者是人……<strong>这种与语言无关的描述句子内容的对象，称为中间表示</strong></p>
+<p>因此，通过上面的介绍，我们知道了，进行语义分析，是需要从划分句子的成分开始的。而句子中的成分都是各类短语。因此我们需要分析各类短语在句子中的成分，因此我们需要进行<code>语法分析</code></p>
+<p>短语是由单词组成的。因此我们为了进行语法分析，需要先进<code>词法分析</code></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230525120205359.png" alt="词法分析->语法分析->语义分析" style="zoom: 33%;"></p>
+<p>综上，我们就得到了一个句子翻译的过程:</p>
+<ul>
+<li>首先进行词法分析，得到句子中各个单词的词性和词类</li>
+<li>而后进行语法分析，得到句子中的各类短语，从而获得句子的结构</li>
+<li>接下来进行语义分析，得到句子中各个短语在句子中充当的成分，以及与核心谓语动词之间的关系</li>
+<li>最后给出中间表示形式</li>
+</ul>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230525120708287.png" alt="一个句子翻译的过程" style="zoom:33%;"></p>
+<p>事实上，编译器在工作的时候也会经过这样的几个步骤，称为<code>阶段</code>：</p>
+<ul>
+<li>前几个阶段对源语言进行分析，输出中间表示，因此称为<code>前端</code></li>
+<li>后几个阶段对中间表示进行分析，输出目标语言，因此称为<code>后端</code></li>
+</ul>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230525121004901.png" alt="编译器的结构" style="zoom:33%;"></p>
+<p>PS：目前有理论可以做到在语法分析的同时进行语义分析，这一技术称为<code>语法制导翻译</code>，此时语法分析器、语义分析器和中间代码生成器是同一个东西</p>
+<h2 id="4-词法分析-Scanning"><a href="#4-词法分析-Scanning" class="headerlink" title="4 词法分析 Scanning"></a>4 词法分析 Scanning</h2><blockquote>
+<p>我们接下来详细介绍一下词法分析</p>
+</blockquote>
+<p>词法分析是编译的第一个阶段</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230525123806453.png" alt="词法分析" style="zoom:33%;"></p>
+<p>词法分析的任务是<strong>从左向右逐行扫描源程序的字符，识别出各个单词，确定单词的类型，而后将识别出的单词转换成统一的机内表示——<code>词法单元</code>（<code>token</code>）的形式</strong></p>
+<p><code>token</code>是一个二元组，由<code>&lt;种别码, 属性值&gt;</code>构成。</p>
+<p><code>种别码</code>表示单词具体的种别。自然语言中每个单词都有一个词性，例如名词、动词……<br>程序设计语言中的单词，主要分为以下五类：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230525121610648.png" alt="编程语言中的单词种别" style="zoom:33%;"></p>
+<p>其中：</p>
+<ul>
+<li><code>关键字</code>是有限的，因此我们可以为每一个关键字分配一个种别码</li>
+<li><code>标识符</code>是无限的，因此我们可以将所有的标识符视为一类具有同一词性的词语，即为所有的标识符分配同一个种别码。而为了区分不同的标识符，我们使用属性值来保存标识符具体的名称</li>
+<li><code>常量</code>类似标识符，也是无限的，但是会有类型的区分。因此我们为同一类型的常量分配同一个种别码，使用属性值来区分同一类型的、不同的常量</li>
+<li><code>运算符</code>是有限的，因此可以一词一码或者根据运算符的类型（算术运算符、关系运算符、逻辑运算符……）一型一码</li>
+<li><code>界限符</code>和关键字类似，一词一码</li>
+</ul>
+<h3 id="A-词法分析举例"><a href="#A-词法分析举例" class="headerlink" title="A 词法分析举例"></a>A 词法分析举例</h3><p>根据上述词法分析的原则，我们针对这段代码进行词法分析：</p>
+<pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">while</span><span class="token punctuation">(</span>value <span class="token operator">!=</span> <span class="token number">100</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  num<span class="token operator">++</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>按照上面所说的词法分析的注意事项，可以得到词法分析的结果，即<code>token</code>序列为：</p>
+<pre class="line-numbers language-c"><code class="language-c"><span class="token operator">&lt;</span> WHILE <span class="token punctuation">,</span> <span class="token operator">-</span> <span class="token operator">></span><span class="token punctuation">,</span> <span class="token operator">&lt;</span> SLP <span class="token punctuation">,</span> <span class="token operator">-</span> <span class="token operator">></span><span class="token punctuation">,</span> <span class="token operator">&lt;</span> IDN <span class="token punctuation">,</span> value <span class="token operator">></span><span class="token punctuation">,</span> <span class="token operator">&lt;</span> NE <span class="token punctuation">,</span> <span class="token operator">-</span> <span class="token operator">></span><span class="token punctuation">,</span> <span class="token operator">&lt;</span> CONST <span class="token punctuation">,</span> <span class="token number">100</span> <span class="token operator">></span><span class="token punctuation">,</span> <span class="token operator">&lt;</span> SRP <span class="token punctuation">,</span> <span class="token operator">-</span> <span class="token operator">></span><span class="token punctuation">,</span> <span class="token operator">&lt;</span> LP <span class="token punctuation">,</span> <span class="token operator">-</span> <span class="token operator">></span><span class="token punctuation">,</span> <span class="token operator">&lt;</span> IDN <span class="token punctuation">,</span> num <span class="token operator">></span><span class="token punctuation">,</span> <span class="token operator">&lt;</span> INC <span class="token punctuation">,</span> <span class="token operator">-</span> <span class="token operator">></span><span class="token punctuation">,</span> <span class="token operator">&lt;</span> SEMI <span class="token punctuation">,</span> <span class="token operator">-</span> <span class="token operator">></span><span class="token punctuation">,</span> <span class="token operator">&lt;</span> RP <span class="token punctuation">,</span> <span class="token operator">-</span> <span class="token operator">></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>注意：</p>
+<ul>
+<li>种别码应该是整数，这里为了方便去理解，所以使用宏定义的符号常量</li>
+<li>当种别码可以区分<code>token</code>的时候，属性值留空，否则使用属性值来保存<code>token</code>的字面值</li>
+</ul>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230525123440156.png" alt="词法分析的例子" style="zoom:33%;"></p>
+<h2 id="5-语法分析-Parsing"><a href="#5-语法分析-Parsing" class="headerlink" title="5 语法分析 Parsing"></a>5 语法分析 Parsing</h2><p>语法分析是编译的第二个阶段</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230525123939093.png" alt="语法分析" style="zoom:33%;"></p>
+<p><strong>语法分析的任务是从词法分析器输出的<code>token</code>序列中识别出各类短语，并构造语法分析树</strong></p>
+<ul>
+<li>语法分析树描述了句子的语法结构</li>
+</ul>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230525124042525.png" alt="语法分析的目的是构造语法分析树" style="zoom:33%;"></p>
+<h3 id="A-赋值语句的语法分析树"><a href="#A-赋值语句的语法分析树" class="headerlink" title="A 赋值语句的语法分析树"></a>A 赋值语句的语法分析树</h3><p>我们举一个赋值语句<code>position = initial + rate * 60;</code>的语法分析树：</p>
+<ul>
+<li>首先进行词法分析，得到该赋值语句的<code>token</code>序列：<code>&lt;id, position&gt; &lt;=&gt; &lt;id,initial&gt; &lt;+&gt; &lt;id, rate&gt; &lt;\*&gt; &lt;num,60&gt; &lt;;&gt;</code></li>
+<li>针对<code>token</code>序列构建语法分析树</li>
+</ul>
+<p>可以看出：</p>
+<ul>
+<li>一个标识符可以构成一个表达式</li>
+<li>表达式和表达式经过运算得到表达式</li>
+<li>标识符和一个赋值符号再加上一个表达式可以得到一个赋值语句</li>
+</ul>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230525124155500.png" alt="赋值语句的语法分析树" style="zoom:33%;"></p>
+<h3 id="B-声明语句的语法分析树"><a href="#B-声明语句的语法分析树" class="headerlink" title="B 声明语句的语法分析树"></a>B 声明语句的语法分析树</h3><p>我们首先给定声明语句的<code>文法</code>。<strong>文法就是一系列规则组成的集合</strong>。声明语句的文法为：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230529161119793.png" alt="声明语句的文法" style="zoom:33%;"></p>
+<p>其中：</p>
+<ul>
+<li><code>&lt;D&gt;</code>表示<code>Declaration</code>，即表示声明语句</li>
+<li><code>&lt;T&gt;</code>表示<code>Type</code>，即类型</li>
+<li><code>&lt;IDS&gt;</code>表示<code>IDentifier Sequence</code>，即标识符序列</li>
+</ul>
+<p>因此，声明语句的文法的</p>
+<ul>
+<li>第一个规则表示：声明语句由一个类型+一个标识符组成</li>
+<li>第二个规则表示：类型可以是<code>int</code>、<code>real</code>、<code>char</code>、<code>bool</code></li>
+<li>第三个规则表示：标识符序列可以就是标识符本身，也可以是一个标识符序列在拼接一个标识符</li>
+</ul>
+<p>因此，根据声明语句的文法，我们构建下述生命语句的语法分析树</p>
+<pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">int</span> a<span class="token punctuation">,</span> b<span class="token punctuation">,</span> c<span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230529161604792.png" alt="声明语句的语法分析树" style="zoom:33%;"></p>
+<h2 id="6-语义分析"><a href="#6-语义分析" class="headerlink" title="6 语义分析"></a>6 语义分析</h2><p>语义分析是编译的第三个阶段。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230529161809144.png" alt="语义分析" style="zoom:33%;"></p>
+<p>通常，高级语言中的语句有两种：</p>
+<ul>
+<li>声明语句，即在分配存储空间，并将该存储空间和一个标识符关联</li>
+<li>执行语句，即执行多条指令，得到执行的结果和效果</li>
+</ul>
+<p>而前面通过词法分析拿到了<code>token</code>序列、词法分析拿到了语法分析树之后，接下来的语义分析就针对输入的语法分析树来分别处理这两类语句。</p>
+<p><strong>简单的说，语义分析的任务就是分析语法分析树，构建符号表，同时检查语法错误</strong>。我们接下来详细对其进行介绍</p>
+<h3 id="A-语义分析的任务"><a href="#A-语义分析的任务" class="headerlink" title="A 语义分析的任务"></a>A 语义分析的任务</h3><p>具体而言，语义分析阶段的任务有两个：</p>
+<ul>
+<li>收集标识符的属性信息</li>
+<li>语义检查</li>
+</ul>
+<h4 id="1-收集标识符的属性信息"><a href="#1-收集标识符的属性信息" class="headerlink" title="1. 收集标识符的属性信息"></a>1. 收集标识符的属性信息</h4><p>程序中声明语句声明的标识符需要在内存中分配一定的空间存储，因此语义分析收集标识符的属性的目的之一就是确定为各个标识符分配的存储空间的大小。</p>
+<p>具体来说，需要为每个标识符收集如下信息：</p>
+<ul>
+<li><p>种属（Kind）：简单变量、复合变量（数组、记录……）、过程（函数）、宏、……</p>
+</li>
+<li><p>类型（Type）：整形、布尔、字符、指针、……</p>
+</li>
+<li><p>存储位置、长度（ADDR）：例如一个实型数组<code>x</code>，有八个元素，假设每个实型变量占用8个字节，那么实型数组<code>x</code>占用64个字节，相对地址为<code>0~63</code>，则整形变量<code>i</code>的起始地址为<code>64</code>，以此类推，<code>j</code>相对地址为<code>68</code></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230529162951404.png" alt="image-20230529162951404" style="zoom:33%;"></p>
+</li>
+<li><p>值（Value）</p>
+</li>
+<li><p>作用域</p>
+</li>
+<li><p>对于种属为函数的标识符，还需要知道函数的参数和返回值信息，具体包括：</p>
+<ul>
+<li>参数个数、参数类型、参数传递方式、返回值类型、……</li>
+</ul>
+</li>
+</ul>
+<p>在语义分析阶段，收集的这些标识符的信息，都会存放在一个称为<code>符号表</code>（<code>Symbol Table</code>）的数据结构中。</p>
+<ul>
+<li>符号表中每一个记录都对应一个标识符</li>
+<li>记录的每一个字段都对应标识符的一个属性</li>
+<li>为了实现固定长度，通常将标识符<code>token</code>的属性值存放到字符串表中，而后将<code>NAME</code>字段设置为起始地址和长度，从而固定<code>NAME</code>字段的长度</li>
+</ul>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230529164824979.png" alt="符号表" style="zoom:33%;"></p>
+<h4 id="2-语义检查"><a href="#2-语义检查" class="headerlink" title="2. 语义检查"></a>2. 语义检查</h4><p>程序的错误可能发生在运行时，也可能发生在编译时。编译时检查出的错误就是因为程序的语句不符合语法。</p>
+<p>因此，在语义分析阶段，要进行的第二个任务就是进行语义检查。通常会检查下述错误：</p>
+<ul>
+<li>变量或过程未经声明就使用</li>
+<li>变量或过程名重复声明</li>
+<li>运算分量种属不匹配。注意这里的是种属，不是类型，即检查的是类似于<code>数组名 + 函数名</code>这样的错误。</li>
+<li>操作符与操作数之间的类型不匹配<ul>
+<li>数组下标不是整数</li>
+<li>对非数组变量使用数组访问操作符</li>
+<li>对非过程名使用过程调用操作符</li>
+<li>过程调用的参数类型或数目不匹配</li>
+<li>函数返回类型有误</li>
+</ul>
+</li>
+</ul>
+<h2 id="7-中间代码生成"><a href="#7-中间代码生成" class="headerlink" title="7 中间代码生成"></a>7 中间代码生成</h2><p>常用的中间表示有两种：</p>
+<ul>
+<li>三地址码（<code>Three-address Code</code>）</li>
+<li>语法结构树/语法树（<code>Syntax Trees</code>）<ul>
+<li>注意，语法树又称为语法分析树、抽象语法树（<code>Abstract Syntax Tree</code>，<code>AST</code>）</li>
+</ul>
+</li>
+</ul>
+<p>介绍语法树我们在前面词法分析的时候就已经获得了，而三地址码则是类似于汇编指令的代码。因为后面会详细介绍语法分析树，因此所以这里介绍一下三地址码。</p>
+<h3 id="三地址码"><a href="#三地址码" class="headerlink" title="三地址码"></a>三地址码</h3><p>三地址码由类似于汇编语言的指令序列组成，每个指令最多有三个操作数（<code>operand</code>）。每个操作数使用一个地址表示，因此称为三地址码。</p>
+<p>地址可以是：</p>
+<ul>
+<li>源程序中的名字（<code>name</code>）</li>
+<li>常量（<code>constant</code>）</li>
+<li>编译器生成的临时变量（<code>temporary</code>）</li>
+</ul>
+<p>一般常用的三地址码有：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230529174446127.png" alt="常用三地址码" style="zoom:33%;"></p>
+<p>三地址码通常由下面三种表示：</p>
+<ul>
+<li>四元式（<code>Quadruples</code>）</li>
+<li>三元式（<code>Triples</code>）</li>
+<li>间接三元式（<code>Indirect Triples</code>）</li>
+</ul>
+<p>比较常用的是四元式，即将三地址码表示为<code>(op, y, z, x)</code>的四元式，例如四元式表示三地址码为：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230529174926630.png" alt="四元式表示的三地址码" style="zoom:33%;"></p>
+<p>需要注意的是：<strong>三地址指令序列唯一确定了运算完成的顺序</strong></p>
+<p>使用三地址码生成下面这段<code>C</code>语言代码的中间表示：</p>
+<pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">while</span> <span class="token punctuation">(</span>a<span class="token operator">&lt;</span>b<span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token keyword">while</span> <span class="token punctuation">(</span>a<span class="token operator">&lt;</span>b<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>c<span class="token operator">&lt;</span><span class="token number">5</span><span class="token punctuation">)</span>
+      <span class="token keyword">while</span><span class="token punctuation">(</span>x<span class="token operator">></span>y<span class="token punctuation">)</span>
+        z<span class="token operator">=</span>x<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">;</span>             
+        <span class="token keyword">else</span> 
+      x<span class="token operator">=</span>y<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span> 
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230529175802529.png" alt="三地址码中间表示" style="zoom:33%;"></p>
+<h2 id="8-编译器的结构"><a href="#8-编译器的结构" class="headerlink" title="8 编译器的结构"></a>8 编译器的结构</h2><p>编译器前段部分到中间代码就结束了，接下来我们讲解一下编译器后端的结构</p>
+<h3 id="A-目标代码生成器"><a href="#A-目标代码生成器" class="headerlink" title="A 目标代码生成器"></a>A 目标代码生成器</h3><p>我们前面在中间代码生成的时候生成了与源语言、与目标平台均无关的中间表示。但是为了能够得到可以在目标平台运行的程序，我们还需要将中间表示形式转换为目标语言。</p>
+<p>而完成这一功能的就是编译器，具体来说是编译器中的目标代码生成器：</p>
+<ul>
+<li>目标代码生成以源程序的中间表示形式作为输入，并把它映射到目标语言</li>
+<li>目标代码生成的一个重要任务是为程序中使用的变量合理分配寄存器</li>
+</ul>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230529180321354.png" alt="目标代码生成" style="zoom:33%;"></p>
+<h3 id="B-代码优化器"><a href="#B-代码优化器" class="headerlink" title="B 代码优化器"></a>B 代码优化器</h3><p><strong>所谓代码优化，是为改进代码所进行的等价程序变换，使其优化后的程序运行得更快一些、占用空间更少一些，或者二者兼顾</strong></p>
+<p>这一步通常是对程序员写的程序中的指令进行逻辑上的等价变换，例如<code>int i = 12; i = 15;</code>直接优化为<code>int i = 15;</code></p>
+<p>优化也是分为两部分：</p>
+<ul>
+<li>中间无关代码优化，这个就是对代码逻辑进行优化</li>
+<li>目标平台代码优化，这个就是由于目标平台，例如<code>RISC-V</code>对一些指令进行了优化，例如一些原子指令，所以这一步就是将中间无关代码中的指令使用目标平台的、等效的、高效率指令替换</li>
+</ul>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230529180754382.png" alt="代码优化" style="zoom:33%;"></p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Jack Wang</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://jackwang0107.github.io/2023/03/13/bian-yi-yuan-li-1/">https://jackwang0107.github.io/2023/03/13/bian-yi-yuan-li-1/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Jack Wang</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">
+                                    <span class="chip bg-color">编译原理</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.png" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2023/05/26/linux-nei-he-yuan-ma-fen-xi-0/">
+                    <div class="card-image">
+                        
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230526173802640.png" class="responsive-img" alt="Linux内核源码分析 1：Linux内核体系架构和学习路线">
+                        
+                        <span class="card-title">Linux内核源码分析 1：Linux内核体系架构和学习路线</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            本文是Linux内核源码分析系列文章的第一篇，介绍了Linux内核的体系架构和学习路线
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-05-26
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            Jack Wang
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/C%E8%AF%AD%E8%A8%80/">
+                        <span class="chip bg-color">C语言</span>
+                    </a>
+                    
+                    <a href="/tags/Linux%E5%86%85%E6%A0%B8/">
+                        <span class="chip bg-color">Linux内核</span>
+                    </a>
+                    
+                    <a href="/tags/Linux%E5%86%85%E6%A0%B8%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">
+                        <span class="chip bg-color">Linux内核源码分析</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/01/01/king-xue-xi-bi-ji/">
+                    <div class="card-image">
+                        
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/backiee-91181.jpg" class="responsive-img" alt="记录">
+                        
+                        <span class="card-title">记录</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            我向往自由与高山，希望跨过卑微与泥泞，梦想拥有这一切
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-01-01
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E4%B8%93%E9%A1%B9%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-category">
+                                    专项学习笔记
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+                        <span class="chip bg-color">学习笔记</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: JackWang&#39;s Blog<br />'
+            + '文章作者: Jack Wang<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('1'),
+            headingSelector: 'h2, h3, h4, h5, h6'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4, h5, h6').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2021-2023</span>
+            
+            <a href="/about" target="_blank">Jack Wang</a>
+            <!-- |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a> -->
+            <!-- |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a> -->
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">526.1k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+                <span id="sitetime"> Loading ...</span>
+                <script>
+                    var calcSiteTime = function () {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2021";
+                        var startMonth = "11";
+                        var startDate = "12";
+                        var startHour = "0";
+                        var startMinute = "0";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+
+                        // 区分是否有年份.
+                        var language = 'zh-CN';
+                        if (startYear === String(todayYear)) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            var daysTip = 'This site has been running for ' + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                daysTip = '本站已运行 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                daysTip = '本站已運行 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = daysTip;
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            var yearsAndDaysTip = 'This site has been running for ' + diffYears + ' years and '
+                                + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                yearsAndDaysTip = '本站已运行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                yearsAndDaysTip = '本站已運行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+                        }
+                    }
+
+                    calcSiteTime();
+                </script>
+            
+            <br>
+            
+                <span id="icp"><img src="/medias/icp.png"
+                                    style="vertical-align: text-bottom;"/>
+                <a href="https://beian.miit.gov.cn" target="_blank">陕ICP备2021014294号-1</a>
+            </span>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/jackwang0108" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:2232123545@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2232123545" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2232123545" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+        
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/sakura.js"><\/script>');
+            }
+        </script>
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

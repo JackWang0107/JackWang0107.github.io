@@ -383,12 +383,12 @@
                                 <span class="chip bg-color">ROS教程</span>
                             </a>
                         
-                            <a href="/tags/catkin-make/">
-                                <span class="chip bg-color">catkin_make</span>
-                            </a>
-                        
                             <a href="/tags/ROS%E7%BC%96%E8%AF%91%E7%B3%BB%E7%BB%9F/">
                                 <span class="chip bg-color">ROS编译系统</span>
+                            </a>
+                        
+                            <a href="/tags/catkin-make/">
+                                <span class="chip bg-color">catkin_make</span>
                             </a>
                         
                             <a href="/tags/ROS%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/">
@@ -423,14 +423,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-12-26
+                    2022-12-28
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    4.2k
+                    4.3k
                 </div>
                 
 
@@ -835,7 +835,8 @@ catkin_install_python(PROGRAMS
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="2-4-ROS文件系统常用命令"><a href="#2-4-ROS文件系统常用命令" class="headerlink" title="2.4 ROS文件系统常用命令"></a>2.4 ROS文件系统常用命令</h3><p>上面介绍了<code>ROS</code>文件系统，下面介绍<code>ROS</code>文件系统重常用的命令</p>
+<h3 id="2-4-ROS文件系统常用命令"><a href="#2-4-ROS文件系统常用命令" class="headerlink" title="2.4 ROS文件系统常用命令"></a>2.4 ROS文件系统常用命令</h3><p>上面介绍了<code>ROS</code>文件系统，下面介绍<code>ROS</code>文件系统中常用的命令。事实上，<code>ROS</code>其实是有一整套命令的，每个命令下其实都是有很多选项的，所有其实是有非常非常多的功能的，我们这里只是针对常用的功能来介绍某个命令中的某个选项。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221227104855150.png" alt="image-20221227104855150"></p>
 <h4 id="A-新增包"><a href="#A-新增包" class="headerlink" title="A. 新增包"></a>A. 新增包</h4><p>包可以自己创建然后自己写</p>
 <pre class="line-numbers language-bash"><code class="language-bash">catkin_create_pkg 自定义包名 依赖包
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -863,6 +864,7 @@ catkin_install_python(PROGRAMS
 <h5 id="rospack-find"><a href="#rospack-find" class="headerlink" title="rospack find"></a>rospack find</h5><p><code>rospack find</code>可以查找某个功能包是否存在，如果存在返回安装路径</p>
 <pre class="line-numbers language-bash"><code class="language-bash">rospack <span class="token function">find</span> 功能包名
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>当然<code>rospack</code>命令下还有很多选项，后面用到了我们再慢慢介绍</p>
 <p>例如：</p>
 <pre class="line-numbers language-bash"><code class="language-bash">rospack <span class="token function">find</span> tf2
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -993,12 +995,12 @@ roscd rospy
                                     <span class="chip bg-color">ROS教程</span>
                                 </a>
                             
-                                <a href="/tags/catkin-make/">
-                                    <span class="chip bg-color">catkin_make</span>
-                                </a>
-                            
                                 <a href="/tags/ROS%E7%BC%96%E8%AF%91%E7%B3%BB%E7%BB%9F/">
                                     <span class="chip bg-color">ROS编译系统</span>
+                                </a>
+                            
+                                <a href="/tags/catkin-make/">
+                                    <span class="chip bg-color">catkin_make</span>
                                 </a>
                             
                                 <a href="/tags/ROS%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/">
@@ -1178,7 +1180,7 @@ roscd rospy
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2022/12/24/ros-jiao-cheng-4-hello-world-li-cheng/">
+                <a href="/2022/12/25/ros-jiao-cheng-4-hello-world-li-cheng/">
                     <div class="card-image">
                         
                         <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/new/%E5%B1%8F%E5%B9%95%E5%BD%95%E5%88%B62022-12-25%20%E4%B8%8A%E5%8D%883.27.36.gif" class="responsive-img" alt="ROS教程 4：Hello World例程">
@@ -1189,7 +1191,7 @@ roscd rospy
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            本文是ROS系列教程的第四篇文章，介绍了如何实现ROS的Hello World立场
+                            本文是ROS系列教程的第四篇文章，介绍了如何实现ROS的Hello World例程
                         
                     </div>
                     <div class="publish-info">
@@ -1455,7 +1457,7 @@ roscd rospy
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
-                <span id="year">2021-2022</span>
+                <span id="year">2021-2023</span>
             
             <a href="/about" target="_blank">Jack Wang</a>
             <!-- |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a> -->
@@ -1463,7 +1465,7 @@ roscd rospy
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">426k</span>
+                        class="white-color">526.1k</span>
             
             
             

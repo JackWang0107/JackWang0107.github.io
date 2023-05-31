@@ -1,0 +1,1907 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Bochs调试常用命令, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
+    <meta name="description" content="本文是JackOS开发笔记中的一篇，主要讲解了Bochs调试常用命令">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>Bochs调试常用命令 | JackWang&#39;s Blog</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.2">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+
+   <style>
+    body{
+       background-image: url(https://cdn.jsdelivr.net/gh/Tokisaki-Galaxy/res/site/medias/background.jpg);
+       background-repeat:no-repeat;
+       background-size: 100% 100%;
+       background-attachment:fixed;
+    }
+</style>
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">JackWang&#39;s Blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-book-reader" style="zoom: 0.6;"></i>
+      
+      <span>博客</span>
+      <i class="fas fa-chevron-down" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/tags">
+          
+          <i class="fas fa-tags" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按标签归类文章</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories">
+          
+          <i class="fas fa-bookmark" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按目录归类文章</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/archives">
+          
+          <i class="fas fa-archive" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按日期分类文章</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">JackWang&#39;s Blog</div>
+        <div class="logo-desc">
+            
+            JackWang的个人博客
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-book-reader"></i>
+			
+			博客
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>
+
+                  <a href="/tags " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-tags" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按标签归类文章</    span>
+
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/categories " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-bookmark" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按目录归类文章</    span>
+
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/archives " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-archive" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按日期分类文章</    span>
+
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('抱歉，这篇文章并不想让所有人都看到，请输入授权密码观看')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://jack-1307599355.cos.ap-shanghai.myqcloud.com/JackOSALL-20221119034840255.png')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Bochs调试常用命令</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
+                                <span class="chip bg-color">操作系统</span>
+                            </a>
+                        
+                            <a href="/tags/Operating-System/">
+                                <span class="chip bg-color">Operating System</span>
+                            </a>
+                        
+                            <a href="/tags/JackOS/">
+                                <span class="chip bg-color">JackOS</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/JackOS%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/" class="post-category">
+                                JackOS开发笔记
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2022-11-20
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2022-11-21
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    4k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    16 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/JackOSALL-20221119034840255.png" alt="Bochs调试常用命令"></p>
+<h1 id="Bochs调试常用命令"><a href="#Bochs调试常用命令" class="headerlink" title="Bochs调试常用命令"></a>Bochs调试常用命令</h1><h2 id="1-Bochs简介"><a href="#1-Bochs简介" class="headerlink" title="1 Bochs简介"></a>1 Bochs简介</h2><p><code>Bochs</code>（发音：box）是一个开源的模拟器和调试工具。<code>Bochs</code>支持对一系列指令集架构和硬件进行模拟：</p>
+<ul>
+<li><strong>指令集架构</strong>：<code>Bochs</code>支持对<code>x86</code>、<code>x86-64</code>（即基于<code>x86</code>架构的64位扩展）、<code>IBM PC</code>等指令架构进行模拟和调试，</li>
+<li><strong>硬件</strong>：<code>Bochs</code>支持对处理器（包括保护模式）、内存、硬盘、显示器、以太网、BIOS、IBM PC等等常见硬件的仿真。</li>
+</ul>
+<p>许多操作系统在<code>Bochs</code>上运行，包括<code>DOS</code>、某些版本的<code>Microsoft Windows</code>、<code>AmigaOS 4</code>、<code>BSD</code>、<code>Linux</code>、<code>MorphOS</code>、<code>Xenix</code>和<code>Rhapsody</code> (<code>Mac OS X</code>的前身)。</p>
+<p><code>Bochs</code>能也能够在许多操作系统上运行，例如<code>Windows</code>、<code>Windows Mobile</code>、<code>Linux</code>、<code>Mac OS X</code>、<code>iOS</code>以及<code>PlayStation 2</code></p>
+<p><code>Bochs</code>主要用于操作系统开发：</p>
+<ul>
+<li>一方面，当调试的操作系统崩溃时，运行中的<code>Bochs</code>崩溃，但是运行<code>Bochs</code>的操作系统不会崩溃，修改代码后就可以重新调试了，因此<code>Bochs</code>可以调试仿真操作系统</li>
+<li>另一方面，<code>Bochs</code>支持指令级别的单步运行和模拟硬件。</li>
+</ul>
+<p>但是也可以当做一个虚拟机来运行其他操作系统，或者运行不兼容的旧的软件（如电脑游戏）</p>
+<p><code>Bochs</code>的优点在于能够模拟与当前主机不同指令集架构的主机，例如在<code>SPARC</code>系统里模拟<code>x86</code>主句。而缺点是<code>Bochs</code>的速度却慢得多。</p>
+<p><code>Bochs</code>一个开源<code>x86</code>虚拟机软件。在它的实现中定义了各种数据结构来模拟硬件，用软件模拟硬件缺点是速度比较慢，毕竟全是软件来模拟，要在软件中模拟各种中断，能不慢吗。不过它的功能非常强大，而且可移植性强，原则上只要是<code>GCC</code>支持的平台，这个平台上就可以编译、运行<code>Bochs</code>，从而保证了<code>Bochs</code>在各平台上的畅通无阻。</p>
+<p>所以总的来说，<code>Bochs</code>是做系统开发常用的虚拟机，调试系统内核很方便。</p>
+<h2 id="2-安装Bochs"><a href="#2-安装Bochs" class="headerlink" title="2 安装Bochs"></a>2 安装Bochs</h2><p>安装<code>Bochs</code>一般是从源码编译安装，因为我们需要在当前的平台上模拟其他平台。</p>
+<h3 id="2-1-配置Bochs"><a href="#2-1-配置Bochs" class="headerlink" title="2.1 配置Bochs"></a>2.1 配置Bochs</h3><h4 id="选择安装目录"><a href="#选择安装目录" class="headerlink" title="选择安装目录"></a>选择安装目录</h4><p>因为我们可能需要多个版本、不同功能的<code>Bochs</code>，所以我们可以在编译的时候指定安装目录，注意，必须是绝对路径</p>
+<pre class="line-numbers language-shell"><code class="language-shell">./configure --prefix=安装目录
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h4 id="开启调试器"><a href="#开启调试器" class="headerlink" title="开启调试器"></a>开启调试器</h4><p><code>Bochs</code>包含两部分：<code>虚拟机</code>和<code>调试器</code>，而调试器属于可选功能，所以在配置<code>Bochs</code>时需要使用<code>--enable-debugger</code>和`标志开启调试模块。例如：</p>
+<pre class="line-numbers language-shell"><code class="language-shell">./configure --enable-debugger # 还有后面的选项
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>需要注意调试功能在 <strong>2.5.4</strong> 版本以上才有，确保下载的代码是高于这个版本的。</p>
+<h4 id="开启反汇编"><a href="#开启反汇编" class="headerlink" title="开启反汇编"></a>开启反汇编</h4><p>光能单步调试没用，还得开启反汇编功能，配置的时候使用<code>--enable-disasm</code>开启反汇编功能</p>
+<pre class="line-numbers language-shell"><code class="language-shell">./configure --enable-disasm # 后面还有别的选项
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>注意，新版本中<code>--enable-disasm</code>已经被移除了，开启了<code>--enable-debugger</code>自动就会打开反汇编，至少我用的<code>2.7</code>版本是这样的。</p>
+<h4 id="开启IO调试"><a href="#开启IO调试" class="headerlink" title="开启IO调试"></a>开启IO调试</h4><p>为了能够调试外部硬件，需要开启IO调试功能，配置的时候加上<code>--enable-iodebug</code>标志</p>
+<pre class="line-numbers language-shell"><code class="language-shell">./configure --enable-iodebug # 后面还有别的选项
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h4 id="支持x86调试"><a href="#支持x86调试" class="headerlink" title="支持x86调试"></a>支持x86调试</h4><p>我们需要模拟<code>x86</code>指令集架构，所以需要配置的时候加上<code>--enable-x86-debugger</code>标志</p>
+<pre class="line-numbers language-shell"><code class="language-shell">./configure --enable-x86-debugger # 后面还有别的选项
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h4 id="支持gdb调试"><a href="#支持gdb调试" class="headerlink" title="支持gdb调试"></a>支持gdb调试</h4><p>上面的<code>--enable-debugger</code>是使用<code>Bochs</code>自带的调试器来调试，当然<code>Bochs</code>自带的调试器没有<code>GDB</code>好用。所以我们也可以在配置的时候加上<code>--enable-gdb-stub</code>来支持<code>GDB</code>调试</p>
+<pre class="line-numbers language-shell"><code class="language-shell">./configure --enable-gdb-stub # 后面还有别的选项
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>注意，<code>--enable-gdb-stub</code>和<code>--enable-debugger</code>只能开一个，不然会报错。</p>
+<h4 id="支持图形化窗口"><a href="#支持图形化窗口" class="headerlink" title="支持图形化窗口"></a>支持图形化窗口</h4><p><code>Linux</code>平台上编译默认是不会开启图形化窗口的。想要开启图形化窗口，需要在编译的时候加上<code>---with-x</code> 以支持<code>x windows</code>作为图形显示服务器，或者使用<code>--with-x11</code>支持<code>x11</code>图形显示服务。</p>
+<pre class="line-numbers language-shell"><code class="language-shell">./configure --with-x --with-x11 # 后面还有别的选项
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>注意，这<code>x11</code>是在<code>Linux</code>上的图形显示。<code>MacOS</code>上需要使用<code>sdl</code>或者<code>sdl2</code>，即</p>
+<pre class="line-numbers language-shell"><code class="language-shell">./configure --with-sdl2
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>开启图形窗口后，效果如下</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221120180142437.png" alt="开启图形化窗口后的效果"></p>
+<h4 id="常用配置如下"><a href="#常用配置如下" class="headerlink" title="常用配置如下"></a>常用配置如下</h4><p><code>Bochs 2.7</code>下使用下面的命令配置：</p>
+<p><code>Linux</code>上</p>
+<pre class="line-numbers language-shell"><code class="language-shell">./configure --prefix=安装目录 --enable-debugger --enable-iodebug --enable-x86-debugger --with-x --with-x11
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><code>MacOS</code>上</p>
+<pre class="line-numbers language-shell"><code class="language-shell">./configure --predix=安装目录 --enable-debugger --enable-iodebug --enable-x86-debugger --with-sdl2
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="2-2-编译、安装"><a href="#2-2-编译、安装" class="headerlink" title="2.2 编译、安装"></a>2.2 编译、安装</h3><p>编译安装使用下面的命令即可：</p>
+<pre class="line-numbers language-shell"><code class="language-shell">make
+make install
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h3 id="2-3-例子"><a href="#2-3-例子" class="headerlink" title="2.3 例子"></a>2.3 例子</h3><p>下面是<code>MacOS</code>的安装例子</p>
+<pre class="line-numbers language-sh"><code class="language-sh">mkdir ../bochs-test
+./configure --prefix=/Users/jack/project/bochs/bochs-test/ --enable-debugger --enable-iodebug --enable-x86-debugger --with-sdl2
+make
+make install
+tree ../bochs-test -L 3
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221120183820667.png" alt="MacOS安装的例子"></p>
+<h2 id="3-Bochs常用调试命令"><a href="#3-Bochs常用调试命令" class="headerlink" title="3 Bochs常用调试命令"></a>3 Bochs常用调试命令</h2><p>大体上协<code>Bochs</code>的调试命令分为：</p>
+<ul>
+<li><code>Debugger Control</code>类</li>
+<li><code>Execution Control</code>类</li>
+<li><code>Breakpoint Management</code>类</li>
+<li><code>CPU and Memory Contents</code>类</li>
+</ul>
+<h3 id="3-1-查看寄存器"><a href="#3-1-查看寄存器" class="headerlink" title="3.1 查看寄存器"></a>3.1 查看寄存器</h3><p>汇编代码中，调试最常用的功能就是查看寄存器的内容。</p>
+<ul>
+<li><code>r</code> 查看通用寄存器</li>
+<li><code>sreg</code> 查看段寄存器</li>
+<li><code>creg</code> 查看控制寄存器</li>
+<li><code>dreg</code> 查看调试寄存器</li>
+<li><code>info cpu</code> 查看所有寄存器</li>
+</ul>
+<h3 id="3-2-查找和定位代码"><a href="#3-2-查找和定位代码" class="headerlink" title="3.2 查找和定位代码"></a>3.2 查找和定位代码</h3><p>次常用的肯定是控制代码执行流程，代码执行到想要仔细跟踪的那个部分。</p>
+<ul>
+<li><p><code>b 内存地址</code> 设置断点</p>
+<p>如<code>b 0x7c00</code>，在线性地址0x7c00处设置断点。</p>
+</li>
+<li><p><code>info break</code> 查看设置过的断点</p>
+</li>
+<li><p><code>c</code> 继续执行代码，直到遇到断点或者按下<code>Ctrl+D</code></p>
+<p>一般设置断点后，想让代码恢复执行，就使用这个命令。</p>
+</li>
+<li><p><code>s</code> 单步执行</p>
+<p>单步执行一行代码，和高级语言调试器的step into按钮类似，遇到函数调用会跳转到函数内部执行。单步执行命令也可以带参数，指定执行的次数，如 <code>s 100</code> 就是单步执行100次。</p>
+</li>
+<li><p><code>n</code> 执行下一行</p>
+<p>它和单步执行类似，单步执行遇到循环和函数时会跳转到内部，而n命令会执行完循环和函数，类似于step over，这样在遇到大量的循环或者较长的函数时，可以用n命令来执行到下一行。</p>
+<p>n命令能跳转到下一行是因为loop或者call执行有明显的结束标记（前者通过cx寄存器，后者通ret指令），如果遇到用jmp语句写的循环这种情况，没有明显结束标记的，可以用下面的u命令反汇编代码的地址，找到循环的下一行指令的地址，然后给该地址加一个断点就能达到同样的效果。</p>
+</li>
+<li><p><code>u</code> 反汇编代码</p>
+<p>直接使用u命令会反汇编当前执行的指令，它可以加参数， <code>u /反汇编数量 起始地址</code> ，如 <code>u /20 0x7c00</code> 就是从0x7c00处开始，反汇编20条指令，如果没有起始地址就是从当前地址开始。</p>
+<p>它还可以反汇编一个范围的代码，<code>u 起始地址 结束地址</code> ，如<code>u 0x7c00 0x7cff</code> 就是反汇编0x7c00到0x7cff的代码。</p>
+</li>
+</ul>
+<h3 id="3-3-查看内存"><a href="#3-3-查看内存" class="headerlink" title="3.3 查看内存"></a>3.3 查看内存</h3><ul>
+<li><code>x /nuf 地址</code> 查看线性地址处的内存内容。</li>
+<li><code>xp /nuf 地址</code> 查看物理地址处的内存内容。</li>
+</ul>
+<pre class="line-numbers language-shell"><code class="language-shell">n 指定要显示的内存单元的数量
+u 显示的内存单元的大小，如下参数之一:
+    b 单个字节
+    h 半个字(2 字节)
+    w 一个字(4 字节)
+f 打印的格式。如下类型之一：
+    x 按照十六进制形式打印
+    d 按照十进制形式打印
+    u 以无符号的10进制打印
+    o 按照八进制形式打印
+    t 按照二进制行是打印
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="3-4-Tips"><a href="#3-4-Tips" class="headerlink" title="3.4 Tips"></a>3.4 Tips</h3><p>Bochs还有一个比较有用的设计就是，当你输入指令后，直接按回车键（Enter Key）会重复上一次的命令。比如上一个命令是单步执行<code>s</code>，此时直接按回车键就相当于<code>s</code>的功能。</p>
+<h2 id="4-调试指令手册"><a href="#4-调试指令手册" class="headerlink" title="4 调试指令手册"></a>4 调试指令手册</h2><h3 id="4-1-执行控制"><a href="#4-1-执行控制" class="headerlink" title="4.1 执行控制"></a>4.1 执行控制</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">命令</th>
+<th style="text-align:left">解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>c</code> / <code>cont</code> / <code>continue</code></td>
+<td style="text-align:left">继续执行</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>s</code> / <code>step [count]</code></td>
+<td style="text-align:left">执行count条指令，如果不指定参数，默认值为1</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>s</code> / <code>step [cpu] [count]</code></td>
+<td style="text-align:left">对于对称多处理器结构模拟，在cpu上执行count条指令，count的默认值为1</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>s</code> / <code>step all [count]</code></td>
+<td style="text-align:left">对于对称多处理器结构模拟，所有cpu上都执行count条指令，count的默认值为1</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>Ctrl+C</code></td>
+<td style="text-align:left">停止执行，返回到命令行提示符</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>Ctrl+D</code></td>
+<td style="text-align:left">如果在空行上执行，则退出调试器</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>q</code> / <code>quit</code> / <code>exit</code></td>
+<td style="text-align:left">退出调试器，继续执行</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="4-2-断点操作"><a href="#4-2-断点操作" class="headerlink" title="4.2 断点操作"></a>4.2 断点操作</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">命令</th>
+<th style="text-align:left">解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">① <code>vbreak</code> / `vb segment:offset</td>
+<td style="text-align:left">设置虚拟地址指令断点，segment和offset指段地址和段内偏移量</td>
+</tr>
+<tr>
+<td style="text-align:left">② <code>lbreak</code> / <code>lb</code> addr</td>
+<td style="text-align:left">在线性地址指令上设置断点</td>
+</tr>
+<tr>
+<td style="text-align:left">③ <code>pbreak</code> / <code>bp</code> [*] addr</td>
+<td style="text-align:left">在物理地址上设置断点</td>
+</tr>
+<tr>
+<td style="text-align:left">④ <code>break</code> / <code>b</code> [*] addr</td>
+<td style="text-align:left">同上。 * 符号是兼容GDB命令，为可选参数</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>info break</code></td>
+<td style="text-align:left">显示当前所有断点状态</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>bpe</code> n</td>
+<td style="text-align:left">开启断点</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>bpd</code> n</td>
+<td style="text-align:left">关闭断点</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>delete</code> / <code>del</code> / <code>d</code> n</td>
+<td style="text-align:left">删除断点</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>注意</strong>：① ② ③ ④ 的命令都可以设置条件，即都可以变成条件断点。具体做法是在命令之后添加<code>if condition</code> ，如<code>vbreak 0x008:0x001 if "条件表达式"</code></p>
+<h3 id="4-3-内存观察点"><a href="#4-3-内存观察点" class="headerlink" title="4.3 内存观察点"></a>4.3 内存观察点</h3><p>内存观察点类似于内存的监听器，当指定地址的内存产生读取或者写入事件时，会产生中断。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">命令</th>
+<th style="text-align:left">解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>watch read/r</code> addr</td>
+<td style="text-align:left">在物理地址addr上插入读观察点</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>watch write/w</code> addr</td>
+<td style="text-align:left">在物理地址addr上插入一个写观察点</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>watch</code></td>
+<td style="text-align:left">显示当前内存观察点的状态</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>watch stop</code></td>
+<td style="text-align:left">当遇到观察点时，停止模拟执行（默认）</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>watch continue</code></td>
+<td style="text-align:left">在遇到观察点时，不要停止模拟执行</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>unwatch</code> addr</td>
+<td style="text-align:left">移除指定物理地址上的观察点</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>unwatch</code></td>
+<td style="text-align:left">移除所有的观察点</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>trace-mem on/off</code></td>
+<td style="text-align:left">开启/关闭 内存访问追踪</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="4-4-内存操作"><a href="#4-4-内存操作" class="headerlink" title="4.4 内存操作"></a>4.4 内存操作</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">命令</th>
+<th style="text-align:left">解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>x</code> /nuf addr</td>
+<td style="text-align:left">在线性地址addr处检查内存内容，nuf的解释在前面列出</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>xp</code> /nuf addr</td>
+<td style="text-align:left">在物理地址 addr处查看内存内容，nuf的解释在前面列出</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>setpmem</code> addr datasize value</td>
+<td style="text-align:left">在内存位置addr处设置datasize大小内存，值为 value</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>writemem</code> filepath addr datasize</td>
+<td style="text-align:left">从线性地addr处dump出datasize个字节到文件filepath中</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>crc</code> addr1 addr2</td>
+<td style="text-align:left">显示物理地址范围 addr1到addr2之间内容的 CRC值</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="4-5-查看信息"><a href="#4-5-查看信息" class="headerlink" title="4.5 查看信息"></a>4.5 查看信息</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">命令</th>
+<th style="text-align:left">解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>r</code> / <code>reg</code> / <code>regs</code> / <code>registers</code></td>
+<td style="text-align:left">查看通用寄存器内容</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>fp</code> / <code>fpu</code></td>
+<td style="text-align:left">查看FPU寄存器内容</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>mmx</code></td>
+<td style="text-align:left">查看MMX寄存器内容</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>sse</code> / <code>xmm</code></td>
+<td style="text-align:left">查看SSE寄存器内容</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>ymm</code></td>
+<td style="text-align:left">查看AVX寄存器内容</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>sreg</code> / <code>dreg</code> / <code>creg</code></td>
+<td style="text-align:left">查看 段 / 调试 / 控制 寄存器内容</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>info</code> cpu</td>
+<td style="text-align:left">查看所有寄存器内容</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>info</code> eflags</td>
+<td style="text-align:left">查看标志寄存器内容</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>info</code> break</td>
+<td style="text-align:left">显示当前所有断点状态</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>info</code> tab</td>
+<td style="text-align:left">显示分页地址转换</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>info</code> device</td>
+<td style="text-align:left">显示指定设备的状态</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="4-6-寄存器操作"><a href="#4-6-寄存器操作" class="headerlink" title="4.6 寄存器操作"></a>4.6 寄存器操作</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">命令</th>
+<th style="text-align:left">解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>set</code> reg = expr</td>
+<td style="text-align:left">修改reg寄存器值为expr</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>注意</strong>：只能修改通用寄存器和指令寄存器。不能够修改标志寄存器，段寄存器，浮点寄存器和SIMD寄存器。</p>
+<h3 id="4-7-反汇编"><a href="#4-7-反汇编" class="headerlink" title="4.7 反汇编"></a>4.7 反汇编</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">命令</th>
+<th style="text-align:left">解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>u</code> addr1 addr2</td>
+<td style="text-align:left">在给定的线性地址范围内反汇编指令，包含start处指令，不包含end处指令</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>u</code> switch-mode</td>
+<td style="text-align:left">在Intel和 AT&amp;T两种汇编风格之间切换</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>u</code> size = n</td>
+<td style="text-align:left">设定反汇编命令的位数，使用0，16，32。值0意思是使用当前的CS段寄存器，默认值是0</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>set u on</code></td>
+<td style="text-align:left">每次停止执行时就自动反汇编当前的指令</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>set u off</code></td>
+<td style="text-align:left">和上一条相反，不自动反汇编</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="4-8-指令跟踪"><a href="#4-8-指令跟踪" class="headerlink" title="4.8 指令跟踪"></a>4.8 指令跟踪</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">命令</th>
+<th style="text-align:left">解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>trace on</code></td>
+<td style="text-align:left">反汇编每一条执行的指令。引起异常的指令都没有真正执行，因此也不会被跟踪</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>trace off</code></td>
+<td style="text-align:left">关闭指令跟踪功能</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="4-9-指令编程环境"><a href="#4-9-指令编程环境" class="headerlink" title="4.9 指令编程环境"></a>4.9 指令编程环境</h3><p>Bochs的instrument功能，提供了运行时的各种钩子函数。它也是可选功能，在编译安装时需要开启<code>--enable-instrumentation</code>选项指定。</p>
+<pre class="line-numbers language-shell"><code class="language-shell">./configure [...] --enable-instrumentation
+./configure [...] --enable-instrumentation="instrument/stubs"
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>自定义的代码要创建一个独立的目录，例如”instrument/myinstrument”，将”instrument/stubs”目录拷贝进去，然后使用如下的指令设定：</p>
+<pre class="line-numbers language-shell"><code class="language-shell">./configure [...] --enable-instrumentation="instrument/myinstrument"
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>指令命令：</p>
+<pre class="line-numbers language-shell"><code class="language-shell">instrument [command]    用[command]调用BX_INSTR_DEBUG_CMD指令回调
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="4-10-show指令"><a href="#4-10-show指令" class="headerlink" title="4.10 show指令"></a>4.10 show指令</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">命令</th>
+<th style="text-align:left">解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>show</code></td>
+<td style="text-align:left">打印当前的符号信息显示模式</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>show</code> mode</td>
+<td style="text-align:left">当处理器切换模式时打印</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>show</code> int</td>
+<td style="text-align:left">当产生中断时打印</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>show</code> call</td>
+<td style="text-align:left">当产生调用时打印</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>show</code> ret</td>
+<td style="text-align:left">当函数返回时打印</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>show</code> off</td>
+<td style="text-align:left">关闭打印</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>show</code> dbg-all</td>
+<td style="text-align:left">开启所有显示标志</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>show</code> dbg-none</td>
+<td style="text-align:left">关闭所有显示标志</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="4-11-其他命令"><a href="#4-11-其他命令" class="headerlink" title="4.11 其他命令"></a>4.11 其他命令</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">命令</th>
+<th style="text-align:left">解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>ptime</code></td>
+<td style="text-align:left">打印当前的时间（从开始模拟到现在的ticks）</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>sb</code> delta</td>
+<td style="text-align:left">在未来执行中插入一个时间断点delta。delta是一个64位的整数，跟着字母”L”，例如1000L</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>sba</code> time</td>
+<td style="text-align:left">在时间time处插入一个时间断点 。time 同上面的delta</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>print-stack</code> [num]</td>
+<td style="text-align:left">打印栈顶端的num个字</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>modebp</code></td>
+<td style="text-align:left">触发CPU模式转换断点</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>ldsym</code> [global] filename [offset]</td>
+<td style="text-align:left">从文件filename加载符号。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="5-Bochs配置"><a href="#5-Bochs配置" class="headerlink" title="5 Bochs配置"></a>5 Bochs配置</h2><p><code>Bochs</code>在运行的时候是需要<code>bochrc</code>这个配置文件的，所以下面给出来我常用的<code>Bochs</code>配置</p>
+<pre class="line-numbers language-sh"><code class="language-sh"># bochrc.source
+
+###############################################
+# Configuration file for Bochs
+###############################################
+
+# 第一步，首先设置Bochs在运行过程中能够使用的内存，本例为32MB。
+# 关键字为：megs
+
+megs: 32
+
+# 第二步，设置对应真实机器的BIOS和VGA BIOS.
+# 对应两个关键字为：romimage 和 vgaromimage
+
+# LINUX: romimage: file=/usr/share/bochs/BIOS-bochs-latest
+# LINUX: vgaromimage: file=/usr/share/bochs/VGABIOS-lgpl-latest
+
+# MACOS: romimage: file=/opt/homebrew/share/bochs/BIOS-bochs-latest
+# MACOS: vgaromimage: file=/opt/homebrew/share/bochs/VGABIOS-lgpl-latest
+
+# 设置图形显示库
+# MACOS: display_library: sdl2
+
+
+# 第三步，设置Bochs所使用的磁盘，软盘的关键字为floppy。
+# 若只有一个软盘，则使用floppya即可，若有多个，则为floppya，floppyb...
+#floppya: 1_44=a.img, status=inserted
+
+
+# 第四步，选择启动盘符。
+#boot: floppy
+boot: disk
+
+# 第五步，设置日志文件的输出。
+log: log.bochsrc.disk
+
+# 第六步，开启或关闭某些功能。
+# 下面是关闭鼠标，并打开键盘。
+mouse: enabled=0
+# LINUX: keyboard: keymap=$BXSHARE/keymaps/x11-pc-us.map
+# MACOS: keyboard: keymap=$BXSHARE/keymaps/sdl2-pc-us.map
+
+# 硬盘设置 
+ata0: enabled=1, ioaddr1=0x1f0, ioaddr2=0x3f0, irq=14
+ata0-master: type=disk, path="PATH", mode=flat, cylinders=CYLINDERS, heads=HEADS, spt=SPT
+
+#gdbstub: enabled=1, port=1234, text_base=0, data_base=0, bss_base=0
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>相应的，用来生成配置信息的脚本是</p>
+<pre class="line-numbers language-shell"><code class="language-shell"># genrc.sh
+
+# check system
+sys=$(uname -s)
+case $sys in
+    Linux)
+        os=LINUX
+        ;;
+    Darwin)
+        os=MACOS
+        ;;
+    FreeBSD)
+        os=LINUX
+        ;;
+    *)
+        os=UNKNOWN
+        ;;
+esac
+
+if [ "$os" == "UNKNOWN" ]; then
+    echo "Unknown OS, exit..."
+    exit
+fi
+
+# get disk image
+shell_folder=$(cd "$(dirname $0)" || exit; pwd)
+cd $shell_folder
+bin_file=$(grep -d skip . * | grep -e 'Binary' | grep -v ':' | awk '{print $3}')
+bin_info=($(bximage -func=info $bin_file -q | awk '/geometry/{print $3}' | awk -F '/' '{print $1,$2,$3}'))
+echo "Binary file detected: $bin_file, C/H/S: ${bin_info[0]}/${bin_info[1]}/${bin_info[2]}"
+
+
+echo "Using $os config, writing config to bochsrc.run"
+sed \
+    -e "s/# $os: //g"\
+    -e "s/PATH/$bin_file/g"\
+    -e "s/CYLINDERS/${bin_info[0]}/g"\
+    -e "s/HEADS/${bin_info[1]}/g"\
+    -e "s/SPT/${bin_info[2]}/g"\
+    $shell_folder/bochsrc.source  > $shell_folder/bochsrc
+echo 'Run `bochs -f bochsrc` to start bochs'
+# bochsrc -f bochsrc
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>用来编译的脚本是</p>
+<pre class="line-numbers language-shell"><code class="language-shell">shell_folder=$(cd "$(dirname $0)" || exit; pwd)
+
+# get disk image
+shell_folder=$(cd "$(dirname $0)" || exit; pwd)
+cd $shell_folder
+bin_file=$(grep -d skip . * | grep -e 'Binary' | grep -v ':' | awk '{print $3}')
+if [ -z $bin_file ]; then
+    read -p "Binary file not detected, enter the name to create [hd60M.img]:" bin_file
+    if [ -z $bin_file ]; then
+        bin_file="hd60M.img"
+    fi
+    echo "Generating $bin_file..."
+    bximage -q -func=create -hd=60 -imgmode=flat $shell_folder/$bin_file
+else
+    bin_info=($(bximage -func=info $bin_file -q | awk '/geometry/{print $3}' | awk -F '/' '{print $1,$2,$3}'))
+    echo "Binary file detected: $bin_file, C/H/S: ${bin_info[0]}/${bin_info[1]}/${bin_info[2]}"
+fi
+echo "You can run genrc.sh to auto-config bochsrc"
+
+echo "Compiling..."
+mkdir -p $shell_folder/exe
+nasm $shell_folder/a/boot/mbr.S -f bin -o $shell_folder/exe/mbr.bin
+dd if=$shell_folder/exe/mbr.bin of=$bin_file bs=512 count=1 conv=notrunc
+echo "Done, run genrc.sh to auto-config"
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>所以要生成配置文件的话，就是</p>
+<pre class="line-numbers language-shell"><code class="language-shell">tree ./
+
+# 编译
+compile.sh
+# 生成配置信息
+./genrc.sh
+
+tree ./
+
+# 调试
+bochs -f bochrc
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221120204111245.png" alt="Bochs调试-2"></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221120204427098.png" alt="image-20221120204427098"></p>
+<h2 id="6-参考"><a href="#6-参考" class="headerlink" title="6 参考"></a>6 参考</h2><ul>
+<li><a target="_blank" rel="noopener" href="http://bochs.sourceforge.net/doc/docbook/user/internal-debugger.html#AEN4220">8.14. Using Bochs internal debugger</a></li>
+<li><a target="_blank" rel="noopener" href="http://bochs.sourceforge.net/cgi-bin/lxr/source/instrument/instrumentation.txt">bochs/instrument</a></li>
+</ul>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Jack Wang</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://jackwang0107.github.io/2022/11/20/bochs-diao-shi-chang-yong-ming-ling/">https://jackwang0107.github.io/2022/11/20/bochs-diao-shi-chang-yong-ming-ling/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Jack Wang</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
+                                    <span class="chip bg-color">操作系统</span>
+                                </a>
+                            
+                                <a href="/tags/Operating-System/">
+                                    <span class="chip bg-color">Operating System</span>
+                                </a>
+                            
+                                <a href="/tags/JackOS/">
+                                    <span class="chip bg-color">JackOS</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.png" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2022/11/21/elf-wen-jian-ge-shi/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="ELF文件格式">
+                        
+                        <span class="card-title">ELF文件格式</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-11-21
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            Jack Wang
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/11/20/linux-kai-ji-na-dian-shi-bios-dao-di-gan-liao-sha/">
+                    <div class="card-image">
+                        
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/JackOSALL-20221119034840255.png" class="responsive-img" alt="Linux开机那点事：BIOS以及实模式内存布局">
+                        
+                        <span class="card-title">Linux开机那点事：BIOS以及实模式内存布局</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            本文是JackOS开发笔记之Linux开机那点事系列中的一篇，讲解了BIOS以及实模式下底端1MB内存布局
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-11-20
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/JackOS%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/" class="post-category">
+                                    JackOS开发笔记
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
+                        <span class="chip bg-color">操作系统</span>
+                    </a>
+                    
+                    <a href="/tags/Operating-System/">
+                        <span class="chip bg-color">Operating System</span>
+                    </a>
+                    
+                    <a href="/tags/JackOS/">
+                        <span class="chip bg-color">JackOS</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: JackWang&#39;s Blog<br />'
+            + '文章作者: Jack Wang<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('1'),
+            headingSelector: 'h2, h3, h4, h5, h6'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4, h5, h6').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2021-2023</span>
+            
+            <a href="/about" target="_blank">Jack Wang</a>
+            <!-- |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a> -->
+            <!-- |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a> -->
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">526.1k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+                <span id="sitetime"> Loading ...</span>
+                <script>
+                    var calcSiteTime = function () {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2021";
+                        var startMonth = "11";
+                        var startDate = "12";
+                        var startHour = "0";
+                        var startMinute = "0";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+
+                        // 区分是否有年份.
+                        var language = 'zh-CN';
+                        if (startYear === String(todayYear)) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            var daysTip = 'This site has been running for ' + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                daysTip = '本站已运行 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                daysTip = '本站已運行 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = daysTip;
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            var yearsAndDaysTip = 'This site has been running for ' + diffYears + ' years and '
+                                + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                yearsAndDaysTip = '本站已运行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                yearsAndDaysTip = '本站已運行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+                        }
+                    }
+
+                    calcSiteTime();
+                </script>
+            
+            <br>
+            
+                <span id="icp"><img src="/medias/icp.png"
+                                    style="vertical-align: text-bottom;"/>
+                <a href="https://beian.miit.gov.cn" target="_blank">陕ICP备2021014294号-1</a>
+            </span>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/jackwang0108" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:2232123545@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2232123545" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2232123545" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+        
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/sakura.js"><\/script>');
+            }
+        </script>
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

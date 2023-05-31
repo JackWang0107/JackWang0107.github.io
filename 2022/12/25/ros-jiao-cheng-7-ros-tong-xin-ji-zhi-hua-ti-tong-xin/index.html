@@ -1,0 +1,1842 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="ROS教程 7：ROS通信机制——话题通信, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
+    <meta name="description" content="本文是ROS系列教程的第七篇文章，讲解了ROS通信机制中的话题通信">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>ROS教程 7：ROS通信机制——话题通信 | JackWang&#39;s Blog</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.2">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+
+   <style>
+    body{
+       background-image: url(https://cdn.jsdelivr.net/gh/Tokisaki-Galaxy/res/site/medias/background.jpg);
+       background-repeat:no-repeat;
+       background-size: 100% 100%;
+       background-attachment:fixed;
+    }
+</style>
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">JackWang&#39;s Blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-book-reader" style="zoom: 0.6;"></i>
+      
+      <span>博客</span>
+      <i class="fas fa-chevron-down" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/tags">
+          
+          <i class="fas fa-tags" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按标签归类文章</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories">
+          
+          <i class="fas fa-bookmark" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按目录归类文章</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/archives">
+          
+          <i class="fas fa-archive" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按日期分类文章</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">JackWang&#39;s Blog</div>
+        <div class="logo-desc">
+            
+            JackWang的个人博客
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-book-reader"></i>
+			
+			博客
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>
+
+                  <a href="/tags " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-tags" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按标签归类文章</    span>
+
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/categories " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-bookmark" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按目录归类文章</    span>
+
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/archives " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-archive" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按日期分类文章</    span>
+
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('抱歉，这篇文章并不想让所有人都看到，请输入授权密码观看')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/8.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">ROS教程 7：ROS通信机制——话题通信</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/ROS/">
+                                <span class="chip bg-color">ROS</span>
+                            </a>
+                        
+                            <a href="/tags/ROS%E9%80%9A%E4%BF%A1%E6%9C%BA%E5%88%B6/">
+                                <span class="chip bg-color">ROS通信机制</span>
+                            </a>
+                        
+                            <a href="/tags/%E8%AF%9D%E9%A2%98%E9%80%9A%E4%BF%A1/">
+                                <span class="chip bg-color">话题通信</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/ROS%E6%95%99%E7%A8%8B/" class="post-category">
+                                ROS教程
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2022-12-26
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2022-12-28
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    5.8k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    22 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="ROS教程-7：ROS通信机制——话题通信"><a href="#ROS教程-7：ROS通信机制——话题通信" class="headerlink" title="ROS教程 7：ROS通信机制——话题通信"></a>ROS教程 7：ROS通信机制——话题通信</h1><p>话题通信是<code>ROS</code>中使用频率最高的一种通信模式，话题通信是基于<strong>发布订阅</strong>模式的，也即：<strong>一个节点发布消息，另一个节点订阅该消息</strong>。</p>
+<p>话题通信的应用场景也极其广泛，比如下面一个常见场景：</p>
+<blockquote>
+<p>机器人在执行导航功能，使用的传感器是激光雷达，机器人会采集激光雷达感知到的信息并计算，然后生成运动控制信息驱动机器人底盘运动。</p>
+</blockquote>
+<p>在上述场景中，就不止一次使用到了话题通信：</p>
+<ul>
+<li>以激光雷达信息的采集处理为例，在<code>ROS</code>中有一个节点需要时时的发布当前雷达采集到的数据，导航模块中也有节点会订阅并解析雷达数据</li>
+<li>再以运动消息的发布为例，导航模块会根据传感器采集的数据时时的计算出运动控制信息并发布给底盘，底盘也可以有一个节点订阅运动信息并最终转换成控制电机的脉冲信号</li>
+</ul>
+<p>以此类推，像雷达、摄像头、GPS……等等一系列传感器数据的采集，都是使用了话题通信。换言之，<strong>话题通信适用于不断更新的数据传输相关的应用场景</strong>。</p>
+<h2 id="1-话题通信介绍"><a href="#1-话题通信介绍" class="headerlink" title="1. 话题通信介绍"></a>1. 话题通信介绍</h2><h3 id="1-1-基础知识"><a href="#1-1-基础知识" class="headerlink" title="1.1 基础知识"></a>1.1 基础知识</h3><p><strong>话题通信是以发布订阅的方式实现不同节点之间数据交互的通信模式</strong>。<strong>话题通信用于<code>不断更新</code>的、<code>少逻辑处理</code>的数据传输场景</strong>。</p>
+<p>例如摄像头不断通过发布图像到<code>/img</code>话题下，而诸如<code>人脸识别</code>、<code>物体检测</code>这样的复杂、低频处理，最好还是以服务的形式来实现。</p>
+<p>后面，我们首先将实现最基本的发布订阅模型：<strong>发布方以固定频率发送一段文本，订阅方接收文本并输出</strong></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/02.01_%E7%AE%80%E5%8D%95%E6%B6%88%E6%81%AF%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85.gif" alt="基础案例"></p>
+<p>然后再实现对自定义消息的发布与订阅</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/02.02_%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B6%88%E6%81%AF%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85.gif" alt="自定义消息"></p>
+<h3 id="1-2-理论模型"><a href="#1-2-理论模型" class="headerlink" title="1.2 理论模型"></a>1.2 理论模型</h3><p>话题通信实现模型是比较复杂的，该模型如下图所示,该模型中涉及到三个角色:</p>
+<ul>
+<li><code>ROS Master</code>（管理者）</li>
+<li><code>Talker</code>（发布者）</li>
+<li><code>Listener</code>（订阅者）</li>
+</ul>
+<p><code>ROS Master</code>负责保管<code>Talker</code>和<code>Listener</code>注册的信息，并匹配话题相同的<code>Talker</code>与<code>Listener</code>，帮助<code>Talker</code>与<code>Listener</code>建立连接，连接建立后，<code>Talker</code>可以发布消息，且发布的消息会被<code>Listener</code>订阅。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/01%E8%AF%9D%E9%A2%98%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9E%8B.jpg" alt="话题通信理论模型" style="zoom:50%;"></p>
+<p>我们按照流程来走一遍话题通信的整个流程：</p>
+<ol>
+<li><strong>首先是<code>Talker</code>启动，即数据发布者启动，此时<code>Talker</code>会被注册在<code>ROS Master</code>中</strong>。<code>Talker</code>启动后，会通过<code>RPC</code>在<code>ROS Master</code>中注册自身信息，其中包含所发布消息的话题名称。<code>ROS Master</code>会将节点的注册信息加入到注册表中。</li>
+<li><strong>然后是<code>Listener</code>启动，即数据接受者启动，此时<code>Listener</code>会被注册在<code>ROS Master</code>中</strong>。<code>Listener</code>根据接收到的<code>RPC</code>地址，通过<code>RPC</code>向<code>Talker</code>发送连接请求，传输订阅的话题名称、消息类型以及通信协议（<code>TCP/UDP</code>）。</li>
+<li><strong>接下来，<code>ROS Master</code>会根据注册表中的信息匹配<code>Talker</code>和<code>Listener</code></strong>。在匹配成功后，<code>ROS Master</code>会通过<code>RPC</code>向<code>Listener</code>发送<code>Talker</code>的<code>RPC</code>地址信息。</li>
+<li><strong>接着<code>Listener</code>向<code>Talker</code>发送请求</strong>。当<code>Listener</code>接收到的<code>RPC</code>地址后，会通过<code>RPC</code>向<code>Talker</code>发送连接请求，传输订阅的话题名称、消息类型以及通信协议(TCP/UDP)。</li>
+<li><strong>而后<code>Talker</code>确认请求</strong>。<code>Talker</code>接收到<code>Listener</code>的请求后，也是通过<code>RPC</code>向<code>Listener</code>确认连接信息，并发送自身的<code>TCP</code>地址信息。</li>
+<li><strong><code>Talker</code>和<code>Listener</code>建立连接</strong>。<code>Listener</code>根据步骤5返回的消息使用<code>TCP</code>与<code>Talker</code>建立网络连接。</li>
+<li><strong><code>Talker</code>向<code>Listener</code>发送消息</strong>。连接建立后，<code>Talker</code>开始向<code>Listener</code>发布消息。</li>
+</ol>
+<blockquote>
+<p>注意：</p>
+<ul>
+<li>上述实现流程中，前五步使用的<code>RPC</code>协议，最后两步使用的是<code>TCP</code>协议</li>
+<li><code>Talker</code>与<code>Listener</code>的启动无先后顺序要求，但是<code>ROS Master</code>必须先启动</li>
+<li><code>Talker</code>与<code>Listener</code>都可以有多个</li>
+<li><code>Talker</code>与<code>Listener</code>连接建立后，不再需要<code>ROS Master</code>。也即，即便关闭<code>ROS Master</code>，<code>Talker</code>与<code>Listern</code>依旧可以正常通信</li>
+</ul>
+</blockquote>
+<p><strong>最重要的是，这7个步骤<code>ROS</code>已经为我们封装好了，我们不需要手动注册、建立链接，对我们来说就是几个<code>API</code>就可以解决的事情</strong></p>
+<p>因此，我们在话题通信的时候，需要注意的是：</p>
+<ul>
+<li>话题的设置</li>
+<li>发布者的实现</li>
+<li>订阅者的实现</li>
+<li>消息载体的实现</li>
+</ul>
+<h2 id="2-话题通信C-实现"><a href="#2-话题通信C-实现" class="headerlink" title="2. 话题通信C++实现"></a>2. 话题通信C++实现</h2><p>我们上面介绍了话题通信理论知识，我们接下来用C++来实现话题通信</p>
+<h3 id="2-1-需求"><a href="#2-1-需求" class="headerlink" title="2.1 需求"></a>2.1 需求</h3><blockquote>
+<p>编写发布订阅实现，要求发布方以10HZ(每秒10次)的频率发布文本消息，订阅方订阅消息并将消息内容打印输出。</p>
+</blockquote>
+<h3 id="2-2-分析"><a href="#2-2-分析" class="headerlink" title="2.2 分析"></a>2.2 分析</h3><p>在<code>ROS</code>话题通信模型的七步实现中，<code>ROS Master</code>不需要实现，而连接的建立也已经被封装了，因此，我们自己写代码的时候，需要关注的关键点有三个:</p>
+<ol>
+<li>发布方</li>
+<li>接收方</li>
+<li>数据（此处为普通文本）</li>
+</ol>
+<p>我们接下来就将围绕这三个点进行实现</p>
+<h3 id="2-3-实现流程"><a href="#2-3-实现流程" class="headerlink" title="2.3 实现流程"></a>2.3 实现流程</h3><p>按照上面的分析，我们按照下面的流程进行实现：</p>
+<ol>
+<li>编写发布方实现</li>
+<li>编写订阅方实现</li>
+<li>编辑配置文件</li>
+<li>编译并执行</li>
+</ol>
+<p>PS：我们这里先运行下面的命令创建一个名为<code>topic_communication</code>的功能包</p>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">cd</span> 工作目录/src
+catkin_create_pkg topic_communication roscpp rospy std_msgs
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h4 id="A-发布方实现"><a href="#A-发布方实现" class="headerlink" title="A 发布方实现"></a>A 发布方实现</h4><p>我们在<code>工作目录/src/topic_communication/src</code>下新建一个名为<code>pub.cpp</code>的文件，即发布者的实现。</p>
+<h5 id="1-单纯发布消息"><a href="#1-单纯发布消息" class="headerlink" title="1. 单纯发布消息"></a>1. 单纯发布消息</h5><p>我们首先实现一个最简单的版本，该版本中发布者只要不断发出消息即可。</p>
+<p>发布者最重要的就是<code>ros::Publisher</code>对象，该对象可以用<code>ros::NodeHandle.advertise</code>方法创建，该方法支持重载，我们需要发布什么类型的消息就重载什么类型的消息。</p>
+<p>此外，<code>ros::Publisher</code>对象有一个<code>publish</code>方法，该方法用于发布消息，本质上也是一个重载函数，不过已经对<code>message</code>做了屏蔽。</p>
+<p>所以，下面的代码中，除了正常的<code>ros::init()</code>初始化节点和创建<code>ros::Nodehandle</code>句柄外，我们需要特别关注<code>ros::NodeHandle</code>相关的语句</p>
+<blockquote>
+<p>注意这里我们设置节点名称为<code>publisher_cpp</code>，用于和后面的<code>Python</code>进行区别</p>
+</blockquote>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"ros/ros.h"</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"std_msgs/String.h"</span>            </span><span class="token comment" spellcheck="true">// 普通文本类型的消息，ROS中已经为其封装了一个标准实现</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;sstream></span></span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">int</span> argc<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token operator">*</span>argv<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 初始化当前节点，节点名设置为publisher</span>
+    ros<span class="token operator">::</span><span class="token function">init</span><span class="token punctuation">(</span>argc<span class="token punctuation">,</span> argv<span class="token punctuation">,</span> <span class="token string">"publisher_cpp"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 创建节点句柄</span>
+    ros<span class="token operator">::</span>NodeHandle nh<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 初始化发布者</span>
+    ros<span class="token operator">::</span>Publisher pub <span class="token operator">=</span> nh<span class="token punctuation">.</span>advertise<span class="token operator">&lt;</span>std_msgs<span class="token operator">::</span>String<span class="token operator">></span><span class="token punctuation">(</span><span class="token string">"messages"</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 发布消息前，创建String消息对象</span>
+    std_msgs<span class="token operator">::</span>String msg<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// 当前节点没有退出或者被意外终止就继续运行</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>ros<span class="token operator">::</span><span class="token function">ok</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// 设置String消息的内容</span>
+        msg<span class="token punctuation">.</span>data <span class="token operator">=</span> <span class="token string">"Hello I'm publisher!"</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 发布者发送消息</span>
+        pub<span class="token punctuation">.</span><span class="token function">publish</span><span class="token punctuation">(</span>msg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>然后编辑<code>CMakeLists.txt</code>，向其中添加<code>pub.cpp</code></p>
+<blockquote>
+<p>注意这里我们修改了可执行文件名称为<code>publisher_cpp</code>，用于和后面的<code>Python</code>进行区别</p>
+</blockquote>
+<pre class="line-numbers language-cmake"><code class="language-cmake">add_executable(
+    publisher_cpp
+    src/pub.cpp
+)
+
+add_dependencies(
+    publisher_cpp
+    ${${PROJECT_NAME}_EXPORTED_TARGETS}
+    ${catkin_EXPORTED_TARGETS}
+)
+
+target_link_libraries(publisher_cpp
+  ${catkin_LIBRARIES}
+)
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>在命令号编译之后运行：</p>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">cd</span> 工作目录
+catkin_make
+rospack profile            <span class="token comment" spellcheck="true"># 新的功能包第一次编译后生成一下profile，从而添加rosrun的补全</span>
+roscore
+rosrun topic_communication publisher_cpp                <span class="token comment" spellcheck="true"># 新的终端下运行</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>此时命令行没有任何输出，这是正常的，因为我们没有使用<code>ROSINFO</code>来向终端输出任何内容</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221227133934761.png" alt="命令行没有输出" style="zoom:25%;"></p>
+<p>此时如何检测我们的<code>publisher</code>是否真的在发布消息呢？我们首先运行<code>rqt_graph</code>来看看所有的节点和话题</p>
+<pre class="line-numbers language-bash"><code class="language-bash">rqt_graph
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>注意，<code>rqt_graph</code>一开始的设置是只显示节点，并且默认隐藏没有订阅者的话题的，即<code>Leaf Topic</code>，同时还会隐藏<code>dead sink</code>，所我们需要：</p>
+<ul>
+<li>取消<code>Hide Leaf Topic</code></li>
+<li>取消<code>Hide Dead Sinks</code></li>
+<li>设置为<code>Nodes/Topics(all)</code></li>
+</ul>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221227134043430.png" alt="要修改的三个设置" style="zoom: 33%;"></p>
+<p>设置了<code>rqt_graph</code>之后，就可能看到<code>publisher</code>节点确实向<code>message</code>话题中发布了数据</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221227134120797.png" alt="设置之后正常显示节点和话题" style="zoom:33%;"></p>
+<p>然而此时还有一个问题，就是即便<code>publisher</code>确实和<code>message</code>话题有关系，但是我们如何确定<code>message</code>这个话题中是否有数据？</p>
+<p>此时我们可以运行<code>rostopic</code>这个命令，<code>rostopic</code>命令的<code>echo</code>选项可以用来订阅任意话题中的数据，并且输出到终端上</p>
+<pre class="line-numbers language-bash"><code class="language-bash">rostopic <span class="token keyword">echo</span> /message
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221227134220962.png" alt="rostopic向终端上输出数据" style="zoom:25%;"></p>
+<p>此时我们再新开一个终端，检查一下此时的节点关系，注意，<code>rostopic echo /message</code>和<code>rosrun topic_communication publisher</code>不要中止</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221227134931674.png" alt="运行rostopic echo后的节点图" style="zoom:33%;"></p>
+<p>此时，我们就会发现，有一个新节点订阅了我们的<code>messages</code>话题，这个节点其实就是<code>rostopic</code>命令运行的节点。而且，<code>rostopic</code>会给新的节点后面添加时间戳，来唯一标记当前<code>echo</code>的节点</p>
+<h5 id="2-设置频率发布消息"><a href="#2-设置频率发布消息" class="headerlink" title="2. 设置频率发布消息"></a>2. 设置频率发布消息</h5><p>我们上面已经成功的实现了发布者，并且检查了发布者能够向指定的话题中发布消息。</p>
+<p>我们接下来添加频率设置，即让发布者按照指定的频率来发布消息，为此我们可以使用<code>ros::Rate</code>对象。<code>ros::Rate</code>对象有一个<code>sleep</code>方法，这个方法会自动计算距离上次运行到<code>sleep</code>消耗的时间，然后自动计算需要睡眠的时间，然后进行睡眠。</p>
+<p>有一个需要注意的是如果频率过高的话，<code>ros::Rate</code>是没法实现的。即如果循环一次要500毫秒，但是我们却要求<code>ros::Rate</code>保证10Hz，即每秒运行10次循环，这个时候<code>ros::Rate</code>就没有用了。</p>
+<p>详细代码如下，注意<code>ros::Rate</code>相关的语句，</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"ros/ros.h"</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"std_msgs/String.h"</span>            </span><span class="token comment" spellcheck="true">// 普通文本类型的消息，ROS中已经为其封装了一个标准实现</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;sstream></span></span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">int</span> argc<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token operator">*</span>argv<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 初始化当前节点</span>
+    ros<span class="token operator">::</span><span class="token function">init</span><span class="token punctuation">(</span>argc<span class="token punctuation">,</span> argv<span class="token punctuation">,</span> <span class="token string">"publisher_cpp"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 创建节点句柄</span>
+    ros<span class="token operator">::</span>NodeHandle nh<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 初始化发布者</span>
+    ros<span class="token operator">::</span>Publisher pub <span class="token operator">=</span> nh<span class="token punctuation">.</span>advertise<span class="token operator">&lt;</span>std_msgs<span class="token operator">::</span>String<span class="token operator">></span><span class="token punctuation">(</span><span class="token string">"messages"</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 发布消息前，创建String消息对象</span>
+    std_msgs<span class="token operator">::</span>String msg<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// 创建循环频率，每秒10Hz</span>
+    ros<span class="token operator">::</span>Rate <span class="token function">rate</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">int</span> count <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>              <span class="token comment" spellcheck="true">// 等会给每句话添加编号</span>
+    std<span class="token operator">::</span>stringstream ss<span class="token punctuation">;</span>       <span class="token comment" spellcheck="true">// 等会给每句话添加编号用</span>
+
+    <span class="token comment" spellcheck="true">// 当前节点没有退出或者被意外终止就继续运行</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>ros<span class="token operator">::</span><span class="token function">ok</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// 设置String消息的内容, 用string stream (sstream)来实现字符串拼接</span>
+        ss<span class="token punctuation">.</span><span class="token function">str</span><span class="token punctuation">(</span>std<span class="token operator">::</span><span class="token function">string</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                                  <span class="token comment" spellcheck="true">// 清空string stream</span>
+        ss <span class="token operator">&lt;&lt;</span>  <span class="token string">"Hello I'm publisher -- "</span> <span class="token operator">&lt;&lt;</span> count<span class="token operator">++</span> <span class="token operator">&lt;&lt;</span> <span class="token string">"!"</span><span class="token punctuation">;</span>     <span class="token comment" spellcheck="true">// 拼接字符串</span>
+        msg<span class="token punctuation">.</span>data <span class="token operator">=</span> ss<span class="token punctuation">.</span><span class="token function">str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                                    <span class="token comment" spellcheck="true">// 复制字符串到data中</span>
+        <span class="token comment" spellcheck="true">// 发布者发送消息</span>
+        pub<span class="token punctuation">.</span><span class="token function">publish</span><span class="token punctuation">(</span>msg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 向命令行输出消息</span>
+        <span class="token function">ROS_INFO</span><span class="token punctuation">(</span><span class="token string">"发布数据： %s"</span><span class="token punctuation">,</span> ss<span class="token punctuation">.</span><span class="token function">str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// ros::Rate将会自动休眠，以满足初始化时频率的要求</span>
+        rate<span class="token punctuation">.</span><span class="token function">sleep</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>但是这个时候，如果直接运行的话，命令行中中文的输出是乱码的，这是因为<code>C++</code>中的编码不对，即内存中的中文的编码格式不对。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221227124329746.png" alt="C++中文输出乱码" style="zoom:25%;"></p>
+<p>为此，我们在<code>C++</code>代码的前面设置一下编码格式，注意下面放在最前面的<code>set_local</code>函数</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"ros/ros.h"</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"std_msgs/String.h"</span>            </span><span class="token comment" spellcheck="true">// 普通文本类型的消息，ROS中已经为其封装了一个标准实现</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;sstream></span></span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">int</span> argc<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token operator">*</span>argv<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 设置编码格式</span>
+    <span class="token function">setlocale</span><span class="token punctuation">(</span>LC_ALL<span class="token punctuation">,</span> <span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// 初始化当前节点</span>
+    ros<span class="token operator">::</span><span class="token function">init</span><span class="token punctuation">(</span>argc<span class="token punctuation">,</span> argv<span class="token punctuation">,</span> <span class="token string">"publisher_cpp"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 创建节点句柄</span>
+    ros<span class="token operator">::</span>NodeHandle nh<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 初始化发布者</span>
+    ros<span class="token operator">::</span>Publisher pub <span class="token operator">=</span> nh<span class="token punctuation">.</span>advertise<span class="token operator">&lt;</span>std_msgs<span class="token operator">::</span>String<span class="token operator">></span><span class="token punctuation">(</span><span class="token string">"messages"</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 发布消息前，创建String消息对象</span>
+    std_msgs<span class="token operator">::</span>String msg<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// 创建循环频率，每秒10Hz</span>
+    ros<span class="token operator">::</span>Rate <span class="token function">rate</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">int</span> count <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>              <span class="token comment" spellcheck="true">// 等会给每句话添加编号</span>
+    std<span class="token operator">::</span>stringstream ss<span class="token punctuation">;</span>       <span class="token comment" spellcheck="true">// 等会给每句话添加编号用</span>
+
+    <span class="token comment" spellcheck="true">// 当前节点没有退出或者被意外终止就继续运行</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>ros<span class="token operator">::</span><span class="token function">ok</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// 设置String消息的内容, 用string stream (sstream)来实现字符串拼接</span>
+        ss<span class="token punctuation">.</span><span class="token function">str</span><span class="token punctuation">(</span>std<span class="token operator">::</span><span class="token function">string</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                                  <span class="token comment" spellcheck="true">// 清空string stream</span>
+        ss <span class="token operator">&lt;&lt;</span>  <span class="token string">"Hello I'm publisher -- "</span> <span class="token operator">&lt;&lt;</span> count<span class="token operator">++</span> <span class="token operator">&lt;&lt;</span> <span class="token string">"!"</span><span class="token punctuation">;</span>     <span class="token comment" spellcheck="true">// 拼接字符串</span>
+        msg<span class="token punctuation">.</span>data <span class="token operator">=</span> ss<span class="token punctuation">.</span><span class="token function">str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                                    <span class="token comment" spellcheck="true">// 复制字符串到data中</span>
+        <span class="token comment" spellcheck="true">// 发布者发送消息</span>
+        pub<span class="token punctuation">.</span><span class="token function">publish</span><span class="token punctuation">(</span>msg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 向命令行输出消息</span>
+        <span class="token function">ROS_INFO</span><span class="token punctuation">(</span><span class="token string">"发布数据： %s"</span><span class="token punctuation">,</span> ss<span class="token punctuation">.</span><span class="token function">str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// ros::Rate将会自动休眠，以满足初始化时频率的要求</span>
+        rate<span class="token punctuation">.</span><span class="token function">sleep</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221227123912986.png" alt="中文正常输出" style="zoom:25%;"></p>
+<p>最后，我们运行一下<code>rostopic echo</code>和<code>rqt_graph</code>来看看</p>
+<pre class="line-numbers language-bash"><code class="language-bash">roscore
+rosrun topic_communication publisher_cpp            <span class="token comment" spellcheck="true"># 新的终端中运行</span>
+rostopic <span class="token keyword">echo</span> /message                                                <span class="token comment" spellcheck="true"># 新的终端中运行</span>
+rqt_graph                                                                            <span class="token comment" spellcheck="true"># 新的终端中运行</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221227135455487.png" alt="运行结果" style="zoom:25%;"></p>
+<h5 id="3-完整代码"><a href="#3-完整代码" class="headerlink" title="3. 完整代码"></a>3. 完整代码</h5><p>最后，完整版，带注释的代码如下：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">// pub.cpp</span>
+<span class="token comment" spellcheck="true">/*
+    需求: 实现基本的话题通信，一方发布数据，一方接收数据，
+         实现的关键点:
+         1.发送方
+         2.接收方
+         3.数据(此处为普通文本)
+
+         PS: 二者需要设置相同的话题
+
+    消息发布方:
+        循环发布信息:HelloWorld 后缀数字编号
+
+    实现流程:
+        1.包含头文件 
+        2.初始化 ROS 节点:命名(唯一)
+        3.实例化 ROS 句柄
+        4.实例化 发布者 对象
+        5.组织被发布的数据，并编写逻辑发布数据
+
+*/</span>
+
+<span class="token comment" spellcheck="true">// 1.包含头文件 </span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"ros/ros.h"</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"std_msgs/String.h"</span> </span><span class="token comment" spellcheck="true">//普通文本类型的消息，ROS中已经为其封装了一个标准实现</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;sstream></span></span>
+
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">int</span> argc<span class="token punctuation">,</span> <span class="token keyword">char</span>  <span class="token operator">*</span>argv<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>   
+    <span class="token comment" spellcheck="true">// 设置编码</span>
+    <span class="token function">setlocale</span><span class="token punctuation">(</span>LC_ALL<span class="token punctuation">,</span><span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// 2.初始化 ROS 节点:命名(唯一)</span>
+    <span class="token comment" spellcheck="true">//      参数1和参数2后期为节点传值会使用</span>
+    <span class="token comment" spellcheck="true">//      参数3是节点名称，是一个标识符，需要保证运行后，在 ROS 网络拓扑中唯一</span>
+    ros<span class="token operator">::</span><span class="token function">init</span><span class="token punctuation">(</span>argc<span class="token punctuation">,</span>argv<span class="token punctuation">,</span><span class="token string">"publisher"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 3.实例化 ROS 句柄</span>
+    ros<span class="token operator">::</span>NodeHandle nh<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//该类封装了 ROS 中的一些常用功能</span>
+
+    <span class="token comment" spellcheck="true">// 4.实例化 发布者 对象</span>
+    <span class="token comment" spellcheck="true">//      泛型: 发布的消息类型</span>
+    <span class="token comment" spellcheck="true">//      参数1: 要发布到的话题</span>
+    <span class="token comment" spellcheck="true">//      参数2: 队列中最大保存的消息数，超出此阀值时，先进的先销毁(时间早的先销毁)</span>
+    ros<span class="token operator">::</span>Publisher pub <span class="token operator">=</span> nh<span class="token punctuation">.</span>advertise<span class="token operator">&lt;</span>std_msgs<span class="token operator">::</span>String<span class="token operator">></span><span class="token punctuation">(</span><span class="token string">"message"</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// 5.组织被发布的数据，并编写逻辑发布数据</span>
+
+      <span class="token comment" spellcheck="true">// 发布消息前，创建String消息对象</span>
+    std_msgs<span class="token operator">::</span>String msg<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// 创建循环频率，每秒10Hz</span>
+    ros<span class="token operator">::</span>Rate <span class="token function">rate</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">int</span> count <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>              <span class="token comment" spellcheck="true">// 等会给每句话添加编号</span>
+    std<span class="token operator">::</span>stringstream ss<span class="token punctuation">;</span>       <span class="token comment" spellcheck="true">// 等会给每句话添加编号用</span>
+
+    <span class="token comment" spellcheck="true">// 当前节点没有退出或者被意外终止就继续运行</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>ros<span class="token operator">::</span><span class="token function">ok</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// 设置String消息的内容, 用string stream (sstream)来实现字符串拼接</span>
+        ss<span class="token punctuation">.</span><span class="token function">str</span><span class="token punctuation">(</span>std<span class="token operator">::</span><span class="token function">string</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                                  <span class="token comment" spellcheck="true">// 清空string stream</span>
+        ss <span class="token operator">&lt;&lt;</span>  <span class="token string">"Hello I'm publisher -- "</span> <span class="token operator">&lt;&lt;</span> count<span class="token operator">++</span> <span class="token operator">&lt;&lt;</span> <span class="token string">"!"</span><span class="token punctuation">;</span>     <span class="token comment" spellcheck="true">// 拼接字符串</span>
+        msg<span class="token punctuation">.</span>data <span class="token operator">=</span> ss<span class="token punctuation">.</span><span class="token function">str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                                    <span class="token comment" spellcheck="true">// 复制字符串到data中</span>
+        <span class="token comment" spellcheck="true">// 发布者发送消息</span>
+        pub<span class="token punctuation">.</span><span class="token function">publish</span><span class="token punctuation">(</span>msg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 向命令行输出消息</span>
+        <span class="token function">ROS_INFO</span><span class="token punctuation">(</span><span class="token string">"发布数据： %s"</span><span class="token punctuation">,</span> ss<span class="token punctuation">.</span><span class="token function">str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// ros::Rate将会自动休眠，以满足初始化时频率的要求</span>
+        rate<span class="token punctuation">.</span><span class="token function">sleep</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="B-订阅方实现"><a href="#B-订阅方实现" class="headerlink" title="B 订阅方实现"></a>B 订阅方实现</h4><h5 id="1-代码讲解"><a href="#1-代码讲解" class="headerlink" title="1. 代码讲解"></a>1. 代码讲解</h5><p>订阅方的实现很多都和发布方是一样的，不同的是我们需要使用函数<code>nh.subscribe</code>来创建订阅者<code>ros::Subscriber</code>。<code>nh.subscribe</code>需要使用一个回调函数，这个回调函数接受的参数类型是<code>const 消息属于的功能包::消息类型::ConstPtr</code>。这个是<code>ROS</code>的要求，是没法改的。</p>
+<blockquote>
+<p>稍后我们会介绍如何自定义消息，事实上，自定义消息之后，<code>catkin</code>编译系统会自动帮我们创建消息的头文件和对象，这个在后面我们再详细介绍</p>
+</blockquote>
+<p>最后我们有一个<code>ros::spin()</code>函数，这个函数的意思就是类似于协程的概念。因为我们的节点中可能有不止一个订阅者，可能会有多个订阅者。而这个时候是当前节点接收到了哪一类消息，那么就会在所有的订阅者中循环检查，看看是哪个一个订阅者的回调函数处理这一类消息，然后就会调用这一个回调函数去处理消息。</p>
+<p>而所有静态代码中所有订阅者的队列、运行时候的消息队列等等都是由<code>ROS</code>去维护的。</p>
+<p>具体代码如下，注意依旧是要设置一下内存中的字符的编码格式</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"ros/ros.h"</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"std_msgs/String.h"</span></span>
+
+<span class="token comment" spellcheck="true">// 订阅者的回调函数，当消息传到的时候将调用该函数处理</span>
+<span class="token keyword">void</span> <span class="token function">do_msg</span><span class="token punctuation">(</span><span class="token keyword">const</span> std_msgs<span class="token operator">::</span>String<span class="token operator">::</span>ConstPtr <span class="token operator">&amp;</span>msg<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 这个回调函数就是单纯的输出</span>
+    <span class="token function">ROS_INFO</span><span class="token punctuation">(</span><span class="token string">"订阅数据： %s"</span><span class="token punctuation">,</span> msg<span class="token operator">-</span><span class="token operator">></span>data<span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">int</span> argc<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token operator">*</span>argv<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+
+    <span class="token function">setlocale</span><span class="token punctuation">(</span>LC_ALL<span class="token punctuation">,</span> <span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// 初始化节点</span>
+    ros<span class="token operator">::</span><span class="token function">init</span><span class="token punctuation">(</span>argc<span class="token punctuation">,</span> argv<span class="token punctuation">,</span> <span class="token string">"subscriber_cpp"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 创建节点句柄</span>
+    ros<span class="token operator">::</span>NodeHandle nh<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// 创建订阅者对象</span>
+    ros<span class="token operator">::</span>Subscriber sub <span class="token operator">=</span> nh<span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span><span class="token string">"messages"</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> do_msg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// 循环处理</span>
+    ros<span class="token operator">::</span><span class="token function">spin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>然后编辑<code>CMakeLists.txt</code>，添加订阅者的内容</p>
+<pre class="line-numbers language-cmake"><code class="language-cmake">add_executable(
+    subscriber_cpp
+    src/sub.cpp
+)
+
+add_dependencies(
+    subscriber_cpp
+    ${${PROJECT_NAME}_EXPORTED_TARGETS}
+    ${catkin_EXPORTED_TARGETS}
+)
+
+target_link_libraries(subscriber_cpp
+  ${catkin_LIBRARIES}
+)
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>最后，编译代码并运行，顺便跑一个<code>rqt_graph</code>来看看</p>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">cd</span> 工作目录
+catkin_make
+roscore
+rosrun topic_communication publisher                <span class="token comment" spellcheck="true"># 新开一个终端</span>
+rosrun topic_communication subscriber                <span class="token comment" spellcheck="true"># 新开一个终端</span>
+rqt_graph                                                                        <span class="token comment" spellcheck="true"># 新开一个终端</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221227145017796.png" alt="订阅方运行结果" style="zoom:25%;"></p>
+<h5 id="2-完整代码"><a href="#2-完整代码" class="headerlink" title="2. 完整代码"></a>2. 完整代码</h5><p>最后，带注释的完整代码如下</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">/*
+    需求: 实现基本的话题通信，一方发布数据，一方接收数据，
+         实现的关键点:
+         1.发送方
+         2.接收方
+         3.数据(此处为普通文本)
+
+
+    消息订阅方:
+        订阅话题并打印接收到的消息
+
+    实现流程:
+        1.包含头文件 
+        2.初始化 ROS 节点:命名(唯一)
+        3.实例化 ROS 句柄
+        4.实例化 订阅者 对象
+        5.处理订阅的消息(回调函数)
+        6.设置循环调用回调函数
+
+*/</span>
+<span class="token comment" spellcheck="true">// 1.包含头文件 </span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"ros/ros.h"</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"std_msgs/String.h"</span></span>
+
+<span class="token comment" spellcheck="true">// 订阅者的回调函数，当消息传到的时候将调用该函数处理</span>
+<span class="token keyword">void</span> <span class="token function">do_msg</span><span class="token punctuation">(</span><span class="token keyword">const</span> std_msgs<span class="token operator">::</span>String<span class="token operator">::</span>ConstPtr <span class="token operator">&amp;</span>msg<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 这个回调函数就是单纯的输出</span>
+    <span class="token function">ROS_INFO</span><span class="token punctuation">(</span><span class="token string">"订阅数据： %s"</span><span class="token punctuation">,</span> msg<span class="token operator">-</span><span class="token operator">></span>data<span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">int</span> argc<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token operator">*</span>argv<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+
+    <span class="token function">setlocale</span><span class="token punctuation">(</span>LC_ALL<span class="token punctuation">,</span> <span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// 2.初始化 ROS 节点: 命名(唯一)</span>
+    ros<span class="token operator">::</span><span class="token function">init</span><span class="token punctuation">(</span>argc<span class="token punctuation">,</span> argv<span class="token punctuation">,</span> <span class="token string">"subscriber_cpp"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 3.实例化 ROS 句柄</span>
+    ros<span class="token operator">::</span>NodeHandle nh<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// 4.实例化 订阅者 对象</span>
+    ros<span class="token operator">::</span>Subscriber sub <span class="token operator">=</span> nh<span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span><span class="token string">"messages"</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> do_msg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// 循环处理订阅的消息(回调函数)</span>
+    ros<span class="token operator">::</span><span class="token function">spin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="2-4-注意事项"><a href="#2-4-注意事项" class="headerlink" title="2.4 注意事项"></a>2.4 注意事项</h3><p>最后，在实现的时候可能会有一些问题，我们在这里讲讲</p>
+<h4 id="A-char-const-argv-问题"><a href="#A-char-const-argv-问题" class="headerlink" title="A. char const *argv[]问题"></a>A. <code>char const *argv[]</code>问题</h4><p><code>vscode</code>中的<code>main</code>函数声明可能是<code>int main(int argc, char const *argv[])</code>，即<code>argv</code>被<code>const</code>修饰，表示不可修改，但是<code>ros::init()</code>中的<code>argv</code>类型是<code>char *argv[]</code>，所以此时传入<code>char const *argv[]</code>的话，就会报错，类型不匹配（<code>CMakeLists.txt</code>加入了<code>strict-prototype</code>标志）。</p>
+<p>此时，需要去除该修饰符</p>
+<h4 id="B-找不到ros-h头文件"><a href="#B-找不到ros-h头文件" class="headerlink" title="B. 找不到ros.h头文件"></a>B. 找不到<code>ros.h</code>头文件</h4><p>报错是：<code>ros/ros.h No such file or directory ...</code></p>
+<p>这个一般是<code>CMakeList.txt</code>出错了，导致<code>VSCode</code>没法正常解析<code>CMakeList.txt</code>，从而无法去搜索头文件、补全。</p>
+<p>已知会导致该问题的错误有：</p>
+<ul>
+<li><code>CMakeLists.txt</code>中，<code>find_package</code>出现重复，此时删除重复的内容即可</li>
+</ul>
+<p>参考资料:<a target="_blank" rel="noopener" href="https://answers.ros.org/question/237494/fatal-error-rosrosh-no-such-file-or-directory/">https://answers.ros.org/question/237494/fatal-error-rosrosh-no-such-file-or-directory/</a></p>
+<p>此外，有的时候<code>find_package</code>中没有添加一些包，但也可以运行，这个原因在<code>ros.wiki</code>中的解释如下：</p>
+<blockquote>
+<p>You may notice that sometimes your project builds fine even if you did not call find_package with all dependencies. This is because catkin combines all your projects into one, so if an earlier project calls find_package, yours is configured with the same values. But forgetting the call means your project can easily break when built in isolation.</p>
+</blockquote>
+<h4 id="C-订阅时，第一条-前几条数据丢失"><a href="#C-订阅时，第一条-前几条数据丢失" class="headerlink" title="C. 订阅时，第一条/前几条数据丢失"></a>C. 订阅时，第一条/前几条数据丢失</h4><p>如果<code>Subscriber</code>先启动，然后<code>Publisher</code>后启动，那么<code>Subscriber</code>可能会丢失前几条消息</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221227172315861.png" alt="丢失第一条/前几条数据" style="zoom:25%;"></p>
+<p><strong>原因</strong>：发送第一条数据时，<code>Publisher</code>还未在 <code>ROS Master</code>中注册完毕</p>
+<p><strong>解决</strong>：注册后，休眠几秒<code>ros::Duration(3.0).sleep()</code>以保证第一条数据的发送时<code>Publisher</code>已经完成注册</p>
+<h2 id="3-话题通信Python实现"><a href="#3-话题通信Python实现" class="headerlink" title="3. 话题通信Python实现"></a>3. 话题通信Python实现</h2><p>我们上面介绍了话题通信的<code>Python</code>实现，接下来我们介绍一下话题通信的<code>Python</code>实现。</p>
+<h3 id="3-1-需求"><a href="#3-1-需求" class="headerlink" title="3.1 需求"></a>3.1 需求</h3><p><code>Python</code>的话题通信实现和<code>C++</code>的话题通信实现需求是一样的</p>
+<blockquote>
+<p>编写发布订阅实现，要求发布方以10HZ(每秒10次)的频率发布文本消息，订阅方订阅消息并将消息内容打印输出。</p>
+</blockquote>
+<h3 id="3-2-分析"><a href="#3-2-分析" class="headerlink" title="3.2 分析"></a>3.2 分析</h3><p><code>Python</code>的分析和<code>C++</code>的分析也是一样的</p>
+<blockquote>
+<p>在<code>ROS</code>话题通信模型的七步实现中，<code>ROS Master</code>不需要实现，而连接的建立也已经被封装了，因此，我们自己写代码的时候，需要关注的关键点有三个:</p>
+<ol>
+<li>发布方</li>
+<li>接收方</li>
+<li>数据（此处为普通文本）</li>
+</ol>
+<p>我们接下来就将围绕这三个点进行实现</p>
+</blockquote>
+<h3 id="3-3-实现流程"><a href="#3-3-实现流程" class="headerlink" title="3.3 实现流程"></a>3.3 实现流程</h3><p><code>Python</code>和<code>C++</code>的实现流程有些不同，我们接下来按照下面的流程来实现<code>Python</code>话题通信：</p>
+<ol>
+<li>编写发布方实现</li>
+<li>编写订阅方实现</li>
+<li>为<code>Python</code>文件添加可执行权限</li>
+<li>编辑配置文件</li>
+<li>编译并执行</li>
+</ol>
+<h4 id="A-发布方实现-1"><a href="#A-发布方实现-1" class="headerlink" title="A 发布方实现"></a>A 发布方实现</h4><p>首先还是先在<code>topic_communication</code>功能包下新建一个<code>scripts</code>文件夹，然后再<code>scripts</code>文件夹中新建<code>pub.py</code>文件</p>
+<h5 id="1-单纯发布消息-1"><a href="#1-单纯发布消息-1" class="headerlink" title="1. 单纯发布消息"></a>1. 单纯发布消息</h5><p>类似<code>C++</code>一样，我们首先实现一个最简单的<code>Python</code>发布者，即只能循环发布消息的发布者</p>
+<p>需要注意的是，<code>std_msgs</code>包中的<code>String</code>消息类型是要从<code>std_msgs.msg</code>中直接导入的。然后<code>Python</code>中并不是<code>ros::ok()</code>，而是<code>rospy.is_shutdown()</code>，所以前面要加一个<code>not</code>来取反。</p>
+<p>剩下的逻辑都和<code>C++</code>基本一致</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true"># pub.py</span>
+<span class="token keyword">import</span> sys
+<span class="token keyword">import</span> rospy
+<span class="token keyword">from</span> std_msgs<span class="token punctuation">.</span>msg <span class="token keyword">import</span> String
+
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">"__main__"</span><span class="token punctuation">:</span>
+    <span class="token comment" spellcheck="true"># 初始化节点</span>
+    rospy<span class="token punctuation">.</span>init_node<span class="token punctuation">(</span>name<span class="token operator">=</span><span class="token string">"publisher_py"</span><span class="token punctuation">,</span> argv<span class="token operator">=</span>sys<span class="token punctuation">.</span>argv<span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># 初始化发布者</span>
+    pub <span class="token operator">=</span> rospy<span class="token punctuation">.</span>Publisher<span class="token punctuation">(</span>name<span class="token operator">=</span><span class="token string">"messages"</span><span class="token punctuation">,</span> data_class<span class="token operator">=</span>String<span class="token punctuation">,</span> queue_size<span class="token operator">=</span><span class="token number">10</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># 初始化要发布的数据</span>
+    msg <span class="token operator">=</span> String<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># 循环发布数据，只要当前节点没有被关闭</span>
+    <span class="token keyword">while</span> <span class="token operator">not</span> rospy<span class="token punctuation">.</span>is_shutdown<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        msg<span class="token punctuation">.</span>data <span class="token operator">=</span> <span class="token string">"Hello I'm publisher of Python"</span>
+        pub<span class="token punctuation">.</span>publish<span class="token punctuation">(</span>msg<span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>然后命令行中为<code>pub.py</code>添加可执行文件</p>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">cd</span> 工作目录/src
+<span class="token function">chmod</span> +x topic_communication/scripts/pub.py
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>接下来在功能包的<code>CMakeLists.txt</code>中添加一下<code>Python</code>脚本的安装目录</p>
+<pre class="line-numbers language-bash"><code class="language-bash">catkin_install_python<span class="token punctuation">(</span>PROGRAMS
+  scripts/pub.py
+  DESTINATION <span class="token variable">${CATKIN_PACKAGE_BIN_DESTINATION}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>最后在命令行中编译一下，安装一下<code>Python</code>脚本</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221228003616877.png" alt="安装Python脚本" style="zoom: 25%;"></p>
+<p>最后在命令行中运行：</p>
+<pre class="line-numbers language-bash"><code class="language-bash">roscore
+rosrun topic_communication pub.py            <span class="token comment" spellcheck="true"># 新开中断运行</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>需要注意的是，如果命令行中报错<code>command not found</code>或者<code>cannot read XXX</code>，这种是因为<code>rosrun</code>使用的解释器不对，此时我们需要指定一下需要使用的解释器</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221228005924126.png" alt="command not found报错" style="zoom:25%;"></p>
+<p>此时在命令行运行下属的命令，然后将获取到的当前环境的<code>Python</code>解释器位置放到第一行</p>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">which</span> python
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221228010047482.png" alt="which python的输出" style="zoom: 33%;"></p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true">#! /home/jack/miniconda3/bin/python</span>
+<span class="token keyword">import</span> sys
+<span class="token keyword">import</span> rospy
+<span class="token keyword">from</span> std_msgs<span class="token punctuation">.</span>msg <span class="token keyword">import</span> String
+
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">"__main__"</span><span class="token punctuation">:</span>
+    <span class="token comment" spellcheck="true"># 初始化节点</span>
+    rospy<span class="token punctuation">.</span>init_node<span class="token punctuation">(</span>name<span class="token operator">=</span><span class="token string">"publisher_py"</span><span class="token punctuation">,</span> argv<span class="token operator">=</span>sys<span class="token punctuation">.</span>argv<span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># 初始化发布者</span>
+    pub <span class="token operator">=</span> rospy<span class="token punctuation">.</span>Publisher<span class="token punctuation">(</span>name<span class="token operator">=</span><span class="token string">"messages"</span><span class="token punctuation">,</span> data_class<span class="token operator">=</span>String<span class="token punctuation">,</span> queue_size<span class="token operator">=</span><span class="token number">10</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># 初始化要发布的数据</span>
+    msg <span class="token operator">=</span> String<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># 循环发布数据，只要当前节点没有被关闭</span>
+    <span class="token keyword">while</span> <span class="token operator">not</span> rospy<span class="token punctuation">.</span>is_shutdown<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        msg<span class="token punctuation">.</span>data <span class="token operator">=</span> <span class="token string">"Hello I'm publisher of Python"</span>
+        pub<span class="token punctuation">.</span>publish<span class="token punctuation">(</span>msg<span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>然后此时再运行就好了。</p>
+<p>同时我们新开终端，运行<code>rqt_graph</code>和<code>rostopic echo</code></p>
+<pre class="line-numbers language-bash"><code class="language-bash">roscore
+rosrun topic_communication pub.py                    <span class="token comment" spellcheck="true"># 新开终端</span>
+rostopic <span class="token keyword">echo</span> messages                                        <span class="token comment" spellcheck="true"># 新开终端</span>
+rqt_graph                                                                    <span class="token comment" spellcheck="true"># 新开终端</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221228014302799.png" alt="运行结果" style="zoom: 25%;"></p>
+<h5 id="2-设置频率发布消息-1"><a href="#2-设置频率发布消息-1" class="headerlink" title="2. 设置频率发布消息"></a>2. 设置频率发布消息</h5><p>和<code>C++</code>实现一样，<code>Python</code>中也有一个<code>Rate</code>对象来控制循环频率</p>
+<p><code>python</code></p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Jack Wang</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://jackwang0107.github.io/2022/12/25/ros-jiao-cheng-7-ros-tong-xin-ji-zhi-hua-ti-tong-xin/">https://jackwang0107.github.io/2022/12/25/ros-jiao-cheng-7-ros-tong-xin-ji-zhi-hua-ti-tong-xin/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Jack Wang</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/ROS/">
+                                    <span class="chip bg-color">ROS</span>
+                                </a>
+                            
+                                <a href="/tags/ROS%E9%80%9A%E4%BF%A1%E6%9C%BA%E5%88%B6/">
+                                    <span class="chip bg-color">ROS通信机制</span>
+                                </a>
+                            
+                                <a href="/tags/%E8%AF%9D%E9%A2%98%E9%80%9A%E4%BF%A1/">
+                                    <span class="chip bg-color">话题通信</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.png" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2022/12/25/ros-jiao-cheng-7-ros-tong-xin-ji-zhi-hua-ti-tong-xin/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="ROS教程 7：ROS通信机制——话题通信">
+                        
+                        <span class="card-title">ROS教程 7：ROS通信机制——话题通信</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            本文是ROS系列教程的第七篇文章，讲解了ROS通信机制中的话题通信
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-12-26
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/ROS%E6%95%99%E7%A8%8B/" class="post-category">
+                                    ROS教程
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/ROS/">
+                        <span class="chip bg-color">ROS</span>
+                    </a>
+                    
+                    <a href="/tags/ROS%E9%80%9A%E4%BF%A1%E6%9C%BA%E5%88%B6/">
+                        <span class="chip bg-color">ROS通信机制</span>
+                    </a>
+                    
+                    <a href="/tags/%E8%AF%9D%E9%A2%98%E9%80%9A%E4%BF%A1/">
+                        <span class="chip bg-color">话题通信</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/12/25/ros-jiao-cheng-6-ros-tong-xin-ji-zhi-jian-jie/">
+                    <div class="card-image">
+                        
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/01_%E6%A1%88%E4%BE%8B01_%E4%B9%8C%E9%BE%9F%E7%94%BB%E5%9C%86.gif" class="responsive-img" alt="ROS教程 6：ROS通信机制简介">
+                        
+                        <span class="card-title">ROS教程 6：ROS通信机制简介</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            本文是ROS系列教程的第六篇文章，对ROS中的通信机制进行了简介
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-12-25
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/ROS%E6%95%99%E7%A8%8B/" class="post-category">
+                                    ROS教程
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/ROS/">
+                        <span class="chip bg-color">ROS</span>
+                    </a>
+                    
+                    <a href="/tags/ROS%E9%80%9A%E4%BF%A1%E6%9C%BA%E5%88%B6/">
+                        <span class="chip bg-color">ROS通信机制</span>
+                    </a>
+                    
+                    <a href="/tags/%E8%AF%9D%E9%A2%98%E9%80%9A%E4%BF%A1/">
+                        <span class="chip bg-color">话题通信</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%9C%8D%E5%8A%A1%E9%80%9A%E4%BF%A1/">
+                        <span class="chip bg-color">服务通信</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%8F%82%E6%95%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/">
+                        <span class="chip bg-color">参数服务器</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: JackWang&#39;s Blog<br />'
+            + '文章作者: Jack Wang<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('1'),
+            headingSelector: 'h2, h3, h4, h5, h6'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4, h5, h6').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2021-2022</span>
+            
+            <a href="/about" target="_blank">Jack Wang</a>
+            <!-- |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a> -->
+            <!-- |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a> -->
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">432.5k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+                <span id="sitetime"> Loading ...</span>
+                <script>
+                    var calcSiteTime = function () {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2021";
+                        var startMonth = "11";
+                        var startDate = "12";
+                        var startHour = "0";
+                        var startMinute = "0";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+
+                        // 区分是否有年份.
+                        var language = 'zh-CN';
+                        if (startYear === String(todayYear)) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            var daysTip = 'This site has been running for ' + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                daysTip = '本站已运行 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                daysTip = '本站已運行 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = daysTip;
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            var yearsAndDaysTip = 'This site has been running for ' + diffYears + ' years and '
+                                + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                yearsAndDaysTip = '本站已运行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                yearsAndDaysTip = '本站已運行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+                        }
+                    }
+
+                    calcSiteTime();
+                </script>
+            
+            <br>
+            
+                <span id="icp"><img src="/medias/icp.png"
+                                    style="vertical-align: text-bottom;"/>
+                <a href="https://beian.miit.gov.cn" target="_blank">陕ICP备2021014294号-1</a>
+            </span>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/jackwang0108" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:2232123545@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2232123545" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2232123545" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+        
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/sakura.js"><\/script>');
+            }
+        </script>
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

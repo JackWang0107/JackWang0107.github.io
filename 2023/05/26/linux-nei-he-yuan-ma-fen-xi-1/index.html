@@ -1,0 +1,1524 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Linux内核源码分析 2：Linux内核版本号和源码目录结构, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
+    <meta name="description" content="本文是Linux内核源码分析系列文章的第二篇，介绍了Linux内核的版本号和源码组织结构">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>Linux内核源码分析 2：Linux内核版本号和源码目录结构 | JackWang&#39;s Blog</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.2">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+
+   <style>
+    body{
+       background-image: url(https://cdn.jsdelivr.net/gh/Tokisaki-Galaxy/res/site/medias/background.jpg);
+       background-repeat:no-repeat;
+       background-size: 100% 100%;
+       background-attachment:fixed;
+    }
+</style>
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">JackWang&#39;s Blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-book-reader" style="zoom: 0.6;"></i>
+      
+      <span>博客</span>
+      <i class="fas fa-chevron-down" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/tags">
+          
+          <i class="fas fa-tags" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按标签归类文章</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories">
+          
+          <i class="fas fa-bookmark" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按目录归类文章</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/archives">
+          
+          <i class="fas fa-archive" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按日期分类文章</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">JackWang&#39;s Blog</div>
+        <div class="logo-desc">
+            
+            JackWang的个人博客
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-book-reader"></i>
+			
+			博客
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>
+
+                  <a href="/tags " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-tags" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按标签归类文章</    span>
+
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/categories " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-bookmark" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按目录归类文章</    span>
+
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/archives " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-archive" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按日期分类文章</    span>
+
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('抱歉，这篇文章并不想让所有人都看到，请输入授权密码观看')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://jack-1307599355.cos.ap-shanghai.myqcloud.com/ccf17cd2d69b41c9a6271d016583c7e6.png')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Linux内核源码分析 2：Linux内核版本号和源码目录结构</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Linux%E5%86%85%E6%A0%B8/">
+                                <span class="chip bg-color">Linux内核</span>
+                            </a>
+                        
+                            <a href="/tags/Linux%E5%86%85%E6%A0%B8%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">
+                                <span class="chip bg-color">Linux内核源码分析</span>
+                            </a>
+                        
+                            <a href="/tags/Linux%E5%86%85%E6%A0%B8%E6%BA%90%E7%A0%81%E7%9B%AE%E5%BD%95/">
+                                <span class="chip bg-color">Linux内核源码目录</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2023-05-26
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2023-05-28
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    6.6k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    22 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/ccf17cd2d69b41c9a6271d016583c7e6.png" alt="Linux内核源码目录结构" style="zoom:33%;"></p>
+<h2 id="一、Linux的版本"><a href="#一、Linux的版本" class="headerlink" title="一、Linux的版本"></a>一、Linux的版本</h2><h3 id="1-稳定版和开发版"><a href="#1-稳定版和开发版" class="headerlink" title="1. 稳定版和开发版"></a>1. 稳定版和开发版</h3><p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/dtpwtvvncdj1ntqa4fxenctgle0jnbl.png" alt="Linux内核版本"></p>
+<p><code>Linux</code>内核主要分为两种版本：</p>
+<ul>
+<li>稳定版（长期支持版）：稳定版的内核具有工业级的强度，可以广泛地应用和部署。而每一代新推出的稳定版内核大部分都只是修正了一些Bug或是加入了一些新的设备驱动程序</li>
+<li>开发版：开发版的内核中内核开发者不断试验新的解决方案，所以开发版内核中代码变化得都很快</li>
+</ul>
+<p>这两种版本<code>Linux</code>通过版本号来进行区分。</p>
+<h3 id="2-Linux的版本号"><a href="#2-Linux的版本号" class="headerlink" title="2. Linux的版本号"></a>2. Linux的版本号</h3><p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/7179.1593248779.png" alt="Linux版本号" style="zoom: 50%;"></p>
+<p><code>Linux</code>的版本号主要由三组数字组成<code>xxx.yyy.zzz</code>：</p>
+<ul>
+<li><code>xxx</code>：主版本号（<code>Major Release</code>）</li>
+<li><code>yyy</code>：次版本号（<code>Minor Release</code>）</li>
+<li><code>zzz</code>：修订版本号（<code>Revision Count</code>）</li>
+</ul>
+<p>其中：</p>
+<ul>
+<li>次版本之间添加新的驱动、修复BUG，例如：<code>3.21.x</code>和<code>3.22.x</code></li>
+<li>当次版本累积到一定程度之后，就会发布新的主版本，例如：<code>5.x.x</code>和<code>6.x.x</code></li>
+<li>每个次版本在发布后人们在使用过程中可能会发现BUG，因此会发布该次版本的修订版本，例如<code>5.6.13</code>和<code>5.6.14</code></li>
+</ul>
+<p>而<code>Linux</code>的稳定版和开发版，是通过次版本号来区分的：</p>
+<ul>
+<li>偶数次版本号表示该版本内核为稳定版</li>
+<li>奇数次版本号表示该版本内核为测试版</li>
+</ul>
+<p>例如，<code>Linux 3.6.34</code>：</p>
+<ul>
+<li><code>主版本号</code>：3</li>
+<li><code>次版本号</code>：6，稳定版</li>
+<li><code>修订版本号</code>：34，表示当前版本是<code>Linux 3.6</code>的第34次修订版</li>
+</ul>
+<p>不过，主版本号和次版本号在一起其实就已经可以描述一个版本的内核了，因为后续的修订版本都是修复BUG，不涉及到新功能的发布。</p>
+<h2 id="二、Linux内核源码组织结构"><a href="#二、Linux内核源码组织结构" class="headerlink" title="二、Linux内核源码组织结构"></a>二、Linux内核源码组织结构</h2><p><code>Linux</code>内核源码庞大，2020年版本的内核源码就已经有2780万行了，这些代码分散在66492个C文件中。而<code>Linux</code>代码的源文件则按照一定的组织结构存放在不同的目录下，每个目录中的源代码的功能在逻辑上都有相同的点。</p>
+<p>除了目录以外，还有一些文件，这些文件具有特殊的作用和目的。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230526202809678.png" alt="Linux源码目录" style="zoom: 25%;"></p>
+<h3 id="1-目录"><a href="#1-目录" class="headerlink" title="1. 目录"></a>1. 目录</h3><p><code>Linux</code>源码根目录下存放了一系列目录，每个目录中又有很多的C代码。根据这些C代码在逻辑上功能的划分，将他们放到相同的文件夹。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230528131236517.png" alt="Linux内核源码目录下的目录" style="zoom:33%;"></p>
+<h5 id="A-arch文件夹"><a href="#A-arch文件夹" class="headerlink" title="A. arch文件夹"></a>A. <code>arch</code>文件夹</h5><p><code>arch</code>目录下存放了和体系结构相关的代码，用于屏蔽不同的体系、平台之间的差异。例如：<code>RISC-V</code>架构的<code>CPU</code>打开虚拟地址的地址翻译功能需要读写<code>satp</code>寄存器，而<code>x86</code>的<code>CPU</code>打开虚拟地址的地址翻译功能需要读写<code>cr3</code>寄存器。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230527002716455.png" alt="arch文件夹下列出的Linux支持的所有的体系结构" style="zoom:33%;"></p>
+<p>在<code>Linux</code>中打开虚拟地址翻译功能的函数是<code>switch_mm</code>，而又因为不同的体系结构打开虚拟地址翻译需要进行的操作不同，所以<code>switch_mm</code>函数就放在<code>arch</code>目录下。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230527021318781.png" alt="Linux使用switch_mm打开分页机制，这一函数在RISC-V和x86下行为不同" style="zoom: 50%;"></p>
+<p>事实上，除了<code>switch_mm</code>以外，还有很多类似的函数，例如中断处理函数……</p>
+<h4 id="B-block文件夹"><a href="#B-block文件夹" class="headerlink" title="B. block文件夹"></a>B. <code>block</code>文件夹</h4><p><code>block</code>文件夹内存放了<code>Linux</code>内核的块设备驱动程序。块设备是指将信息存储在固定大小的块中，每个块都有自己的地址，而后<code>CPU</code>可以通过指定地址实现在设备的任意位置读取一定长度的数据。</p>
+<p>块设备其实指的是一类设备，具体来说是<code>I/O</code>设备，即存储数据的设备，而非类似于<code>CPU</code>、显卡这样的计算设备，例如：<code>硬盘</code>，<code>U盘</code>，<code>SD卡</code>。</p>
+<p>注意，后面会讲到<code>Linux</code>内核源码根目录下有一个<code>drivers</code>目录，这个目录里面放着各种设备的驱动。按理来说块设备驱动应该也是驱动的一种，但是这里为什么把<code>block</code>单独拉出来，而不是放到<code>drivers</code>目录下面呢？</p>
+<p>这个其实是因为，<code>drivers</code>目录下面其实放的各种设备的驱动，例如：</p>
+<ul>
+<li><code>driver/cdrom</code>文件夹下存放只读光盘的驱动</li>
+<li><code>driver/usb</code>文件夹下存放<code>USB</code>设备的驱动，例如U盘</li>
+</ul>
+<p>而事实上只读光盘和<code>USB</code>都是块设备，因此在块的操作上，例如读取块、写入块都是一样的，只不过对具体的设备，读取块的操作不同。</p>
+<p>因此，<code>Linux</code>的<code>block</code>目录下是存放的是通用的块设备驱动程序，即写入块、读取块的函数，而具体各个设备读取块的函数则是在<code>driver/设备</code>目录下。所以<code>Linux</code>才把<code>block</code>目录放到根目录下。</p>
+<p>实施上，除了<code>block</code>目录是这样，<code>ipc</code>和<code>net</code>目录也是一样的。只不过存放的是通用的<code>ipc</code>设备驱动和通用的网络驱动。</p>
+<h4 id="C-certs目录"><a href="#C-certs目录" class="headerlink" title="C. certs目录"></a>C. <code>certs</code>目录</h4><p><code>certs</code>目录下存放了<code>Linux</code>与认证和签名有关的代码。该目录中包含了一些预装的数字证书，这些证书可以用来验证签名的模块、内核代码和用户空间应用程序等等内容，这些证书可以用来确保这些组件是来自可信的源，从而提高系统的安全性。</p>
+<p>之所以需要这个目录，其实是由于<code>Linux</code>内核从<code>2.2</code>版本之后就支持动态加载<code>内核模块</code>。</p>
+<blockquote>
+<p><strong>内核模块</strong></p>
+<p>原先在编译的内核的时候，所有的驱动程序、文件系统或网络协议的代码都会编译进内核。最后就会导致内核中充满了各种设备的驱动程序，可能你的电脑的硬件系统上只有10多种设备，但是运行的内核里却有400多种设备的驱动程序。</p>
+<p>正是因为如此，<code>Linux</code>在<code>2.2</code>版本之后提出了<code>内核模块</code>的概念，即将文件系统、驱动程序等等从内核的二进制程序中独立出来，在编译阶段生成单独的以<code>.so</code>文件。未来需要哪个程序，那么就加载对应的<code>.so</code>文件即可。</p>
+<p>例如假设我们现在是文件系统、存储相关的研究者，我们针对<code>ext</code>文件系统的缺点，进行了改进，提出了自己的文件系统<code>Iron</code>文件系统。我们想要测试我们的文件系统，那么这个时候我们就可以以<code>内核模块</code>的形式编写<code>Iron</code>文件系统的程序，<code>Linux</code>内核在运行的时候就可以加载我们编写的<code>Iron</code>文件系统的<code>内核模块</code>到内存</p>
+</blockquote>
+<p><code>内核模块</code>可以在系统运行时动态加载和卸载，这意味着它们不一定是在系统启动时就被加载，而是在需要时才被加载。这种动态加载的方式为系统的灵活性和可扩展性带来了很大的好处，但也为系统带来了一些潜在的安全风险。</p>
+<p>例如，攻击者可以在实现正常内核模块功能的代码之上，增加一些恶意的代码，例如窃取敏感信息、拒绝服务攻击、提权等。最后将其伪装成合法的内核模块，将编译后得到的<code>.so</code>文件替换掉原先正常的<code>内核模块</code>。最后当用户加载了这些恶意的<code>内核模块</code>，这些恶意内核模块就开始破坏系统了。</p>
+<p>正是因为如此，<code>Linux</code>需要对包括<code>内核模块</code>在内的多个组件进行验证，以防止开源的、经过检验的<code>Linux</code>内核的源代码被插入恶意代码，亦或者加载了恶意内核模块。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230527190735184.png" alt="Linux内核源码根目录下的certs目录" style="zoom:33%;"></p>
+<h4 id="D-crypto目录"><a href="#D-crypto目录" class="headerlink" title="D. crypto目录"></a>D. <code>crypto</code>目录</h4><p><code>crypto</code>目录下存放了<code>Linux</code>内核常用的压缩和加密算法。</p>
+<h5 id="1-内核中的加密算法"><a href="#1-内核中的加密算法" class="headerlink" title="1. 内核中的加密算法"></a>1. 内核中的加密算法</h5><p><code>Linux</code>内核在很多地方都需要使用加密算法，基本上<code>Linux</code>系统中实现各种安全功能，例如：加密文件系统、网络传输加密、数字签名、安全登录等等需要保存密码的地方，都需要进行加密。</p>
+<p>因此，<code>Linux</code>内核中的<code>crypto</code>目录中就包含了常用的加密算法的实现，包括：<code>AES</code>、<code>DES</code>、<code>SHA1</code>、<code>SHA256</code>等等。</p>
+<p>此外，因为加密解密使用的非常频繁，因此<code>Linux</code>内核的<code>crypto</code>目录还提供了一些加速加密/解密的硬件的驱动程序，例如基于硬件的<code>AES</code>加速器等，通过这些驱动来调用这些硬件，可以提高<code>Linux</code>内核加密和解密的性能。</p>
+<h5 id="2-内核的压缩算法"><a href="#2-内核的压缩算法" class="headerlink" title="2. 内核的压缩算法"></a>2. 内核的压缩算法</h5><p><code>Linux</code>内核的源码目前已经1.1G了，最终编译得到的二进制格式的内核只会更大。而在开机前，<code>Linux</code>内核是以文件形式存在在磁盘上的，想要运行还需要被加载到内存中。因此，为了减少启动时间和内存占用，<code>Linux</code>内核会对自己进行进行压缩，而后在需要的时候解压对应的代码。</p>
+<p>因此，<strong>内核中的压缩算法的主要目的是为了减小内核映像的大小</strong>。如果不进行压缩，将会导致内核映像的加载和执行时间变长，同时会占用更多的内存空间。</p>
+<p><strong>通过使用压缩算法，可以将内核映像的大小减小到原来的一半甚至更小，从而提高启动速度和节约内存空间</strong>。此外，一些文件系统也使用压缩算法来减小存储空间占用，提高文件系统的性能。</p>
+<p>当然，压缩和解压都是由开销的，虽然压缩算法可以减小内核映像的大小，但同时也会增加内核启动时的解压缩的时间。因此，<code>Linux</code>内核在选择具体的压缩算法时，会根据需要权衡压缩比和解压缩时间选择压缩算法，或者直接使用用户指定的压缩算法，以获得最佳的性能表现。</p>
+<p>具体来说，<code>crypto</code>目录中<code>Linux</code>实现的各种压缩算法包括：<code>LZO</code>、<code>LZ4</code>、<code>Zlib</code>、<code>Deflate</code>……</p>
+<h4 id="E-Documentation目录"><a href="#E-Documentation目录" class="headerlink" title="E. Documentation目录"></a>E. <code>Documentation</code>目录</h4><p><code>Documentation</code>目录是<code>Linux</code>内核的文档，主要描述了各种模块的功能、定义了一些规范</p>
+<p>例如：</p>
+<pre class="line-numbers language-shell"><code class="language-shell">cat Documentation/riscv/boot-image-header.rst | less
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230528003610006.png" alt="Linux内核中关于RISC-V的文档" style="zoom: 25%;"></p>
+<h4 id="F-drivers目录"><a href="#F-drivers目录" class="headerlink" title="F. drivers目录"></a>F. <code>drivers</code>目录</h4><p><code>drivers</code>目录存放了<code>Linux</code>内核的各种硬件的驱动程序。例如<code>GPIO</code>设备：</p>
+<pre class="line-numbers language-shell"><code class="language-shell">ls drivers/gpio | less
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230528004057238.png" alt="drivers目录下的GPIO设备" style="zoom: 25%;"></p>
+<p>不同的<code>CPU</code>型号的<code>GPIO</code>的设置、初始化方法均不同，所以<code>Linux</code>就在<code>drivers/gpio</code>目录下存放了针对不同芯片的<code>GPIO</code>的代码。</p>
+<h4 id="G-fs目录"><a href="#G-fs目录" class="headerlink" title="G. fs目录"></a>G. <code>fs</code>目录</h4><p><code>fs</code>目录下存放了<code>Linux</code>的虚拟文件系统的代码和各种类型的文件系统实现的代码。</p>
+<p>例如<code>Windows</code>中比较常见的<code>ntfs</code>文件系统的实现就在<code>fs/ntfs</code>目录下</p>
+<pre class="line-numbers language-shell"><code class="language-shell">ls fs/ntfs | less
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230528004450901.png" alt="fs目录下的ntfs的实现代码" style="zoom: 25%;"></p>
+<h4 id="H-include目录"><a href="#H-include目录" class="headerlink" title="H. include目录"></a>H. <code>include</code>目录</h4><p><code>include</code>目录下存放了<code>Linux</code>内核源码依赖的绝大部分头文件。各个头文件中包含了内核的各种定义和声明，为内核的构建和开发提供了必要的支持。</p>
+<h4 id="I-init目录"><a href="#I-init目录" class="headerlink" title="I. init目录"></a>I. <code>init</code>目录</h4><p><code>init</code>目录中存放了内核初始化的代码。</p>
+<p>内核的整个运行过程，其实能够视为两个过程：</p>
+<ul>
+<li>按下电源键到内核启动，再到内核开始准备就绪，等待用户使用的这个过程，这一过程被称为<code>初始化</code></li>
+<li>用户开始使用内核，内核正常工作直到关机，这一过程就是内核正常运行的过程</li>
+</ul>
+<p>在初始化阶段，内核需要干很多的事情，例如：</p>
+<ul>
+<li>统计可用的物理内存、打开虚拟地址翻译功能、初始化内存管理模块……</li>
+<li>初始化线程管理模块、构建内核线程、创建init线程运行和用户交互的shell……</li>
+<li>……</li>
+</ul>
+<p>而由于内核是由多个组件组成的，所以<strong>内核初始化阶段的代码实际上就是进入内核各个组件完成各个组件的初始化</strong>。</p>
+<h4 id="J-ipc目录"><a href="#J-ipc目录" class="headerlink" title="J. ipc目录"></a>J. <code>ipc</code>目录</h4><p><code>ipc</code>目录是进程间通信的实现，未来将会被编译成内核的进程间通信模块。<code>Linux</code>中各种常用的进程间通信的机制，例如：</p>
+<ul>
+<li>信号量</li>
+<li>共享内存</li>
+<li>匿名管道</li>
+<li>……</li>
+</ul>
+<p>的实现代码都是在<code>ipc</code>这个目录下面的。</p>
+<pre class="line-numbers language-shell"><code class="language-shell">ls ipc
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230528005740988.png" alt="Linux内核源码的ipc目录" style="zoom:33%;"></p>
+<h4 id="K-kernel目录"><a href="#K-kernel目录" class="headerlink" title="K. kernel目录"></a>K. <code>kernel</code>目录</h4><p><code>kernel</code>目录是内核的核心代码，包含了：</p>
+<ul>
+<li>进程管理</li>
+<li>中断管理</li>
+<li>时钟</li>
+<li>……</li>
+</ul>
+<p>这些是内核最核心的功能组成，因此都放在了<code>kernel</code>这个目录下面。</p>
+<h4 id="L-lib目录"><a href="#L-lib目录" class="headerlink" title="L. lib目录"></a>L. <code>lib</code>目录</h4><p><code>lib</code>目录包含了一些通用的库函数，例如：<code>memset</code>、<code>strlen</code>……这些函数可以被内核的其他部分使用，从而简化内核的开发。注意，我们自己写的用户程序中<code>#include &lt;stdlib.h&gt;</code>和<code>#include&lt;stdio.h&gt;</code>之后也能适应<code>memset</code>，但是这个<code>memset</code>和内核<code>lib</code>目录下的<code>memset</code>是不一样的。</p>
+<p>我们使用的<code>memset</code>是<code>C标准库</code>中定义的函数，而<code>C标准库</code>实际上是需要操作系统的支持的，因此我们在编写内核的源代码的时候实际上是没有<code>C标准库</code>给我们用的，我们得自己手动实现一些<code>C标准库</code>的函数。</p>
+<p>因此，从这个角度来理解，内核源码中的<code>lib</code>目录其实就是<code>C标准库</code>实现的一个子集。</p>
+<p>此外，<code>lib</code>目录中还有一些常见的数据结构和算法的实现，如链表、哈希表、红黑树、位图等。</p>
+<h4 id="M-mm目录"><a href="#M-mm目录" class="headerlink" title="M. mm目录"></a>M. <code>mm</code>目录</h4><p><code>mm</code>目录是<code>Linux</code>内核内存管理相关的实现，包括：</p>
+<ul>
+<li>物理内存管理</li>
+<li>页面分配算法</li>
+<li>缺页中断、换页算法</li>
+<li>……</li>
+</ul>
+<h4 id="N-net目录"><a href="#N-net目录" class="headerlink" title="N. net目录"></a>N. <code>net</code>目录</h4><p><code>net</code>目录和<code>block</code>目录类似，因为有很多种网络设备，例如：无线网卡（即<code>WiFi</code>）、以太网（即有线），还有4G……而这些具体的网络设备的驱动代码是放在<code>drivers</code>目录下的。</p>
+<p>不管设备有多少种，而网络协议栈其实都是一样的，例如用无线网卡和以太网收发数据包，尽管数据包收发的设备不同，但是都是遵循IPv4网络协议的。因此<code>Linux</code>内核将网络协议实现的代码放在了<code>net</code>目录下。</p>
+<p><code>net</code>目录中实现的网络协议包括：</p>
+<ul>
+<li><code>TCP</code></li>
+<li><code>IPv6</code></li>
+<li><code>DNS</code></li>
+<li>……</li>
+</ul>
+<h4 id="O-samples目录"><a href="#O-samples目录" class="headerlink" title="O. samples目录"></a>O. <code>samples</code>目录</h4><p><code>samples</code>目录中存放了一些<code>Linux</code>内核的示例代码和程序，这些代码和程序可以帮助新入门的内核工程师更好地了解<code>Linux</code>内核的工作原理和实现细节。</p>
+<p><code>samples</code>目录中的示例代码和程序可以帮助开发人员学习如何使用<code>Linux</code>内核实现的函数，比如网络协议栈相关的函数、文件系统、驱动程序、调度器等等功能模块中相关的函数。</p>
+<p>同时，这些示例代码和应用程序还可以作为开发人员开发自己的<code>Linux</code>内核模块和应用程序的参考和范例。</p>
+<p>最后，在<code>samples</code>目录中有一些程序作为测试用例，可以用于测试<code>Linux</code>内核的各种功能和接口的正确性和性能。</p>
+<p>基本上我们在一开始学习<code>Linux</code>内核开发的时候，或者<code>Hacking Linux Kernel</code>的时候，为了避免直接修改其他目录下的代码来插入我们自己的代码会导致<code>Linux</code>无法运行、难以调试，一般把代码放在<code>samples</code>目录下去测试。等我们以后功力精进了，再去修改其他目录下的代码。</p>
+<h4 id="P-scripts目录"><a href="#P-scripts目录" class="headerlink" title="P. scripts目录"></a>P. <code>scripts</code>目录</h4><p><code>Linux</code>内核源码目录中的<code>scripts</code>目录包含了一些脚本工具，这些工具可以帮助内核开发者进行内核编译、调试、分析和优化等工作。</p>
+<p>具体来说，<code>scripts</code>目录中包含了以下几类工具：</p>
+<ol>
+<li><strong>编译工具</strong>：<code>scripts</code>目录中包含了一些编译内核的工具脚本，比如<code>make</code>、<code>gcc</code>、<code>ld</code>等等工具的脚本。这些工具脚本可以帮助开发人员编译内核源码，生成可执行的内核镜像文件。</li>
+<li><strong>调试工具</strong>：<code>scripts</code>目录中包含了一些调试内核的脚本工具，比如<code>gdb</code>、<code>kgdb</code>、<code>kdb</code>等工具的脚本等。这些脚本可以帮助开发人员对内核进行调试，定位和解决内核中的各种问题。</li>
+<li><strong>分析工具</strong>：<code>scripts</code>目录中包含了一些分析内核的脚本工具，比如<code>perf</code>、<code>trace-cmd</code>等等。这些工具可以帮助开发人员对内核进行性能分析、跟踪和统计，从而找出内核中的性能瓶颈和优化点。</li>
+<li><strong>代码检查工具</strong>：<code>scripts</code>目录中包含了一些代码检查的脚本工具，比如<code>checkpatch.pl</code>、<code>sparse</code>等等。这些脚本工具可以帮助开发人员检查内核源码中的代码风格、语法错误、内存泄漏等问题，提高代码质量和可维护性。</li>
+</ol>
+<h4 id="Q-security目录"><a href="#Q-security目录" class="headerlink" title="Q. security目录"></a>Q. <code>security</code>目录</h4><p><code>Linux</code>内核源码目录中的<code>security</code>目录提供了<code>Linux</code>内核安全机制的实现，例如：<code>Access Contol List</code>（即<code>ACL</code>），<code>SELinux</code>……</p>
+<p>这个目录下的代码主要实现的都是安全相关的函数，因此这个目录提供了安全相关的模块和接口，这些模块和接口可以帮助开发人员增强<code>Linux</code>系统的安全性能。</p>
+<p>具体来说，<code>security</code>目录中包含了以下几类模块和接口：</p>
+<ol>
+<li><strong>安全模块</strong>：<code>security</code>目录中包含了一些安全模块，比如<code>SELinux</code>、<code>AppArmor</code>等等。这些安全模块可以帮助开发人员对系统中的各种资源进行访问控制和安全策略的管理，从而提高系统的安全性能。</li>
+<li><strong>安全接口</strong>：<code>security</code>目录中还包含了一些安全接口，比如<code>security_inode_permission</code>、<code>security_file_permission</code>等等。这些安全接口可以帮助开发人员对系统中的各种资源进行访问控制和权限管理，从而保护系统中的敏感数据和应用程序。</li>
+<li><strong>安全策略</strong>：<code>security</code>目录中还包含了一些安全策略，比如<code>capability</code>、<code>posix_acl</code>等等。这些安全策略可以帮助开发人员对系统中的各种资源进行访问控制和权限管理，从而保护系统中的敏感数据和应用程序。</li>
+</ol>
+<h4 id="R-sound目录"><a href="#R-sound目录" class="headerlink" title="R. sound目录"></a>R. <code>sound</code>目录</h4><p><code>sound</code>目录是<code>Linux</code>内核源码中的包含了与声音相关的驱动程序和模块的目录。和<code>net</code>、<code>block</code>目录类似，具体的某种型号的声卡设备的驱动是放在<code>drivers</code>目录下的，<code>sound</code>目录中的代码关注的是通用的声音的播放、录制和处理的功能。</p>
+<p>因此，<code>sound</code>目录通过调用<code>drivers</code>目录下的不同型号声卡的驱动程序，从而实现了让<code>Linux</code>内核可以支持使用多种声卡设备播放、录制和处理声音，并为用户程序提供了一系列的接口和功能。</p>
+<p>具体来说，<code>sound</code>目录主要实现的，或者说<code>Linux</code>目前处理声音的模块的架构是<code>ALSA</code>，它是<code>Advanced Linux Sound Architecture</code>的缩写，是<code>Linux</code>系统中用于声音处理的一种高级架构。<code>alsa</code>规范中定义了一系列的驱动程序和库，使得<code>Linux</code>系统能够支持多种声卡设备，并提供了一系列的接口和功能，使得应用程序能够方便地进行声音的录制、播放和处理等操作。</p>
+<p>除了<code>alsa</code>之外，<code>sound</code>目录中还包含了一些其他的声音驱动程序和模块，如<code>oss</code>子目录，它是<code>Open Sound System</code>的缩写，是一种旧的<code>Linux</code>声音架构，目前已经逐渐被<code>alsa</code>所取代。</p>
+<p>此外，<code>sound</code>目录中还包含了一些其他的声音驱动程序和模块，如USB声卡驱动程序、蓝牙耳机驱动程序等。这些驱动程序和模块可以支持多种声卡设备，并提供了一系列的接口和功能，使得Linux系统能够播放、录制和处理声音。</p>
+<h4 id="S-tools目录"><a href="#S-tools目录" class="headerlink" title="S. tools目录"></a>S. <code>tools</code>目录</h4><p>在Linux内核源码目录中，<code>tools</code>目录包含了一些工具和实用程序的源代码，这些工具通常用于内核开发和调试。其中一些工具是用C语言编写的，而另一些工具则是用<code>Python</code>或其他脚本语言编写的。具体来说：</p>
+<ul>
+<li>这些工具包括了一些用于系统调试和性能分析的程序，如<code>perf</code>和<code>ftrace</code>等</li>
+<li>还包括了一些用于内核构建和编译的工具，如<code>kconfig</code>和<code>kbuild</code>等</li>
+<li>还包含了一些用于模拟和测试的程序，如<code>ktest</code>和<code>kvm</code>等。</li>
+</ul>
+<p><code>tools</code>目录下的工具和实用程序对于内核开发和调试非常重要，通常一名资深的<code>Linux</code>内核开发人员，是需要熟悉这些工具的使用方法和实现原理。</p>
+<h4 id="T-usr目录"><a href="#T-usr目录" class="headerlink" title="T. usr目录"></a>T. <code>usr</code>目录</h4><p><code>usr</code>目录是用户打包盒压缩内核实现的源码。</p>
+<h4 id="U-virt目录"><a href="#U-virt目录" class="headerlink" title="U. virt目录"></a>U. <code>virt</code>目录</h4><p><code>virt</code>目录提供了<code>Linux</code>内核对虚拟化相关支持的代码实现。</p>
+<p>例如，<code>virt/kvm</code>目录下包含了<code>Linux</code>内核中的<code>KVM</code>虚拟化模块的源代码，它可以让Linux内核作为一个虚拟机监控器（<code>VMM</code>）来运行虚机</p>
+<h4 id="W-LICENSE目录"><a href="#W-LICENSE目录" class="headerlink" title="W. LICENSE目录"></a>W. <code>LICENSE</code>目录</h4><p><code>Linux</code>内核源码目录中的<code>LICENSES</code>目录包含了<code>Linux</code>内核源码中使用的各种许可证的文本，包括<code>GPL</code>、<code>LGPL</code>、<code>BSD</code>、<code>MIT</code>等等。</p>
+<p>这个目录的作用是为了让<code>Linux</code>内核源码的开发者能够方便地查看和了解每种许可证的具体内容和限制。</p>
+<p>这个目录是为了保证<code>Linux</code>内核源码的开放性和透明度，让所有人都能够了解<code>Linux</code>内核源码的使用条件和限制，从而更好地遵守这些许可证和规定。</p>
+<h3 id="2-文件"><a href="#2-文件" class="headerlink" title="2. 文件"></a>2. 文件</h3><p>除了目录以外，<code>Linux</code>内核源码目录下还存放了几个文件，这些文件各有不同的用法。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230528131841577.png" alt="Linux内核源码目录下的文件" style="zoom:33%;"></p>
+<h4 id="A-COPYING文件"><a href="#A-COPYING文件" class="headerlink" title="A. COPYING文件"></a>A. <code>COPYING</code>文件</h4><p><code>Linux</code>内核源码目录中的<code>COPYING</code>文件是版权声明文件，即许可证，它规定了<code>Linux</code>内核源码的使用条件和限制。</p>
+<p><code>Linux</code>内核源码采用的许可证是<code>GPLv2</code>。<code>GPLv2</code>开源许可声明任何人都可以自由地使用、复制、分发和修改<code>Linux</code>内核源码，但是得到的成果也使用<code>GPL</code>许可证开源出来。</p>
+<p>需要注意的是，<code>Linux</code>内核绝大部分的源码采用的都是<code>GPLv2</code>，但是有一些例外，例如有一些系统调用，对应的授权声明在<code>LICENSES/exceptions/Linux-syscall-note</code>中</p>
+<h4 id="B-CREDIT文件"><a href="#B-CREDIT文件" class="headerlink" title="B. CREDIT文件"></a>B. <code>CREDIT</code>文件</h4><p><code>Linux</code>内核源码目录中的<code>CREDIT</code>文件记录了所有为<code>Linux</code>内核做出贡献的人员名单，包括：</p>
+<ul>
+<li>内核开发者</li>
+<li>维护者</li>
+<li>测试人员</li>
+<li>……</li>
+</ul>
+<p><code>CREDIT</code>文件的作用是为了表彰和感谢所有为<code>Linux</code>内核做出贡献的人员，记录他们的贡献和成就。</p>
+<p>同时，<code>CREDIT</code>文件也是<code>Linux</code>社区文化的一部分，它强调了<code>Linux</code>内核开发的开放性、合作性和社区精神，让所有人都能够参与到<code>Linux</code>内核的开发和维护中来。</p>
+<h4 id="C-Kbuild文件"><a href="#C-Kbuild文件" class="headerlink" title="C. Kbuild文件"></a>C. <code>Kbuild</code>文件</h4><p><code>Linux</code>内核源码目录中的<code>Kbuild</code>文件是用于构建<code>Linux</code>内核的<code>Makefile</code>。注意，<code>Kbuild</code>文件主要定义了构建<code>Linux</code>内核的<code>Makefile</code>的配置。在编译内核时候运行的命令主要定义在<code>Makefile</code>文件中</p>
+<p><code>Kbuild</code>文件的作用是自动化构建<code>Linux</code>内核的过程，使得开发者能够方便地编译、构建和安装<code>Linux</code>内核。</p>
+<p>同时，<code>Kbuild</code>文件也提供了一些高级的编译功能，如：</p>
+<ul>
+<li>支持模块化编译</li>
+<li>交叉编译</li>
+<li>并行编译</li>
+<li>……</li>
+</ul>
+<p>这些功能使得<code>Linux</code>内核的构建更加灵活和高效。</p>
+<h4 id="D-MAINTAINERS文件"><a href="#D-MAINTAINERS文件" class="headerlink" title="D. MAINTAINERS文件"></a>D. <code>MAINTAINERS</code>文件</h4><p><code>Linux</code>内核源码目录中的<code>MAINTAINERS</code>文件保存了当前所有内核的维护者名单。它记录了<code>Linux</code>内核中各个子系统的维护者和贡献者信息。</p>
+<p><code>MAINTAINERS</code>文件的作用是帮助开发者快速找到负责某个子系统的维护者或贡献者，以便于进行代码提交、修复或协作开发等工作。</p>
+<p><code>MAINTAINERS</code>文件中列出了<code>Linux</code>内核中各个子系统的维护者和贡献者的姓名、电子邮件地址、所在公司、负责的子系统等信息。开发者可以通过该文件查找到负责自己所关注的子系统的维护者或贡献者，并向其提交代码或报告问题。</p>
+<p>除了作为开发者的参考之外，<code>MAINTAINERS</code>文件还可以作为<code>Linux</code>内核社区的组织和管理工具。通过该文件，<code>Linux</code>内核社区可以对各个子系统的维护者和贡献者进行管理和协调，以保证<code>Linux</code>内核的良好发展和稳定性。</p>
+<h4 id="E-Makefile文件"><a href="#E-Makefile文件" class="headerlink" title="E. Makefile文件"></a>E. <code>Makefile</code>文件</h4><p><code>Linux</code>内核源码目录中的<code>Makefile</code>文件是用于编译内核的。它包含了在编译内核时候该执行的一系列的命令，包括：</p>
+<ul>
+<li>用于生成内核镜像的命令</li>
+<li>生成内核模块的命令</li>
+<li>……</li>
+</ul>
+<p><code>Makefile</code>文件会读取<code>Kbuild</code>文件的中的配置信息来生成编译命令，从而编译内核源代码。</p>
+<p>除了编译内核镜像和模块之外，<code>Makefile</code>文件中还定义了其他的一些操作，例如：</p>
+<ul>
+<li>安装内核</li>
+<li>打包内核</li>
+<li>清除编译生成的文件</li>
+<li>……</li>
+</ul>
+<p><code>Makefile</code>文件根据调用<code>make</code>命令时候指定不同的目标来执行不同的操作，例如<code>make all</code>用于编译内核和模块，<code>make install</code>用于安装内核，<code>make clean</code>用于清除编译生成的文件等等。</p>
+<h4 id="F-README文件"><a href="#F-README文件" class="headerlink" title="F. README文件"></a>F. <code>README</code>文件</h4><p><code>Linux</code>内核源码目录中的<code>README</code>文件提供了有关该特定版本的内核的一些基本信息，如：</p>
+<ul>
+<li>内核的版本号</li>
+<li>支持的硬件平台</li>
+<li>安装和配置指南</li>
+<li>……</li>
+</ul>
+<p>此外，<code>README</code>文件还可能包含其他有用的信息，如：</p>
+<ul>
+<li>已知的问题、限制</li>
+<li>BUG修复</li>
+</ul>
+<p>通常，<code>README</code>文件提供了有关内核的基本信息，帮助用户快速入门。</p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Jack Wang</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://jackwang0107.github.io/2023/05/26/linux-nei-he-yuan-ma-fen-xi-1/">https://jackwang0107.github.io/2023/05/26/linux-nei-he-yuan-ma-fen-xi-1/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Jack Wang</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/Linux%E5%86%85%E6%A0%B8/">
+                                    <span class="chip bg-color">Linux内核</span>
+                                </a>
+                            
+                                <a href="/tags/Linux%E5%86%85%E6%A0%B8%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">
+                                    <span class="chip bg-color">Linux内核源码分析</span>
+                                </a>
+                            
+                                <a href="/tags/Linux%E5%86%85%E6%A0%B8%E6%BA%90%E7%A0%81%E7%9B%AE%E5%BD%95/">
+                                    <span class="chip bg-color">Linux内核源码目录</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.png" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2023/05/28/linux-nei-he-yuan-ma-fen-xi-2/">
+                    <div class="card-image">
+                        
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/Process-States-in-LINUX.png" class="responsive-img" alt="Linux内核源码分析 3：Linux线程原理以及相关系统调用">
+                        
+                        <span class="card-title">Linux内核源码分析 3：Linux线程原理以及相关系统调用</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            本文是Linux内核源码分析系列文章的第三篇，介绍了Linux内核中是如何实现进程和线程的
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-05-28
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            Jack Wang
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/C%E8%AF%AD%E8%A8%80/">
+                        <span class="chip bg-color">C语言</span>
+                    </a>
+                    
+                    <a href="/tags/Linux%E5%86%85%E6%A0%B8/">
+                        <span class="chip bg-color">Linux内核</span>
+                    </a>
+                    
+                    <a href="/tags/Linux%E5%86%85%E6%A0%B8%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">
+                        <span class="chip bg-color">Linux内核源码分析</span>
+                    </a>
+                    
+                    <a href="/tags/%E8%BF%9B%E7%A8%8B/">
+                        <span class="chip bg-color">进程</span>
+                    </a>
+                    
+                    <a href="/tags/%E7%BA%BF%E7%A8%8B/">
+                        <span class="chip bg-color">线程</span>
+                    </a>
+                    
+                    <a href="/tags/task-struct/">
+                        <span class="chip bg-color">task_struct</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/05/26/linux-nei-he-yuan-ma-fen-xi-0/">
+                    <div class="card-image">
+                        
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230526173802640.png" class="responsive-img" alt="Linux内核源码分析 1：Linux内核体系架构和学习路线">
+                        
+                        <span class="card-title">Linux内核源码分析 1：Linux内核体系架构和学习路线</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            本文是Linux内核源码分析系列文章的第一篇，介绍了Linux内核的体系架构和学习路线
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-05-26
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            Jack Wang
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/C%E8%AF%AD%E8%A8%80/">
+                        <span class="chip bg-color">C语言</span>
+                    </a>
+                    
+                    <a href="/tags/Linux%E5%86%85%E6%A0%B8/">
+                        <span class="chip bg-color">Linux内核</span>
+                    </a>
+                    
+                    <a href="/tags/Linux%E5%86%85%E6%A0%B8%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">
+                        <span class="chip bg-color">Linux内核源码分析</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: JackWang&#39;s Blog<br />'
+            + '文章作者: Jack Wang<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('1'),
+            headingSelector: 'h2, h3, h4, h5, h6'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4, h5, h6').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2021-2023</span>
+            
+            <a href="/about" target="_blank">Jack Wang</a>
+            <!-- |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a> -->
+            <!-- |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a> -->
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">526.1k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+                <span id="sitetime"> Loading ...</span>
+                <script>
+                    var calcSiteTime = function () {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2021";
+                        var startMonth = "11";
+                        var startDate = "12";
+                        var startHour = "0";
+                        var startMinute = "0";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+
+                        // 区分是否有年份.
+                        var language = 'zh-CN';
+                        if (startYear === String(todayYear)) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            var daysTip = 'This site has been running for ' + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                daysTip = '本站已运行 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                daysTip = '本站已運行 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = daysTip;
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            var yearsAndDaysTip = 'This site has been running for ' + diffYears + ' years and '
+                                + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                yearsAndDaysTip = '本站已运行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                yearsAndDaysTip = '本站已運行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+                        }
+                    }
+
+                    calcSiteTime();
+                </script>
+            
+            <br>
+            
+                <span id="icp"><img src="/medias/icp.png"
+                                    style="vertical-align: text-bottom;"/>
+                <a href="https://beian.miit.gov.cn" target="_blank">陕ICP备2021014294号-1</a>
+            </span>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/jackwang0108" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:2232123545@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2232123545" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2232123545" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+        
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/sakura.js"><\/script>');
+            }
+        </script>
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
