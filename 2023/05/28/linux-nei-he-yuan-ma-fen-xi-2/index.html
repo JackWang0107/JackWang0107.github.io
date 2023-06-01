@@ -484,7 +484,7 @@
 <p>例如，我们在电脑上运行的<code>QQ</code>、<code>微信</code>、<code>Chrome浏览器</code>、<code>QQ音乐</code>……等等应用在操作系统看来都是进程。进程通过调用系统提供的这些使用硬件的函数，最终完成了向耳机输出声音（<code>QQ音乐</code>）、发出消息（<code>QQ</code>/<code>微信</code>）……等等功能</p>
 <p><strong>因此，线程是操作系统的使用者，具备使用操作系统抽象出的资源的能力，是完成用户要求的直接对象</strong>。</p>
 <p>下面是我使用<code>htop</code>命令查看了当前系统中我运行了那些进程。</p>
-<pre class="line-numbers language-shell"><code class="language-shell">htop
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">htop</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>可以看到，我在写这篇文章的时候，正在听歌（<code>QQ音乐</code>）、看文档（<code>wpsoffice</code>）、使用魔法（<code>ClashX Pro</code>）……</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230528184124761.png" alt="我电脑上此刻运行的进程" style="zoom: 25%;"></p>
@@ -498,7 +498,7 @@
 <li>……</li>
 </ul>
 <p>还是以我电脑为例，查看一下一个进程包含了那些线程。</p>
-<pre class="line-numbers language-shell"><code class="language-shell">htop
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">htop</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>这里可以看到，<code>iTerm 2</code>这个进程运行了多个线程。这里其实就是我在命令行里开了多个终端，每个终端都在跑一个命令：</p>
 <ul>
@@ -519,7 +519,7 @@
 </ul>
 <h4 id="1-可执行的二进制指令序列"><a href="#1-可执行的二进制指令序列" class="headerlink" title="1. 可执行的二进制指令序列"></a>1. 可执行的二进制指令序列</h4><p>源代码是文本形式的文件，本质和<code>.txt</code>文件差不太多，内容上和<code>Word</code>里的文档是一样的。我们利用编译器，将文本格式的程序（此时还是源代码）编译为可执行的二进制程序（此时就是我们熟知的<code>QQ</code>、<code>微信</code>等应用）</p>
 <p><strong>可执行的二进制程序实际上就是由可执行的二进制指令序列组成的</strong>。例如现在使用<code>hexdump</code>命令查看我电脑上的<code>VSCode</code>这个可执行的程序</p>
-<pre class="line-numbers language-shell"><code class="language-shell">hexdump -C $(which code)
+<pre class="line-numbers language-bash"><code class="language-bash">hexdump -C <span class="token variable"><span class="token variable">$(</span><span class="token function">which</span> code<span class="token variable">)</span></span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>可以看到，<code>VSCode</code>这个可执行程序实际上就是由可执行的指令序列组成的</p>
 <p><strong>而进程实际上就是运行中的程序，所以进程的特征之一就是具有可执行的指令序列</strong></p>
@@ -1082,7 +1082,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">526.7k</span>
+                        class="white-color">534.5k</span>
             
             
             

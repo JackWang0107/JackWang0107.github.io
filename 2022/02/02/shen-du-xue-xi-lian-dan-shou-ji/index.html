@@ -419,7 +419,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-09-28
+                    2023-06-01
                 </div>
                 
 
@@ -774,16 +774,16 @@ b <span class="token operator">=</span> torch<span class="token punctuation">.</
 <p>那么我们就会想问有没有类似htop、top一类可以实时监控GPU缓存用量的命令行工具呢？</p>
 <p>答案其实是有的，下面几种方法都可以实现持续不断地监控GPU缓存的用量</p>
 <h3 id="1-watch-nvidia-smi"><a href="#1-watch-nvidia-smi" class="headerlink" title="1. watch nvidia-smi"></a>1. watch nvidia-smi</h3><p>第一种方法就是最原始<code>watch</code>+<code>nvidia-smi</code>的方式，使用下面的命令，指定0.1秒查询一次</p>
-<pre class="line-numbers language-shell"><code class="language-shell">watch -n0.1 nvidia-smi
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">watch</span> -n0.1 nvidia-smi
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>使用效果如下</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/深度录屏_选择区域_20220322105816.gif" alt="watch+nvidia-smi的使用效果"></p>
 <h3 id="2-gpustat"><a href="#2-gpustat" class="headerlink" title="2. gpustat"></a>2. gpustat</h3><p>使用<code>nvidia-smi</code>得到的输出是没有颜色的，我们就希望能不能像htop一样有彩色的输出。这个时候我们就可以结束<code>gpustat</code>这个工具实现。</p>
 <p>首先安装该工具</p>
-<pre class="line-numbers language-shell"><code class="language-shell">pip install gpustat
+<pre class="line-numbers language-bash"><code class="language-bash">pip <span class="token function">install</span> gpustat
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>然后在安装的python环境下，使用如下命令</p>
-<pre class="line-numbers language-shell"><code class="language-shell">gpustat -cp --watch
+<pre class="line-numbers language-bash"><code class="language-bash">gpustat -cp --watch
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>就可以看到如下的效果</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/深度录屏_选择区域_20220322110301.gif" alt="gpustat的效果"></p>
@@ -1333,7 +1333,7 @@ b <span class="token operator">=</span> torch<span class="token punctuation">.</
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">526.7k</span>
+                        class="white-color">534.5k</span>
             
             
             

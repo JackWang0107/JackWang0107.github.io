@@ -411,7 +411,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-11-14
+                    2023-06-01
                 </div>
                 
 
@@ -451,27 +451,27 @@
 <h2 id="1-软连接：ln-s"><a href="#1-软连接：ln-s" class="headerlink" title="1. 软连接：ln -s"></a>1. 软连接：ln -s</h2><p><code>Linux</code>系统及其发行版系统中，使用的文件系统基本都是<code>ext</code>系列的。而<code>ext</code>文件系统中有一个概念，就是<code>链接</code>。链接可以视为文件或者目录的镜像。直观的理解，有所谓的链接(<code>link</code>)，我们可以将其视为文件或者目录的别名。</p>
 <p>链接分<strong>软链接</strong>和<strong>硬链接</strong>两种，常用的是软连接，因为硬链接会导致文件在硬盘中存在多个镜像。</p>
 <h3 id="A-创建软连接"><a href="#A-创建软连接" class="headerlink" title="A. 创建软连接"></a>A. 创建软连接</h3><p><code>ln</code>命令可以用于创建软连接或者硬链接，其格式为：</p>
-<pre class="line-numbers language-shell"><code class="language-shell">ln [参数] [源文件或目录]  [目标文件或目录]
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">ln</span> <span class="token punctuation">[</span>参数<span class="token punctuation">]</span> <span class="token punctuation">[</span>源文件或目录<span class="token punctuation">]</span>  <span class="token punctuation">[</span>目标文件或目录<span class="token punctuation">]</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>创建软连接的格式为：</p>
-<pre class="line-numbers language-shell"><code class="language-shell">ln -s [源文件或目录]  [目标文件或目录]
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">ln</span> -s <span class="token punctuation">[</span>源文件或目录<span class="token punctuation">]</span>  <span class="token punctuation">[</span>目标文件或目录<span class="token punctuation">]</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>例如我现在在当前目录下创建一个指向<code>~/project/data/cifar10</code>的软连接，则命令为：</p>
-<pre class="line-numbers language-shell"><code class="language-shell">mkdir datasets
-ln -s ~/projects/data/cifar10  ./datasets/cifar10
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">mkdir</span> datasets
+<span class="token function">ln</span> -s ~/projects/data/cifar10  ./datasets/cifar10
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <h3 id="B-删除软连接"><a href="#B-删除软连接" class="headerlink" title="B. 删除软连接"></a>B. 删除软连接</h3><p><code>rm</code>命令可以用于删除文件或者目录，软连接自然也可以。</p>
-<pre class="line-numbers language-shell"><code class="language-shell">rm [软链接]
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">rm</span> <span class="token punctuation">[</span>软链接<span class="token punctuation">]</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>但是需要注意的是，删除软连接的时候，不能加<code>/</code>，例如，现在要删除上面创建的<code>cifar10</code>软连接，<strong>那么就要用</strong></p>
-<pre class="line-numbers language-shell"><code class="language-shell">rm -r cifar10
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">rm</span> -r cifar10
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><strong>注意，不能用</strong>：</p>
-<pre class="line-numbers language-shell"><code class="language-shell">rm -r cifar10/
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">rm</span> -r cifar10/
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>因为<code>cifar10</code>是一个软连接，如果我们加了<code>/</code>，就会对其进行转义，从而删除掉<code>~/project/data/cifar10/</code>文件夹下的所有文件，但是<code>cifar10</code>这个链接文件本文会被保存下来。</p>
 <h3 id="C-查看软连接"><a href="#C-查看软连接" class="headerlink" title="C. 查看软连接"></a>C. 查看软连接</h3><p>我们如果要查看软连接所指向的文件，那么直接用<code>ls</code>命令即可。</p>
-<pre class="line-numbers language-shell"><code class="language-shell">ls -al ./
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">ls</span> -al ./
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><code>ls</code>的<code>-l</code>参数会解析软连接，并且显示出软连接指向的文件。</p>
 <h2 id="2-压缩和解压缩-tar-gz-tgz"><a href="#2-压缩和解压缩-tar-gz-tgz" class="headerlink" title="2. 压缩和解压缩.tar.gz/.tgz"></a>2. 压缩和解压缩.tar.gz/.tgz</h2><p>压缩文件能够方便的在不同的计算机之间传输数据，亦或者是使用<code>at</code>、<code>crontab</code>等命令定期的备份数据。</p>
@@ -507,65 +507,65 @@ ln -s ~/projects/data/cifar10  ./datasets/cifar10
 
 
 <h3 id="B-压缩"><a href="#B-压缩" class="headerlink" title="B. 压缩"></a>B. 压缩</h3><p>压缩直接使用下面的组合</p>
-<pre class="line-numbers language-shell"><code class="language-shell">tar -czvf 压缩后生成的文件名 要压缩的文件/文件夹名
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">tar</span> -czvf 压缩后生成的文件名 要压缩的文件/文件夹名
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>此外，需要注意的是，<code>tar</code>在压缩的时候会保存文件夹的结构，因此我们要压缩一个文件夹的时候，最好在该文件夹外进行压缩。</p>
 <p>例如我们要压缩一个名为<code>~/file/test/</code>的文件夹时，使用下面的命令</p>
-<pre class="line-numbers language-shell"><code class="language-shell">cd ~/file
-tar -czvf test.tar.gz test/
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">cd</span> ~/file
+<span class="token function">tar</span> -czvf test.tar.gz test/
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>这样解压完了之后得到<code>test</code>一整个文件夹</p>
 <p>但是如果我们按照下面的方式进行压缩</p>
-<pre class="line-numbers language-shell"><code class="language-shell">cd ~/file/test
-tar -czvf ./*
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">cd</span> ~/file/test
+<span class="token function">tar</span> -czvf ./*
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>那么解压的时候就会得到很多文件</p>
 <h3 id="C-解压"><a href="#C-解压" class="headerlink" title="C. 解压"></a>C. 解压</h3><p>解压使用下面的组合</p>
-<pre class="line-numbers language-shell"><code class="language-shell">tar -xzvf 要解压的文件名
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">tar</span> -xzvf 要解压的文件名
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <h2 id="3-非交互式SSH连接：sshpass"><a href="#3-非交互式SSH连接：sshpass" class="headerlink" title="3. 非交互式SSH连接：sshpass"></a>3. 非交互式SSH连接：sshpass</h2><p>在开发的过程中，很多时候我们都需要干一些重复的事情。因此如果有一些任务在未来一段时间我们重复会干的话，那么我们就可以把这一系列任务写成一个Shell脚本，以后直接调用即可。</p>
 <p>而很多时候，我们在本机上完成好了开发之后，需要上传到内网的机器中进行测试。手动的用<code>tar</code>打包完了之后再用<code>scp</code>命令上传到内网服务器中是真的很麻烦。因此我们就想能不能把代码的打包以及上传写成一个脚本。</p>
 <p>可是这样干优惠存在一个问题，就是<code>scp</code>或者<code>ssh</code>这样涉及到链接远程服务器的命令都是交互式的，换而言之需要我们手动输入密码，这样就为我们在<code>Shell</code>中集成工作流造成了很大的不便。</p>
 <p>因此，我们就在想能不能把密码当成参数传给<code>scp</code>或者<code>ssh</code>，很可惜，这样不行。所以这个时候就有<code>sshpass</code>这个工具来帮助我们了。</p>
 <h3 id="A-p-指定密码"><a href="#A-p-指定密码" class="headerlink" title="A. -p 指定密码"></a>A. -p 指定密码</h3><p>使用<code>-p</code>参数直接指定<code>ssh</code>和<code>scp</code>登录时的密码</p>
-<pre class="line-numbers language-shell"><code class="language-shell"># 免密码登录
-sshpass -p password ssh username@host
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># 免密码登录</span>
+sshpass -p password <span class="token function">ssh</span> username@host
 
-# 远程执行命令
-sshpass -p password ssh username@host <cmd>
+<span class="token comment" spellcheck="true"># 远程执行命令</span>
+sshpass -p password <span class="token function">ssh</span> username@host <span class="token operator">&lt;</span>cmd<span class="token operator">></span>
 
-# 通过scp上传文件
-sshpass -p password scp local_file root@host:remote_file 
+<span class="token comment" spellcheck="true"># 通过scp上传文件</span>
+sshpass -p password <span class="token function">scp</span> local_file root@host:remote_file 
 
-# 通过scp下载文件
-sshpass -p password scp root@host:remote_file local_file
+<span class="token comment" spellcheck="true"># 通过scp下载文件</span>
+sshpass -p password <span class="token function">scp</span> root@host:remote_file local_file
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>所以组合在一起，我们首先在本地使用<code>tar</code>打包，然后使用<code>scp</code>把压缩好的文件上传到远程服务器上去，接下来使用<code>ssh</code>命令远程执行解压、编译、测试的命令。</p>
 <p>类似的，如果想在远程执行多个命令，我们可以先用<code>scp</code>把写好的<code>shell</code>脚本上传到远程服务器上去，然后再使用<code>ssh</code>命令远程执行<code>shell</code>脚本。</p>
 <h3 id="B-o-忽略RAS-Key检查"><a href="#B-o-忽略RAS-Key检查" class="headerlink" title="B. -o 忽略RAS Key检查"></a>B. -o 忽略RAS Key检查</h3><p>在第一次链接到远程服务器的时候，第一次认证时，一般会有<code>RSA Key</code>验证的提示：</p>
-<pre class="line-numbers language-shell"><code class="language-shell">The authenticity of host ’10.x.x.x (10.x.x.x)' can't be established.
+<pre class="line-numbers language-bash"><code class="language-bash">The authenticity of host ’10.x.x.x <span class="token punctuation">(</span>10.x.x.x<span class="token punctuation">)</span><span class="token string">' can'</span>t be established.
 RSA key fingerprint is a4:eb:8c:7d:2a:ef:d6:1c:a3:0c:e8:e5:00:d2:eb:60.
-Are you sure you want to continue connecting (yes/no)?
+Are you sure you want to <span class="token keyword">continue</span> connecting <span class="token punctuation">(</span>yes/no<span class="token punctuation">)</span>?
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>这个时候可以指定<code>-o</code>参数来忽略<code>RSA Key</code>的验证</p>
-<pre class="line-numbers language-shell"><code class="language-shell">sshpass -p "$SSH_PASSWD" ssh root@"$host" -o StrictHostKeyChecking=no "$@" 2>/dev/null
+<pre class="line-numbers language-bash"><code class="language-bash">sshpass -p <span class="token string">"<span class="token variable">$SSH_PASSWD</span>"</span> <span class="token function">ssh</span> root@<span class="token string">"<span class="token variable">$host</span>"</span> -o StrictHostKeyChecking<span class="token operator">=</span>no <span class="token string">"<span class="token variable">$@</span>"</span> 2<span class="token operator">></span>/dev/null
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <h3 id="C-f-从文件中读取密码"><a href="#C-f-从文件中读取密码" class="headerlink" title="C. -f 从文件中读取密码"></a>C. -f 从文件中读取密码</h3><p>使用<code>-f</code>参数从文件中读取密码</p>
-<pre class="line-numbers language-shell"><code class="language-shell">echo "password" > userpasswd
-sshpass -f userpasswd ssh username@x.x.x.x
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token keyword">echo</span> <span class="token string">"password"</span> <span class="token operator">></span> userpasswd
+sshpass -f userpasswd <span class="token function">ssh</span> username@x.x.x.x
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>当然可以配合<code>gpg</code>来加密密码，而使用时候把解密后的密码传给<code>sshpass</code>，最后再删掉即可。</p>
-<pre class="line-numbers language-shell"><code class="language-shell">gpg -d -q .sshpassword.gpg > fifo; sshpass -f fifo ssh; rm fifo
+<pre class="line-numbers language-bash"><code class="language-bash">gpg -d -q .sshpassword.gpg <span class="token operator">></span> fifo<span class="token punctuation">;</span> sshpass -f fifo <span class="token function">ssh</span><span class="token punctuation">;</span> <span class="token function">rm</span> fifo
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <h3 id="D-e-从环境变量中读取密码"><a href="#D-e-从环境变量中读取密码" class="headerlink" title="D. -e 从环境变量中读取密码"></a>D. -e 从环境变量中读取密码</h3><p>使用<code>-e</code>参数从环境变量中读取密码</p>
-<pre class="line-numbers language-shell"><code class="language-shell">export SSHPASS="password"
-sshpass -e ssh username@x.x.x.x
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">export</span> SSHPASS<span class="token operator">=</span><span class="token string">"password"</span>
+sshpass -e <span class="token function">ssh</span> username@x.x.x.x
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <h2 id="4-测试程序用时：time"><a href="#4-测试程序用时：time" class="headerlink" title="4.  测试程序用时：time"></a>4.  测试程序用时：time</h2><p>很多时候，我们需要测试一个程序、命令运行所花费的时间，为此，我们可以使用<code>Linux</code>中的<code>time</code>命令</p>
-<h3 id="A-基本使用"><a href="#A-基本使用" class="headerlink" title="A. 基本使用"></a>A. 基本使用</h3><pre class="line-numbers language-sh"><code class="language-sh">time 需要计算时间的程序
+<h3 id="A-基本使用"><a href="#A-基本使用" class="headerlink" title="A. 基本使用"></a>A. 基本使用</h3><pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">time</span> 需要计算时间的程序
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>例如我们下面测试<code>ls</code>的用时</p>
-<pre class="line-numbers language-sh"><code class="language-sh">time ls
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">time</span> <span class="token function">ls</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>其中：</p>
 <ul>
@@ -586,11 +586,11 @@ sshpass -e ssh username@x.x.x.x
 </ol>
 <p>因此，由于<code>shell</code>的<code>BUILTIN commands</code>就有<code>time</code>，所以如果直接使用的话，用的就是<code>BUILTIN commands</code>而非<code>PATH</code>中的可执行的<code>time</code>二进制文件</p>
 <p>为此，可以在<code>time</code>命令前加上<code>\</code>表示强制使用<code>PATH</code>中的命令，则此时</p>
-<pre class="line-numbers language-sh"><code class="language-sh">\time ls
+<pre class="line-numbers language-bash"><code class="language-bash">\time <span class="token function">ls</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221109133352779.png" alt="time结果"></p>
 <h3 id="B-f-格式化输出"><a href="#B-f-格式化输出" class="headerlink" title="B. -f 格式化输出"></a>B. -f 格式化输出</h3><p>使用<code>-f</code>选项格式化时间输出：</p>
-<pre class="line-numbers language-shell"><code class="language-shell">\time -f "time: %U" ls
+<pre class="line-numbers language-bash"><code class="language-bash">\time -f <span class="token string">"time: %U"</span> <span class="token function">ls</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221109133539162.png" alt="time结果"></p>
 <p><code>-f</code>选项后的参数：</p>
@@ -659,25 +659,25 @@ sshpass -e ssh username@x.x.x.x
 </table>
 </div>
 <h3 id="C-o-写入到文件中"><a href="#C-o-写入到文件中" class="headerlink" title="C. -o 写入到文件中"></a>C. -o 写入到文件中</h3><p>使用<code>-o</code>选项将执行时间写入到文件中：</p>
-<pre class="line-numbers language-shell"><code class="language-shell">\time -o outfile.txt ls
-cat outfile.txt
+<pre class="line-numbers language-bash"><code class="language-bash">\time -o outfile.txt <span class="token function">ls</span>
+<span class="token function">cat</span> outfile.txt
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221109133737939.png" alt="time结果"></p>
 <h2 id="5-标准输入作为参数：xargs"><a href="#5-标准输入作为参数：xargs" class="headerlink" title="5. 标准输入作为参数：xargs"></a>5. 标准输入作为参数：xargs</h2><p><code>xargs</code>是 <code>Linux</code> 系统的一个很有用的命令，但是常常被忽视，很多人不了解它的用法。</p>
 <h3 id="A-介绍"><a href="#A-介绍" class="headerlink" title="A. 介绍"></a>A. 介绍</h3><p><code>Linux</code> 命令都带有参数，有些命令可以接受<code>标准输入</code>（<code>Stdin</code>）作为参数，例如<code>grep</code>命令：</p>
-<pre class="line-numbers language-sh"><code class="language-sh">cat /etc/passwd | grep root
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">cat</span> /etc/passwd <span class="token operator">|</span> <span class="token function">grep</span> root
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>上面的代码使用了管道命令（<code>|</code>）。管道命令的作用，是将左侧命令（<code>cat /etc/passwd</code>）的<code>标准输出</code>转换为<code>标准输入</code>，提供给右侧命令（<code>grep root</code>）作为参数。</p>
 <p>因为<code>grep</code>命令可以接受标准输入作为参数，所以上面的代码等同于下面的代码。</p>
-<pre class="line-numbers language-sh"><code class="language-sh">grep root /etc/passwd
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">grep</span> root /etc/passwd
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><strong>然而，能够接收标准输入作为参数的命令只是少数，大多数命令都不接受标准输入作为参数，只能直接在命令行输入参数，这导致无法用管道命令传递参数</strong>。例如，<code>echo</code>命令就不接受管道传参。</p>
-<pre class="line-numbers language-sh"><code class="language-sh">echo "hello world" | echo
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token keyword">echo</span> <span class="token string">"hello world"</span> <span class="token operator">|</span> <span class="token keyword">echo</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>上面的代码不会有输出。因为管道右侧的<code>echo</code>不接受管道传来的标准输入作为参数。因此，这就极大地限制了我们使用管道符来连接多个命令，从而实现整个工作流。</p>
 <p>因此，如果我们有命令，能够让所有的命令接收标准输入作为参数，那么就可以极大地提高我们的工作效率，而<code>xargs</code>就是这个命令。</p>
 <h3 id="B-基本使用"><a href="#B-基本使用" class="headerlink" title="B. 基本使用"></a>B. 基本使用</h3><p><code>xargs</code>命令的基本用法如下</p>
-<pre class="line-numbers language-sh"><code class="language-sh">xargs [options] [command]
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">xargs</span> <span class="token punctuation">[</span>options<span class="token punctuation">]</span> <span class="token punctuation">[</span>command<span class="token punctuation">]</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>其中：</p>
 <ul>
@@ -685,47 +685,47 @@ cat outfile.txt
 <li><code>command</code>是将要传入参数的命令</li>
 </ul>
 <p>如果没有指定<code>command</code>的话，那么默认将运行<code>echo</code>。例如</p>
-<pre class="line-numbers language-sh"><code class="language-sh">ps aux | grep grep | xargs
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">ps</span> aux <span class="token operator">|</span> <span class="token function">grep</span> <span class="token function">grep</span> <span class="token operator">|</span> <span class="token function">xargs</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221113115938026.png" alt="xargs默认运行echo"></p>
 <h3 id="C-p-确认运行"><a href="#C-p-确认运行" class="headerlink" title="C. -p 确认运行"></a>C. -p 确认运行</h3><p>有的时候可能会运行诸如<code>rm</code>等高危命令，因此<code>xargs</code>提供了<code>-p</code>参数来向用户确认是否运行命令</p>
-<pre class="line-numbers language-sh"><code class="language-sh">ps aux | grep grep | awk '{print $2}' | xargs -p kill -9
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">ps</span> aux <span class="token operator">|</span> <span class="token function">grep</span> <span class="token function">grep</span> <span class="token operator">|</span> <span class="token function">awk</span> <span class="token string">'{print <span class="token variable">$2</span>}'</span> <span class="token operator">|</span> <span class="token function">xargs</span> -p <span class="token function">kill</span> -9
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>此时输入<code>y/Y</code>来确认运行，其他的字符都视为不运行。</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221113120705847.png" alt="-p确认运行"></p>
 <h3 id="D-t-输出执行的命令"><a href="#D-t-输出执行的命令" class="headerlink" title="D. -t 输出执行的命令"></a>D. -t 输出执行的命令</h3><p><code>-p</code>会阻塞程序，直到用户输入。有的时候我们只希望需要输出一下将要执行的命令，而不阻塞程序运行，这个时候就可以使用<code>-t</code>参数。</p>
-<pre class="line-numbers language-sh"><code class="language-sh">ps aux | grep grep | awk '{print $2}' | xargs -t kill -9
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">ps</span> aux <span class="token operator">|</span> <span class="token function">grep</span> <span class="token function">grep</span> <span class="token operator">|</span> <span class="token function">awk</span> <span class="token string">'{print <span class="token variable">$2</span>}'</span> <span class="token operator">|</span> <span class="token function">xargs</span> -t <span class="token function">kill</span> -9
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221113132018397.png" alt="-t输出执行的命令"></p>
 <h3 id="E-I-保存输出到变量"><a href="#E-I-保存输出到变量" class="headerlink" title="E. -I 保存输出到变量"></a>E. -I 保存输出到变量</h3><p>有的时候我们希望能够将标准输出的内容传递给多个命令，例如：</p>
-<pre class="line-numbers language-sh"><code class="language-sh">echo dirs.txt | xargs .... echo dirs_to_make; mkdir dirs_to_make
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token keyword">echo</span> dirs.txt <span class="token operator">|</span> <span class="token function">xargs</span> <span class="token punctuation">..</span><span class="token punctuation">..</span> <span class="token keyword">echo</span> dirs_to_make<span class="token punctuation">;</span> <span class="token function">mkdir</span> dirs_to_make
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>这个情况下，解决办法就是我们将前一个命令的输出保存到一个变量中，而后通过取值就可以多次使用前一个命令的输出值。</p>
 <p><code>xargs</code>中通过指定<code>-I</code>参数，来指定变量名</p>
-<pre class="line-numbers language-sh"><code class="language-sh">echo "one\ntwo\nthree" > foo.txt
-cat foo.txt
-cat foo.txt | xargs -I files echo files
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token keyword">echo</span> <span class="token string">"one\ntwo\nthree"</span> <span class="token operator">></span> foo.txt
+<span class="token function">cat</span> foo.txt
+<span class="token function">cat</span> foo.txt <span class="token operator">|</span> <span class="token function">xargs</span> -I files <span class="token keyword">echo</span> files
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221113183745670.png" alt="保存输出到变量中"></p>
 <p>但是，如果我们想用多次调用的话，使用<code>;</code>链接是不行的，因为<code>shell</code>会认为<code>;</code>前的是一个命令，即如果我们使用下面的命令来尝试运行多个命令</p>
-<pre class="line-numbers language-sh"><code class="language-sh">cat foo.txt | xargs -I files echo files; echo files
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">cat</span> foo.txt <span class="token operator">|</span> <span class="token function">xargs</span> -I files <span class="token keyword">echo</span> files<span class="token punctuation">;</span> <span class="token keyword">echo</span> files
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>那么在<code>shell</code>中，这就成了两个命令</p>
-<pre class="line-numbers language-shell"><code class="language-shell">cat foo.txt | xargs -I files echo files
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">cat</span> foo.txt <span class="token operator">|</span> <span class="token function">xargs</span> -I files <span class="token keyword">echo</span> files
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>和</p>
-<pre class="line-numbers language-sh"><code class="language-sh">echo files
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token keyword">echo</span> files
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>那么这样，第二个命令中的<code>file</code>自然无法被<code>xargs</code>替换，所以运行结果如下</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221113184113074.png" alt="运行结果"></p>
 <p>所以如果我们想要使用<code>xargs</code>讲输出传给多个命令的话，就要用下面的调用方法</p>
-<pre class="line-numbers language-sh"><code class="language-sh">cat foo.txt | xargs -I files $SHELL -c 'echo files;echo files'
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">cat</span> foo.txt <span class="token operator">|</span> <span class="token function">xargs</span> -I files <span class="token variable">$SHELL</span> -c <span class="token string">'echo files;echo files'</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221113184533047.png" alt="运行结果"></p>
 <h3 id="F-d-指定分隔符"><a href="#F-d-指定分隔符" class="headerlink" title="F. -d 指定分隔符"></a>F. -d 指定分隔符</h3><p><code>xargs</code>默认上一个命令输出的分隔符是空格和换行，而<code>$PATH</code>的分隔符是<code>:</code>。所以这种时候，可以使用<code>xargs</code>的<code>-d</code>参数来指定分隔符。</p>
 <p>注意<code>-d</code>参数在<code>macOS</code>上的<code>xargs</code>不支持，不过可以使用<code>awk</code>的<code>RS</code>和<code>ORS</code>来实现类似的替换效果</p>
-<pre class="line-numbers language-sh"><code class="language-sh">echo $PATH | xargs -d ':' -I p bash -c 'echo -e "p"' > searching_path.txt
-cat searchin_path.txt
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token keyword">echo</span> <span class="token variable">$PATH</span> <span class="token operator">|</span> <span class="token function">xargs</span> -d <span class="token string">':'</span> -I p <span class="token function">bash</span> -c <span class="token string">'echo -e "p"'</span> <span class="token operator">></span> searching_path.txt
+<span class="token function">cat</span> searchin_path.txt
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221113190232452.png" alt="运行结果"></p>
 
@@ -1258,7 +1258,7 @@ cat searchin_path.txt
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">526.7k</span>
+                        class="white-color">534.5k</span>
             
             
             

@@ -422,7 +422,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    605
+                    609
                 </div>
                 
 
@@ -464,7 +464,7 @@
 </blockquote>
 <h3 id="A-Rustup：Rust安装器和版本管理工具"><a href="#A-Rustup：Rust安装器和版本管理工具" class="headerlink" title="A. Rustup：Rust安装器和版本管理工具"></a>A. Rustup：Rust安装器和版本管理工具</h3><p><code>Rustup</code>既是一个<code>Rust</code>安装器又是一个版本管理工具，因此安装<code>Rust</code>的主要方式是通过<code>Rustup</code>这一工具</p>
 <p>运行下面的命令安装<code>Rustup</code></p>
-<pre class="line-numbers language-shell"><code class="language-shell">curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+<pre class="line-numbers language-bash"><code class="language-bash">curl --proto <span class="token string">'=https'</span> --tlsv1.2 -sSf https://sh.rustup.rs <span class="token operator">|</span> sh
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <blockquote>
 <p>PS：<code>curl</code>会去<code>https://sh.rustup.rs</code>这个网站下载安装脚本，所以需要一些魔法。不过我把脚本内容贴在后面了，自己创建一个脚本运行效果也是一样的</p>
@@ -476,7 +476,7 @@
 <p>稍等片刻，大概喝杯咖啡的功夫就好了。PS：我的魔法不够强大！！！</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230601044110177.png" alt="Rustup安装-3" style="zoom:25%;"></p>
 <p>最后按照提示添加一下<code>Rust</code>环境激活命令到当前<code>shell</code>的配置文件，然后重新加载配置就好。</p>
-<pre class="line-numbers language-shell"><code class="language-shell">(echo 'source "$HOME/.cargo/env"' >> ~/.zshrc && source ~/.zshrc && cargo --version)|| echo 'fail'
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>echo <span class="token string">'source "<span class="token variable">$HOME</span>/.cargo/env"'</span> <span class="token operator">>></span> ~/.zshrc <span class="token operator">&amp;&amp;</span> <span class="token function">source</span> ~/.zshrc <span class="token operator">&amp;&amp;</span> cargo --version<span class="token punctuation">)</span><span class="token operator">||</span> <span class="token keyword">echo</span> <span class="token string">'fail'</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <blockquote>
 <p>PS：我用的是<code>zsh</code>，所以是<code>~/.zshrc</code></p>
@@ -1001,7 +1001,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">526.7k</span>
+                        class="white-color">534.5k</span>
             
             
             

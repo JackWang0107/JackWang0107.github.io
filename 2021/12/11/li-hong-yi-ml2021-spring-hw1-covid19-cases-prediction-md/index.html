@@ -419,7 +419,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-09-28
+                    2023-06-01
                 </div>
                 
 
@@ -486,7 +486,7 @@
 <h3 id="2-Updates"><a href="#2-Updates" class="headerlink" title="2. Updates"></a>2. Updates</h3><h4 id="2021-12-11：完成了基本框架"><a href="#2021-12-11：完成了基本框架" class="headerlink" title="2021-12-11：完成了基本框架"></a>2021-12-11：完成了基本框架</h4><ul>
 <li><strong>进展</strong>：完成了基本的框架的搭建，明天开始训练。完成的框架包括训练代码，网络的定义，dataset和得到提交文件的代码</li>
 </ul>
-<pre class="line-numbers language-shell"><code class="language-shell">(torch) jack@jack-Alienware-m15-R3:/media/jack/JackCode/project/deeplearning/hw1_1-regression$ tree src/
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>torch<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:/media/jack/JackCode/project/deeplearning/hw1_1-regression$ tree src/
 src/
 ├── dataset.py
 ├── gen_submission.py
@@ -544,7 +544,7 @@ src/
 </li>
 </ul>
 <p>而特征选择时候前90个特征的得分如下，可以看到，前两个特征（前两天确诊的人数）的分数是远远大于剩下的特征，也就难怪训练出来最后一个的得分最高</p>
-<pre class="line-numbers language-shell"><code class="language-shell">                    Specs          Score
+<pre class="line-numbers language-bash"><code class="language-bash">                    Specs          Score
 76       tested_positive.1  148069.658278
 58         tested_positive   69603.872591
 43            hh_cmnty_cli    9235.492094
@@ -568,7 +568,7 @@ src/
 84                  shop.2     561.764051
 66                  shop.1     553.876727
 48                    shop     546.553395
-0                       id     328.682311
+0                       <span class="token function">id</span>     328.682311
 92    worried_become_ill.2     208.122647
 18                      MA     205.672603
 74    worried_become_ill.1     203.473072
@@ -635,13 +635,13 @@ src/
 28                      NC       2.877359
 4                       AR       2.546223
 90             depressed.2       2.362492
-Int64Index([76, 58, 43, 61, 79, 44, 62, 80, 41, 59, 77, 42, 60, 78, 93, 75, 57,
+Int64Index<span class="token punctuation">(</span><span class="token punctuation">[</span>76, 58, 43, 61, 79, 44, 62, 80, 41, 59, 77, 42, 60, 78, 93, 75, 57,
             88, 70, 52, 84, 66, 48,  0, 92, 18, 74, 56, 86, 68, 50, 21, 30,  7,
             17,  5, 29, 24, 10, 53, 22, 36, 71,  3, 85, 67, 23, 49, 35, 89,  2,
             32,  6, 15, 13,  8, 27, 38, 31, 82, 19, 64, 46, 14, 55, 33, 73, 91,
             34, 45, 63, 20, 87,  1, 81, 39, 69, 25, 37, 51,  9, 83, 65, 54, 11,
-            47, 72, 28,  4, 90],
-           dtype='int64')
+            47, 72, 28,  4, 90<span class="token punctuation">]</span>,
+           dtype<span class="token operator">=</span><span class="token string">'int64'</span><span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 </ul>
@@ -696,8 +696,8 @@ Int64Index([76, 58, 43, 61, 79, 44, 62, 80, 41, 59, 77, 42, 60, 78, 93, 75, 57,
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20211213015919490.png" alt="目前的最优成绩"></p>
 <h2 id="4-My-Codes"><a href="#4-My-Codes" class="headerlink" title="4. My Codes"></a>4. My Codes</h2><p>下面是我的代码</p>
 <h3 id="1-代码结构"><a href="#1-代码结构" class="headerlink" title="1. 代码结构"></a>1. 代码结构</h3><p>整个代码的结构如下</p>
-<pre class="line-numbers language-shell"><code class="language-shell">(torch) jack@jack-Alienware-m15-R3:/media/jack/JackCode/project/deeplearning/hw1_1-regression$ tree -d -L 2
-.
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>torch<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:/media/jack/JackCode/project/deeplearning/hw1_1-regression$ tree -d -L 2
+<span class="token keyword">.</span>
 ├── checkpoint
 │   ├── Baseline
 │   ├── DeeperNet
@@ -730,7 +730,7 @@ Int64Index([76, 58, 43, 61, 79, 44, 62, 80, 41, 59, 77, 42, 60, 78, 93, 75, 57,
 <li><p>checkpoint、log和submission都如其名</p>
 </li>
 <li><p>每次进行训练的时候，都会根据模型（网络）名创建一个文件夹，在里面放对应的训练日志、提交结果、参数文件等等。以log为例，每次得到的结果都是根据日期和时间创建的文件夹。只有正确训练结束才会三个文件，分别为训练摘要、训练图像以及训练的过程中的loss。</p>
-<pre class="line-numbers language-shell"><code class="language-shell">(torch) jack@jack-Alienware-m15-R3:/media/jack/JackCode/project/deeplearning/hw1_1-regression$ tree log/DeeperNet/
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>torch<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:/media/jack/JackCode/project/deeplearning/hw1_1-regression$ tree log/DeeperNet/
 log/DeeperNet/
 ├── 2021-12-12 16_52_47
 ├── 2021-12-12 16_53_13
@@ -893,7 +893,7 @@ log/DeeperNet/
 <li>直接提交submission中生成的文件即可</li>
 </ul>
 <h3 id="2-src中文件作用"><a href="#2-src中文件作用" class="headerlink" title="2. src中文件作用"></a>2. src中文件作用</h3><p>src中有这些文件</p>
-<pre class="line-numbers language-shell"><code class="language-shell">(torch) jack@jack-Alienware-m15-R3:/media/jack/JackCode/project/deeplearning/hw1_1-regression$ tree src/ -L 1
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>torch<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:/media/jack/JackCode/project/deeplearning/hw1_1-regression$ tree src/ -L 1
 src/
 ├── config
 ├── dataset.py
@@ -915,7 +915,7 @@ src/
 </ul>
 <p>具体的代码在下面给出来</p>
 <h3 id="3-data中的数据"><a href="#3-data中的数据" class="headerlink" title="3. data中的数据"></a>3. data中的数据</h3><p>data中需要把训练、测试数据放进去就行了</p>
-<pre class="line-numbers language-shell"><code class="language-shell">(torch) jack@jack-Alienware-m15-R3:/media/jack/JackCode/project/deeplearning/hw1_1-regression$ tree data/
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>torch<span class="token punctuation">)</span> jack@jack-Alienware-m15-R3:/media/jack/JackCode/project/deeplearning/hw1_1-regression$ tree data/
 data/
 ├── covid.test.csv
 ├── covid.train.csv
@@ -1970,12 +1970,12 @@ pd<span class="token punctuation">.</span>set_option<span class="token punctuati
                         <span class="chip bg-color">Machine Learning</span>
                     </a>
                     
-                    <a href="/tags/CNN/">
-                        <span class="chip bg-color">CNN</span>
-                    </a>
-                    
                     <a href="/tags/Attention/">
                         <span class="chip bg-color">Attention</span>
+                    </a>
+                    
+                    <a href="/tags/CNN/">
+                        <span class="chip bg-color">CNN</span>
                     </a>
                     
                 </div>
@@ -2162,7 +2162,7 @@ pd<span class="token punctuation">.</span>set_option<span class="token punctuati
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">526.7k</span>
+                        class="white-color">534.5k</span>
             
             
             

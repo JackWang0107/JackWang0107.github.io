@@ -411,7 +411,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-09-28
+                    2023-06-01
                 </div>
                 
 
@@ -488,8 +488,8 @@
 <p>也正是因为和编程语言如此相似，甚至都出现了函数定义，因此<code>.sty</code>文件也会存在代码复用性的问题。</p>
 <p>所以，我们就可以把自己写好的<code>.sty</code>文件上传到网上，让大家来下载，从而实现代码复用。类似于其他语言中的库的这个概念，我们一般说的Latex包其实指的就是指我们上传到网上的<code>.sty</code>文件。</p>
 <p>我们可以看看有多少包</p>
-<pre class="line-numbers language-shell"><code class="language-shell">find ./usr/ -name "*.sty" | tr / "\n" | grep ".sty"
-find ./usr/ -name "*.sty" | tr / "\n" | grep ".sty" | wc -l
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">find</span> ./usr/ -name <span class="token string">"*.sty"</span> <span class="token operator">|</span> <span class="token function">tr</span> / <span class="token string">"\n"</span> <span class="token operator">|</span> <span class="token function">grep</span> <span class="token string">".sty"</span>
+<span class="token function">find</span> ./usr/ -name <span class="token string">"*.sty"</span> <span class="token operator">|</span> <span class="token function">tr</span> / <span class="token string">"\n"</span> <span class="token operator">|</span> <span class="token function">grep</span> <span class="token string">".sty"</span> <span class="token operator">|</span> <span class="token function">wc</span> -l
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220127224443223.png" alt="有5809个包"></p>
 <p>当然，这个数字是比较粗略的，因为有的比较大的包里面会有多个<code>.sty</code>文件。</p>
@@ -1033,7 +1033,7 @@ find ./usr/ -name "*.sty" | tr / "\n" | grep ".sty" | wc -l
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">526.7k</span>
+                        class="white-color">534.5k</span>
             
             
             

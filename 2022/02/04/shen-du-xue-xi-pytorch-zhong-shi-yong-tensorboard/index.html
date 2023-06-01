@@ -423,7 +423,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-09-28
+                    2023-06-01
                 </div>
                 
 
@@ -547,11 +547,11 @@ pprint<span class="token punctuation">.</span>pprint<span class="token punctuati
 <h3 id="B-前端显示数据"><a href="#B-前端显示数据" class="headerlink" title="B. 前端显示数据"></a>B. 前端显示数据</h3><p>因为TensorBoard是异步I/O的网页服务程序，因此后端程序在把数据写入到文件的时候，前端程序可以读取数据来进行显示。</p>
 <p>具体来说，后端数据记录程序会把所有的数据记录到同一个文件夹下的一个文件内。<strong>因此，前端显示程序在启动的时候需要指定读取的文件夹</strong>。多次实验就会产生多个文件，我们通过显示这个文件夹，就可以很方便的来进行多个实验的比较</p>
 <h4 id="1-默认使用"><a href="#1-默认使用" class="headerlink" title="1. 默认使用"></a>1. 默认使用</h4><p>前端显示程序提供了CLI（命令行）界面，因此我们直接在命令行启动就行了</p>
-<pre class="line-numbers language-shell"><code class="language-shell">tensorboard --logdir=数据文件夹
+<pre class="line-numbers language-bash"><code class="language-bash">tensorboard --logdir<span class="token operator">=</span>数据文件夹
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>其中数据文件夹就是在声明SummaryWriter时候指定的文件夹。</p>
 <p>例如：</p>
-<pre class="line-numbers language-shell"><code class="language-shell">tensorboard --logdir=./Feb05_01-00-48_Alienware/
+<pre class="line-numbers language-bash"><code class="language-bash">tensorboard --logdir<span class="token operator">=</span>./Feb05_01-00-48_Alienware/
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>而在我们启动前端显示程序之后，就会得到一个端口，访问这个端口就能看到显示的效果</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220205012353764.png" alt="命令行启动tensorboard后会看到程序启动的端口" style="zoom: 67%;"></p>
@@ -559,10 +559,10 @@ pprint<span class="token punctuation">.</span>pprint<span class="token punctuati
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220205012630314.png" alt="浏览器中访问就能看到效果" style="zoom:67%;"></p>
 <h4 id="2-修改端口"><a href="#2-修改端口" class="headerlink" title="2. 修改端口"></a>2. 修改端口</h4><p>有的时候，在服务器上训练模型的时候为了避免和别人的TensorBoard的端口撞了，我们需要指定新的端口。或者有的时候我们在docker容器里跑TensorBoard，我们通过一个端口映射到主机上去，这个时候就需要指定TensorBoard使用特定的端口。</p>
 <p>具体来说就是通过CLI的<code>--port</code>参数</p>
-<pre class="line-numbers language-shell"><code class="language-shell">tensorboard --logdir=数据文件夹 --port=端口
+<pre class="line-numbers language-bash"><code class="language-bash">tensorboard --logdir<span class="token operator">=</span>数据文件夹 --port<span class="token operator">=</span>端口
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>例如我们现在指定上面的例子端口为10000</p>
-<pre class="line-numbers language-shell"><code class="language-shell">tensorboard --logdir=./Feb05_01-00-48_Alienware/ --port=10000
+<pre class="line-numbers language-bash"><code class="language-bash">tensorboard --logdir<span class="token operator">=</span>./Feb05_01-00-48_Alienware/ --port<span class="token operator">=</span>10000
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220205013842301.png" alt="修改后的端口"></p>
 <h3 id="C-Summary"><a href="#C-Summary" class="headerlink" title="C. Summary"></a>C. Summary</h3><p>最后，总结一下使用TensorFlow的Pipeline，首先在训练的过程中使用SummaryWriter来记录数据，记录的过程中需要注意文件夹需要来合理的划分。</p>
@@ -606,7 +606,7 @@ pprint<span class="token punctuation">.</span>pprint<span class="token punctuati
 <p>效果如下</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/image-20220205105158529.png" alt="add_scalar徐爱公益"></p>
 <h3 id="2-add-hparams"><a href="#2-add-hparams" class="headerlink" title="2. add_hparams"></a>2. add_hparams</h3><p><code>add_hparams</code>用于添加超参数列表，主要用于调参。</p>
-<pre class="line-numbers language-shell"><code class="language-shell">def add_hparams(hparam_dict, metric_dict, hparam_domain_discrete=None, run_name=None)
+<pre class="line-numbers language-bash"><code class="language-bash">def add_hparams<span class="token punctuation">(</span>hparam_dict, metric_dict, hparam_domain_discrete<span class="token operator">=</span>None, run_name<span class="token operator">=</span>None<span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>其中：</p>
 <ul>
@@ -1216,7 +1216,7 @@ pprint<span class="token punctuation">.</span>pprint<span class="token punctuati
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">526.7k</span>
+                        class="white-color">534.5k</span>
             
             
             

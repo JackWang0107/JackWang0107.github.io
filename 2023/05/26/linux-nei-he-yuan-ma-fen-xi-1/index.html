@@ -526,17 +526,17 @@
 <p>具体来说，<code>crypto</code>目录中<code>Linux</code>实现的各种压缩算法包括：<code>LZO</code>、<code>LZ4</code>、<code>Zlib</code>、<code>Deflate</code>……</p>
 <h4 id="E-Documentation目录"><a href="#E-Documentation目录" class="headerlink" title="E. Documentation目录"></a>E. <code>Documentation</code>目录</h4><p><code>Documentation</code>目录是<code>Linux</code>内核的文档，主要描述了各种模块的功能、定义了一些规范</p>
 <p>例如：</p>
-<pre class="line-numbers language-shell"><code class="language-shell">cat Documentation/riscv/boot-image-header.rst | less
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">cat</span> Documentation/riscv/boot-image-header.rst <span class="token operator">|</span> <span class="token function">less</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230528003610006.png" alt="Linux内核中关于RISC-V的文档" style="zoom: 25%;"></p>
 <h4 id="F-drivers目录"><a href="#F-drivers目录" class="headerlink" title="F. drivers目录"></a>F. <code>drivers</code>目录</h4><p><code>drivers</code>目录存放了<code>Linux</code>内核的各种硬件的驱动程序。例如<code>GPIO</code>设备：</p>
-<pre class="line-numbers language-shell"><code class="language-shell">ls drivers/gpio | less
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">ls</span> drivers/gpio <span class="token operator">|</span> <span class="token function">less</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230528004057238.png" alt="drivers目录下的GPIO设备" style="zoom: 25%;"></p>
 <p>不同的<code>CPU</code>型号的<code>GPIO</code>的设置、初始化方法均不同，所以<code>Linux</code>就在<code>drivers/gpio</code>目录下存放了针对不同芯片的<code>GPIO</code>的代码。</p>
 <h4 id="G-fs目录"><a href="#G-fs目录" class="headerlink" title="G. fs目录"></a>G. <code>fs</code>目录</h4><p><code>fs</code>目录下存放了<code>Linux</code>的虚拟文件系统的代码和各种类型的文件系统实现的代码。</p>
 <p>例如<code>Windows</code>中比较常见的<code>ntfs</code>文件系统的实现就在<code>fs/ntfs</code>目录下</p>
-<pre class="line-numbers language-shell"><code class="language-shell">ls fs/ntfs | less
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">ls</span> fs/ntfs <span class="token operator">|</span> <span class="token function">less</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230528004450901.png" alt="fs目录下的ntfs的实现代码" style="zoom: 25%;"></p>
 <h4 id="H-include目录"><a href="#H-include目录" class="headerlink" title="H. include目录"></a>H. <code>include</code>目录</h4><p><code>include</code>目录下存放了<code>Linux</code>内核源码依赖的绝大部分头文件。各个头文件中包含了内核的各种定义和声明，为内核的构建和开发提供了必要的支持。</p>
@@ -561,7 +561,7 @@
 <li>……</li>
 </ul>
 <p>的实现代码都是在<code>ipc</code>这个目录下面的。</p>
-<pre class="line-numbers language-shell"><code class="language-shell">ls ipc
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">ls</span> ipc
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230528005740988.png" alt="Linux内核源码的ipc目录" style="zoom:33%;"></p>
 <h4 id="K-kernel目录"><a href="#K-kernel目录" class="headerlink" title="K. kernel目录"></a>K. <code>kernel</code>目录</h4><p><code>kernel</code>目录是内核的核心代码，包含了：</p>
@@ -1233,7 +1233,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">526.7k</span>
+                        class="white-color">534.5k</span>
             
             
             

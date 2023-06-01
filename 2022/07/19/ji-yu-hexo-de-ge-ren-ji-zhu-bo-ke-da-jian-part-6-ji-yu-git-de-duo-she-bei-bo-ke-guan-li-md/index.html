@@ -407,7 +407,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-09-28
+                    2023-06-01
                 </div>
                 
 
@@ -543,13 +543,13 @@
 <p>然后在branch下选择新的分支</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20220719190051619.png" alt="设置新分支为默认分支-2"></p>
 <h3 id="3-拉取分支到本地并添加所有需要保存的文件"><a href="#3-拉取分支到本地并添加所有需要保存的文件" class="headerlink" title="3. 拉取分支到本地并添加所有需要保存的文件"></a>3. 拉取分支到本地并添加所有需要保存的文件</h3><p>在本地Hexo项目文件夹下运行</p>
-<pre class="line-numbers language-shell"><code class="language-shell">git remote add github https://github.com/JackWang0107/JackWang0107.github.io.git
-git pull github hexo
-git checkout hexo
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">git</span> remote add github https://github.com/JackWang0107/JackWang0107.github.io.git
+<span class="token function">git</span> pull github hexo
+<span class="token function">git</span> checkout hexo
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>这样就把hexo分支拉取过来了并且切换到这个分支了</p>
 <p>我们接下来新建一个<code>.gitignore</code>文件忽略所有不需要同步的文件</p>
-<pre class="line-numbers language-shell"><code class="language-shell">vim .gitignore
+<pre class="line-numbers language-bash"><code class="language-bash">vim .gitignore
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>内容如下</p>
 <pre class="line-numbers language-txt"><code class="language-txt">.DS_Store
@@ -561,23 +561,23 @@ public/
 .deploy*/
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="4-删除静态网页文件并添加所有需要保存的文件"><a href="#4-删除静态网页文件并添加所有需要保存的文件" class="headerlink" title="4. 删除静态网页文件并添加所有需要保存的文件"></a>4. 删除静态网页文件并添加所有需要保存的文件</h3><p>因为我们的hexo分支是从master分支中创建出来的，而master分支中保存了网站的静态网页，这些文件我们显然是不需要的，因此先删除这些文件。</p>
-<pre class="line-numbers language-shell"><code class="language-shell">git rm -r 2021 2022 about archives categories contact css friends js libs medias page tags test 404.html CNAME favicon.png favicon.svg favicon1.png index.html search.xml
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">git</span> <span class="token function">rm</span> -r 2021 2022 about archives categories contact css friends js libs medias page tags <span class="token function">test</span> 404.html CNAME favicon.png favicon.svg favicon1.png index.html search.xml
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>然后添加博客网站的所有需要同步的文件</p>
-<pre class="line-numbers language-shell"><code class="language-shell">git add .
-git commit -a --message="sync the website"
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">git</span> add <span class="token keyword">.</span>
+<span class="token function">git</span> commit -a --message<span class="token operator">=</span><span class="token string">"sync the website"</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <h3 id="5-推送到GitHub"><a href="#5-推送到GitHub" class="headerlink" title="5. 推送到GitHub"></a>5. 推送到GitHub</h3><p>接下来，我们把新的分支推送到Github上即可，不过需要注意的是，由于hexo分支是在github上新建的，因此拉取到本地的时候这个分支和远程分支之间没有历史关系，推送的时候需要加上允许无历史关系的推送这个参数</p>
-<pre class="line-numbers language-shell"><code class="language-shell">git push github hexo --allow-unrelated-histories
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">git</span> push github hexo --allow-unrelated-histories
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <h3 id="6-新设备上同步博客"><a href="#6-新设备上同步博客" class="headerlink" title="6. 新设备上同步博客"></a>6. 新设备上同步博客</h3><p>接下来我们在新的设备上同步博客</p>
 <p>在新的设备上，首先克隆项目</p>
-<pre class="line-numbers language-shell"><code class="language-shell">git clone 项目链接
-git checkout hexo
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">git</span> clone 项目链接
+<span class="token function">git</span> checkout hexo
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>然后安装hexo以及依赖的其他node.js包</p>
-<pre class="line-numbers language-shell"><code class="language-shell">npm install hexo-cli -g
-npm install
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span> hexo-cli -g
+<span class="token function">npm</span> <span class="token function">install</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>然后就在新的设备上愉快的开始编写博客了。</p>
 <p>最后，需要注意的就是有一些博客的主题是需要配置的，这样的话就需要额外把该主题的配置文件添加进来，具体的步骤和前面一样，这里就不赘述了。</p>
@@ -1111,7 +1111,7 @@ npm install
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">526.7k</span>
+                        class="white-color">534.5k</span>
             
             
             

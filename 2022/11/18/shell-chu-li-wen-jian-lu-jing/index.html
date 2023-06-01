@@ -415,21 +415,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-11-19
+                    2023-06-01
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    751
+                    1.4k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    2 分
+                    5 分
                 </div>
                 
 
@@ -453,40 +453,40 @@
 <h1 id="Shell处理文本路径"><a href="#Shell处理文本路径" class="headerlink" title="Shell处理文本路径"></a>Shell处理文本路径</h1><p>编写<code>Shell</code>脚本的过程中，经常会和文件名和文件路径打交道。如果用户输入了一个文件的全名（可能包含绝对路径和文件后缀），如何得到文件的路径名，文件名，文件后缀这些信息呢?</p>
 <p>本文就介绍了如何获得文件路径名、文件名、文件后缀等等信息。</p>
 <h2 id="获取文件名与目录名：basename与dirname"><a href="#获取文件名与目录名：basename与dirname" class="headerlink" title="获取文件名与目录名：basename与dirname"></a>获取文件名与目录名：basename与dirname</h2><p><code>Shell</code>中提供了<code>basename</code>与<code>dirname</code>两个命令来获得<strong>文件的名字（不是文件的路径）</strong>与<strong>文件的目录名</strong>。</p>
-<pre class="line-numbers language-shell"><code class="language-shell">fullfile=/the/path/foo.txt
-echo $fullfile
+<pre class="line-numbers language-bash"><code class="language-bash">fullfile<span class="token operator">=</span>/the/path/foo.txt
+<span class="token keyword">echo</span> <span class="token variable">$fullfile</span>
 
-fullname=$(basename $fullfile)
-echo $fullname
+fullname<span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token function">basename</span> $fullfile<span class="token variable">)</span></span>
+<span class="token keyword">echo</span> <span class="token variable">$fullname</span>
 
-dir=$(dirname $fullfile)
-echo $dir
+dir<span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token function">dirname</span> $fullfile<span class="token variable">)</span></span>
+<span class="token keyword">echo</span> <span class="token variable">$dir</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>运行结果为：</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221118162103706.png" alt="basename和dirname获取文件名与目录名"></p>
 <h2 id="单后缀文件stem与suffix：cut"><a href="#单后缀文件stem与suffix：cut" class="headerlink" title="单后缀文件stem与suffix：cut"></a>单后缀文件stem与suffix：cut</h2><p>我们上面通过<code>basename</code>获得的文件名是文件的完整名字，包含后缀名在内。但是有的时候我们可能只想要这个文件名不包含后缀的部分。因此，这里先讲解如何切分只有一个后缀名的文件的后缀和不含后缀的名字。</p>
 <p>事实上，<code>basename</code>最后获得的文件名其实就是一个字符串，所以针对只有一个后缀名的后缀，直接用<code>cut</code>命令从<code>.</code>出切分即可。</p>
-<pre class="line-numbers language-shell"><code class="language-shell">fullfile=/the/path/foo.txt
-echo $fullfile
+<pre class="line-numbers language-bash"><code class="language-bash">fullfile<span class="token operator">=</span>/the/path/foo.txt
+<span class="token keyword">echo</span> <span class="token variable">$fullfile</span>
 
-fullname=$(basename $fullfile)
-echo $fullname
+fullname<span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token function">basename</span> $fullfile<span class="token variable">)</span></span>
+<span class="token keyword">echo</span> <span class="token variable">$fullname</span>
 
-stem=$(echo $fullname | cut -d . -f1)
-suffix=$(echo $fullname | cut -d . -f2)
-echo $stem
-echo $suffix
+stem<span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token keyword">echo</span> $fullname <span class="token operator">|</span> <span class="token function">cut</span> -d <span class="token keyword">.</span> -f1<span class="token variable">)</span></span>
+suffix<span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token keyword">echo</span> $fullname <span class="token operator">|</span> <span class="token function">cut</span> -d <span class="token keyword">.</span> -f2<span class="token variable">)</span></span>
+<span class="token keyword">echo</span> <span class="token variable">$stem</span>
+<span class="token keyword">echo</span> <span class="token variable">$suffix</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>运行结果为：</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221118163646888.png" alt="cut切分单后缀文件名"></p>
 <h2 id="多后缀文件stem与suffix：sed"><a href="#多后缀文件stem与suffix：sed" class="headerlink" title="多后缀文件stem与suffix：sed"></a>多后缀文件stem与suffix：sed</h2><p>有时候文件可能不止有一个后缀，比如<code>*.tar.gz</code>，此时该怎么得到文件的名字、全部后缀，或者最后一个后缀呢？再cut一回？当然可以，但是如果文件名是<code>mylib.1.0.1a.zip</code>这样的呢？</p>
 <p>因为文件名本身就是字符串所以这个时候，就需要更加强大的文本处理工具。而说到文本处理工具，那就是<code>sed</code>了，所以就利用<code>sed</code>和正则表达式，通过掐头去尾留下我们想要的部分来实现获取各种名字。</p>
-<pre class="line-numbers language-shell"><code class="language-shell">fullname=mylib.1.0.1a.zip
+<pre class="line-numbers language-bash"><code class="language-bash">fullname<span class="token operator">=</span>mylib.1.0.1a.zip
 
-last_suffix=$(echo $fullname | sed 's/\.[^.]*$//')
-name=$(echo $fullname | sed 's/^.*\.//')
+last_suffix<span class="token operator">=</span><span class="token punctuation">$(</span>echo <span class="token variable">$fullname</span> <span class="token operator">|</span> <span class="token function">sed</span> <span class="token string">'s/\.[^.]*$//'</span><span class="token punctuation">)</span>
+name<span class="token operator">=</span><span class="token punctuation">$(</span>echo <span class="token variable">$fullname</span> <span class="token operator">|</span> <span class="token function">sed</span> <span class="token string">'s/^.*\.//'</span><span class="token punctuation">)</span>
 
-echo $fullname, $last_suffix, $name
+<span class="token keyword">echo</span> <span class="token variable">$fullname</span>, <span class="token variable">$last_suffix</span>, <span class="token variable">$name</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>运行结果为：</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221118164329527.png" alt="sed切分多后缀文件名"></p>
@@ -496,27 +496,27 @@ echo $fullname, $last_suffix, $name
 <li><code>后缀名</code>：把从行首开始以<code>.</code>字符结尾的子串替换为空。</li>
 </ul>
 <p>光用语言把这两个正则表达式描述出来脑细胞也要死不少。有没有像上面cut版本一样简单容易理解的方法呢？由于<code>.</code>分隔符的个数不确定，正常使用cut来分割最后一个<code>.</code>字符是不太可能的。但是我们可使用 <a target="_blank" rel="noopener" href="http://man7.org/linux/man-pages/man1/rev.1.html">rev</a> 命令将字符串反转一下，区分后缀和文件名的<code>.</code>字符位置就确定了。截取了想要的部分之后，再次反转就得到了我们想要的内容。</p>
-<pre class="line-numbers language-shell"><code class="language-shell">fullname=mylib.1.0.1a.zip
+<pre class="line-numbers language-bash"><code class="language-bash">fullname<span class="token operator">=</span>mylib.1.0.1a.zip
 
-stem=$(rev <<< $fullname | cut -d . -f2- | rev)
-suffix=$(rev <<< $fullname | cut -d . -f1 | rev)
-echo $stem, $suffix
+stem<span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token function">rev</span> <span class="token operator">&lt;&lt;&lt;</span> $fullname <span class="token operator">|</span> <span class="token function">cut</span> -d <span class="token keyword">.</span> -f2- <span class="token operator">|</span> <span class="token function">rev</span><span class="token variable">)</span></span>
+suffix<span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token function">rev</span> <span class="token operator">&lt;&lt;&lt;</span> $fullname <span class="token operator">|</span> <span class="token function">cut</span> -d <span class="token keyword">.</span> -f1 <span class="token operator">|</span> <span class="token function">rev</span><span class="token variable">)</span></span>
+<span class="token keyword">echo</span> <span class="token variable">$stem</span>, <span class="token variable">$suffix</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>运行结果为：</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221118192049918.png" alt="rev获取最后一个后缀"></p>
 <h2 id="使用Bash扩展"><a href="#使用Bash扩展" class="headerlink" title="使用Bash扩展"></a>使用Bash扩展</h2><h3 id="1-Bash扩展介绍"><a href="#1-Bash扩展介绍" class="headerlink" title="1. Bash扩展介绍"></a>1. Bash扩展介绍</h3><p>在前面介绍<code>Bash</code>特性的文章中，我们介绍<code>Bash</code>中有很多的扩展。实际上，针对文本路径，<code>Bash</code>也提供了非常多的扩展。<code>Bash</code>扩展类似于预定义宏，我们直接用就行了，<code>Bash</code>解释器会帮助我们处理扩展。</p>
 <p>看下面的例子：</p>
-<pre class="line-numbers language-shell"><code class="language-shell">fullfile=/the/path/mylib.1.0.1a.zip
+<pre class="line-numbers language-bash"><code class="language-bash">fullfile<span class="token operator">=</span>/the/path/mylib.1.0.1a.zip
 
-dir="${fullfile%/*}"
-fullname="${fullfile##*/}"
-stem="${fullname%.*}"
-extension="${fullname##*.}"
+dir<span class="token operator">=</span><span class="token string">"<span class="token variable">${fullfile%/*}</span>"</span>
+fullname<span class="token operator">=</span><span class="token string">"<span class="token variable">${fullfile##*/}</span>"</span>
+stem<span class="token operator">=</span><span class="token string">"<span class="token variable">${fullname%.*}</span>"</span>
+extension<span class="token operator">=</span><span class="token string">"<span class="token variable">${fullname##*.}</span>"</span>
 
-echo $dir
-echo $fullname
-echo $stem
-echo $extension
+<span class="token keyword">echo</span> <span class="token variable">$dir</span>
+<span class="token keyword">echo</span> <span class="token variable">$fullname</span>
+<span class="token keyword">echo</span> <span class="token variable">$stem</span>
+<span class="token keyword">echo</span> <span class="token variable">$extension</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>运行后的结果：</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221118193340340.png" alt="Bash扩展运行结果"></p>
@@ -1182,7 +1182,7 @@ echo $extension
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">526.7k</span>
+                        class="white-color">534.5k</span>
             
             
             

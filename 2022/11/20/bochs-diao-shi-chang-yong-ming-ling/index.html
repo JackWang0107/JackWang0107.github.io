@@ -415,7 +415,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-11-21
+                    2023-06-01
                 </div>
                 
 
@@ -468,51 +468,51 @@
 <p>所以总的来说，<code>Bochs</code>是做系统开发常用的虚拟机，调试系统内核很方便。</p>
 <h2 id="2-安装Bochs"><a href="#2-安装Bochs" class="headerlink" title="2 安装Bochs"></a>2 安装Bochs</h2><p>安装<code>Bochs</code>一般是从源码编译安装，因为我们需要在当前的平台上模拟其他平台。</p>
 <h3 id="2-1-配置Bochs"><a href="#2-1-配置Bochs" class="headerlink" title="2.1 配置Bochs"></a>2.1 配置Bochs</h3><h4 id="选择安装目录"><a href="#选择安装目录" class="headerlink" title="选择安装目录"></a>选择安装目录</h4><p>因为我们可能需要多个版本、不同功能的<code>Bochs</code>，所以我们可以在编译的时候指定安装目录，注意，必须是绝对路径</p>
-<pre class="line-numbers language-shell"><code class="language-shell">./configure --prefix=安装目录
+<pre class="line-numbers language-bash"><code class="language-bash">./configure --prefix<span class="token operator">=</span>安装目录
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <h4 id="开启调试器"><a href="#开启调试器" class="headerlink" title="开启调试器"></a>开启调试器</h4><p><code>Bochs</code>包含两部分：<code>虚拟机</code>和<code>调试器</code>，而调试器属于可选功能，所以在配置<code>Bochs</code>时需要使用<code>--enable-debugger</code>和`标志开启调试模块。例如：</p>
-<pre class="line-numbers language-shell"><code class="language-shell">./configure --enable-debugger # 还有后面的选项
+<pre class="line-numbers language-bash"><code class="language-bash">./configure --enable-debugger <span class="token comment" spellcheck="true"># 还有后面的选项</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>需要注意调试功能在 <strong>2.5.4</strong> 版本以上才有，确保下载的代码是高于这个版本的。</p>
 <h4 id="开启反汇编"><a href="#开启反汇编" class="headerlink" title="开启反汇编"></a>开启反汇编</h4><p>光能单步调试没用，还得开启反汇编功能，配置的时候使用<code>--enable-disasm</code>开启反汇编功能</p>
-<pre class="line-numbers language-shell"><code class="language-shell">./configure --enable-disasm # 后面还有别的选项
+<pre class="line-numbers language-bash"><code class="language-bash">./configure --enable-disasm <span class="token comment" spellcheck="true"># 后面还有别的选项</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>注意，新版本中<code>--enable-disasm</code>已经被移除了，开启了<code>--enable-debugger</code>自动就会打开反汇编，至少我用的<code>2.7</code>版本是这样的。</p>
 <h4 id="开启IO调试"><a href="#开启IO调试" class="headerlink" title="开启IO调试"></a>开启IO调试</h4><p>为了能够调试外部硬件，需要开启IO调试功能，配置的时候加上<code>--enable-iodebug</code>标志</p>
-<pre class="line-numbers language-shell"><code class="language-shell">./configure --enable-iodebug # 后面还有别的选项
+<pre class="line-numbers language-bash"><code class="language-bash">./configure --enable-iodebug <span class="token comment" spellcheck="true"># 后面还有别的选项</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <h4 id="支持x86调试"><a href="#支持x86调试" class="headerlink" title="支持x86调试"></a>支持x86调试</h4><p>我们需要模拟<code>x86</code>指令集架构，所以需要配置的时候加上<code>--enable-x86-debugger</code>标志</p>
-<pre class="line-numbers language-shell"><code class="language-shell">./configure --enable-x86-debugger # 后面还有别的选项
+<pre class="line-numbers language-bash"><code class="language-bash">./configure --enable-x86-debugger <span class="token comment" spellcheck="true"># 后面还有别的选项</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <h4 id="支持gdb调试"><a href="#支持gdb调试" class="headerlink" title="支持gdb调试"></a>支持gdb调试</h4><p>上面的<code>--enable-debugger</code>是使用<code>Bochs</code>自带的调试器来调试，当然<code>Bochs</code>自带的调试器没有<code>GDB</code>好用。所以我们也可以在配置的时候加上<code>--enable-gdb-stub</code>来支持<code>GDB</code>调试</p>
-<pre class="line-numbers language-shell"><code class="language-shell">./configure --enable-gdb-stub # 后面还有别的选项
+<pre class="line-numbers language-bash"><code class="language-bash">./configure --enable-gdb-stub <span class="token comment" spellcheck="true"># 后面还有别的选项</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>注意，<code>--enable-gdb-stub</code>和<code>--enable-debugger</code>只能开一个，不然会报错。</p>
 <h4 id="支持图形化窗口"><a href="#支持图形化窗口" class="headerlink" title="支持图形化窗口"></a>支持图形化窗口</h4><p><code>Linux</code>平台上编译默认是不会开启图形化窗口的。想要开启图形化窗口，需要在编译的时候加上<code>---with-x</code> 以支持<code>x windows</code>作为图形显示服务器，或者使用<code>--with-x11</code>支持<code>x11</code>图形显示服务。</p>
-<pre class="line-numbers language-shell"><code class="language-shell">./configure --with-x --with-x11 # 后面还有别的选项
+<pre class="line-numbers language-bash"><code class="language-bash">./configure --with-x --with-x11 <span class="token comment" spellcheck="true"># 后面还有别的选项</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>注意，这<code>x11</code>是在<code>Linux</code>上的图形显示。<code>MacOS</code>上需要使用<code>sdl</code>或者<code>sdl2</code>，即</p>
-<pre class="line-numbers language-shell"><code class="language-shell">./configure --with-sdl2
+<pre class="line-numbers language-bash"><code class="language-bash">./configure --with-sdl2
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>开启图形窗口后，效果如下</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221120180142437.png" alt="开启图形化窗口后的效果"></p>
 <h4 id="常用配置如下"><a href="#常用配置如下" class="headerlink" title="常用配置如下"></a>常用配置如下</h4><p><code>Bochs 2.7</code>下使用下面的命令配置：</p>
 <p><code>Linux</code>上</p>
-<pre class="line-numbers language-shell"><code class="language-shell">./configure --prefix=安装目录 --enable-debugger --enable-iodebug --enable-x86-debugger --with-x --with-x11
+<pre class="line-numbers language-bash"><code class="language-bash">./configure --prefix<span class="token operator">=</span>安装目录 --enable-debugger --enable-iodebug --enable-x86-debugger --with-x --with-x11
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><code>MacOS</code>上</p>
-<pre class="line-numbers language-shell"><code class="language-shell">./configure --predix=安装目录 --enable-debugger --enable-iodebug --enable-x86-debugger --with-sdl2
+<pre class="line-numbers language-bash"><code class="language-bash">./configure --predix<span class="token operator">=</span>安装目录 --enable-debugger --enable-iodebug --enable-x86-debugger --with-sdl2
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <h3 id="2-2-编译、安装"><a href="#2-2-编译、安装" class="headerlink" title="2.2 编译、安装"></a>2.2 编译、安装</h3><p>编译安装使用下面的命令即可：</p>
-<pre class="line-numbers language-shell"><code class="language-shell">make
-make install
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">make</span>
+<span class="token function">make</span> <span class="token function">install</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <h3 id="2-3-例子"><a href="#2-3-例子" class="headerlink" title="2.3 例子"></a>2.3 例子</h3><p>下面是<code>MacOS</code>的安装例子</p>
-<pre class="line-numbers language-sh"><code class="language-sh">mkdir ../bochs-test
-./configure --prefix=/Users/jack/project/bochs/bochs-test/ --enable-debugger --enable-iodebug --enable-x86-debugger --with-sdl2
-make
-make install
-tree ../bochs-test -L 3
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">mkdir</span> <span class="token punctuation">..</span>/bochs-test
+./configure --prefix<span class="token operator">=</span>/Users/jack/project/bochs/bochs-test/ --enable-debugger --enable-iodebug --enable-x86-debugger --with-sdl2
+<span class="token function">make</span>
+<span class="token function">make</span> <span class="token function">install</span>
+tree <span class="token punctuation">..</span>/bochs-test -L 3
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221120183820667.png" alt="MacOS安装的例子"></p>
 <h2 id="3-Bochs常用调试命令"><a href="#3-Bochs常用调试命令" class="headerlink" title="3 Bochs常用调试命令"></a>3 Bochs常用调试命令</h2><p>大体上协<code>Bochs</code>的调试命令分为：</p>
@@ -556,11 +556,11 @@ tree ../bochs-test -L 3
 <li><code>x /nuf 地址</code> 查看线性地址处的内存内容。</li>
 <li><code>xp /nuf 地址</code> 查看物理地址处的内存内容。</li>
 </ul>
-<pre class="line-numbers language-shell"><code class="language-shell">n 指定要显示的内存单元的数量
+<pre class="line-numbers language-bash"><code class="language-bash">n 指定要显示的内存单元的数量
 u 显示的内存单元的大小，如下参数之一:
     b 单个字节
-    h 半个字(2 字节)
-    w 一个字(4 字节)
+    h 半个字<span class="token punctuation">(</span>2 字节<span class="token punctuation">)</span>
+    w 一个字<span class="token punctuation">(</span>4 字节<span class="token punctuation">)</span>
 f 打印的格式。如下类型之一：
     x 按照十六进制形式打印
     d 按照十进制形式打印
@@ -857,14 +857,14 @@ f 打印的格式。如下类型之一：
 </table>
 </div>
 <h3 id="4-9-指令编程环境"><a href="#4-9-指令编程环境" class="headerlink" title="4.9 指令编程环境"></a>4.9 指令编程环境</h3><p>Bochs的instrument功能，提供了运行时的各种钩子函数。它也是可选功能，在编译安装时需要开启<code>--enable-instrumentation</code>选项指定。</p>
-<pre class="line-numbers language-shell"><code class="language-shell">./configure [...] --enable-instrumentation
-./configure [...] --enable-instrumentation="instrument/stubs"
+<pre class="line-numbers language-bash"><code class="language-bash">./configure <span class="token punctuation">[</span><span class="token punctuation">..</span>.<span class="token punctuation">]</span> --enable-instrumentation
+./configure <span class="token punctuation">[</span><span class="token punctuation">..</span>.<span class="token punctuation">]</span> --enable-instrumentation<span class="token operator">=</span><span class="token string">"instrument/stubs"</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>自定义的代码要创建一个独立的目录，例如”instrument/myinstrument”，将”instrument/stubs”目录拷贝进去，然后使用如下的指令设定：</p>
-<pre class="line-numbers language-shell"><code class="language-shell">./configure [...] --enable-instrumentation="instrument/myinstrument"
+<pre class="line-numbers language-bash"><code class="language-bash">./configure <span class="token punctuation">[</span><span class="token punctuation">..</span>.<span class="token punctuation">]</span> --enable-instrumentation<span class="token operator">=</span><span class="token string">"instrument/myinstrument"</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>指令命令：</p>
-<pre class="line-numbers language-shell"><code class="language-shell">instrument [command]    用[command]调用BX_INSTR_DEBUG_CMD指令回调
+<pre class="line-numbers language-bash"><code class="language-bash">instrument <span class="token punctuation">[</span>command<span class="token punctuation">]</span>    用<span class="token punctuation">[</span>command<span class="token punctuation">]</span>调用BX_INSTR_DEBUG_CMD指令回调
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <h3 id="4-10-show指令"><a href="#4-10-show指令" class="headerlink" title="4.10 show指令"></a>4.10 show指令</h3><div class="table-container">
 <table>
@@ -947,135 +947,135 @@ f 打印的格式。如下类型之一：
 </table>
 </div>
 <h2 id="5-Bochs配置"><a href="#5-Bochs配置" class="headerlink" title="5 Bochs配置"></a>5 Bochs配置</h2><p><code>Bochs</code>在运行的时候是需要<code>bochrc</code>这个配置文件的，所以下面给出来我常用的<code>Bochs</code>配置</p>
-<pre class="line-numbers language-sh"><code class="language-sh"># bochrc.source
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># bochrc.source</span>
 
-###############################################
-# Configuration file for Bochs
-###############################################
+<span class="token comment" spellcheck="true">###############################################</span>
+<span class="token comment" spellcheck="true"># Configuration file for Bochs</span>
+<span class="token comment" spellcheck="true">###############################################</span>
 
-# 第一步，首先设置Bochs在运行过程中能够使用的内存，本例为32MB。
-# 关键字为：megs
+<span class="token comment" spellcheck="true"># 第一步，首先设置Bochs在运行过程中能够使用的内存，本例为32MB。</span>
+<span class="token comment" spellcheck="true"># 关键字为：megs</span>
 
 megs: 32
 
-# 第二步，设置对应真实机器的BIOS和VGA BIOS.
-# 对应两个关键字为：romimage 和 vgaromimage
+<span class="token comment" spellcheck="true"># 第二步，设置对应真实机器的BIOS和VGA BIOS.</span>
+<span class="token comment" spellcheck="true"># 对应两个关键字为：romimage 和 vgaromimage</span>
 
-# LINUX: romimage: file=/usr/share/bochs/BIOS-bochs-latest
-# LINUX: vgaromimage: file=/usr/share/bochs/VGABIOS-lgpl-latest
+<span class="token comment" spellcheck="true"># LINUX: romimage: file=/usr/share/bochs/BIOS-bochs-latest</span>
+<span class="token comment" spellcheck="true"># LINUX: vgaromimage: file=/usr/share/bochs/VGABIOS-lgpl-latest</span>
 
-# MACOS: romimage: file=/opt/homebrew/share/bochs/BIOS-bochs-latest
-# MACOS: vgaromimage: file=/opt/homebrew/share/bochs/VGABIOS-lgpl-latest
+<span class="token comment" spellcheck="true"># MACOS: romimage: file=/opt/homebrew/share/bochs/BIOS-bochs-latest</span>
+<span class="token comment" spellcheck="true"># MACOS: vgaromimage: file=/opt/homebrew/share/bochs/VGABIOS-lgpl-latest</span>
 
-# 设置图形显示库
-# MACOS: display_library: sdl2
-
-
-# 第三步，设置Bochs所使用的磁盘，软盘的关键字为floppy。
-# 若只有一个软盘，则使用floppya即可，若有多个，则为floppya，floppyb...
-#floppya: 1_44=a.img, status=inserted
+<span class="token comment" spellcheck="true"># 设置图形显示库</span>
+<span class="token comment" spellcheck="true"># MACOS: display_library: sdl2</span>
 
 
-# 第四步，选择启动盘符。
-#boot: floppy
+<span class="token comment" spellcheck="true"># 第三步，设置Bochs所使用的磁盘，软盘的关键字为floppy。</span>
+<span class="token comment" spellcheck="true"># 若只有一个软盘，则使用floppya即可，若有多个，则为floppya，floppyb...</span>
+<span class="token comment" spellcheck="true">#floppya: 1_44=a.img, status=inserted</span>
+
+
+<span class="token comment" spellcheck="true"># 第四步，选择启动盘符。</span>
+<span class="token comment" spellcheck="true">#boot: floppy</span>
 boot: disk
 
-# 第五步，设置日志文件的输出。
+<span class="token comment" spellcheck="true"># 第五步，设置日志文件的输出。</span>
 log: log.bochsrc.disk
 
-# 第六步，开启或关闭某些功能。
-# 下面是关闭鼠标，并打开键盘。
-mouse: enabled=0
-# LINUX: keyboard: keymap=$BXSHARE/keymaps/x11-pc-us.map
-# MACOS: keyboard: keymap=$BXSHARE/keymaps/sdl2-pc-us.map
+<span class="token comment" spellcheck="true"># 第六步，开启或关闭某些功能。</span>
+<span class="token comment" spellcheck="true"># 下面是关闭鼠标，并打开键盘。</span>
+mouse: enabled<span class="token operator">=</span>0
+<span class="token comment" spellcheck="true"># LINUX: keyboard: keymap=$BXSHARE/keymaps/x11-pc-us.map</span>
+<span class="token comment" spellcheck="true"># MACOS: keyboard: keymap=$BXSHARE/keymaps/sdl2-pc-us.map</span>
 
-# 硬盘设置 
-ata0: enabled=1, ioaddr1=0x1f0, ioaddr2=0x3f0, irq=14
-ata0-master: type=disk, path="PATH", mode=flat, cylinders=CYLINDERS, heads=HEADS, spt=SPT
+<span class="token comment" spellcheck="true"># 硬盘设置 </span>
+ata0: enabled<span class="token operator">=</span>1, ioaddr1<span class="token operator">=</span>0x1f0, ioaddr2<span class="token operator">=</span>0x3f0, irq<span class="token operator">=</span>14
+ata0-master: type<span class="token operator">=</span>disk, path<span class="token operator">=</span><span class="token string">"PATH"</span>, mode<span class="token operator">=</span>flat, cylinders<span class="token operator">=</span>CYLINDERS, heads<span class="token operator">=</span>HEADS, spt<span class="token operator">=</span>SPT
 
-#gdbstub: enabled=1, port=1234, text_base=0, data_base=0, bss_base=0
+<span class="token comment" spellcheck="true">#gdbstub: enabled=1, port=1234, text_base=0, data_base=0, bss_base=0</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>相应的，用来生成配置信息的脚本是</p>
-<pre class="line-numbers language-shell"><code class="language-shell"># genrc.sh
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># genrc.sh</span>
 
-# check system
-sys=$(uname -s)
-case $sys in
-    Linux)
-        os=LINUX
-        ;;
-    Darwin)
-        os=MACOS
-        ;;
-    FreeBSD)
-        os=LINUX
-        ;;
-    *)
-        os=UNKNOWN
-        ;;
+<span class="token comment" spellcheck="true"># check system</span>
+sys<span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token function">uname</span> -s<span class="token variable">)</span></span>
+<span class="token keyword">case</span> <span class="token variable">$sys</span> <span class="token keyword">in</span>
+    Linux<span class="token punctuation">)</span>
+        os<span class="token operator">=</span>LINUX
+        <span class="token punctuation">;</span><span class="token punctuation">;</span>
+    Darwin<span class="token punctuation">)</span>
+        os<span class="token operator">=</span>MACOS
+        <span class="token punctuation">;</span><span class="token punctuation">;</span>
+    FreeBSD<span class="token punctuation">)</span>
+        os<span class="token operator">=</span>LINUX
+        <span class="token punctuation">;</span><span class="token punctuation">;</span>
+    *<span class="token punctuation">)</span>
+        os<span class="token operator">=</span>UNKNOWN
+        <span class="token punctuation">;</span><span class="token punctuation">;</span>
 esac
 
-if [ "$os" == "UNKNOWN" ]; then
-    echo "Unknown OS, exit..."
-    exit
-fi
+<span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token string">"<span class="token variable">$os</span>"</span> <span class="token operator">==</span> <span class="token string">"UNKNOWN"</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+    <span class="token keyword">echo</span> <span class="token string">"Unknown OS, exit..."</span>
+    <span class="token keyword">exit</span>
+<span class="token keyword">fi</span>
 
-# get disk image
-shell_folder=$(cd "$(dirname $0)" || exit; pwd)
-cd $shell_folder
-bin_file=$(grep -d skip . * | grep -e 'Binary' | grep -v ':' | awk '{print $3}')
-bin_info=($(bximage -func=info $bin_file -q | awk '/geometry/{print $3}' | awk -F '/' '{print $1,$2,$3}'))
-echo "Binary file detected: $bin_file, C/H/S: ${bin_info[0]}/${bin_info[1]}/${bin_info[2]}"
+<span class="token comment" spellcheck="true"># get disk image</span>
+shell_folder<span class="token operator">=</span><span class="token punctuation">$(</span>cd <span class="token string">"<span class="token variable"><span class="token variable">$(</span><span class="token function">dirname</span> $0<span class="token variable">)</span></span>"</span> <span class="token operator">||</span> <span class="token keyword">exit</span><span class="token punctuation">;</span> pwd<span class="token punctuation">)</span>
+<span class="token function">cd</span> <span class="token variable">$shell_folder</span>
+bin_file<span class="token operator">=</span><span class="token punctuation">$(</span>grep -d skip <span class="token keyword">.</span> * <span class="token operator">|</span> <span class="token function">grep</span> -e <span class="token string">'Binary'</span> <span class="token operator">|</span> <span class="token function">grep</span> -v <span class="token string">':'</span> <span class="token operator">|</span> <span class="token function">awk</span> <span class="token string">'{print <span class="token variable">$3</span>}'</span><span class="token punctuation">)</span>
+bin_info<span class="token operator">=</span><span class="token punctuation">(</span><span class="token punctuation">$(</span>bximage -func<span class="token operator">=</span>info <span class="token variable">$bin_file</span> -q <span class="token operator">|</span> <span class="token function">awk</span> <span class="token string">'/geometry/{print <span class="token variable">$3</span>}'</span> <span class="token operator">|</span> <span class="token function">awk</span> -F <span class="token string">'/'</span> <span class="token string">'{print <span class="token variable">$1</span>,<span class="token variable">$2</span>,<span class="token variable">$3</span>}'</span><span class="token punctuation">))</span>
+<span class="token keyword">echo</span> <span class="token string">"Binary file detected: <span class="token variable">$bin_file</span>, C/H/S: <span class="token variable">${bin_info[0]}</span>/<span class="token variable">${bin_info[1]}</span>/<span class="token variable">${bin_info[2]}</span>"</span>
 
 
-echo "Using $os config, writing config to bochsrc.run"
-sed \
-    -e "s/# $os: //g"\
-    -e "s/PATH/$bin_file/g"\
-    -e "s/CYLINDERS/${bin_info[0]}/g"\
-    -e "s/HEADS/${bin_info[1]}/g"\
-    -e "s/SPT/${bin_info[2]}/g"\
-    $shell_folder/bochsrc.source  > $shell_folder/bochsrc
-echo 'Run `bochs -f bochsrc` to start bochs'
-# bochsrc -f bochsrc
+<span class="token keyword">echo</span> <span class="token string">"Using <span class="token variable">$os</span> config, writing config to bochsrc.run"</span>
+<span class="token function">sed</span> \
+    -e <span class="token string">"s/# <span class="token variable">$os</span>: //g"</span>\
+    -e <span class="token string">"s/PATH/<span class="token variable">$bin_file</span>/g"</span>\
+    -e <span class="token string">"s/CYLINDERS/<span class="token variable">${bin_info[0]}</span>/g"</span>\
+    -e <span class="token string">"s/HEADS/<span class="token variable">${bin_info[1]}</span>/g"</span>\
+    -e <span class="token string">"s/SPT/<span class="token variable">${bin_info[2]}</span>/g"</span>\
+    <span class="token variable">$shell_folder</span>/bochsrc.source  <span class="token operator">></span> <span class="token variable">$shell_folder</span>/bochsrc
+<span class="token keyword">echo</span> <span class="token string">'Run <span class="token variable"><span class="token variable">`</span>bochs -f bochsrc<span class="token variable">`</span></span> to start bochs'</span>
+<span class="token comment" spellcheck="true"># bochsrc -f bochsrc</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>用来编译的脚本是</p>
-<pre class="line-numbers language-shell"><code class="language-shell">shell_folder=$(cd "$(dirname $0)" || exit; pwd)
+<pre class="line-numbers language-bash"><code class="language-bash">shell_folder<span class="token operator">=</span><span class="token punctuation">$(</span>cd <span class="token string">"<span class="token variable"><span class="token variable">$(</span><span class="token function">dirname</span> $0<span class="token variable">)</span></span>"</span> <span class="token operator">||</span> <span class="token keyword">exit</span><span class="token punctuation">;</span> pwd<span class="token punctuation">)</span>
 
-# get disk image
-shell_folder=$(cd "$(dirname $0)" || exit; pwd)
-cd $shell_folder
-bin_file=$(grep -d skip . * | grep -e 'Binary' | grep -v ':' | awk '{print $3}')
-if [ -z $bin_file ]; then
-    read -p "Binary file not detected, enter the name to create [hd60M.img]:" bin_file
-    if [ -z $bin_file ]; then
-        bin_file="hd60M.img"
-    fi
-    echo "Generating $bin_file..."
-    bximage -q -func=create -hd=60 -imgmode=flat $shell_folder/$bin_file
-else
-    bin_info=($(bximage -func=info $bin_file -q | awk '/geometry/{print $3}' | awk -F '/' '{print $1,$2,$3}'))
-    echo "Binary file detected: $bin_file, C/H/S: ${bin_info[0]}/${bin_info[1]}/${bin_info[2]}"
-fi
-echo "You can run genrc.sh to auto-config bochsrc"
+<span class="token comment" spellcheck="true"># get disk image</span>
+shell_folder<span class="token operator">=</span><span class="token punctuation">$(</span>cd <span class="token string">"<span class="token variable"><span class="token variable">$(</span><span class="token function">dirname</span> $0<span class="token variable">)</span></span>"</span> <span class="token operator">||</span> <span class="token keyword">exit</span><span class="token punctuation">;</span> pwd<span class="token punctuation">)</span>
+<span class="token function">cd</span> <span class="token variable">$shell_folder</span>
+bin_file<span class="token operator">=</span><span class="token punctuation">$(</span>grep -d skip <span class="token keyword">.</span> * <span class="token operator">|</span> <span class="token function">grep</span> -e <span class="token string">'Binary'</span> <span class="token operator">|</span> <span class="token function">grep</span> -v <span class="token string">':'</span> <span class="token operator">|</span> <span class="token function">awk</span> <span class="token string">'{print <span class="token variable">$3</span>}'</span><span class="token punctuation">)</span>
+<span class="token keyword">if</span> <span class="token punctuation">[</span> -z <span class="token variable">$bin_file</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+    <span class="token function">read</span> -p <span class="token string">"Binary file not detected, enter the name to create [hd60M.img]:"</span> bin_file
+    <span class="token keyword">if</span> <span class="token punctuation">[</span> -z <span class="token variable">$bin_file</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+        bin_file<span class="token operator">=</span><span class="token string">"hd60M.img"</span>
+    <span class="token keyword">fi</span>
+    <span class="token keyword">echo</span> <span class="token string">"Generating <span class="token variable">$bin_file</span>..."</span>
+    bximage -q -func<span class="token operator">=</span>create -hd<span class="token operator">=</span>60 -imgmode<span class="token operator">=</span>flat <span class="token variable">$shell_folder</span>/<span class="token variable">$bin_file</span>
+<span class="token keyword">else</span>
+    bin_info<span class="token operator">=</span><span class="token punctuation">(</span><span class="token punctuation">$(</span>bximage -func<span class="token operator">=</span>info <span class="token variable">$bin_file</span> -q <span class="token operator">|</span> <span class="token function">awk</span> <span class="token string">'/geometry/{print <span class="token variable">$3</span>}'</span> <span class="token operator">|</span> <span class="token function">awk</span> -F <span class="token string">'/'</span> <span class="token string">'{print <span class="token variable">$1</span>,<span class="token variable">$2</span>,<span class="token variable">$3</span>}'</span><span class="token punctuation">))</span>
+    <span class="token keyword">echo</span> <span class="token string">"Binary file detected: <span class="token variable">$bin_file</span>, C/H/S: <span class="token variable">${bin_info[0]}</span>/<span class="token variable">${bin_info[1]}</span>/<span class="token variable">${bin_info[2]}</span>"</span>
+<span class="token keyword">fi</span>
+<span class="token keyword">echo</span> <span class="token string">"You can run genrc.sh to auto-config bochsrc"</span>
 
-echo "Compiling..."
-mkdir -p $shell_folder/exe
-nasm $shell_folder/a/boot/mbr.S -f bin -o $shell_folder/exe/mbr.bin
-dd if=$shell_folder/exe/mbr.bin of=$bin_file bs=512 count=1 conv=notrunc
-echo "Done, run genrc.sh to auto-config"
+<span class="token keyword">echo</span> <span class="token string">"Compiling..."</span>
+<span class="token function">mkdir</span> -p <span class="token variable">$shell_folder</span>/exe
+nasm <span class="token variable">$shell_folder</span>/a/boot/mbr.S -f bin -o <span class="token variable">$shell_folder</span>/exe/mbr.bin
+<span class="token function">dd</span> if<span class="token operator">=</span><span class="token variable">$shell_folder</span>/exe/mbr.bin of<span class="token operator">=</span><span class="token variable">$bin_file</span> bs<span class="token operator">=</span>512 count<span class="token operator">=</span>1 conv<span class="token operator">=</span>notrunc
+<span class="token keyword">echo</span> <span class="token string">"Done, run genrc.sh to auto-config"</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>所以要生成配置文件的话，就是</p>
-<pre class="line-numbers language-shell"><code class="language-shell">tree ./
+<pre class="line-numbers language-bash"><code class="language-bash">tree ./
 
-# 编译
+<span class="token comment" spellcheck="true"># 编译</span>
 compile.sh
-# 生成配置信息
+<span class="token comment" spellcheck="true"># 生成配置信息</span>
 ./genrc.sh
 
 tree ./
 
-# 调试
+<span class="token comment" spellcheck="true"># 调试</span>
 bochs -f bochrc
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221120204111245.png" alt="Bochs调试-2"></p>
@@ -1599,7 +1599,7 @@ bochs -f bochrc
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">526.7k</span>
+                        class="white-color">534.5k</span>
             
             
             

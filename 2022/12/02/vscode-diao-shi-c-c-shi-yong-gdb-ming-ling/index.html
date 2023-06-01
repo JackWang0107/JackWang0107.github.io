@@ -419,7 +419,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-12-24
+                    2023-06-01
                 </div>
                 
 
@@ -460,11 +460,11 @@
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221223180155357.png" alt="VSCode封装了GDB命令" style="zoom: 25%;"></p>
 <p>但是如果我们要检查特定的内存区域的话，此时<code>VSCode</code>封装的命令就不够看了，此时我们需要直接执行<code>GDB</code>命令</p>
 <p>为此，我们在需要执行的<code>GDB</code>命令前添加<code>-exec</code>来指示<code>VSCode</code>将后面的命令视为<code>GDB</code>命令直接交给<code>GDB</code>来运行。例如我们现在要查看内存<code>0xc0001500</code>开始的100个字节的内存数据，那么就可以执行下面的命令</p>
-<pre class="line-numbers language-sh"><code class="language-sh">-exec x /100hx 0xc0001500
+<pre class="line-numbers language-bash"><code class="language-bash">-exec x /100hx 0xc0001500
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221223181034969.png" alt="GDB查看内存"></p>
 <p>可以看到，<code>0xc0001500</code>处是<code>main</code>函数（严谨的来说，是<code>main</code>符号）的开始地址，为此，我们反汇编这个地址中的数据。即将其中的数据视为指令来进行翻译</p>
-<pre class="line-numbers language-sh"><code class="language-sh">-exec disassmble 0xc0001500
+<pre class="line-numbers language-bash"><code class="language-bash">-exec disassmble 0xc0001500
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>使用<code>GDB</code>反汇编出来的代码确实和我特地生成的汇编代码是一样的</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221223181724184.png" alt="image-20221223181724184"></p>
@@ -721,18 +721,18 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2022/12/22/ros-jiao-cheng-1-ros-an-zhuang/">
+                <a href="/2022/12/22/ros-jiao-cheng-0-ros-jie-shao/">
                     <div class="card-image">
                         
-                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/%E5%B1%8F%E5%B9%95%E5%BD%95%E5%88%B62022-12-23%20%E4%B8%8B%E5%8D%881.50.16.gif" class="responsive-img" alt="ROS教程 1：ROS安装">
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221222234619457.png" class="responsive-img" alt="ROS教程 0：ROS介绍">
                         
-                        <span class="card-title">ROS教程 1：ROS安装</span>
+                        <span class="card-title">ROS教程 0：ROS介绍</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            本文是ROS系列教程的第一篇文章，介绍了如何安装ROS
+                            本文是ROS系列教程的前言，介绍了什么是ROS
                         
                     </div>
                     <div class="publish-info">
@@ -987,7 +987,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">526.7k</span>
+                        class="white-color">534.5k</span>
             
             
             

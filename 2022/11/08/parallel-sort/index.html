@@ -419,7 +419,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-11-14
+                    2023-06-01
                 </div>
                 
 
@@ -1838,7 +1838,7 @@ job <span class="token operator">=</span> <span class="token function">sort_job_
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="项目代码"><a href="#项目代码" class="headerlink" title="项目代码"></a>项目代码</h2><p>代码已开源：<a target="_blank" rel="noopener" href="https://github.com/jackwang0108/CS537-Project3.git">https://github.com/jackwang0108/CS537-Project3.git</a></p>
 <h3 id="1-项目结构"><a href="#1-项目结构" class="headerlink" title="1. 项目结构"></a>1. 项目结构</h3><p>项目结构如下</p>
-<pre class="line-numbers language-shell"><code class="language-shell">tree -C ./
+<pre class="line-numbers language-bash"><code class="language-bash">tree -C ./
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>其中：</p>
 <ul>
@@ -1848,47 +1848,47 @@ job <span class="token operator">=</span> <span class="token function">sort_job_
 </ul>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221109044515531.png" alt="项目结构"></p>
 <h3 id="2-使用说明"><a href="#2-使用说明" class="headerlink" title="2. 使用说明"></a>2. 使用说明</h3><h4 id="A-初始化项目"><a href="#A-初始化项目" class="headerlink" title="A. 初始化项目"></a>A. 初始化项目</h4><p>使用在项目根目录下的<code>init.sh</code>初始化项目</p>
-<pre class="line-numbers language-sh"><code class="language-sh">cd <path-to-project>
-source init.sh
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">cd</span> <span class="token operator">&lt;</span>path-to-project<span class="token operator">></span>
+<span class="token function">source</span> init.sh
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <h4 id="B-编译"><a href="#B-编译" class="headerlink" title="B. 编译"></a>B. 编译</h4><p>可以手动编译</p>
-<pre class="line-numbers language-sh"><code class="language-sh">cd <path-to-project>
-mkdir build
-cd build
-cmake ..
-make
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">cd</span> <span class="token operator">&lt;</span>path-to-project<span class="token operator">></span>
+<span class="token function">mkdir</span> build
+<span class="token function">cd</span> build
+cmake <span class="token punctuation">..</span>
+<span class="token function">make</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>或者在<code>source init.sh</code>后使用提供的自动编译工具</p>
-<pre class="line-numbers language-shell"><code class="language-shell">source init.sh
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">source</span> init.sh
 autobuild.sh
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221109045433994.png" alt="自动编译"></p>
 <p>编译后将得到<code>libppsort.a</code>库和可执行文件，分别位于<code>lib</code>文件夹和<code>bin</code>文件夹下</p>
-<pre class="line-numbers language-sh"><code class="language-sh">tree -C -I build
+<pre class="line-numbers language-bash"><code class="language-bash">tree -C -I build
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221109045639062.png" alt="编译后得到可执行文件"></p>
 <h4 id="C-测试"><a href="#C-测试" class="headerlink" title="C. 测试"></a>C. 测试</h4><p>使用<code>gentest.sh</code>生成测试文件。这里指定生成100个record</p>
-<pre class="line-numbers language-sh"><code class="language-sh">source init.sh
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">source</span> init.sh
 gentest.sh 10
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>测试文件将写入<code>&lt;path-toprojec&gt;/test.bin文件中</code></p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221109050250292.png" alt="生成测试文件"></p>
 <p>而后使用<code>printkey</code>程序查看其中每个<code>record</code>的键值</p>
-<pre class="line-numbers language-shell"><code class="language-shell">./bin/printkey test.bin
+<pre class="line-numbers language-bash"><code class="language-bash">./bin/printkey test.bin
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221109050330618.png" alt="查看测试文件key值"></p>
 <p>使用测试脚本<code>autotest.sh</code>进行测试，测试后的结果将写入<code>sorted.bin</code>中</p>
-<pre class="line-numbers language-shell"><code class="language-shell">autotest.sh
+<pre class="line-numbers language-bash"><code class="language-bash">autotest.sh
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221109050430623.png" alt="进行测试"></p>
 <p>最后，查看排序后的结果</p>
-<pre class="line-numbers language-sh"><code class="language-sh">./bin/printkey sorted.bin
+<pre class="line-numbers language-bash"><code class="language-bash">./bin/printkey sorted.bin
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221109050527197.png" alt="查看排序后的结果"></p>
 <h3 id="3-性能测试"><a href="#3-性能测试" class="headerlink" title="3. 性能测试"></a>3. 性能测试</h3><p>使用<code>gentest.sh</code>生成10,000,000（一百万个record），文件大小954M。对其进行排序</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221109050741114.png" alt="性能测试"></p>
 <p>使用time进行计时</p>
-<pre class="line-numbers language-sh"><code class="language-sh">time ./bin/psort test.bin sorted.bin
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">time</span> ./bin/psort test.bin sorted.bin
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>包含将排序后文件写入到<code>sorted.bin</code>中，一共用时<code>8.574</code>秒，平均每秒处理十万个<code>record</code></p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221109050910881.png" alt="计时"></p>
@@ -2422,7 +2422,7 @@ gentest.sh 10
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">526.7k</span>
+                        class="white-color">534.5k</span>
             
             
             

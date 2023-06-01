@@ -419,7 +419,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-12-24
+                    2023-06-01
                 </div>
                 
 
@@ -530,13 +530,13 @@
 </ul>
 <h4 id="4-args标签"><a href="#4-args标签" class="headerlink" title="4 ) args标签"></a>4 ) args标签</h4><p><code>args</code>标签指定了执行的命令或者程序时传入的命令行参数。在具体执行的时候会把多个参数用空格连接起来而后执行。</p>
 <p>结合<code>command</code>标签，我们执行的命令就是下面这句话</p>
-<pre class="line-numbers language-shell"><code class="language-shell">mkdir -p build
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">mkdir</span> -p build
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <h4 id="5-windows标签"><a href="#5-windows标签" class="headerlink" title="5 ) windows标签"></a>5 ) windows标签</h4><p><code>windows</code>标签指定了只有在<code>windows</code>系统上的配置。我们在<code>windows</code>标签中指定了两个标签<code>options</code>标签和<code>args</code>标签。</p>
 <ul>
 <li><p>对于<code>args</code>标签就意味着在其他系统（<code>Linux</code>/<code>MacOS</code>）上，使用<code>-p build</code>作为命令行参数，而在<code>Windows</code>系统上，使用<code>-Force build</code>作为命令行参数。</p>
 <p>这是因为在<code>Linux</code>/<code>MacOS</code>系统上，创建一个文件夹使用下面的命令就行了</p>
-<pre class="line-numbers language-shell"><code class="language-shell">mkdir -p 文件夹名
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">mkdir</span> -p 文件夹名
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>但是在<code>Windows</code>平台上，创建一个文件夹需要使用下面的命令</p>
 <pre class="line-numbers language-powershell"><code class="language-powershell">mkdir <span class="token operator">-</span>Force 文件夹名
@@ -622,26 +622,26 @@
 <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>具体来说我们就是想要执行一下下面的命令</p>
-<pre class="line-numbers language-shell"><code class="language-shell">echo "${file}\n" "${fileBasename}\n" "${fileBasenameNoExtension}\n" "${fileDirname}\n"
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token keyword">echo</span> <span class="token string">"<span class="token variable">${file}</span>\n"</span> <span class="token string">"<span class="token variable">${fileBasename}</span>\n"</span> <span class="token string">"<span class="token variable">${fileBasenameNoExtension}</span>\n"</span> <span class="token string">"<span class="token variable">${fileDirname}</span>\n"</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>主要是看一看这四个宏的值分别是什么</p>
 <h3 id="B-launch-json的内容"><a href="#B-launch-json的内容" class="headerlink" title="B. launch.json的内容"></a>B. launch.json的内容</h3><p>Toy Example中<code>lauch.json</code>的内容如下</p>
-<pre class="line-numbers language-shell"><code class="language-shell">{
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">{</span>
     // 使用 IntelliSense 了解相关属性。 
     // 悬停以查看现有属性的描述。
-    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "type": "gdb",
-            "request": "launch",
-            "name": "Toy Example",
-            "program": "${workspaceFolder}/${file}",
-            "stopOnEntry": true,
-            "preLaunchTask": "example"
-        }
-    ]
-}
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid<span class="token operator">=</span>830387
+    <span class="token string">"version"</span><span class="token keyword">:</span> <span class="token string">"0.2.0"</span>,
+    <span class="token string">"configurations"</span><span class="token keyword">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+            <span class="token string">"type"</span><span class="token keyword">:</span> <span class="token string">"gdb"</span>,
+            <span class="token string">"request"</span><span class="token keyword">:</span> <span class="token string">"launch"</span>,
+            <span class="token string">"name"</span><span class="token keyword">:</span> <span class="token string">"Toy Example"</span>,
+            <span class="token string">"program"</span><span class="token keyword">:</span> <span class="token string">"<span class="token variable">${workspaceFolder}</span>/<span class="token variable">${file}</span>"</span>,
+            <span class="token string">"stopOnEntry"</span><span class="token keyword">:</span> true,
+            <span class="token string">"preLaunchTask"</span><span class="token keyword">:</span> <span class="token string">"example"</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>具体来说就是在启动调试器之前运行一下上面定义的<code>example</code>这个task。</p>
 <h3 id="C-hello-world-c"><a href="#C-hello-world-c" class="headerlink" title="C. hello_world.c"></a>C. hello_world.c</h3><p>我们接下来写一个<code>hello_world.c</code>，里面的内容如下：</p>
@@ -832,30 +832,30 @@ $<span class="token punctuation">{</span>fileDirname<span class="token punctuati
 <p>关键就在于修改之后的<code>debug_build</code>任务，<code>debug_build</code>任务中新增加了一个<code>dependsOn</code>标签，这个标签说明了在运行<code>debug_build</code>任务之前需要运行的任务。</p>
 <p>在这里就表示在运行<code>debug_build</code>任务之前，需要运行<code>create_bin</code>任务。</p>
 <h3 id="B-launch-json的内容-3"><a href="#B-launch-json的内容-3" class="headerlink" title="B. launch.json的内容"></a>B. launch.json的内容</h3><p><code>launch.json</code>中的内容保持不变，还是<code>LLDB Debug</code></p>
-<pre class="line-numbers language-shell"><code class="language-shell">{
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">{</span>
     // 使用 IntelliSense 了解相关属性。 
     // 悬停以查看现有属性的描述。
-    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "type": "cppdbg",
-            "request": "launch",
-            "name": "LLDB Debug",
-            "program": "${workspaceFolder}${pathSeparator}bin${pathSeparator}${fileBasenameNoExtension}.o",
-            "stopAtEntry": false,
-            "preLaunchTask": "debug_build",
-            "cwd": "${workspaceFolder}",
-            "MIMode": "lldb",
-        },
-    ]
-}
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid<span class="token operator">=</span>830387
+    <span class="token string">"version"</span><span class="token keyword">:</span> <span class="token string">"0.2.0"</span>,
+    <span class="token string">"configurations"</span><span class="token keyword">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+            <span class="token string">"type"</span><span class="token keyword">:</span> <span class="token string">"cppdbg"</span>,
+            <span class="token string">"request"</span><span class="token keyword">:</span> <span class="token string">"launch"</span>,
+            <span class="token string">"name"</span><span class="token keyword">:</span> <span class="token string">"LLDB Debug"</span>,
+            <span class="token string">"program"</span><span class="token keyword">:</span> <span class="token string">"<span class="token variable">${workspaceFolder}</span><span class="token variable">${pathSeparator}</span>bin<span class="token variable">${pathSeparator}</span><span class="token variable">${fileBasenameNoExtension}</span>.o"</span>,
+            <span class="token string">"stopAtEntry"</span><span class="token keyword">:</span> false,
+            <span class="token string">"preLaunchTask"</span><span class="token keyword">:</span> <span class="token string">"debug_build"</span>,
+            <span class="token string">"cwd"</span><span class="token keyword">:</span> <span class="token string">"<span class="token variable">${workspaceFolder}</span>"</span>,
+            <span class="token string">"MIMode"</span><span class="token keyword">:</span> <span class="token string">"lldb"</span>,
+        <span class="token punctuation">}</span>,
+    <span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="C-运行LLDB-Debug-1"><a href="#C-运行LLDB-Debug-1" class="headerlink" title="C. 运行LLDB Debug"></a>C. 运行LLDB Debug</h3><p>运行<code>LLDB Debug</code>的结果如下，可以发现首先<code>bin</code>文件被创建了，接着可执行文件输出到了<code>bin</code>文件夹中，而后开始debug</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221011222558619.png" alt="image-20221011222558619"></p>
 <h2 id="8-一个真实的例子：CMake工程"><a href="#8-一个真实的例子：CMake工程" class="headerlink" title="8. 一个真实的例子：CMake工程"></a>8. 一个真实的例子：CMake工程</h2><p>我们上面讲了四个Toy Example，介绍了VSCode的<code>tasks.json</code>和<code>launch.json</code>最基本的功能，接下来我们就把这些功能结合到一起，用VSCode调试一个真实的<code>CMake</code>工程。</p>
 <h3 id="A-CMake工程结构及文件"><a href="#A-CMake工程结构及文件" class="headerlink" title="A. CMake工程结构及文件"></a>A. CMake工程结构及文件</h3><p><code>CMake</code>工程的结构如下</p>
-<pre class="line-numbers language-shell"><code class="language-shell">tree ./
+<pre class="line-numbers language-bash"><code class="language-bash">tree ./
 ./
 ├── CMakeLists.txt
 ├── main.c
@@ -1323,24 +1323,24 @@ target_link_libraries(wish libwish)
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>关于<code>input</code>标签，参考手册的这一节：<a target="_blank" rel="noopener" href="https://code.visualstudio.com/docs/editor/variables-reference">https://code.visualstudio.com/docs/editor/variables-reference</a></p>
 <h3 id="C-launch-json的内容"><a href="#C-launch-json的内容" class="headerlink" title="C. launch.json的内容"></a>C. launch.json的内容</h3><p><code>launch.json</code>的内容如下</p>
-<pre class="line-numbers language-shell"><code class="language-shell">{
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">{</span>
     // 使用 IntelliSense 了解相关属性。 
     // 悬停以查看现有属性的描述。
-    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "type": "cppdbg",
-            "request": "launch",
-            "name": "LLDB Debug",
-            "program": "${workspaceFolder}/bin/wish",
-            "stopAtEntry": true,
-            "preLaunchTask": "make_build",
-            "cwd": "${workspaceFolder}",
-            "MIMode": "lldb",
-        },
-    ]
-}
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid<span class="token operator">=</span>830387
+    <span class="token string">"version"</span><span class="token keyword">:</span> <span class="token string">"0.2.0"</span>,
+    <span class="token string">"configurations"</span><span class="token keyword">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+            <span class="token string">"type"</span><span class="token keyword">:</span> <span class="token string">"cppdbg"</span>,
+            <span class="token string">"request"</span><span class="token keyword">:</span> <span class="token string">"launch"</span>,
+            <span class="token string">"name"</span><span class="token keyword">:</span> <span class="token string">"LLDB Debug"</span>,
+            <span class="token string">"program"</span><span class="token keyword">:</span> <span class="token string">"<span class="token variable">${workspaceFolder}</span>/bin/wish"</span>,
+            <span class="token string">"stopAtEntry"</span><span class="token keyword">:</span> true,
+            <span class="token string">"preLaunchTask"</span><span class="token keyword">:</span> <span class="token string">"make_build"</span>,
+            <span class="token string">"cwd"</span><span class="token keyword">:</span> <span class="token string">"<span class="token variable">${workspaceFolder}</span>"</span>,
+            <span class="token string">"MIMode"</span><span class="token keyword">:</span> <span class="token string">"lldb"</span>,
+        <span class="token punctuation">}</span>,
+    <span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="D-开始调试-1"><a href="#D-开始调试-1" class="headerlink" title="D. 开始调试"></a>D. 开始调试</h3><p>按下<code>F5</code>开始调试</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/%E5%B1%8F%E5%B9%95%E5%BD%95%E5%88%B62022-10-11-%E4%B8%8B%E5%8D%8811.28.15%20(1" alt="开始调试">.gif)</p>
@@ -2125,7 +2125,7 @@ target_link_libraries(wish libwish)
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">526.7k</span>
+                        class="white-color">534.5k</span>
             
             
             
