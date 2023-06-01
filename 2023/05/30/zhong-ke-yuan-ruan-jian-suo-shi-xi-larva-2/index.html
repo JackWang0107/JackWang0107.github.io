@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="中科院软件所实习日志（LARVa）：Rust语言从入门到入土 1, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
-    <meta name="description" content="本文是中科院软件所实习日志的第二篇，主要记录了我学习Rust语言的相关内容。本文主要介绍了什么是Rust">
+    <meta name="keywords" content="Rust语言从入门到入土 1：Rust的开始, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
+    <meta name="description" content="本文是中科院软件所实习（LARVa项目）日志的第二篇，主要记录了我学习Rust语言的相关内容。本文主要介绍了什么是Rust，以及Rust开发环境配置">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>中科院软件所实习日志（LARVa）：Rust语言从入门到入土 1 | JackWang&#39;s Blog</title>
+    <title>Rust语言从入门到入土 1：Rust的开始 | JackWang&#39;s Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -259,7 +259,7 @@
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">中科院软件所实习日志（LARVa）：Rust语言从入门到入土 1</h1>
+                    <h1 class="description center-align post-title">Rust语言从入门到入土 1：Rust的开始</h1>
                 </div>
             </div>
         </div>
@@ -422,14 +422,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    609
+                    2.7k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    2 分
+                    10 分
                 </div>
                 
 
@@ -450,10 +450,10 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <blockquote>
-<p>没办法，还就那个得学一下<code>Rust</code></p>
+<p>没办法，还就那个得学一下<code>Rust</code>。本文参考官方教程：<a target="_blank" rel="noopener" href="https://kaisery.github.io/trpl-zh-cn/ch01-00-getting-started.html">https://kaisery.github.io/trpl-zh-cn/ch01-00-getting-started.html</a></p>
 </blockquote>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230601042403179.png" alt="Rust从入门到入土"></p>
-<h2 id="中科院软件所实习日志（LARVa）：Rust语言从入门到入土-1"><a href="#中科院软件所实习日志（LARVa）：Rust语言从入门到入土-1" class="headerlink" title="中科院软件所实习日志（LARVa）：Rust语言从入门到入土 1"></a>中科院软件所实习日志（LARVa）：Rust语言从入门到入土 1</h2><p>我对学习的态度是，学习什么之前，得有足够的动力去学习他。所以得先明白他是什么，他有什么用。</p>
+<h2 id="Rust语言从入门到入土-1：Rust的开始"><a href="#Rust语言从入门到入土-1：Rust的开始" class="headerlink" title="Rust语言从入门到入土 1：Rust的开始"></a>Rust语言从入门到入土 1：Rust的开始</h2><p>我对学习的态度是，学习什么之前，得有足够的动力去学习他。所以得先明白他是什么，他有什么用。</p>
 <h2 id="1-什么是Rust"><a href="#1-什么是Rust" class="headerlink" title="1. 什么是Rust"></a>1. 什么是Rust</h2><p>简单的介绍，类似于<code>C</code>和<code>C++</code>，<code>Rust</code>是一种系统级编程语言，由<code>Mozilla</code>开发。<strong>它的设计目标是提供一种安全、并发、高效的编程语言，可以用于编写操作系统、网络服务器、嵌入式系统等高性能应用程序</strong>。</p>
 <p><code>Rust</code>的语法类似于<code>C++</code>，但它采用了一些新的语言特性，例如所有权系统、借用和生命周期等，这些特性可以帮助程序员避免常见的内存安全问题，例如空指针引用和数据竞争等。<code>Rust</code>还提供了一些高级的并发编程特性，例如通道和闭包等，可以使编写并发程序更加容易和安全。</p>
 <p><code>Rust</code>的编译器非常快，并且可以生成高效的本地代码，所以<code>Rust</code>非常适合用于编写高性能的系统级应用程序。</p>
@@ -462,7 +462,7 @@
 <h2 id="2-Rust无痛开箱"><a href="#2-Rust无痛开箱" class="headerlink" title="2. Rust无痛开箱"></a>2. Rust无痛开箱</h2><blockquote>
 <p>学一个新语言，总得先准备好开发环境吧？</p>
 </blockquote>
-<h3 id="A-Rustup：Rust安装器和版本管理工具"><a href="#A-Rustup：Rust安装器和版本管理工具" class="headerlink" title="A. Rustup：Rust安装器和版本管理工具"></a>A. Rustup：Rust安装器和版本管理工具</h3><p><code>Rustup</code>既是一个<code>Rust</code>安装器又是一个版本管理工具，因此安装<code>Rust</code>的主要方式是通过<code>Rustup</code>这一工具</p>
+<p><code>Rustup</code>既是一个<code>Rust</code>安装器又是一个版本管理工具，在首次安装<code>Rustup</code>时，就会顺带把<code>Rust</code>的其他工具一起安装了。因此安装<code>Rust</code>的主要方式是通过<code>Rustup</code>这一工具</p>
 <p>运行下面的命令安装<code>Rustup</code></p>
 <pre class="line-numbers language-bash"><code class="language-bash">curl --proto <span class="token string">'=https'</span> --tlsv1.2 -sSf https://sh.rustup.rs <span class="token operator">|</span> sh
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -483,6 +483,167 @@
 </blockquote>
 <p>安装成功则输出<code>cargo</code>版本，失败则输出<code>fail</code></p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230601045254078.png" alt="运气不错，一遍过"></p>
+<p>最后，<code>Rust</code>工具链全部在<code>~/.cargo/bin</code>目录下（如果你没修改的话），用<code>ls</code>查看一下</p>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">ls</span> ~/.cargo/bin
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230601111035586.png" alt="查看Rust工具链" style="zoom:33%;"></p>
+<h2 id="3-Rust开发环境配置"><a href="#3-Rust开发环境配置" class="headerlink" title="3. Rust开发环境配置"></a>3. Rust开发环境配置</h2><blockquote>
+<p>当然是宇宙第一编辑器啦！</p>
+</blockquote>
+<p>在<code>VSCode</code>的扩展，搜索<code>Rust</code>。找到点击<code>install</code>。</p>
+<p>或者你更<del>熟悉命令面板</del>（觉得命令面板更酷）的话，按下<code>Command + P</code>，然后输入：<code>ext install rust-lang.rust</code></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230601112844594.png" alt="安装Rust的Language Server" style="zoom: 25%;"></p>
+<p>然后创建一个<code>Rust</code>，看看有没有补全</p>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">(</span>cargo new hello_world <span class="token operator">&amp;&amp;</span> code hello_world/main.rs<span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token keyword">echo</span> fail
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>好耶，补全出现，可以开始快乐的写代码了！ヾ(@^▽^@)ノ</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230601145814571.png" alt="VSCode成功补全"></p>
+<h2 id="4-Rustc和Cargo"><a href="#4-Rustc和Cargo" class="headerlink" title="4. Rustc和Cargo"></a>4. Rustc和Cargo</h2><p><code>Rust</code>类似于<code>C</code>/<code>C++</code>一样，也需要使用编译器将源代码编译为可执行文件，而<code>rustc</code>就是<code>Rust</code>的编译器。除了编写单独的<code>Rust</code>源代码以外，<code>Rust</code>还可以使用<code>Cargo</code>来创建项目。</p>
+<h3 id="A-Rustc"><a href="#A-Rustc" class="headerlink" title="A. Rustc"></a>A. Rustc</h3><p>学习一门新语言的时候，使用该语言在屏幕上打印<code>Hello, world!</code>是一项传统，我们将沿用这一传统！</p>
+<h4 id="1-创建项目目录"><a href="#1-创建项目目录" class="headerlink" title="1) 创建项目目录"></a>1) 创建项目目录</h4><p>首先创建一个存放<code>Rust</code>代码的目录。<code>Rust</code>并不关心代码的存放位置，不过对于会把<code>Rust</code>代码放到<code>home</code>目录中下的<code>projects</code>目录里的<code>rust-learning</code>目录</p>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">mkdir</span> ~/projects/rust-learning <span class="token operator">&amp;&amp;</span> <span class="token function">cd</span> ~/projects/rust-learning <span class="token operator">&amp;&amp;</span> <span class="token function">mkdir</span> -p hello/hello_<span class="token punctuation">{</span>rustc,cargo_init<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h4 id="2-编写源代码"><a href="#2-编写源代码" class="headerlink" title="2) 编写源代码"></a>2) 编写源代码</h4><p><code>Rust</code>源代码以<code>.rs</code>为后缀，使用下面命令创建一个<code>Rust</code>源代码</p>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">cd</span> hello/hello_rustc <span class="token operator">&amp;&amp;</span> code main.rs
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>然后编写如下的代码</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"Hello, world!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h4 id="3-编译可执行文件"><a href="#3-编译可执行文件" class="headerlink" title="3) 编译可执行文件"></a>3) 编译可执行文件</h4><p>类似于<code>gcc</code>，使用<code>Rustc</code>编译<code>Rust</code>源代码</p>
+<pre class="line-numbers language-bash"><code class="language-bash">rustc main.rs -o main
+<span class="token function">ls</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>得到的<code>main</code>是可执行文件（有<code>x</code>权限）</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230601151959110.png" alt="rustc编译Rust源代码" style="zoom: 33%;"></p>
+<h4 id="4-运行可执行文件"><a href="#4-运行可执行文件" class="headerlink" title="4) 运行可执行文件"></a>4) 运行可执行文件</h4><p>因为<code>main</code>已经有可执行权限了，并且是二进制程序，所以直接运行即可</p>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">file</span> main
+./main
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230601152226178.png" alt="运行可执行文件" style="zoom: 33%;"></p>
+<h3 id="B-Cargo"><a href="#B-Cargo" class="headerlink" title="B. Cargo"></a>B. Cargo</h3><p>简单的程序，使用 <code>rustc</code> 编译是没问题的，不过随着项目的代码量的增长，项目编译起来就麻烦了。此外，因为项目还可能会依赖第三方的<code>Rust</code>库，因此在使用别人写好的<code>Rust</code>项目的时候还需要注意<code>Rust</code>依赖的问题。</p>
+<p><code>Rust</code>提供了一个叫做<code>Cargo</code>的工具，用于帮助我们开发、管理、分享<code>Rust</code>项目。</p>
+<h4 id="1-创建项目"><a href="#1-创建项目" class="headerlink" title="1) 创建项目"></a>1) 创建项目</h4><p>使用下面的命令创建一个<code>Cargo</code>管理的<code>Rust</code>项目</p>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">cd</span> ~/project/rust-learning/hello
+cargo new hello_cargo_new
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>而后，<code>Cargo</code>会帮助我们创建一个名为<code>hello_cargo_new</code>的<code>Rust</code>项目</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230601155002843.png" alt="Cargo创建一个Rust项目" style="zoom: 33%;"></p>
+<p><code>Cargo new</code>会创建一个新的目录，如果已经有一个目录，我们想要将这个目录转换为一个<code>Cargo</code>管理的<code>Rust</code>项目的话，那么就是用<code>Cargo init</code></p>
+<pre class="line-numbers language-bash"><code class="language-bash">cargo init hello_cargo_init
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230601155124688.png" alt="Cargo初始化一个Rust项目" style="zoom: 50%;"></p>
+<h4 id="2-项目结构"><a href="#2-项目结构" class="headerlink" title="2) 项目结构"></a>2) 项目结构</h4><p>使用<code>tree</code>查看一下项目的目录结构</p>
+<pre class="line-numbers language-bash"><code class="language-bash">tree hello_cargo_new
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230601154550783.png" alt="Cargo创建的Rust项目的目录" style="zoom:33%;"></p>
+<p>其中：</p>
+<ul>
+<li><p><code>Cargo.toml</code>是项目的配置文件，使用<code>TOML</code>格式。其中描述了项目名称、使用的<code>Rust</code>版本、依赖的第三方<code>Rust</code>库等等信息。目前因为我们的项目是刚刚初始化的，自然没有任何依赖</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230601155405819.png" alt="Cargo.toml的内容" style="zoom:33%;"></p>
+</li>
+<li><p><code>src</code>目录存放项目的源码</p>
+</li>
+</ul>
+<blockquote>
+<p><code>TOML</code>（<code>Tom's Obvious, Minimal Language</code>）是一种易于阅读和编写的配置文件格式，旨在成为配置文件的标准。<code>TOML</code>文件使用简单的语法规则，支持注释、键值对、列表和嵌套数据结构等特性，可以用于配置各种应用程序和工具。</p>
+<p><code>TOML</code>文件的语法规则非常简单，其中键值对使用等号或冒号进行赋值，列表使用方括号进行定义，注释使用井号（<code>#</code>）进行标识。下面是一个 <code>TOML</code> 文件的示例：</p>
+<pre class="line-numbers language-toml"><code class="language-toml"># This is a TOML document
+
+title = "TOML Example"
+description = "An example of TOML file format"
+
+[author]
+name = "John Doe"
+email = "john@example.com"
+
+[database]
+server = "localhost"
+port = 3306
+username = "root"
+password = "password"
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>在上述 <code>TOML</code> 文件中，使用 <code>title</code> 和 <code>description</code> 定义了文档的标题和描述，使用 <code>[author]</code> 和 <code>[database]</code> 定义了两个域。在 <code>[author]</code>域 中，使用 <code>name</code> 和 <code>email</code> 定义了作者的姓名和电子邮件地址，在 <code>[database]</code>域 中，使用 <code>server</code>、<code>port</code>、<code>username</code> 和 <code>password</code> 定义了数据库的连接信息。</p>
+<p><code>TOML</code>文件格式的简洁性和易读性，使得它在各种应用程序和工具中得到了广泛的应用，<code>Rust</code> 语言中的 <code>Cargo</code> 包管理工具就使用 <code>TOML</code> 文件来管理项目的依赖关系和构建配置。</p>
+</blockquote>
+<p>此外，<code>Cargo</code>实际上在创建项目的同时，也会初始化<code>Git</code>仓库</p>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">cd</span> hello_cargo_new <span class="token operator">&amp;&amp;</span> <span class="token function">git</span> status <span class="token operator">&amp;&amp;</span> <span class="token function">ls</span> -a
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230601160946541.png" alt="Cargo初始化一个空的Git仓库" style="zoom:33%;"></p>
+<h4 id="3-编写源代码"><a href="#3-编写源代码" class="headerlink" title="3) 编写源代码"></a>3) 编写源代码</h4><p>同样，我们还向<code>src/mian.rs</code>中写入输出<code>hello world!</code>的代码</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"Hello, world!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<p>注意：<code>Cargo</code>管理的<code>Rust</code>项目预期所以源文件存放在<code>src</code>目录中。项目根目录只存放<code>README</code>、<code>License</code>授权文件、<code>Cargo配置文件</code>和其他<strong>跟代码无关的文件</strong>。我们在编写项目的时候需要注意遵守这一默认的规定以保持项目的整洁</p>
+</blockquote>
+<h4 id="4-构建项目"><a href="#4-构建项目" class="headerlink" title="4) 构建项目"></a>4) 构建项目</h4><p>类似于<code>CMake</code>和<code>Make</code>这类<code>C</code>/<code>C++</code>项目的编译系统，他们在构建项目的时候可以编译所有源文件、更新目标文件（生成被修改过的源文件的目标文件而不用全部重新编译），<code>Rust</code>也提供了编译系统。</p>
+<p>这个编译系统继承进了<code>Cargo</code>中，使用下面的命令编译项目</p>
+<pre class="line-numbers language-bash"><code class="language-bash">cargo build
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<blockquote>
+<p>注意，<code>cargo build</code>命令需要在项目根目录下运行</p>
+</blockquote>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230601160809771.png" alt="Cargo build编译项目" style="zoom:33%;"></p>
+<p>运行<code>cargo build</code>命令后，<code>Cargo</code>会将编译生成的中间文件、得到的可执行文件<code>debug</code>的目录中。可执行文件的名字就是项目名，我这里就是<code>hello_cargo_new</code>。</p>
+<pre class="line-numbers language-bash"><code class="language-bash">tree -d -L 3 ./
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230601161617236.png" alt="target/debug目录中存放中间文件" style="zoom:33%;"></p>
+<h4 id="5-运行项目"><a href="#5-运行项目" class="headerlink" title="5) 运行项目"></a>5) 运行项目</h4><p>我们可以直接运行得到的可执行文件</p>
+<pre class="line-numbers language-bash"><code class="language-bash">./target/debug/hello_cargo_new
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230601161728840.png" alt="直接运行可执行文件" style="zoom: 50%;"></p>
+<p>不过<code>Cargo</code>提供了<code>cargo run</code>命令，他可以在完成编译后自动运行</p>
+<pre class="line-numbers language-bash"><code class="language-bash">cargo run
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230601161853363.png" alt="cargo run编译后自动运行" style="zoom:33%;"></p>
+<h4 id="6-发布项目"><a href="#6-发布项目" class="headerlink" title="6) 发布项目"></a>6) 发布项目</h4><p><code>cargo build</code>命令编译得到的可执行文件是带有符号表等帮助<code>Debug</code>信息的，使用<code>--release</code>选项来编译不带调试信息的发行版。</p>
+<pre class="line-numbers language-bash"><code class="language-bash">cargo build --release
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230601162602230.png" alt="编译发布版的项目"></p>
+<p>此时生成的中间文件、可执行文件都在<code>target/release</code>目录下</p>
+<pre class="line-numbers language-bash"><code class="language-bash">tree -d -L 3 ./
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230601162718972.png" alt="target/release目录中存放中间文件" style="zoom:33%;"></p>
+<p>因为不带调试信息，<code>release</code>版本的可执行文件小了很多</p>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">ls</span> -alh target/<span class="token punctuation">{</span>debug/hello_cargo_new,release/hello_cargo_new<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230601162904034.png" alt="release版本比debug版本小4K字节" style="zoom: 50%;"></p>
+<h4 id="7-检查项目"><a href="#7-检查项目" class="headerlink" title="7) 检查项目"></a>7) 检查项目</h4><p><code>cargo build</code>会调用<code>Rust</code>编译器，按照编译原理的步骤，一步步进行下去，词法分析、语法分析、语义分析，直到最后生成包含目标平台二进制指令的可执行程序。</p>
+<p>但是在写代码的时候我们可能只想检查一下语法对不对，既能否通过前面的词法分析、语法分析，而不关心最后是否生成可执行程序，所以没必要去生成可执行程序。使用<code>cargo build</code>确实可以完成检查，不过因为<code>cargo build</code>需要生成可执行程序，所以速度会慢很多。</p>
+<p>为此，<code>Cargo</code>提供了<code>cargo check</code>命令来快速检查代码的语法，该命令不会生成可执行程序。</p>
+<pre class="line-numbers language-bash"><code class="language-bash">cargo clean <span class="token operator">&amp;&amp;</span> <span class="token function">time</span> cargo build
+cargo clean <span class="token operator">&amp;&amp;</span> <span class="token function">time</span> cargo check
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230601163739757.png" alt="cargo check比cargo build快了很多" style="zoom:33%;"></p>
+<h2 id="5-把Cargo当成习惯"><a href="#5-把Cargo当成习惯" class="headerlink" title="5. 把Cargo当成习惯"></a>5. 把Cargo当成习惯</h2><p>对于简单项目，<code>Cargo</code>并不比<code>rustc</code>提供更多的优势，不过随着开发的深入，<code>Cargo</code>会越来越方便。一旦程序壮大到由多个文件组成，亦或者是需要其他的依赖，让<code>Cargo</code>协调构建过程就会简单得多。</p>
+<p><code>hello_cargo</code> 这个<code>Rust</code>项目十分简单，但是却使用了很多之后我们<code>Rust</code>生涯将会用到的实用工具。</p>
+<p>其实，要在任何已存在的项目上工作时，可以使用如下命令快速开始开发，爽的雅痞(*\^▽\^*)</p>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">git</span> clone example.org/someproject
+<span class="token function">cd</span> someproject
+cargo build
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>例如我现在用的<code>ls</code>命令的替代品<code>exa</code>就是<code>Rust</code>开发的，当然你可以在<code>APT</code>上下载预编译好的<code>exa</code>可执行文件，如果在本地编译的话速度也很快：</p>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">git</span> clone https://github.com/ogham/exa.git
+<span class="token function">cd</span> exa
+cargo build
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230601170924661.png" alt="首先会下载一些依赖：指定的Rust版本编译器、依赖库……" style="zoom: 25%;"></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230601170843942.png" alt="然后开始编译" style="zoom:25%;"></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230601171124247.png" alt="完成编译" style="zoom:25%;"></p>
+<p>然后就得到了<code>exa</code>的可执行文件</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230601171256785.png" alt="exa可执行文件" style="zoom:33%;"></p>
+<p>接着使用<code>exa</code>看看效果</p>
+<pre class="line-numbers language-bash"><code class="language-bash">./target/debug/exa -alh ./
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230601171356830.png" alt="效果非常不错" style="zoom:25%;"></p>
+<p>实际上，我现在的<code>ls</code>和<code>tree</code>使用的就是<code>exa</code></p>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">which</span> <span class="token function">ls</span>
+<span class="token function">which</span> tree
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230601171452622.png" alt="ls和tree都被我alias了" style="zoom:33%;"></p>
 
                 
             </div>
@@ -780,7 +941,7 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            本文是中科院软件所实习日志的第一篇，主要对实习的项目（LARVa）进行了介绍
+                            本文是中科院软件所实习（LARVa项目）日志的第一篇，主要对实习的项目（LARVa）进行了介绍
                         
                     </div>
                     <div class="publish-info">
@@ -1001,7 +1162,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">534.5k</span>
+                        class="white-color">536.6k</span>
             
             
             
