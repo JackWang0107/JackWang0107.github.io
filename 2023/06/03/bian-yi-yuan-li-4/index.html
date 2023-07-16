@@ -1,0 +1,1786 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="编译原理 4：语法分析, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
+    <meta name="description" content="本章是编译原理的第四章，主要对语法分析进行了介绍。">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>编译原理 4：语法分析 | JackWang&#39;s Blog</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.2">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+
+   <style>
+    body{
+       background-image: url(https://cdn.jsdelivr.net/gh/Tokisaki-Galaxy/res/site/medias/background.jpg);
+       background-repeat:no-repeat;
+       background-size: 100% 100%;
+       background-attachment:fixed;
+    }
+</style>
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">JackWang&#39;s Blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-book-reader" style="zoom: 0.6;"></i>
+      
+      <span>博客</span>
+      <i class="fas fa-chevron-down" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/tags">
+          
+          <i class="fas fa-tags" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按标签归类文章</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories">
+          
+          <i class="fas fa-bookmark" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按目录归类文章</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/archives">
+          
+          <i class="fas fa-archive" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按日期分类文章</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">JackWang&#39;s Blog</div>
+        <div class="logo-desc">
+            
+            JackWang的个人博客
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-book-reader"></i>
+			
+			博客
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>
+
+                  <a href="/tags " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-tags" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按标签归类文章</    span>
+
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/categories " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-bookmark" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按目录归类文章</    span>
+
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/archives " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-archive" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按日期分类文章</    span>
+
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('抱歉，这篇文章并不想让所有人都看到，请输入授权密码观看')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://jack-1307599355.cos.ap-shanghai.myqcloud.com/51Bv6BJig-L.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">编译原理 4：语法分析</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">
+                                <span class="chip bg-color">编译原理</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/" class="post-category">
+                                编译原理
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2023-06-03
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2023-06-10
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    8.4k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    29 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/51Bv6BJig-L-20230601185851241.jpg" alt="编译原理"></p>
+<h1 id="编译原理-4：语法分析"><a href="#编译原理-4：语法分析" class="headerlink" title="编译原理 4：语法分析"></a>编译原理 4：语法分析</h1><p>前面在<code>编译原理 1：绪论</code>中我们介绍：</p>
+<ul>
+<li><strong>词法分析的任务是从左向右逐行扫描源程序的字符，识别出各个单词，确定单词的类型，而后将识别出的单词转换成统一的机内表示——词法单元（<code>token</code>）的形式</strong></li>
+</ul>
+<p>上一章在<code>编译原理 3：词法分析</code>中，我们介绍了词法分析是如何实现的。具体来说：</p>
+<ul>
+<li><p><strong>我们首先介绍了正则表达式和正则定义</strong>。通过正则表达式和正则定义，我们定义了程序中各类<code>token</code>的模式，例如：标识符的模式、无符号数的模式……</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230603000027485.png" alt="标识符的正则定义" style="zoom: 25%;"></p>
+</li>
+<li><p>但是正则表达式和正则定义人类很容易理解，但是不方便写出让计算机接受的算法。因此，<strong>我们接着介绍了有穷自动机</strong>。</p>
+<ul>
+<li>有穷自动机分为两种：<strong>非确定性有穷自动机（<code>NFA</code>）</strong>和<strong>确定性有穷自动机（<code>DFA</code>）</strong><ul>
+<li><strong>非确定性有穷自动机方便人类理解</strong>。我们可以很简单的从正则表达式构建对应的（即识别相同<code>token</code>）的非确定性有穷自动机</li>
+<li><strong>确定性有穷自动机方便机器的算法实现</strong>。给定一个<code>DFA</code>，我们可以很轻松的就写出对应的算法实现。</li>
+</ul>
+</li>
+<li><strong>我们有指定的算法（即<code>子集描述法</code>）将<code>NFA</code>转换为<code>DFA</code></strong>。</li>
+</ul>
+</li>
+<li><p><strong>接着，我们利用正则表达式和不确定性有穷自动机的转换关系，通过各种<code>token</code>的正则表达式构建出识别各类<code>token</code>的<code>NFA</code></strong></p>
+</li>
+<li><p><strong>然后，利用子集描述法，利用识别各类<code>token</code>的<code>NFA</code>构建识别各类<code>token</code>的<code>DFA</code></strong></p>
+</li>
+<li><p><strong>最后，我们使用各类编程语言将识别各类<code>token</code>的<code>DFA</code>实现，得到词法分析程序</strong></p>
+</li>
+</ul>
+<blockquote>
+<p><strong>词法分析程序以程序源代码作为输入，而后输出是<code>token</code>流</strong></p>
+</blockquote>
+<h2 id="1-语法分析概述"><a href="#1-语法分析概述" class="headerlink" title="1. 语法分析概述"></a>1. 语法分析概述</h2><h3 id="A-语法分析的任务"><a href="#A-语法分析的任务" class="headerlink" title="A. 语法分析的任务"></a>A. 语法分析的任务</h3><p>在词法分析之后，我们得到了源程序的<code>token</code>流。而接下来的语法分析，<strong>我们的任务就是从<code>token</code>流中，根据给定的文法，去识别各个短语，而后构建出源程序的语法分析树</strong>。</p>
+<p>如果输入<code>token</code>序列的各个<code>token</code>都自左至右的站在语法分析树的叶子结点，那么输入的<code>token</code>流就是该语言的一个句子。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230525124042525.png" alt="词法分析后输入的字符序列被分割为单词序列，语法分析根据单词序列识别各个短语，从而构建语法分析树" style="zoom:33%;"></p>
+<p><strong>同样，和词法分析类似，我们接下来首先从理论上对语法分析进行介绍，最后一步步引导到语法分析的算法实现</strong>。</p>
+<h3 id="B-语法分析的分类"><a href="#B-语法分析的分类" class="headerlink" title="B. 语法分析的分类"></a>B. 语法分析的分类</h3><p>语法分析的最终目的就是构建语法分析树，因此根据语法分析时构建语法分析树的方式不同，可以将语法分析分为两类：</p>
+<ul>
+<li><strong><code>自顶向下的语法分析</code>：从顶部的根节点向底部的叶节点方向构建语法分析树</strong></li>
+<li><strong><code>自底向上的语法分析</code>：从底部的叶节点向顶部的根节点方向构建语法分析树</strong></li>
+</ul>
+<p><strong>而由于目前大多数编译器中进行语法分析的分析器采用的都是自顶向下的语法分析，因此我们就主要介绍自顶向下的语法分析</strong>。</p>
+<h2 id="2-自顶向下的语法分析"><a href="#2-自顶向下的语法分析" class="headerlink" title="2. 自顶向下的语法分析"></a>2. 自顶向下的语法分析</h2><h3 id="A-自顶向下的语法分析等价于推导"><a href="#A-自顶向下的语法分析等价于推导" class="headerlink" title="A. 自顶向下的语法分析等价于推导"></a>A. 自顶向下的语法分析等价于推导</h3><p>我们不加证明的给出如下的论断：</p>
+<ul>
+<li><strong>自顶向下的语法分析等价于从文法开始符号$S$<code>推导</code>出词串$w$的过程</strong></li>
+</ul>
+<h4 id="1-举例"><a href="#1-举例" class="headerlink" title="1) 举例"></a>1) 举例</h4><p>我们举一个例子来验证这一论断的正确性。</p>
+<p>给定如下的文法：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230606011016477.png" alt="简化版的算数表达式文法" style="zoom:50%;"></p>
+<p>假设我们输入如下的单词串（假设已经经过词法分析得到了<code>token</code>流）：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230606011058803.png" alt="输入单词串（算数表达式）" style="zoom: 67%;"></p>
+<p>现在我们要针对这单词串构建语法分析树：</p>
+<p>首先从开始符号开始构建语法分析树</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230606013657432.png" alt="从开始符号开始构建分析树等价于从开始符号开始推导句子" style="zoom:33%;"></p>
+<p>然后对分析树的根节点运用<code>产生式1</code>：$E\rightarrow E + E$</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230606194248315.png" alt="自顶向下构建分析树，等价于从语法开始符号推导" style="zoom: 33%;"></p>
+<p>然后对最右侧的子节点运用<code>产生式3</code>：$E\rightarrow (E)$</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230606194510045.png" alt="继续向下构建分析树，等价于继续推导" style="zoom:33%;"></p>
+<p>接着，在对中间的子节点运用<code>产生式1</code>：$E\rightarrow E + E$</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230606194632340.png" alt="继续向下构建分析树、继续推导" style="zoom:33%;"></p>
+<p>然后，对左侧的子节点运用<code>产生式4</code>：$E\rightarrow \mathrm{id}$</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230606194759314.png" alt="继续向下构建、继续推导" style="zoom:33%;"></p>
+<p>接下来，我们对根节点的左子节点运用<code>产生式4</code>：$E\rightarrow \mathrm{id}$</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230606194904891.png" alt="继续向下构建、继续推导" style="zoom:33%;"></p>
+<p>最后，在对剩余的右子节点运用<code>产生式4</code>：$E\rightarrow \mathrm{id}$</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230606194949295.png" alt="完成语法树构建，完成推导" style="zoom:33%;"></p>
+<p>至此，我们就已经完成了输入的<code>token</code>流的语法分析，构建出了语法分析树。</p>
+<p><strong>通过上面的例子我们知道了语法分析过程中我们构建自顶向下去构建语法分析树，其实就等价于从语法开始符号去推导得到输入的句子。</strong>所以后面，从开始符号推导得到句子就等价于构建输入<code>token</code>流语法分析树</p>
+<h4 id="2-语法分析的问题"><a href="#2-语法分析的问题" class="headerlink" title="2) 语法分析的问题"></a>2) 语法分析的问题</h4><p>我们发现，<strong>在每一步推导中，都需要做两个选择</strong>：</p>
+<ul>
+<li><strong><code>选择一</code>：替换当前句型中的哪个非终结符</strong></li>
+<li><strong><code>选择二</code>：用该非终结符的哪个候选式进行替换</strong></li>
+</ul>
+<p>因此，对于自顶向下的语法分析，我们需要解决的就是这样问题，即：</p>
+<ul>
+<li><strong>决定替换哪个非终结符</strong></li>
+<li><strong>决定使用哪个产生式替换</strong></li>
+</ul>
+<h3 id="B-最左推导-Left-most-Derivation"><a href="#B-最左推导-Left-most-Derivation" class="headerlink" title="B. 最左推导 Left-most Derivation"></a>B. 最左推导 <code>Left-most Derivation</code></h3><p><strong><code>最左推导</code>（<code>Left-most Derivation</code>）指的是，在每次选择非终结符进行替换的时候，总是选择每个句型的最左非终结符进行替换，使用符号$\Rightarrow_{lm}$表示</strong></p>
+<p>例如对于上面的例子，我们从开始符号开始进行最左推导：</p>
+<blockquote>
+<p>注意，如何选择合适的产生式我们后面再进行介绍，这里我们关注的是每次选择哪个非终结符进行替换（红色标出）</p>
+</blockquote>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230606020822665.png" alt="从开始符号开始进行最左推导" style="zoom:33%;"></p>
+<p><strong>和最左推导相反的规约过程，称为<code>最右规约</code></strong></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230606021156456.png" alt="最右规约是最左推导的逆过程" style="zoom:33%;"></p>
+<p>我们定义：<strong>如果开始符号经过$n$步最左推导得到一个句型$\alpha$，则称$\alpha$是当前文法的<code>最左句型</code>（<code>Left-sentential Form</code>）</strong></p>
+<h3 id="C-最右推导-Right-most-Derivation"><a href="#C-最右推导-Right-most-Derivation" class="headerlink" title="C. 最右推导 Right-most Derivation"></a>C. 最右推导 <code>Right-most Derivation</code></h3><p>和最左推导类似，<strong><code>最右推导</code>（<code>Right-most Derivation</code>）指的是，在每次选择非终结符进行替换的时候，总是选择每个句型的最右非终结符进行替换，使用符号$\Rightarrow_{rm}$表示</strong></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230606021637536.png" alt="最右推导" style="zoom:33%;"></p>
+<p>类似的，<strong>和最右推导相反的规约过程，称为<code>最左规约</code></strong></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230606021808977.png" alt="最左规约是最右推导的逆过程" style="zoom:33%;"></p>
+<p><strong>注意，由于在自底向上的分析中，总是采用最左归约的方式，因此把最左归约称为<code>规范归约</code>，而最右推导相应地称为<code>规范推导</code></strong></p>
+<h3 id="D-最左推导和最右推导的唯一性"><a href="#D-最左推导和最右推导的唯一性" class="headerlink" title="D. 最左推导和最右推导的唯一性"></a>D. 最左推导和最右推导的唯一性</h3><p>我们在自顶向下构建分析树的时候，哪怕最后生成得到的分析的叶子结点在表示相同的句子，但是由于每一次使用产生式展开选择的节点可能不同，因此最后得到的分析树可能是不同。</p>
+<p>但是，我们自顶向下构建分析树的时候，<strong>最左推导和最右推导得到的分析树是唯一的（假设相同节点的产生式是相同的）</strong></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230606022423278.png" alt="一般的推导不具备唯一性（左侧）最左推导和最右推导具有唯一性（右侧）" style="zoom:33%;"></p>
+<h3 id="E-自顶向下的语法分析采用最左推导"><a href="#E-自顶向下的语法分析采用最左推导" class="headerlink" title="E. 自顶向下的语法分析采用最左推导"></a>E. 自顶向下的语法分析采用最左推导</h3><p>由于现实中工业生产的分析器（例如<code>gcc</code>、<code>clang</code>……）都是自左向右的扫描输入串，因此在构建语法树的时候，也是按照最左推导的方式去构建的。</p>
+<p>即：</p>
+<ul>
+<li>选择终结符时：<strong>每次总是选择每个句型的最左非终结符进行替换</strong></li>
+<li>选择产生式时：<strong>根据输入流中的下一个终结符，选择最左非终结符的一个候选式</strong></li>
+</ul>
+<h3 id="F-自顶向下语法分析举例"><a href="#F-自顶向下语法分析举例" class="headerlink" title="F. 自顶向下语法分析举例"></a>F. 自顶向下语法分析举例</h3><p>我们接下来看一个自顶向下语法分析的例子：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230606112037245.png" alt="给定文法" style="zoom:33%;"></p>
+<p>给定输入：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230606112107629.png" alt="token指针一开始指向第一个token" style="zoom:33%;"></p>
+<blockquote>
+<p>注意，和<code>token</code>流一同输入的，还有一个<code>token</code>指针，这个<code>token</code>指针后续会随着分析树构建的过程不断移动</p>
+</blockquote>
+<p>接下来，我们开始构建分析树。</p>
+<p>因为是自顶向下的语法分析，因此我们从文法的开始符号$E$开始（即从开始符号$E$开始推导）：</p>
+<blockquote>
+<p>注意，和前面一样，我们这里略去如何选择使用哪个产生式，而关注于选择哪个非终结符进行展开</p>
+</blockquote>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230606112210210.png" alt="从开始符号开始构建分析树" style="zoom: 33%;"></p>
+<p>最左侧的非终结符就是开始符号$E$</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230606135220626.png" alt="运用产生式1" style="zoom:33%;"></p>
+<p>最左侧的非终结符是$T$</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230606135111438.png" alt="运用产生式3" style="zoom:33%;"></p>
+<p>最左侧的非终结符是$F$。这里注意：产生式5都是简写形式的产生式，实际上产生式5有两个两个候选式：</p>
+<ul>
+<li>$F\rightarrow (E)$</li>
+<li>$F\rightarrow \mathrm{id}$</li>
+</ul>
+<p>我们后面再介绍如何选择产生式/候选式，这里我们只关注与选择哪个非终结符。这里我们用产生式5的第二个候选式</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230606132546910.png" alt="运用产生式5的第二个候选式" style="zoom:33%;"></p>
+<p>注意，这个时候由于第一个终结符<code>id</code>和表达式的第一个终结符匹配上了，因此<code>token</code>指针向右移动一个<code>token</code>，指向<code>+</code></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230606114157967.png" alt="token指针向右移动一位，指向+" style="zoom:33%;"></p>
+<p>然后，最左侧的非终结符是$T’$，但是由于不存在将$T’$转换为$+$的产生式，因此选择产生式4，将$T’$转换为空串$\varepsilon$</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230606131231453.png" alt="运用产生式4" style="zoom:33%;"></p>
+<p>继续构建语法树，最左侧的非终结符是$E’$，因为当前<code>token</code>指针指向的<code>token</code>是$+$，因此使用产生式2的第一个候选式</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230606131057469.png" alt="使用产生式2的第一个候选式" style="zoom:33%;"></p>
+<p>此时，产生了一个非终结符$+$，并且该非终结符和<code>token</code>指针指向的<code>token</code>匹配了，因此<code>token</code>指针向右移动一位</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230606114905372.png" alt="token指针向右移动一位，指向id" style="zoom:33%;"></p>
+<p>继续构建语法树，此时最左侧的非终结符是$T$</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230606130811893.png" alt="运用产生式3" style="zoom:33%;"></p>
+<p>没有产生终结符，继续展开最左侧非终结符$F$。产生式5有两个候选式，这里选择第二个候选式</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230606130550156.png" alt="运用产生式5的第二个候选式" style="zoom:33%;"></p>
+<p>此时产生了一个终结符$\mathrm{id}$，并且和当前<code>token</code>指针指向的<code>token</code>匹配了，因此<code>token</code>指针向右移动一位</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230606115418244.png" alt="token指针向右移动一位，指向*" style="zoom:33%;"></p>
+<p>由于没有终结符了，所以继续构建语法树。此时最左侧非终结符是$T’$</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230606130433138.png" alt="运用产生式4" style="zoom:33%;"></p>
+<p>由于产生了一个终结符$*$，并且和当前<code>token</code>指针指向的<code>token</code>匹配了，因此<code>token</code>指针向右移动一位</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230606115829305.png" alt="token指针向右移动一位，指向id" style="zoom:33%;"></p>
+<p>然后最左侧的非终结符是$F$。产生式5有两个候选式，这里选择第二个候选式</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230606125930726.png" alt="运用产生式5的第二个候选式" style="zoom:33%;"></p>
+<p>由于产生了一个终结符$\mathrm{id}$，并且和当前<code>token</code>指针指向的<code>token</code>匹配了，因此<code>token</code>指针向右移动一位</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230606130131393.png" alt="token指针向右移动一位，指向NULL" style="zoom:33%;"></p>
+<p>最后，剩下的$T’$和$E’$就依次展开就好，展开的时候选择用空串展开。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230606130319033.png" alt="使用产生式4的第二个候选式和产生式2的第二个候选式" style="zoom:33%;"></p>
+<p>最后，由于输入的串恰好自左至右的站在语法树的叶子结点上，因此输入的句子是该文法定义的语言的一个句子</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230606135547267.png" alt="表达式id + id * id是文法定义的语言的一个句子" style="zoom:33%;"></p>
+<h3 id="G-递归下降分析"><a href="#G-递归下降分析" class="headerlink" title="G. 递归下降分析"></a>G. 递归下降分析</h3><blockquote>
+<p>我们上面介绍了自顶向下的语法分析，接下来我们介绍计算机中是如何用算法去实现自顶向下语法分析的</p>
+</blockquote>
+<p>自顶向下语法分析的算法实现称为：<code>递归下降分析</code>（<code>Recursive-Descent Parsing</code>）。</p>
+<p>具体而言：</p>
+<ul>
+<li><p><strong>递归向下分析由一组过程组成，每个过程对应一个非终结符</strong>。例如对应非终结符A的过程：</p>
+<ul>
+<li>首先通过产生式选择算法（后面会详细介绍）选择出$A$的产生式$A\rightarrow X_1X_2…X_k$</li>
+<li>然后针对产生式右边的所有符号循环判断：<ul>
+<li>如果符号是非终结符，那么递归调用对应的过程$X_i()$（可以看到就是树的深度遍历）</li>
+<li>如果符号是非终结符，且对应当前的符号，那么读入下一个符号。即<code>token</code>指针右移</li>
+<li>此外报错，即选择出来的产生式是错误的</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230606140127881.png" alt="非终结符A的过程" style="zoom:33%;"></p>
+</li>
+<li><p><strong>递归向下分析从文法开始符号$S$对应的过程开始，其中递归调用文法中其它非终结符对应的过程。如果S对应的过程体恰好扫描了整个输入串，则成功完成语法分析</strong></p>
+</li>
+</ul>
+<p>但是递归向下分析实际在效率上其实是存在问题的，例如：</p>
+<ul>
+<li><p>假设现在针对非终结符$A$调用对应的过程</p>
+</li>
+<li><p>$A$有多个产生式：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    P_1:\ A&\rightarrow aBC\\
+    P_2:\ A&\rightarrow aDE\\
+    P_3:\ A&\rightarrow a
+\end{aligned}</script></li>
+<li><p>那么在遍历产生式的时候，前两个产生式因为都用到了别的非终结符，所以实际上会递归的调用非终结符$B$和$C$的产生式。</p>
+</li>
+<li><p>假设在最后构成的语法树中，使用到的正确的产生式是$P_3$，那么就意味着前两次向下递归调用$B$和$C$的产生式实在浪费时间</p>
+</li>
+</ul>
+<p>因此，向下递归分析最大的问题就是：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230606153847248.png" alt="向下递归分析可能由于回溯导致效率低" style="zoom:33%;"></p>
+<p>因此，在语法分析过程中需要回溯的分析器称为不确定的<code>分析器</code>。而通过一些手段，例如下面要介绍的<code>预测分析</code>，我们是可以在一定程度上解决这个问题的</p>
+<h3 id="H-预测分析"><a href="#H-预测分析" class="headerlink" title="H. 预测分析"></a>H. 预测分析</h3><p><code>预测分析</code>是递归下降分析技术的一个特例，即：</p>
+<ul>
+<li><strong>在输入的符号串中向前看固定个数（通常是一个）符号来选择正确的$A\rightarrow$产生式</strong></li>
+</ul>
+<p><strong>预测分析通过在选择产生式的时候向前几个符号，从而选择最佳的产生式，因此预测分析不需要回溯，是一种确定性的分析方法</strong>。</p>
+<p>此外，某些文法具有特殊性，针对这些文法，我们可以：</p>
+<ul>
+<li><strong>构造出向前看$k$个输入符号的预测分析器，因此我们有时候也将这类文法称为$LL(k)$文法类</strong></li>
+</ul>
+<blockquote>
+<p>这么讲比较抽象，尤其是还没有例子。不过别担心，我们后面会详细介绍的</p>
+</blockquote>
+<h2 id="3-文法转换"><a href="#3-文法转换" class="headerlink" title="3. 文法转换"></a>3. 文法转换</h2><p>我们上面介绍了自顶向下语法分析是如何选择替换哪个非终结符的，那么还剩的最后一个问题就是确定使用哪个产生式替换非终结符。因此，我们接下来讲解的内容，就是去解决剩下的第二个问题的。</p>
+<p>在此之前，我们需要表数学形式的文法表达为计算机可以接受的算法。同时针对一些文法，可能存在问题，不能直接转换为算法，因此还需要我们去进行特殊处理。</p>
+<p>这一节就先介绍这些内容。</p>
+<h3 id="A-问题一：冗余计算"><a href="#A-问题一：冗余计算" class="headerlink" title="A. 问题一：冗余计算"></a>A. 问题一：冗余计算</h3><blockquote>
+<p>我们上面介绍了自顶向下语法分析的算法实现：递归下降分析。我们也提到了递归下降分析存在的回溯问题，从而导致分析器在运行的时候效率低。</p>
+<p>但是我们只是简单的提了一下，没有正式地举例介绍，我们这里正式地介绍自顶向下语法分析中的回溯问题</p>
+</blockquote>
+<p>假设给定如下的文法和输入：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230606155510591.png" alt="给定的文法和输入串" style="zoom:33%;"></p>
+<p>我们现在开始自顶向下的语法分析，即从开始符号$S$开始分析。</p>
+<p>但是这个时候，对于符号$S$，他有两个$A\rightarrow$类型的产生式：</p>
+<ul>
+<li>$S\rightarrow aAd$</li>
+<li>$S\rightarrow aBe$</li>
+</ul>
+<p>那么我们此时不知道到底选哪个产生式。假设使用遍历的方式选择产生式，那么如果第一个产生式不是最终能够得到句子的产生式，那么此后的向下展开都白费了。</p>
+<p>因此：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230606160212194.png" alt="回溯现象的根本原因" style="zoom:33%;"></p>
+<p>而在具有公共前缀的情况下，回溯会造成大量的冗余计算</p>
+<h3 id="B-问题二：无限循环"><a href="#B-问题二：无限循环" class="headerlink" title="B. 问题二：无限循环"></a>B. 问题二：无限循环</h3><p>加上我们给定如下的文法：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230606160340677.png" alt="给定的文法G" style="zoom:33%;"></p>
+<p>而后给定输入串：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230606160401897.png" alt="待构建语法树的输入串" style="zoom:33%;"></p>
+<p>然后我们接下来需要对这个输入串构建其语法树。</p>
+<p>我们首先从开始符号$E$开始推导，因为$E$的$A\rightarrow$类型产生式只有一个，所以顺利展开就好：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230606160525092.png" alt="展开开始符号E" style="zoom:33%;"></p>
+<p>然后根据最左推导，我们下一个要展开的非终结符是$E$。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230606160600842.png" alt="继续展开非终结符E" style="zoom:33%;"></p>
+<p>那这个时候，问题就来了，我们发现最左推导针对这类文法会出现无线循环展开的问题，即最后：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230606160651034.png" alt="无限循环展开" style="zoom:33%;"></p>
+<p>无限循环问题的一种可能是因为我们存在这样的产生式：</p>
+<script type="math/tex; mode=display">
+A\rightarrow A\alpha</script><p>针对上面的例子，我们存在问题的产生式是：</p>
+<script type="math/tex; mode=display">
+E\rightarrow E+T</script><p>因此，<strong>我们将这类产生式称为<code>直接左递归的产生式</code>。</strong></p>
+<p>类似的，<strong>含有直接左递归产生式的文法我们称为<code>直接左递归文法</code></strong></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230606160849466.png" alt="直接左递归文法" style="zoom:33%;"></p>
+<p>另外一种情况是我们不存在直接左递归产生式，但是存在如下的产生式：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+A&\rightarrow Ba\\
+B&\rightarrow Acd
+\end{aligned}</script><p>那么我们对$A$进行推导，最后得到的还是递归的产生式。</p>
+<p><strong>因此，若一个文法中一个非终结符$A$使得对某个串$\alpha$存在一个推导：</strong></p>
+<script type="math/tex; mode=display">
+A\Rightarrow^*A\alpha</script><p><strong>则称这个文法为<code>左递归文法</code></strong></p>
+<p>由此，<strong>我们称经过两步或两步以上推导产生的左递归为<code>间接左递归</code></strong></p>
+<h3 id="C-消除直接左递归"><a href="#C-消除直接左递归" class="headerlink" title="C. 消除直接左递归"></a>C. 消除直接左递归</h3><h4 id="1-消除思想和原因"><a href="#1-消除思想和原因" class="headerlink" title="1) 消除思想和原因"></a>1) 消除思想和原因</h4><blockquote>
+<p>冗余计算问题和递归问题是我们需要解决的两个问题。我们首先解决递归问题，首先从直接左递归开始</p>
+</blockquote>
+<p>我们处理直接左递归的思想就是：<strong>将直接左递归产生式转换为等价的（即表示相同语言的）右递归产生式</strong>。右递归产生式虽然也会导致编译器出现无限循环，但是我们在算法中可以检测到右递归，而后通过回溯跳出无限循环。</p>
+<blockquote>
+<p>PS：为什么要先把直接左递归转换为右递归然后再通过回溯跳出循环而不能直接跳出循环？</p>
+<p>因为对于左递归来说，回溯技术是没法避免无限循环的，因为回溯之后，分析器回溯到$A$，然后去尝试匹配$\alpha$。但是由于产生式的形式是$A\rightarrow A\alpha$，所以回溯到$A$之后，分析器又会再次展开成$A\alpha$，从而导致进入无限循环的状态。</p>
+</blockquote>
+<h4 id="2-消除方法"><a href="#2-消除方法" class="headerlink" title="2) 消除方法"></a>2) 消除方法</h4><p>对于直接左递归的产生式的通式：</p>
+<script type="math/tex; mode=display">
+A\rightarrow A\alpha|\beta (\alpha\neq\varepsilon)</script><p>我们首先分析其所表示的串：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230606170100929.png" alt="直接左递归产生式表示的串" style="zoom:33%;"></p>
+<p>所以，直接左递归产生式对应的正则表达式为：</p>
+<script type="math/tex; mode=display">
+r=\beta \alpha^*</script><p>即<strong>直接左递归产生式表达的串是$\beta$开头的，可以由$n$个$\alpha$的串</strong></p>
+<p>所以，我们构建如下的表示相同串的产生式：</p>
+<script type="math/tex; mode=display">
+A\rightarrow A\alpha \Leftrightarrow
+\left \{
+\begin{aligned}
+A\ &\rightarrow \beta A'\\
+A'&\rightarrow \alpha A' | \varepsilon
+\end{aligned}
+\right .</script><p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230606170345239.png" alt="对直接左递归表达式进行等价的转换" style="zoom:33%;"></p>
+<p>我们可以对转换后的产生式进行验证</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230606170749710.png" alt="对A'进行推导，最后发现A'表示任意多的a相连的串" style="zoom:33%;"></p>
+<p>而转换后的产生式，实际上是一个右递归的产生式，因此上面这种消除方式其实就是把左递归产生式转化为了右递归产生式</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230606170921026.png" alt="把左递归产生式转换为右递归产生式" style="zoom:33%;"></p>
+<h4 id="3-举例"><a href="#3-举例" class="headerlink" title="3) 举例"></a>3) 举例</h4><p>我们接下来举一个消除直接左递归的例子</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230606171242247.png" alt="上面直接左递归文法中的导致无限循环的直接左递归产生式" style="zoom:33%;"></p>
+<p>对于第一个直接左递归产生式：</p>
+<script type="math/tex; mode=display">
+E\rightarrow E+T|T</script><p>和通式的对应关系为：</p>
+<ul>
+<li>$A$：$E$</li>
+<li>$\alpha$：$+T$</li>
+<li>$\beta$：$T$</li>
+</ul>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230606171653925.png" alt="消除第一个直接左递归产生式" style="zoom:33%;"></p>
+<p>同理，第二个直接左递归产生式进行如下的转换</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230606172013571.png" alt="消除第二个直接左递归产生式" style="zoom:33%;"></p>
+<h4 id="4-消除左递归的一般形式"><a href="#4-消除左递归的一般形式" class="headerlink" title="4) 消除左递归的一般形式"></a>4) 消除左递归的一般形式</h4><p>我们接下来给出消除左递归的一般形式：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230606172138738.png" alt="消除左递归的一般形式" style="zoom:33%;"></p>
+<p>此外，从上面的讲解中，我们也明白了消除左递归是要付出代价的：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230606172239546.png" alt="消除左递归的代价" style="zoom:33%;"></p>
+<h3 id="D-消除间接左递归"><a href="#D-消除间接左递归" class="headerlink" title="D. 消除间接左递归"></a>D. 消除间接左递归</h3><p>间接左递归产生式代入即可得到直接左递归产生式，因此消除间接左递归产生式方法就是先代入，然后消除</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230606172556060.png" alt="消除简介左递归产生式" style="zoom:33%;"></p>
+<h3 id="E-消除左递归的算法实现"><a href="#E-消除左递归的算法实现" class="headerlink" title="E. 消除左递归的算法实现"></a>E. 消除左递归的算法实现</h3><p>我们接下来给出消除左递归的算法实现</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230606172729129.png" alt="消除左递归的算法实现" style="zoom: 33%;"></p>
+<h3 id="F-提取左公因子"><a href="#F-提取左公因子" class="headerlink" title="F. 提取左公因子"></a>F. 提取左公因子</h3><blockquote>
+<p>我们通过消除左递归解决了无限循环问题，而针对冗余计算问题，提取左公因子可以减少一部分计算量。</p>
+</blockquote>
+<h4 id="1-原理"><a href="#1-原理" class="headerlink" title="1) 原理"></a>1) 原理</h4><p>提取左公因子的思想很简单，就是把具有相同前缀的产生式的前缀提取出来，构成一个新的产生式</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230606180952472.png" alt="提取左公因子举例" style="zoom:33%;"></p>
+<p>提取左公因子减少了冗余计算量，因为左公因子的表达式只会计算一遍。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230606181126621.png" alt="提起左公因子的本质" style="zoom:33%;"></p>
+<h4 id="2-算法实现"><a href="#2-算法实现" class="headerlink" title="2) 算法实现"></a>2) 算法实现</h4><p>提取左公因子的算法实现如下：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230606181207973.png" alt="提取左公因子算法实现" style="zoom:33%;"></p>
+<h2 id="4-LL1文法"><a href="#4-LL1文法" class="headerlink" title="4. LL1文法"></a>4. LL1文法</h2><p>递归下降分析可能会遇到回溯，回溯会降低分析器的效率。而如果我们在分析的每一步，都能够选择正确的产生式展开的话，那么我们就不需要回溯。这样的分析称为预测分析。但并不是所有的文法都可以实现预测分析的，不过我们接下来要介绍的一种文法，即<code>LL1文法</code>是可以实现预测分析的。</p>
+<p>所以，我们先讲解<code>LL1</code>文法，然后再介绍预测分析法。具体来说，我们会先介绍<code>FIRST</code>集、<code>FOLLOW</code>集和<code>SELECT</code>集。</p>
+<h3 id="A-FIRST集：串首终结符集"><a href="#A-FIRST集：串首终结符集" class="headerlink" title="A.  FIRST集：串首终结符集"></a>A.  <code>FIRST</code>集：串首终结符集</h3><blockquote>
+<p><code>FIRST</code>集的主要意义就是计算<code>SELECT</code>集</p>
+</blockquote>
+<h4 id="1-定义"><a href="#1-定义" class="headerlink" title="1) 定义"></a>1) 定义</h4><p>定义<code>串首终结符</code>为：</p>
+<ul>
+<li><strong>位与串的开头的第一个非终结符，简称<code>首终结符</code></strong></li>
+</ul>
+<p>形式化的定义为：</p>
+<ul>
+<li><strong>给定一个文法符号串$α$， $α$的<code>串首终结符集</code>定义为可以从$α$推导出的所有串首终结符构成的集合，记为：$FIRST(α)$</strong></li>
+</ul>
+<p>即：</p>
+<script type="math/tex; mode=display">
+\forall \alpha\in(V_T\cup V_N)^*, FIRST(\alpha)=\{a|\alpha\Rightarrow^*a\beta,\ a\in V_T, \beta\in(V_T\cup V_N)^*\}</script><h4 id="2-举例"><a href="#2-举例" class="headerlink" title="2) 举例"></a>2) 举例</h4><p>假设我们有一个文法$G$，其中$S$是起始符号，$V_T={a,b,c}$，$V_N={A,B}$，产生式如下：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+S &\rightarrow AaBb | BcA\\
+
+A &\rightarrow aA | ε\\
+
+B &\rightarrow bB | ε
+
+\end{aligned}</script><p>对于串<code>AaBb</code>，它的首终结符集合是<code>{a}</code>，因为它的第一个终结符是<code>a</code>。而对于串<code>BcA</code>，它的首终结符集合是<code>{b, c}</code>，因为它的第一个终结符可以是<code>b</code>或<code>c</code>。</p>
+<h4 id="3-串首终结符的作用"><a href="#3-串首终结符的作用" class="headerlink" title="3) 串首终结符的作用"></a>3) 串首终结符的作用</h4><p>串首终结符集对语法分析非常重要，因为在预测分析表的构建中，需要根据当前符号和下一个输入符号来决定采用哪个产生式进行推导。而串首终结符集可以帮助我们在构建预测分析表时快速确定当前符号的类型，从而提高语法分析的效率。</p>
+<h3 id="B-FOLLOW集：后继符号集"><a href="#B-FOLLOW集：后继符号集" class="headerlink" title="B.  FOLLOW集：后继符号集"></a>B.  <code>FOLLOW</code>集：后继符号集</h3><blockquote>
+<p><code>FOLLOW</code>集的主要意义就是计算<code>SELECT</code>集</p>
+</blockquote>
+<h4 id="1-定义-1"><a href="#1-定义-1" class="headerlink" title="1) 定义"></a>1) 定义</h4><p><strong>定义非终结符或者终结符$A$的<code>后继符号集</code>（<code>FOLLOW</code>集）为</strong>：</p>
+<ul>
+<li><strong>可能在某个句型中紧跟在$A$后边的终结符$a$的集合，记为$FOLLOW(A)$。</strong></li>
+</ul>
+<p>即：</p>
+<script type="math/tex; mode=display">
+FOLLOW(A)=\{a|S\Rightarrow^*\alpha Aa\beta,\ a\in V_T, \alpha,\beta\in(V_T\cup V_N)^*\}</script><p>其中：</p>
+<ul>
+<li>$a$表示终结符</li>
+<li>$\alpha$、$\beta$表示串</li>
+</ul>
+<p>而某个非终结符的后继符号集可以通过产生式推导得知。例如对于上面的例子，$FOLLOW(B)={a,c}$</p>
+<h4 id="2-结束符"><a href="#2-结束符" class="headerlink" title="2) 结束符$"></a>2) 结束符<code>$</code></h4><p>为了标记一个串的结尾，我们引入结束符<script type="math/tex">`。那么如果$A$是某个句型的的最右符号，则将结束符`</script>添加到$FOLLOW(A)$中</p>
+<p>通过后继符号集，我们能够直接就判断出串<code>ade</code>是非法的。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230606202657471.png" alt="利用后继符号集直接判断非法串" style="zoom:33%;"></p>
+<h3 id="C-SELECT集：产生式的可选集"><a href="#C-SELECT集：产生式的可选集" class="headerlink" title="C. SELECT集：产生式的可选集"></a>C. <code>SELECT集</code>：产生式的可选集</h3><h4 id="1-通过符号选择产生式"><a href="#1-通过符号选择产生式" class="headerlink" title="1) 通过符号选择产生式"></a>1) 通过符号选择产生式</h4><p><strong>如果我们能够产生式和产生式能够生成的第一个符号的映射关系，那么我们就能够确定从开始符号到输入串，中间的推导使用了那些产生式。</strong></p>
+<p>构建语法树的时候就能够通过下一个符号来判断要选择使用哪个产生式：</p>
+<p>例如我们给定如下的产生式和产生式生成的第一个符号的映射：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230606202852519.png" alt="产生式和映射" style="zoom:33%;"></p>
+<p>假设现在输入串<code>ada</code>，我们要求从语法开始符号<code>S</code>推导出串<code>ada</code>都使用了那些产生式。</p>
+<ol>
+<li>初始化阶段，<code>token</code>指针指向<code>a</code></li>
+<li><strong>首先使用了产生式1</strong>，因为开始符号只在产生式1中出现<ul>
+<li><code>token</code>指针和<code>a</code>匹配，因此<code>token</code>指针指向<code>d</code></li>
+<li>此时语法树为$S\Rightarrow aBC$</li>
+</ul>
+</li>
+<li><strong>接下来使用了产生式3</strong>，因为只有产生式3才可能生成<code>d</code><ul>
+<li><code>token</code>指针和<code>d</code>匹配，因此<code>token</code>指针指向<code>a</code></li>
+<li>此时语法树为$S\Rightarrow adBC$</li>
+</ul>
+</li>
+<li><strong>接下来使用了产生式4</strong>，因为只有产生式4经过推导后可能生成a`<ul>
+<li><code>token</code>指针不与<code>a</code>匹配，因此<code>token</code>指不移动，继续针指向<code>a</code></li>
+<li>此时语法树为$S\Rightarrow adC$</li>
+</ul>
+</li>
+<li><strong>接下来使用了产生式6</strong>，因为只有产生式6才可能生成<code>a</code><ul>
+<li><code>token</code>指针和<code>a</code>匹配，因此<code>token</code>指针指向<code>NULL</code></li>
+<li>此时语法树为$S\Rightarrow ada$</li>
+</ul>
+</li>
+<li>此时已经将输入串完全匹配，匹配结束</li>
+</ol>
+<p>从上面的例子，我们能够看出来，<strong>推导的关键就是要知道那个符号是由那个产生式产生的，因此我们才需要构建产生式的可选集。即遇到这个符号，就可以选择该产生式</strong>。</p>
+<p>上面这种思想其实就是下面要详细讲解的预测分析法。但是实现上面这一根据输入串来得到推导过程中使用的产生式的关键就在于每个符号都确定了唯一的一个产生式。</p>
+<blockquote>
+<p>例如：如果符号<code>d</code>对应产生式3和产生式5，那么上面推导到第三步就会有问题。</p>
+</blockquote>
+<p>因此我们下面会介绍<code>LL1</code>文法</p>
+<h4 id="2-产生式的可选集"><a href="#2-产生式的可选集" class="headerlink" title="2) 产生式的可选集"></a>2) 产生式的可选集</h4><p><strong>定义产生式$A→\beta$的<code>可选集</code>是指可以选用该产生式进行推导时对应的输入符号的集合，记为$SELECT( A→\beta)$</strong>。例如：</p>
+<ul>
+<li>对于产生式$A\rightarrow a\beta$，$SELECT(A\rightarrow \beta)={a}$</li>
+</ul>
+<blockquote>
+<p>可选集的含义是，遇到某个产生式的可选集内的符号，就可以选用这个产生式来进行推导</p>
+</blockquote>
+<h4 id="3-可选集的计算"><a href="#3-可选集的计算" class="headerlink" title="3) 可选集的计算"></a>3) 可选集的计算</h4><p>某个产生式的可选集，其实就是产生式右部的第一个非终结符的串首终结符集，即：</p>
+<script type="math/tex; mode=display">
+P\rightarrow AX_1X_2...X_N\\
+SELECT(P) = FIRST(A)\\</script><h3 id="G-LL1文法"><a href="#G-LL1文法" class="headerlink" title="G. LL1文法"></a>G. <code>LL1</code>文法</h3><p>我们称文法$G$是<code>LL1</code>文法，当且仅当$G$的任意两个具有相同左部的产生式$A → α | β$满足下面的条件：</p>
+<ul>
+<li>如果$α$和$β$均不能推导出$ε$ ，则$FIRST(α)∩FIRST (β) =Φ$</li>
+<li>$α$和$β$至多有一个能推导出$ε$ <ul>
+<li>如果$β\Rightarrow^*ε$，则$FIRST (α)∩FOLLOW(A) =Φ$</li>
+<li>如果$α\Rightarrow^* ε$，则$FIRST (β)∩FOLLOW(A) =Φ$</li>
+</ul>
+</li>
+</ul>
+<p><strong>定义的核心就是相同左部的产生式的<code>SELECT</code>集合不相交，即一个符号能确定唯一的一个产生式</strong></p>
+<blockquote>
+<p>下面我们会给出详细的例子</p>
+</blockquote>
+<h2 id="5-FIRST集、FOLLOW集、Select集、LL1文法举例"><a href="#5-FIRST集、FOLLOW集、Select集、LL1文法举例" class="headerlink" title="5. FIRST集、FOLLOW集、Select集、LL1文法举例"></a>5. <code>FIRST</code>集、<code>FOLLOW</code>集、<code>Select</code>集、<code>LL1</code>文法举例</h2><p>前面介绍了<code>FIRST</code>集、<code>FOLLOW</code>集、<code>SELECT</code>集和<code>LL1</code>文法，我们下面给出详细的例子。</p>
+<h3 id="A-FIRST集的计算"><a href="#A-FIRST集的计算" class="headerlink" title="A. FIRST集的计算"></a>A. <code>FIRST</code>集的计算</h3><p>我们举下面的例子</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230608164358039.png" alt="给定文法，求各个语法成分（非终结符）的FIRST集" style="zoom:33%;"></p>
+<p><code>FIRST</code>集的定义为：</p>
+<ul>
+<li><code>FIRST(X)</code>：可以从语法成分$X$推导出的所有串首终结符构成的集合</li>
+</ul>
+<p><strong>那么根据定义，如果产生式的右部第一个符号是一个终结符，那么这个终结符就在<code>FIRST</code>集中</strong>。因此就可以先写填写一些<code>FIRST</code>集：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230608164629959.png" alt="直接将产生式右部的终结符写入到FIRST集中" style="zoom:33%;"></p>
+<p><strong>此外，如果产生式能够推导出空串$\varepsilon$，那么空串也在<code>FIRST</code>集中</strong>。因此，继续填写一些<code>FIRST</code>集：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230608164900895.png" alt="将空串添加到FIRST集中" style="zoom:33%;"></p>
+<p>最后，如果产生式右部是一个非终结符，那么这个非终结符的<code>FIRST</code>集就肯定在左部的<code>FIRST</code>集中。因此，填写剩下的<code>FIRST</code>集：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230608165708825.png" alt="先填写3，再填写1" style="zoom:33%;"></p>
+<p>所以，<code>FIRST</code>集的算法如下：</p>
+<blockquote>
+<p>算法比较抽象，还是记住上面的三个规则</p>
+</blockquote>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230608165805431.png" alt="FIRST集的算法" style="zoom:33%;"></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230608165911420.png" alt="计算串的FIRST集算法" style="zoom:33%;"></p>
+<h3 id="B-FOLLOW集的计算"><a href="#B-FOLLOW集的计算" class="headerlink" title="B. FOLLOW集的计算"></a>B. <code>FOLLOW</code>集的计算</h3><p>我们接下来举一个计算<code>FOLLOW</code>集的例子：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230608170440062.png" alt="给定文法，求各个语法成分（非终结符）的FOLLOW集，假设FIRST集已经计算" style="zoom:33%;"></p>
+<p><code>FOLLOW</code>集的定义为：</p>
+<ul>
+<li><code>FOLLOW(A)</code>可能在某个句型中紧跟在$A$后边的终结符的集合</li>
+</ul>
+<p>计算<code>FOLLOW</code>集要逐产生式的去计算。即从第一个产生式开始，依次计算所有出现过的符号。因此我们先从第一个产生式开始计算。</p>
+<p>首先，<strong>如果一个非终结符是某个句型的最后一个符号，那么他的<code>FOLLOW</code>集就肯定有结束符<code>$</code></strong>。例如：</p>
+<ul>
+<li>$E$本身作为开始符号，子集就能够成为一个矩形，所以他的<code>FOLLOW</code>集中一定有<code>$</code></li>
+</ul>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230608172155411.png" alt="将结束符写入到E的FOLLOW集中" style="zoom:33%;"></p>
+<p>此外，<strong>一个非终结符的<code>FOLLOW</code>集实际上和下个非终结符的<code>FIRST</code>集有关</strong>。例如：</p>
+<ul>
+<li>$T$后面可能得符号有：$E’$（产生式1、产生式2）</li>
+</ul>
+<p>因此，我们要$T$的<code>FOLLOW</code>集中一定包含了$E’$<code>FIRST</code>集中的所有元素。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230608172326764.png" alt="将E'的FIRST集中的元素添加到T的FOLLOW集中" style="zoom:33%;"></p>
+<p>注意，如果一个非终结符的<code>FIRST</code>集含有空串，就表示这个终结符可以推导出空串。因此在填写的时候，需要把<code>FIRST</code>集中的空串改为结束符<code>$</code>。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230608173040649.png" alt="将下一个符号的FIRST集改为FOLLOW集" style="zoom:33%;"></p>
+<p><strong>如果一个符号是产生式右部的最后一个符号，那么左部的<code>FOLLOW</code>集应该包含在这个符号的<code>FOLLOW</code>集中</strong>。例如第一个产生式，$E$后面能接的符号$E’$都能接，因此把$E$的<code>$</code>加入到$E’$的<code>FOLLOW</code>集中</p>
+<blockquote>
+<p>若某个符号后面的符号可能为空，那么上面这个规则也使用。例如下面分析产生式3的时候</p>
+</blockquote>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230608173517842.png" alt="产生式右部最后一个符号的FOLLOW集包含左部的FOLLOW集" style="zoom:33%;"></p>
+<p>至此，第一个产生式分析结束</p>
+<p>然后分析第二个产生式。由于第二个产生式的右部中，$T$、$E’$的位置和第一个产生式中的位置是一样的，因此不会为<code>FOLLOW(T)</code>和<code>FOLLOW(E')</code>中带来新的元素。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230608173815010.png" alt="第二个产生式不会新增加元素" style="zoom: 33%;"></p>
+<p>接着分析第三个产生式。规则一，<code>T'</code>的<code>FIRST</code>集可以加入到<code>F</code>的<code>FOLLOW</code>集中。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230608174157214.png" alt="添加符号到F的FOLLOW集中" style="zoom:33%;"></p>
+<p>如果某个符号后面的符号可能都为空，那么注意还要用规则三，所以$F$的<code>FOLLOW</code>集还包含$T$的<code>FOLLOW</code>集</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230608175259195.png" alt="规则三的空串变体" style="zoom:33%;"></p>
+<p>而后$T’$的是规则三，故$T’$的<code>FOLLOW</code>集应该包含$T$的<code>FOLLOW</code>集</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230608180004308.png" alt="规则三，T'的FOLLOW集包含T的FOLLOW集" style="zoom:33%;"></p>
+<p>接下来分析产生式4。由于$F$和$T’$位置和产生式3是一样的，所以不会带来更多的结果。</p>
+<p>最后对于产生式5，会给E后面添加<code>)</code></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230608180315865.png" alt="分析产生式5" style="zoom:33%;"></p>
+<p>注意由于规则三，所以导致$E’$的<code>FOLLOW</code>集依赖$E$的<code>FOLLOW</code>集、$T’$的<code>FOLLOW</code>集依赖于$T$的<code>FOLLOW</code>集。因此规则四就是，<strong>如果后面的产生式修改了前面的<code>FOLLOW</code>集，那么就需要重新从产生式1开始在分析一次。</strong></p>
+<p>在第二次遍历的时候，分析有：</p>
+<ul>
+<li>$E’$依赖于$E$</li>
+<li>$T$依赖于$E$（$E’$为空）</li>
+<li>$T’$依赖于$T$</li>
+</ul>
+<p>所以，所有的产生式中都需要添加<code>)</code></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230608180831287.png" alt="分析完成" style="zoom:33%;"></p>
+<p>所以，我们给出<code>FOLLOW</code>集的算法为：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230608181008899.png" alt="FOLLOW集的算法" style="zoom:33%;"></p>
+<h3 id="C-SELECT集的计算"><a href="#C-SELECT集的计算" class="headerlink" title="C. SELECT集的计算"></a>C. <code>SELECT</code>集的计算</h3><p>计算得到了<code>FIRST</code>集和<code>FOLLOW</code>集后，我们就能计算产生式的<code>SELECT</code>集</p>
+<p>依据前面介绍的计算<code>SELECT</code>集的方法，针对每一个产生式：</p>
+<ul>
+<li>如果右边第一个符号是非终结符的话，等于右部第一个非终结符的<code>FIRST</code>集合</li>
+<li>如果右部是空串话，那么就是左部的<code>FOLLOW</code>集</li>
+<li>如果右部第一个符号是终结符的话，那么就是就是这个终结符</li>
+</ul>
+<p>例如给定下下面的文法和对应的<code>FIRST</code>集和<code>FOLLOW</code>集，我们计算其<code>SELECT</code>集</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230608182036841.png" alt="FIRST集和FOLLOW集" style="zoom:33%;"></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230608182202912.png" alt="产生式及其SELECT集" style="zoom:33%;"></p>
+<p>由于上面这个文法相同左部的产生式的<code>SELECT</code>集不想交，因此是一个<code>LL1</code>文法</p>
+<h2 id="6-预测分析法"><a href="#6-预测分析法" class="headerlink" title="6. 预测分析法"></a>6. 预测分析法</h2><p>上面在介绍<code>SELECT</code>集合和<code>LL1</code>文法的时候，我们其实已经举了一个预测分析法的例子。我们这里首先介绍一下预测分析法的工作过程，然后给出预测分析法在进行时候会用到的预测分析表</p>
+<h3 id="A-预测分析法的工作过程"><a href="#A-预测分析法的工作过程" class="headerlink" title="A. 预测分析法的工作过程"></a>A. 预测分析法的工作过程</h3><p>预测分析法的工作过程为：</p>
+<ul>
+<li><strong>从文法开始符号出发，在每一步推导过程中根据当前句型的最左非终结符$A$和当前输入符号$a$，选择正确的$A\rightarrow$产生式。为保证分析的确定性，选出的候选式必须是唯一的</strong></li>
+</ul>
+<p>其核心就在于：</p>
+<ul>
+<li><strong>预测分析法每次都能选出正确的、唯一的候选式</strong></li>
+</ul>
+<p>例如我们给定如下的产生式和产生式生成的第一个符号的映射：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230606202852519.png" alt="产生式和映射" style="zoom:33%;"></p>
+<p>假设现在输入串<code>ada</code>，我们要求从语法开始符号<code>S</code>推导出串<code>ada</code>都使用了那些产生式。</p>
+<ol>
+<li>初始化阶段，<code>token</code>指针指向<code>a</code></li>
+<li><strong>首先使用了产生式1</strong>，因为开始符号只在产生式1中出现<ul>
+<li><code>token</code>指针和<code>a</code>匹配，因此<code>token</code>指针指向<code>d</code></li>
+<li>此时语法树为$S\Rightarrow aBC$</li>
+</ul>
+</li>
+<li><strong>接下来使用了产生式3</strong>，因为只有产生式3才可能生成<code>d</code><ul>
+<li><code>token</code>指针和<code>d</code>匹配，因此<code>token</code>指针指向<code>a</code></li>
+<li>此时语法树为$S\Rightarrow adBC$</li>
+</ul>
+</li>
+<li><strong>接下来使用了产生式4</strong>，因为只有产生式4经过推导后可能生成a`<ul>
+<li><code>token</code>指针不与<code>a</code>匹配，因此<code>token</code>指不移动，继续针指向<code>a</code></li>
+<li>此时语法树为$S\Rightarrow adC$</li>
+</ul>
+</li>
+<li><strong>接下来使用了产生式6</strong>，因为只有产生式6才可能生成<code>a</code><ul>
+<li><code>token</code>指针和<code>a</code>匹配，因此<code>token</code>指针指向<code>NULL</code></li>
+<li>此时语法树为$S\Rightarrow ada$</li>
+</ul>
+</li>
+<li>此时已经将输入串完全匹配，匹配结束</li>
+</ol>
+<h3 id="B-预测分析表"><a href="#B-预测分析表" class="headerlink" title="B. 预测分析表"></a>B. 预测分析表</h3><p>预测分析法最关键的，就是对输入串进行扫描的时候，能够根据当前<code>token</code>指针指向的<code>token</code>选择出适用的产生式</p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Jack Wang</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://jackwang0107.github.io/2023/06/03/bian-yi-yuan-li-4/">https://jackwang0107.github.io/2023/06/03/bian-yi-yuan-li-4/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Jack Wang</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">
+                                    <span class="chip bg-color">编译原理</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.png" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2023/06/04/zhong-ke-yuan-ruan-jian-suo-shi-xi-larva-4/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="中科院软件所实习：LARVa 4">
+                        
+                        <span class="card-title">中科院软件所实习：LARVa 4</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-06-04
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            Jack Wang
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/06/02/zhong-ke-yuan-ruan-jian-suo-shi-xi-larva-3/">
+                    <div class="card-image">
+                        
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230601171840007.png" class="responsive-img" alt="Rust语言从入门到入土 2：如此奇特的语法">
+                        
+                        <span class="card-title">Rust语言从入门到入土 2：如此奇特的语法</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            本文是中科院软件所实习（LARVa项目）日志的第三篇，主要记录了我学习Rust语言的相关内容。本文主要介绍了Rust的基础语法
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-06-02
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E4%B8%AD%E7%A7%91%E9%99%A2%E5%AE%9E%E4%B9%A0%E6%97%A5%E8%AE%B0/" class="post-category">
+                                    中科院实习日记
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%AE%9E%E4%B9%A0%E6%97%A5%E8%AE%B0/">
+                        <span class="chip bg-color">实习日记</span>
+                    </a>
+                    
+                    <a href="/tags/%E4%B8%AD%E7%A7%91%E9%99%A2/">
+                        <span class="chip bg-color">中科院</span>
+                    </a>
+                    
+                    <a href="/tags/Rust/">
+                        <span class="chip bg-color">Rust</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: JackWang&#39;s Blog<br />'
+            + '文章作者: Jack Wang<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('1'),
+            headingSelector: 'h2, h3, h4, h5, h6'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4, h5, h6').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    });
+</script>
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2021-2023</span>
+            
+            <a href="/about" target="_blank">Jack Wang</a>
+            <!-- |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a> -->
+            <!-- |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a> -->
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">564.4k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+                <span id="sitetime"> Loading ...</span>
+                <script>
+                    var calcSiteTime = function () {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2021";
+                        var startMonth = "11";
+                        var startDate = "12";
+                        var startHour = "0";
+                        var startMinute = "0";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+
+                        // 区分是否有年份.
+                        var language = 'zh-CN';
+                        if (startYear === String(todayYear)) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            var daysTip = 'This site has been running for ' + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                daysTip = '本站已运行 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                daysTip = '本站已運行 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = daysTip;
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            var yearsAndDaysTip = 'This site has been running for ' + diffYears + ' years and '
+                                + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                yearsAndDaysTip = '本站已运行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                yearsAndDaysTip = '本站已運行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+                        }
+                    }
+
+                    calcSiteTime();
+                </script>
+            
+            <br>
+            
+                <span id="icp"><img src="/medias/icp.png"
+                                    style="vertical-align: text-bottom;"/>
+                <a href="https://beian.miit.gov.cn" target="_blank">陕ICP备2021014294号-1</a>
+            </span>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/jackwang0108" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:2232123545@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2232123545" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2232123545" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+        
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/sakura.js"><\/script>');
+            }
+        </script>
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

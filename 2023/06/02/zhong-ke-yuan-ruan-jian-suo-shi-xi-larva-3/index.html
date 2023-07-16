@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Rust语言从入门到入土 2——你可曾见过如此奇特的语法？, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
+    <meta name="keywords" content="Rust语言从入门到入土 2：如此奇特的语法, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
     <meta name="description" content="本文是中科院软件所实习（LARVa项目）日志的第三篇，主要记录了我学习Rust语言的相关内容。本文主要介绍了Rust的基础语法">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Rust语言从入门到入土 2——你可曾见过如此奇特的语法？ | JackWang&#39;s Blog</title>
+    <title>Rust语言从入门到入土 2：如此奇特的语法 | JackWang&#39;s Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -259,7 +259,7 @@
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Rust语言从入门到入土 2——你可曾见过如此奇特的语法？</h1>
+                    <h1 class="description center-align post-title">Rust语言从入门到入土 2：如此奇特的语法</h1>
                 </div>
             </div>
         </div>
@@ -415,21 +415,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-06-01
+                    2023-06-04
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    29
+                    2.2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    8 分
                 </div>
                 
 
@@ -453,6 +453,153 @@
 <p>人麻了，<code>Rust</code>的语法有点奇特。。。。。本文参考官方教程：<a target="_blank" rel="noopener" href="https://kaisery.github.io/trpl-zh-cn/title-page.html">https://kaisery.github.io/trpl-zh-cn/title-page.html</a></p>
 </blockquote>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230601171840007.png" alt="直观的感受一下Rust程序"></p>
+<h2 id="Rust语言从入门到入土-2：如此奇特的语法"><a href="#Rust语言从入门到入土-2：如此奇特的语法" class="headerlink" title="Rust语言从入门到入土 2：如此奇特的语法"></a>Rust语言从入门到入土 2：如此奇特的语法</h2><p>上次介绍了<code>Rust</code>的基础工具，这次首先通过一个程序介绍<code>Rust</code>的基础输入输出等内容，然后再介绍<code>Rust</code>的语法。</p>
+<h2 id="1-Hello-World"><a href="#1-Hello-World" class="headerlink" title="1. Hello World"></a>1. Hello World</h2><p>编程语言入门第一课，必须得是<code>hello world</code>程序。我们先来看看<code>Rust</code>的<code>hello world</code>是什么样子</p>
+<pre class="line-numbers language-bash"><code class="language-bash">cargo new hello_world
+code hello_world
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>然后在<code>src/main.rs</code>中编写如下的代码：</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token comment" spellcheck="true">// main.rs</span>
+<span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> s <span class="token operator">=</span> <span class="token string">"Hello World!\n"</span><span class="token punctuation">;</span>
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"{s}"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>然后编译、运行该项目</p>
+<pre class="line-numbers language-bash"><code class="language-bash">cargo run
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230604160721746.png" alt="运行结果" style="zoom:33%;"></p>
+<h3 id="A-分析程序"><a href="#A-分析程序" class="headerlink" title="A. 分析程序"></a>A. 分析程序</h3><p>我们接下来分析一下这个程序</p>
+<h4 id="1-文件名：main-rs"><a href="#1-文件名：main-rs" class="headerlink" title="1) 文件名：main.rs"></a>1) 文件名：<code>main.rs</code></h4><p>一般<code>Rust</code>源代码的后缀名使用<code>.rs</code>表示，<code>Cargo</code>项目中源码都放在<code>src</code>目录下。<strong>源码一定要注意使用<code>utf8</code>编码</strong>。</p>
+<h4 id="2-注释：-main-rs"><a href="#2-注释：-main-rs" class="headerlink" title="2) 注释：// main.rs"></a>2) 注释：<code>// main.rs</code></h4><p>第一行是注释语句，<code>Rust</code>的注释是<code>C</code>语言系列风格的，行注释采用<code>//</code>开头，块注释使用<code>/*</code>和<code>*/</code>包围。</p>
+<p>此外，类似<code>Python</code>的<code>docstring</code>，<code>Rust</code>它还支持更高级的文档注释，即对文档、函数等等对象进行注释，后文中将详细展开说明。</p>
+<h4 id="3-函数：fn"><a href="#3-函数：fn" class="headerlink" title="3) 函数：fn"></a>3) 函数：<code>fn</code></h4><p><strong><code>fn</code>是一个<code>关键字</code>（<code>keyword</code>），函数定义必须以这个关键字开头</strong>。<strong><code>fn</code>是单词<code>function</code>的缩写，在<code>Rust</code>中，设计者比较偏向使用单词缩写，即使是关键字也不例外</strong>。在代码风格上， 某些读者可能开始会有点不习惯。但总体而言，这只是个审美偏好而已，不必过于纠结，习惯就好。</p>
+<p><strong>函数体使用大括号来包含。</strong></p>
+<p><strong>如果我们要定义的函数有参数和返回值，可以使用以下语法（参数列表使用逗号分开，冒号后面是类型，返回值类型使用<code>-&gt;</code>符号分隔）</strong>：</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">Foo</span><span class="token punctuation">(</span>input1 <span class="token punctuation">:</span> i32<span class="token punctuation">,</span> input2 <span class="token punctuation">:</span> u32<span class="token punctuation">)</span> <span class="token punctuation">-></span> i32 <span class="token punctuation">{</span>
+    <span class="token punctuation">...</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h4 id="4-主函数：main"><a href="#4-主函数：main" class="headerlink" title="4) 主函数：main"></a>4) 主函数：<code>main</code></h4><p>默认情况下，<code>main</code>函数是可执行程序的入口点，它是一个无参数，无返回值的函数</p>
+<h4 id="5-局部变量：let"><a href="#5-局部变量：let" class="headerlink" title="5) 局部变量：let"></a>5) 局部变量：<code>let</code></h4><p>局部变量声明使用<code>let</code>关键字开头，用双引号包含起来的部分是字符串常量。<code>Rust</code>是静态强类型语言，所有的变量都有严格的编译期语法检查。关于<code>Rust</code>的变量和类型系统将在后文详细说明。</p>
+<h4 id="6-语句：let-s-quot-Hello-World-n-quot"><a href="#6-语句：let-s-quot-Hello-World-n-quot" class="headerlink" title="6) 语句：let s = &quot;Hello World!\n&quot;;"></a>6) 语句：<code>let s = "Hello World!\n";</code></h4><ul>
+<li><code>Rust</code>中每条语句使用分号结尾。</li>
+<li>语句块使用大括号。</li>
+<li>空格、换行和缩进不是语法规则的一部分。</li>
+</ul>
+<p>这都是明显的C语言系列的风格。</p>
+<h4 id="7-标准输出：println"><a href="#7-标准输出：println" class="headerlink" title="7) 标准输出：println!"></a>7) 标准输出：<code>println!</code></h4><p><code>Rust</code>最简单的标准输出是使用<code>println!</code>宏来完成。请大家一定注意<code>println!</code>后面的感叹号，它代表这是一个宏，而不是一个函数。</p>
+<p><strong>Rust中的宏与C/C++中的宏是完全不一样的东西</strong>。简单点说，可以把它理解为一种安全版的编译期语法扩展。<strong>这里之所以使用宏，而不是函数，是因为</strong><br><strong>标准输出宏可以完成编译期格式检查，更加安全。</strong></p>
+<blockquote>
+<p>从这个小程序的惊鸿一瞥中，大家可以看到，<code>Rust</code>的语法主要还是<code>C</code>系列的语法风格。对于熟悉<code>C</code>/<code>C++</code>/<code>Java</code>/<code>C#</code>/<code>PHP</code>/<code>JavaScript</code>等语言的读者来说，会看到许多熟悉的身影。</p>
+</blockquote>
+<h3 id="B-create和mod"><a href="#B-create和mod" class="headerlink" title="B. create和mod"></a>B. <code>create</code>和<code>mod</code></h3><h2 id="2-猜数游戏"><a href="#2-猜数游戏" class="headerlink" title="2. 猜数游戏"></a>2. 猜数游戏</h2><p>本章将介绍<code>Rust</code>中一些常用概念，并通过真实的程序来展示如何运用它们。具体包括：</p>
+<ul>
+<li><code>let</code></li>
+<li><code>match</code></li>
+<li><code>方法</code>（<code>method</code>）</li>
+<li><code>关联函数</code>（<code>associated function</code>）</li>
+<li>外部<code>crate</code></li>
+</ul>
+<blockquote>
+<p>这里是简单的介绍，后续章节会深入探讨这些概念的细节</p>
+</blockquote>
+<h3 id="A-程序功能"><a href="#A-程序功能" class="headerlink" title="A. 程序功能"></a>A. 程序功能</h3><p>猜数游戏是这么工作的：</p>
+<ul>
+<li>程序将会随机生成一个 1 到 100 之间的随机整数</li>
+<li>接着程序会请玩家猜一个数并输入</li>
+<li>程序接着会：<ul>
+<li>如果玩家猜对了，它会打印祝贺信息并退出</li>
+<li>如果玩家猜错了，他会提示猜测是大了还是小了</li>
+</ul>
+</li>
+</ul>
+<h3 id="B-创建项目"><a href="#B-创建项目" class="headerlink" title="B. 创建项目"></a>B. 创建项目</h3><p>前面我们说到，尽量使用<code>Cargo</code>来管理<code>Rust</code>项目。所以这里我们直接使用<code>Cargo</code>来创建项目</p>
+<pre class="line-numbers language-bash"><code class="language-bash">cargo new guessing_game
+<span class="token function">cd</span> guessing_game
+code ./
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>然后就会打开<code>VSCode</code>。</p>
+<p>接着编译、运行一下项目（我这里就在<code>VSCode</code>的终端了）</p>
+<pre class="line-numbers language-bash"><code class="language-bash">cargo run
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230604003549772.png" alt="运行结果"></p>
+<h3 id="C-编写代码"><a href="#C-编写代码" class="headerlink" title="C. 编写代码"></a>C. 编写代码</h3><p>我们接下来就开始在<code>src/main.rs</code>中编写代码了。</p>
+<h4 id="1-获取用户输入"><a href="#1-获取用户输入" class="headerlink" title="1) 获取用户输入"></a>1) 获取用户输入</h4><p>学习任何一门语言，最开始的一定都是学习这门语言的输入输出。前面的例子里我们已经看到，<code>Rust</code>打印字符串的函数是<code>println!</code>，这里我们介绍<code>Rust</code>如何获取用户的输入</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">use</span> std<span class="token punctuation">:</span><span class="token punctuation">:</span>io<span class="token punctuation">;</span>
+
+<span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"Guess the number!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"Please input your guess."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">let</span> <span class="token keyword">mut</span> guess <span class="token operator">=</span> String<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    io<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">stdin</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">read_line</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token keyword">mut</span> guess<span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">expect</span><span class="token punctuation">(</span><span class="token string">"Failed to read line"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"You guessed: {guess}"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h5 id="a-use-std-io"><a href="#a-use-std-io" class="headerlink" title="a) use std::io"></a>a) <code>use std::io</code></h5><p>类似于<code>C</code>接受用户输入需要<code>#include &lt;sdtio.h&gt;</code>，<code>C++</code>接受用户输入需要<code>#incldue &lt;iostream&gt;</code>，<strong><code>Rust</code>接受用户输入首先需要<code>use std::io</code></strong></p>
+<p><strong><code>Rust</code>的代码从逻辑上是分<code>crate</code>和<code>mod</code>管理的</strong>：</p>
+<ul>
+<li>所谓<code>crate</code>大家可以理解为<code>项目</code>，或者<code>库</code>。每个<code>crate</code>是一个完整的编译单元，它可以生成为一个<code>lib</code>或者<code>exe</code>可执行文件。而在crate内部，则是由mod这个概念管理的</li>
+<li>所谓<code>mod</code>大家可以理解为<code>namespace</code>。我们可以使用<code>use</code>语句把其他模块中的内容引入到当前模块中来</li>
+</ul>
+<p>这里：</p>
+<ul>
+<li><code>io</code>是<code>mod</code>的名字，<code>io</code>这个<code>mod</code>中提供了输入/输出函数。<code>io</code> 这个<code>mod</code>是<code>std</code>这个<code>create</code>（库）的一部分，因此在前面加上 <code>std::</code></li>
+<li><code>use</code>等价于<code>C/C++</code>中的<code>#include</code>，<code>Python</code>中的<code>import</code>。注意，<strong>默认情况下，<code>Rust</code>会自动把标准库的一些内容自动导入到当前程序，这些内容被称为<code>预导入</code>（<code>Preclude</code>） 内容</strong>。我们需要使用的类型、函数不在预导入内容中，就必须使用 <code>use</code> 语句显式地将其导入</li>
+</ul>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230604010505246.png" alt="io库的内容" style="zoom: 25%;"></p>
+<h5 id="b-println"><a href="#b-println" class="headerlink" title="b) println!"></a>b) <code>println!</code></h5><p>我们前面介绍了，<code>println!</code>可以用于向终端打印字符串。但实际上和<code>C/C++</code>的<code>printf</code>是函数不同，<strong><code>Rust</code>中的<code>println!</code>是一个宏</strong></p>
+<p>类似于<code>C/C++</code>有宏，<code>Rust</code>中也有宏。<strong>宏可以在编译时进行代码展开，因此可以避免在运行时进行函数调用的开销。这对于频繁调用的函数来说非常重要，因为它可以显著提高程序的性能。</strong></p>
+<p>而<code>println!</code>就是一类非常常用的函数，因此<code>Rust</code>将<code>println!</code>设置为宏是为了提高<code>Rust</code>程序的效率。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230604010923257.png" alt="println!宏的定义" style="zoom:33%;"></p>
+<h5 id="c-let"><a href="#c-let" class="headerlink" title="c) let"></a>c) <code>let</code></h5><p><code>let</code>是<code>Rust</code>的关键字，用于声明一个变量。例如下面我们声明了一个值为<code>1</code>的变量，变量名为<code>a</code>：</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">let</span> a <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><strong>但是注意，<code>Rust</code>中默认所有的变量的值都是不可以改变的。如果我们尝试改变，在编译阶段就会报错</strong>。例如：</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> a <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    a <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230604011824631.png" alt="编译会报错" style="zoom:33%;"></p>
+<p>最后的报错就是说我们尝试给一个变量<code>a</code>赋值两次。</p>
+<blockquote>
+<p>除了报错以外这里还有两个警告，这里的两个警告主要是因为<code>Rust</code>是一个严格的语言：</p>
+<ul>
+<li>第一个警告是因为变量<code>a</code>从来没有被使用</li>
+<li>第二个警告是因为变量<code>a</code>中的值从来没有被使用过</li>
+</ul>
+</blockquote>
+<h5 id="d-mut"><a href="#d-mut" class="headerlink" title="d) mut"></a>d) <code>mut</code></h5><p>程序是无可避免的需要修改变量的值的。为此，<code>Rust</code>提供了一个关键字<code>mut</code>，使用该关键字，<code>Rust</code>允许我们修改被修饰的变量的值。</p>
+<p>例如上面的程序，变量<code>a</code>使用<code>mut</code>关键字修饰后，再次编译就不会报错</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> <span class="token keyword">mut</span> a <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    a <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong><code>Rust</code>之所以要这样设计，主要是避免了<code>C/C++</code>中使用<code>const</code>关键字的麻烦，因为要修饰指针不可变，或者指针指向的内容不可变。而且因为<code>Rust</code>是内存安全型的语言，相比让所有变量都是可变的而后声明不可变的变量，将所有变量都是不可变的而后声明可变的变量更安全</strong>。</p>
+<h5 id="e-打印变量"><a href="#e-打印变量" class="headerlink" title="e) 打印变量"></a>e) 打印变量</h5><p>程序中我们无可避免的需要打印变量的值。在<code>C/C++</code>中通过格式化字符串或者重载来实现。</p>
+<p><code>Rust</code>实现打印变量的方式和<code>Python</code>的<code>format-string</code>类似，都是在打印的变量用<code>{}</code>包裹来输出变量。</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> a <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"num of a is {a}"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230604150640361.png" alt="cargo run的结果" style="zoom:33%;"></p>
+<p>除了直接将变变量放在<code>{}</code>中之外，还可以把<code>{}</code>当做占位符，放在后面。</p>
+<pre class="line-numbers language-rust"><code class="language-rust"><span class="token keyword">fn</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> a <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token function">println!</span><span class="token punctuation">(</span><span class="token string">"num of a is {}"</span><span class="token punctuation">,</span> a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230604150754640.png" alt="cargo run的结果" style="zoom:33%;"></p>
+<h5 id="f-String-new"><a href="#f-String-new" class="headerlink" title="f) String::new()"></a>f) <code>String::new()</code></h5><p><code>Rust</code>和<code>C++</code>类似，是一种多范式编程语言，支持面向对象编程、函数式编程和命令式编程等多种编程范式。</p>
 
                 
             </div>
@@ -698,55 +845,45 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2023/06/02/zhong-ke-yuan-ruan-jian-suo-shi-xi-larva-3/">
+                <a href="/2023/06/03/bian-yi-yuan-li-4/">
                     <div class="card-image">
                         
-                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230601171840007.png" class="responsive-img" alt="Rust语言从入门到入土 2——你可曾见过如此奇特的语法？">
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/51Bv6BJig-L.jpg" class="responsive-img" alt="编译原理 4：语法分析">
                         
-                        <span class="card-title">Rust语言从入门到入土 2——你可曾见过如此奇特的语法？</span>
+                        <span class="card-title">编译原理 4：语法分析</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            本文是中科院软件所实习（LARVa项目）日志的第三篇，主要记录了我学习Rust语言的相关内容。本文主要介绍了Rust的基础语法
+                            本章是编译原理的第四章，主要对语法分析进行了介绍。
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-06-02
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-06-03
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E4%B8%AD%E7%A7%91%E9%99%A2%E5%AE%9E%E4%B9%A0%E6%97%A5%E8%AE%B0/" class="post-category">
-                                    中科院实习日记
+                            <a href="/categories/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/" class="post-category">
+                                    编译原理
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E5%AE%9E%E4%B9%A0%E6%97%A5%E8%AE%B0/">
-                        <span class="chip bg-color">实习日记</span>
-                    </a>
-                    
-                    <a href="/tags/%E4%B8%AD%E7%A7%91%E9%99%A2/">
-                        <span class="chip bg-color">中科院</span>
-                    </a>
-                    
-                    <a href="/tags/Rust/">
-                        <span class="chip bg-color">Rust</span>
+                    <a href="/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">
+                        <span class="chip bg-color">编译原理</span>
                     </a>
                     
                 </div>
@@ -763,16 +900,15 @@
                 <a href="/2023/05/31/bian-yi-yuan-li-3/">
                     <div class="card-image">
                         
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/51Bv6BJig-L.jpg" class="responsive-img" alt="编译原理 3：词法分析">
                         
-                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="编译原理-3">
-                        
-                        <span class="card-title">编译原理-3</span>
+                        <span class="card-title">编译原理 3：词法分析</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
+                            本章是编译原理的第三章，主要对词法分析进行了介绍。
                         
                     </div>
                     <div class="publish-info">
@@ -781,11 +917,23 @@
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            Jack Wang
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/" class="post-category">
+                                    编译原理
+                                </a>
+                            
                             
                         </span>
                     </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">
+                        <span class="chip bg-color">编译原理</span>
+                    </a>
+                    
                 </div>
                 
             </div>
@@ -977,7 +1125,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">536.6k</span>
+                        class="white-color">564.4k</span>
             
             
             

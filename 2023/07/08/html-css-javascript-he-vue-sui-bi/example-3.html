@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <p id="myParagraph">这是一个段落。点击按钮 0 次</p>
+    <button id="myButton">点击我</button>
+</body>
+
+<script>
+    // 计数器
+    var click_time = 1;
+    // 获取按钮和 <p> 标签的引用
+    const button = document.getElementById('myButton');
+    const paragraph = document.getElementById('myParagraph');
+
+    // 创建按钮的点击事件处理程序
+    button.addEventListener('click', function () {
+        // 修改 <p> 标签的内容
+        paragraph.textContent = '这是一个段落。点击按钮 ' + click_time + ' 次';
+        click_time++;
+    });
+
+</script>
+
+</html>

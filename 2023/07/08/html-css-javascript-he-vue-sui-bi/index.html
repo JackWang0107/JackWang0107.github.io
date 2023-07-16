@@ -1,0 +1,1820 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="前端随笔 1：HTML、JavaScript和Vue, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
+    <meta name="description" content="本文记录了我学习前端技术时候的一些感悟">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>前端随笔 1：HTML、JavaScript和Vue | JackWang&#39;s Blog</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.2">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+
+   <style>
+    body{
+       background-image: url(https://cdn.jsdelivr.net/gh/Tokisaki-Galaxy/res/site/medias/background.jpg);
+       background-repeat:no-repeat;
+       background-size: 100% 100%;
+       background-attachment:fixed;
+    }
+</style>
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">JackWang&#39;s Blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-book-reader" style="zoom: 0.6;"></i>
+      
+      <span>博客</span>
+      <i class="fas fa-chevron-down" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/tags">
+          
+          <i class="fas fa-tags" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按标签归类文章</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories">
+          
+          <i class="fas fa-bookmark" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按目录归类文章</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/archives">
+          
+          <i class="fas fa-archive" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按日期分类文章</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">JackWang&#39;s Blog</div>
+        <div class="logo-desc">
+            
+            JackWang的个人博客
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-book-reader"></i>
+			
+			博客
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>
+
+                  <a href="/tags " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-tags" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按标签归类文章</    span>
+
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/categories " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-bookmark" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按目录归类文章</    span>
+
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/archives " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-archive" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按日期分类文章</    span>
+
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('抱歉，这篇文章并不想让所有人都看到，请输入授权密码观看')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230708112807994.png')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">前端随笔 1：HTML、JavaScript和Vue</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E5%89%8D%E7%AB%AF/">
+                                <span class="chip bg-color">前端</span>
+                            </a>
+                        
+                            <a href="/tags/HTML/">
+                                <span class="chip bg-color">HTML</span>
+                            </a>
+                        
+                            <a href="/tags/CSS/">
+                                <span class="chip bg-color">CSS</span>
+                            </a>
+                        
+                            <a href="/tags/JavaScript/">
+                                <span class="chip bg-color">JavaScript</span>
+                            </a>
+                        
+                            <a href="/tags/Vue/">
+                                <span class="chip bg-color">Vue</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E5%89%8D%E7%AB%AF/" class="post-category">
+                                前端
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2023-07-08
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2023-07-15
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    8.4k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    31 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230708112807994.png" alt="Vue.js" style="zoom: 33%;"></p>
+<h1 id="前端随笔-1：HTML、JavaScript和Vue"><a href="#前端随笔-1：HTML、JavaScript和Vue" class="headerlink" title="前端随笔 1：HTML、JavaScript和Vue"></a>前端随笔 1：HTML、JavaScript和Vue</h1><p>最近因为工作需要，需要接触一些前端的东西。之前虽然大体上了解过<code>HTML</code>、<code>CSS</code>和<code>JavaScript</code>，也知道<code>HTML</code>定义了内容、<code>CSS</code>定义了样式、<code>JavaScript</code>定义了行为，但是却没有详细的学习过前端三件套的细节。而最近的工作中需要使用<code>Vue</code>，并且想到未来的工作中使用<code>Vue</code>能够更好地展示成功，所以认真的学习了一些前端的知识。</p>
+<p>因此特地准备写一些文章，将自己的一些心得和感悟记录下来，作为学习的见证和方便未来使用。</p>
+<h2 id="一、HTML"><a href="#一、HTML" class="headerlink" title="一、HTML"></a>一、HTML</h2><h3 id="1-HTML语言"><a href="#1-HTML语言" class="headerlink" title="1. HTML语言"></a>1. HTML语言</h3><p><strong><code>HTML</code>全称是<code>HyperText Markup Language</code>，即超文本标记语言，一种用来结构化 Web 网页及其内容的标记语言</strong>。网页内容可以是：一组段落、一个重点信息列表、也可以含有图片和数据表。</p>
+<p><strong>需要注意的是，<code>HTML</code>不是一门编程语言，只是一种用于定义内容和结构的标记语言</strong>。之所以称为标记语言，是因为<code>HTML</code>由一系列的<strong>标签</strong>（<code>Tag</code>）组成，这些标签可以用来包围不同部分的内容，使其以某种方式呈现或者工作。</p>
+<p>例如将一段文字设置为斜体：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/italic-tag-definition.png" alt="HTML使用\<i\>标签将文字设置为斜体"></p>
+<p>需要注意的是，<code>HTML</code>的设计初衷是为了能够在不同的计算机系统和浏览器之间共享文档，并以一种易于阅读和编写的方式呈现信息。因此，需要经过浏览器解析，才能看到具体效果。</p>
+<h3 id="2-HTML标签"><a href="#2-HTML标签" class="headerlink" title="2. HTML标签"></a>2. HTML标签</h3><p><code>HTML</code>标签是用于定义网页结构和内容的元素。它们由尖括号包围，并以标签名开始和结束，例如<code>&lt;tagname&gt;content&lt;/tagname&gt;</code>。标签通常以成对的形式出现，其中包括一个开始标签和一个结束标签，中间是标签的内容。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/grumpy-cat-small.png" alt="HTML标签" style="zoom:50%;"></p>
+<p>不同的标签有不同的功能，例如：</p>
+<ul>
+<li><code>&lt;p&gt;</code>标签用于定义段落</li>
+<li><code>&lt;h1&gt;</code>到<code>&lt;h6&gt;</code>标签用于定义标题</li>
+<li><code>&lt;a&gt;</code>标签用于创建链接等等</li>
+<li>……</li>
+</ul>
+<p>被不同的标签包裹的文字将会产生不同的效果，例如超链接、粗体、斜体、……。而且，<code>HTML</code>标签可以嵌套在彼此之内，形成层次结构，从而为一段文字设置多个属性，例如加粗斜体，以构建复杂的网页布局和内容。</p>
+<p>此外，<strong><code>HTML</code>标签还可以具有属性包含了关于元素的一些额外信息，这些信息本身不应显现在内容中</strong>。例如下面的例子中，<code>class</code> 是属性名称，<code>editor-note</code> 是属性的值。<code>class</code> 属性可为元素提供一个标识名称，以便进一步为元素指定样式（即元素的外观，例如字号、字体、……）或进行其他操作时使用。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/grumpy-cat-attribute-small.png" alt="HTML 属性" style="zoom:50%;"></p>
+<p>最后，<strong>除了开始和结束标签，有些标签也可以是自闭合的，即在开始标签中就结束。直观的理解就是标签只有一个</strong>。例如：</p>
+<ul>
+<li><code>&lt;img&gt;</code>标签用于插入图像</li>
+<li><code>&lt;br&gt;</code>标签用于插入换行符等</li>
+<li>……</li>
+</ul>
+<blockquote>
+<p>需要注意的是，HTML标签的属性和（被包裹的）内容是两种截然不同的文本。稍后再Vue中我们还会强调这一点。</p>
+</blockquote>
+<h3 id="3-HTML文档"><a href="#3-HTML文档" class="headerlink" title="3. HTML文档"></a>3. HTML文档</h3><p>使用<code>HTML</code>语言编写的文档称为<code>HTML</code>文档，后缀名一般保存为<code>.html</code>、<code>.htm</code>、……</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/v2-2044089938b7a747f40d8aa4408d3989_1440w.png" alt="HTML文档"></p>
+<p>前面介绍过，<code>HTML</code>的设计初衷是为了能够在不同的计算机系统和浏览器之间共享文档，并以一种易于阅读和编写的方式呈现信息。因此，需要经过浏览器解析，才能看到具体效果。因此<code>HTML</code>自然需要通过浏览器打开。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230708172000128.png" alt="通过浏览器打开的HTML文件" style="zoom: 15%;"></p>
+<p>通过文本编辑器打开的<code>HTML</code>文档只能看到其中的字符：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230708172042797.png" alt="文本编辑器打开的HTML文档" style="zoom:15%;"></p>
+<p>一般来说：</p>
+<ul>
+<li>编写<code>HTML</code>文档的时候，我们一般是通过文本编辑器打开<code>HTML</code>文档，以方便我们编写<code>HTML</code>源代码</li>
+<li>调试<code>HTML</code>文档的时候则是通过浏览器打开，以方便我们查看<code>HTML</code>文档的内容是否正确显示</li>
+</ul>
+<p>最后在编写完<code>HTML</code>文档之后，我们将<code>HTML</code>文档发布给用户的时候，即需要阅读内容的时候，则是通过浏览器打开，从而能够浏览到具有丰富格式的网页。</p>
+<p>最后，这里只是对<code>HTML</code>进行简单的介绍，还有很多内容没有介绍，例如：</p>
+<ul>
+<li><code>HTML</code>的所有标签</li>
+<li><code>HTML</code>文档的结构</li>
+<li>……</li>
+</ul>
+<p>因为这只是随笔，我觉得这些内容应该是在编程教学书、教学视频中的，并不是我这个随笔该讲解的。所以就直接略过了。</p>
+<h2 id="二、JavaScript"><a href="#二、JavaScript" class="headerlink" title="二、JavaScript"></a>二、JavaScript</h2><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Glossary/JavaScript">JavaScript</a> 堪称<a target="_blank" rel="noopener" href="http://javascript.crockford.com/javascript.html">世界上被人误解最深的编程语言</a>。虽然常被嘲为“玩具语言”，但在它看似简洁的外衣下，还隐藏着强大的语言特性。JavaScript 目前广泛应用于众多知名应用中，对于网页和移动开发者来说，深入理解 <code>JavaScript</code> 就尤为必要。</p>
+<h3 id="1-历史"><a href="#1-历史" class="headerlink" title="1. 历史"></a>1. 历史</h3><p>我们有必要先从这门语言的历史谈起。在 1995 年 <code>Netscape</code> 一位名为 Brendan Eich 的工程师创造了 <code>JavaScript</code>，随后在 1996 年初，<code>JavaScript</code> 首先被应用于 <code>Netscape 2</code> 浏览器上。</p>
+<p>最初的 <code>JavaScript</code> 名为 <code>LiveScript</code>，但是当时社交媒体在铺天盖地的宣传 <code>Sun Microsystem</code> 公司所开发的 <code>Java</code> 语言，所以为了蹭热度， <code>NetScape</code> 公司将它的名字从最初的 <code>LiveScript</code> 更改为 <code>JavaScript</code>——尽管两者之间并没有什么共同点。这便是之后人们对 <code>Java</code> 和 <code>JavaScript</code>混淆产生的根源。</p>
+<blockquote>
+<p>但是事实上，<code>JavaScript</code>原先的名字，<code>LiveScript</code>更能显示这门语言的能力：<strong><code>JavaScript</code>让网页具有动态特性（<code>Live</code>）</strong></p>
+<p><strong>具体来说，<code>HTML</code>编写的网页是静态的，用户只能看到一个页面</strong>。可是很多时候，我们试图和网页进行交互，例如，我们会在输入账号和密码之后点击一个登录按钮，而后我们就能在网页上浏览淘宝、将商品加入购物车。</p>
+<p>点击登录按钮、添加购物车等等这些功能是动态地，意味着需要一定的动作的执行，但是<code>HTML</code>只定义了网页看起来是什么样的，正是<code>JavaScript</code>让静态的网页动了起来。</p>
+</blockquote>
+<p>几个月后，<code>Microsoft</code> 随 <code>IE 3</code> 发布推出了一个与之基本兼容的语言 <code>JScript</code>。又过了几个月，<code>Netscape</code> 将 <code>JavaScript</code> 提交至 <a target="_blank" rel="noopener" href="https://www.ecma-international.org/">Ecma International</a>（一个欧洲标准化组织），<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Glossary/ECMAScript">ECMAScript</a> 标准第一版便在 1997 年诞生了。<code>ECMAScript</code>标准中定义了一个脚本语言应该具有的语言特性和能力，而<code>JavaScript</code>则是这个标准的具体实现。</p>
+<p>我们可以简单的理解为：<code>ECMAScript</code>中规定了<code>JavaScript</code>这门语言的语法。</p>
+<p>随后在 1999 年以 <a target="_blank" rel="noopener" href="https://www.ecma-international.org/publications/standards/Ecma-262.htm">ECMAScript 第三版</a>的形式进行了更新，从那之后这个标准没有发生过大的改动。由于委员会在语言特性的讨论上发生分歧，<code>ECMAScript</code> 第四版尚未推出便被废除，但随后于 2009 年 12 月发布的 <code>ECMAScript</code> 第五版引入了第四版草案加入的许多特性。第六版标准已经于 2015 年 6 月发布。</p>
+<h3 id="2-运行时环境-宿主环境"><a href="#2-运行时环境-宿主环境" class="headerlink" title="2. 运行时环境/宿主环境"></a>2. 运行时环境/宿主环境</h3><p>一般来说，各种语言编写的程序需要一个运行时环境，或者说宿主环境。只有在宿主环境下，程序才能够正确运行并且产生功能。例如：</p>
+<ul>
+<li><code>C/C++</code>的运行时环境/宿主环境就是操作系统，在嵌入式开发的基础下，<code>C/C++</code>的运行时环境也可以是没有操作系统的裸机</li>
+<li><code>Python</code>的运行时环境就是<code>Python</code>解释器</li>
+<li><code>Java</code>的运行时环境是<code>Java</code>虚拟机</li>
+<li>……</li>
+</ul>
+<p>和<code>Python</code>类似，<code>JavaScript</code>是一个在<code>宿主环境</code>（<code>host environment</code>）下运行的脚本语言。</p>
+<p>但是和其他语言都具备输入输出能力不同，<code>JavaScript</code>中没有输入或输出的概念。在任何与外界沟通的机制都是由宿主环境提供的。例如JavaScript读写文件是通过浏览器的<code>File API</code>来读取和写入文件的。</p>
+<p><strong><code>JavaScript</code>有多种宿主环境</strong>。浏览器是最常见的宿主环境，但在非常多的其他程序中也包含 <code>JavaScript</code> 解释器，如 <code>Adobe Acrobat</code>、<code>Adobe Photoshop</code>、<code>SVG</code> 图像、<code>Yahoo！</code>的 <code>Widget</code> 引擎，<a target="_blank" rel="noopener" href="https://nodejs.org/">Node.js</a> 之类的服务器端环境，<code>NoSQL</code> 数据库（如开源的 <a target="_blank" rel="noopener" href="https://couchdb.apache.org/">Apache CouchDB</a>）、嵌入式计算机，以及包括 <a target="_blank" rel="noopener" href="https://www.gnome.org/">GNOME</a>（注：<code>GNU/Linux</code> 上最流行的 <code>GUI</code> 之一）在内的桌面环境等等。</p>
+<p>这些宿主环境都能够解析<code>JavaScript</code>语言编写程序，而后执行指定的功能。</p>
+<h3 id="3-JavaScript的语法特性"><a href="#3-JavaScript的语法特性" class="headerlink" title="3. JavaScript的语法特性"></a>3. JavaScript的语法特性</h3><p><strong><code>JavaScript</code> 是一种多范式的动态语言</strong>。它包含类型、运算符、标准内置（built-in）对象和方法。它的语法来源于 <code>Java</code> 和 <code>C</code>，所以这两种语言的许多语法特性同样适用于 <code>JavaScript</code>。</p>
+<p><strong><code>JavaScript</code>是一个支持面向对象编程的语言</strong>。但是需要注意的是<code>JavaScript</code>通过原型链而不是类来支持面向对象编程（有关 ES6 类的内容参考这里<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Classes"><code>Classes</code></a>，有关对象原型参考见此<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Inheritance_and_the_prototype_chain">继承与原型链</a>）。</p>
+<blockquote>
+<p>在其他语言中，一般会有类和对象两种概念。类是创建对象的模板，创建对象的时候根据类的定义来创建，而在类中我们定义了类的继承关系，从而实现对象之间的继承等关系。所以，其他语言是根据最终依据类中的定义来决定对象之间的关系，而在运行阶段，对象与对象的关系是确定的，是无法修改的</p>
+<p>但是在<code>JavaScript</code>中只有对象。每个对象（object）都有一个私有属性指向另一个名为<strong>原型</strong>（prototype）的对象。原型对象也有一个自己的原型，层层向上直到一个对象的原型为 <code>null</code>。根据定义，<code>null</code> 没有原型，并作为这个<strong>原型链</strong>（prototype chain）中的最后一个环节。可以改变原型链中的任何成员，甚至可以在运行时修改原型链。即在运行阶段对象与对象间的关系是可以修改的</p>
+</blockquote>
+<p><code>JavaScript</code> 同样支持函数式编程——因为它们也是对象，函数也可以被保存在变量中，并且像其他对象一样被传递。</p>
+<h3 id="4-JavaScript与事件"><a href="#4-JavaScript与事件" class="headerlink" title="4. JavaScript与事件"></a>4. JavaScript与事件</h3><p>浏览器、<code>Node.js</code>这类宿主环境一般运行在操作系统中。因此这就意味着宿主环境能够和操作系统交互，从而得知用户是否按下鼠标、是否敲击键盘、……</p>
+<p>前面介绍了，<code>JavaScript</code>是运行在一个宿主环境中的，因此当用户按下键盘之后，<code>JavaScript</code>能够通过其宿主环境得知用户按下了键盘。而后采取特定的行动来处理用户按下键盘这一行为。例如读取用户按键是否为回车，如果是则提交账号和密码，如果是一般字符则视为账号的一部分在输入框中显示……</p>
+<p>类似的，将鼠标点击这样的事实称为<strong>事件</strong>。<strong>事件是发生在你正在编程的系统中的事情——当事件发生时，系统产生（或“触发”）某种信号，并提供一种机制，当事件发生时，可以自动采取某种行动（即运行一些代码）</strong>。</p>
+<blockquote>
+<p>事件的概念不仅仅是在<code>JavaScript</code>中，在其他很多编程场景都存在这一概念。例如：</p>
+<ul>
+<li>使用C++编写的电脑应用，例如QT框架编写的播放器，当用户点击空格就需要暂停播放，再次点击空格就继续播放</li>
+<li>……</li>
+</ul>
+<p>此时，对于事件的捕捉就是由语言自己去完成的，一般是通过框架（例如QT）。而后框架提供了执行处理对应的事件的函数的机制。对于<code>JavaScript</code>，事件是由宿主环境负责捕捉的，<code>JavaScript</code>负责处理这些事件。</p>
+</blockquote>
+<p>有不同类型的事件可以发生，例如：</p>
+<ul>
+<li>用户选择、点击或将光标悬停在某一元素上。</li>
+<li>用户在键盘中按下某个按键。</li>
+<li>用户调整浏览器窗口的大小或者关闭浏览器窗口。</li>
+<li>网页结束加载。</li>
+<li>表单提交。</li>
+<li>视频播放、暂停或结束。</li>
+<li>发生错误。</li>
+</ul>
+<p>为了对一个事件做出反应，你要给它附加一个<strong>事件处理器</strong>。这是一个代码块（通常是你作为程序员创建的一个 <code>JavaScript</code> 函数），在事件发生时运行。当这样一个代码块被定义为响应一个事件而运行时，我们说我们在<strong>注册一个事件处理器</strong>。注意，事件处理器有时候被叫做<strong>事件监听器</strong>——从我们的用意来看这两个名字是相同的，尽管严格地来说这块代码既监听也处理事件。监听器留意事件是否发生，处理器对事件发生做出回应。</p>
+<p>例如下面的代码：</p>
+<pre class="line-numbers language-html"><code class="language-html"><span class="token comment" spellcheck="true">&lt;!-- HTML代码 --></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>myParagraph<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>这是一个段落。<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>myButton<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>点击我<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// JavaScript代码</span>
+<span class="token keyword">const</span> button <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">'myButton'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> paragraph <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">'myParagraph'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function">random</span><span class="token punctuation">(</span>number<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> Math<span class="token punctuation">.</span><span class="token function">floor</span><span class="token punctuation">(</span>Math<span class="token punctuation">.</span><span class="token function">random</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token punctuation">(</span>number <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+button<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'click'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> rndCol <span class="token operator">=</span> <span class="token template-string"><span class="token string">`rgb(</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token function">random</span><span class="token punctuation">(</span><span class="token number">255</span><span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">, </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token function">random</span><span class="token punctuation">(</span><span class="token number">255</span><span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">, </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token function">random</span><span class="token punctuation">(</span><span class="token number">255</span><span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">)`</span></span><span class="token punctuation">;</span>
+    paragraph<span class="token punctuation">.</span>style<span class="token punctuation">.</span>backgroundColor <span class="token operator">=</span> rndCol<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>在上面这段代码中，我们在<code>HTML</code>定义的网页中定义了一个按钮和一段文字，而后在<code>JavaScript</code>中我们为这个按钮的点击事件绑定了一个函数，这个函数随机产生一个颜色，而后将<code>HTML</code>中这段文字的背景颜色设置为这个随机颜色。</p>
+<p>具体运行的效果如下：</p>
+<iframe src="example.html" align="middle"></iframe>
+
+<p>正如我们在上面的例子中所看到的，能够触发事件的对象有一个 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/EventTarget/addEventListener"><code>addEventListener()</code></a> 方法，这就是通过这个函数，我们能够为<code>HTML</code>中指定的标签所触发的事件添加事件处理器。</p>
+<p>但是一个网页中，需要处理的时间很多很多，一个个手动添加很难顶。因此<code>JavaScript</code>中就出现了类似于<code>Vue</code>这样的框架，通过框架我们能够快速的添加事件处理器。不过在介绍Vue之前，我们还需要介绍JavaScript的和HTML文档的交互。</p>
+<h3 id="5-JavaScript与HTML文档"><a href="#5-JavaScript与HTML文档" class="headerlink" title="5. JavaScript与HTML文档"></a>5. JavaScript与HTML文档</h3><p>网页所有的内容的显示都是由<code>HTML</code>决定的，<code>JavaScript</code>只是决定了一个事件是如何被处理的。</p>
+<p>然后在上面的例子中，我们看到了当按钮被点击之后，网页的部分的颜色直接改变了。这就意味着决定网页内容（包括背景颜色）的<code>HTML</code>改变了。可是在点击按钮之后，只有<code>JavaScript</code>的函数被运行了，我们没有重新加载网页（即刷新）网页的颜色就变了。这就意味着，<code>JavaScript</code>具有动态修改<code>HTML</code>的能力。</p>
+<p><strong>事实上，这就是<code>JavaScript</code>让网页从静态变成动态的核心：我们可以在<code>JavaScript</code>中动态修改<code>HTML</code>的元素</strong>。例如：</p>
+<ul>
+<li><p>点击按钮之后添加一个<code>&lt;p&gt;</code>标签，从而添加一段文字</p>
+<iframe src="example-2.html" align="middle"></iframe>
+</li>
+<li><p>点击按钮之后修改<code>&lt;p&gt;</code>标签的内容，从而修改原先的文字</p>
+<iframe src="example-3.html" align="middle"></iframe>
+</li>
+<li><p>……</p>
+</li>
+</ul>
+<p>正是因为<code>JavaScript</code>可以动态修改<code>HTML</code>的内容，才使得网页具有了各种各样丰富多彩的功能，才使得<strong>网页从一个单纯的文章变成了应用</strong>。</p>
+<h3 id="6-DOM对象"><a href="#6-DOM对象" class="headerlink" title="6. DOM对象"></a>6. DOM对象</h3><p>关于<code>JavaScript</code>修改<code>HTML</code>我们还需要多讲一点，就是<code>DOM</code>对象。其实修改<code>HTML</code>非常简单，无非就是增加、删除或者修改标签即可。</p>
+<p>然而，前面在介绍<code>HTML</code>标签的时候介绍过，标签是可以嵌套的，例如：</p>
+<pre class="line-numbers language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span>div标签里嵌套一个<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>p标签<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>是完全合法的<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span>你甚至可以在div标签里嵌套另外一个<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span>div标签<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>，这也是完全合法的<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>此外一个网页中一个标签完全可以出现多次，例如可以出现多个<code>&lt;p&gt;</code>标签：</p>
+<pre class="line-numbers language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>p标签可以出现多次，这是第0次<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>p标签可以出现多次，这是第1次<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>p标签可以出现多次，还能<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>嵌套<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>出现<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>可是<code>JavaScript</code>在进行修改的时候，到底要修改哪个<code>&lt;p&gt;</code>标签？由此引发的，是对<code>HTML</code>中的标签定位问题。</p>
+<p>类似于操作系统的文件系统使用树状的路径来确定一个个文件、区分同名文件，<code>HTML</code>也可以使用树状的结构来区分所有的<code>&lt;p&gt;</code>标签：</p>
+<ul>
+<li>将最外层的<code>&lt;html&gt;</code>标签表示为根节点，其余所有标签都是其子节点</li>
+<li>将嵌套的标签表示为父子节点</li>
+<li>将并列的标签表示为兄弟节点</li>
+</ul>
+<p>从而构建出来一个表示了<code>HTML</code>中所有标签的树：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/htmltree.gif" alt="表示了HTML中所有标签的树"></p>
+<p>通过这个树，我们就能够去定位到具体我们需要去修改的标签，然后进行修改即可。</p>
+<p><strong>我们发现，<code>HTML</code>是一个既可以在浏览器窗口中显示的文档，也可以作为 <code>HTML</code> 源代码的文档被文件编辑器编辑。使用浏览器查看和使用文本编辑器编辑提供了<code>HTML</code>文档两种不同的访问方式。</strong></p>
+<p><strong>这里我们通过这种树形的方式去访问、修改其信息的方式，提供了第三种访问方式：通过编程语言访问。</strong>由此，我们将此时被抽象为树的<code>HTML</code>称为<code>文档对象模型</code>（<code>DOM</code>），以表示此时的<code>HTML</code>文件是内部具有结构的对象的集合。而上面的树则称为<code>DOM</code>树。</p>
+<p>通过的<code>DOM</code>表示方式使得<code>HTML</code>可以被操作。作为一个面向对象的网页表示，其中的每一个对象（即标签），可以用编程语言（如 <code>JavaScript</code>、<code>Python</code>）进行修改。</p>
+<p>我们再来看看上面那个改变背景颜色的<code>JavaScript</code>代码：</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// JavaScript代码</span>
+<span class="token keyword">const</span> button <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">'myButton'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> paragraph <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">'myParagraph'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function">random</span><span class="token punctuation">(</span>number<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> Math<span class="token punctuation">.</span><span class="token function">floor</span><span class="token punctuation">(</span>Math<span class="token punctuation">.</span><span class="token function">random</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token punctuation">(</span>number <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+button<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'click'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> rndCol <span class="token operator">=</span> <span class="token template-string"><span class="token string">`rgb(</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token function">random</span><span class="token punctuation">(</span><span class="token number">255</span><span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">, </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token function">random</span><span class="token punctuation">(</span><span class="token number">255</span><span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">, </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token function">random</span><span class="token punctuation">(</span><span class="token number">255</span><span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">)`</span></span><span class="token punctuation">;</span>
+    paragraph<span class="token punctuation">.</span>style<span class="token punctuation">.</span>backgroundColor <span class="token operator">=</span> rndCol<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>我们发现其实这个<code>JavaScript</code>代码的功能就是：</p>
+<ul>
+<li><p>首先在<code>DOM</code>树中找到按钮标签和<code>&lt;p&gt;</code>标签，即：</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">const</span> button <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">'myButton'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> paragraph <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">'myParagraph'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+<li><p>然后为按钮这个标签的点击事件添加事件处理函数，即：</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript">btn<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">"click"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> rndCol <span class="token operator">=</span> <span class="token template-string"><span class="token string">`rgb(</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token function">random</span><span class="token punctuation">(</span><span class="token number">255</span><span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">, </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token function">random</span><span class="token punctuation">(</span><span class="token number">255</span><span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">, </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token function">random</span><span class="token punctuation">(</span><span class="token number">255</span><span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">)`</span></span><span class="token punctuation">;</span>
+  paragraph<span class="token punctuation">.</span>style<span class="token punctuation">.</span>backgroundColor <span class="token operator">=</span> rndCol<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>事件处理函数中：</p>
+<ul>
+<li><p>首先产生随机颜色，即：</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">const</span> rndCol <span class="token operator">=</span> <span class="token template-string"><span class="token string">`rgb(</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token function">random</span><span class="token punctuation">(</span><span class="token number">255</span><span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">, </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token function">random</span><span class="token punctuation">(</span><span class="token number">255</span><span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">, </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token function">random</span><span class="token punctuation">(</span><span class="token number">255</span><span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">)`</span></span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li><p>然后修改<code>&lt;p&gt;</code>的属性值，这里是修改背景颜色，即：</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript">paragraph<span class="token punctuation">.</span>style<span class="token punctuation">.</span>backgroundColor <span class="token operator">=</span> rndCol<span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<p>我们会发现，<code>JavaScript</code>中这样通过原生的方式去修改<code>HTML</code>实在是太繁琐了。这里只是修改背景颜色而已，还别说别的功能了。例如我们要实现美团外卖的添加购物车功能，那么<code>JavaScript</code>代码里面要写死我们。</p>
+<p>正是因为这样，目前<code>JavaScript</code>会借助框架来快捷的帮我们处理这些事情，我们只需要关注具体得事件处理函数的编写即可，而接下来要介绍的<code>Vue</code>就是这样的一个框架。</p>
+<h2 id="三、Vue"><a href="#三、Vue" class="headerlink" title="三、Vue"></a>三、Vue</h2><p>我们上面在介绍<code>JavaScript</code>和<code>HTML</code>的交互的时候，讲到了标准的<code>JavaScript</code>修改<code>HTML</code>以实现动态网页的方式比较繁琐，代码写起来烦得要死。为此，就出现了很多的框架（例如：<code>React</code>、<code>Angular</code>，他们帮助我们快捷的绑定函数到指定标签的事件上去。</p>
+<p>实际上，框架能干的事情、为我们干的事情远不止如此，不过在目前阶段，我们这样理解框架就行了。<code>Vue</code>就是诸多<code>JavaScript</code>框架中最成功的那一个。所以接下来就介绍介绍<code>Vue</code></p>
+<h3 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h3><p><code>Vue</code> (发音为 /vjuː/，类似 <strong>view</strong>) 是一款用于构建用户界面的 <code>JavaScript</code> 框架。它基于标准<code>HTML</code>、<code>CSS</code>和<code>JavaScript</code>构建，并提供了一套声明式的、组件化的编程模型，帮助你高效地开发用户界面。无论是简单还是复杂的界面，<code>Vue</code>都可以胜任。</p>
+<p>最初<code>Vue</code>是一个个人项目，时至今日，已成为全世界三大前端框架之一，<code>Github</code>上拥有3.8万<code>Star</code>。 领先于另外两个前端框架：<code>React</code>和<code>Angular</code>，在国内更是首选。</p>
+<h3 id="2-发展历史"><a href="#2-发展历史" class="headerlink" title="2. 发展历史"></a>2. 发展历史</h3><ul>
+<li>2013年，在 <code>Google</code> 工作的尤雨溪，受到 <code>Angular</code> 的启发，开发出了一款轻量级框架，最初命名为 <code>Seed</code> 。</li>
+<li>2013年12月，更名为 <code>Vue</code>，图标颜色是代表勃勃生机的绿色，版本号是 0.6.0。</li>
+<li>2014.01.24，<code>Vue</code> 正式对外发布，版本号是 0.8.0。</li>
+<li>2014.02.25，0.9.0 发布，有了自己的代号：Animatrix，此后，重要的版本都会有自己的代号。</li>
+<li>2015.06.13，0.12.0，代号Dragon Ball，Laravel 社区（一款流行的 PHP 框架的社区）首次使用 Vue，Vue 在 JS 社区也打响了知名度。</li>
+<li>2015.10.26，1.0.0 Evangelion 是 Vue 历史上的第一个里程碑。同年，vue-router、vuex、vue-cli 相继发布，标志着 Vue从一个视图层库发展为一个渐进式框架。</li>
+<li>2016.10.01，2.0.0 是第二个重要的里程碑，它吸收了 React 的虚拟 Dom 方案，还支持服务端渲染。自从Vue 2.0 发布之后，Vue 就成了前端领域的热门话题。</li>
+<li>2019.02.05，Vue 发布了 2.6.0 ，这是一个承前启后的版本，在它之后，推出了 3.0.0。</li>
+<li>2019.12.05，在万众期待中，尤雨溪公布了 Vue 3 源代码，此时的 Vue 3仍 处于 Alpha 版本。</li>
+<li>2020年09月18日，Vue.js 3.0 正式发布。</li>
+</ul>
+<p>前两年国内大厂的网页前端基本都是用Vue 2.0写的，可是截止本文发布时间2023年，不少大厂已经切换到了Vue 3.0了。</p>
+<p>作为一个计算机科学家，理应了解计算机的方方面面。</p>
+<h3 id="3-Vue文件"><a href="#3-Vue文件" class="headerlink" title="3. Vue文件"></a>3. Vue文件</h3><p><code>Vue</code>是<code>JavaScript</code>的框架，<code>Vue</code>通过组件的形式来组织网页，即将一个页面分为不同的组件，每个组件以单独的文件形式保存，称为<code>Vue</code>文件，后缀一般为<code>.vue</code>。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230709150032090.png" alt="将网页划分为三个不同的组件，每个组件独立开发" style="zoom: 15%;"></p>
+<p>一个典型的<code>Vue</code>文件一般分为三个部分：</p>
+<ul>
+<li><code>&lt;template&gt;</code>部分：定义了这个组件的<code>HTML</code>代码，即该组件的结构</li>
+<li><code>&lt;script&gt;</code>部分：定义了这个组件<code>JavaScript</code>代码，即该组件的行为</li>
+<li><code>&lt;style&gt;</code>部分：定义了这个组建的<code>CSS</code>代码，即该组件的外观</li>
+</ul>
+<blockquote>
+<p><strong>未来这个组件在被<code>Vue</code>加载的时候，<code>&lt;template&gt;</code>中的内容将按照<code>&lt;style&gt;</code>中中<code>CSS</code>指定的样式显示，而具体的行为则由<code>&lt;script&gt;</code>中的<code>JavaScript</code>代码决定</strong></p>
+</blockquote>
+<p>下面就是一个典型的<code>Vue</code>文件的例子，我们这里不关注其中的语法，后续我们会进行详细的介绍。</p>
+<pre class="line-numbers language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span><span class="token punctuation">></span></span>{{ message }}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">@click</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>changeMessage<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Change Message<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script language-javascript">
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  <span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">{</span>
+      message<span class="token punctuation">:</span> <span class="token string">"Hello, Vue!"</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  methods<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token function">changeMessage</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>message <span class="token operator">=</span> <span class="token string">"Vue is awesome!"</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">></span></span><span class="token style language-css">
+<span class="token selector">h1 </span><span class="token punctuation">{</span>
+  <span class="token property">color</span><span class="token punctuation">:</span> blue<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="4-HTML标签的字段"><a href="#4-HTML标签的字段" class="headerlink" title="4. HTML标签的字段"></a>4. HTML标签的字段</h3><p>我们在前面介绍了<code>HTML</code>的标签，我们前面说到：</p>
+<ul>
+<li><code>HTML</code>标签的属性</li>
+<li><code>HTML</code>标签的内容</li>
+</ul>
+<p>是两个完全独立内容，其中：</p>
+<ul>
+<li>属性控制了标签的行为、样式、……</li>
+<li>内容控制了显示的数据</li>
+</ul>
+<p>例如按钮标签<code>&lt;button&gt;</code>：</p>
+<ul>
+<li>按钮标签的属性：<ul>
+<li><code>type</code>属性决定了这个按钮是一个普通按钮</li>
+<li><code>id</code>属性决定了这个按钮的<code>ID</code>，方便未来在<code>JavaScript</code>中通过查找<code>ID</code>为<code>myButton</code>的标签来找到这个按钮</li>
+<li><code>onclick</code>属性决定了按钮的点击事件处理函数</li>
+</ul>
+</li>
+<li>按钮标签的内容：<ul>
+<li><code>点击我将会弹窗</code>决定了按钮内显示的文本</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>button<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>myButton<span class="token punctuation">"</span></span> <span class="token attr-name">onclick</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>myFunction()<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>点击我将会弹窗<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
+
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script language-javascript">
+        <span class="token keyword">function</span> <span class="token function">myFunction</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">"按钮被点击了！"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>最终显示的效果为：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230709143547713.png" alt="按钮显示的效果" style="zoom: 15%;"></p>
+<p>点击之后的效果：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230709143602654.png" alt="点击之后的效果" style="zoom:15%;"></p>
+<p><strong>因此，我们使用<code>JavaScript</code>来修改<code>DOM</code>树的时候，其实对于每一个标签，我们要修改的就是这个标签的属性和内容</strong>。而标签的内容又是通过标签的属性绑定到标签上的，例如下面的例子：</p>
+<pre class="line-numbers language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>myButton<span class="token punctuation">"</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>button<span class="token punctuation">"</span></span> <span class="token attr-name">onclick</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>myFunction()<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>点击我<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>myDiv<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>这是一个示例<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script language-javascript">
+    <span class="token comment" spellcheck="true">// 根据ID查找到标签</span>
+    <span class="token keyword">var</span> div <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">"myDiv"</span><span class="token punctuation">)</span>
+    <span class="token keyword">var</span> button <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">"myButton"</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">function</span> <span class="token function">myFunction</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// 标签内容以属性的形式绑定到JavaScript对象上</span>
+        div<span class="token punctuation">.</span>innerText <span class="token operator">=</span> <span class="token string">"标签的内容被修改"</span>
+        <span class="token comment" spellcheck="true">// 同时修改标签的style属性</span>
+        div<span class="token punctuation">.</span>style<span class="token punctuation">.</span>backgroundColor <span class="token operator">=</span> <span class="token string">"green"</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>点击前：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230709144552209.png" alt="点击前效果"></p>
+<p>点击后：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230709144606137.png" alt="点击后效果"></p>
+<h3 id="5-Vue修改DOM"><a href="#5-Vue修改DOM" class="headerlink" title="5. Vue修改DOM"></a>5. Vue修改DOM</h3><p>我们前面讲到，使用<code>JavaScript</code>原生修改<code>HTML</code>的方式就是先在<code>DOM</code>树中找到要修改的标签对象（<code>JavaScript</code>中标签以对象的形式存在），然后通过修改对象的属性来修改标签的内容和属性。</p>
+<p>而在<code>Vue</code>中：</p>
+<ul>
+<li><code>Vue</code>使用<code>插值表达式</code>来完成内容的修改</li>
+<li><code>Vue</code>使用<code>Vue指令</code>来完成属性的修改</li>
+</ul>
+<h4 id="A-Vue插值表达式"><a href="#A-Vue插值表达式" class="headerlink" title="A. Vue插值表达式"></a>A. Vue插值表达式</h4><p>我们前面说到，<code>Vue</code>的组件中<code>&lt;template&gt;</code>标签中的内容是将要显示的<code>HTML</code>代码。而<code>Vue</code>中的插值表达式是一种在<code>&lt;template&gt;</code>标签中使用的特殊语法，会被<code>Vue</code>引擎动态地解析。</p>
+<p>插值表达式用于在模板中插入动态的数据，语法为：</p>
+<pre class="line-numbers language-html"><code class="language-html">{{ JavaScript表达式 }}
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>例如：</p>
+<pre class="line-numbers language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>test<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span><span class="token punctuation">></span></span>变量message的值为: {{ message }}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>效果为</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230710190526309.png" alt="插值表达式的效果"></p>
+<p><strong>可以看到，<code>Vue</code>在解析组件的时候用变量的值替换了插值表达式。</strong></p>
+<p>​    </p>
+<h4 id="B-Vue指令"><a href="#B-Vue指令" class="headerlink" title="B. Vue指令"></a>B. Vue指令</h4><h5 id="1-HTML和XML"><a href="#1-HTML和XML" class="headerlink" title="1) HTML和XML"></a>1) HTML和XML</h5><p><code>HTML</code>语言是<code>XML</code>语言的子集。<code>XML</code>语言的全称是：可扩展标记语言（英语：E<strong>x</strong>tensible <strong>M</strong>arkup <strong>L</strong>anguage，简称：<strong>XML</strong>）。</p>
+<p>既然称为可扩展标记语言，所以<code>XML</code>其实是允许我们程序员自己定义新的标签，而后在标签中存储数据。例如：</p>
+<pre class="line-numbers language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>book</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">></span></span>Harry Potter and the Philosopher's Stone<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>author</span><span class="token punctuation">></span></span>J.K. Rowling<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>author</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>year</span><span class="token punctuation">></span></span>1997<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>year</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>book</span><span class="token punctuation">></span></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>在这个例子中，<code>&lt;book&gt;</code>是根元素，它包含了<code>&lt;title&gt;</code>、<code>&lt;author&gt;</code>和<code>&lt;year&gt;</code>等子元素。每个子元素都包含了相应的数据。XML的结构可以根据需求来定义，用于存储和传输数据。</p>
+<p><strong><code>HTML</code>是<code>XML</code>的一种，其预先定义了一些标签，这些标签是会被浏览器识别，并且渲染出不同的样式的，例如<code>&lt;h1&gt;</code>标签会改变文字的字号。</strong></p>
+<p>既然<code>HTML</code>是<code>XML</code>的一种，那么其实我们也可以为<code>HTML</code>定义新的标签，不过新定义的标签，浏览器是不会对其进行渲染的，除非我们为自己定义的新标签指定外观和行为。</p>
+<h5 id="2-自定义属性"><a href="#2-自定义属性" class="headerlink" title="2) 自定义属性"></a>2) 自定义属性</h5><p>除了为<code>HTML</code>定义新的标签以外，我们还可以为<code>HTML</code>的标签定义新的属性，而后为新的属性指定样式和行为。</p>
+<p><strong>具体就是通过<code>HTML</code>和<code>JavaScript</code>为已有的<code>HTML</code>标签添加新的属性</strong>。例如：</p>
+<ul>
+<li><p>我们为<code>&lt;p&gt;</code>标签定义一个<code>look</code>属性</p>
+<pre class="line-numbers language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span> <span class="token attr-name">look</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>false<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>这是一个段落<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<ul>
+<li>如果<code>look</code>属性值为<code>true</code>，则不进行任何修改</li>
+<li>如果<code>look</code>属性值为<code>false</code>，则隐藏<code>&lt;p&gt;</code>标签的内容，即指定文字的透明度为100%</li>
+</ul>
+</li>
+<li><p>具体这个属性功能的实现，则是通过<code>JavaScript</code></p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">const</span> pElement <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">'p'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> lookValue <span class="token operator">=</span> pElement<span class="token punctuation">.</span><span class="token function">getAttribute</span><span class="token punctuation">(</span><span class="token string">'look'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>lookValue <span class="token operator">==</span> <span class="token string">"true"</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  pElement<span class="token punctuation">.</span>style<span class="token punctuation">.</span>opacity <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+</ul>
+<h5 id="3-Vue指令"><a href="#3-Vue指令" class="headerlink" title="3) Vue指令"></a>3) Vue指令</h5><p><strong><code>Vue</code>中为我们定义了许多由<code>Vue</code>定义的标签以简化开发，这些属性<code>Vue</code>中称其为指令。</strong></p>
+<p>不同的指令有不同的作用，例如：</p>
+<ul>
+<li><code>v-on</code>指令可以便捷的将事件和<code>JavaScript</code>函数绑定起来，即将<code>JavaScript</code>的函数作为<code>v-on</code>属性的值</li>
+<li><code>v-show</code>指令可以根据变量的真假来决定是否显示变量，即将<code>JavaScript</code>的变量作为<code>v-show</code>属性的值</li>
+</ul>
+<p>例如：</p>
+<pre class="line-numbers language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>test<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span><span class="token punctuation">></span></span>变量ifShow的值为: {{ ifShow }}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span> <span class="token attr-name">v-show</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>ifShow<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>ifShow为{{ ifShow }}, 会显示内容<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>button<span class="token punctuation">"</span></span> <span class="token attr-name"><span class="token namespace">v-on:</span>click</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>changeValue()<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>点击修改布尔值<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这里：</p>
+<ul>
+<li><code>ifShow</code>是一个布尔变量</li>
+<li><code>changeValue</code>是一个函数，每次会将<code>ifShow</code>取反</li>
+</ul>
+<p>最后得到的效果为：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230710225936667.png" alt="点击按钮前" style="zoom:25%;"></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230710225954033.png" alt="点击按钮后" style="zoom: 33%;"></p>
+<h3 id="6-Vue的JavaScript标签"><a href="#6-Vue的JavaScript标签" class="headerlink" title="6. Vue的JavaScript标签"></a>6. Vue的JavaScript标签</h3><p>我们上面说到<code>Vue</code>提供了指令和插值表达式，使得<code>&lt;template&gt;</code>标签中的<code>HTML</code>代码和<code>&lt;javascript&gt;</code>标签中的<code>JavaScript</code>代码可以动态地交互。这里详细介绍一下<code>Vue</code>的<code>JavaScript</code>标签</p>
+<h4 id="A-模块"><a href="#A-模块" class="headerlink" title="A. 模块"></a>A. 模块</h4><p><code>ES6</code>规范发布前，<code>JavaScript</code>在语法上是不支持模块的，虽然我们可以通过读取文件、自己编写解析器的方式实现加载，但是<code>JavaScript</code>依旧不像其他语言一样具有模块的能力。</p>
+<p>一直直到<code>ES6</code>，<code>JavaScript</code>才在语法层面上支持了模块。模块的核心思想就是<strong>：把逻辑分块，各自封装，相互独立，每个块自行决定对外暴露什么，同时自行决定引入执行哪些外部代码</strong>。对应着导出和导入，我们可以在一个<code>JavaScript</code>文件中决定要导出那些变量、函数，而后再另外一个<code>JavaScript</code>代码中导入这些变量和函数</p>
+<p>对于<code>Vue</code>来说，<code>Vue</code>框架会将我们自己写的组件中<code>JavaScript</code>代码作为一个模块引入，因此我们需要在自己的组件中将自己的<code>JavaScript</code>代码导出。</p>
+<p><code>ES6</code>模块支持两种导出：<code>命名导出</code>和<code>默认导出</code>。不同的导出方式对应不同的导入方式。</p>
+<h5 id="1-命名导出"><a href="#1-命名导出" class="headerlink" title="1) 命名导出"></a>1) 命名导出</h5><p>在JavaScript中，可以使用命名导出来导出模块中的特定函数、变量或类。命名导出允许你在导入模块时只导入你感兴趣的部分，而不是整个模块。</p>
+<p>要使用命名导出，首先需要在模块中定义你想要导出的函数、变量或类。然后，使用<code>export</code>关键字将它们导出。</p>
+<p>例如：</p>
+<ul>
+<li>导出一个变量</li>
+</ul>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// 模块中的代码</span>
+<span class="token keyword">export</span> <span class="token keyword">const</span> PI <span class="token operator">=</span> <span class="token number">3.14</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// 导入模块的代码</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> PI <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./module.js'</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>PI<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 输出: 3.14</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li>导出一个函数</li>
+</ul>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// 模块中的代码</span>
+<span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">add</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> a <span class="token operator">+</span> b<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">// 导入模块的代码</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> add <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./module.js'</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 输出: 5</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h5 id="2-默认导出"><a href="#2-默认导出" class="headerlink" title="2) 默认导出"></a>2) 默认导出</h5><p>在<code>JavaScript</code>中，除了命名导出，还可以使用默认导出来导出模块中的内容。默认导出允许你在导入模块时为导出的内容选择任意名称，而不需要使用花括号指定导入的特定项。</p>
+<p>要使用默认导出，可以在模块中使用<code>export default</code>关键字将一个函数、变量或类标记为默认导出。</p>
+<p>例如：</p>
+<ul>
+<li>默认导出一个变量</li>
+</ul>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// 模块中的代码</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">const</span> PI <span class="token operator">=</span> <span class="token number">3.14</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// 导入模块的代码</span>
+<span class="token keyword">import</span> PI <span class="token keyword">from</span> <span class="token string">'./module.js'</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>PI<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 输出: 3.14</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li>默认导出一个函数</li>
+</ul>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// 模块中的代码</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">add</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> a <span class="token operator">+</span> b<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">// 导入模块的代码</span>
+<span class="token keyword">import</span> add <span class="token keyword">from</span> <span class="token string">'./module.js'</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 输出: 5</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>注意，默认导出只能有一个，而且在导入时可以为其指定任意名称。在导入时，你可以自由选择一个名称来引用默认导出的内容。</p>
+<h4 id="B-Vue组件的导出"><a href="#B-Vue组件的导出" class="headerlink" title="B. Vue组件的导出"></a>B. Vue组件的导出</h4><p><code>Vue</code>组件要求我们在<code>&lt;script&gt;</code>标签中使用<code>export default</code>语法将一个对象导出为默认导出。这个对象包含了<code>Vue</code>组件的选项和逻辑。</p>
+<p>例如：</p>
+<pre class="line-numbers language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+  <span class="token comment" spellcheck="true">&lt;!-- 模板部分 --></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span>
+    <span class="token comment" spellcheck="true">&lt;!-- 在这里放置你的HTML模板 --></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script language-javascript">
+  <span class="token comment" spellcheck="true">// 脚本部分</span>
+  <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 被导出的数据、函数</span>
+  <span class="token punctuation">}</span>
+</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">></span></span><span class="token style language-css">
+  <span class="token comment" spellcheck="true">/* 样式部分 */</span>
+  <span class="token comment" spellcheck="true">/* 在这里放置你的CSS样式 */</span>
+</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这里导出的只有一个对象，因此：</p>
+<ul>
+<li>要导出的所有变量需要使用<code>data</code>函数返回一个以变量为属性的对象</li>
+<li>要导出的所有函数需要使用<code>methods</code>属性返回一个以函数为属性的对象</li>
+</ul>
+<p>例如上面点击按钮修改显示文字的<code>Vue</code>组件：</p>
+<ul>
+<li>变量<code>ifShow</code>作为对象的属性，由<code>data</code>函数返回</li>
+<li>函数作为对象的属性，由<code>methods</code>属性返回</li>
+</ul>
+<pre class="line-numbers language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>test<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span><span class="token punctuation">></span></span>变量ifShow的值为: {{ ifShow }}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span> <span class="token attr-name">v-show</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>ifShow<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>ifShow为{{ ifShow }}, 会显示内容<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>button<span class="token punctuation">"</span></span> <span class="token attr-name"><span class="token namespace">v-on:</span>click</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>changeValue()<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>点击修改布尔值<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script language-javascript">
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+    <span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token punctuation">{</span>
+            ifShow<span class="token punctuation">:</span> <span class="token boolean">true</span>
+        <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    methods<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        <span class="token function">changeValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>ifShow <span class="token operator">=</span> <span class="token operator">!</span> <span class="token keyword">this</span><span class="token punctuation">.</span>ifShow
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>注意，<code>ES6</code>中规定，如果对象的属性名和变量名一样，那么就可以简写：</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// 定义person对象，具有一个属性name</span>
+<span class="token keyword">let</span> name <span class="token operator">=</span> <span class="token string">'Matt'</span><span class="token punctuation">;</span> 
+<span class="token keyword">let</span> person <span class="token operator">=</span> <span class="token punctuation">{</span> 
+ name<span class="token punctuation">:</span> name 
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// 简写后</span>
+<span class="token keyword">let</span> name <span class="token operator">=</span> <span class="token string">'Matt'</span><span class="token punctuation">;</span> 
+<span class="token keyword">let</span> person <span class="token operator">=</span> <span class="token punctuation">{</span> 
+ name 
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>所以上面导出的代码就等价于：</p>
+<pre class="line-numbers language-html"><code class="language-html">// 原代码
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script language-javascript">
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+    <span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token punctuation">{</span>
+            ifShow<span class="token punctuation">:</span> <span class="token boolean">true</span>
+        <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    methods<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        <span class="token function">changeValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>ifShow <span class="token operator">=</span> <span class="token operator">!</span> <span class="token keyword">this</span><span class="token punctuation">.</span>ifShow
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script language-javascript">
+<span class="token comment" spellcheck="true">// 等价形式（不进行省略）</span>
+<span class="token keyword">function</span> <span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token punctuation">{</span> ifShow<span class="token punctuation">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">changeValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span> <span class="token keyword">this</span><span class="token punctuation">.</span>ifShow <span class="token operator">=</span> <span class="token operator">!</span> <span class="token keyword">this</span><span class="token punctuation">.</span>ifShow <span class="token punctuation">}</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  data<span class="token punctuation">:</span> data<span class="token punctuation">,</span>
+  methods <span class="token punctuation">:</span> <span class="token punctuation">{</span> changeValue<span class="token punctuation">:</span> changeValue <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Jack Wang</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://jackwang0107.github.io/2023/07/08/html-css-javascript-he-vue-sui-bi/">https://jackwang0107.github.io/2023/07/08/html-css-javascript-he-vue-sui-bi/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Jack Wang</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E5%89%8D%E7%AB%AF/">
+                                    <span class="chip bg-color">前端</span>
+                                </a>
+                            
+                                <a href="/tags/HTML/">
+                                    <span class="chip bg-color">HTML</span>
+                                </a>
+                            
+                                <a href="/tags/CSS/">
+                                    <span class="chip bg-color">CSS</span>
+                                </a>
+                            
+                                <a href="/tags/JavaScript/">
+                                    <span class="chip bg-color">JavaScript</span>
+                                </a>
+                            
+                                <a href="/tags/Vue/">
+                                    <span class="chip bg-color">Vue</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.png" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2023/07/08/example/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="">
+                        
+                        <span class="card-title"></span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-07-08
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            Jack Wang
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/06/04/zhong-ke-yuan-ruan-jian-suo-shi-xi-larva-4/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="中科院软件所实习：LARVa 4">
+                        
+                        <span class="card-title">中科院软件所实习：LARVa 4</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-06-04
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            Jack Wang
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: JackWang&#39;s Blog<br />'
+            + '文章作者: Jack Wang<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('1'),
+            headingSelector: 'h2, h3, h4, h5, h6'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4, h5, h6').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2021-2023</span>
+            
+            <a href="/about" target="_blank">Jack Wang</a>
+            <!-- |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a> -->
+            <!-- |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a> -->
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">564.4k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+                <span id="sitetime"> Loading ...</span>
+                <script>
+                    var calcSiteTime = function () {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2021";
+                        var startMonth = "11";
+                        var startDate = "12";
+                        var startHour = "0";
+                        var startMinute = "0";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+
+                        // 区分是否有年份.
+                        var language = 'zh-CN';
+                        if (startYear === String(todayYear)) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            var daysTip = 'This site has been running for ' + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                daysTip = '本站已运行 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                daysTip = '本站已運行 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = daysTip;
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            var yearsAndDaysTip = 'This site has been running for ' + diffYears + ' years and '
+                                + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                yearsAndDaysTip = '本站已运行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                yearsAndDaysTip = '本站已運行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+                        }
+                    }
+
+                    calcSiteTime();
+                </script>
+            
+            <br>
+            
+                <span id="icp"><img src="/medias/icp.png"
+                                    style="vertical-align: text-bottom;"/>
+                <a href="https://beian.miit.gov.cn" target="_blank">陕ICP备2021014294号-1</a>
+            </span>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/jackwang0108" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:2232123545@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2232123545" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2232123545" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+        
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/sakura.js"><\/script>');
+            }
+        </script>
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

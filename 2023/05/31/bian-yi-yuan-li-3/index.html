@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="编译原理-3, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
-    <meta name="description" content="编译原理-3 | JackWang&#39;s Blog">
+    <meta name="keywords" content="编译原理 3：词法分析, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
+    <meta name="description" content="本章是编译原理的第三章，主要对词法分析进行了介绍。">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>编译原理-3 | JackWang&#39;s Blog</title>
+    <title>编译原理 3：词法分析 | JackWang&#39;s Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -254,12 +254,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://jack-1307599355.cos.ap-shanghai.myqcloud.com/51Bv6BJig-L.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">编译原理-3</h1>
+                    <h1 class="description center-align post-title">编译原理 3：词法分析</h1>
                 </div>
             </div>
         </div>
@@ -373,12 +373,25 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">
+                                <span class="chip bg-color">编译原理</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/" class="post-category">
+                                编译原理
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -394,21 +407,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-06-01
+                    2023-06-04
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    0
+                    5.5k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    19 分
                 </div>
                 
 
@@ -428,7 +441,348 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/51Bv6BJig-L-20230601185851241.jpg" alt="编译原理"></p>
+<h1 id="编译原理-3：词法分析"><a href="#编译原理-3：词法分析" class="headerlink" title="编译原理 3：词法分析"></a>编译原理 3：词法分析</h1><p>第二章中，我们对语言进行了介绍。也正是在第二章中，我们说到，程序设计语言中的大多数单词，都可以用正则文法来描述，即正则文法生成的语言中的句子就是程序设计语言中大多数单词。</p>
+<p>本章我们将介绍一种用来描述正则语言的、更紧凑的方法，即正则表达式。</p>
+<h2 id="1-正则表达式"><a href="#1-正则表达式" class="headerlink" title="1. 正则表达式"></a>1. 正则表达式</h2><p>我们上一章定义语言的时候讲到过，语言是句子集合。句子则可以由定义的文法中的开始符号和产生式推导得到。因此可以在语言上进行多种运算，例如：交并补、乘积（连接）、闭包。</p>
+<p>例如下面的语言：</p>
+<ul>
+<li>语言$L$首先由语言${a}$和${a,b}^*$乘积得到。注意这里<code>a</code>和<code>b</code>都是句子</li>
+<li>语言$L$然后再和语言${\varepsilon}$和语言${.}{a,b}{a,b}^*$的乘积进行乘积</li>
+</ul>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230602231123242.png" alt="语言可以进行交并补运算" style="zoom:33%;"></p>
+<p>用人话来说，语言$L$中的句子是这样构成的：</p>
+<ul>
+<li>句首是字符<code>a</code></li>
+<li>然后是任意长度的<code>ab</code>字符串</li>
+<li>然后：<ul>
+<li>要么连接空串，表示句子已经结束</li>
+<li>要么连接<code>,_</code>，然后再连接<code>a</code>+任意长度<code>ab</code>字符串或者<code>b</code>+任意长度<code>ab</code>字符串</li>
+</ul>
+</li>
+</ul>
+<h3 id="A-正则表达式"><a href="#A-正则表达式" class="headerlink" title="A. 正则表达式"></a>A. 正则表达式</h3><p>正则表达式（<code>Regular Expression</code>，<code>RE</code>）是一种用来描述正则语言的更紧凑的表示方法。</p>
+<p>例如上面的语言$L$，用正则表达式描述为：</p>
+<script type="math/tex; mode=display">
+r = a(a|b)^*(\varepsilon|(.|\_)(a|b)(a|b)^*)</script><p>其中：</p>
+<ul>
+<li>$|$表示或</li>
+<li>$^*$表示闭包</li>
+<li>$()$表示分组</li>
+<li>$\varepsilon$表示结束</li>
+<li>$xy$表示拼接</li>
+</ul>
+<p>从上面的例子中可以看出：</p>
+<ul>
+<li><strong>正则表达式可以由较小的正则表达式按照特定规则递归地构建</strong></li>
+<li>每个正则表达式$r$定义（表示）一个语言，记为$L(r)$。这个语言也是根据$r$的子表达式所表示的语言递归定义的</li>
+</ul>
+<h3 id="B-正则表达式的规则（运算）"><a href="#B-正则表达式的规则（运算）" class="headerlink" title="B. 正则表达式的规则（运算）"></a>B. 正则表达式的规则（运算）</h3><p>正则表达式的定义是一个递归的定义，因此我们必须要给出最小正则表达式和递归规则才算给出了完整的正则表达式的定义。</p>
+<ul>
+<li><p>$\varepsilon$是一个RE，且$L(\varepsilon)={\varepsilon}$</p>
+</li>
+<li><p>字母表上的任意一个符号都是一个正则表达式，且所表示的语言为其本身。即：</p>
+<script type="math/tex; mode=display">
+\forall a \in \Sigma,  L(a)=\{a\}</script></li>
+<li><p>假设$a$和$s$都是RE，表示的语言分别是$L(r)$和$L(s)$，则</p>
+<ul>
+<li>或：$r|s$是一个RE，$L(r|s) = L(r) \cup L(s)$</li>
+<li>连接：$rs$是一个RE，$L(rs) = L(r)L(s)$</li>
+<li>克林闭包：$r^<em>$是一个RE，$L(r^</em>) = L(r)^*$</li>
+<li>分组：$(r)$是一个RE，$L((r)) = L(r)$</li>
+</ul>
+</li>
+</ul>
+<p>运算的优先级为：克林闭包，连接，或者</p>
+<p>我们举一个字符串拼接的正则表达式的例子：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230602233052968.png" alt="正则表达式的例子" style="zoom: 25%;"></p>
+<p>然后我们再给出表示整数的正则表达式的例子：</p>
+<ul>
+<li>注意十进制整数正则表达式，$0$和其他数字是分开的</li>
+</ul>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230602233652645.png" alt="表示整数的正则表达式" style="zoom:33%;"></p>
+<h3 id="C-正则语言"><a href="#C-正则语言" class="headerlink" title="C. 正则语言"></a>C. 正则语言</h3><p>我们将可以用RE定义的语言叫做<code>正则语言</code>（<code>Regular Language</code>）或<code>正则集合</code>（<code>Regular Set</code>）</p>
+<h3 id="D-正则表达式的代数定律"><a href="#D-正则表达式的代数定律" class="headerlink" title="D. 正则表达式的代数定律"></a>D. 正则表达式的代数定律</h3><p>正则表达式的运算是符合一些代数定律的</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230602234005046.png" alt="正则表达式运算的代数定律" style="zoom: 25%;"></p>
+<h3 id="E-正则文法与正则表达式的关系"><a href="#E-正则文法与正则表达式的关系" class="headerlink" title="E. 正则文法与正则表达式的关系"></a>E. 正则文法与正则表达式的关系</h3><p>实际上，正则文法和正则表达式是等价的，即：</p>
+<ul>
+<li>对任何正则文法$G$，存在定义同一语言的正则表达式$r$</li>
+<li>对任何正则表达式$r$，存在生成同一语言的正则文法$G$</li>
+</ul>
+<h2 id="2-正则定义"><a href="#2-正则定义" class="headerlink" title="2. 正则定义"></a>2. 正则定义</h2><p>为了方便，我们可以给某些正则表达式命名，而后像使用字母表中的符号一样去使用这些正则表达式，这就是正则定义的思想。</p>
+<h3 id="A-正则定义的定义"><a href="#A-正则定义的定义" class="headerlink" title="A. 正则定义的定义"></a>A. 正则定义的定义</h3><p><code>正则定义</code>是具有如下形式的定义序列：</p>
+<script type="math/tex; mode=display">
+d_1\rightarrow r_1\\
+d_2\rightarrow r_2\\
+\cdots\\
+d_n\rightarrow r_n</script><p>其中：</p>
+<ul>
+<li>每个$d_i$都是一个新符号，它们都不在字母表$\Sigma$中，而且各不相同</li>
+<li>每个$r<em>i$是字母表$\Sigma\cup{d_1,d_2,…,d</em>{i-1}}$上的正则表达式</li>
+</ul>
+<p>注意，正则定义的关键就是第一条，第一条声明了新的符号，而第二条生命了这个定义序列是新符号到正则表达式的转换</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230602235936859.png" alt="正则定义的本质" style="zoom:33%;"></p>
+<h3 id="B-正则定义的例子"><a href="#B-正则定义的例子" class="headerlink" title="B. 正则定义的例子"></a>B. 正则定义的例子</h3><p>我们接下来举几个例子</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230603000027485.png" alt="C语言中标识符的正则定义" style="zoom: 25%;"></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230603000128037.png" alt="无符号数：整数&amp;浮点数的正则定义" style="zoom: 25%;"></p>
+<h2 id="3-有穷自动机"><a href="#3-有穷自动机" class="headerlink" title="3. 有穷自动机"></a>3. 有穷自动机</h2><h3 id="A-介绍"><a href="#A-介绍" class="headerlink" title="A. 介绍"></a>A. 介绍</h3><p><code>有穷自动机</code> （<code>Finite Automata</code>，<code>FA</code>）由两位神经物理学家<code>MeCuloch</code>和<code>Pitts</code>于1948年首先提出，是对一类处理系统建立的数学模型</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/McCulloch-Pitts-1.jpg" alt="MeCuloch和Pitts" style="zoom:33%;"></p>
+<p>这类系统具有一系列离散的输入输出信息和有穷数目的内部状态。注意状态是对过去输入信息处理状况的概括</p>
+<p>系统只需要根据当前所处的状态和当前面临的输入信息就可以决定系统的后继行为。每当系统处理了当前的输入后，系统的内部状态也将发生改变</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230603002548696.png" alt="有穷自动机的经典例子：电梯" style="zoom: 25%;"></p>
+<h3 id="B-有穷自动机模型"><a href="#B-有穷自动机模型" class="headerlink" title="B. 有穷自动机模型"></a>B. 有穷自动机模型</h3><p>有穷自动机由：</p>
+<ul>
+<li>输入带，<code>Input Tape</code></li>
+<li>读头，<code>Head</code></li>
+<li>有穷控制器，<code>Finit Control</code></li>
+</ul>
+<p>三部分组成。其模型为</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230603002836634.png" alt="有穷自动机模型" style="zoom: 25%;"></p>
+<h3 id="C-有穷自动机的表示"><a href="#C-有穷自动机的表示" class="headerlink" title="C. 有穷自动机的表示"></a>C. 有穷自动机的表示</h3><p>有穷自动机最核心的就是状态和状态之间的跳转。而从表示状态和状态之间的跳转这一个角度出发的，给出的有穷自动机的表示称为<code>转换图</code>（<code>Transition Graph</code>）。</p>
+<p>图中：</p>
+<ul>
+<li>结点表示有穷自动机的状态</li>
+<li>有向边表示有穷自动机状态的跳转，<strong>对应字母表中的符号</strong></li>
+</ul>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230603003145729.png" alt="转换图是有穷自动机的一种表示" style="zoom:25%;"></p>
+<h3 id="D-有穷自动机接受-定义的语言"><a href="#D-有穷自动机接受-定义的语言" class="headerlink" title="D. 有穷自动机接受/定义的语言"></a>D. 有穷自动机接受/定义的语言</h3><p>给定输入串$x$，如果存在一个对应于串$x$的从初始状态到某个终止状态的转换序列，则称串$x$被该有穷自动机接收</p>
+<p>由一个有穷自动机$M$接收的所有串构成的集合称为是该有穷自动机定义（或接收）的语言，记为$L(M)$</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230603003630099.png" alt="有穷自动机接受的语言" style="zoom:33%;"></p>
+<blockquote>
+<p>注意，上面这个有穷自动机中，在<code>0</code>状态接收到一个<code>1</code>之后，既可能保持在<code>0</code>状态，也有可能进入到<code>1</code>状态，因此这个有穷自动机是<code>不确定有穷自动机</code>，这个在后面会讲到</p>
+</blockquote>
+<p>若现在已经有有穷自动机（可以以状态图的形式表示，也可以以其他形式表示），输入一个串，如果从初始状态开始租个扫描符号，将符号作为动作，最终能够进入到终止状态，则称这个串与该有穷自动机匹配。</p>
+<h3 id="E-最长子串匹配原则"><a href="#E-最长子串匹配原则" class="headerlink" title="E. 最长子串匹配原则"></a>E. 最长子串匹配原则</h3><p>有穷自动机可以用状态图表示。而检查某个串是否被这个有穷自动机接受就是在其状态图中从起始状态开始，不断经过状态转换，看看最后能否到达终止状态。</p>
+<p>然而，输入的串中的子串可能会当输入串的多个前缀与一个或多个模式匹配。此时，总是选择最长的前缀进行匹配。</p>
+<p>这样说不太好理解，举下面的例子：</p>
+<ul>
+<li>输入串<code>&lt;</code>和串<code>&lt;=</code></li>
+<li>输入串<code>+</code>和串<code>++</code></li>
+</ul>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230603004659602.png" alt="给定的以转换图表示的有穷自动机" style="zoom:33%;"></p>
+<p>此时，如果在遇到第一个终止状态就停下的，那么<code>&lt;=</code>就会被识别位<code>&lt;</code>，<code>++</code>被识别为<code>+</code>，就会存在问题。因此，才声明有穷自动机匹配串的时候遵循最长子串匹配原则。</p>
+<p>具体在操作上，就是：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230603005211504.png" alt="最长子串匹配原则" style="zoom:33%;"></p>
+<h2 id="4-有穷自动机的分类"><a href="#4-有穷自动机的分类" class="headerlink" title="4. 有穷自动机的分类"></a>4. 有穷自动机的分类</h2><p>有穷自动机分为两类：</p>
+<ul>
+<li><code>确定有穷自动机</code> （<code>Deterministic Finite Automata</code>，<code>DFA</code>）</li>
+<li><code>非确定有穷自动机</code>（<code>Nondeterministic Finite Automata</code>，<code>NFA</code>）</li>
+</ul>
+<h3 id="A-确定有穷自动机-DFA"><a href="#A-确定有穷自动机-DFA" class="headerlink" title="A. 确定有穷自动机 DFA"></a>A. 确定有穷自动机 DFA</h3><p>定义一个有穷自动机为一个五元组</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230603005523646.png" alt="有穷自动机的定义" style="zoom: 25%;"></p>
+<p>注意，确定有穷状态机中的转换函数$\delta$是状态机的关键，它直接决定了状态机转换图的外型。</p>
+<p>我们接下来给出一个确定有穷自动机的例子：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230603005805115.png" alt="识别字符串中abb的确定有穷自动机" style="zoom:25%;"></p>
+<blockquote>
+<p>注意，这里我们用转换函数表示转换函数</p>
+</blockquote>
+<h3 id="B-非确定有穷自动机-NFA"><a href="#B-非确定有穷自动机-NFA" class="headerlink" title="B. 非确定有穷自动机 NFA"></a>B. 非确定有穷自动机 NFA</h3><p>非确定有穷自动机同样为一个五元组</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230603010054345.png" alt="非确定有穷自动机的定义" style="zoom:25%;"></p>
+<p>注意，非确定有穷自动机和确定有穷自动机唯一的区别有就是转换函数：</p>
+<ul>
+<li>确定有穷自动机，$\delta: S\times\Sigma\rightarrow S$</li>
+<li>不确定有穷自动机，$\delta：S\times\Sigma\rightarrow 2^S$</li>
+</ul>
+<p>也就是说，<strong>不确定有穷自动机状态转换的结果有多个可能</strong></p>
+<p>同样，我们给出一个不确定有穷自动机的例子：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230603010501382.png" alt="实际上就是前面介绍有穷自动机时候的例子，只不过加上了转换表" style="zoom:25%;"></p>
+<h3 id="C-DFA和NFA的等价性"><a href="#C-DFA和NFA的等价性" class="headerlink" title="C. DFA和NFA的等价性"></a>C. DFA和NFA的等价性</h3><p><code>DFA</code>和<code>NFA</code>看似是两种有穷自动机，但实际上两者是具有等价性的，等价的地方就在于，<strong>DFA和NFA可以识别相同的语言</strong>。</p>
+<p>形式化的表述为：</p>
+<ul>
+<li>对任何非确定的有穷自动机$N$ ，存在定义同一语言的确定的有穷自动机$D$</li>
+<li>对任何确定的有穷自动机$D$ ，存在定义同一语言的非确定的有穷自动机$N$</li>
+</ul>
+<p>举例而言，这两种NFA和DFA都可以识别以<code>abb</code>结尾的字符串。只不过<code>NFA</code>在0状态遇到<code>a</code>之后需要跳转到状态1</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230603010958759.png" alt="DFA和NFA可以识别相同的语言" style="zoom: 25%;"></p>
+<p>而以<code>abb</code>结尾的字符串，是可以使用正则表达式$(a|b)^<em>abb$来表示，因此<em>*正则文法、正则表达式和有穷自动机实际上是等价的</em></em>。这个我们后面会讲</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230603011204798.png" alt="正则文法、正则表达式和有穷自动机是等价的" style="zoom:33%;"></p>
+<p>此外，也是从上面的例子中我们能看出，等价的DFA和NFA虽然识别的语言相同，但是对于人类来说，NFA更易于理解，比较直观简洁。而对于计算机来说，DFA是更好的实现。</p>
+<p>所以各有各的好处</p>
+<h3 id="D-带-varepsilon-边的NFA"><a href="#D-带-varepsilon-边的NFA" class="headerlink" title="D. 带$\varepsilon$边的NFA"></a>D. 带$\varepsilon$边的NFA</h3><p>我们前面给出FA定义的时候说过，边一般适合字母表中的符号对应一个边。而我们在定义串的时候说，串是字符的克林闭包，从而产生了空串$\varepsilon$。</p>
+<p>因此，$\varepsilon$其实是一个串，而不是符号，因此$\varepsilon \notin \Sigma$，但是有的时候，在NFA的边中引入<code>空边</code>非常有用。</p>
+<p>例如下面带空边的NFA：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230603012420934.png" alt="带空边的NFA" style="zoom:33%;"></p>
+<p>这个带空边的NFA表示：</p>
+<ul>
+<li>在状态A只接受0、在状态B只接受1、在状态C只接受2</li>
+<li>空边表示不需要接受任何符号就可以进入下一个状态</li>
+</ul>
+<p>因此，上面那个NFA接受的语言的正则表达式就是：$r=0^<em>1^</em>2^*$，即若干个0、1、2组成的串</p>
+<p>带空边的NFA其实是为了方便人类理解所写的。而我们上面讲过，NFA一定有一个能表示相同语言的DFA与之对应。例如上面的带空边的NFA与之对应的DFA为：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230603012840066.png" alt="不带空边的DFA和带空边的NFA的对应" style="zoom: 25%;"></p>
+<blockquote>
+<p>注意这里最核心的就是<code>01</code>、<code>12</code>这样的连接处</p>
+</blockquote>
+<h3 id="E-DFA的算法实现"><a href="#E-DFA的算法实现" class="headerlink" title="E. DFA的算法实现"></a>E. DFA的算法实现</h3><blockquote>
+<p>我们前面说了，NFA适合表意，主要用于给人类看；而DFA适合用于算法实现。我们下面出给一个DFA算法实现的例子。</p>
+</blockquote>
+<p>我们现在要设计一个能够识别以文件结束符<code>eof</code>结尾的字符串<code>x</code>的算法。而DFA则可以接受指定模式的串。因此我们这里的算法其实就是DFA的算法实现。</p>
+<p>假设我们现在经过设计，得到了一个确定有穷自动机$D$，其开始状态为$s_0$，接收状态集$F$，转换函数$move$。该有穷自动机输入为串$x$，若$D$接受串$x$，则输出<code>yes</code>，否则输出<code>no</code>。</p>
+<p>则该DFA的算法实现如下：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230603164057653.png" alt="DFA算法的实现" style="zoom:33%;"></p>
+<p>算法的关键就是：</p>
+<ul>
+<li><code>move</code>函数的实现</li>
+<li><code>F</code>的实现</li>
+</ul>
+<h2 id="5-正则表达式到确定有穷自动机"><a href="#5-正则表达式到确定有穷自动机" class="headerlink" title="5. 正则表达式到确定有穷自动机"></a>5. 正则表达式到确定有穷自动机</h2><p>我们前面介绍了正则表达式和有穷自动机。我们使用正则表达式去描述一个串的构成，而DFA可以按照上面介绍的框架，很容易的就用算法去实现出来。</p>
+<p>因此，如果我们想要让计算机去识别是一个指定模式的串，就需要使用DFA。同样的，我们在构造或者说实现分析器的时候，尽管我们人类使用正则表达式去分析，但是计算机的算法中模拟的也是DFA。</p>
+<p>因此我们就需要实现正则表达式到有穷自动机的转换，这就是这一节我们要干的事。</p>
+<h3 id="A-实现"><a href="#A-实现" class="headerlink" title="A. 实现"></a>A. 实现</h3><p>一般来说，我们给定一个RE，然后直接从RE来构造出DFA是比较困难的。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230603165946236.png" alt="很难从正则表达式直接构建出确定有穷状态机" style="zoom: 25%;"></p>
+<p>因此，我们在实现的时候，一般是先从RE中构建出NFA，然后再从NFA构建出DFA</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230603170159971.png" alt="先构建表达正则表达式的NFA，然后再构建表达相同语言的DFA就会简单很多" style="zoom:25%;"></p>
+<h3 id="B-从RE构建NFA"><a href="#B-从RE构建NFA" class="headerlink" title="B. 从RE构建NFA"></a>B. 从RE构建NFA</h3><p>我们前面介绍了RE的定义。RE的定义是一个递归定义，我们定义了RE的最小元素和RE的运算规则，从而给出了RE的完整定义。</p>
+<p>那么如何从RE构建NFA？其实我们就是需要把RE的运算规则使用NFA的状态转换表示出来就好了。</p>
+<h4 id="1-最小RE"><a href="#1-最小RE" class="headerlink" title="1) 最小RE"></a>1) 最小RE</h4><p>首先给出最小RE对应的NFA</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230603172050730.png" alt="最小RE包含空串和符号" style="zoom:33%;"></p>
+<h4 id="2-RE的运算规则"><a href="#2-RE的运算规则" class="headerlink" title="2) RE的运算规则"></a>2) RE的运算规则</h4><p>我们接下来给出RE运算规则对应的NFA</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230603172217101.png" alt="RE运算规则对应的NFA" style="zoom: 25%;"></p>
+<h4 id="3-RE构建NFA的例子"><a href="#3-RE构建NFA的例子" class="headerlink" title="3) RE构建NFA的例子"></a>3) RE构建NFA的例子</h4><p>我们接下来举几个例子来实际运用一下：</p>
+<ol>
+<li>首先我们画出初始状态和终止状态，中间有一条边，就是我们的RE</li>
+<li>然后把正则表达式进行分解，分解成四个正则表达式连接的格式</li>
+<li>继续拆分正则表达式<ul>
+<li>后三个正则表达式已经是最小了，没有办法再拆分了</li>
+<li>第一个正则表达式拆分克林闭包</li>
+</ul>
+</li>
+<li>然后再把正则表达式的或运算拆分</li>
+</ol>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230603172335275.png" alt="RE转NFA的第一个例子" style="zoom: 33%;"></p>
+<p>这样，给定一个正则表达式RE，我们就能够购进出来对应的NFA</p>
+<h3 id="C-从NFA构建DFA"><a href="#C-从NFA构建DFA" class="headerlink" title="C. 从NFA构建DFA"></a>C. 从NFA构建DFA</h3><p>NFA适合人类阅读，但是不适合计算机的算法实现，因此我们在写代码实现之前需要把NFA转换为DFA。而后根据DFA去设计状态机集合和转换函数，最后实现出来串匹配算法。</p>
+<h4 id="1-转换算法"><a href="#1-转换算法" class="headerlink" title="1) 转换算法"></a>1) 转换算法</h4><p>假设我们给定下面的NFA，我们构建表示相同语言的DFA</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230603222628190.png" alt="NFA的转换图和转换表" style="zoom:33%;"></p>
+<p>首先：</p>
+<ul>
+<li><p>DFA的初始状态和NFA相同</p>
+</li>
+<li><p>而后NFA处于状态A的时候，如果接受一个符号a，既可能进入状态B，有可能维持状态A。所以此时，我们可以为DFA构建一个新状态AB，来表示在状态A接收到符号a之后进入的状态。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230603223115299.png" alt="为DFA构建新的状态AB" style="zoom:25%;"></p>
+</li>
+<li><p>接下来对于NFA，由于其可能处于状态A，也有可能处于状态B。而处于</p>
+<ul>
+<li>状态A时候接受符号a，那么可能进入到状态A，也可能进入到状态B。</li>
+<li>状态B时不接受符号a</li>
+<li>状态A时不接受符号b</li>
+<li>状态B时接受符号b，那么可能进入到状态B，也可能进入状态C</li>
+</ul>
+<p><strong>即NFA接下来可能处于状态B，也可能处于状态C</strong>。对应的，DFA的状态AB在接受到符号a、b时候的表现也要和NFA相同。因此为DFA构建新状态BC</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230603223724353.png" alt="为DFA构建状态BC" style="zoom:33%;"></p>
+</li>
+<li><p>同样的分析。对于NFA，接下来可能处于状态B，也可能处于状态C。那么</p>
+<ul>
+<li>状态B时接受符号b，可能进入到状态C，也可能停留在状态B</li>
+<li>状态B不接受符号c</li>
+<li>状态C时接受符号c，可能进入到状态D，也可能停留在状态C</li>
+<li>状态C时不接受符号b</li>
+</ul>
+<p><strong>即NFA接下来可能处于状态C，也可能处于状态D</strong>。所以接下来为DFA构建新状态CD</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230603224054769.png" alt="为DFA构建新状态CD" style="zoom: 33%;"></p>
+</li>
+</ul>
+<p>通过上面的分析，我们最终为NFA构建出了接受相同语言的DFA。</p>
+<p>而观察一下我们为DFA构建出来的新状态，其实是和NFA的状态转换表中的状态集合是一样的</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230603224244754.png" alt="DFA的新状态和NFA状态转换表的输出是一样的" style="zoom:33%;"></p>
+<p>事实上，这个并不是孤例，在数学上是可以证明表示相同语言的DFA中的状态是NFA的转换函数的输出。不过我们这里不关注数学，所以就略过了。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230603224420947.png" alt="DFA的状态是NFA转化函数的输出" style="zoom: 50%;"></p>
+<h4 id="2-验证"><a href="#2-验证" class="headerlink" title="2) 验证"></a>2) 验证</h4><p>最后因为NFA是适合人类阅读的，而构建出来的DFA是适合编码给计算机执行的。因此，我们其实可以很方便的从NFA构建出来FA接受的正则表达式，然后构建一个对应的串，交给DFA去匹配，看最后能否进入到终态。</p>
+<p>例如上面的例子的NFA的正则表达式是：</p>
+<script type="math/tex; mode=display">
+r=aa^*bb^*cc^*</script><blockquote>
+<p>PS：注意至少要一个a/b/c</p>
+</blockquote>
+<p>所以我们构建一个串<code>aabbccccc</code>进行验证即可</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230603225039046.png" alt="从NFA构建正则表达式去验证DFA" style="zoom:33%;"></p>
+<h4 id="3-带-varepsilon-边的NFA的转换"><a href="#3-带-varepsilon-边的NFA的转换" class="headerlink" title="3) 带$\varepsilon$边的NFA的转换"></a>3) 带$\varepsilon$边的NFA的转换</h4><p>我们前面在介绍NFA的时候介绍了带空边的NFA，即在允许空串作为一种特殊符号作为状态转换图的边参与到状态转换图的构建中。因此，这里需要额外讲一下带空边的NFA转换为DFA。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230603225912228.png" alt="带空边的NFA" style="zoom:33%;"></p>
+<p><strong>其实转换算法还是一样的，关键就在于构建出来带空边的NFA的状态转换图</strong>。</p>
+<p>由于带空边，所以状态A能接受的字符有：<code>0</code>、<code>1</code>、<code>2</code>，此时：</p>
+<ul>
+<li>状态A接受<code>0</code>则停留在状态A或状态B（把输入视为$1\varepsilon$）或状态C（把输入视为$1\varepsilon\varepsilon$）</li>
+<li>状态A接受<code>1</code>则停留在状态B或状态C（把输入视为$1\varepsilon$）</li>
+<li>状态A接受<code>2</code>则停留在状态C</li>
+</ul>
+<p>因此，NFA在状态A的转换函数为</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230603230453631.png" alt="NFA在状态A的转换函数" style="zoom:33%;"></p>
+<p>进行同样的分析，就可以给出NFA在状态B和状态C的转换函数，最终得出NFA的状态转换表</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230603230554157.png" alt="NFA的状态转换表" style="zoom:33%;"></p>
+<p>接下来我们构建对应的DFA。其实算法都一样，只不过需要注意一下初态和终态：</p>
+<ul>
+<li>NFA中初态为A，但是由于不接受任何输入符号就可以变成状态B/状态C，所以状态BC也应该是初始状态（虽然初始状态定义的时候说只能有一个初始状态）</li>
+<li>因此，为DFA构建新状态ABC，而后将其作为初始状态。</li>
+</ul>
+<p>此外：</p>
+<ul>
+<li>NFA可以接受空串，所以A、B、C三个状态都可以是NFA的终态</li>
+<li>因此，ABC状态可以是DFA的终态。</li>
+</ul>
+<p>最后，ABC是作为NFA处于状态A时候接受了0的输出，所以在DFA处于状态ABC时，若接受符号0还是返回状态ABC</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230603231037210.png" alt="为DFA构建状态ABC" style="zoom:33%;"></p>
+<p>而状态ABC接受到1的时候，就进入到状态BC，且NFA可以接受空串，所以BC状态也可以是DFA的终态</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230603231613768.png" alt="为DFA构建状态BC" style="zoom:33%;"></p>
+<p>最后同理，构建状态C，并且补上状态间转换的边，得到最终的DFA</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230603231722096.png" alt="最终的DFA" style="zoom:33%;"></p>
+<h4 id="4-子集构造法"><a href="#4-子集构造法" class="headerlink" title="4) 子集构造法"></a>4) 子集构造法</h4><p>最后，我们将上面介绍的转换算法称为子集构造法，并且给出其伪代码描述</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230603232111319.png" alt="子集构造法" style="zoom: 33%;"></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230603232149537.png" alt="子集构造法中的空闭包函数" style="zoom:33%;"></p>
+<h2 id="6-识别单词的DFA"><a href="#6-识别单词的DFA" class="headerlink" title="6. 识别单词的DFA"></a>6. 识别单词的DFA</h2><h3 id="A-识别标识符的DFA"><a href="#A-识别标识符的DFA" class="headerlink" title="A. 识别标识符的DFA"></a>A. 识别标识符的DFA</h3><p>我们在前面介绍正则定义（即把正则表达式当成符号来用）的时候给出过定义标识符的正则定义</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230603232351422.png" alt="标识符的正则定义" style="zoom:50%;"></p>
+<p>标识符的正则表达式由两部分组成，所以对应的NFA也由两部分组成</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230603232804313.png" alt="标识符的NFA" style="zoom:33%;"></p>
+<p>由于识别标识符的NFA本身就是一个DFA，所以不需要在进行额外的操作。</p>
+<h3 id="B-识别无符号数的DFA"><a href="#B-识别无符号数的DFA" class="headerlink" title="B. 识别无符号数的DFA"></a>B. 识别无符号数的DFA</h3><p>前面介绍过，无符号数的正则表达式由三部分组成：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230603233205882.png" alt="无符号数的正则表达式" style="zoom:33%;"></p>
+<p>而第一部分是正则的链接，第二部分是正则的或，第三部分也是或。</p>
+<p>因此识别无符号数的NFA为：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230603233413053.png" alt="识别无符号数的NFA" style="zoom: 33%;"></p>
+<p>由于该NFA含有空边，因此需要将其转换为DFA。这里使用前面说的子集构造法</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230603233712128.png" alt="构建NFA对应的NFA" style="zoom:33%;"></p>
+<h3 id="C-识别各种进制无符号整数的DFA"><a href="#C-识别各种进制无符号整数的DFA" class="headerlink" title="C. 识别各种进制无符号整数的DFA"></a>C. 识别各种进制无符号整数的DFA</h3><p>我们前面也介绍过可以识别各种进制的无符号整数的DFA的正则表达式。</p>
+<p>我们根据这些正则表达式构建出来对应的NFA</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230603234217387.png" alt="各种进制证书的NFA" style="zoom:33%;"></p>
+<p>由于三个NFA都是DFA，所以不需要进行额外的操作。</p>
+<p>最后，我们将这三个DFA总合成一个识别各种进制整数的DFA</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230603234356791.png" alt="识别各种进制整数的DFA" style="zoom:33%;"></p>
+<h3 id="D-识别注释的DFA"><a href="#D-识别注释的DFA" class="headerlink" title="D. 识别注释的DFA"></a>D. 识别注释的DFA</h3><p>最后我们再给出一个识别注释的DFA</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230603234532578.png" alt="识别注释的DFA" style="zoom:33%;"></p>
+<h3 id="E-识别Token的DFA"><a href="#E-识别Token的DFA" class="headerlink" title="E. 识别Token的DFA"></a>E. 识别Token的DFA</h3><p>最后，我们将上面四种DFA整合到一起，就得到了识别单词的DFA，即识别Token的DFA</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230603234723789.png" alt="识别Token的DFA" style="zoom:33%;"></p>
+<h2 id="7-词法分析的错误处理"><a href="#7-词法分析的错误处理" class="headerlink" title="7. 词法分析的错误处理"></a>7. 词法分析的错误处理</h2><p>经过我们前面的介绍，我们应该明白了编译器在词法分析阶段是如何将源代码转换为<code>Token</code>序列的。</p>
+<p>不过在这一阶段，编译器除了要转换得到<code>Token</code>序列，还需要处理错误。</p>
+<p>在这个词法分析阶段，可能出现的错误有：</p>
+<ul>
+<li>单词拼写错误<ul>
+<li><code>int i = 0x3G</code>、<code>float j =1.05e</code></li>
+</ul>
+</li>
+<li>非法字符<ul>
+<li><code>~</code>、<code>@</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="A-错误检测"><a href="#A-错误检测" class="headerlink" title="A. 错误检测"></a>A. 错误检测</h3><p>词法分析阶段的错误检测很简单：</p>
+<ul>
+<li>如果当前状态与当前输入符号在转换表对应项中的信息为空，而当前状态又不是终止状态，则调用错误处理程序</li>
+</ul>
+<h3 id="B-错误处理程序"><a href="#B-错误处理程序" class="headerlink" title="B. 错误处理程序"></a>B. 错误处理程序</h3><p>错误处理程序的逻辑为：</p>
+<ul>
+<li>查找已扫描字符串中最后一个对应于某终态的字符<ul>
+<li>如果找到了，将该字符与其前面的字符识别成一个单词。然后将输入指针退回到该字符，扫描器重新回到初始状<br>态，继续识别下一个单词</li>
+<li>如果没找到，则确定出错，采用错误恢复策略</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>现代编译器的设计就是在确定出错后，不会停止编译，而是会继续扫描，得到所有的错误，而后一次性输出。</p>
+<p>因此，编译器的错误处理程序在确定出错后，不是停止编译，而是采用错误恢复策略，记录下错误发生的地方，然后继续扫描其他错误。</p>
+</blockquote>
+<h3 id="C-错误恢复策略"><a href="#C-错误恢复策略" class="headerlink" title="C. 错误恢复策略"></a>C. 错误恢复策略</h3><p>最简单的错误恢复策略就是<code>恐慌模式</code>（<code>Panic Mode</code>），即：</p>
+<ul>
+<li>从剩余的输入中不断删除字符，直到词法分析器能够在剩余输入的开头发现一个正确的字符为止</li>
+</ul>
+
                 
             </div>
             <hr/>
@@ -491,7 +845,11 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">
+                                    <span class="chip bg-color">编译原理</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -668,9 +1026,9 @@
                 <a href="/2023/06/02/zhong-ke-yuan-ruan-jian-suo-shi-xi-larva-3/">
                     <div class="card-image">
                         
-                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230601171840007.png" class="responsive-img" alt="Rust语言从入门到入土 2——你可曾见过如此奇特的语法？">
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230601171840007.png" class="responsive-img" alt="Rust语言从入门到入土 2：如此奇特的语法">
                         
-                        <span class="card-title">Rust语言从入门到入土 2——你可曾见过如此奇特的语法？</span>
+                        <span class="card-title">Rust语言从入门到入土 2：如此奇特的语法</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -932,6 +1290,13 @@
 </main>
 
 
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    });
+</script>
+
 
 
     <footer class="page-footer bg-color">
@@ -950,7 +1315,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">536.6k</span>
+                        class="white-color">564.4k</span>
             
             
             
