@@ -12,18 +12,14 @@
 </body>
 
 <script>
-    const btn = document.querySelector("button");
-
-    function random(number) {
-        return Math.floor(Math.random() * (number + 1));
-    }
-
-    btn.addEventListener("click", () => {
-        document.body.style.backgroundColor = rndCol;
-    });
     // 获取按钮和 <p> 标签的引用
     const button = document.getElementById('myButton');
     const paragraph = document.getElementById('myParagraph');
+
+    // 随机数产生函数
+    function random(number) {
+        return Math.floor(Math.random() * (number + 1));
+    }
 
     // 创建按钮的点击事件处理程序
     button.addEventListener('click', function () {
