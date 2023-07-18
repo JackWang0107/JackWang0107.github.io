@@ -415,21 +415,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-07-17
+                    2023-07-18
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.5k
+                    1.8k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    5 分
+                    6 分
                 </div>
                 
 
@@ -471,36 +471,43 @@
 </ul>
 <p>为此，<code>Linux</code>中提供了<code>at</code>和<code>crontab</code>两个程序来完成一次性临时任务和长期周期任务。</p>
 <h2 id="1-一次性临时任务：at"><a href="#1-一次性临时任务：at" class="headerlink" title="1. 一次性临时任务：at"></a>1. 一次性临时任务：at</h2><p><strong>at命令</strong> 用于在指定时间执行命令。</p>
-<h3 id="A-启动atd"><a href="#A-启动atd" class="headerlink" title="A. 启动atd"></a>A. 启动atd</h3><p>为了能够在指定的时间执行命令，需要有一个守护进程在后台不断地运行，而后到指定的时间之后运行我们指定的程序。这个守护进程就是 atd。因此，为了使用at程序，需要先开启 atd 守护进程。Linux中使用 systemctl 来管理所有的守护进程，包括启动、重启、禁止、……</p>
-<p>首先允许 atd 守护进程</p>
-<pre class="line-numbers language-shell"><code class="language-shell">sudo systemctl enable rpc-statd
+<h3 id="A-启动atd"><a href="#A-启动atd" class="headerlink" title="A. 启动atd"></a>A. 启动atd</h3><p>为了能够在指定的时间执行命令，需要有一个守护进程在后台不断地运行，而后到指定的时间之后运行我们指定的程序。这个守护进程就是 <code>atd</code>。因此，为了使用<code>at</code>程序，需要先开启 <code>atd</code> 守护进程。<code>Linux</code>中使用 <code>systemctl</code> 来管理所有的守护进程，包括启动、重启、禁止、……</p>
+<p>首先开启 <code>atd</code> 守护进程启动那个服务</p>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">sudo</span> systemctl <span class="token function">enable</span> rpc-statd
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>然后重启一下 atd 守护进程</p>
-<pre class="line-numbers language-shell"><code class="language-shell">sudo systemctl restart atd
+<p>然后启动一下 atd 守护进程（默认是启动的，这里是以防万一）</p>
+<pre class="line-numbers language-shell"><code class="language-shell">sudo systemctl start atd
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>最后查看一下 atd 守护进程的状态</p>
 <pre class="line-numbers language-shell"><code class="language-shell">systemctl status atd
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230716213941654.png" alt="查看atd守护进程的状态"></p>
 <p>可以看到正常在运行</p>
-<h3 id="B-at的运行方式"><a href="#B-at的运行方式" class="headerlink" title="B. at的运行方式"></a>B. at的运行方式</h3><h3 id="A-时间指定格式"><a href="#A-时间指定格式" class="headerlink" title="A. 时间指定格式"></a>A. 时间指定格式</h3><p>at允许使用一套相当复杂的指定时间的方法。</p>
+<h3 id="B-at配置文件"><a href="#B-at配置文件" class="headerlink" title="B. at配置文件"></a>B. at配置文件</h3><p><code>atd</code> 通过两个文件 <code>/etc/at.allow</code> 和 <code>/etc/at.deny</code> 来决定系统中哪些用户可以使用 <code>at</code> 设置定时任务</p>
 <ul>
-<li>它能够接受在当天的hh:mm（小时:分钟）式的时间指定。假如该时间已过去，那么就放在第二天执行。</li>
-<li>当然也能够使用midnight（深夜），noon（中午），teatime（饮茶时间，一般是下午4点）等比较模糊的词语来指定时间。</li>
-<li>用户还能够采用12小时计时制，即在时间后面加上AM（上午）或PM（下午）来说明是上午还是下午。 </li>
-<li>也能够指定命令执行的具体日期，指定格式为month day（月 日）或mm/dd/yy（月/日/年）或dd.mm.yy（日.月.年）。指定的日期必须跟在指定时间的后面。</li>
+<li>它首先检查 <code>/etc/at.allow</code>，如果文件存在，则只有文件中列出的用户（每行一个用户名）能使用 <code>at</code></li>
+<li>如果 <code>/etc/at.allow</code>不存在，则检查文件 <code>/etc/at.deny</code>，不在此文件中的所有用户都可以使用 <code>at</code></li>
+<li>如果 <code>/etc/at.deny</code> 是空文件，则表示系统中所有用户都可以使用 <code>at</code></li>
+<li>如果 <code>/etc/at.deny</code> 文件也不存在，则只有<code>root</code>才能使用<code>at</code></li>
+</ul>
+<h3 id="C-时间指定格式"><a href="#C-时间指定格式" class="headerlink" title="C. 时间指定格式"></a>C. 时间指定格式</h3><p><code>at</code>允许使用一套相当复杂的指定时间的方法。</p>
+<ul>
+<li>它能够接受在当天的<code>hh:mm</code>（<code>小时:分钟</code>）式的时间指定。假如该时间已过去，那么就放在第二天执行。</li>
+<li>当然也能够使用<code>midnight</code>（深夜）、<code>noon</code>（中午）、<code>teatime</code>（饮茶时间，一般是下午4点）等比较模糊的词语来指定时间。</li>
+<li>用户还能够采用12小时计时制，即在时间后面加上<code>AM</code>（上午）或<code>PM</code>（下午）来说明是上午还是下午。 </li>
+<li>也能够指定命令执行的具体日期，指定格式为<code>month day</code>（<code>月 日</code>）或<code>mm/dd/yy</code>（<code>月/日/年</code>）或<code>dd.mm.yy</code>（<code>日.月.年</code>）。指定的日期必须跟在指定时间的后面。</li>
 </ul>
 <p>不过一般不会使用这种绝对时间写法，而是使用相对时间写法。这对于安排不久就要执行的命令是很有好处的。</p>
 <p>指定格式为：</p>
 <pre class="line-numbers language-shell"><code class="language-shell">now + count time-units
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <ul>
-<li>now就是当前时间</li>
-<li>time-units是时间单位，这里能够是minutes（分钟）、hours（小时）、days（天）、weeks（星期）。</li>
-<li>count是时间的数量，究竟是几天，还是几小时</li>
+<li><code>now</code>就是当前时间</li>
+<li><code>time-units</code>是时间单位，这里能够是<code>minutes</code>（分钟）、<code>hours</code>（小时）、<code>days</code>（天）、<code>weeks</code>（星期）。</li>
+<li><code>count</code>是时间的数量，究竟是几天，还是几小时</li>
 </ul>
-<p> 还有有一种计时方法就是直接使用today（今天）、tomorrow（明天）来指定完成命令的时间。</p>
-<h3 id="B-语法"><a href="#B-语法" class="headerlink" title="B. 语法"></a>B. 语法</h3><p>at的语法如下：</p>
+<p> 还有有一种计时方法就是直接使用<code>today</code>（今天）、<code>tomorrow</code>（明天）来指定完成命令的时间。</p>
+<h3 id="D-语法"><a href="#D-语法" class="headerlink" title="D. 语法"></a>D. 语法</h3><p>at的语法如下：</p>
 <pre class="line-numbers language-shell"><code class="language-shell">at <时间> [选项]
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>其中，</p>
@@ -520,10 +527,10 @@ job 2 at Sun Jul 16 12:51:00 2023
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230716125113327.png" alt="at输入命令"></p>
 <p>另外一种方式就是使用<code>-f</code>参数，然后指定需要运行的脚本文件就行了</p>
-<h3 id="C-运行结果"><a href="#C-运行结果" class="headerlink" title="C. 运行结果"></a>C. 运行结果</h3><p><code>at</code>命令默认情况下不会将任务的输出直接发送到命令行。因此，需要我们在at中写的任务的把输出重定向到一个文件中，该文件可以在任务执行完成后进行查看。</p>
+<h3 id="C-运行结果"><a href="#C-运行结果" class="headerlink" title="C. 运行结果"></a>C. 运行结果</h3><p><code>at</code>命令默认情况下不会将任务的输出直接发送到命令行。因此，需要我们在<code>at</code>中写的任务的把输出重定向到一个文件中，该文件可以在任务执行完成后进行查看。</p>
 <p>不过一般我们更喜欢能够<code>at</code>能够类似于闹钟一样，任务执行完可以以某种方式提醒我们，所以一般直接在任务的最后结合一个<code>mail</code>命令来向我们的邮箱发邮件</p>
-<p>注意，通过Linux系统自带的mail命令可对公网邮箱发送邮件。不过mail命令是依赖sendmail的，所以我们需要先检查安装和配置sendmail。一般系统都自带sendmail，但是只能给内网的邮箱发邮件。如果想给公网的邮箱发邮件(比如qq邮箱)就需要配置sendmail。</p>
-<p>配置也比较简单，因为发邮件是应用层，所以配置一下SMTP协议的相关信息就行了。</p>
+<p>注意，通过<code>Linux</code>系统自带的<code>mail</code>命令默认只能给本机的其他用户发邮件，如果需要对公网邮箱发送邮件，需要配置一下。具体来说，<code>mail</code>命令是依赖<code>sendmail</code>的，所以我们需要先检查安装和配置<code>sendmail</code>。一般系统都自带<code>sendmail</code>，但是只能给内网的邮箱发邮件。如果想给公网的邮箱发邮件（比如qq邮箱）就需要配置<code>sendmail</code>。</p>
+<p>配置也比较简单，因为发邮件是应用层，所以配置一下<code>SMTP</code>协议的相关信息就行了。</p>
 <h3 id="D-选项"><a href="#D-选项" class="headerlink" title="D. 选项"></a>D. 选项</h3><pre class="line-numbers language-shell"><code class="language-shell">-f：指定包含具体指令的任务文件；
 -q：指定新任务的队列名称；
 -l：显示待执行任务的列表；
@@ -559,7 +566,10 @@ job 8 at 2013-01-06 17:20
 umask 22此处省略n个字符
 date >/root/2013.log
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="2-长期周期性任务"><a href="#2-长期周期性任务" class="headerlink" title="2. 长期周期性任务"></a>2. 长期周期性任务</h2>
+<h2 id="2-长期周期性任务：crontab"><a href="#2-长期周期性任务：crontab" class="headerlink" title="2. 长期周期性任务：crontab"></a>2. 长期周期性任务：crontab</h2><p><strong><code>crontab</code>命令</strong> 被用来提交和管理用户的需要周期性执行的任务，与<code>windows</code>下的计划任务类似，当安装完成操作系统后，默认会安装此服务工具，并且会自动启动<code>crond</code>进程，<code>crond</code>进程每分钟会定期检查是否有要执行的任务，如果有要执行的任务，则自动执行该任务。</p>
+<h3 id="A-语法"><a href="#A-语法" class="headerlink" title="A. 语法"></a>A. 语法</h3><pre class="line-numbers language-bash"><code class="language-bash">crontab<span class="token punctuation">(</span>选项<span class="token punctuation">)</span><span class="token punctuation">(</span>参数<span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
                 
             </div>
             <hr/>
@@ -804,55 +814,45 @@ date >/root/2013.log
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2023/07/16/linux-zhou-qi-ren-wu/">
+                <a href="/2023/07/17/gong-wang-fang-wen-nei-wang-ji-qi-frp/">
                     <div class="card-image">
                         
-                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/9f27cb5c78ed96868b74263320fc5dcd.png" class="responsive-img" alt="Linux周期任务：at和crontab">
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230717163415304.png" class="responsive-img" alt="公网访问内网机器：基于frp的内网穿透">
                         
-                        <span class="card-title">Linux周期任务：at和crontab</span>
+                        <span class="card-title">公网访问内网机器：基于frp的内网穿透</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            本文主要介绍了Linux中的crontab和at
+                            本文介绍了如何利用frp实现公网访问内网机器
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-07-16
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-07-17
+                        </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/Linux%E5%AE%9E%E7%94%A8%E6%8A%80%E5%B7%A7/" class="post-category">
-                                    Linux实用技巧
-                                </a>
-                            
+                            <i class="fas fa-user fa-fw"></i>
+                            Jack Wang
                             
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Linux/">
-                        <span class="chip bg-color">Linux</span>
+                    <a href="/tags/frp/">
+                        <span class="chip bg-color">frp</span>
                     </a>
                     
-                    <a href="/tags/at/">
-                        <span class="chip bg-color">at</span>
-                    </a>
-                    
-                    <a href="/tags/crontab/">
-                        <span class="chip bg-color">crontab</span>
+                    <a href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/">
+                        <span class="chip bg-color">内网穿透</span>
                     </a>
                     
                 </div>
@@ -1107,7 +1107,7 @@ date >/root/2013.log
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">569.4k</span>
+                        class="white-color">574.4k</span>
             
             
             
