@@ -1,0 +1,1417 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Linux命令行邮件收发：邮件通信与snail, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
+    <meta name="description" content="本文介绍了邮件通信模型的相关知识，从而介绍了如何在Linux上使用snail收发邮件">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>Linux命令行邮件收发：邮件通信与snail | JackWang&#39;s Blog</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.2">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+
+   <style>
+    body{
+       background-image: url(https://cdn.jsdelivr.net/gh/Tokisaki-Galaxy/res/site/medias/background.jpg);
+       background-repeat:no-repeat;
+       background-size: 100% 100%;
+       background-attachment:fixed;
+    }
+</style>
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">JackWang&#39;s Blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-book-reader" style="zoom: 0.6;"></i>
+      
+      <span>博客</span>
+      <i class="fas fa-chevron-down" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/tags">
+          
+          <i class="fas fa-tags" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按标签归类文章</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories">
+          
+          <i class="fas fa-bookmark" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按目录归类文章</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/archives">
+          
+          <i class="fas fa-archive" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按日期分类文章</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">JackWang&#39;s Blog</div>
+        <div class="logo-desc">
+            
+            JackWang的个人博客
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-book-reader"></i>
+			
+			博客
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>
+
+                  <a href="/tags " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-tags" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按标签归类文章</    span>
+
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/categories " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-bookmark" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按目录归类文章</    span>
+
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/archives " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-archive" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按日期分类文章</    span>
+
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('抱歉，这篇文章并不想让所有人都看到，请输入授权密码观看')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://jack-1307599355.cos.ap-shanghai.myqcloud.com/Mu4e-Email-Client-for-Linux.png')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Linux命令行邮件收发：邮件通信与snail</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Linux/">
+                                <span class="chip bg-color">Linux</span>
+                            </a>
+                        
+                            <a href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/">
+                                <span class="chip bg-color">内网穿透</span>
+                            </a>
+                        
+                            <a href="/tags/mail/">
+                                <span class="chip bg-color">mail</span>
+                            </a>
+                        
+                            <a href="/tags/sendmail/">
+                                <span class="chip bg-color">sendmail</span>
+                            </a>
+                        
+                            <a href="/tags/mailx/">
+                                <span class="chip bg-color">mailx</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Linux%E5%AE%9E%E7%94%A8%E6%8A%80%E5%B7%A7/" class="post-category">
+                                Linux实用技巧
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2023-07-20
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2023-07-20
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    2.5k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    8 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/Mu4e-Email-Client-for-Linux.png" alt="Linux收发邮件客户端"></p>
+<h1 id="Linux命令行邮件收发：邮件通信与snail"><a href="#Linux命令行邮件收发：邮件通信与snail" class="headerlink" title="Linux命令行邮件收发：邮件通信与snail"></a>Linux命令行邮件收发：邮件通信与snail</h1><blockquote>
+<p>真得好好学学电子邮件的工作原理</p>
+</blockquote>
+<p>最近因为工作需要，需要使用<code>Linux</code>收发一下电子邮件。想想一下系统管理员能够将负载信息等内容通过邮件发送过来，或者是在模型训练结束后发送邮件提醒，就会很有用。</p>
+<p>本来以为会很简单，但是没想到，不做不知道一做吓一跳，简简单单的电子邮件收发，里面还藏着不少知识，只不过因为平时太常使用，以至于我们忽略了电子邮件背后的工作原理。</p>
+<p>身为计算机从业人员，还真得学学电子邮件的原理。</p>
+<h2 id="1-邮件通信模型"><a href="#1-邮件通信模型" class="headerlink" title="1. 邮件通信模型"></a>1. 邮件通信模型</h2><h3 id="A-从TCP协议说起"><a href="#A-从TCP协议说起" class="headerlink" title="A. 从TCP协议说起"></a>A. 从TCP协议说起</h3><p>两台计算机如果需要通信，那么需要双方互相知道对方的IP地址，这样才能建立连接。<strong>而两台计算机之间经常需要可靠的、像管道一样的连接，但是IP层不提供这样的流机制，而是提供不可靠的包交换。</strong></p>
+<p>所以在此基础上，就出现了TCP协议，即传输控制协议（英语：Transmission Control Protocol，缩写：TCP）。TCP协议是一种面向连接的、可靠的、基于字节流的传输层通信协议。<strong>所谓面向连接的意思是指，使用TCP协议进行通信的双方在进行数据传输之前，发送方和接收方需要先建立一个连接。</strong></p>
+<p><strong>因此，一般的网络服务程序在传输信息时就像拨打电话，需要双方同时保持在线。但是在电子邮件系统中，双方不需要同时在线</strong>。用户发送邮件后不必等待投递工作完成（即对方收到邮件）即可下线。如果邮件的接收方若在发送方发送邮件时离线，则在上线后还是能够看到发送方发来的邮件。</p>
+<p>所以TCP协议实际上是没有办法满足邮件的使用场景的。</p>
+<h3 id="B-解决方案：邮件服务器"><a href="#B-解决方案：邮件服务器" class="headerlink" title="B. 解决方案：邮件服务器"></a>B. 解决方案：邮件服务器</h3><p><strong>为了解决TCP协议需要保证双方同时在线而无法实现邮件通信这一问题，我们在邮件发送方、接收方之外，引入一个第三方角色：邮件服务器，来实现邮件通信</strong>。</p>
+<p>邮件服务器会一直保持在线状态。所以相比于用户自己接收、发送邮件，引入邮件服务器之后：</p>
+<ul>
+<li>发送邮件时，用户把需要发送的邮件委托给邮件服务器，由邮件服务器进行发送处理</li>
+<li>此外，用户还在邮件服务器设置一个信箱，由邮件服务器代替用户接受邮件</li>
+</ul>
+<p>所以我用的QQ邮箱（<code>xxxxxxxxxx@qq.com</code>）给我的GMail邮箱（<code>xxxxxxxxx@gmail.com</code>）发送一封邮件，实际上是由QQ邮箱的邮件服务器把我们的邮件投递给GMail邮箱的邮件服务器。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/4496483_13474114893rwX-20230720205024083.jpg" alt="邮件实际上是邮件服务器帮我们发送的"></p>
+<p>因此，我们电脑上使用的各种邮箱APP，例如OutLook、Thunderbird，亦或者网页版的QQ邮箱、GMail邮箱，本质上都是一个前端应用，每次用户登录之后会向邮箱服务器发送请求，以获取保存在邮件服务器上的用户邮箱中的信件。</p>
+<p>考虑到发送者和接受者的邮箱服务器可能不是同一个，因此发送邮件的全过程为：</p>
+<ul>
+<li>发送方通过前端应用将邮件发送给发送方的邮件服务器</li>
+<li>发送方邮件服务器将邮件发送给接收方邮件服务器</li>
+<li>接收方邮件服务器保存邮件</li>
+<li>接收方登录前端应用后，会主动去接收方邮件服务器获取收到的邮件</li>
+</ul>
+<p>在这个过程中，邮件服务器充当了邮局的角色。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/20230720205234.png" alt="发送邮件的全过程"></p>
+<h3 id="C-几个术语：MUA、MDA、MTA"><a href="#C-几个术语：MUA、MDA、MTA" class="headerlink" title="C. 几个术语：MUA、MDA、MTA"></a>C. 几个术语：MUA、MDA、MTA</h3><p>上面我们介绍了邮件发送的全过程，下面我们介绍其中的几个角色的专业术语（未来我们会使用这些术语）：</p>
+<ul>
+<li><code>邮件用户代理</code>（<code>Mail User Agent</code>）：<code>MUA</code>是邮件系统中的用户端应用程序，也称为<code>邮件客户端</code>，即我们使用的OutLook、网页版QQ邮箱、手机上的网易邮箱大师等APP。它提供了用户与邮件服务器交互的界面，用于创建、发送、接收和管理电子邮件。常见的<code>MUA</code>包括Outlook、Thunderbird、Gmail等。当用户编写邮件并点击发送时，<code>MUA</code>负责将邮件发送到<code>MTA</code>。</li>
+<li><code>邮件传输代理</code>（<code>Mail Transfer Agent</code>）：<code>MTA</code>是负责电子邮件在网络中的传输的中间代理，也称为<code>邮件服务器</code>。它接收来自<code>MUA</code>的邮件，并负责将邮件传递给下一个<code>MTA</code>或最终的<code>MDA</code>（需要<code>MDA</code>主动请求）。<code>MTA</code>使用<code>SMTP</code>协议来进行邮件的传输，通过在不同的邮件服务器之间转发邮件，最终将邮件发送到目标服务器。常见的<code>MTA</code>包括Sendmail、Postfix、Exim等。</li>
+<li><code>邮件投递代理</code>（<code>Mail Delivery Agent</code>）</li>
+</ul>
+<p>我们上面介绍的邮件投递的过程中实际上不包含<code>MDA</code>，所以这里额外介绍下<code>MDA</code>。</p>
+<p>用户需要再<code>MTA</code>中设置一个信箱，但是这个信箱的大小是有限的，所以每次用户通过<code>MUA</code>登录之后，<code>MUA</code>会把邮件的内容和附件等等数据下载到用户的计算机中。这样就避免了用户数据保存在邮件服务器中，即<code>MTA</code>中。</p>
+<p>因此，在用户计算机上额外多添加了一个软件，即<code>MDA</code>，其作用就是把来自于<code>MTA</code>的邮件保存到本地的收件箱中。这样就是解耦了用户交互和数据保存：</p>
+<ul>
+<li>与用户的交互交给<code>MUA</code></li>
+<li>用户数据的保存和上传（即传输邮件给邮件服务器和从邮件服务器下载邮件）交给<code>MDA</code></li>
+</ul>
+<h3 id="D-SMTP协议、POP3协议和IAMP4协议"><a href="#D-SMTP协议、POP3协议和IAMP4协议" class="headerlink" title="D. SMTP协议、POP3协议和IAMP4协议"></a>D. SMTP协议、POP3协议和IAMP4协议</h3><p>我们上面只介绍了邮件通信模型中的几个角色，我们没有介绍几个角色间通信所使用到的协议。<strong>但凡通信，必有协议。因为协议规定了双方通信的格式，只有双方遵守统一的约定，才能够正确的传输信息</strong>。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230720211128349.png" alt="邮件通信模型中的角色和通信协议"></p>
+<p>邮件通信模型中涉及三种通信类型：</p>
+<ul>
+<li><strong><code>MUA</code>发送邮件给<code>MTA</code></strong>：即发信人发信给发送方邮件服务器</li>
+<li><strong><code>MTA</code>发送邮件给<code>MTA</code></strong>：即发送方邮件服务器发信给收信方邮件服务器</li>
+<li><strong><code>MTA</code>发送邮件给<code>MUA</code></strong>/<strong><code>MUA</code>从<code>MTA</code>收取邮件</strong>：即收信方从收信方邮件服务器获取邮件</li>
+</ul>
+<p>其中使用到了三种通信协议：</p>
+<ul>
+<li><code>MUA</code>发信给<code>MTA</code>、<code>MTA</code>发信给<code>MTA</code>：使用<code>SMTP</code>协议</li>
+<li><code>MTA</code>发信给<code>MUA</code>：使用<code>POP3</code>协议或者<code>IMAP4</code>协议</li>
+</ul>
+<p><code>POP3</code>协议和<code>IMAP4</code>协议的本质区别在于邮件保存在谁那里，到底是保存在邮件服务器还是收信方：</p>
+<ul>
+<li><code>POP3</code>协议允许邮件客户端从邮件服务器上下载邮件，并将邮件从服务器上删除（可选），即邮件存储于收信方。POP3通常使用110端口。</li>
+<li><code>IMAP</code>协议允许邮件客户端在邮件服务器上管理邮件的状态，如标记已读、删除等，即邮件存储于发信方。IMAP通常使用143端口。</li>
+</ul>
+<h2 id="2-常用软件"><a href="#2-常用软件" class="headerlink" title="2. 常用软件"></a>2. 常用软件</h2><p><code>Linux</code>平台上，常用的软件和对应的角色如下：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/zg12zberwq.png" alt="常用软件和对应角色"></p>
+<p>可以看到：</p>
+<ul>
+<li>如果我们想在命令行中使用QQ邮箱发送邮件出去，那么使用<code>Mail Client</code>中的程序即可</li>
+<li>如果我们想有自己的邮件服务器，即能以<code>jackwang@MyMailServer.com</code>的邮箱发送出去，那么需要下载、配置<code>Sender Mail Server</code>中的程序</li>
+<li>接受同理</li>
+</ul>
+<p>一般来说，企业会为自己假设一个邮箱服务器，从而实现企业邮箱功能。例如我们自己创建了一家名字叫做<code>Coax</code>的公司，我们未来想要使用<code>xxxx@coax.com</code>的企业邮箱：</p>
+<ul>
+<li>招聘邮件使用<code>career@coax.com</code>的邮箱发送</li>
+<li>工作邮件使用<code>work@coax.com</code>的邮箱发送</li>
+<li>……</li>
+</ul>
+<p>这样的话就需要使用<code>Sendmail</code>这样的程序了。但是我们这里只需要能够命令行收发QQ邮件、163邮件之类的。所以我们只需要<code>Mail Client</code>即可。</p>
+<h2 id="3-使用Linux收发邮件"><a href="#3-使用Linux收发邮件" class="headerlink" title="3. 使用Linux收发邮件"></a>3. 使用Linux收发邮件</h2><p>我们前面介绍了邮件通信模型，使用<code>Linux</code>收发邮件其实本质上就是我们在<code>Linux</code>上下载一个基于命令行的<code>MUA</code>即可。然后因为<code>MUA</code>需要查看保存在<code>MTA</code>上的邮件，所以<code>MUA</code>往往还需要登录到<code>MTA</code>的用户信息中。</p>
+<p>为此，通常<code>MTA</code>会提供一个授权码，使用授权码<code>MUA</code>就可以使用第三方的<code>MUA</code>连接到<code>MTA</code></p>
+<h3 id="A-获得授权码"><a href="#A-获得授权码" class="headerlink" title="A. 获得授权码"></a>A. 获得授权码</h3><p>不同的邮箱获得授权码的方式不同。这里以QQ邮箱为例，一般都是大差不差的</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/qqmail-set2.jpg" alt="首先进入账户页"></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/qqmail-set.jpg" alt="然后开启POP3/SMTP/IMAP服务，即运行第三方MUA连接到MUA"></p>
+<h3 id="B-使用s-nail发送邮件"><a href="#B-使用s-nail发送邮件" class="headerlink" title="B. 使用s-nail发送邮件"></a>B. 使用s-nail发送邮件</h3><p><code>s-nail</code>是<code>Ubuntu 20.04</code>中发送邮件比较好用的客户端，后面我们使用这个客户端来发送邮件</p>
+<blockquote>
+<p>网上有不少过时文章介绍使用<code>mailx</code>或者<code>heirloom-mailx</code>，这个已经过时了，不用考虑</p>
+</blockquote>
+<h4 id="A-安装"><a href="#A-安装" class="headerlink" title="A. 安装"></a>A. 安装</h4><pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">sudo</span> apt update <span class="token operator">&amp;</span> <span class="token function">sudo</span> apt <span class="token function">install</span> s-nail -y
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h4 id="B-配置s-nail"><a href="#B-配置s-nail" class="headerlink" title="B. 配置s-nail"></a>B. 配置s-nail</h4><pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">sudo</span> vim /etc/s-nail.rc
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>添加如下内容：</p>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token keyword">set</span> from<span class="token operator">=</span><span class="token string">"xxx@qq.com"</span>        <span class="token comment" spellcheck="true"># 发信人的QQ邮箱</span>
+<span class="token keyword">set</span> smtp<span class="token operator">=</span><span class="token string">"smtps://smtp.qq.com:465"</span>            <span class="token comment" spellcheck="true"># QQ邮箱邮件服务器地址</span>
+<span class="token keyword">set</span> smtp-auth-user<span class="token operator">=</span><span class="token string">"xxx@qq.com"</span>                    <span class="token comment" spellcheck="true"># QQ邮箱邮件服务器中的账号，就是QQ邮箱</span>
+<span class="token keyword">set</span> smtp-auth-password<span class="token operator">=</span><span class="token string">"xxx"</span>                         <span class="token comment" spellcheck="true"># QQ邮箱设置->账户->开启“POP3/SMTP服务”生成得到的</span>
+<span class="token keyword">set</span> smtp-auth<span class="token operator">=</span>login
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="C-发送邮件"><a href="#C-发送邮件" class="headerlink" title="C. 发送邮件"></a>C. 发送邮件</h4><p>后面的是收件人邮箱，这里是测试，就是我自己给自己发邮件</p>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">ps</span> aux <span class="token operator">|</span> s-nail -s <span class="token string">"系统当前进程信息"</span> 2232123545@qq.com
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>最后成功收到邮件：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230720222353321.png" alt="成功收到邮件"></p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Jack Wang</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://jackwang0107.github.io/2023/07/20/linux-you-jian-shou-fa-you-jian-er-san-shi/">https://jackwang0107.github.io/2023/07/20/linux-you-jian-shou-fa-you-jian-er-san-shi/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Jack Wang</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/Linux/">
+                                    <span class="chip bg-color">Linux</span>
+                                </a>
+                            
+                                <a href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/">
+                                    <span class="chip bg-color">内网穿透</span>
+                                </a>
+                            
+                                <a href="/tags/mail/">
+                                    <span class="chip bg-color">mail</span>
+                                </a>
+                            
+                                <a href="/tags/sendmail/">
+                                    <span class="chip bg-color">sendmail</span>
+                                </a>
+                            
+                                <a href="/tags/mailx/">
+                                    <span class="chip bg-color">mailx</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.png" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2023/07/20/linux-you-jian-shou-fa-you-jian-er-san-shi/">
+                    <div class="card-image">
+                        
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/Mu4e-Email-Client-for-Linux.png" class="responsive-img" alt="Linux命令行邮件收发：邮件通信与snail">
+                        
+                        <span class="card-title">Linux命令行邮件收发：邮件通信与snail</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            本文介绍了邮件通信模型的相关知识，从而介绍了如何在Linux上使用snail收发邮件
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-07-20
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Linux%E5%AE%9E%E7%94%A8%E6%8A%80%E5%B7%A7/" class="post-category">
+                                    Linux实用技巧
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Linux/">
+                        <span class="chip bg-color">Linux</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/">
+                        <span class="chip bg-color">内网穿透</span>
+                    </a>
+                    
+                    <a href="/tags/mail/">
+                        <span class="chip bg-color">mail</span>
+                    </a>
+                    
+                    <a href="/tags/sendmail/">
+                        <span class="chip bg-color">sendmail</span>
+                    </a>
+                    
+                    <a href="/tags/mailx/">
+                        <span class="chip bg-color">mailx</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/07/17/gong-wang-fang-wen-nei-wang-ji-qi-frp/">
+                    <div class="card-image">
+                        
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20230717163415304.png" class="responsive-img" alt="公网访问内网机器：基于frp的内网穿透">
+                        
+                        <span class="card-title">公网访问内网机器：基于frp的内网穿透</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            本文介绍了如何利用frp实现公网访问内网机器
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-07-17
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Linux%E5%AE%9E%E7%94%A8%E6%8A%80%E5%B7%A7/" class="post-category">
+                                    Linux实用技巧
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/frp/">
+                        <span class="chip bg-color">frp</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/">
+                        <span class="chip bg-color">内网穿透</span>
+                    </a>
+                    
+                    <a href="/tags/Linux%E5%AE%9E%E7%94%A8%E6%8A%80%E5%B7%A7/">
+                        <span class="chip bg-color">Linux实用技巧</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: JackWang&#39;s Blog<br />'
+            + '文章作者: Jack Wang<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('1'),
+            headingSelector: 'h2, h3, h4, h5, h6'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4, h5, h6').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2021-2023</span>
+            
+            <a href="/about" target="_blank">Jack Wang</a>
+            <!-- |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a> -->
+            <!-- |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a> -->
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">576.9k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+                <span id="sitetime"> Loading ...</span>
+                <script>
+                    var calcSiteTime = function () {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2021";
+                        var startMonth = "11";
+                        var startDate = "12";
+                        var startHour = "0";
+                        var startMinute = "0";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+
+                        // 区分是否有年份.
+                        var language = 'zh-CN';
+                        if (startYear === String(todayYear)) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            var daysTip = 'This site has been running for ' + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                daysTip = '本站已运行 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                daysTip = '本站已運行 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = daysTip;
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            var yearsAndDaysTip = 'This site has been running for ' + diffYears + ' years and '
+                                + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                yearsAndDaysTip = '本站已运行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                yearsAndDaysTip = '本站已運行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+                        }
+                    }
+
+                    calcSiteTime();
+                </script>
+            
+            <br>
+            
+                <span id="icp"><img src="/medias/icp.png"
+                                    style="vertical-align: text-bottom;"/>
+                <a href="https://beian.miit.gov.cn" target="_blank">陕ICP备2021014294号-1</a>
+            </span>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/jackwang0108" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:2232123545@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2232123545" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2232123545" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+        
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/sakura.js"><\/script>');
+            }
+        </script>
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
