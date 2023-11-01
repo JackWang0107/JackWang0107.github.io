@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="ROS教程 0：ROS介绍, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
-    <meta name="description" content="本文是ROS系列教程的前言，介绍了什么是ROS">
+    <meta name="description" content="本文是ROS系列教程的前言，介绍了什么是ROS、ROS的发展历史以及ROS1和ROS2的区别">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -387,6 +387,22 @@
                                 <span class="chip bg-color">ROS安装</span>
                             </a>
                         
+                            <a href="/tags/ROS1/">
+                                <span class="chip bg-color">ROS1</span>
+                            </a>
+                        
+                            <a href="/tags/ROS1%E6%95%99%E7%A8%8B/">
+                                <span class="chip bg-color">ROS1教程</span>
+                            </a>
+                        
+                            <a href="/tags/ROS1%E5%AE%89%E8%A3%85/">
+                                <span class="chip bg-color">ROS1安装</span>
+                            </a>
+                        
+                            <a href="/tags/ROS2/">
+                                <span class="chip bg-color">ROS2</span>
+                            </a>
+                        
                     </div>
                     
                 </div>
@@ -415,21 +431,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-06-01
+                    2023-11-01
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.7k
+                    3.5k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    9 分
+                    12 分
                 </div>
                 
 
@@ -451,7 +467,7 @@
             <div id="articleContent">
                 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221222234619457.png" alt="ROS官网"></p>
 <blockquote>
-<p>本文作为<code>ROS</code>系列教程中的序言，介绍了如何什么是<code>ROS</code>，以及为什么要学习<code>ROS</code></p>
+<p>本文作为<code>ROS</code>系列教程中的序言，介绍了什么是<code>ROS</code>，以及为什么要学习<code>ROS</code></p>
 </blockquote>
 <h1 id="ROS教程-0：ROS介绍"><a href="#ROS教程-0：ROS介绍" class="headerlink" title="ROS教程 0：ROS介绍"></a>ROS教程 0：ROS介绍</h1><p>在我的小破站一周岁之际，我许下了一个心愿，就是希望能够在小破站新的一岁中，完成几个我心心念念的项目，其中就包括写一个<code>ROS</code>教程出来。恰逢最近完成了上一个心愿：写完一个自己的操作系统，值此之际我就开始<code>ROS</code>教程这一个新的系列。</p>
 <p>而作为ROS系列教程的序言，本文就将介绍如何什么是<code>ROS</code>。</p>
@@ -472,7 +488,7 @@
 <p>因此，明白了机器的定义之后，我们就明白了什么是机器人。机器人在机器的基础上，又具有了<strong>移动性</strong>、<strong>自动性</strong>等特性。因此，<code>机器人 = 机械结构 + 电子电气控制系统 + 自动化</code></p>
 <h3 id="1-2-机器人的组成"><a href="#1-2-机器人的组成" class="headerlink" title="1.2 机器人的组成"></a>1.2 机器人的组成</h3><p>经过上面的介绍，我们明白了什么是机器人。也明白了创造出一个机器人需要的全部内容：</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221223160431776.png" alt="创造一个机器人需要的内容" style="zoom:50%;"></p>
-<h3 id="1-3-软件层面的机器人开发：ROS"><a href="#1-3-软件层面的机器人开发：ROS" class="headerlink" title="1.3 软件层面的机器人开发：ROS"></a>1.3 软件层面的机器人开发：ROS</h3><p>对于机器人从底层到高层的所有流程中，机械结构、电气驱动、电子控制和系统管理都还好说，都有专门的解决方案，例如：机械运用可以用<code>AutoCAD</code>、<code>Rhino</code>来进行设计、测试，电气驱动则有专门的电机厂商，电机芯片也可以单独购买，系统有Linux、Ubuntu等等开源操作系统。</p>
+<h3 id="1-3-软件层面的机器人开发：ROS"><a href="#1-3-软件层面的机器人开发：ROS" class="headerlink" title="1.3 软件层面的机器人开发：ROS"></a>1.3 软件层面的机器人开发：ROS</h3><p>对于机器人从底层到高层的所有流程中，机械结构、电气驱动、电子控制和系统管理都还好说，都有专门的解决方案，例如：机械运用可以用<code>AutoCAD</code>、<code>Rhino</code>来进行设计、测试，电气驱动则有专门的电机厂商，电机芯片也可以单独购买，系统有<code>Linux</code>、<code>Ubuntu</code>等等开源操作系统。</p>
 <p>唯独只有上层的软件控制我们没法找到一个解决方案。因此，<code>ROS</code>正是诞生在这个背景下。<code>ROS</code>是软件层面的机器人开发工具，用官网的话来说：</p>
 <p><code>ROS</code>是一套软件库和工具的集合：</p>
 <ul>
@@ -493,7 +509,7 @@
 <li><strong>松耦合</strong>：<code>ROS</code>中功能模块封装于独立的功能包或元功能包，便于分享，功能包内的模块以节点为单位运行，以<code>ROS</code>标准的<code>IO</code>作为接口，开发者不需要关注模块内部实现，只要了解接口规则就能实现复用,实现了模块间点对点的松耦合连接</li>
 <li><strong>精简</strong>：<code>ROS</code>被设计为尽可能精简，以便为<code>ROS</code>编写的代码可以与其他机器人软件框架一起使用。<code>ROS</code>易于与其他机器人软件框架集成：<code>ROS</code>已与<code>OpenRAVE</code>，<code>Orocos</code>和<code>Player</code>集成。</li>
 <li><strong>语言独立性</strong>：包括<code>Java</code>，<code>C++</code>，<code>Python</code>等。为了支持更多应用开发和移植，<code>ROS</code>被实现为为一种语言弱相关的框架结构，使用简洁，中立的定义语言描述模块间的消息接口，在编译中再产生所使用语言的目标文件，为消息交互提供支持，同时允许消息接口的嵌套使用</li>
-<li><strong>易于测试</strong>：<code>ROS</code>具有称为<a target="_blank" rel="noopener" href="http://wiki.ros.org/rostest">rostest</a>的内置单元/集成测试框架，可轻松安装和拆卸测试工具。</li>
+<li><strong>易于测试</strong>：<code>ROS</code>具有称为<a target="_blank" rel="noopener" href="http://wiki.ROS.org/rostest">rostest</a>的内置单元/集成测试框架，可轻松安装和拆卸测试工具。</li>
 <li><strong>大型应用</strong>：<code>ROS</code>适用于大型运行时系统和大型开发流程。</li>
 <li><strong>丰富的组件化工具包：</strong><code>ROS</code>可采用组件化方式集成一些工具和软件到系统中并作为一个组件直接使用，如<code>RVIZ</code>（3D可视化工具），开发者根据<code>ROS</code>定义的接口在其中显示机器人模型等，组件还包括仿真环境和消息查看工具等</li>
 <li><strong>免费且开源：</strong>开发者众多，功能包多</li>
@@ -509,7 +525,7 @@
 </ul>
 <p>在上述项目中，创建了一系列用于机器人开发的软件，可以用于机器人学研究。</p>
 <p>2007年，一家名为<code>Willow Garage</code>（柳树车库）的公司，为斯坦福大学机器人项目提供了大量资金支持，并自愿将项目中的软件系统进行扩展与完善，最终，在无数研究人员的共同努力下，斯坦福大学中的诸多项目逐渐汇集在一起，最终形成了<code>ROS</code></p>
-<p><code>ROS</code> 的完善是<code>Willow Garage</code>在开发<code>PR2</code>机器人时候完成的。<code>PR2</code>是一种人形机器人（即上文说的<code>Android</code>），可以在已知环境中自主导航。<code>Willow Garage</code>知道 <code>PR2</code>不会是市场上唯一的机器人，所以在完善斯坦福的程序的时候，预期把这些程序写成<code>PR2</code>的个性化程序，不如该进程一个通用的、可扩展的标准软件，以在未来改进或修改机器人。</p>
+<p>ROS<code>的完善是</code>Willow Garage<code>在开发</code>PR2<code>机器人时候完成的。</code>PR2<code>是一种人形机器人（即上文说的</code>Android<code>），可以在已知环境中自主导航。</code>Willow Garage<code>知道</code>PR2<code>不会是市场上唯一的机器人，所以在完善斯坦福的程序的时候，预期把这些程序写成</code>PR2`的个性化程序，不如该进程一个通用的、可扩展的标准软件，以在未来改进或修改机器人。</p>
 <p>因此，他们通过定义对其他机器人有用的抽象级别来开发中间件<code>ROS</code>。他们以<code>PR2</code>特征为指导：</p>
 <ul>
 <li>单体机器人</li>
@@ -525,6 +541,14 @@
 <p>下面是<code>ROS</code>的所有公开的版本，每个版本都有自己的名称、海报、生命周期和乌龟标志。</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/%E7%89%88%E6%9C%AC.png" alt="ROS各个发行版的名称、发行日期以及生命期"></p>
 <p><code>ROS</code>版本特点: 按照英文字母顺序命名，<code>ROS</code> 目前已经发布了<code>ROS1</code> 的终极版本: <code>noetic</code>。在<code>noetic</code>版本之后，<code>ROS</code>官方推出的发行版就将是基于<code>ROS2</code>的发行版</p>
+<h3 id="2-4-ROS的版本：ROS1和ROS2"><a href="#2-4-ROS的版本：ROS1和ROS2" class="headerlink" title="2.4 ROS的版本：ROS1和ROS2"></a>2.4 <code>ROS</code>的版本：<code>ROS1</code>和<code>ROS2</code></h3><p>上面我们说到了<code>noetic</code>是<code>ROS1</code>的最终版，之后的版本都是<code>ROS2</code>，而这就意味着<code>ROS</code>有两个版本：<code>ROS1</code>和<code>ROS2</code>。这到底是为什么呢？</p>
+<p>上面说到，<code>ROS1</code>的发展历史可以追溯到2007年，当时斯坦福大学的人工智能实验室（AI Lab）开始开发一个用于机器人研究的软件框架，即<code>ROS1</code>的前身。<code>ROS1</code>于2010年首次发布，并迅速成为机器人领域的主流开源框架。在过去的十多年里，<code>ROS1</code>积累了庞大的用户和开发者社区，并得到了广泛应用于学术研究、工业应用和个人项目等领域。</p>
+<p>然而，随着时间的推移，<code>ROS1</code>也暴露出一些局限性和不足之处。其中一些问题包括通信机制的性能瓶颈、实时性的限制、安全性的缺乏以及对多种编程语言的支持不足等。为了解决这些问题并满足日益增长的机器人应用需求，<code>ROS2</code>于2014年开始开发，并于2017年发布了首个稳定版本。</p>
+<p><code>ROS2</code>在设计上采用了一种全新的通信机制<code>DDS</code>（<code>Data Distribution Service</code>），它提供了高性能、实时、可靠的通信能力，更适合大规模机器人系统。此外，<code>ROS2</code>还引入了对多种编程语言的广泛支持，包括<code>C++</code>、<code>Python</code>、<code>Java</code>和<code>JavaScript</code>等，使得开发者可以使用自己熟悉的语言编写<code>ROS2</code>应用程序。</p>
+<p>为什么会有两个版本的区分呢？这主要是由于<code>ROS2</code>的设计目标和一些重大变化导致的。<code>ROS2</code>在设计时考虑了一些<code>ROS1</code>存在的问题，并进行了一系列的改进和优化。然而，由于<code>ROS1</code>的广泛应用和庞大的用户社区，直接替换<code>ROS1</code>可能会导致现有的<code>ROS1</code>应用程序无法兼容或迁移困难。因此，为了平衡新旧版本之间的过渡和兼容性，<code>ROS2</code>作为一个新的版本并行存在，并逐渐发展壮大自己的用户和开发者社区。</p>
+<p><code>ROS2</code>的目标是逐渐取代<code>ROS1</code>，成为未来机器人应用开发的主流框架。尽管如此，<code>ROS1</code>仍然是一个活跃的项目，并且在一些特定的应用场景或项目中仍然被广泛使用。因此，<code>ROS1</code>和<code>ROS2</code>的并行存在为用户提供了更灵活的选择，可以根据自身需求和现有代码库的情况选择使用适合的版本。</p>
+<h3 id="2-5-学习建议"><a href="#2-5-学习建议" class="headerlink" title="2.5 学习建议"></a>2.5 学习建议</h3><p><code>ROS2</code>是在<code>ROS1</code>的基础上改进得到的版本，其中的诸多概念都得到了继承和发展，因此对于初学者而言，学习<code>ROS1</code>可能更容易上手，更容易掌握<code>ROS</code>的基础概念。</p>
+<p>而虽然<code>ROS1</code>仍然广泛使用，但<code>ROS2</code>被认为是未来机器人应用开发的主流框架。<code>ROS2</code>的社区在不断发展壮大，新功能和改进不断推出。所以在学习完<code>ROS1</code>之后，我们还需要学习<code>ROS2</code>。</p>
 
                 
             </div>
@@ -599,6 +623,22 @@
                             
                                 <a href="/tags/ROS%E5%AE%89%E8%A3%85/">
                                     <span class="chip bg-color">ROS安装</span>
+                                </a>
+                            
+                                <a href="/tags/ROS1/">
+                                    <span class="chip bg-color">ROS1</span>
+                                </a>
+                            
+                                <a href="/tags/ROS1%E6%95%99%E7%A8%8B/">
+                                    <span class="chip bg-color">ROS1教程</span>
+                                </a>
+                            
+                                <a href="/tags/ROS1%E5%AE%89%E8%A3%85/">
+                                    <span class="chip bg-color">ROS1安装</span>
+                                </a>
+                            
+                                <a href="/tags/ROS2/">
+                                    <span class="chip bg-color">ROS2</span>
                                 </a>
                             
                         </div>
@@ -777,15 +817,15 @@
                 <a href="/2022/12/23/ros-jiao-cheng-2-ros-kai-fa-huan-jing-da-jian/">
                     <div class="card-image">
                         
-                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/%E5%B1%8F%E5%B9%95%E5%BD%95%E5%88%B62022-12-24%20%E4%B8%8B%E5%8D%881.26.48.gif" class="responsive-img" alt="ROS教程 2：ROS开发环境搭建">
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/%E5%B1%8F%E5%B9%95%E5%BD%95%E5%88%B62022-12-24%20%E4%B8%8B%E5%8D%881.26.48.gif" class="responsive-img" alt="ROS1教程 2：ROS1开发环境搭建">
                         
-                        <span class="card-title">ROS教程 2：ROS开发环境搭建</span>
+                        <span class="card-title">ROS1教程 2：ROS1开发环境搭建</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            本文是ROS系列教程的第二篇文章，介绍了如何搭建ROS开发环境
+                            本文是ROS1系列教程的第二篇文章，介绍了如何搭建ROS1开发环境
                         
                     </div>
                     <div class="publish-info">
@@ -796,8 +836,8 @@
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/ROS%E6%95%99%E7%A8%8B/" class="post-category">
-                                    ROS教程
+                            <a href="/categories/ROS1%E6%95%99%E7%A8%8B/" class="post-category">
+                                    ROS1教程
                                 </a>
                             
                             
@@ -811,12 +851,16 @@
                         <span class="chip bg-color">ROS</span>
                     </a>
                     
-                    <a href="/tags/ROS%E6%95%99%E7%A8%8B/">
-                        <span class="chip bg-color">ROS教程</span>
+                    <a href="/tags/ROS1/">
+                        <span class="chip bg-color">ROS1</span>
                     </a>
                     
-                    <a href="/tags/ROS%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
-                        <span class="chip bg-color">ROS开发环境搭建</span>
+                    <a href="/tags/ROS1%E6%95%99%E7%A8%8B/">
+                        <span class="chip bg-color">ROS1教程</span>
+                    </a>
+                    
+                    <a href="/tags/ROS1%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
+                        <span class="chip bg-color">ROS1开发环境搭建</span>
                     </a>
                     
                 </div>
@@ -833,15 +877,15 @@
                 <a href="/2022/12/22/ros-jiao-cheng-1-ros-an-zhuang/">
                     <div class="card-image">
                         
-                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/%E5%B1%8F%E5%B9%95%E5%BD%95%E5%88%B62022-12-23%20%E4%B8%8B%E5%8D%881.50.16.gif" class="responsive-img" alt="ROS教程 1：ROS安装">
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/%E5%B1%8F%E5%B9%95%E5%BD%95%E5%88%B62022-12-23%20%E4%B8%8B%E5%8D%881.50.16.gif" class="responsive-img" alt="ROS1教程 1：ROS1安装">
                         
-                        <span class="card-title">ROS教程 1：ROS安装</span>
+                        <span class="card-title">ROS1教程 1：ROS1安装</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            本文是ROS系列教程的第一篇文章，介绍了如何安装ROS
+                            本文是ROS1系列教程的第一篇文章，介绍了如何安装ROS1
                         
                     </div>
                     <div class="publish-info">
@@ -852,8 +896,8 @@
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/ROS%E6%95%99%E7%A8%8B/" class="post-category">
-                                    ROS教程
+                            <a href="/categories/ROS1%E6%95%99%E7%A8%8B/" class="post-category">
+                                    ROS1教程
                                 </a>
                             
                             
@@ -863,16 +907,16 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/ROS/">
-                        <span class="chip bg-color">ROS</span>
+                    <a href="/tags/ROS1/">
+                        <span class="chip bg-color">ROS1</span>
                     </a>
                     
-                    <a href="/tags/ROS%E6%95%99%E7%A8%8B/">
-                        <span class="chip bg-color">ROS教程</span>
+                    <a href="/tags/ROS1%E6%95%99%E7%A8%8B/">
+                        <span class="chip bg-color">ROS1教程</span>
                     </a>
                     
-                    <a href="/tags/ROS%E5%AE%89%E8%A3%85/">
-                        <span class="chip bg-color">ROS安装</span>
+                    <a href="/tags/ROS1%E5%AE%89%E8%A3%85/">
+                        <span class="chip bg-color">ROS1安装</span>
                     </a>
                     
                 </div>
@@ -1059,7 +1103,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">576.9k</span>
+                        class="white-color">580k</span>
             
             
             

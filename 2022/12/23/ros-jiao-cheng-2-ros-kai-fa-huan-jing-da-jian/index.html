@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="ROS教程 2：ROS开发环境搭建, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
-    <meta name="description" content="本文是ROS系列教程的第二篇文章，介绍了如何搭建ROS开发环境">
+    <meta name="keywords" content="ROS1教程 2：ROS1开发环境搭建, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
+    <meta name="description" content="本文是ROS1系列教程的第二篇文章，介绍了如何搭建ROS1开发环境">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>ROS教程 2：ROS开发环境搭建 | JackWang&#39;s Blog</title>
+    <title>ROS1教程 2：ROS1开发环境搭建 | JackWang&#39;s Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -259,7 +259,7 @@
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">ROS教程 2：ROS开发环境搭建</h1>
+                    <h1 class="description center-align post-title">ROS1教程 2：ROS1开发环境搭建</h1>
                 </div>
             </div>
         </div>
@@ -379,12 +379,16 @@
                                 <span class="chip bg-color">ROS</span>
                             </a>
                         
-                            <a href="/tags/ROS%E6%95%99%E7%A8%8B/">
-                                <span class="chip bg-color">ROS教程</span>
+                            <a href="/tags/ROS1/">
+                                <span class="chip bg-color">ROS1</span>
                             </a>
                         
-                            <a href="/tags/ROS%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
-                                <span class="chip bg-color">ROS开发环境搭建</span>
+                            <a href="/tags/ROS1%E6%95%99%E7%A8%8B/">
+                                <span class="chip bg-color">ROS1教程</span>
+                            </a>
+                        
+                            <a href="/tags/ROS1%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
+                                <span class="chip bg-color">ROS1开发环境搭建</span>
                             </a>
                         
                     </div>
@@ -395,8 +399,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/ROS%E6%95%99%E7%A8%8B/" class="post-category">
-                                ROS教程
+                            <a href="/categories/ROS1%E6%95%99%E7%A8%8B/" class="post-category">
+                                ROS1教程
                             </a>
                         
                     </div>
@@ -415,7 +419,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-06-01
+                    2023-11-01
                 </div>
                 
 
@@ -449,10 +453,10 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/%E5%B1%8F%E5%B9%95%E5%BD%95%E5%88%B62022-12-24%20%E4%B8%8B%E5%8D%881.26.48.gif" alt="ROS开发环境搭建"></p>
-<h1 id="ROS教程-2：ROS开发环境搭建"><a href="#ROS教程-2：ROS开发环境搭建" class="headerlink" title="ROS教程 2：ROS开发环境搭建"></a>ROS教程 2：ROS开发环境搭建</h1><p>在上一个教程中，我们成功安装了<code>ROS</code>。但是截止目前为止，我们还没有办法进行开发，或者说没有办法舒服的进行开发。因为我们没有搭建出来开发环境，所以本文就将介绍如何搭建<code>ROS</code>开发环境，从而实现诸如代码补全等等功能，最终实现一个舒服的开发环境。</p>
+                <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/%E5%B1%8F%E5%B9%95%E5%BD%95%E5%88%B62022-12-24%20%E4%B8%8B%E5%8D%881.26.48.gif" alt="ROS1开发环境搭建"></p>
+<h1 id="ROS1教程-2：ROS1开发环境搭建"><a href="#ROS1教程-2：ROS1开发环境搭建" class="headerlink" title="ROS1教程 2：ROS1开发环境搭建"></a>ROS1教程 2：ROS1开发环境搭建</h1><p>在上一个教程中，我们成功安装了<code>ROS1</code>。但是截止目前为止，我们还没有办法进行开发，或者说没有办法舒服的进行开发。因为我们没有搭建出来开发环境，所以本文就将介绍如何搭建<code>ROS1</code>开发环境，从而实现诸如代码补全等等功能，最终实现一个舒服的开发环境。</p>
 <h2 id="1-终端安装"><a href="#1-终端安装" class="headerlink" title="1. 终端安装"></a>1. 终端安装</h2><p>我们在前面的一节中讲到，一个机器人，在软件层面想要正常运行的话，肯定是需要多个不同的进程相互配合的，例如：有的进程负责视觉，有的进程负责运动，有的进程负责定位和导航。</p>
-<p>而<code>ROS</code>作为软件层面机器人的开发工具，具备了是负责统一去管理进程的能力。<code>ROS</code>中将每个进程抽象为一个节点（<code>Node</code>），而将某两个有数据交互的进程视为视为有边连接的结点。因此就将机器人的进程管理抽象为了图，从而就可以把数学上的有向图、无向图、有向无环图等等概念运用进来，从而实现了用节点图来描述机器人的正常运行状态。</p>
+<p>而<code>ROS1</code>作为软件层面机器人的开发工具，具备了是负责统一去管理进程的能力。<code>ROS1</code>中将每个进程抽象为一个节点（<code>Node</code>），而将某两个有数据交互的进程视为视为有边连接的结点。因此就将机器人的进程管理抽象为了图，从而就可以把数学上的有向图、无向图、有向无环图等等概念运用进来，从而实现了用节点图来描述机器人的正常运行状态。</p>
 <p>例如下面这个极简的例子：</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221223234224196.png" alt="机器人需要多进程控制" style="zoom: 50%;"></p>
 <p><strong>因此，未来我们是一定需要运行多个进程的，为此我们就一定需要在终端中同时运行多个进程</strong>。为此，我们需要一个能够支持多终端或者终端复用的软件。目前有两个解决方案：</p>
@@ -568,23 +572,23 @@ bind <span class="token punctuation">-</span>r ^l resizep <span class="token pun
 <li><strong>` + |</strong>：垂直分割</li>
 <li><strong>` + -</strong>：水平分割</li>
 </ul>
-<h2 id="2-VSCode"><a href="#2-VSCode" class="headerlink" title="2. VSCode"></a>2. VSCode</h2><p><code>VSCode</code>编辑器作为万能编辑器，连开发操作系统都不在话下，<code>ROS</code>自然也是能够开发的。我们安装几个插件即可</p>
+<h2 id="2-VSCode"><a href="#2-VSCode" class="headerlink" title="2. VSCode"></a>2. VSCode</h2><p><code>VSCode</code>编辑器作为万能编辑器，连开发操作系统都不在话下，<code>ROS1</code>自然也是能够开发的。我们安装几个插件即可</p>
 <p><code>VSCode</code>的安装就不说了，下面直接说一些需要安装的插件。</p>
-<h3 id="2-1-C-C-Extension-Pack"><a href="#2-1-C-C-Extension-Pack" class="headerlink" title="2.1 C/C++ Extension Pack"></a>2.1 C/C++ Extension Pack</h3><p><code>ROS</code>本身是一个语言弱相关的框架，支持用<code>Python</code>、<code>C++</code>、<code>Java</code>等多种语言去开发。由于我们未来会讲解如何使用<code>C++</code>来开发<code>ROS</code>，因此我们需要再<code>VSCode</code>中安装支持<code>C++</code>的插件，即<code>C/C++ Extension Pack</code>。</p>
+<h3 id="2-1-C-C-Extension-Pack"><a href="#2-1-C-C-Extension-Pack" class="headerlink" title="2.1 C/C++ Extension Pack"></a>2.1 C/C++ Extension Pack</h3><p><code>ROS1</code>本身是一个语言弱相关的框架，支持用<code>Python</code>、<code>C++</code>、<code>Java</code>等多种语言去开发。由于我们未来会讲解如何使用<code>C++</code>来开发<code>ROS1</code>，因此我们需要再<code>VSCode</code>中安装支持<code>C++</code>的插件，即<code>C/C++ Extension Pack</code>。</p>
 <p>这个<code>Pack</code>里面包含了<code>C++</code>开发的基本插件，因此直接下载即可</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221224022433251.png" alt="C/C++ Extension Pack" style="zoom:33%;"></p>
 <p>然后额外安装一个<code>CMake</code>的补全工具插件，这样<code>C++</code>的开发的插件就配置好了</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221224022813259.png" alt="CMake语法提示插件" style="zoom:33%;"></p>
-<h3 id="2-2-Python-Pylance"><a href="#2-2-Python-Pylance" class="headerlink" title="2.2 Python / Pylance"></a>2.2 Python / Pylance</h3><p>同样，因为我们后面会讲解如何用<code>Python</code>来开发<code>ROS</code>，所以还得安装一下<code>Python</code>的插件</p>
+<h3 id="2-2-Python-Pylance"><a href="#2-2-Python-Pylance" class="headerlink" title="2.2 Python / Pylance"></a>2.2 Python / Pylance</h3><p>同样，因为我们后面会讲解如何用<code>Python</code>来开发<code>ROS1</code>，所以还得安装一下<code>Python</code>的插件</p>
 <p>首先是<code>Python</code>的基础插件，用于为VSCode添加基础的调试等功能</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221224023335827.png" alt="Python插件安装" style="zoom:33%;"></p>
 <p>然后就是<code>Python</code>的语法高亮、语法补全的插件<code>Pylance</code></p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221224024408754.png" alt="Pylance安装" style="zoom:33%;"></p>
-<h3 id="2-3-ROS插件安装"><a href="#2-3-ROS插件安装" class="headerlink" title="2.3 ROS插件安装"></a>2.3 ROS插件安装</h3><p>令人惊喜的是，目前微软的<code>VSCode</code>官方也实现了对<code>ROS</code>的支持，因此我们直接下载、安装微软官方的<code>ROS</code>插件，以在<code>VSCode</code>中添加对<code>ROS</code>的支持</p>
-<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221224024608972.png" alt="ROS插件安装" style="zoom:33%;"></p>
-<h2 id="3-测试开发环境：实现一个例程"><a href="#3-测试开发环境：实现一个例程" class="headerlink" title="3. 测试开发环境：实现一个例程"></a>3. 测试开发环境：实现一个例程</h2><p>我们上面就搭建完了<code>ROS</code>开发环境，接下来我们实现一下<code>Hello World</code>例程来测试一下是否搭建好了<code>VSCode</code>中的开发环境。</p>
+<h3 id="2-3-ROS1插件安装"><a href="#2-3-ROS1插件安装" class="headerlink" title="2.3 ROS1插件安装"></a>2.3 ROS1插件安装</h3><p>令人惊喜的是，目前微软的<code>VSCode</code>官方也实现了对<code>ROS1</code>的支持，因此我们直接下载、安装微软官方的<code>ROS1</code>插件，以在<code>VSCode</code>中添加对<code>ROS1</code>的支持</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221224024608972.png" alt="ROS1插件安装" style="zoom:33%;"></p>
+<h2 id="3-测试开发环境：实现一个例程"><a href="#3-测试开发环境：实现一个例程" class="headerlink" title="3. 测试开发环境：实现一个例程"></a>3. 测试开发环境：实现一个例程</h2><p>我们上面就搭建完了<code>ROS1</code>开发环境，接下来我们实现一下<code>Hello World</code>例程来测试一下是否搭建好了<code>VSCode</code>中的开发环境。</p>
 <p>注意，我们下面的目的是为了测试是否搭建好了开发环境，而不是介绍如何进行开发，因此我们用到的命令我们不会进行解释，我们下一节会专门的进行介绍，所以这里只会给出命令</p>
-<h3 id="3-1-创建工作空间"><a href="#3-1-创建工作空间" class="headerlink" title="3.1 创建工作空间"></a>3.1 创建工作空间</h3><p>运行下面的命令，来创建一个<code>ROS</code>工作空间</p>
+<h3 id="3-1-创建工作空间"><a href="#3-1-创建工作空间" class="headerlink" title="3.1 创建工作空间"></a>3.1 创建工作空间</h3><p>运行下面的命令，来创建一个<code>ROS1</code>工作空间</p>
 <pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">mkdir</span> -p xxx_ws/src<span class="token punctuation">(</span>必须得有 src<span class="token punctuation">)</span>
 <span class="token function">cd</span> xxx_ws
 catkin_make
@@ -605,13 +609,13 @@ code ./
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <h4 id="A-设置CMakeLists-txt位置"><a href="#A-设置CMakeLists-txt位置" class="headerlink" title="A. 设置CMakeLists.txt位置"></a>A. 设置CMakeLists.txt位置</h4><p>然后按下<code>Ctrl + P</code>，输入<code>&gt; CMake</code>，然后选择<code>CMake: Configure</code>这一项来配置<code>CMake</code>工程</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221224093627387.png" alt="配置CMake工程" style="zoom: 25%;"></p>
-<p>不过因为<code>ROS</code>工作空间的<code>CMakeLists.txt</code>不是放在根目录下的，所以一开始配置的时候会显示找不到<code>CMakeLists.txt</code>，此时我们点击<code>Locate</code>然后手动选择路径</p>
+<p>不过因为<code>ROS1</code>工作空间的<code>CMakeLists.txt</code>不是放在根目录下的，所以一开始配置的时候会显示找不到<code>CMakeLists.txt</code>，此时我们点击<code>Locate</code>然后手动选择路径</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221224093656577.png" alt="点击Locate手动选择路径-1" style="zoom:25%;"></p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221224093727465.png" alt="手动选择路径-2" style="zoom:25%;"></p>
 <p>最后，配置成功后就会在当前的工作空间下新建一个<code>.vscode</code>目录，这个目录就是<code>VSCode</code>对当前项目的配置，未来<code>VSCode</code>的一些设置就会放在这个目录中。不过目前就只有<code>cmake.sourceDirectory</code>这一个配置</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221224094551099.png" alt="VSCode生成当前项目配置" style="zoom:25%;"></p>
-<h4 id="B-配置catkin-make-build任务"><a href="#B-配置catkin-make-build任务" class="headerlink" title="B. 配置catkin_make: build任务"></a>B. 配置<code>catkin_make: build</code>任务</h4><p>什么是<code>catkin_make</code>放到下一章再讲，不过这里可以简单的说的就是<code>catkin_make</code>是<code>ROS</code>的编译工具，所以我们配置一下<code>catkin_make</code>的配置。</p>
-<p>因为我们前面已经安装过了<code>ROS</code>插件，所以这里先按快捷键<code>Ctrl + Shift + B</code>来呼出<code>build</code>界面，然后选择<code>ROS</code>插件提供的<code>catkin_make</code>的<code>build</code>选项</p>
+<h4 id="B-配置catkin-make-build任务"><a href="#B-配置catkin-make-build任务" class="headerlink" title="B. 配置catkin_make: build任务"></a>B. 配置<code>catkin_make: build</code>任务</h4><p>什么是<code>catkin_make</code>放到下一章再讲，不过这里可以简单的说的就是<code>catkin_make</code>是<code>ROS1</code>的编译工具，所以我们配置一下<code>catkin_make</code>的配置。</p>
+<p>因为我们前面已经安装过了<code>ROS1</code>插件，所以这里先按快捷键<code>Ctrl + Shift + B</code>来呼出<code>build</code>界面，然后选择<code>ROS1</code>插件提供的<code>catkin_make</code>的<code>build</code>选项</p>
 <p>这里直接选<code>catkin_make: build</code>这个选项。注意，这里不是点击<code>catkin_make: build</code>，而是点击边上的齿轮，即<code>配置任务</code>。如果直接点击的话，就是直接运行<code>catkin_make: build</code>的相关任务了，我们这是是对其进行配置</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221224100750894.png" alt="配置catkin_make: build"></p>
 <p>点击之后，就会生成<code>tasks.json</code>，同时<code>tasks.json</code>自动的创建了一个<code>catkin_make</code>的任务。而<code>tasks.json</code>和<code>launch.json</code>其实就是<code>VSCode</code>为了统一不同语言、不同框架的调试所创建的工具。关于具体怎么写，可以参考我之前的文章：<a target="_blank" rel="noopener" href="http://jackwang.cafe/2022/10/10/vscode-diao-shi-c-c-pei-zhi-tasks-json-he-launch-json/">VSCode调试C/C++项目：配置tasks.json和launch.json</a></p>
@@ -672,18 +676,18 @@ code ./
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221224132201515.png" alt="按下快捷键自动编译" style="zoom: 25%;"></p>
 <h3 id="3-4-C-测试"><a href="#3-4-C-测试" class="headerlink" title="3.4 C++测试"></a>3.4 C++测试</h3><p>接下来我们在<code>test_vscode</code>的功能包的<code>src</code>文件夹下创建一个<code>test.cpp</code>，测试一下代码补全什么的是否正常工作</p>
 <pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">// test.cpp</span>
-<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"ros/ros.h"</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"ROS1/ROS1.h"</span></span>
 
 <span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">int</span> argc<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token operator">*</span>argv<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
 
-    ros<span class="token operator">::</span><span class="token function">init</span><span class="token punctuation">(</span>argc<span class="token punctuation">,</span> argv<span class="token punctuation">,</span> <span class="token string">"test"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    ROS1<span class="token operator">::</span><span class="token function">init</span><span class="token punctuation">(</span>argc<span class="token punctuation">,</span> argv<span class="token punctuation">,</span> <span class="token string">"test"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    <span class="token function">ROS_INFO</span><span class="token punctuation">(</span><span class="token string">"ROS TEST"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">ROS_INFO</span><span class="token punctuation">(</span><span class="token string">"ROS1 TEST"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>可以看到，在编辑的时候补全已经出来了，所以<code>C++</code>的<code>ROS</code>开发环境已经搭建成功</p>
+<p>可以看到，在编辑的时候补全已经出来了，所以<code>C++</code>的<code>ROS1</code>开发环境已经搭建成功</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221224132803131.png" alt="C++补全-1" style="zoom:25%;"></p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221224132825210.png" alt="C++补全-2" style="zoom:25%;"></p>
 <h3 id="3-5-Python测试"><a href="#3-5-Python测试" class="headerlink" title="3.5 Python测试"></a>3.5 Python测试</h3><p>上面<code>C++</code>的开发环境已经成功了，接下来测试一下<code>Python</code>的开发环境</p>
@@ -694,10 +698,10 @@ code ./
 
 <span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">"__main__"</span><span class="token punctuation">:</span>
 
-    rospy<span class="token punctuation">.</span>init_node<span class="token punctuation">(</span><span class="token string">"Hello_Vscode_p"</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 2.初始化 ROS 节点</span>
+    rospy<span class="token punctuation">.</span>init_node<span class="token punctuation">(</span><span class="token string">"Hello_Vscode_p"</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 2.初始化 ROS1 节点</span>
     rospy<span class="token punctuation">.</span>loginfo<span class="token punctuation">(</span><span class="token string">"Hello VScode, 我是 Python ...."</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true">#3.日志输出 HelloWorld</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>可以看到，在编辑的时候补全已经出来了，所以<code>Python</code>的<code>ROS</code>开发环境已经搭建成功</p>
+<p>可以看到，在编辑的时候补全已经出来了，所以<code>Python</code>的<code>ROS1</code>开发环境已经搭建成功</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221224171041205.png" alt="Python补全-1" style="zoom:25%;"></p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221224171251504.png" alt="Python-2" style="zoom:25%;"></p>
 
@@ -768,12 +772,16 @@ code ./
                                     <span class="chip bg-color">ROS</span>
                                 </a>
                             
-                                <a href="/tags/ROS%E6%95%99%E7%A8%8B/">
-                                    <span class="chip bg-color">ROS教程</span>
+                                <a href="/tags/ROS1/">
+                                    <span class="chip bg-color">ROS1</span>
                                 </a>
                             
-                                <a href="/tags/ROS%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
-                                    <span class="chip bg-color">ROS开发环境搭建</span>
+                                <a href="/tags/ROS1%E6%95%99%E7%A8%8B/">
+                                    <span class="chip bg-color">ROS1教程</span>
+                                </a>
+                            
+                                <a href="/tags/ROS1%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
+                                    <span class="chip bg-color">ROS1开发环境搭建</span>
                                 </a>
                             
                         </div>
@@ -1024,7 +1032,7 @@ code ./
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            本文是ROS系列教程的前言，介绍了什么是ROS
+                            本文是ROS系列教程的前言，介绍了什么是ROS、ROS的发展历史以及ROS1和ROS2的区别
                         
                     </div>
                     <div class="publish-info">
@@ -1056,6 +1064,22 @@ code ./
                     
                     <a href="/tags/ROS%E5%AE%89%E8%A3%85/">
                         <span class="chip bg-color">ROS安装</span>
+                    </a>
+                    
+                    <a href="/tags/ROS1/">
+                        <span class="chip bg-color">ROS1</span>
+                    </a>
+                    
+                    <a href="/tags/ROS1%E6%95%99%E7%A8%8B/">
+                        <span class="chip bg-color">ROS1教程</span>
+                    </a>
+                    
+                    <a href="/tags/ROS1%E5%AE%89%E8%A3%85/">
+                        <span class="chip bg-color">ROS1安装</span>
+                    </a>
+                    
+                    <a href="/tags/ROS2/">
+                        <span class="chip bg-color">ROS2</span>
                     </a>
                     
                 </div>
@@ -1242,7 +1266,7 @@ code ./
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">576.9k</span>
+                        class="white-color">580k</span>
             
             
             
