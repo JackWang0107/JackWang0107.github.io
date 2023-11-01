@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="ROS教程 5：Roslaunch与ROS计算图, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
-    <meta name="description" content="本文是ROS系列教程的第五篇文章，介绍了ROS中的roslaunch工具和ROS计算图">
+    <meta name="keywords" content="ROS1教程 5：Roslaunch与ROS1计算图, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
+    <meta name="description" content="本文是ROS1系列教程的第五篇文章，介绍了ROS1中的roslaunch工具和ROS1计算图">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>ROS教程 5：Roslaunch与ROS计算图 | JackWang&#39;s Blog</title>
+    <title>ROS1教程 5：Roslaunch与ROS1计算图 | JackWang&#39;s Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -259,7 +259,7 @@
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">ROS教程 5：Roslaunch与ROS计算图</h1>
+                    <h1 class="description center-align post-title">ROS1教程 5：Roslaunch与ROS1计算图</h1>
                 </div>
             </div>
         </div>
@@ -379,16 +379,20 @@
                                 <span class="chip bg-color">ROS</span>
                             </a>
                         
-                            <a href="/tags/ROS%E6%95%99%E7%A8%8B/">
-                                <span class="chip bg-color">ROS教程</span>
-                            </a>
-                        
                             <a href="/tags/rqt-graph/">
                                 <span class="chip bg-color">rqt_graph</span>
                             </a>
                         
                             <a href="/tags/roslaunch/">
                                 <span class="chip bg-color">roslaunch</span>
+                            </a>
+                        
+                            <a href="/tags/ROS1/">
+                                <span class="chip bg-color">ROS1</span>
+                            </a>
+                        
+                            <a href="/tags/ROS1%E6%95%99%E7%A8%8B/">
+                                <span class="chip bg-color">ROS1教程</span>
                             </a>
                         
                     </div>
@@ -399,8 +403,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/ROS%E6%95%99%E7%A8%8B/" class="post-category">
-                                ROS教程
+                            <a href="/categories/ROS1%E6%95%99%E7%A8%8B/" class="post-category">
+                                ROS1教程
                             </a>
                         
                     </div>
@@ -419,7 +423,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-06-01
+                    2023-11-01
                 </div>
                 
 
@@ -453,13 +457,13 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/%E5%B1%8F%E5%B9%95%E5%BD%95%E5%88%B62022-12-25%20%E4%B8%8B%E5%8D%889.31.06%20-%2001.gif" alt="roslaunch与ROS计算图"></p>
-<h1 id="ROS教程-5：Roslaunch与ROS计算图"><a href="#ROS教程-5：Roslaunch与ROS计算图" class="headerlink" title="ROS教程 5：Roslaunch与ROS计算图"></a>ROS教程 5：Roslaunch与ROS计算图</h1><h2 id="1-Roslaunch与launch文件"><a href="#1-Roslaunch与launch文件" class="headerlink" title="1. Roslaunch与launch文件"></a>1. Roslaunch与launch文件</h2><h3 id="1-1-需求"><a href="#1-1-需求" class="headerlink" title="1.1 需求"></a>1.1 需求</h3><blockquote>
-<p>一个程序中可能需要启动多个节点，例如：<code>ROS</code>内置的小乌龟案例，如果要控制乌龟运动，要启动多个窗口，分别启动<code>roscore</code>、乌龟界面节点、键盘控制节点。如果每次都调用<code>rosrun</code>逐一启动，显然效率低下，如何优化?</p>
+                <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/%E5%B1%8F%E5%B9%95%E5%BD%95%E5%88%B62022-12-25%20%E4%B8%8B%E5%8D%889.31.06%20-%2001.gif" alt="roslaunch与ROS1计算图"></p>
+<h1 id="ROS1教程-5：Roslaunch与ROS1计算图"><a href="#ROS1教程-5：Roslaunch与ROS1计算图" class="headerlink" title="ROS1教程 5：Roslaunch与ROS1计算图"></a>ROS1教程 5：Roslaunch与ROS1计算图</h1><h2 id="1-Roslaunch与launch文件"><a href="#1-Roslaunch与launch文件" class="headerlink" title="1. Roslaunch与launch文件"></a>1. Roslaunch与launch文件</h2><h3 id="1-1-需求"><a href="#1-1-需求" class="headerlink" title="1.1 需求"></a>1.1 需求</h3><blockquote>
+<p>一个程序中可能需要启动多个节点，例如：<code>ROS1</code>内置的小乌龟案例，如果要控制乌龟运动，要启动多个窗口，分别启动<code>roscore</code>、乌龟界面节点、键盘控制节点。如果每次都调用<code>rosrun</code>逐一启动，显然效率低下，如何优化?</p>
 </blockquote>
-<p>官方给出的优化策略是使用 <code>launch</code> 文件，可以一次性启动多个 <code>ROS</code> 节点。</p>
+<p>官方给出的优化策略是使用 <code>launch</code> 文件，可以一次性启动多个 <code>ROS1</code> 节点。</p>
 <h3 id="1-2-实现"><a href="#1-2-实现" class="headerlink" title="1.2 实现"></a>1.2 实现</h3><p>下面我们举一个使用<code>launch</code>运行前面的<code>hello_world</code>例程，同时运行<code>turtlesim</code>小乌龟例程</p>
-<p><code>ROS</code>的文件系统中要求，所有<code>launch</code>文件要放在功能包的<code>launch</code>文件夹下，因此在选定的功能包中添加<code>launch</code>文件夹</p>
+<p><code>ROS1</code>的文件系统中要求，所有<code>launch</code>文件要放在功能包的<code>launch</code>文件夹下，因此在选定的功能包中添加<code>launch</code>文件夹</p>
 <pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">cd</span> 工作目录/src
 catkin_create_pkg launch_test rospy roscpp std_msgs
 <span class="token function">mkdir</span> launch_test/launch
@@ -482,14 +486,14 @@ catkin_create_pkg launch_test rospy roscpp std_msgs
 </ul>
 <p>运行之后：</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221225182615522.png" alt="roslaunch"></p>
-<h2 id="2-ROS计算图"><a href="#2-ROS计算图" class="headerlink" title="2. ROS计算图"></a>2. ROS计算图</h2><h3 id="2-1-计算图简介"><a href="#2-1-计算图简介" class="headerlink" title="2.1 计算图简介"></a>2.1 计算图简介</h3><p>前面介绍的<code>ROS</code>文件结构，是磁盘上<code>ROS</code>程序的存储结构，是静态的，而<code>ROS</code>程序运行之后，以节点表现出来的进程之间的关系是错综复杂的，<code>ROS</code>中提供了一个实用的工具：<code>rqt_graph</code>来方便我们直观的看到各个节点之间的关系。</p>
-<p><code>rqt_graph</code>能够创建一个显示当前系统运行情况的动态图形。<code>ROS</code>分布式系统中不同进程需要进行数据交互，计算图可以以点对点的网络形式表现数据交互过程。<code>rqt_graph</code>是<code>rqt</code>程序包中的一部分。</p>
-<h3 id="2-2-计算图安装"><a href="#2-2-计算图安装" class="headerlink" title="2.2 计算图安装"></a>2.2 计算图安装</h3><p>如果前面安装<code>ROS</code>的时候，把所有的功能包（<code>package</code>）都已经安装完成，则直接在终端窗口中输入</p>
+<h2 id="2-ROS1计算图"><a href="#2-ROS1计算图" class="headerlink" title="2. ROS1计算图"></a>2. ROS1计算图</h2><h3 id="2-1-计算图简介"><a href="#2-1-计算图简介" class="headerlink" title="2.1 计算图简介"></a>2.1 计算图简介</h3><p>前面介绍的<code>ROS1</code>文件结构，是磁盘上<code>ROS1</code>程序的存储结构，是静态的，而<code>ROS1</code>程序运行之后，以节点表现出来的进程之间的关系是错综复杂的，<code>ROS1</code>中提供了一个实用的工具：<code>rqt_graph</code>来方便我们直观的看到各个节点之间的关系。</p>
+<p><code>rqt_graph</code>能够创建一个显示当前系统运行情况的动态图形。<code>ROS1</code>分布式系统中不同进程需要进行数据交互，计算图可以以点对点的网络形式表现数据交互过程。<code>rqt_graph</code>是<code>rqt</code>程序包中的一部分。</p>
+<h3 id="2-2-计算图安装"><a href="#2-2-计算图安装" class="headerlink" title="2.2 计算图安装"></a>2.2 计算图安装</h3><p>如果前面安装<code>ROS1</code>的时候，把所有的功能包（<code>package</code>）都已经安装完成，则直接在终端窗口中输入</p>
 <pre class="line-numbers language-bash"><code class="language-bash">rosrun rqt_graph rqt_graph
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>就可以运行。如果未安装则在终端中输入下面的命令进行安装：</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">sudo</span> apt <span class="token function">install</span> ros-<span class="token operator">&lt;</span>distro<span class="token operator">></span>-rqt
-<span class="token function">sudo</span> apt <span class="token function">install</span> ros-<span class="token operator">&lt;</span>distro<span class="token operator">></span>-rqt-common-plugins
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">sudo</span> apt <span class="token function">install</span> ROS1-<span class="token operator">&lt;</span>distro<span class="token operator">></span>-rqt
+<span class="token function">sudo</span> apt <span class="token function">install</span> ROS1-<span class="token operator">&lt;</span>distro<span class="token operator">></span>-rqt-common-plugins
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>如果遇到没有<code>PyQt5</code>、<code>PySide2</code>的报错的话，则运行下面的命令进行安装</p>
 <pre class="line-numbers language-bash"><code class="language-bash">python -m pip <span class="token function">install</span> PyQt5
@@ -502,7 +506,7 @@ python -m pip <span class="token function">install</span> PySide2
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>因为<code>rqt_graph</code>需要显示由一个一个节点组成的节点图，具体来说，<code>rqt_graph</code>通过<code>Graphviz</code>来显示节点图。而<code>Graphviz</code>是一个开源的，专门用于图的可视化的库。<code>PyDot</code>就是<code>Graphviz</code>的<code>Python</code>前端。</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221225192210808.png" alt="PyDot报错"></p>
-<p>安装完了之后，就可以正常运行<code>rqt_graph</code>了。但是有一个问题，主要是因为<code>ROS</code>中的<code>rqt_graph</code>功能包和当前的环境中的<code>Python</code>里的<code>PyQt</code>版本存在不兼容的问题，所以如果按照</p>
+<p>安装完了之后，就可以正常运行<code>rqt_graph</code>了。但是有一个问题，主要是因为<code>ROS1</code>中的<code>rqt_graph</code>功能包和当前的环境中的<code>Python</code>里的<code>PyQt</code>版本存在不兼容的问题，所以如果按照</p>
 <pre class="line-numbers language-bash"><code class="language-bash">rosrun rqt_graph rqt_graph
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>来运行的话，就会调用当前环境中的<code>Python</code>来运行<code>rqt_graph</code>包中的<code>Python</code>代码，则此时就会因为当前环境的<code>Python</code>的<code>PyQt</code>版本问题，会有一个报错：</p>
@@ -510,11 +514,11 @@ python -m pip <span class="token function">install</span> PySide2
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>这个就是因为后续新版本的<code>PyQt5</code>该了<code>API</code>的名字，所以有一个报错。但是这个报错不影响功能，就是会显示一个圆圈。</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221225210212954.png" alt="运行rqt_graph"></p>
-<p>但是看着真的不舒服，所以直接运行<code>rqt_graph</code>来使用<code>ROS</code>自带的<code>Python</code></p>
+<p>但是看着真的不舒服，所以直接运行<code>rqt_graph</code>来使用<code>ROS1</code>自带的<code>Python</code></p>
 <pre class="line-numbers language-bash"><code class="language-bash">rqt_graph
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221225212405982.png" alt="直接运行rqt_graph"></p>
-<h3 id="2-3-显示计算图"><a href="#2-3-显示计算图" class="headerlink" title="2.3 显示计算图"></a>2.3 显示计算图</h3><p>接下来以<code>ROS</code>内置的小乌龟案例来演示计算图</p>
+<h3 id="2-3-显示计算图"><a href="#2-3-显示计算图" class="headerlink" title="2.3 显示计算图"></a>2.3 显示计算图</h3><p>接下来以<code>ROS1</code>内置的小乌龟案例来演示计算图</p>
 <p>首先，按照前面所示，运行小乌龟例程</p>
 <pre class="line-numbers language-bash"><code class="language-bash">rosrun turtlesim turtlesim_node
 rosrun turtlesim turtle_teleop_key
@@ -595,16 +599,20 @@ rosrun turtlesim turtle_teleop_key
                                     <span class="chip bg-color">ROS</span>
                                 </a>
                             
-                                <a href="/tags/ROS%E6%95%99%E7%A8%8B/">
-                                    <span class="chip bg-color">ROS教程</span>
-                                </a>
-                            
                                 <a href="/tags/rqt-graph/">
                                     <span class="chip bg-color">rqt_graph</span>
                                 </a>
                             
                                 <a href="/tags/roslaunch/">
                                     <span class="chip bg-color">roslaunch</span>
+                                </a>
+                            
+                                <a href="/tags/ROS1/">
+                                    <span class="chip bg-color">ROS1</span>
+                                </a>
+                            
+                                <a href="/tags/ROS1%E6%95%99%E7%A8%8B/">
+                                    <span class="chip bg-color">ROS1教程</span>
                                 </a>
                             
                         </div>
@@ -783,15 +791,15 @@ rosrun turtlesim turtle_teleop_key
                 <a href="/2022/12/25/ros-jiao-cheng-6-ros-tong-xin-ji-zhi-jian-jie/">
                     <div class="card-image">
                         
-                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/01_%E6%A1%88%E4%BE%8B01_%E4%B9%8C%E9%BE%9F%E7%94%BB%E5%9C%86.gif" class="responsive-img" alt="ROS教程 6：ROS通信机制简介">
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/01_%E6%A1%88%E4%BE%8B01_%E4%B9%8C%E9%BE%9F%E7%94%BB%E5%9C%86.gif" class="responsive-img" alt="ROS1教程 6：ROS1通信机制简介">
                         
-                        <span class="card-title">ROS教程 6：ROS通信机制简介</span>
+                        <span class="card-title">ROS1教程 6：ROS1通信机制简介</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            本文是ROS系列教程的第六篇文章，对ROS中的通信机制进行了简介
+                            本文是ROS1系列教程的第六篇文章，对ROS1中的通信机制进行了简介
                         
                     </div>
                     <div class="publish-info">
@@ -802,8 +810,8 @@ rosrun turtlesim turtle_teleop_key
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/ROS%E6%95%99%E7%A8%8B/" class="post-category">
-                                    ROS教程
+                            <a href="/categories/ROS1%E6%95%99%E7%A8%8B/" class="post-category">
+                                    ROS1教程
                                 </a>
                             
                             
@@ -812,14 +820,6 @@ rosrun turtlesim turtle_teleop_key
                 </div>
                 
                 <div class="card-action article-tags">
-                    
-                    <a href="/tags/ROS/">
-                        <span class="chip bg-color">ROS</span>
-                    </a>
-                    
-                    <a href="/tags/ROS%E9%80%9A%E4%BF%A1%E6%9C%BA%E5%88%B6/">
-                        <span class="chip bg-color">ROS通信机制</span>
-                    </a>
                     
                     <a href="/tags/%E8%AF%9D%E9%A2%98%E9%80%9A%E4%BF%A1/">
                         <span class="chip bg-color">话题通信</span>
@@ -831,6 +831,14 @@ rosrun turtlesim turtle_teleop_key
                     
                     <a href="/tags/%E5%8F%82%E6%95%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/">
                         <span class="chip bg-color">参数服务器</span>
+                    </a>
+                    
+                    <a href="/tags/ROS1/">
+                        <span class="chip bg-color">ROS1</span>
+                    </a>
+                    
+                    <a href="/tags/ROS1%E9%80%9A%E4%BF%A1%E6%9C%BA%E5%88%B6/">
+                        <span class="chip bg-color">ROS1通信机制</span>
                     </a>
                     
                 </div>
@@ -847,15 +855,15 @@ rosrun turtlesim turtle_teleop_key
                 <a href="/2022/12/25/ros-jiao-cheng-4-hello-world-li-cheng/">
                     <div class="card-image">
                         
-                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/new/%E5%B1%8F%E5%B9%95%E5%BD%95%E5%88%B62022-12-25%20%E4%B8%8A%E5%8D%883.27.36.gif" class="responsive-img" alt="ROS教程 4：Hello World例程">
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/new/%E5%B1%8F%E5%B9%95%E5%BD%95%E5%88%B62022-12-25%20%E4%B8%8A%E5%8D%883.27.36.gif" class="responsive-img" alt="ROS1教程 4：Hello World例程">
                         
-                        <span class="card-title">ROS教程 4：Hello World例程</span>
+                        <span class="card-title">ROS1教程 4：Hello World例程</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            本文是ROS系列教程的第四篇文章，介绍了如何实现ROS的Hello World例程
+                            本文是ROS1系列教程的第四篇文章，介绍了如何实现ROS1的Hello World例程
                         
                     </div>
                     <div class="publish-info">
@@ -866,8 +874,8 @@ rosrun turtlesim turtle_teleop_key
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/ROS%E6%95%99%E7%A8%8B/" class="post-category">
-                                    ROS教程
+                            <a href="/categories/ROS1%E6%95%99%E7%A8%8B/" class="post-category">
+                                    ROS1教程
                                 </a>
                             
                             
@@ -881,12 +889,16 @@ rosrun turtlesim turtle_teleop_key
                         <span class="chip bg-color">ROS</span>
                     </a>
                     
-                    <a href="/tags/ROS%E6%95%99%E7%A8%8B/">
-                        <span class="chip bg-color">ROS教程</span>
-                    </a>
-                    
                     <a href="/tags/catkin-make/">
                         <span class="chip bg-color">catkin_make</span>
+                    </a>
+                    
+                    <a href="/tags/ROS1/">
+                        <span class="chip bg-color">ROS1</span>
+                    </a>
+                    
+                    <a href="/tags/ROS1%E6%95%99%E7%A8%8B/">
+                        <span class="chip bg-color">ROS1教程</span>
                     </a>
                     
                 </div>
@@ -1073,7 +1085,7 @@ rosrun turtlesim turtle_teleop_key
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">580k</span>
+                        class="white-color">587.9k</span>
             
             
             

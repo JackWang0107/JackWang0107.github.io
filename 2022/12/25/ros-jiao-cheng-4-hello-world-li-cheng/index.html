@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="ROS教程 4：Hello World例程, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
-    <meta name="description" content="本文是ROS系列教程的第四篇文章，介绍了如何实现ROS的Hello World例程">
+    <meta name="keywords" content="ROS1教程 4：Hello World例程, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
+    <meta name="description" content="本文是ROS1系列教程的第四篇文章，介绍了如何实现ROS1的Hello World例程">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>ROS教程 4：Hello World例程 | JackWang&#39;s Blog</title>
+    <title>ROS1教程 4：Hello World例程 | JackWang&#39;s Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -259,7 +259,7 @@
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">ROS教程 4：Hello World例程</h1>
+                    <h1 class="description center-align post-title">ROS1教程 4：Hello World例程</h1>
                 </div>
             </div>
         </div>
@@ -379,12 +379,16 @@
                                 <span class="chip bg-color">ROS</span>
                             </a>
                         
-                            <a href="/tags/ROS%E6%95%99%E7%A8%8B/">
-                                <span class="chip bg-color">ROS教程</span>
-                            </a>
-                        
                             <a href="/tags/catkin-make/">
                                 <span class="chip bg-color">catkin_make</span>
+                            </a>
+                        
+                            <a href="/tags/ROS1/">
+                                <span class="chip bg-color">ROS1</span>
+                            </a>
+                        
+                            <a href="/tags/ROS1%E6%95%99%E7%A8%8B/">
+                                <span class="chip bg-color">ROS1教程</span>
                             </a>
                         
                     </div>
@@ -395,8 +399,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/ROS%E6%95%99%E7%A8%8B/" class="post-category">
-                                ROS教程
+                            <a href="/categories/ROS1%E6%95%99%E7%A8%8B/" class="post-category">
+                                ROS1教程
                             </a>
                         
                     </div>
@@ -415,7 +419,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-06-01
+                    2023-11-01
                 </div>
                 
 
@@ -449,11 +453,11 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/new/%E5%B1%8F%E5%B9%95%E5%BD%95%E5%88%B62022-12-25%20%E4%B8%8A%E5%8D%883.27.36.gif" alt="ROS的Hello World例程"></p>
-<h1 id="ROS教程-4：Hello-World例程"><a href="#ROS教程-4：Hello-World例程" class="headerlink" title="ROS教程 4：Hello World例程"></a>ROS教程 4：Hello World例程</h1><p>前面我们讲解了<code>ROS</code>的编译系统和文件系统，接下来这一节我们将介绍如何实现<code>ROS</code>中的<code>Hello World</code>例程</p>
-<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F.jpg" alt="ROS的文件系统"></p>
-<h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h2><p><code>ROS</code>中涉及的编程语言以<code>C++</code>和<code>Python</code>为主，<code>ROS</code>中的大多数程序两者都可以实现，在本系列教程中，每一个案例也都会分别使用<code>C++</code>和<code>Python</code>两种语言分别实现演示，读者可以根据自身情况选择合适的实现方案。</p>
-<p><code>ROS</code>中的程序即便使用不同的编程语言，实现流程也大致类似，以当前<code>HelloWorld</code>程序为例，实现流程大致如下：</p>
+                <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/new/%E5%B1%8F%E5%B9%95%E5%BD%95%E5%88%B62022-12-25%20%E4%B8%8A%E5%8D%883.27.36.gif" alt="ROS1的Hello World例程"></p>
+<h1 id="ROS1教程-4：Hello-World例程"><a href="#ROS1教程-4：Hello-World例程" class="headerlink" title="ROS1教程 4：Hello World例程"></a>ROS1教程 4：Hello World例程</h1><p>前面我们讲解了<code>ROS1</code>的编译系统和文件系统，接下来这一节我们将介绍如何实现<code>ROS1</code>中的<code>Hello World</code>例程</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F.jpg" alt="ROS1的文件系统"></p>
+<h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h2><p><code>ROS1</code>中涉及的编程语言以<code>C++</code>和<code>Python</code>为主，<code>ROS1</code>中的大多数程序两者都可以实现，在本系列教程中，每一个案例也都会分别使用<code>C++</code>和<code>Python</code>两种语言分别实现演示，读者可以根据自身情况选择合适的实现方案。</p>
+<p><code>ROS1</code>中的程序即便使用不同的编程语言，实现流程也大致类似，以当前<code>HelloWorld</code>程序为例，实现流程大致如下：</p>
 <ol>
 <li>先创建一个工作空间；</li>
 <li>再创建一个功能包；</li>
@@ -461,7 +465,7 @@
 <li>编译并执行。</li>
 </ol>
 <p>上述流程中，<code>C++</code>和<code>Python</code>只是在步骤3和步骤4的实现细节上存在差异，其他流程基本一致。</p>
-<p><strong>注意</strong>：虽然说在<code>ROS</code>中，实现同一功能时，<code>C++</code>和<code>Python</code>都能实现，但是具体选择哪种语言，需要视需求而定，因为两种语言相较而言，<code>C++</code>运行效率高但是编码效率低，而<code>Python</code>则反之，基于二者互补的特点，<code>ROS</code>设计者分别设计了<code>roscpp</code>与<code>rospy</code>库，前者旨在成为<code>ROS</code>的高性能库，而后者则一般用于对性能无要求的场景，旨在提高开发效率。</p>
+<p><strong>注意</strong>：虽然说在<code>ROS1</code>中，实现同一功能时，<code>C++</code>和<code>Python</code>都能实现，但是具体选择哪种语言，需要视需求而定，因为两种语言相较而言，<code>C++</code>运行效率高但是编码效率低，而<code>Python</code>则反之，基于二者互补的特点，<code>ROS1</code>设计者分别设计了<code>roscpp</code>与<code>rospy</code>库，前者旨在成为<code>ROS1</code>的高性能库，而后者则一般用于对性能无要求的场景，旨在提高开发效率。</p>
 <h2 id="2-创建工作空间"><a href="#2-创建工作空间" class="headerlink" title="2. 创建工作空间"></a>2. 创建工作空间</h2><p>我们首先创建一个名为<code>jack_ws</code>的工作空间</p>
 <pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">mkdir</span> -p 自定义空间名称/src
 <span class="token function">cd</span> 自定义空间名称
@@ -469,29 +473,29 @@ catkin_make
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>上述命令，首先会创建一个工作空间以及一个<code>src</code>子目录，然后再进入工作空间调用<code>catkin_make</code>命令编译。在我这里工作空间名就是<code>jack_ws</code></p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/new/Snipaste_2022-12-25_00-46-20.png" alt="创建工作空间"></p>
-<h2 id="3-创建功能包"><a href="#3-创建功能包" class="headerlink" title="3. 创建功能包"></a>3. 创建功能包</h2><p>接下来我们进入<code>src</code>目录创建<code>ROS</code>功能包</p>
+<h2 id="3-创建功能包"><a href="#3-创建功能包" class="headerlink" title="3. 创建功能包"></a>3. 创建功能包</h2><p>接下来我们进入<code>src</code>目录创建<code>ROS1</code>功能包</p>
 <pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">cd</span> src
-catkin_create_pkg 自定义ROS包名 依赖的ROS功能包1 依赖的ROS功能包2 依赖的功能包3
+catkin_create_pkg 自定义ROS1包名 依赖的ROS1功能包1 依赖的ROS1功能包2 依赖的功能包3
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>上述命令，会在工作空间下生成一个依赖了三个功能包的功能包，例如</p>
 <pre class="line-numbers language-bash"><code class="language-bash">catkin_create_pkg hello_world roscpp rospy std_msgs
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>创建出的<code>HelloWorld</code>功能包依赖于 <code>roscpp</code>、<code>rospy</code> 与 <code>std_msgs</code>，其中<code>roscpp</code>是使用<code>C++</code>实现的<code>ROS</code>基础功能库，而<code>rospy</code>则是使用<code>python</code>实现的<code>ROS</code>基础功能库，<code>std_msgs</code>是标准消息库，创建<code>ROS</code>功能包时，一般都会依赖这三个库实现。</p>
+<p>创建出的<code>HelloWorld</code>功能包依赖于 <code>roscpp</code>、<code>rospy</code> 与 <code>std_msgs</code>，其中<code>roscpp</code>是使用<code>C++</code>实现的<code>ROS1</code>基础功能库，而<code>rospy</code>则是使用<code>python</code>实现的<code>ROS1</code>基础功能库，<code>std_msgs</code>是标准消息库，创建<code>ROS1</code>功能包时，一般都会依赖这三个库实现。</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221225005838484.png" alt="创建功能包"></p>
 <h2 id="4-编写C-代码"><a href="#4-编写C-代码" class="headerlink" title="4. 编写C++代码"></a>4. 编写C++代码</h2><p>上面创建工作空间和功能包都是准备阶段，接下来写代码才是核心。写代码的步骤Python又和C++有些不懂，因此我们下面分开讲</p>
 <h3 id="4-1-编辑C-源文件"><a href="#4-1-编辑C-源文件" class="headerlink" title="4.1 编辑C++源文件"></a>4.1 编辑C++源文件</h3><pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">cd</span> 自定义的包
 <span class="token function">touch</span> src/源文件名.cpp
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>然后接下来输入下面的测试代码</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"ros/ros.h"</span></span>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"ROS1/ROS1.h"</span></span>
 
 <span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">int</span> argc<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token operator">*</span>argv<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
 
-    <span class="token comment" spellcheck="true">// 初始化ros节点</span>
-    ros<span class="token operator">::</span><span class="token function">init</span><span class="token punctuation">(</span>argc<span class="token punctuation">,</span> argv<span class="token punctuation">,</span> <span class="token string">"hello"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 初始化ROS1节点</span>
+    ROS1<span class="token operator">::</span><span class="token function">init</span><span class="token punctuation">(</span>argc<span class="token punctuation">,</span> argv<span class="token punctuation">,</span> <span class="token string">"hello"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
     <span class="token comment" spellcheck="true">// 创建节点句柄，非必要</span>
-    ros<span class="token operator">::</span>NodeHandle n<span class="token punctuation">;</span>
+    ROS1<span class="token operator">::</span>NodeHandle n<span class="token punctuation">;</span>
 
     <span class="token comment" spellcheck="true">// 命令行输出hello world</span>
     <span class="token function">ROS_INFO</span><span class="token punctuation">(</span><span class="token string">"Hello World\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -534,7 +538,7 @@ rosrun 包名 C++节点
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>此后就有补全了</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221225025236615.png" alt="运行C++程序"></p>
-<h2 id="5-编写Python代码"><a href="#5-编写Python代码" class="headerlink" title="5. 编写Python代码"></a>5. 编写Python代码</h2><h3 id="5-1-编写Python源代码"><a href="#5-1-编写Python源代码" class="headerlink" title="5.1 编写Python源代码"></a>5.1 编写Python源代码</h3><pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">cd</span> ros包
+<h2 id="5-编写Python代码"><a href="#5-编写Python代码" class="headerlink" title="5. 编写Python代码"></a>5. 编写Python代码</h2><h3 id="5-1-编写Python源代码"><a href="#5-1-编写Python源代码" class="headerlink" title="5.1 编写Python源代码"></a>5.1 编写Python源代码</h3><pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">cd</span> ROS1包
 <span class="token function">mkdir</span> scripts
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>新建<code>Python</code>文件，文件名自定义</p>
@@ -644,12 +648,16 @@ rosrun 包名 自定义文件名.py
                                     <span class="chip bg-color">ROS</span>
                                 </a>
                             
-                                <a href="/tags/ROS%E6%95%99%E7%A8%8B/">
-                                    <span class="chip bg-color">ROS教程</span>
-                                </a>
-                            
                                 <a href="/tags/catkin-make/">
                                     <span class="chip bg-color">catkin_make</span>
+                                </a>
+                            
+                                <a href="/tags/ROS1/">
+                                    <span class="chip bg-color">ROS1</span>
+                                </a>
+                            
+                                <a href="/tags/ROS1%E6%95%99%E7%A8%8B/">
+                                    <span class="chip bg-color">ROS1教程</span>
                                 </a>
                             
                         </div>
@@ -828,15 +836,15 @@ rosrun 包名 自定义文件名.py
                 <a href="/2022/12/25/ros-jiao-cheng-5-roslaunch-yu-ros-ji-suan-tu/">
                     <div class="card-image">
                         
-                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/%E5%B1%8F%E5%B9%95%E5%BD%95%E5%88%B62022-12-25%20%E4%B8%8B%E5%8D%889.31.06%20-%2001.gif" class="responsive-img" alt="ROS教程 5：Roslaunch与ROS计算图">
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/%E5%B1%8F%E5%B9%95%E5%BD%95%E5%88%B62022-12-25%20%E4%B8%8B%E5%8D%889.31.06%20-%2001.gif" class="responsive-img" alt="ROS1教程 5：Roslaunch与ROS1计算图">
                         
-                        <span class="card-title">ROS教程 5：Roslaunch与ROS计算图</span>
+                        <span class="card-title">ROS1教程 5：Roslaunch与ROS1计算图</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            本文是ROS系列教程的第五篇文章，介绍了ROS中的roslaunch工具和ROS计算图
+                            本文是ROS1系列教程的第五篇文章，介绍了ROS1中的roslaunch工具和ROS1计算图
                         
                     </div>
                     <div class="publish-info">
@@ -847,8 +855,8 @@ rosrun 包名 自定义文件名.py
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/ROS%E6%95%99%E7%A8%8B/" class="post-category">
-                                    ROS教程
+                            <a href="/categories/ROS1%E6%95%99%E7%A8%8B/" class="post-category">
+                                    ROS1教程
                                 </a>
                             
                             
@@ -862,16 +870,20 @@ rosrun 包名 自定义文件名.py
                         <span class="chip bg-color">ROS</span>
                     </a>
                     
-                    <a href="/tags/ROS%E6%95%99%E7%A8%8B/">
-                        <span class="chip bg-color">ROS教程</span>
-                    </a>
-                    
                     <a href="/tags/rqt-graph/">
                         <span class="chip bg-color">rqt_graph</span>
                     </a>
                     
                     <a href="/tags/roslaunch/">
                         <span class="chip bg-color">roslaunch</span>
+                    </a>
+                    
+                    <a href="/tags/ROS1/">
+                        <span class="chip bg-color">ROS1</span>
+                    </a>
+                    
+                    <a href="/tags/ROS1%E6%95%99%E7%A8%8B/">
+                        <span class="chip bg-color">ROS1教程</span>
                     </a>
                     
                 </div>
@@ -888,15 +900,15 @@ rosrun 包名 自定义文件名.py
                 <a href="/2022/12/24/ros-jiao-cheng-3-ros-de-bian-yi-xi-tong-he-ros-de-wen-jian-xi-tong/">
                     <div class="card-image">
                         
-                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/%E5%B1%8F%E5%B9%95%E5%BD%95%E5%88%B62022-12-24%20%E4%B8%8B%E5%8D%888.22.34.gif" class="responsive-img" alt="ROS教程 3：ROS的编译系统和ROS的文件系统">
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/%E5%B1%8F%E5%B9%95%E5%BD%95%E5%88%B62022-12-24%20%E4%B8%8B%E5%8D%888.22.34.gif" class="responsive-img" alt="ROS1教程 3：ROS1的编译系统和ROS1的文件系统">
                         
-                        <span class="card-title">ROS教程 3：ROS的编译系统和ROS的文件系统</span>
+                        <span class="card-title">ROS1教程 3：ROS1的编译系统和ROS1的文件系统</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            本文是ROS系列教程的第三篇文章，介绍了如何搭建ROS的编译系统和ROS的文件系统
+                            本文是ROS1系列教程的第三篇文章，介绍了如何搭建ROS1的编译系统和ROS1的文件系统
                         
                     </div>
                     <div class="publish-info">
@@ -907,8 +919,8 @@ rosrun 包名 自定义文件名.py
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/ROS%E6%95%99%E7%A8%8B/" class="post-category">
-                                    ROS教程
+                            <a href="/categories/ROS1%E6%95%99%E7%A8%8B/" class="post-category">
+                                    ROS1教程
                                 </a>
                             
                             
@@ -922,20 +934,24 @@ rosrun 包名 自定义文件名.py
                         <span class="chip bg-color">ROS</span>
                     </a>
                     
-                    <a href="/tags/ROS%E6%95%99%E7%A8%8B/">
-                        <span class="chip bg-color">ROS教程</span>
-                    </a>
-                    
-                    <a href="/tags/ROS%E7%BC%96%E8%AF%91%E7%B3%BB%E7%BB%9F/">
-                        <span class="chip bg-color">ROS编译系统</span>
-                    </a>
-                    
                     <a href="/tags/catkin-make/">
                         <span class="chip bg-color">catkin_make</span>
                     </a>
                     
-                    <a href="/tags/ROS%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/">
-                        <span class="chip bg-color">ROS文件系统</span>
+                    <a href="/tags/ROS1/">
+                        <span class="chip bg-color">ROS1</span>
+                    </a>
+                    
+                    <a href="/tags/ROS1%E6%95%99%E7%A8%8B/">
+                        <span class="chip bg-color">ROS1教程</span>
+                    </a>
+                    
+                    <a href="/tags/ROS1%E7%BC%96%E8%AF%91%E7%B3%BB%E7%BB%9F/">
+                        <span class="chip bg-color">ROS1编译系统</span>
+                    </a>
+                    
+                    <a href="/tags/ROS1%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/">
+                        <span class="chip bg-color">ROS1文件系统</span>
                     </a>
                     
                 </div>
@@ -1122,7 +1138,7 @@ rosrun 包名 自定义文件名.py
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">580k</span>
+                        class="white-color">587.9k</span>
             
             
             

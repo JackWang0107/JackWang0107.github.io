@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="ROS教程 3：ROS的编译系统和ROS的文件系统, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
-    <meta name="description" content="本文是ROS系列教程的第三篇文章，介绍了如何搭建ROS的编译系统和ROS的文件系统">
+    <meta name="keywords" content="ROS1教程 3：ROS1的编译系统和ROS1的文件系统, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
+    <meta name="description" content="本文是ROS1系列教程的第三篇文章，介绍了如何搭建ROS1的编译系统和ROS1的文件系统">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>ROS教程 3：ROS的编译系统和ROS的文件系统 | JackWang&#39;s Blog</title>
+    <title>ROS1教程 3：ROS1的编译系统和ROS1的文件系统 | JackWang&#39;s Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -259,7 +259,7 @@
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">ROS教程 3：ROS的编译系统和ROS的文件系统</h1>
+                    <h1 class="description center-align post-title">ROS1教程 3：ROS1的编译系统和ROS1的文件系统</h1>
                 </div>
             </div>
         </div>
@@ -379,20 +379,24 @@
                                 <span class="chip bg-color">ROS</span>
                             </a>
                         
-                            <a href="/tags/ROS%E6%95%99%E7%A8%8B/">
-                                <span class="chip bg-color">ROS教程</span>
-                            </a>
-                        
-                            <a href="/tags/ROS%E7%BC%96%E8%AF%91%E7%B3%BB%E7%BB%9F/">
-                                <span class="chip bg-color">ROS编译系统</span>
-                            </a>
-                        
                             <a href="/tags/catkin-make/">
                                 <span class="chip bg-color">catkin_make</span>
                             </a>
                         
-                            <a href="/tags/ROS%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/">
-                                <span class="chip bg-color">ROS文件系统</span>
+                            <a href="/tags/ROS1/">
+                                <span class="chip bg-color">ROS1</span>
+                            </a>
+                        
+                            <a href="/tags/ROS1%E6%95%99%E7%A8%8B/">
+                                <span class="chip bg-color">ROS1教程</span>
+                            </a>
+                        
+                            <a href="/tags/ROS1%E7%BC%96%E8%AF%91%E7%B3%BB%E7%BB%9F/">
+                                <span class="chip bg-color">ROS1编译系统</span>
+                            </a>
+                        
+                            <a href="/tags/ROS1%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/">
+                                <span class="chip bg-color">ROS1文件系统</span>
                             </a>
                         
                     </div>
@@ -403,8 +407,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/ROS%E6%95%99%E7%A8%8B/" class="post-category">
-                                ROS教程
+                            <a href="/categories/ROS1%E6%95%99%E7%A8%8B/" class="post-category">
+                                ROS1教程
                             </a>
                         
                     </div>
@@ -423,7 +427,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-06-01
+                    2023-11-01
                 </div>
                 
 
@@ -457,9 +461,9 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/%E5%B1%8F%E5%B9%95%E5%BD%95%E5%88%B62022-12-24%20%E4%B8%8B%E5%8D%888.22.34.gif" alt="ROS编译系统"></p>
-<h1 id="ROS教程-3：ROS的编译系统和ROS的文件系统"><a href="#ROS教程-3：ROS的编译系统和ROS的文件系统" class="headerlink" title="ROS教程 3：ROS的编译系统和ROS的文件系统"></a>ROS教程 3：ROS的编译系统和ROS的文件系统</h1><p>其实，我们上一节在测试的<code>ROS</code>开发环境的时候，就已经涉及到了<code>ROS</code>的编译系统和文件系统。但是我们始终没有正是介绍他们，所以在下一章我们正是开始编写<code>ROS</code>代码前，我们先介绍<code>ROS</code>的编译系统和<code>ROS</code>的文件系统。</p>
-<h2 id="1-ROS编译系统：Catkin"><a href="#1-ROS编译系统：Catkin" class="headerlink" title="1. ROS编译系统：Catkin"></a>1. ROS编译系统：Catkin</h2><p>我们前面在<code>ROS</code>的介绍中说过，<code>ROS</code>是<code>Willow Garage</code>这家公司创造的，而<code>catkin</code>这个词的本意是柔荑，即柳树的花的名字。所以其实，<code>catkin</code>就是回应了<code>Willow Garage</code>公司</p>
+                <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/%E5%B1%8F%E5%B9%95%E5%BD%95%E5%88%B62022-12-24%20%E4%B8%8B%E5%8D%888.22.34.gif" alt="ROS1编译系统"></p>
+<h1 id="ROS1教程-3：ROS1的编译系统和ROS1的文件系统"><a href="#ROS1教程-3：ROS1的编译系统和ROS1的文件系统" class="headerlink" title="ROS1教程 3：ROS1的编译系统和ROS1的文件系统"></a>ROS1教程 3：ROS1的编译系统和ROS1的文件系统</h1><p>其实，我们上一节在测试的<code>ROS1</code>开发环境的时候，就已经涉及到了<code>ROS1</code>的编译系统和文件系统。但是我们始终没有正是介绍他们，所以在下一章我们正是开始编写<code>ROS1</code>代码前，我们先介绍<code>ROS1</code>的编译系统和<code>ROS1</code>的文件系统。</p>
+<h2 id="1-ROS1编译系统：Catkin"><a href="#1-ROS1编译系统：Catkin" class="headerlink" title="1. ROS1编译系统：Catkin"></a>1. ROS1编译系统：Catkin</h2><p>我们前面在<code>ROS1</code>的介绍中说过，<code>ROS1</code>是<code>Willow Garage</code>这家公司创造的，而<code>catkin</code>这个词的本意是柔荑，即柳树的花的名字。所以其实，<code>catkin</code>就是回应了<code>Willow Garage</code>公司</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221224180613231.png" alt="Catkin, 柔荑" style="zoom:50%;"></p>
 <h3 id="1-1-什么是编译系统？"><a href="#1-1-什么是编译系统？" class="headerlink" title="1.1 什么是编译系统？"></a>1.1 什么是编译系统？</h3><p><strong><code>编译系统</code>负责编译源代码，生成最终的目标</strong>。目标可以是<strong>库</strong>、<strong>可执行程序</strong>、<strong>（自动生成的）脚本</strong>、<strong>（自动导出的）接口</strong>（例如 C++ 头文件）或任何其他非静态代码的形式。</p>
 <p>在软件开发中广泛使用的流行编译系统包括：</p>
@@ -473,24 +477,24 @@
 <p>几乎所有集成开发环境，例如<code>Qt Creator</code>、<code>Microsoft Visual Studio</code>和<code>Eclipse</code>，都为它们支持的相应语言创造了自己的编译系统，例如<code>QMake</code>和<code>Visual Build</code>。这些 IDE 中的编译系统通常都是给其他的编译系统进行了包装，例如：<code>Autotools</code>、<code>CMake</code>。即<code>QMake</code>和<code>Visual Build</code>都是<code>Autotools</code>和<code>Cmake</code>的前端。</p>
 <p>要构建目标，编译系统需要一套工具，即工具链，包括：<code>C++</code>编译器、链接器等等。而除了这些工具以外，编译系统还需要这些工具的其他信息，例如工具的位置、源代码的位置、代码依赖项、外部依赖项、这些依赖项位于何处、要编译哪些目标、生成的编译目标的位置等信息，以及它们应该安装的位置……</p>
 <p>这些信息通常保存在一个文件之后，而后在调用编译系统编译的时候，编译系统会读取的文件中的内容，而后按照文件中的规矩进行编译。这个文件称为配置文件。例如<code>CMake</code>中，它的配置文件通常命名为<code>CMakeLists.txt</code>，而<code>GNU Make</code>，它的配置文件通常命名为<code>Makefile</code>。而在IDE中，则通常把配置文件中的信息存储为工作区/项目的元信息，例如<code>Visual C++</code>项目文件的一部分。</p>
-<p>类似的，<code>ROS</code>使用自定义构建系统<code>catkin</code>，它是基于<code>CMake</code>的构建系统，以管理包之间的依赖关系。</p>
-<h3 id="1-2-为什么-ROS-有自定义编译系统？"><a href="#1-2-为什么-ROS-有自定义编译系统？" class="headerlink" title="1.2 为什么 ROS 有自定义编译系统？"></a>1.2 为什么 ROS 有自定义编译系统？</h3><p>对于单个软件项目的开发，<code>Autotools</code>、<code>CMake</code>等现有编译系统往往就够用了。然而，这些工具虽然可以胜任大型、复杂、高度异构（包含多种语言写成的代码）的项目的编译，但是往往可能需要复杂的配置，因为特定目标可能具有大量的依赖项。</p>
+<p>类似的，<code>ROS1</code>使用自定义构建系统<code>catkin</code>，它是基于<code>CMake</code>的构建系统，以管理包之间的依赖关系。</p>
+<h3 id="1-2-为什么-ROS1-有自定义编译系统？"><a href="#1-2-为什么-ROS1-有自定义编译系统？" class="headerlink" title="1.2 为什么 ROS1 有自定义编译系统？"></a>1.2 为什么 ROS1 有自定义编译系统？</h3><p>对于单个软件项目的开发，<code>Autotools</code>、<code>CMake</code>等现有编译系统往往就够用了。然而，这些工具虽然可以胜任大型、复杂、高度异构（包含多种语言写成的代码）的项目的编译，但是往往可能需要复杂的配置，因为特定目标可能具有大量的依赖项。</p>
 <blockquote>
 <p>例如项目可能需要分别编译<code>C/C++</code>代码和<code>rust</code>代码，然后运行的时候又需要先运行<code>Python</code>脚本启动客户端去链接<code>Java</code>代码写的服务器……</p>
 </blockquote>
 <p>如此复杂的项目中具有大量特定的链接方式、自定义的构建规则和运行规则，但是<code>Autotools</code>和<code>CMake</code>是面向通用项目的。因此需要在<code>Autotools</code>和<code>CMake</code>的配置文件中需要进行大量的设置才能够编译复杂的项目，因此没有软件开发背景的人也往往难以实现。</p>
-<p>而<code>ROS</code>恰巧正如上面所说，<code>ROS</code>是一个非常大的松散联合包集合。不同的包之间可能是用不同的语言写成的，各自都有不同的依赖、开发工具工具和代码组织约定。因此，某些包中目标的编译过程可能与另一个的编译方式完全不同。例如A公司的机器人的机械臂的代码使用<code>CMake</code>去编译代码，而B公司的地盘的代码使用<code>Autotools</code>编译。</p>
-<p>因此，为了屏蔽包与包之间的编译的差异，<code>ROS</code>提供了一个更加高层的编译系统，即<code>catkin</code>编译系统。具体来说，<code>catkin</code>对<code>CMake</code>进行了扩展，为其添加了很多的扩展配置，例如专门用于<code>ROS</code>的<code>CMake</code>函数等等。所以换句话说，<code>catkin</code>都旨在通过使用工具和约定来简化<code>ROS</code>的编译过程，从而使得编译和运行<code>ROS</code>代码变得更加容易。没有它，有效地共享<code>ROS</code>的代码将更加困难。</p>
+<p>而<code>ROS1</code>恰巧正如上面所说，<code>ROS1</code>是一个非常大的松散联合包集合。不同的包之间可能是用不同的语言写成的，各自都有不同的依赖、开发工具工具和代码组织约定。因此，某些包中目标的编译过程可能与另一个的编译方式完全不同。例如A公司的机器人的机械臂的代码使用<code>CMake</code>去编译代码，而B公司的地盘的代码使用<code>Autotools</code>编译。</p>
+<p>因此，为了屏蔽包与包之间的编译的差异，<code>ROS1</code>提供了一个更加高层的编译系统，即<code>catkin</code>编译系统。具体来说，<code>catkin</code>对<code>CMake</code>进行了扩展，为其添加了很多的扩展配置，例如专门用于<code>ROS1</code>的<code>CMake</code>函数等等。所以换句话说，<code>catkin</code>都旨在通过使用工具和约定来简化<code>ROS1</code>的编译过程，从而使得编译和运行<code>ROS1</code>代码变得更加容易。没有它，有效地共享<code>ROS1</code>的代码将更加困难。</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L21hb19odWlfZmVp,size_16,color_FFFFFF,t_70.png" alt="catkin编译系统的层次" style="zoom:43%;"></p>
-<h3 id="1-3-rosbuild与catkin-make"><a href="#1-3-rosbuild与catkin-make" class="headerlink" title="1.3 rosbuild与catkin_make"></a>1.3 rosbuild与catkin_make</h3><p>事实上，<code>ROS</code>最初的编译系统是<code>rosbuild</code>，后来才换成了<code>catkin</code></p>
-<p>因为在<code>ROS</code>的早期版本中，<code>rosbuild</code>作为<code>ROS</code>的编译系统运行良好。但随着<code>ROS</code>代码库的快速增长以及多年的运用已经暴露出<code>rosbuild</code>设计时的一些缺点，因此<code>catkin</code>试图弥补这些缺点。</p>
+<h3 id="1-3-rosbuild与catkin-make"><a href="#1-3-rosbuild与catkin-make" class="headerlink" title="1.3 rosbuild与catkin_make"></a>1.3 rosbuild与catkin_make</h3><p>事实上，<code>ROS1</code>最初的编译系统是<code>rosbuild</code>，后来才换成了<code>catkin</code></p>
+<p>因为在<code>ROS1</code>的早期版本中，<code>rosbuild</code>作为<code>ROS1</code>的编译系统运行良好。但随着<code>ROS1</code>代码库的快速增长以及多年的运用已经暴露出<code>rosbuild</code>设计时的一些缺点，因此<code>catkin</code>试图弥补这些缺点。</p>
 <p>举一个例子，<code>rosbuild</code>的最大问题之一是它不能轻松的移植到所有操作系统，尤其是<code>Windows</code>。这是因为<code>rosbuild</code>混合使用<code>Bash</code>脚本、<code>GNU Make</code>和 <code>CMake</code>来构建代码。在<code>rosbuild</code>中，当我们调用编译系统时，我们必须调用 <code>rosbuild</code> 提供的自定义脚本，例如<code>rosmake</code>。<code>rosmake</code>是一个调用<code>make</code>的 <code>Bash</code> 脚本，它本身调用 <code>CMake</code>，<code>CMake</code> 生成另一个 <code>makefile</code>，最后再次调用<code>make</code>。属实是太不优雅了。而<code>catkin</code>更优雅，只需调用 <code>CMake</code> 即可完成编译。</p>
 <p><code>Catkin</code> 中自定义非常多的 <code>CMake</code> 宏以及一些<code>Python</code>代码实现的。由于<code>CMake</code>和<code>Python</code>都是多平台通用的，因此<code>catkin</code>可以轻松移植到任何同时支持<code>Python</code>和<code>CMake</code>的系统。事实上，<code>catkin</code> 项目以与其他 <code>CMake</code> 项目无缝使用——构建 <code>catkin</code> 项目时，它们还会生成导出信息，允许在别的<code>CMake</code>项目中使用<code>CMake</code>的函数 <code>find_package()</code>函数找到它们。</p>
-<p>除了复杂的编译流程外，还有：次优的设计决策、黑客攻击和不必要的复杂性等等问题，因此这些问题促使<code>ROS</code>替换掉<code>rosbuild</code>。</p>
-<h3 id="1-4-Catkin编译系统和文件系统的配合"><a href="#1-4-Catkin编译系统和文件系统的配合" class="headerlink" title="1.4 Catkin编译系统和文件系统的配合"></a>1.4 Catkin编译系统和文件系统的配合</h3><p>一个复杂的项目需要很好的文件结构规划，而<code>ROS</code>中<code>catkin</code>编译系统能够很好的和<code>ROS</code>的文件系统配合。</p>
-<h2 id="2-ROS的文件系统"><a href="#2-ROS的文件系统" class="headerlink" title="2. ROS的文件系统"></a>2. ROS的文件系统</h2><p>所谓文件系统，指的是文件在硬盘上的存储方式。因此<code>ROS</code>的文件系统指的就是硬盘上<code>ROS</code>源代码的组织形式，其结构大致可以如下图所示：</p>
-<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F.jpg" alt="ROS的文件系统"></p>
-<h3 id="2-1-概述"><a href="#2-1-概述" class="headerlink" title="2.1 概述"></a>2.1 概述</h3><p><code>ROS</code>文件系统中各个文件的作用的解释如下：</p>
+<p>除了复杂的编译流程外，还有：次优的设计决策、黑客攻击和不必要的复杂性等等问题，因此这些问题促使<code>ROS1</code>替换掉<code>rosbuild</code>。</p>
+<h3 id="1-4-Catkin编译系统和文件系统的配合"><a href="#1-4-Catkin编译系统和文件系统的配合" class="headerlink" title="1.4 Catkin编译系统和文件系统的配合"></a>1.4 Catkin编译系统和文件系统的配合</h3><p>一个复杂的项目需要很好的文件结构规划，而<code>ROS1</code>中<code>catkin</code>编译系统能够很好的和<code>ROS1</code>的文件系统配合。</p>
+<h2 id="2-ROS1的文件系统"><a href="#2-ROS1的文件系统" class="headerlink" title="2. ROS1的文件系统"></a>2. ROS1的文件系统</h2><p>所谓文件系统，指的是文件在硬盘上的存储方式。因此<code>ROS1</code>的文件系统指的就是硬盘上<code>ROS1</code>源代码的组织形式，其结构大致可以如下图所示：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F.jpg" alt="ROS1的文件系统"></p>
+<h3 id="2-1-概述"><a href="#2-1-概述" class="headerlink" title="2.1 概述"></a>2.1 概述</h3><p><code>ROS1</code>文件系统中各个文件的作用的解释如下：</p>
 <pre class="line-numbers language-bash"><code class="language-bash">WorkSpace --- 自定义的工作空间
 
     <span class="token operator">|</span>--- build:编译空间，用于存放CMake和catkin的缓存信息、配置信息和其他中间文件。
@@ -499,7 +503,7 @@
 
     <span class="token operator">|</span>--- src: 源码
 
-        <span class="token operator">|</span>-- package：功能包<span class="token punctuation">(</span>ROS基本单元<span class="token punctuation">)</span>包含多个节点、库与配置文件，包名所有字母小写，只能由字母、数字与下划线组成
+        <span class="token operator">|</span>-- package：功能包<span class="token punctuation">(</span>ROS1基本单元<span class="token punctuation">)</span>包含多个节点、库与配置文件，包名所有字母小写，只能由字母、数字与下划线组成
 
             <span class="token operator">|</span>-- CMakeLists.txt 配置编译规则，比如源文件、依赖项、目标文件
 
@@ -523,7 +527,7 @@
 
         <span class="token operator">|</span>-- CMakeLists.txt: 编译的基本配置
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><code>ROS</code> 文件系统中各个目录下的内容后面教程会逐一进行介绍，目前我们主要介绍：<code>package.xml</code>与<code>CMakeLists.txt</code>这两个配置文件。</p>
+<p><code>ROS1</code> 文件系统中各个目录下的内容后面教程会逐一进行介绍，目前我们主要介绍：<code>package.xml</code>与<code>CMakeLists.txt</code>这两个配置文件。</p>
 <h3 id="2-2-Package-xml"><a href="#2-2-Package-xml" class="headerlink" title="2.2 Package.xml"></a>2.2 Package.xml</h3><p><code>package.xml</code>是<code>catkin</code>编译系统的一部分，该文件定义了一个<code>catkin</code>软件包的属性，例如<strong>软件包名称</strong>，<strong>版本号</strong>，<strong>作者</strong>，<strong>维护者</strong>以及对其他<code>catkin</code>软件包的依赖性。请注意，该概念类似于旧版 <code>rosbuild</code> 构建系统中使用的<code>manifest.xml</code>文件。</p>
 <p>对一个标准的<code>package.xml</code>的注释如下</p>
 <pre class="line-numbers language-xml"><code class="language-xml"><span class="token prolog">&lt;?xml version="1.0"?></span>
@@ -546,14 +550,14 @@
   <span class="token comment" spellcheck="true">&lt;!-- One license tag required, multiple allowed, one license per tag --></span>
   <span class="token comment" spellcheck="true">&lt;!-- Commonly used license strings: --></span>
   <span class="token comment" spellcheck="true">&lt;!--   BSD, MIT, Boost Software License, GPLv2, GPLv3, LGPLv2.1, LGPLv3 --></span>
-  <span class="token comment" spellcheck="true">&lt;!-- 许可证信息，ROS核心组件默认 BSD --></span>
+  <span class="token comment" spellcheck="true">&lt;!-- 许可证信息，ROS1核心组件默认 BSD --></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>license</span><span class="token punctuation">></span></span>BSD<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>license</span><span class="token punctuation">></span></span>
 
 
   <span class="token comment" spellcheck="true">&lt;!-- Url tags are optional, but multiple are allowed, one per tag --></span>
   <span class="token comment" spellcheck="true">&lt;!-- Optional attribute type can be: website, bugtracker, or repository --></span>
   <span class="token comment" spellcheck="true">&lt;!-- Example: --></span>
-  <span class="token comment" spellcheck="true">&lt;!-- &lt;url type="website">http://wiki.ros.org/demo01_hello_vscode&lt;/url> --></span>
+  <span class="token comment" spellcheck="true">&lt;!-- &lt;url type="website">http://wiki.ROS1.org/demo01_hello_vscode&lt;/url> --></span>
 
 
   <span class="token comment" spellcheck="true">&lt;!-- Author tags are optional, multiple are allowed, one per tag --></span>
@@ -609,12 +613,12 @@
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>package</span><span class="token punctuation">></span></span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="2-3-CMakeLists-txt"><a href="#2-3-CMakeLists-txt" class="headerlink" title="2.3 CMakeLists.txt"></a>2.3 CMakeLists.txt</h3><p><code>CMakeLists.txt</code>是<code>CMake</code>构建系统的输入，用于构建软件包。任何兼容<code>CMake</code>的软件包都包含一个或多个<code>CMakeLists.txt</code>文件，这些文件描述了如何构建代码以及将代码安装到何处。</p>
-<p>我们前面说到，<code>catkin</code>是给<code>CMake</code>做了扩展，添加了<code>ROS</code>专用的函数，因此<code>ROS</code>文件系统中需要有一个<code>CMakeLists.txt</code>，而<code>catkin</code>编译的时候会调用<code>CMake</code>去读取<code>CMakeLists.txt</code>中的数据</p>
+<p>我们前面说到，<code>catkin</code>是给<code>CMake</code>做了扩展，添加了<code>ROS1</code>专用的函数，因此<code>ROS1</code>文件系统中需要有一个<code>CMakeLists.txt</code>，而<code>catkin</code>编译的时候会调用<code>CMake</code>去读取<code>CMakeLists.txt</code>中的数据</p>
 <p>下面是一个包中的<code>CMakeLists.txt</code>的内容：</p>
 <pre class="line-numbers language-cmake"><code class="language-cmake">make_minimum_required(VERSION 3.0.2) #所需 cmake 版本
 project(example) #包名称，会被 ${PROJECT_NAME} 的方式调用
 
-## Compile as C++11, supported in ROS Kinetic and newer
+## Compile as C++11, supported in ROS1 Kinetic and newer
 # add_compile_options(-std=c++11)
 
 ## Find catkin macros and libraries
@@ -634,13 +638,13 @@ find_package(catkin REQUIRED COMPONENTS
 
 ## Uncomment this if the package has a setup.py. This macro ensures
 ## modules and global scripts declared therein get installed
-## See http://ros.org/doc/api/catkin/html/user_guide/setup_dot_py.html
+## See http://ROS1.org/doc/api/catkin/html/user_guide/setup_dot_py.html
 # 启动 python 模块支持
 # catkin_python_setup()
 
 ################################################
-## Declare ROS messages, services and actions ##
-## 声明 ROS 消息、服务、动作... ##
+## Declare ROS1 messages, services and actions ##
+## 声明 ROS1 消息、服务、动作... ##
 ################################################
 
 ## To declare and build messages, services or actions from within this
@@ -692,8 +696,8 @@ find_package(catkin REQUIRED COMPONENTS
 # )
 
 ################################################
-## Declare ROS dynamic reconfigure parameters ##
-## 声明 ROS 动态参数配置 ##
+## Declare ROS1 dynamic reconfigure parameters ##
+## 声明 ROS1 动态参数配置 ##
 ################################################
 
 ## To declare and build dynamic reconfigure parameters within this
@@ -784,7 +788,7 @@ target_link_libraries(Test
 #############
 
 # all install targets should use catkin DESTINATION variables
-# See http://ros.org/doc/api/catkin/html/adv_user_guide/variables.html
+# See http://ROS1.org/doc/api/catkin/html/adv_user_guide/variables.html
 
 ## Mark executable scripts (Python etc.) for installation
 ## in contrast to setup.py, you can choose the destination
@@ -795,13 +799,13 @@ catkin_install_python(PROGRAMS
 )
 
 ## Mark executables for installation
-## See http://docs.ros.org/melodic/api/catkin/html/howto/format1/building_executables.html
+## See http://docs.ROS1.org/melodic/api/catkin/html/howto/format1/building_executables.html
 # install(TARGETS ${PROJECT_NAME}_node
 #   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 # )
 
 ## Mark libraries for installation
-## See http://docs.ros.org/melodic/api/catkin/html/howto/format1/building_libraries.html
+## See http://docs.ROS1.org/melodic/api/catkin/html/howto/format1/building_libraries.html
 # install(TARGETS ${PROJECT_NAME}
 #   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 #   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
@@ -835,18 +839,18 @@ catkin_install_python(PROGRAMS
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="2-4-ROS文件系统常用命令"><a href="#2-4-ROS文件系统常用命令" class="headerlink" title="2.4 ROS文件系统常用命令"></a>2.4 ROS文件系统常用命令</h3><p>上面介绍了<code>ROS</code>文件系统，下面介绍<code>ROS</code>文件系统中常用的命令。事实上，<code>ROS</code>其实是有一整套命令的，每个命令下其实都是有很多选项的，所有其实是有非常非常多的功能的，我们这里只是针对常用的功能来介绍某个命令中的某个选项。</p>
+<h3 id="2-4-ROS1文件系统常用命令"><a href="#2-4-ROS1文件系统常用命令" class="headerlink" title="2.4 ROS1文件系统常用命令"></a>2.4 ROS1文件系统常用命令</h3><p>上面介绍了<code>ROS1</code>文件系统，下面介绍<code>ROS1</code>文件系统中常用的命令。事实上，<code>ROS1</code>其实是有一整套命令的，每个命令下其实都是有很多选项的，所有其实是有非常非常多的功能的，我们这里只是针对常用的功能来介绍某个命令中的某个选项。</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221227104855150.png" alt="image-20221227104855150"></p>
 <h4 id="A-新增包"><a href="#A-新增包" class="headerlink" title="A. 新增包"></a>A. 新增包</h4><p>包可以自己创建然后自己写</p>
 <pre class="line-numbers language-bash"><code class="language-bash">catkin_create_pkg 自定义包名 依赖包
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>这样的话，包就会创建在当前所在的<code>工作目录(Current Working Directory)</code>下</p>
 <p>此外，也可以从APT中下载，因为我们前面添加过软件源了</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">sudo</span> apt <span class="token function">install</span> ros-版本号-包名
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">sudo</span> apt <span class="token function">install</span> ROS1-版本号-包名
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><code>Tab</code>补全就会显示当前版本可以安装的软件包，例如：</p>
-<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221225112851912.png" alt="APT直接安装ROS包"></p>
-<p>而通过<code>APT</code>安装的软件包，最后都会被安装到环境变量<code>ROS_PACKAGE_PATH</code>所表示的路径中。这个路径如果没有修改的话，默认是<code>/opt/ros/noetic/share</code></p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221225112851912.png" alt="APT直接安装ROS1包"></p>
+<p>而通过<code>APT</code>安装的软件包，最后都会被安装到环境变量<code>ROS_PACKAGE_PATH</code>所表示的路径中。这个路径如果没有修改的话，默认是<code>/opt/ROS1/noetic/share</code></p>
 <pre class="line-numbers language-bash"><code class="language-bash"><span class="token keyword">echo</span> <span class="token variable">$ROS_PACKAGE_PATH</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221225122503637.png" alt="image-20221225122503637"></p>
@@ -855,7 +859,7 @@ catkin_install_python(PROGRAMS
 <span class="token function">rm</span> -r src/要删除的包名
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>而对于<code>APT</code>安装的包，使用<code>APT</code>即可删除</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">sudo</span> apt purge ros-版本号-包名
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">sudo</span> apt purge ROS1-版本号-包名
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <h4 id="C-查询包"><a href="#C-查询包" class="headerlink" title="C. 查询包"></a>C. 查询包</h4><h5 id="rospack-list"><a href="#rospack-list" class="headerlink" title="rospack list"></a>rospack list</h5><p><code>rospack list</code>可以列出所有功能包</p>
 <pre class="line-numbers language-bash"><code class="language-bash">rospack list
@@ -885,11 +889,11 @@ roscd rospy
 <pre class="line-numbers language-bash"><code class="language-bash">rosls roscpp
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221225124602959.png" alt="rosls roscpp"></p>
-<h5 id="apt-search"><a href="#apt-search" class="headerlink" title="apt search"></a>apt search</h5><p>我们前面说到，可以用<code>APT</code>直接从网上下载<code>ROS</code>功能包，所以我们可以用<code>apt search</code>去搜索功能包</p>
-<pre class="line-numbers language-bash"><code class="language-bash">apt search ros-版本号-包名
+<h5 id="apt-search"><a href="#apt-search" class="headerlink" title="apt search"></a>apt search</h5><p>我们前面说到，可以用<code>APT</code>直接从网上下载<code>ROS1</code>功能包，所以我们可以用<code>apt search</code>去搜索功能包</p>
+<pre class="line-numbers language-bash"><code class="language-bash">apt search ROS1-版本号-包名
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>例如：</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">sudo</span> apt search ros-noetic-ros-py
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">sudo</span> apt search ROS1-noetic-ROS1-py
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221225124950933.png" alt="apt search"></p>
 <h4 id="D-修改包"><a href="#D-修改包" class="headerlink" title="D. 修改包"></a>D. 修改包</h4><p><code>rosed</code>可以直接修改包中的文件</p>
@@ -900,11 +904,11 @@ roscd rospy
 <pre class="line-numbers language-bash"><code class="language-bash">rosed rospy rospy.cmake
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221225130305431.png" alt="rosed"></p>
-<h4 id="E-运行"><a href="#E-运行" class="headerlink" title="E. 运行"></a>E. 运行</h4><h5 id="roscore"><a href="#roscore" class="headerlink" title="roscore"></a>roscore</h5><p><code>roscore</code> 是 <code>ROS</code> 的系统先决条件节点和程序的集合， 必须运行 <code>roscore</code> 才能使 <code>ROS</code> 节点进行通信。</p>
+<h4 id="E-运行"><a href="#E-运行" class="headerlink" title="E. 运行"></a>E. 运行</h4><h5 id="roscore"><a href="#roscore" class="headerlink" title="roscore"></a>roscore</h5><p><code>roscore</code> 是 <code>ROS1</code> 的系统先决条件节点和程序的集合， 必须运行 <code>roscore</code> 才能使 <code>ROS1</code> 节点进行通信。</p>
 <p><code>roscore</code> 将启动:</p>
 <ul>
-<li><code>ros master</code></li>
-<li><code>ros</code>参数服务器</li>
+<li><code>ROS1 master</code></li>
+<li><code>ROS1</code>参数服务器</li>
 <li><code>rosout</code> 日志节点</li>
 </ul>
 <p>用法:</p>
@@ -913,7 +917,7 @@ roscd rospy
 <p>或(指定端口号)</p>
 <pre class="line-numbers language-bash"><code class="language-bash">roscore -p xxxx
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h5 id="rosrun"><a href="#rosrun" class="headerlink" title="rosrun"></a>rosrun</h5><p><code>rosrun</code>可以运行指定的ROS节点</p>
+<h5 id="rosrun"><a href="#rosrun" class="headerlink" title="rosrun"></a>rosrun</h5><p><code>rosrun</code>可以运行指定的ROS1节点</p>
 <pre class="line-numbers language-bash"><code class="language-bash">rosrun 功能包名 可执行文件名
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>例如：</p>
@@ -991,20 +995,24 @@ roscd rospy
                                     <span class="chip bg-color">ROS</span>
                                 </a>
                             
-                                <a href="/tags/ROS%E6%95%99%E7%A8%8B/">
-                                    <span class="chip bg-color">ROS教程</span>
-                                </a>
-                            
-                                <a href="/tags/ROS%E7%BC%96%E8%AF%91%E7%B3%BB%E7%BB%9F/">
-                                    <span class="chip bg-color">ROS编译系统</span>
-                                </a>
-                            
                                 <a href="/tags/catkin-make/">
                                     <span class="chip bg-color">catkin_make</span>
                                 </a>
                             
-                                <a href="/tags/ROS%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/">
-                                    <span class="chip bg-color">ROS文件系统</span>
+                                <a href="/tags/ROS1/">
+                                    <span class="chip bg-color">ROS1</span>
+                                </a>
+                            
+                                <a href="/tags/ROS1%E6%95%99%E7%A8%8B/">
+                                    <span class="chip bg-color">ROS1教程</span>
+                                </a>
+                            
+                                <a href="/tags/ROS1%E7%BC%96%E8%AF%91%E7%B3%BB%E7%BB%9F/">
+                                    <span class="chip bg-color">ROS1编译系统</span>
+                                </a>
+                            
+                                <a href="/tags/ROS1%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/">
+                                    <span class="chip bg-color">ROS1文件系统</span>
                                 </a>
                             
                         </div>
@@ -1183,15 +1191,15 @@ roscd rospy
                 <a href="/2022/12/25/ros-jiao-cheng-4-hello-world-li-cheng/">
                     <div class="card-image">
                         
-                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/new/%E5%B1%8F%E5%B9%95%E5%BD%95%E5%88%B62022-12-25%20%E4%B8%8A%E5%8D%883.27.36.gif" class="responsive-img" alt="ROS教程 4：Hello World例程">
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/new/%E5%B1%8F%E5%B9%95%E5%BD%95%E5%88%B62022-12-25%20%E4%B8%8A%E5%8D%883.27.36.gif" class="responsive-img" alt="ROS1教程 4：Hello World例程">
                         
-                        <span class="card-title">ROS教程 4：Hello World例程</span>
+                        <span class="card-title">ROS1教程 4：Hello World例程</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            本文是ROS系列教程的第四篇文章，介绍了如何实现ROS的Hello World例程
+                            本文是ROS1系列教程的第四篇文章，介绍了如何实现ROS1的Hello World例程
                         
                     </div>
                     <div class="publish-info">
@@ -1202,8 +1210,8 @@ roscd rospy
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/ROS%E6%95%99%E7%A8%8B/" class="post-category">
-                                    ROS教程
+                            <a href="/categories/ROS1%E6%95%99%E7%A8%8B/" class="post-category">
+                                    ROS1教程
                                 </a>
                             
                             
@@ -1217,12 +1225,16 @@ roscd rospy
                         <span class="chip bg-color">ROS</span>
                     </a>
                     
-                    <a href="/tags/ROS%E6%95%99%E7%A8%8B/">
-                        <span class="chip bg-color">ROS教程</span>
-                    </a>
-                    
                     <a href="/tags/catkin-make/">
                         <span class="chip bg-color">catkin_make</span>
+                    </a>
+                    
+                    <a href="/tags/ROS1/">
+                        <span class="chip bg-color">ROS1</span>
+                    </a>
+                    
+                    <a href="/tags/ROS1%E6%95%99%E7%A8%8B/">
+                        <span class="chip bg-color">ROS1教程</span>
                     </a>
                     
                 </div>
@@ -1469,7 +1481,7 @@ roscd rospy
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">580k</span>
+                        class="white-color">587.9k</span>
             
             
             

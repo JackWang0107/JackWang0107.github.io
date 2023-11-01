@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="ROS教程 7：ROS通信机制——话题通信, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
-    <meta name="description" content="本文是ROS系列教程的第七篇文章，讲解了ROS通信机制中的话题通信">
+    <meta name="keywords" content="ROS1教程 7：ROS1通信机制——话题通信, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
+    <meta name="description" content="本文是ROS1系列教程的第七篇文章，讲解了ROS1通信机制中的话题通信">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>ROS教程 7：ROS通信机制——话题通信 | JackWang&#39;s Blog</title>
+    <title>ROS1教程 7：ROS1通信机制——话题通信 | JackWang&#39;s Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -254,12 +254,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/8.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://jack-1307599355.cos.ap-shanghai.myqcloud.com/02.01_%E7%AE%80%E5%8D%95%E6%B6%88%E6%81%AF%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85.gif')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">ROS教程 7：ROS通信机制——话题通信</h1>
+                    <h1 class="description center-align post-title">ROS1教程 7：ROS1通信机制——话题通信</h1>
                 </div>
             </div>
         </div>
@@ -379,12 +379,16 @@
                                 <span class="chip bg-color">ROS</span>
                             </a>
                         
-                            <a href="/tags/ROS%E9%80%9A%E4%BF%A1%E6%9C%BA%E5%88%B6/">
-                                <span class="chip bg-color">ROS通信机制</span>
-                            </a>
-                        
                             <a href="/tags/%E8%AF%9D%E9%A2%98%E9%80%9A%E4%BF%A1/">
                                 <span class="chip bg-color">话题通信</span>
+                            </a>
+                        
+                            <a href="/tags/ROS1/">
+                                <span class="chip bg-color">ROS1</span>
+                            </a>
+                        
+                            <a href="/tags/ROS1%E9%80%9A%E4%BF%A1%E6%9C%BA%E5%88%B6/">
+                                <span class="chip bg-color">ROS1通信机制</span>
                             </a>
                         
                     </div>
@@ -395,8 +399,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/ROS%E6%95%99%E7%A8%8B/" class="post-category">
-                                ROS教程
+                            <a href="/categories/ROS1%E6%95%99%E7%A8%8B/" class="post-category">
+                                ROS1教程
                             </a>
                         
                     </div>
@@ -415,7 +419,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-06-01
+                    2023-11-01
                 </div>
                 
 
@@ -449,14 +453,14 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="ROS教程-7：ROS通信机制——话题通信"><a href="#ROS教程-7：ROS通信机制——话题通信" class="headerlink" title="ROS教程 7：ROS通信机制——话题通信"></a>ROS教程 7：ROS通信机制——话题通信</h1><p>话题通信是<code>ROS</code>中使用频率最高的一种通信模式，话题通信是基于<strong>发布订阅</strong>模式的，也即：<strong>一个节点发布消息，另一个节点订阅该消息</strong>。</p>
+                <h1 id="ROS1教程-7：ROS1通信机制——话题通信"><a href="#ROS1教程-7：ROS1通信机制——话题通信" class="headerlink" title="ROS1教程 7：ROS1通信机制——话题通信"></a>ROS1教程 7：ROS1通信机制——话题通信</h1><p>话题通信是<code>ROS1</code>中使用频率最高的一种通信模式，话题通信是基于<strong>发布订阅</strong>模式的，也即：<strong>一个节点发布消息，另一个节点订阅该消息</strong>。</p>
 <p>话题通信的应用场景也极其广泛，比如下面一个常见场景：</p>
 <blockquote>
 <p>机器人在执行导航功能，使用的传感器是激光雷达，机器人会采集激光雷达感知到的信息并计算，然后生成运动控制信息驱动机器人底盘运动。</p>
 </blockquote>
 <p>在上述场景中，就不止一次使用到了话题通信：</p>
 <ul>
-<li>以激光雷达信息的采集处理为例，在<code>ROS</code>中有一个节点需要时时的发布当前雷达采集到的数据，导航模块中也有节点会订阅并解析雷达数据</li>
+<li>以激光雷达信息的采集处理为例，在<code>ROS1</code>中有一个节点需要时时的发布当前雷达采集到的数据，导航模块中也有节点会订阅并解析雷达数据</li>
 <li>再以运动消息的发布为例，导航模块会根据传感器采集的数据时时的计算出运动控制信息并发布给底盘，底盘也可以有一个节点订阅运动信息并最终转换成控制电机的脉冲信号</li>
 </ul>
 <p>以此类推，像雷达、摄像头、GPS……等等一系列传感器数据的采集，都是使用了话题通信。换言之，<strong>话题通信适用于不断更新的数据传输相关的应用场景</strong>。</p>
@@ -468,17 +472,17 @@
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/02.02_%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B6%88%E6%81%AF%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85.gif" alt="自定义消息"></p>
 <h3 id="1-2-理论模型"><a href="#1-2-理论模型" class="headerlink" title="1.2 理论模型"></a>1.2 理论模型</h3><p>话题通信实现模型是比较复杂的，该模型如下图所示,该模型中涉及到三个角色:</p>
 <ul>
-<li><code>ROS Master</code>（管理者）</li>
+<li><code>ROS1 Master</code>（管理者）</li>
 <li><code>Talker</code>（发布者）</li>
 <li><code>Listener</code>（订阅者）</li>
 </ul>
-<p><code>ROS Master</code>负责保管<code>Talker</code>和<code>Listener</code>注册的信息，并匹配话题相同的<code>Talker</code>与<code>Listener</code>，帮助<code>Talker</code>与<code>Listener</code>建立连接，连接建立后，<code>Talker</code>可以发布消息，且发布的消息会被<code>Listener</code>订阅。</p>
+<p><code>ROS1 Master</code>负责保管<code>Talker</code>和<code>Listener</code>注册的信息，并匹配话题相同的<code>Talker</code>与<code>Listener</code>，帮助<code>Talker</code>与<code>Listener</code>建立连接，连接建立后，<code>Talker</code>可以发布消息，且发布的消息会被<code>Listener</code>订阅。</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/01%E8%AF%9D%E9%A2%98%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9E%8B.jpg" alt="话题通信理论模型" style="zoom:50%;"></p>
 <p>我们按照流程来走一遍话题通信的整个流程：</p>
 <ol>
-<li><strong>首先是<code>Talker</code>启动，即数据发布者启动，此时<code>Talker</code>会被注册在<code>ROS Master</code>中</strong>。<code>Talker</code>启动后，会通过<code>RPC</code>在<code>ROS Master</code>中注册自身信息，其中包含所发布消息的话题名称。<code>ROS Master</code>会将节点的注册信息加入到注册表中。</li>
-<li><strong>然后是<code>Listener</code>启动，即数据接受者启动，此时<code>Listener</code>会被注册在<code>ROS Master</code>中</strong>。<code>Listener</code>根据接收到的<code>RPC</code>地址，通过<code>RPC</code>向<code>Talker</code>发送连接请求，传输订阅的话题名称、消息类型以及通信协议（<code>TCP/UDP</code>）。</li>
-<li><strong>接下来，<code>ROS Master</code>会根据注册表中的信息匹配<code>Talker</code>和<code>Listener</code></strong>。在匹配成功后，<code>ROS Master</code>会通过<code>RPC</code>向<code>Listener</code>发送<code>Talker</code>的<code>RPC</code>地址信息。</li>
+<li><strong>首先是<code>Talker</code>启动，即数据发布者启动，此时<code>Talker</code>会被注册在<code>ROS1 Master</code>中</strong>。<code>Talker</code>启动后，会通过<code>RPC</code>在<code>ROS1 Master</code>中注册自身信息，其中包含所发布消息的话题名称。<code>ROS1 Master</code>会将节点的注册信息加入到注册表中。</li>
+<li><strong>然后是<code>Listener</code>启动，即数据接受者启动，此时<code>Listener</code>会被注册在<code>ROS1 Master</code>中</strong>。<code>Listener</code>根据接收到的<code>RPC</code>地址，通过<code>RPC</code>向<code>Talker</code>发送连接请求，传输订阅的话题名称、消息类型以及通信协议（<code>TCP/UDP</code>）。</li>
+<li><strong>接下来，<code>ROS1 Master</code>会根据注册表中的信息匹配<code>Talker</code>和<code>Listener</code></strong>。在匹配成功后，<code>ROS1 Master</code>会通过<code>RPC</code>向<code>Listener</code>发送<code>Talker</code>的<code>RPC</code>地址信息。</li>
 <li><strong>接着<code>Listener</code>向<code>Talker</code>发送请求</strong>。当<code>Listener</code>接收到的<code>RPC</code>地址后，会通过<code>RPC</code>向<code>Talker</code>发送连接请求，传输订阅的话题名称、消息类型以及通信协议(TCP/UDP)。</li>
 <li><strong>而后<code>Talker</code>确认请求</strong>。<code>Talker</code>接收到<code>Listener</code>的请求后，也是通过<code>RPC</code>向<code>Listener</code>确认连接信息，并发送自身的<code>TCP</code>地址信息。</li>
 <li><strong><code>Talker</code>和<code>Listener</code>建立连接</strong>。<code>Listener</code>根据步骤5返回的消息使用<code>TCP</code>与<code>Talker</code>建立网络连接。</li>
@@ -488,12 +492,12 @@
 <p>注意：</p>
 <ul>
 <li>上述实现流程中，前五步使用的<code>RPC</code>协议，最后两步使用的是<code>TCP</code>协议</li>
-<li><code>Talker</code>与<code>Listener</code>的启动无先后顺序要求，但是<code>ROS Master</code>必须先启动</li>
+<li><code>Talker</code>与<code>Listener</code>的启动无先后顺序要求，但是<code>ROS1 Master</code>必须先启动</li>
 <li><code>Talker</code>与<code>Listener</code>都可以有多个</li>
-<li><code>Talker</code>与<code>Listener</code>连接建立后，不再需要<code>ROS Master</code>。也即，即便关闭<code>ROS Master</code>，<code>Talker</code>与<code>Listern</code>依旧可以正常通信</li>
+<li><code>Talker</code>与<code>Listener</code>连接建立后，不再需要<code>ROS1 Master</code>。也即，即便关闭<code>ROS1 Master</code>，<code>Talker</code>与<code>Listern</code>依旧可以正常通信</li>
 </ul>
 </blockquote>
-<p><strong>最重要的是，这7个步骤<code>ROS</code>已经为我们封装好了，我们不需要手动注册、建立链接，对我们来说就是几个<code>API</code>就可以解决的事情</strong></p>
+<p><strong>最重要的是，这7个步骤<code>ROS1</code>已经为我们封装好了，我们不需要手动注册、建立链接，对我们来说就是几个<code>API</code>就可以解决的事情</strong></p>
 <p>因此，我们在话题通信的时候，需要注意的是：</p>
 <ul>
 <li>话题的设置</li>
@@ -505,7 +509,7 @@
 <h3 id="2-1-需求"><a href="#2-1-需求" class="headerlink" title="2.1 需求"></a>2.1 需求</h3><blockquote>
 <p>编写发布订阅实现，要求发布方以10HZ(每秒10次)的频率发布文本消息，订阅方订阅消息并将消息内容打印输出。</p>
 </blockquote>
-<h3 id="2-2-分析"><a href="#2-2-分析" class="headerlink" title="2.2 分析"></a>2.2 分析</h3><p>在<code>ROS</code>话题通信模型的七步实现中，<code>ROS Master</code>不需要实现，而连接的建立也已经被封装了，因此，我们自己写代码的时候，需要关注的关键点有三个:</p>
+<h3 id="2-2-分析"><a href="#2-2-分析" class="headerlink" title="2.2 分析"></a>2.2 分析</h3><p>在<code>ROS1</code>话题通信模型的七步实现中，<code>ROS1 Master</code>不需要实现，而连接的建立也已经被封装了，因此，我们自己写代码的时候，需要关注的关键点有三个:</p>
 <ol>
 <li>发布方</li>
 <li>接收方</li>
@@ -525,28 +529,28 @@ catkin_create_pkg topic_communication roscpp rospy std_msgs
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <h4 id="A-发布方实现"><a href="#A-发布方实现" class="headerlink" title="A 发布方实现"></a>A 发布方实现</h4><p>我们在<code>工作目录/src/topic_communication/src</code>下新建一个名为<code>pub.cpp</code>的文件，即发布者的实现。</p>
 <h5 id="1-单纯发布消息"><a href="#1-单纯发布消息" class="headerlink" title="1. 单纯发布消息"></a>1. 单纯发布消息</h5><p>我们首先实现一个最简单的版本，该版本中发布者只要不断发出消息即可。</p>
-<p>发布者最重要的就是<code>ros::Publisher</code>对象，该对象可以用<code>ros::NodeHandle.advertise</code>方法创建，该方法支持重载，我们需要发布什么类型的消息就重载什么类型的消息。</p>
-<p>此外，<code>ros::Publisher</code>对象有一个<code>publish</code>方法，该方法用于发布消息，本质上也是一个重载函数，不过已经对<code>message</code>做了屏蔽。</p>
-<p>所以，下面的代码中，除了正常的<code>ros::init()</code>初始化节点和创建<code>ros::Nodehandle</code>句柄外，我们需要特别关注<code>ros::NodeHandle</code>相关的语句</p>
+<p>发布者最重要的就是<code>ROS1::Publisher</code>对象，该对象可以用<code>ROS1::NodeHandle.advertise</code>方法创建，该方法支持重载，我们需要发布什么类型的消息就重载什么类型的消息。</p>
+<p>此外，<code>ROS1::Publisher</code>对象有一个<code>publish</code>方法，该方法用于发布消息，本质上也是一个重载函数，不过已经对<code>message</code>做了屏蔽。</p>
+<p>所以，下面的代码中，除了正常的<code>ROS1::init()</code>初始化节点和创建<code>ROS1::Nodehandle</code>句柄外，我们需要特别关注<code>ROS1::NodeHandle</code>相关的语句</p>
 <blockquote>
 <p>注意这里我们设置节点名称为<code>publisher_cpp</code>，用于和后面的<code>Python</code>进行区别</p>
 </blockquote>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"ros/ros.h"</span></span>
-<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"std_msgs/String.h"</span>            </span><span class="token comment" spellcheck="true">// 普通文本类型的消息，ROS中已经为其封装了一个标准实现</span>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"ROS1/ROS1.h"</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"std_msgs/String.h"</span>            </span><span class="token comment" spellcheck="true">// 普通文本类型的消息，ROS1中已经为其封装了一个标准实现</span>
 <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;sstream></span></span>
 
 <span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">int</span> argc<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token operator">*</span>argv<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
     <span class="token comment" spellcheck="true">// 初始化当前节点，节点名设置为publisher</span>
-    ros<span class="token operator">::</span><span class="token function">init</span><span class="token punctuation">(</span>argc<span class="token punctuation">,</span> argv<span class="token punctuation">,</span> <span class="token string">"publisher_cpp"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    ROS1<span class="token operator">::</span><span class="token function">init</span><span class="token punctuation">(</span>argc<span class="token punctuation">,</span> argv<span class="token punctuation">,</span> <span class="token string">"publisher_cpp"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">// 创建节点句柄</span>
-    ros<span class="token operator">::</span>NodeHandle nh<span class="token punctuation">;</span>
+    ROS1<span class="token operator">::</span>NodeHandle nh<span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">// 初始化发布者</span>
-    ros<span class="token operator">::</span>Publisher pub <span class="token operator">=</span> nh<span class="token punctuation">.</span>advertise<span class="token operator">&lt;</span>std_msgs<span class="token operator">::</span>String<span class="token operator">></span><span class="token punctuation">(</span><span class="token string">"messages"</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    ROS1<span class="token operator">::</span>Publisher pub <span class="token operator">=</span> nh<span class="token punctuation">.</span>advertise<span class="token operator">&lt;</span>std_msgs<span class="token operator">::</span>String<span class="token operator">></span><span class="token punctuation">(</span><span class="token string">"messages"</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">// 发布消息前，创建String消息对象</span>
     std_msgs<span class="token operator">::</span>String msg<span class="token punctuation">;</span>
 
     <span class="token comment" spellcheck="true">// 当前节点没有退出或者被意外终止就继续运行</span>
-    <span class="token keyword">while</span> <span class="token punctuation">(</span>ros<span class="token operator">::</span><span class="token function">ok</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>ROS1<span class="token operator">::</span><span class="token function">ok</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
         <span class="token comment" spellcheck="true">// 设置String消息的内容</span>
         msg<span class="token punctuation">.</span>data <span class="token operator">=</span> <span class="token string">"Hello I'm publisher!"</span><span class="token punctuation">;</span>
         <span class="token comment" spellcheck="true">// 发布者发送消息</span>
@@ -605,31 +609,31 @@ rosrun topic_communication publisher_cpp                <span class="token comme
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221227134931674.png" alt="运行rostopic echo后的节点图" style="zoom:33%;"></p>
 <p>此时，我们就会发现，有一个新节点订阅了我们的<code>messages</code>话题，这个节点其实就是<code>rostopic</code>命令运行的节点。而且，<code>rostopic</code>会给新的节点后面添加时间戳，来唯一标记当前<code>echo</code>的节点</p>
 <h5 id="2-设置频率发布消息"><a href="#2-设置频率发布消息" class="headerlink" title="2. 设置频率发布消息"></a>2. 设置频率发布消息</h5><p>我们上面已经成功的实现了发布者，并且检查了发布者能够向指定的话题中发布消息。</p>
-<p>我们接下来添加频率设置，即让发布者按照指定的频率来发布消息，为此我们可以使用<code>ros::Rate</code>对象。<code>ros::Rate</code>对象有一个<code>sleep</code>方法，这个方法会自动计算距离上次运行到<code>sleep</code>消耗的时间，然后自动计算需要睡眠的时间，然后进行睡眠。</p>
-<p>有一个需要注意的是如果频率过高的话，<code>ros::Rate</code>是没法实现的。即如果循环一次要500毫秒，但是我们却要求<code>ros::Rate</code>保证10Hz，即每秒运行10次循环，这个时候<code>ros::Rate</code>就没有用了。</p>
-<p>详细代码如下，注意<code>ros::Rate</code>相关的语句，</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"ros/ros.h"</span></span>
-<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"std_msgs/String.h"</span>            </span><span class="token comment" spellcheck="true">// 普通文本类型的消息，ROS中已经为其封装了一个标准实现</span>
+<p>我们接下来添加频率设置，即让发布者按照指定的频率来发布消息，为此我们可以使用<code>ROS1::Rate</code>对象。<code>ROS1::Rate</code>对象有一个<code>sleep</code>方法，这个方法会自动计算距离上次运行到<code>sleep</code>消耗的时间，然后自动计算需要睡眠的时间，然后进行睡眠。</p>
+<p>有一个需要注意的是如果频率过高的话，<code>ROS1::Rate</code>是没法实现的。即如果循环一次要500毫秒，但是我们却要求<code>ROS1::Rate</code>保证10Hz，即每秒运行10次循环，这个时候<code>ROS1::Rate</code>就没有用了。</p>
+<p>详细代码如下，注意<code>ROS1::Rate</code>相关的语句，</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"ROS1/ROS1.h"</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"std_msgs/String.h"</span>            </span><span class="token comment" spellcheck="true">// 普通文本类型的消息，ROS1中已经为其封装了一个标准实现</span>
 <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;sstream></span></span>
 
 <span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">int</span> argc<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token operator">*</span>argv<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
     <span class="token comment" spellcheck="true">// 初始化当前节点</span>
-    ros<span class="token operator">::</span><span class="token function">init</span><span class="token punctuation">(</span>argc<span class="token punctuation">,</span> argv<span class="token punctuation">,</span> <span class="token string">"publisher_cpp"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    ROS1<span class="token operator">::</span><span class="token function">init</span><span class="token punctuation">(</span>argc<span class="token punctuation">,</span> argv<span class="token punctuation">,</span> <span class="token string">"publisher_cpp"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">// 创建节点句柄</span>
-    ros<span class="token operator">::</span>NodeHandle nh<span class="token punctuation">;</span>
+    ROS1<span class="token operator">::</span>NodeHandle nh<span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">// 初始化发布者</span>
-    ros<span class="token operator">::</span>Publisher pub <span class="token operator">=</span> nh<span class="token punctuation">.</span>advertise<span class="token operator">&lt;</span>std_msgs<span class="token operator">::</span>String<span class="token operator">></span><span class="token punctuation">(</span><span class="token string">"messages"</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    ROS1<span class="token operator">::</span>Publisher pub <span class="token operator">=</span> nh<span class="token punctuation">.</span>advertise<span class="token operator">&lt;</span>std_msgs<span class="token operator">::</span>String<span class="token operator">></span><span class="token punctuation">(</span><span class="token string">"messages"</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">// 发布消息前，创建String消息对象</span>
     std_msgs<span class="token operator">::</span>String msg<span class="token punctuation">;</span>
 
     <span class="token comment" spellcheck="true">// 创建循环频率，每秒10Hz</span>
-    ros<span class="token operator">::</span>Rate <span class="token function">rate</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    ROS1<span class="token operator">::</span>Rate <span class="token function">rate</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
     <span class="token keyword">int</span> count <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>              <span class="token comment" spellcheck="true">// 等会给每句话添加编号</span>
     std<span class="token operator">::</span>stringstream ss<span class="token punctuation">;</span>       <span class="token comment" spellcheck="true">// 等会给每句话添加编号用</span>
 
     <span class="token comment" spellcheck="true">// 当前节点没有退出或者被意外终止就继续运行</span>
-    <span class="token keyword">while</span> <span class="token punctuation">(</span>ros<span class="token operator">::</span><span class="token function">ok</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>ROS1<span class="token operator">::</span><span class="token function">ok</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
         <span class="token comment" spellcheck="true">// 设置String消息的内容, 用string stream (sstream)来实现字符串拼接</span>
         ss<span class="token punctuation">.</span><span class="token function">str</span><span class="token punctuation">(</span>std<span class="token operator">::</span><span class="token function">string</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                                  <span class="token comment" spellcheck="true">// 清空string stream</span>
         ss <span class="token operator">&lt;&lt;</span>  <span class="token string">"Hello I'm publisher -- "</span> <span class="token operator">&lt;&lt;</span> count<span class="token operator">++</span> <span class="token operator">&lt;&lt;</span> <span class="token string">"!"</span><span class="token punctuation">;</span>     <span class="token comment" spellcheck="true">// 拼接字符串</span>
@@ -638,7 +642,7 @@ rosrun topic_communication publisher_cpp                <span class="token comme
         pub<span class="token punctuation">.</span><span class="token function">publish</span><span class="token punctuation">(</span>msg<span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token comment" spellcheck="true">// 向命令行输出消息</span>
         <span class="token function">ROS_INFO</span><span class="token punctuation">(</span><span class="token string">"发布数据： %s"</span><span class="token punctuation">,</span> ss<span class="token punctuation">.</span><span class="token function">str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token comment" spellcheck="true">// ros::Rate将会自动休眠，以满足初始化时频率的要求</span>
+        <span class="token comment" spellcheck="true">// ROS1::Rate将会自动休眠，以满足初始化时频率的要求</span>
         rate<span class="token punctuation">.</span><span class="token function">sleep</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 
@@ -648,8 +652,8 @@ rosrun topic_communication publisher_cpp                <span class="token comme
 <p>但是这个时候，如果直接运行的话，命令行中中文的输出是乱码的，这是因为<code>C++</code>中的编码不对，即内存中的中文的编码格式不对。</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221227124329746.png" alt="C++中文输出乱码" style="zoom:25%;"></p>
 <p>为此，我们在<code>C++</code>代码的前面设置一下编码格式，注意下面放在最前面的<code>set_local</code>函数</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"ros/ros.h"</span></span>
-<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"std_msgs/String.h"</span>            </span><span class="token comment" spellcheck="true">// 普通文本类型的消息，ROS中已经为其封装了一个标准实现</span>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"ROS1/ROS1.h"</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"std_msgs/String.h"</span>            </span><span class="token comment" spellcheck="true">// 普通文本类型的消息，ROS1中已经为其封装了一个标准实现</span>
 <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;sstream></span></span>
 
 <span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">int</span> argc<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token operator">*</span>argv<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
@@ -657,22 +661,22 @@ rosrun topic_communication publisher_cpp                <span class="token comme
     <span class="token function">setlocale</span><span class="token punctuation">(</span>LC_ALL<span class="token punctuation">,</span> <span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
     <span class="token comment" spellcheck="true">// 初始化当前节点</span>
-    ros<span class="token operator">::</span><span class="token function">init</span><span class="token punctuation">(</span>argc<span class="token punctuation">,</span> argv<span class="token punctuation">,</span> <span class="token string">"publisher_cpp"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    ROS1<span class="token operator">::</span><span class="token function">init</span><span class="token punctuation">(</span>argc<span class="token punctuation">,</span> argv<span class="token punctuation">,</span> <span class="token string">"publisher_cpp"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">// 创建节点句柄</span>
-    ros<span class="token operator">::</span>NodeHandle nh<span class="token punctuation">;</span>
+    ROS1<span class="token operator">::</span>NodeHandle nh<span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">// 初始化发布者</span>
-    ros<span class="token operator">::</span>Publisher pub <span class="token operator">=</span> nh<span class="token punctuation">.</span>advertise<span class="token operator">&lt;</span>std_msgs<span class="token operator">::</span>String<span class="token operator">></span><span class="token punctuation">(</span><span class="token string">"messages"</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    ROS1<span class="token operator">::</span>Publisher pub <span class="token operator">=</span> nh<span class="token punctuation">.</span>advertise<span class="token operator">&lt;</span>std_msgs<span class="token operator">::</span>String<span class="token operator">></span><span class="token punctuation">(</span><span class="token string">"messages"</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">// 发布消息前，创建String消息对象</span>
     std_msgs<span class="token operator">::</span>String msg<span class="token punctuation">;</span>
 
     <span class="token comment" spellcheck="true">// 创建循环频率，每秒10Hz</span>
-    ros<span class="token operator">::</span>Rate <span class="token function">rate</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    ROS1<span class="token operator">::</span>Rate <span class="token function">rate</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
     <span class="token keyword">int</span> count <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>              <span class="token comment" spellcheck="true">// 等会给每句话添加编号</span>
     std<span class="token operator">::</span>stringstream ss<span class="token punctuation">;</span>       <span class="token comment" spellcheck="true">// 等会给每句话添加编号用</span>
 
     <span class="token comment" spellcheck="true">// 当前节点没有退出或者被意外终止就继续运行</span>
-    <span class="token keyword">while</span> <span class="token punctuation">(</span>ros<span class="token operator">::</span><span class="token function">ok</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>ROS1<span class="token operator">::</span><span class="token function">ok</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
         <span class="token comment" spellcheck="true">// 设置String消息的内容, 用string stream (sstream)来实现字符串拼接</span>
         ss<span class="token punctuation">.</span><span class="token function">str</span><span class="token punctuation">(</span>std<span class="token operator">::</span><span class="token function">string</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                                  <span class="token comment" spellcheck="true">// 清空string stream</span>
         ss <span class="token operator">&lt;&lt;</span>  <span class="token string">"Hello I'm publisher -- "</span> <span class="token operator">&lt;&lt;</span> count<span class="token operator">++</span> <span class="token operator">&lt;&lt;</span> <span class="token string">"!"</span><span class="token punctuation">;</span>     <span class="token comment" spellcheck="true">// 拼接字符串</span>
@@ -681,7 +685,7 @@ rosrun topic_communication publisher_cpp                <span class="token comme
         pub<span class="token punctuation">.</span><span class="token function">publish</span><span class="token punctuation">(</span>msg<span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token comment" spellcheck="true">// 向命令行输出消息</span>
         <span class="token function">ROS_INFO</span><span class="token punctuation">(</span><span class="token string">"发布数据： %s"</span><span class="token punctuation">,</span> ss<span class="token punctuation">.</span><span class="token function">str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token comment" spellcheck="true">// ros::Rate将会自动休眠，以满足初始化时频率的要求</span>
+        <span class="token comment" spellcheck="true">// ROS1::Rate将会自动休眠，以满足初始化时频率的要求</span>
         rate<span class="token punctuation">.</span><span class="token function">sleep</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 
@@ -712,16 +716,16 @@ rqt_graph                                                                       
 
     实现流程:
         1.包含头文件 
-        2.初始化 ROS 节点:命名(唯一)
-        3.实例化 ROS 句柄
+        2.初始化 ROS1 节点:命名(唯一)
+        3.实例化 ROS1 句柄
         4.实例化 发布者 对象
         5.组织被发布的数据，并编写逻辑发布数据
 
 */</span>
 
 <span class="token comment" spellcheck="true">// 1.包含头文件 </span>
-<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"ros/ros.h"</span></span>
-<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"std_msgs/String.h"</span> </span><span class="token comment" spellcheck="true">//普通文本类型的消息，ROS中已经为其封装了一个标准实现</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"ROS1/ROS1.h"</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"std_msgs/String.h"</span> </span><span class="token comment" spellcheck="true">//普通文本类型的消息，ROS1中已经为其封装了一个标准实现</span>
 <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;sstream></span></span>
 
 
@@ -730,18 +734,18 @@ rqt_graph                                                                       
     <span class="token comment" spellcheck="true">// 设置编码</span>
     <span class="token function">setlocale</span><span class="token punctuation">(</span>LC_ALL<span class="token punctuation">,</span><span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    <span class="token comment" spellcheck="true">// 2.初始化 ROS 节点:命名(唯一)</span>
+    <span class="token comment" spellcheck="true">// 2.初始化 ROS1 节点:命名(唯一)</span>
     <span class="token comment" spellcheck="true">//      参数1和参数2后期为节点传值会使用</span>
-    <span class="token comment" spellcheck="true">//      参数3是节点名称，是一个标识符，需要保证运行后，在 ROS 网络拓扑中唯一</span>
-    ros<span class="token operator">::</span><span class="token function">init</span><span class="token punctuation">(</span>argc<span class="token punctuation">,</span>argv<span class="token punctuation">,</span><span class="token string">"publisher"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token comment" spellcheck="true">// 3.实例化 ROS 句柄</span>
-    ros<span class="token operator">::</span>NodeHandle nh<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//该类封装了 ROS 中的一些常用功能</span>
+    <span class="token comment" spellcheck="true">//      参数3是节点名称，是一个标识符，需要保证运行后，在 ROS1 网络拓扑中唯一</span>
+    ROS1<span class="token operator">::</span><span class="token function">init</span><span class="token punctuation">(</span>argc<span class="token punctuation">,</span>argv<span class="token punctuation">,</span><span class="token string">"publisher"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 3.实例化 ROS1 句柄</span>
+    ROS1<span class="token operator">::</span>NodeHandle nh<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//该类封装了 ROS1 中的一些常用功能</span>
 
     <span class="token comment" spellcheck="true">// 4.实例化 发布者 对象</span>
     <span class="token comment" spellcheck="true">//      泛型: 发布的消息类型</span>
     <span class="token comment" spellcheck="true">//      参数1: 要发布到的话题</span>
     <span class="token comment" spellcheck="true">//      参数2: 队列中最大保存的消息数，超出此阀值时，先进的先销毁(时间早的先销毁)</span>
-    ros<span class="token operator">::</span>Publisher pub <span class="token operator">=</span> nh<span class="token punctuation">.</span>advertise<span class="token operator">&lt;</span>std_msgs<span class="token operator">::</span>String<span class="token operator">></span><span class="token punctuation">(</span><span class="token string">"message"</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    ROS1<span class="token operator">::</span>Publisher pub <span class="token operator">=</span> nh<span class="token punctuation">.</span>advertise<span class="token operator">&lt;</span>std_msgs<span class="token operator">::</span>String<span class="token operator">></span><span class="token punctuation">(</span><span class="token string">"message"</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
     <span class="token comment" spellcheck="true">// 5.组织被发布的数据，并编写逻辑发布数据</span>
 
@@ -749,13 +753,13 @@ rqt_graph                                                                       
     std_msgs<span class="token operator">::</span>String msg<span class="token punctuation">;</span>
 
     <span class="token comment" spellcheck="true">// 创建循环频率，每秒10Hz</span>
-    ros<span class="token operator">::</span>Rate <span class="token function">rate</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    ROS1<span class="token operator">::</span>Rate <span class="token function">rate</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
     <span class="token keyword">int</span> count <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>              <span class="token comment" spellcheck="true">// 等会给每句话添加编号</span>
     std<span class="token operator">::</span>stringstream ss<span class="token punctuation">;</span>       <span class="token comment" spellcheck="true">// 等会给每句话添加编号用</span>
 
     <span class="token comment" spellcheck="true">// 当前节点没有退出或者被意外终止就继续运行</span>
-    <span class="token keyword">while</span> <span class="token punctuation">(</span>ros<span class="token operator">::</span><span class="token function">ok</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>ROS1<span class="token operator">::</span><span class="token function">ok</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
         <span class="token comment" spellcheck="true">// 设置String消息的内容, 用string stream (sstream)来实现字符串拼接</span>
         ss<span class="token punctuation">.</span><span class="token function">str</span><span class="token punctuation">(</span>std<span class="token operator">::</span><span class="token function">string</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                                  <span class="token comment" spellcheck="true">// 清空string stream</span>
         ss <span class="token operator">&lt;&lt;</span>  <span class="token string">"Hello I'm publisher -- "</span> <span class="token operator">&lt;&lt;</span> count<span class="token operator">++</span> <span class="token operator">&lt;&lt;</span> <span class="token string">"!"</span><span class="token punctuation">;</span>     <span class="token comment" spellcheck="true">// 拼接字符串</span>
@@ -764,21 +768,21 @@ rqt_graph                                                                       
         pub<span class="token punctuation">.</span><span class="token function">publish</span><span class="token punctuation">(</span>msg<span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token comment" spellcheck="true">// 向命令行输出消息</span>
         <span class="token function">ROS_INFO</span><span class="token punctuation">(</span><span class="token string">"发布数据： %s"</span><span class="token punctuation">,</span> ss<span class="token punctuation">.</span><span class="token function">str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token comment" spellcheck="true">// ros::Rate将会自动休眠，以满足初始化时频率的要求</span>
+        <span class="token comment" spellcheck="true">// ROS1::Rate将会自动休眠，以满足初始化时频率的要求</span>
         rate<span class="token punctuation">.</span><span class="token function">sleep</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h4 id="B-订阅方实现"><a href="#B-订阅方实现" class="headerlink" title="B 订阅方实现"></a>B 订阅方实现</h4><h5 id="1-代码讲解"><a href="#1-代码讲解" class="headerlink" title="1. 代码讲解"></a>1. 代码讲解</h5><p>订阅方的实现很多都和发布方是一样的，不同的是我们需要使用函数<code>nh.subscribe</code>来创建订阅者<code>ros::Subscriber</code>。<code>nh.subscribe</code>需要使用一个回调函数，这个回调函数接受的参数类型是<code>const 消息属于的功能包::消息类型::ConstPtr</code>。这个是<code>ROS</code>的要求，是没法改的。</p>
+<h4 id="B-订阅方实现"><a href="#B-订阅方实现" class="headerlink" title="B 订阅方实现"></a>B 订阅方实现</h4><h5 id="1-代码讲解"><a href="#1-代码讲解" class="headerlink" title="1. 代码讲解"></a>1. 代码讲解</h5><p>订阅方的实现很多都和发布方是一样的，不同的是我们需要使用函数<code>nh.subscribe</code>来创建订阅者<code>ROS1::Subscriber</code>。<code>nh.subscribe</code>需要使用一个回调函数，这个回调函数接受的参数类型是<code>const 消息属于的功能包::消息类型::ConstPtr</code>。这个是<code>ROS1</code>的要求，是没法改的。</p>
 <blockquote>
 <p>稍后我们会介绍如何自定义消息，事实上，自定义消息之后，<code>catkin</code>编译系统会自动帮我们创建消息的头文件和对象，这个在后面我们再详细介绍</p>
 </blockquote>
-<p>最后我们有一个<code>ros::spin()</code>函数，这个函数的意思就是类似于协程的概念。因为我们的节点中可能有不止一个订阅者，可能会有多个订阅者。而这个时候是当前节点接收到了哪一类消息，那么就会在所有的订阅者中循环检查，看看是哪个一个订阅者的回调函数处理这一类消息，然后就会调用这一个回调函数去处理消息。</p>
-<p>而所有静态代码中所有订阅者的队列、运行时候的消息队列等等都是由<code>ROS</code>去维护的。</p>
+<p>最后我们有一个<code>ROS1::spin()</code>函数，这个函数的意思就是类似于协程的概念。因为我们的节点中可能有不止一个订阅者，可能会有多个订阅者。而这个时候是当前节点接收到了哪一类消息，那么就会在所有的订阅者中循环检查，看看是哪个一个订阅者的回调函数处理这一类消息，然后就会调用这一个回调函数去处理消息。</p>
+<p>而所有静态代码中所有订阅者的队列、运行时候的消息队列等等都是由<code>ROS1</code>去维护的。</p>
 <p>具体代码如下，注意依旧是要设置一下内存中的字符的编码格式</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"ros/ros.h"</span></span>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"ROS1/ROS1.h"</span></span>
 <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"std_msgs/String.h"</span></span>
 
 <span class="token comment" spellcheck="true">// 订阅者的回调函数，当消息传到的时候将调用该函数处理</span>
@@ -792,15 +796,15 @@ rqt_graph                                                                       
     <span class="token function">setlocale</span><span class="token punctuation">(</span>LC_ALL<span class="token punctuation">,</span> <span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
     <span class="token comment" spellcheck="true">// 初始化节点</span>
-    ros<span class="token operator">::</span><span class="token function">init</span><span class="token punctuation">(</span>argc<span class="token punctuation">,</span> argv<span class="token punctuation">,</span> <span class="token string">"subscriber_cpp"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    ROS1<span class="token operator">::</span><span class="token function">init</span><span class="token punctuation">(</span>argc<span class="token punctuation">,</span> argv<span class="token punctuation">,</span> <span class="token string">"subscriber_cpp"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">// 创建节点句柄</span>
-    ros<span class="token operator">::</span>NodeHandle nh<span class="token punctuation">;</span>
+    ROS1<span class="token operator">::</span>NodeHandle nh<span class="token punctuation">;</span>
 
     <span class="token comment" spellcheck="true">// 创建订阅者对象</span>
-    ros<span class="token operator">::</span>Subscriber sub <span class="token operator">=</span> nh<span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span><span class="token string">"messages"</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> do_msg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    ROS1<span class="token operator">::</span>Subscriber sub <span class="token operator">=</span> nh<span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span><span class="token string">"messages"</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> do_msg<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
     <span class="token comment" spellcheck="true">// 循环处理</span>
-    ros<span class="token operator">::</span><span class="token function">spin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    ROS1<span class="token operator">::</span><span class="token function">spin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
@@ -844,15 +848,15 @@ rqt_graph                                                                       
 
     实现流程:
         1.包含头文件 
-        2.初始化 ROS 节点:命名(唯一)
-        3.实例化 ROS 句柄
+        2.初始化 ROS1 节点:命名(唯一)
+        3.实例化 ROS1 句柄
         4.实例化 订阅者 对象
         5.处理订阅的消息(回调函数)
         6.设置循环调用回调函数
 
 */</span>
 <span class="token comment" spellcheck="true">// 1.包含头文件 </span>
-<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"ros/ros.h"</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"ROS1/ROS1.h"</span></span>
 <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"std_msgs/String.h"</span></span>
 
 <span class="token comment" spellcheck="true">// 订阅者的回调函数，当消息传到的时候将调用该函数处理</span>
@@ -865,38 +869,38 @@ rqt_graph                                                                       
 
     <span class="token function">setlocale</span><span class="token punctuation">(</span>LC_ALL<span class="token punctuation">,</span> <span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    <span class="token comment" spellcheck="true">// 2.初始化 ROS 节点: 命名(唯一)</span>
-    ros<span class="token operator">::</span><span class="token function">init</span><span class="token punctuation">(</span>argc<span class="token punctuation">,</span> argv<span class="token punctuation">,</span> <span class="token string">"subscriber_cpp"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token comment" spellcheck="true">// 3.实例化 ROS 句柄</span>
-    ros<span class="token operator">::</span>NodeHandle nh<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 2.初始化 ROS1 节点: 命名(唯一)</span>
+    ROS1<span class="token operator">::</span><span class="token function">init</span><span class="token punctuation">(</span>argc<span class="token punctuation">,</span> argv<span class="token punctuation">,</span> <span class="token string">"subscriber_cpp"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 3.实例化 ROS1 句柄</span>
+    ROS1<span class="token operator">::</span>NodeHandle nh<span class="token punctuation">;</span>
 
     <span class="token comment" spellcheck="true">// 4.实例化 订阅者 对象</span>
-    ros<span class="token operator">::</span>Subscriber sub <span class="token operator">=</span> nh<span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span><span class="token string">"messages"</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> do_msg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    ROS1<span class="token operator">::</span>Subscriber sub <span class="token operator">=</span> nh<span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span><span class="token string">"messages"</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> do_msg<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
     <span class="token comment" spellcheck="true">// 循环处理订阅的消息(回调函数)</span>
-    ros<span class="token operator">::</span><span class="token function">spin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    ROS1<span class="token operator">::</span><span class="token function">spin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="2-4-注意事项"><a href="#2-4-注意事项" class="headerlink" title="2.4 注意事项"></a>2.4 注意事项</h3><p>最后，在实现的时候可能会有一些问题，我们在这里讲讲</p>
-<h4 id="A-char-const-argv-问题"><a href="#A-char-const-argv-问题" class="headerlink" title="A. char const *argv[]问题"></a>A. <code>char const *argv[]</code>问题</h4><p><code>vscode</code>中的<code>main</code>函数声明可能是<code>int main(int argc, char const *argv[])</code>，即<code>argv</code>被<code>const</code>修饰，表示不可修改，但是<code>ros::init()</code>中的<code>argv</code>类型是<code>char *argv[]</code>，所以此时传入<code>char const *argv[]</code>的话，就会报错，类型不匹配（<code>CMakeLists.txt</code>加入了<code>strict-prototype</code>标志）。</p>
+<h4 id="A-char-const-argv-问题"><a href="#A-char-const-argv-问题" class="headerlink" title="A. char const *argv[]问题"></a>A. <code>char const *argv[]</code>问题</h4><p><code>vscode</code>中的<code>main</code>函数声明可能是<code>int main(int argc, char const *argv[])</code>，即<code>argv</code>被<code>const</code>修饰，表示不可修改，但是<code>ROS1::init()</code>中的<code>argv</code>类型是<code>char *argv[]</code>，所以此时传入<code>char const *argv[]</code>的话，就会报错，类型不匹配（<code>CMakeLists.txt</code>加入了<code>strict-prototype</code>标志）。</p>
 <p>此时，需要去除该修饰符</p>
-<h4 id="B-找不到ros-h头文件"><a href="#B-找不到ros-h头文件" class="headerlink" title="B. 找不到ros.h头文件"></a>B. 找不到<code>ros.h</code>头文件</h4><p>报错是：<code>ros/ros.h No such file or directory ...</code></p>
+<h4 id="B-找不到ROS1-h头文件"><a href="#B-找不到ROS1-h头文件" class="headerlink" title="B. 找不到ROS1.h头文件"></a>B. 找不到<code>ROS1.h</code>头文件</h4><p>报错是：<code>ROS1/ROS1.h No such file or directory ...</code></p>
 <p>这个一般是<code>CMakeList.txt</code>出错了，导致<code>VSCode</code>没法正常解析<code>CMakeList.txt</code>，从而无法去搜索头文件、补全。</p>
 <p>已知会导致该问题的错误有：</p>
 <ul>
 <li><code>CMakeLists.txt</code>中，<code>find_package</code>出现重复，此时删除重复的内容即可</li>
 </ul>
-<p>参考资料:<a target="_blank" rel="noopener" href="https://answers.ros.org/question/237494/fatal-error-rosrosh-no-such-file-or-directory/">https://answers.ros.org/question/237494/fatal-error-rosrosh-no-such-file-or-directory/</a></p>
-<p>此外，有的时候<code>find_package</code>中没有添加一些包，但也可以运行，这个原因在<code>ros.wiki</code>中的解释如下：</p>
+<p>参考资料:<a target="_blank" rel="noopener" href="https://answers.ROS1.org/question/237494/fatal-error-rosrosh-no-such-file-or-directory/">https://answers.ROS1.org/question/237494/fatal-error-rosrosh-no-such-file-or-directory/</a></p>
+<p>此外，有的时候<code>find_package</code>中没有添加一些包，但也可以运行，这个原因在<code>ROS1.wiki</code>中的解释如下：</p>
 <blockquote>
 <p>You may notice that sometimes your project builds fine even if you did not call find_package with all dependencies. This is because catkin combines all your projects into one, so if an earlier project calls find_package, yours is configured with the same values. But forgetting the call means your project can easily break when built in isolation.</p>
 </blockquote>
 <h4 id="C-订阅时，第一条-前几条数据丢失"><a href="#C-订阅时，第一条-前几条数据丢失" class="headerlink" title="C. 订阅时，第一条/前几条数据丢失"></a>C. 订阅时，第一条/前几条数据丢失</h4><p>如果<code>Subscriber</code>先启动，然后<code>Publisher</code>后启动，那么<code>Subscriber</code>可能会丢失前几条消息</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221227172315861.png" alt="丢失第一条/前几条数据" style="zoom:25%;"></p>
-<p><strong>原因</strong>：发送第一条数据时，<code>Publisher</code>还未在 <code>ROS Master</code>中注册完毕</p>
-<p><strong>解决</strong>：注册后，休眠几秒<code>ros::Duration(3.0).sleep()</code>以保证第一条数据的发送时<code>Publisher</code>已经完成注册</p>
+<p><strong>原因</strong>：发送第一条数据时，<code>Publisher</code>还未在 <code>ROS1 Master</code>中注册完毕</p>
+<p><strong>解决</strong>：注册后，休眠几秒<code>ROS1::Duration(3.0).sleep()</code>以保证第一条数据的发送时<code>Publisher</code>已经完成注册</p>
 <h2 id="3-话题通信Python实现"><a href="#3-话题通信Python实现" class="headerlink" title="3. 话题通信Python实现"></a>3. 话题通信Python实现</h2><p>我们上面介绍了话题通信的<code>Python</code>实现，接下来我们介绍一下话题通信的<code>Python</code>实现。</p>
 <h3 id="3-1-需求"><a href="#3-1-需求" class="headerlink" title="3.1 需求"></a>3.1 需求</h3><p><code>Python</code>的话题通信实现和<code>C++</code>的话题通信实现需求是一样的</p>
 <blockquote>
@@ -904,7 +908,7 @@ rqt_graph                                                                       
 </blockquote>
 <h3 id="3-2-分析"><a href="#3-2-分析" class="headerlink" title="3.2 分析"></a>3.2 分析</h3><p><code>Python</code>的分析和<code>C++</code>的分析也是一样的</p>
 <blockquote>
-<p>在<code>ROS</code>话题通信模型的七步实现中，<code>ROS Master</code>不需要实现，而连接的建立也已经被封装了，因此，我们自己写代码的时候，需要关注的关键点有三个:</p>
+<p>在<code>ROS1</code>话题通信模型的七步实现中，<code>ROS1 Master</code>不需要实现，而连接的建立也已经被封装了，因此，我们自己写代码的时候，需要关注的关键点有三个:</p>
 <ol>
 <li>发布方</li>
 <li>接收方</li>
@@ -922,7 +926,7 @@ rqt_graph                                                                       
 </ol>
 <h4 id="A-发布方实现-1"><a href="#A-发布方实现-1" class="headerlink" title="A 发布方实现"></a>A 发布方实现</h4><p>首先还是先在<code>topic_communication</code>功能包下新建一个<code>scripts</code>文件夹，然后再<code>scripts</code>文件夹中新建<code>pub.py</code>文件</p>
 <h5 id="1-单纯发布消息-1"><a href="#1-单纯发布消息-1" class="headerlink" title="1. 单纯发布消息"></a>1. 单纯发布消息</h5><p>类似<code>C++</code>一样，我们首先实现一个最简单的<code>Python</code>发布者，即只能循环发布消息的发布者</p>
-<p>需要注意的是，<code>std_msgs</code>包中的<code>String</code>消息类型是要从<code>std_msgs.msg</code>中直接导入的。然后<code>Python</code>中并不是<code>ros::ok()</code>，而是<code>rospy.is_shutdown()</code>，所以前面要加一个<code>not</code>来取反。</p>
+<p>需要注意的是，<code>std_msgs</code>包中的<code>String</code>消息类型是要从<code>std_msgs.msg</code>中直接导入的。然后<code>Python</code>中并不是<code>ROS1::ok()</code>，而是<code>rospy.is_shutdown()</code>，所以前面要加一个<code>not</code>来取反。</p>
 <p>剩下的逻辑都和<code>C++</code>基本一致</p>
 <pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true"># pub.py</span>
 <span class="token keyword">import</span> sys
@@ -1057,29 +1061,29 @@ rosrun topic_communication sub.py                <span class="token comment" spe
 rqt_graph                                                                <span class="token comment" spellcheck="true"># 新开一个终端运行</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221228021137367.png" alt="运行结果" style="zoom:25%;"></p>
-<h2 id="4-ROS语言独立性"><a href="#4-ROS语言独立性" class="headerlink" title="4. ROS语言独立性"></a>4. ROS语言独立性</h2><p>我们在最前面介绍过了，<code>ROS</code>的一个特点就是语言独立性</p>
+<h2 id="4-ROS1语言独立性"><a href="#4-ROS1语言独立性" class="headerlink" title="4. ROS1语言独立性"></a>4. ROS1语言独立性</h2><p>我们在最前面介绍过了，<code>ROS1</code>的一个特点就是语言独立性</p>
 <blockquote>
 <ul>
-<li><strong>语言独立性：</strong><code>ROS</code>的开发语言包括<code>Java</code>，<code>C++</code>，<code>Python</code>等。为了支持更多应用开发和移植，<code>ROS</code>设计为一种语言弱相关的框架结构，使用简洁，中立的定义语言描述模块间的消息接口，在编译中再产生所使用语言的目标文件，为消息交互提供支持，同时允许消息接口的嵌套使用</li>
+<li><strong>语言独立性：</strong><code>ROS1</code>的开发语言包括<code>Java</code>，<code>C++</code>，<code>Python</code>等。为了支持更多应用开发和移植，<code>ROS1</code>设计为一种语言弱相关的框架结构，使用简洁，中立的定义语言描述模块间的消息接口，在编译中再产生所使用语言的目标文件，为消息交互提供支持，同时允许消息接口的嵌套使用</li>
 </ul>
 </blockquote>
-<p>我们在前面，一直没有机会能够介绍<code>ROS</code>的语言独立性，这里我们恰好有了<code>C++</code>和<code>Python</code>开发的节点，所以我们就展示一下<code>ROS</code>这语言独立性这个能力。</p>
-<p><code>ROS</code>的语言独立性具体来说就是各个节点可以用不同的语言开发，而<code>ROS</code>提供的<code>API</code>内实现了统一的访问。所以我们可以运行<code>C++</code>的发布者，而后运行<code>Python</code>订阅者</p>
+<p>我们在前面，一直没有机会能够介绍<code>ROS1</code>的语言独立性，这里我们恰好有了<code>C++</code>和<code>Python</code>开发的节点，所以我们就展示一下<code>ROS1</code>这语言独立性这个能力。</p>
+<p><code>ROS1</code>的语言独立性具体来说就是各个节点可以用不同的语言开发，而<code>ROS1</code>提供的<code>API</code>内实现了统一的访问。所以我们可以运行<code>C++</code>的发布者，而后运行<code>Python</code>订阅者</p>
 <pre class="line-numbers language-bash"><code class="language-bash">roscore
 rosrun topic_communication publisher_cpp            <span class="token comment" spellcheck="true"># 新的终端中运行</span>
 rosrun topic_communication sub.py                            <span class="token comment" spellcheck="true"># 新的终端中运行</span>
 rqt_graph                                                                            <span class="token comment" spellcheck="true"># 新的终端中运行</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p>我们可以看到，不同语言实现的节点，通过<code>ROS</code>框架，能够进行统一的通信，这就是<code>ROS</code>的第一个强大之处</p>
-<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221228022218864.png" alt="ROS的语言独立性" style="zoom:25%;"></p>
-<h2 id="5-自定义消息类型介绍"><a href="#5-自定义消息类型介绍" class="headerlink" title="5. 自定义消息类型介绍"></a>5. 自定义消息类型介绍</h2><p><code>ROS</code>通信协议中，最重要的有如下三个元素：</p>
+<p>我们可以看到，不同语言实现的节点，通过<code>ROS1</code>框架，能够进行统一的通信，这就是<code>ROS1</code>的第一个强大之处</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221228022218864.png" alt="ROS1的语言独立性" style="zoom:25%;"></p>
+<h2 id="5-自定义消息类型介绍"><a href="#5-自定义消息类型介绍" class="headerlink" title="5. 自定义消息类型介绍"></a>5. 自定义消息类型介绍</h2><p><code>ROS1</code>通信协议中，最重要的有如下三个元素：</p>
 <ul>
 <li>发布者</li>
 <li>订阅者</li>
 <li>消息</li>
 </ul>
 <p>我们前面讲了如何实现发布者和订阅者，但是却没有将如何自定义消息类型，下面我们就将讲解如何自定义消息类型。</p>
-<p>数据载体是话题通信的一个重要组成部分，<code>ROS</code>中在<code>std_msgs</code>功能包封装了一些原生的数据类型，例如：</p>
+<p>数据载体是话题通信的一个重要组成部分，<code>ROS1</code>中在<code>std_msgs</code>功能包封装了一些原生的数据类型，例如：</p>
 <ul>
 <li><code>String</code></li>
 <li><code>Int32</code></li>
@@ -1091,14 +1095,14 @@ rqt_graph                                                                       
 <p>但是，这些数据作为基础类型，一般只包含一个<code>data</code>字段，即只有一个数据域。<strong>结构的单一意味着功能上的局限性，当传输一些复杂的数据，比如: 激光雷达的数据，需要角度、距离和反射强度的三合一信息，即很多时候我们需要传输一个结构，这个时候依旧使用<code>std_msgs</code>就显得力不从心了</strong>。</p>
 <p>事实上<code>std_msgs</code>作为基础数据类型，由于描述性较差，因此往往在复杂的消息类型中都用作为自定义的复杂消息类型中的元素，从而解决诸如激光雷达这样的我问题的。</p>
 <h3 id="5-1-std-msgs介绍"><a href="#5-1-std-msgs介绍" class="headerlink" title="5.1 std_msgs介绍"></a>5.1 <code>std_msgs</code>介绍</h3><p><code>std_msgs</code>实际上是一个专门定义了基础数据类型的功能包，其中有非常多的<code>.h</code>和<code>.py</code>文件可以让我们导入，而这些文件中定义了诸如<code>String</code>、<code>Int32</code>等等的实现。</p>
-<p>而为什么我们在别的功能包中能够<code>include</code>或者<code>import</code>别的功能包呢？这个实际上涉及了<code>ROS</code>的另外一个特性：<strong>松耦合</strong></p>
+<p>而为什么我们在别的功能包中能够<code>include</code>或者<code>import</code>别的功能包呢？这个实际上涉及了<code>ROS1</code>的另外一个特性：<strong>松耦合</strong></p>
 <blockquote>
 <ul>
-<li><strong>松耦合：</strong><code>ROS</code>中功能模块封装于独立的功能包或元功能包，便于分享，功能包内的模块以节点为单位运行，以<code>ROS</code>标准的<code>IO</code>作为接口，开发者不需要关注模块内部实现，只要了解接口规则就能实现复用,实现了模块间点对点的松耦合连接</li>
+<li><strong>松耦合：</strong><code>ROS1</code>中功能模块封装于独立的功能包或元功能包，便于分享，功能包内的模块以节点为单位运行，以<code>ROS1</code>标准的<code>IO</code>作为接口，开发者不需要关注模块内部实现，只要了解接口规则就能实现复用,实现了模块间点对点的松耦合连接</li>
 </ul>
 </blockquote>
 <p>关于这里我们这里不展开讲，我们后面会有专门的例子来介绍什么是松耦合，以及如何让自己的功能包为其他功能包提供接口。</p>
-<h3 id="5-2-msg文件介绍"><a href="#5-2-msg文件介绍" class="headerlink" title="5.2 .msg文件介绍"></a>5.2 <code>.msg</code>文件介绍</h3><h4 id="A-自动化生成消息"><a href="#A-自动化生成消息" class="headerlink" title="A. 自动化生成消息"></a>A. 自动化生成消息</h4><p>如何定义一个消息类型呢？我们能想到的一种解决方案是，<code>ROS</code>提供一个<code>ros_topic_message</code>的基类，其中定义了几个纯虚函数来定义接口。然后所有消息类型都必须继承<code>ros_topic_message</code>这个基类，而且每个消息类型都必须重写这些纯虚函数，例如上面<code>String</code>中的<code>data</code>。</p>
+<h3 id="5-2-msg文件介绍"><a href="#5-2-msg文件介绍" class="headerlink" title="5.2 .msg文件介绍"></a>5.2 <code>.msg</code>文件介绍</h3><h4 id="A-自动化生成消息"><a href="#A-自动化生成消息" class="headerlink" title="A. 自动化生成消息"></a>A. 自动化生成消息</h4><p>如何定义一个消息类型呢？我们能想到的一种解决方案是，<code>ROS1</code>提供一个<code>ros_topic_message</code>的基类，其中定义了几个纯虚函数来定义接口。然后所有消息类型都必须继承<code>ros_topic_message</code>这个基类，而且每个消息类型都必须重写这些纯虚函数，例如上面<code>String</code>中的<code>data</code>。</p>
 <p>当然可以这样做，可是这样做就有一个问题，就是会增加开发的复杂程度，因为作为开发者，我们还需要去关注具体得消息的实现。但事实上：</p>
 <ul>
 <li>定义新的对象表示新的消息类型</li>
@@ -1132,9 +1136,9 @@ public:
 my_msgs<span class="token operator">::</span>laser_msg L<span class="token punctuation">;</span>
 <span class="token comment" spellcheck="true">// ...</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p>而这个<strong>从模板到类的自动化生成，核心就是我们需要知道将要生成的新消息的中含有的数据对象</strong>。为此，<code>ROS</code>专门使用一个后缀为<code>.msg</code>的文件来保存。我们这里先对<code>.msg</code>的详细介绍，而如何定义<code>.msg</code>文件，以及如何自动生成代码形式的消息的，在后面再进行介绍。</p>
+<p>而这个<strong>从模板到类的自动化生成，核心就是我们需要知道将要生成的新消息的中含有的数据对象</strong>。为此，<code>ROS1</code>专门使用一个后缀为<code>.msg</code>的文件来保存。我们这里先对<code>.msg</code>的详细介绍，而如何定义<code>.msg</code>文件，以及如何自动生成代码形式的消息的，在后面再进行介绍。</p>
 <h4 id="B-msg文件"><a href="#B-msg文件" class="headerlink" title="B. .msg文件"></a>B. <code>.msg</code>文件</h4><p><code>.msg</code>只是简单的文本文件，每行都是<code>字段类型  字段名称</code>的<code>record</code>，用于表示符合对象中的一个成员。例如我们查看<code>std_msgs</code>功能包中的我们用过的<code>String</code>的<code>.msg</code>文件。</p>
-<p>首先查找<code>std_msgs</code>文件的位置，如果你没有改<code>ROS</code>安装的位置的话，这个<code>std_msgs</code>功能包一般在<code>/opt/ros/noetic/share</code>目录下，当然可以运行下面的命令来直接输出安装位置</p>
+<p>首先查找<code>std_msgs</code>文件的位置，如果你没有改<code>ROS1</code>安装的位置的话，这个<code>std_msgs</code>功能包一般在<code>/opt/ROS1/noetic/share</code>目录下，当然可以运行下面的命令来直接输出安装位置</p>
 <pre class="line-numbers language-bash"><code class="language-bash"><span class="token keyword">echo</span> <span class="token variable">$ROS_ROOT</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221228025905259.png" alt="ROS_ROOT的值" style="zoom: 50%;"></p>
@@ -1155,9 +1159,9 @@ my_msgs<span class="token operator">::</span>laser_msg L<span class="token punct
 <li>时间戳/时间段：<code>time/duration</code></li>
 <li>数组：<code>variable-length array[]/fixed-length array[C]</code></li>
 </ul>
-<p>ROS中还有一种特殊类型：<code>Header</code>，标头包含时间戳和ROS中常用的坐标帧信息。会经常看到msg文件的第一行具有<code>Header标头</code>。例如我们正在进行跟随的时候，那么每时每刻人的位置都是不同的，所以十秒前人的位置不能用于指导机器人现在的运动，所以就会有一个<code>Header标头</code></p>
+<p>ROS1中还有一种特殊类型：<code>Header</code>，标头包含时间戳和ROS1中常用的坐标帧信息。会经常看到msg文件的第一行具有<code>Header标头</code>。例如我们正在进行跟随的时候，那么每时每刻人的位置都是不同的，所以十秒前人的位置不能用于指导机器人现在的运动，所以就会有一个<code>Header标头</code></p>
 <p>我们其实可以<code>cat</code>查看一下<code>Header</code>标头</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">cat</span> /opt/ros/noetic/share/std_msgs/msg/Header.msg
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">cat</span> /opt/ROS1/noetic/share/std_msgs/msg/Header.msg
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221228121226821.png" alt="Header标头"></p>
 <p>介绍完了<code>.msg</code>的理论知识之后，我们接下来来介绍如何自定义消息，即开始实现。</p>
@@ -1170,14 +1174,14 @@ my_msgs<span class="token operator">::</span>laser_msg L<span class="token punct
 <li>编辑配置文件</li>
 <li>编译生成可以被<code>Python</code>或<code>C++</code>调用的中间文件</li>
 </ol>
-<h4 id="A-添加依赖的功能包"><a href="#A-添加依赖的功能包" class="headerlink" title="A 添加依赖的功能包"></a>A 添加依赖的功能包</h4><p><code>ROS</code>中生成自定义的消息类型需要使用两个功能包：</p>
+<h4 id="A-添加依赖的功能包"><a href="#A-添加依赖的功能包" class="headerlink" title="A 添加依赖的功能包"></a>A 添加依赖的功能包</h4><p><code>ROS1</code>中生成自定义的消息类型需要使用两个功能包：</p>
 <ul>
 <li><code>message_generation</code></li>
 <li><code>message_runtime</code></li>
 </ul>
 <p>第一个功能包是用于生成静态的消息文件，第二个功能包是用于运行自定义消息</p>
 <p>我们除了在创建功能包的时候可以指定当前功能包依赖的功能包外，还可以直接编辑<code>Packages.xml</code>文件和<code>CMakeLists.txt</code>来说明当前编译当前功能包所依赖的功能包。</p>
-<h5 id="1-Package-xml"><a href="#1-Package-xml" class="headerlink" title="1. Package.xml"></a>1. <code>Package.xml</code></h5><p>关于<code>Package.xml</code>中的内容，我们在前面<code>ROS</code>文件系统那一节已经有介绍了，这里再重复讲讲。<code>Package.xml</code>文件中，<code>&lt;build_depend&gt;</code>、<code>&lt;build_export_depend&gt;</code>和<code>&lt;exec_depend&gt;</code>这三个标签联合在一起定义了当前功能包依赖的功能包</p>
+<h5 id="1-Package-xml"><a href="#1-Package-xml" class="headerlink" title="1. Package.xml"></a>1. <code>Package.xml</code></h5><p>关于<code>Package.xml</code>中的内容，我们在前面<code>ROS1</code>文件系统那一节已经有介绍了，这里再重复讲讲。<code>Package.xml</code>文件中，<code>&lt;build_depend&gt;</code>、<code>&lt;build_export_depend&gt;</code>和<code>&lt;exec_depend&gt;</code>这三个标签联合在一起定义了当前功能包依赖的功能包</p>
 <pre class="line-numbers language-xml"><code class="language-xml">  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>build_depend</span><span class="token punctuation">></span></span>roscpp<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>build_depend</span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>build_depend</span><span class="token punctuation">></span></span>rospy<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>build_depend</span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>build_depend</span><span class="token punctuation">></span></span>std_msgs<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>build_depend</span><span class="token punctuation">></span></span>
@@ -1215,7 +1219,7 @@ vim package.xml
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221228124851919.png" alt="package.xml中添加依赖" style="zoom:25%;"></p>
 <p>注意，有些早期的教程中添加运行时依赖的标签是<code>&lt;run_depend&gt;</code>，事实上这个标签已经被<code>&lt;exec_depend&gt;</code>所取代了，现在是非法的标签了</p>
 <h5 id="2-CMakeLists-txt"><a href="#2-CMakeLists-txt" class="headerlink" title="2. CMakeLists.txt"></a>2. <code>CMakeLists.txt</code></h5><p>编辑完了<code>Package.xml</code>之后，第二个要编辑的就是<code>CMakeLists.txt</code></p>
-<p><code>ROS</code>在编译功能包的时候，会自动为当前的功能包生成<code>.cmake</code>文件，然后将该<code>.cmake</code>文件<code>export</code>到<code>cmake</code>全局的搜索库路径中，这样我们就可以在其他功能包中导入当前功能包的头文件了。</p>
+<p><code>ROS1</code>在编译功能包的时候，会自动为当前的功能包生成<code>.cmake</code>文件，然后将该<code>.cmake</code>文件<code>export</code>到<code>cmake</code>全局的搜索库路径中，这样我们就可以在其他功能包中导入当前功能包的头文件了。</p>
 <p>当然，这样讲太抽象了，我们下面就举<code>topic_communication</code>功能包的例子。在<code>topic_communication/CMakeLists.txt</code>中，有<code>find_package</code>函数：</p>
 <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20221228133237647.png" alt="topic_communication功能包下的CMakeLists.txt文件" style="zoom: 25%;"></p>
 <p><code>find_package</code>是<code>CMake</code>自带的函数，会在指定的路径下搜索库。</p>
@@ -1287,12 +1291,16 @@ vim package.xml
                                     <span class="chip bg-color">ROS</span>
                                 </a>
                             
-                                <a href="/tags/ROS%E9%80%9A%E4%BF%A1%E6%9C%BA%E5%88%B6/">
-                                    <span class="chip bg-color">ROS通信机制</span>
-                                </a>
-                            
                                 <a href="/tags/%E8%AF%9D%E9%A2%98%E9%80%9A%E4%BF%A1/">
                                     <span class="chip bg-color">话题通信</span>
+                                </a>
+                            
+                                <a href="/tags/ROS1/">
+                                    <span class="chip bg-color">ROS1</span>
+                                </a>
+                            
+                                <a href="/tags/ROS1%E9%80%9A%E4%BF%A1%E6%9C%BA%E5%88%B6/">
+                                    <span class="chip bg-color">ROS1通信机制</span>
                                 </a>
                             
                         </div>
@@ -1519,15 +1527,15 @@ vim package.xml
                 <a href="/2022/12/25/ros-jiao-cheng-6-ros-tong-xin-ji-zhi-jian-jie/">
                     <div class="card-image">
                         
-                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/01_%E6%A1%88%E4%BE%8B01_%E4%B9%8C%E9%BE%9F%E7%94%BB%E5%9C%86.gif" class="responsive-img" alt="ROS教程 6：ROS通信机制简介">
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/01_%E6%A1%88%E4%BE%8B01_%E4%B9%8C%E9%BE%9F%E7%94%BB%E5%9C%86.gif" class="responsive-img" alt="ROS1教程 6：ROS1通信机制简介">
                         
-                        <span class="card-title">ROS教程 6：ROS通信机制简介</span>
+                        <span class="card-title">ROS1教程 6：ROS1通信机制简介</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            本文是ROS系列教程的第六篇文章，对ROS中的通信机制进行了简介
+                            本文是ROS1系列教程的第六篇文章，对ROS1中的通信机制进行了简介
                         
                     </div>
                     <div class="publish-info">
@@ -1538,8 +1546,8 @@ vim package.xml
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/ROS%E6%95%99%E7%A8%8B/" class="post-category">
-                                    ROS教程
+                            <a href="/categories/ROS1%E6%95%99%E7%A8%8B/" class="post-category">
+                                    ROS1教程
                                 </a>
                             
                             
@@ -1548,14 +1556,6 @@ vim package.xml
                 </div>
                 
                 <div class="card-action article-tags">
-                    
-                    <a href="/tags/ROS/">
-                        <span class="chip bg-color">ROS</span>
-                    </a>
-                    
-                    <a href="/tags/ROS%E9%80%9A%E4%BF%A1%E6%9C%BA%E5%88%B6/">
-                        <span class="chip bg-color">ROS通信机制</span>
-                    </a>
                     
                     <a href="/tags/%E8%AF%9D%E9%A2%98%E9%80%9A%E4%BF%A1/">
                         <span class="chip bg-color">话题通信</span>
@@ -1567,6 +1567,14 @@ vim package.xml
                     
                     <a href="/tags/%E5%8F%82%E6%95%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/">
                         <span class="chip bg-color">参数服务器</span>
+                    </a>
+                    
+                    <a href="/tags/ROS1/">
+                        <span class="chip bg-color">ROS1</span>
+                    </a>
+                    
+                    <a href="/tags/ROS1%E9%80%9A%E4%BF%A1%E6%9C%BA%E5%88%B6/">
+                        <span class="chip bg-color">ROS1通信机制</span>
                     </a>
                     
                 </div>
@@ -1753,7 +1761,7 @@ vim package.xml
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">580k</span>
+                        class="white-color">587.9k</span>
             
             
             
