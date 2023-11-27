@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Shell脚本进阶：条件语句, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
-    <meta name="description" content="Shell脚本进阶：条件语句 | JackWang&#39;s Blog">
+    <meta name="keywords" content="Shell脚本进阶：使用${}提取变量, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
+    <meta name="description" content="本文介绍了Shell如何使用${}提取变量的值">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Shell脚本进阶：条件语句 | JackWang&#39;s Blog</title>
+    <title>Shell脚本进阶：使用${}提取变量 | JackWang&#39;s Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -254,12 +254,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://jack-1307599355.cos.ap-shanghai.myqcloud.com/executing-bash-script-on-multiple-remote-server.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Shell脚本进阶：条件语句</h1>
+                    <h1 class="description center-align post-title">Shell脚本进阶：使用${}提取变量</h1>
                 </div>
             </div>
         </div>
@@ -373,12 +373,33 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Linux/">
+                                <span class="chip bg-color">Linux</span>
+                            </a>
+                        
+                            <a href="/tags/Ubuntu/">
+                                <span class="chip bg-color">Ubuntu</span>
+                            </a>
+                        
+                            <a href="/tags/Shell/">
+                                <span class="chip bg-color">Shell</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Linux%E5%AE%9E%E7%94%A8%E6%8A%80%E5%B7%A7/" class="post-category">
+                                Linux实用技巧
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -387,28 +408,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2023-07-24
+                    2023-11-27
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-07-24
+                    2023-11-27
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    0
+                    1.1k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    4 分
                 </div>
                 
 
@@ -428,7 +449,84 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/executing-bash-script-on-multiple-remote-server.jpg" alt="Bash"></p>
+<h1 id="Shell脚本进阶：使用-提取变量"><a href="#Shell脚本进阶：使用-提取变量" class="headerlink" title="Shell脚本进阶：使用${}提取变量"></a>Shell脚本进阶：使用${}提取变量</h1><p>在Shell脚本编程中，提取变量通常使用<code>$</code>符号，即使用<code>$VARIABLE</code>来提取变量<code>VARIABLE</code>的值。而<code>${}</code>是另外一种用于引用变量的语法。</p>
+<p>相比于<code>$</code>，<code>${]</code>的功能更加强大，提供了一系列额外的功能，包括获取变量的值、进行字符串替换、执行命令以及提供默认值等。本文将详细介绍<code>${}</code>的用法和示例。</p>
+<h2 id="1-获取变量的值"><a href="#1-获取变量的值" class="headerlink" title="1. 获取变量的值"></a>1. 获取变量的值</h2><p><code>${var}</code>用于获取变量<code>var</code>的值。这适用于普通变量、数组变量和环境变量。以下是一个示例：</p>
+<pre class="line-numbers language-bash"><code class="language-bash">name<span class="token operator">=</span><span class="token string">"John"</span>
+<span class="token keyword">echo</span> <span class="token string">"欢迎，<span class="token variable">${name}</span>！"</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>在上述示例中，<code>${name}</code>将会被替换为变量<code>name</code>的值，输出为”欢迎，John！”。</p>
+<h2 id="2-大小写转换"><a href="#2-大小写转换" class="headerlink" title="2. 大小写转换"></a>2. 大小写转换</h2><p>在变量后使用<code>^</code>和<code>,</code>可以修改字符串的大小写。</p>
+<ul>
+<li><code>${var^}</code>会让字符串首字母大写</li>
+<li><code>${var^^}</code>会让字符串全部大写</li>
+<li><code>${var,}</code>会让字符串首字母小写</li>
+<li><code>${var,,}</code>会让字符串全部小写</li>
+</ul>
+<pre class="line-numbers language-bash"><code class="language-bash">var<span class="token operator">=</span><span class="token string">"hello world"</span>
+
+<span class="token keyword">echo</span> <span class="token string">"Original string: <span class="token variable">$var</span>"</span>                  <span class="token comment" spellcheck="true"># hello world</span>
+<span class="token keyword">echo</span> <span class="token string">"Capitalizing the first letter: <span class="token variable">${var^}</span>"</span> <span class="token comment" spellcheck="true"># Hello world</span>
+<span class="token keyword">echo</span> <span class="token string">"Converting to uppercase: <span class="token variable">${var^^}</span>"</span>      <span class="token comment" spellcheck="true"># HELLO WORLD</span>
+
+var<span class="token operator">=</span><span class="token string">"HELLO WORLD"</span>
+<span class="token keyword">echo</span> <span class="token string">"Lowercasing the first letter: <span class="token variable">${var,}</span>"</span> <span class="token comment" spellcheck="true"># hELLO WORLD</span>
+<span class="token keyword">echo</span> <span class="token string">"Converting to lowercase: <span class="token variable">${var,,}</span>"</span>     <span class="token comment" spellcheck="true"># hello world</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="3-未定义时使用默认值"><a href="#3-未定义时使用默认值" class="headerlink" title="3. 未定义时使用默认值"></a>3. 未定义时使用默认值</h2><p><code>${var:-default}</code>用于获取变量<code>var</code>的值，如果<code>var</code>未定义或为空，则使用默认值<code>default</code>。以下是一个示例：</p>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token keyword">echo</span> <span class="token string">"${debug_level:-"</span>error<span class="token string">"}"</span> <span class="token comment" spellcheck="true"># error</span>
+
+debug_level<span class="token operator">=</span><span class="token string">"info"</span>
+<span class="token keyword">echo</span> <span class="token string">"${debug_level:-"</span>error<span class="token string">"}"</span> <span class="token comment" spellcheck="true"># info</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这个语法在<code>oh-my-zsh</code>的<code>powerlevel 10k</code>这个主题的下载命令中也有所使用：</p>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">git</span> clone --depth<span class="token operator">=</span>1 https://github.com/romkatv/powerlevel10k.git <span class="token variable">${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}</span>/themes/powerlevel10k
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>这里就是如果用户在安装<code>oh-my-zsh</code>的时候指定了另外的安装目录，那么<code>.zshrc</code>文件中就会利用<code>ZSH_CUSTOM</code>变量来记录这个安装位置。</p>
+<h2 id="4-未定义时设置默认值"><a href="#4-未定义时设置默认值" class="headerlink" title="4. 未定义时设置默认值"></a>4. 未定义时设置默认值</h2><p><code>${var:=default}</code>用于获取变量<code>var</code>的值，如果<code>var</code>未定义或为空，则将其设置为默认值<code>default</code>并使用该值。以下是一个示例：</p>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token keyword">echo</span> <span class="token string">"${debug_level:="</span>error<span class="token string">"}"</span> <span class="token comment" spellcheck="true"># error</span>
+<span class="token keyword">echo</span> <span class="token string">"<span class="token variable">${debug_level}</span>"</span> <span class="token comment" spellcheck="true"># error</span>
+
+count<span class="token operator">=</span>5
+<span class="token keyword">echo</span> <span class="token string">"当前计数：<span class="token variable">${count:=0}</span>"</span>      <span class="token comment" spellcheck="true"># 5</span>
+<span class="token keyword">echo</span> <span class="token string">"变量已存在则不会重新设置：<span class="token variable">${count}</span>"</span> <span class="token comment" spellcheck="true"># 5</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>在上述示例中，变量<code>debug_level</code>未定义或为空，<code>${debug_level:=0}</code>将将其设置为默认值<code>error</code>。而<code>count</code>的值已经定义，所以<code>${count:=5}</code>直接输出当前计数为0，不会修改其默认值</p>
+<h2 id="5-已定义时使用默认值"><a href="#5-已定义时使用默认值" class="headerlink" title="5. 已定义时使用默认值"></a>5. 已定义时使用默认值</h2><p><code>${var:+default}</code>用于获取变量<code>var</code>的值，如果<code>var</code>已经定义，则使用默认值<code>default</code>。</p>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token keyword">echo</span> <span class="token string">"${debug_flag:+"</span>You will not see this debug info<span class="token string">"}"</span> <span class="token comment" spellcheck="true"># （空）</span>
+
+debug_flag<span class="token operator">=</span><span class="token string">"yes"</span>
+<span class="token keyword">echo</span> <span class="token string">"${debug_flag:+"</span>You will see this debug info<span class="token string">"}"</span> <span class="token comment" spellcheck="true"># You will see this debug info</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="6-字符串替换"><a href="#6-字符串替换" class="headerlink" title="6. 字符串替换"></a>6. 字符串替换</h2><p><code>${var/pattern/replacement}</code>用于将变量<code>var</code>中第一个匹配<code>pattern</code>的子串替换为<code>replacement</code>。</p>
+<ul>
+<li><code>${var//pattern/replacement}</code>会替换字符串中所有匹配的子字符串</li>
+<li><code>${var/%pattern/replacement}</code>只会替换字符串中最后一个匹配的子字符串</li>
+<li><code>${var/#pattern/replacement}</code>只会替换字符串中第一个匹配的子字符串</li>
+<li><code>${var/pattern/}</code>相当于删除子字符串，即用空白来替换</li>
+</ul>
+<p>以下是一个示例：</p>
+<pre class="line-numbers language-bash"><code class="language-bash">sentence<span class="token operator">=</span><span class="token string">"I love apples, apples are delicious."</span>
+<span class="token keyword">echo</span> <span class="token string">"替换前的句子：<span class="token variable">${sentence}</span>"</span>
+<span class="token keyword">echo</span> <span class="token string">"替换后的句子：<span class="token variable">${sentence//apples/oranges}</span>"</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>在上述示例中，<code>${sentence//apples/oranges}</code>将会将句子中的所有”apples”替换为”oranges”。</p>
+<h2 id="7-提取子字符串"><a href="#7-提取子字符串" class="headerlink" title="7. 提取子字符串"></a>7. 提取子字符串</h2><p><code>${string:position:length}</code>用于提取字符串<code>string</code>从<code>position</code>开始的<code>length</code>个字符，即获得子字符串。也支持负数开始的<code>positon</code>，表示从字符串结尾开始。</p>
+<p>以下是一个示例：</p>
+<pre class="line-numbers language-bash"><code class="language-bash">name<span class="token operator">=</span><span class="token string">"JackWang"</span>
+<span class="token keyword">echo</span> <span class="token string">"First Name: <span class="token variable">${name:0:4}</span>"</span>
+<span class="token keyword">echo</span> <span class="token string">"Last Name: <span class="token variable">${nane:(-4):4}</span>"</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>注意，负数需要用括号括起来。</p>
+<h2 id="8-变量长度"><a href="#8-变量长度" class="headerlink" title="8. 变量长度"></a>8. 变量长度</h2><p><code>${#var}</code>用于获取变量<code>var</code>的长度（字符个数）。以下是一个示例：</p>
+<pre class="line-numbers language-bash"><code class="language-bash">word<span class="token operator">=</span><span class="token string">"Hello"</span>
+<span class="token keyword">echo</span> <span class="token string">"单词长度为：<span class="token variable">${#word}</span>"</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>在上述示例中，<code>${#word}</code>将会输出变量<code>word</code>的长度，即单词”Hello”的长度为5。</p>
+<h2 id="9-总结"><a href="#9-总结" class="headerlink" title="9. 总结"></a>9. 总结</h2><p><code>${}</code>结构在Shell脚本编程中提供了灵活和强大的功能。通过它，我们可以方便地引用变量、进行字符串替换、提供默认值等操作，以满足不同的编程需求。</p>
+<p>希望本文对你理解<code>${}</code>的用法有所帮助，让你在Shell脚本编程中能够更加灵活地处理变量和字符串操作。</p>
+
                 
             </div>
             <hr/>
@@ -454,7 +552,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://jackwang0107.github.io/2023/07/24/shell-jiao-ben-jin-jie-tiao-jian-yu-ju/">https://jackwang0107.github.io/2023/07/24/shell-jiao-ben-jin-jie-tiao-jian-yu-ju/</a>
+                    <a href="https://jackwang0107.github.io/2023/11/27/shell-jiao-ben-jin-jie/">https://jackwang0107.github.io/2023/11/27/shell-jiao-ben-jin-jie/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -491,7 +589,19 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/Linux/">
+                                    <span class="chip bg-color">Linux</span>
+                                </a>
+                            
+                                <a href="/tags/Ubuntu/">
+                                    <span class="chip bg-color">Ubuntu</span>
+                                </a>
+                            
+                                <a href="/tags/Shell/">
+                                    <span class="chip bg-color">Shell</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -661,28 +771,29 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2023/07/24/linux-lin-shi-wen-jian-tmp-yu-mktemp/">
+                <a href="/2023/11/27/shell-jiao-ben-jin-jie/">
                     <div class="card-image">
                         
-                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/linux-filesystem-hierarchy.png" class="responsive-img" alt="Linux临时文件：/tmp与mktemp">
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/executing-bash-script-on-multiple-remote-server.jpg" class="responsive-img" alt="Shell脚本进阶：使用${}提取变量">
                         
-                        <span class="card-title">Linux临时文件：/tmp与mktemp</span>
+                        <span class="card-title">Shell脚本进阶：使用${}提取变量</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            本文介绍了Linux如何创建临时文件与目录：/tmp目录与mktemp命令
+                            本文介绍了Shell如何使用${}提取变量的值
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-07-24
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-11-27
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -695,19 +806,20 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/mktemp/">
-                        <span class="chip bg-color">mktemp</span>
-                    </a>
-                    
-                    <a href="/tags/FHS/">
-                        <span class="chip bg-color">FHS</span>
-                    </a>
-                    
                     <a href="/tags/Linux/">
                         <span class="chip bg-color">Linux</span>
+                    </a>
+                    
+                    <a href="/tags/Ubuntu/">
+                        <span class="chip bg-color">Ubuntu</span>
+                    </a>
+                    
+                    <a href="/tags/Shell/">
+                        <span class="chip bg-color">Shell</span>
                     </a>
                     
                 </div>
@@ -721,24 +833,23 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2023/07/24/shell-jiao-ben-jin-jie-shu-xue-yun-suan/">
+                <a href="/2023/11/25/python-stub-file/">
                     <div class="card-image">
                         
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/img/20201221215820109.png" class="responsive-img" alt="Python Stub File">
                         
-                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="Shell脚本进阶：数学运算">
-                        
-                        <span class="card-title">Shell脚本进阶：数学运算</span>
+                        <span class="card-title">Python Stub File</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
+                            本文介绍了Python Stub File，即.pyi文件
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-07-24
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-11-25
                             </span>
                         <span class="publish-author">
                             
@@ -747,6 +858,26 @@
                             
                         </span>
                     </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Python/">
+                        <span class="chip bg-color">Python</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%9D%82%E9%A1%B9/">
+                        <span class="chip bg-color">杂项</span>
+                    </a>
+                    
+                    <a href="/tags/Python-Stub-File/">
+                        <span class="chip bg-color">Python Stub File</span>
+                    </a>
+                    
+                    <a href="/tags/pyi/">
+                        <span class="chip bg-color">.pyi</span>
+                    </a>
+                    
                 </div>
                 
             </div>
@@ -931,7 +1062,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">600k</span>
+                        class="white-color">603.8k</span>
             
             
             
