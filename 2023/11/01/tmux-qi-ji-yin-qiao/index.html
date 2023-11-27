@@ -1207,17 +1207,16 @@ bind-key -T copy-mode-vi MouseDragEnd1Pane send -X copy-pipe-and-cancel <span cl
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2023/11/01/tmux-qi-ji-yin-qiao/">
+                <a href="/2023/11/22/ji-suan-ji-zu-cheng-yu-jie-gou-1/">
                     <div class="card-image">
                         
-                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/tmux.png" class="responsive-img" alt="Tmux奇技淫巧">
+                        <img src="https://global.aorus.com/upload/Admin/images/2021_0923_gigabyte-4470.jpg" class="responsive-img" alt="计算机组成原理 1：计算机系统概述">
                         
-                        <span class="card-title">Tmux奇技淫巧</span>
+                        <span class="card-title">计算机组成原理 1：计算机系统概述</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1227,27 +1226,26 @@ bind-key -T copy-mode-vi MouseDragEnd1Pane send -X copy-pipe-and-cancel <span cl
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-11-01
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-11-22
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Linux%E5%AE%9E%E7%94%A8%E6%8A%80%E5%B7%A7/" class="post-category">
-                                    Linux实用技巧
+                            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" class="post-category">
+                                    计算机组成原理
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Tmux/">
-                        <span class="chip bg-color">Tmux</span>
+                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">
+                        <span class="chip bg-color">计算机组成原理</span>
                     </a>
                     
                 </div>
@@ -1394,8 +1392,8 @@ bind-key -T copy-mode-vi MouseDragEnd1Pane send -X copy-pipe-and-cancel <span cl
             tocSelector: '#toc-content',
             contentSelector: '#articleContent',
             headingsOffset: -($(window).height() * 0.4 - 45),
-            collapseDepth: Number('1'),
-            headingSelector: 'h2, h3, h4, h5, h6'
+            collapseDepth: Number('2'),
+            headingSelector: 'h1, h2, h3, h4, h5, h6'
         });
 
         // modify the toc link href to support Chinese.
@@ -1407,7 +1405,7 @@ bind-key -T copy-mode-vi MouseDragEnd1Pane send -X copy-pipe-and-cancel <span cl
 
         // modify the heading title id to support Chinese.
         i = 0;
-        $('#articleContent').children('h2, h3, h4, h5, h6').each(function () {
+        $('#articleContent').children('h1, h2, h3, h4, h5, h6').each(function () {
             $(this).attr('id', tocHeading + (++i));
         });
 
@@ -1486,7 +1484,7 @@ bind-key -T copy-mode-vi MouseDragEnd1Pane send -X copy-pipe-and-cancel <span cl
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">587.9k</span>
+                        class="white-color">600k</span>
             
             
             

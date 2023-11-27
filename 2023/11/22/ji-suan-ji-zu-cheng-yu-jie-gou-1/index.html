@@ -1,0 +1,1406 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="计算机组成原理 1：计算机系统概述, python,machine learning,deep learning,html,css,c,c++,cpp,cmake,ros,linux,ubuntu">
+    <meta name="description" content="
+
+Before Reading：
+大三的时候因为去UW-Madison交流了一个学期，而国内的大三上学期恰好需要上计算机网络和计算机组成原理这两门课，所以当时没能上上这两门课。
+我自己之前写了一个操作已经对组成原理有了诸多认识，但是还是不">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>计算机组成原理 1：计算机系统概述 | JackWang&#39;s Blog</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.2">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+
+   <style>
+    body{
+       background-image: url(https://cdn.jsdelivr.net/gh/Tokisaki-Galaxy/res/site/medias/background.jpg);
+       background-repeat:no-repeat;
+       background-size: 100% 100%;
+       background-attachment:fixed;
+    }
+</style>
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">JackWang&#39;s Blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-book-reader" style="zoom: 0.6;"></i>
+      
+      <span>博客</span>
+      <i class="fas fa-chevron-down" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/tags">
+          
+          <i class="fas fa-tags" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按标签归类文章</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories">
+          
+          <i class="fas fa-bookmark" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按目录归类文章</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/archives">
+          
+          <i class="fas fa-archive" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+	  <span>按日期分类文章</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">JackWang&#39;s Blog</div>
+        <div class="logo-desc">
+            
+            JackWang的个人博客
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-book-reader"></i>
+			
+			博客
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>
+
+                  <a href="/tags " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-tags" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按标签归类文章</    span>
+
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/categories " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-bookmark" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按目录归类文章</    span>
+
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/archives " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-archive" style="position: absolute;left:50px" ></i>
+			      
+                              <span>按日期分类文章</    span>
+
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('抱歉，这篇文章并不想让所有人都看到，请输入授权密码观看')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://global.aorus.com/upload/Admin/images/2021_0923_gigabyte-4470.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">计算机组成原理 1：计算机系统概述</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">
+                                <span class="chip bg-color">计算机组成原理</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" class="post-category">
+                                计算机组成原理
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2023-11-22
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2023-11-27
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    3.4k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    11 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p><img src="https://global.aorus.com/upload/Admin/images/2021_0923_gigabyte-4470.jpg" alt="计算机组成原理"></p>
+<blockquote>
+<p>Before Reading：</p>
+<p>大三的时候因为去UW-Madison交流了一个学期，而国内的大三上学期恰好需要上计算机网络和计算机组成原理这两门课，所以当时没能上上这两门课。</p>
+<p>我自己之前写了一个操作已经对组成原理有了诸多认识，但是还是不妨随着课堂再正是学习一下理论知识</p>
+</blockquote>
+<h1 id="第一章：计算机系统概述"><a href="#第一章：计算机系统概述" class="headerlink" title="第一章：计算机系统概述"></a>第一章：计算机系统概述</h1><h1 id="一、计算机发展历程"><a href="#一、计算机发展历程" class="headerlink" title="一、计算机发展历程"></a>一、计算机发展历程</h1><p>本节知识结构如下：</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20231123194954944.png" alt="第一节：计算机发展历程知识结构" style="zoom:50%;"></p>
+<h2 id="1-什么是计算机系统"><a href="#1-什么是计算机系统" class="headerlink" title="1. 什么是计算机系统"></a>1. 什么是计算机系统</h2><p>计算机系统原理是一门研究计算机系统的课程。因此，我们首先需要了解计算机系统。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20231123200357521.png" alt="计算机系统由软件和硬件两部分组成" style="zoom:33%;"></p>
+<p><strong>计算机系统由软件和硬件两部分组成</strong>：</p>
+<ul>
+<li><strong>硬件指的是计算机的实体部分，就是我们看得见、摸得着的部分</strong>，例如：主机和鼠标、键盘这样的外设</li>
+<li><strong>软件指的是我们看不见、摸不着但是能用的部分</strong>，例如：操作系统、微信、微博</li>
+</ul>
+<p>硬件是计算机的物理基础，决定了计算机性能的上限；而软件决定了我们能把计算机硬件的性能发挥到什么样的程度，因此决定了计算机性能的下限</p>
+<p>因此我们在评判一个计算机系统性能的好坏的时候是需要综合评判软件和硬件</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20231123200921562.png" alt="综合软硬件去评判计算机系统的性能"></p>
+<h3 id="1-1-软件"><a href="#1-1-软件" class="headerlink" title="1.1 软件"></a>1.1 软件</h3><p><strong>计算机系统中的软件可以分为两类：系统软件和应用软件</strong></p>
+<ul>
+<li><strong>系统软件用于管理整个计算机系统，包括对软件的管理和对硬件的管理</strong>，例如：操作系统、数据库管理系统、网络软件（TCP/IP等网络协议的实现库）、……</li>
+<li><strong>应用软件就是针对我们的任务所开发的程序</strong>，例如：美图秀秀、抖音、……</li>
+</ul>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20231123201257651.png" alt="计算机系统中软件的组成" style="zoom:33%;"></p>
+<p>计算机组成原理这门课上，我们更加关注的是计算机的硬件组成，所以我们接下来就先看看计算机（硬件）的发展历史。</p>
+<h2 id="2-计算机（软硬件）的发展"><a href="#2-计算机（软硬件）的发展" class="headerlink" title="2. 计算机（软硬件）的发展"></a>2. 计算机（软硬件）的发展</h2><h3 id="2-1-计算机的发展"><a href="#2-1-计算机的发展" class="headerlink" title="2.1 计算机的发展"></a>2.1 计算机的发展</h3><p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20231123202346801.png" alt="计算机硬件的发展历史"></p>
+<h4 id="2-1-1-电子管时代：ENIAC"><a href="#2-1-1-电子管时代：ENIAC" class="headerlink" title="2.1.1 电子管时代：ENIAC"></a>2.1.1 电子管时代：ENIAC</h4><p>世界上第一台计算机是1946年的ENIAC计算机。它是第一次世界大战接近尾声的时候所诞生的，其主要目的是为盟军计算炮弹的飞行轨迹。</p>
+<p>因为手动计算速度非常慢，所以军方要求能够制造一台能够自动进行数学计算的机器，即ENIAC。</p>
+<p>ENIAC的制作聘请了一位资深的计算机科学家，即冯诺依曼，即计算机之父。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20231123201731754.png" alt="世界上第一台计算机" style="zoom:33%;"></p>
+<p>ENIAC使用电子管作为逻辑元件来进行运算。而电子管不仅体积大，而且耗电量也大。因此使用了1.8万个电子管的ENIAC占满了一整个房间，而且功耗巨大，运行时发热惊人。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20231123202030867.png" alt="电子管" style="zoom:33%;"></p>
+<p><strong>以ENIAC为代表的这一代计算机，我们称其为电子管时代。</strong></p>
+<p>在这个时代，程序员都是直接使用机器语言进行编程的，用纸带打孔表示0和1，而后计算机通过纸带机读入程序，进行运行。</p>
+<p>这个时代的计算机需要人工手动接线，因此如何有一只虫子卡在内部了，就会造成程序运行异常，即出现了bug</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20231123202829338.png" alt="通过指代机直接使用机器语言编写程序" style="zoom: 50%;"></p>
+<h4 id="2-1-2-晶体管时代：更小、更快、更强"><a href="#2-1-2-晶体管时代：更小、更快、更强" class="headerlink" title="2.1.2 晶体管时代：更小、更快、更强"></a>2.1.2 晶体管时代：更小、更快、更强</h4><p>电子管时代的计算机主要使用电子管来完成计算，而电子管非常笨重，不方便使用。后来在1960年代，大名鼎鼎的贝尔实验室发明了晶体管。</p>
+<p>晶体管的</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20231123210025596.png" alt="晶体管" style="zoom: 50%;"></p>
+<p>晶体管和电子管的电气特性是一样的，只不过需要的电流电压更低、反应更加迅速。因此使用电子管就可以替代晶体管制造出同样功能，但是体积和运算速度更快的计算机。</p>
+<p>因此在这个阶段计算机的体积相比于电子管时代的计算机体积小了很多，只需要一个柜子就可以装下，并且运算速度有了极大的提升</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20231123210359687.png" alt="晶体管制成的计算机体积小、速度快" style="zoom: 50%;"></p>
+<p>与此同时一些高级的编程语言（相比于机器语言）开始出现，操作系统也有了雏形。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20231123210512141.png" alt="软件伴随硬件的发展而发展" style="zoom:33%;"></p>
+<p>基于晶体管的计算机在制作的时候需要对针脚进行焊接，而一台计算机几万个晶体管，对应的就有几十万个焊点。只要有一个焊点接触不良，那么整个计算机都会受到影响。</p>
+<h4 id="2-1-3-中小规模集成电路时代"><a href="#2-1-3-中小规模集成电路时代" class="headerlink" title="2.1.3 中小规模集成电路时代"></a>2.1.3 中小规模集成电路时代</h4><p>1970年代，为了更改掉人工焊接晶体管容易出错这个问题，人们就发明了集成电路。所谓集成电路就是将各种逻辑元件集成在一个基片上。基片上通过印刷提前布线，同时给逻辑元件预留了触点。</p>
+<p>这样，我们能够使用更小的空间存放更多的原件，使得可靠性提高的同时性能有了提升，同时功耗降低。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20231124163019711.png" alt="中小规模集成电路时代" style="zoom:50%;"></p>
+<p>在这个时代，高级编程语言开始出现，并且分时操作系统开始出现。但是此时的计算机依旧用于科学计算而非通用计算。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20231124163929244.png" alt="中小规模集成电路时代的软件发展" style="zoom:50%;"></p>
+<h4 id="2-1-4-大规模集成电路时代"><a href="#2-1-4-大规模集成电路时代" class="headerlink" title="2.1.4 大规模集成电路时代"></a>2.1.4 大规模集成电路时代</h4><p>随着集成电路工艺的不断提升，人们将越来越多的逻辑元件放到基片上。以至于一个指甲盖大小的芯片就能有数十亿个晶体管，从而使得芯片的体积功耗进一步下降，同时运算能力有了极大地提升。</p>
+<p>因为有了微处理器，个人PC开始萌芽，走进千家万户，同时个人操作系统开始出现。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20231124164101454.png" alt="大规模集成电路时代软硬件发展" style="zoom:50%;"></p>
+<h3 id="2-2-微处理器的发展"><a href="#2-2-微处理器的发展" class="headerlink" title="2.2 微处理器的发展"></a>2.2 微处理器的发展</h3><p>说到微处理器，就不得不提到Intel的大名。下面是Intel的微处理器发展表。</p>
+<ul>
+<li><strong>所谓机器字长的概念就是指计算机一次整数运算所能处理的二进制位数</strong></li>
+<li>一些经典、具有重要意义的微处理器：<ul>
+<li><strong>8086是Intel最经典的CPU，奠定了整个Intel CPU基础结构（至少是面对程序员的）</strong><ul>
+<li><strong>16位架构</strong>：8086是一个16位处理器，意味着它的内部寄存器是16位的，数据总线宽度为16位，可以在一个操作中处理16位数据。</li>
+<li><strong>20位地址总线</strong>：8086有20位地址总线，这意味着它可以寻址到1MB（1024KB）的内存空间。</li>
+<li><strong>分段内存模型</strong>：8086使用了分段内存模型，内存被划分为多个段，每个段可以独立寻址，最大可达64KB。这种设计允许程序员更有效地组织和管理内存。</li>
+<li><strong>中断和异常处理</strong>：8086有一个完善的中断和异常处理机制，可以响应不同的硬件中断和软件异常。</li>
+</ul>
+</li>
+<li><strong>从80386开始，Intel CPU进入了32位时代，这个时候汇编的基础结构就成了：段描述符+段内偏移的形式，同时出现了保护模式</strong><ul>
+<li><strong>32位架构</strong>：80386是Intel的第一个32位微处理器。这意味着它的内部寄存器、数据总线和地址总线都是32位的，可以在一个操作中处理32位数据，并可以寻址到4GB的内存空间。</li>
+<li><strong>保护模式</strong>：80386引入了保护模式，这是一种新的操作模式，提供了内存保护、多任务支持和虚拟内存等高级特性。保护模式是现代操作系统（如Windows，Linux等）的基础。</li>
+<li><strong>虚拟8086模式</strong>：在保护模式下，80386可以运行一个或多个虚拟8086模式的任务，每个任务就像在一个独立的8086处理器上运行一样。</li>
+<li><strong>分页机制</strong>：80386引入了内存分页机制，允许操作系统将物理内存划分为固定大小的页，这是实现虚拟内存的关键。</li>
+<li><strong>硬件调试支持</strong>：80386引入了一些硬件调试特性，如断点、单步执行等。</li>
+</ul>
+</li>
+<li>从奔腾处理器（Pentium）开始，Intel CPU进入了64位时代，同时引入了：<ul>
+<li><strong>64位模式</strong>：这是新引入的模式，允许运行64位应用程序。在这种模式下，处理器可以使用64位寄存器，可以直接访问大于4GB的内存。</li>
+<li><strong>超标量架构</strong>：奔腾处理器是Intel首次引入超标量架构的产品。超标量架构允许处理器在一个时钟周期中执行多于一个的指令。</li>
+<li><strong>双核技术</strong>：虽然并不是奔腾系列首次引入，但是在奔腾D和奔腾双核处理器中，Intel开始使用多核处理器设计。</li>
+<li><strong>分支预测</strong>：奔腾处理器引入了更复杂的分支预测机制，以减少由于指令跳转引起的处理器空闲时间。</li>
+<li><strong>虚拟化技术</strong>：在一些奔腾处理器中，Intel引入了硬件支持的虚拟化技术（Intel VT-x）。</li>
+<li><strong>MMX技术</strong>：奔腾处理器是第一个引入MMX（MultiMedia eXtensions）技术的Intel处理器，这是一种专门用于加速多媒体和通信应用的指令集。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20231124170007307.png" alt="Intel微处理器发展历史" style="zoom:50%;"></p>
+<h3 id="2-3-晶体管的发展"><a href="#2-3-晶体管的发展" class="headerlink" title="2.3 晶体管的发展"></a>2.3 晶体管的发展</h3><p>说到晶体管的发展，就不得不提到八叛徒和仙童。</p>
+<p>晶体管的发明人是肖克利，他最早在贝尔实验室发明了半导体。后来意识到了半导体广大的市场后选择了从贝尔实验室退出，成立自己的公司专门从事半导体的设计、制造和销售</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20231124172717241.png" alt="半导体之父：肖克利" style="zoom:33%;"></p>
+<p>有着半导体之父的名称，肖克利的公司快速吸纳到了大量的人才，其中有八位才华横溢的年轻人</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20231124172909853.png" alt="肖克利和八叛徒" style="zoom: 33%;"></p>
+<p>尽管肖克利做科研很牛，但是却不擅长对公司的管理，所以后来八个人集体辞职，出去自立门户，成立了仙童半导体公司。因此肖克利把它们称为八叛徒。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20231124173103218.png" alt="八叛徒创立仙童半导体公司" style="zoom: 33%;"></p>
+<p>一开始仙童半导体公司干的还是老本行，也是制造、销售半导体。一直直到后来八个人发明了集成电路，使得计算机步入了集成电路时代。</p>
+<p>因为发明集成电路的成功，仙童半导体公司很快被人收购，这八个人就陆续先后离开了仙童半导体，出去创建自己的公司。</p>
+<ul>
+<li>首先是1968年，摩尔等人离开仙童，创立 Intel</li>
+<li>然后是1969年，仙童销售部负责人桑德斯离开仙童，创立 AMD</li>
+</ul>
+<p>所以到今天为止，大名鼎鼎的Intel和AMD其实都有半导体祖师爷的渊源。</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20231124173339522.png" alt="仙童半导体是Intel和AMD的祖宗" style="zoom:33%;"></p>
+<h3 id="2-4-摩尔定律"><a href="#2-4-摩尔定律" class="headerlink" title="2.4 摩尔定律"></a>2.4 摩尔定律</h3><p>八叛徒中最有名的就是摩尔这个人了。作为Intel的创始人，他提出了摩尔定律：</p>
+<ul>
+<li><strong>集成电路上可容纳的晶体管数目，约每隔18个月便会增加一倍，整体性能也将提升一倍</strong></li>
+</ul>
+<p>实际上除了这个针对处理器的摩尔定律，还有一个针对存储器的摩尔定律：</p>
+<ul>
+<li><strong>相同价格下存储器的容量每18个月翻一倍，或者相同容量的存储器价格每18个月价格降一半</strong></li>
+</ul>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20231124173709870.png" alt="针对处理器和存储器的摩尔定律" style="zoom:33%;"></p>
+<h3 id="2-5-软件的发展"><a href="#2-5-软件的发展" class="headerlink" title="2.5 软件的发展"></a>2.5 软件的发展</h3><p>软件的发展是伴随着硬件的发展而发展的，这里我们把软件的发展单独拉出来说。</p>
+<p><strong>首先是编程语言的发展</strong></p>
+<ul>
+<li>在计算机发展的初期，即ENIAC时期，所有的程序都是用机器语言直接编写的，编程语言就只有机器语言这一种语言。因为机器语言的可读性很差，所以同一时期诞生了汇编语言，即使用助记符标记的机器语言</li>
+<li>后来为了更方便的编程，就出现了Fortran、Pascal这类语言，但本质上来说，Fortran依旧是比较原始的语言，例如变量都必须在程序头部声明</li>
+<li>再后来就出现了C++这样面向对象的语言</li>
+<li>到2000年左右，互联网的出现是的Java这种面向互联网应用的语言得到了极大的发展</li>
+</ul>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20231124181239992.png" alt="计算机编程语言的发展" style="zoom:33%;"></p>
+<p>其次是操作系统的发展</p>
+<ul>
+<li>在计算机的早期，是没有操作系统的这个概念的，计算机读入程序后运行，运行结束后计算机关机</li>
+<li>然后出现了批处理系统，计算机会读入多个程序，然后这些程序（当时称为任务）之间会排队，分次运行</li>
+<li>接下来就出现了分时操作系统，操作系统分时间片给每个程序，此时出现了类似于DOS这样基于终端交互界面的操作系统</li>
+<li>后来出现了图形界面，有了现在的Windows、Linux、MacOS</li>
+<li>到现在出现了手机上的移动操作系统，例如Android、iOS和</li>
+</ul>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20231124183401744.png" alt="操作系统的发展历史" style="zoom:33%;"></p>
+<h3 id="2-6-目前的发展趋势"><a href="#2-6-目前的发展趋势" class="headerlink" title="2.6 目前的发展趋势"></a>2.6 目前的发展趋势</h3><p>目前的发展趋势是朝着两极分化的趋势发展：</p>
+<ul>
+<li>一极是微型计算机向更微型化、网络化、高性能、多用途方向发展</li>
+<li>另一极是巨型机向更巨型化、超高速、并行处理、智能化方向发展</li>
+</ul>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20231124183547439.png" alt="计算机系统的发展趋势" style="zoom:33%;"></p>
+<h2 id="3-总结"><a href="#3-总结" class="headerlink" title="3. 总结"></a>3. 总结</h2><p>最后给出这一节的总结</p>
+<p><img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/image-20231124183757809.png" alt="总结" style="zoom:50%;"></p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Jack Wang</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://jackwang0107.github.io/2023/11/22/ji-suan-ji-zu-cheng-yu-jie-gou-1/">https://jackwang0107.github.io/2023/11/22/ji-suan-ji-zu-cheng-yu-jie-gou-1/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Jack Wang</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">
+                                    <span class="chip bg-color">计算机组成原理</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.png" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2023/11/24/python-type-hint/">
+                    <div class="card-image">
+                        
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/carbon.png" class="responsive-img" alt="Python类型注释">
+                        
+                        <span class="card-title">Python类型注释</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            本文系统的介绍了Python中的类型注释
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-11-24
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            Jack Wang
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Python/">
+                        <span class="chip bg-color">Python</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%9D%82%E9%A1%B9/">
+                        <span class="chip bg-color">杂项</span>
+                    </a>
+                    
+                    <a href="/tags/Python-Type-Hint/">
+                        <span class="chip bg-color">Python Type Hint</span>
+                    </a>
+                    
+                    <a href="/tags/Python-%E7%B1%BB%E5%9E%8B%E6%B3%A8%E9%87%8A/">
+                        <span class="chip bg-color">Python 类型注释</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/11/01/tmux-qi-ji-yin-qiao/">
+                    <div class="card-image">
+                        
+                        <img src="https://jack-1307599355.cos.ap-shanghai.myqcloud.com/tmux.png" class="responsive-img" alt="Tmux奇技淫巧">
+                        
+                        <span class="card-title">Tmux奇技淫巧</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-11-01
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Linux%E5%AE%9E%E7%94%A8%E6%8A%80%E5%B7%A7/" class="post-category">
+                                    Linux实用技巧
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Tmux/">
+                        <span class="chip bg-color">Tmux</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: JackWang&#39;s Blog<br />'
+            + '文章作者: Jack Wang<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('2'),
+            headingSelector: 'h1, h2, h3, h4, h5, h6'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4, h5, h6').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2021-2023</span>
+            
+            <a href="/about" target="_blank">Jack Wang</a>
+            <!-- |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a> -->
+            <!-- |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a> -->
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">600k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+                <span id="sitetime"> Loading ...</span>
+                <script>
+                    var calcSiteTime = function () {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2021";
+                        var startMonth = "11";
+                        var startDate = "12";
+                        var startHour = "0";
+                        var startMinute = "0";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+
+                        // 区分是否有年份.
+                        var language = 'zh-CN';
+                        if (startYear === String(todayYear)) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            var daysTip = 'This site has been running for ' + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                daysTip = '本站已运行 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                daysTip = '本站已運行 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = daysTip;
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            var yearsAndDaysTip = 'This site has been running for ' + diffYears + ' years and '
+                                + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                yearsAndDaysTip = '本站已运行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                yearsAndDaysTip = '本站已運行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+                        }
+                    }
+
+                    calcSiteTime();
+                </script>
+            
+            <br>
+            
+                <span id="icp"><img src="/medias/icp.png"
+                                    style="vertical-align: text-bottom;"/>
+                <a href="https://beian.miit.gov.cn" target="_blank">陕ICP备2021014294号-1</a>
+            </span>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/jackwang0108" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:2232123545@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2232123545" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2232123545" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+        
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/sakura.js"><\/script>');
+            }
+        </script>
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

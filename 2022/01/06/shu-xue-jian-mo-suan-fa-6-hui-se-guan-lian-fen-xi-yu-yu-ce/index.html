@@ -1441,8 +1441,8 @@ x^{(0)}(k+1)=x^{(1)}(k+1)-x^{(1)}(k),\qquad k=1,2,\cdots,n-1</script></li>
             tocSelector: '#toc-content',
             contentSelector: '#articleContent',
             headingsOffset: -($(window).height() * 0.4 - 45),
-            collapseDepth: Number('1'),
-            headingSelector: 'h2, h3, h4, h5, h6'
+            collapseDepth: Number('2'),
+            headingSelector: 'h1, h2, h3, h4, h5, h6'
         });
 
         // modify the toc link href to support Chinese.
@@ -1454,7 +1454,7 @@ x^{(0)}(k+1)=x^{(1)}(k+1)-x^{(1)}(k),\qquad k=1,2,\cdots,n-1</script></li>
 
         // modify the heading title id to support Chinese.
         i = 0;
-        $('#articleContent').children('h2, h3, h4, h5, h6').each(function () {
+        $('#articleContent').children('h1, h2, h3, h4, h5, h6').each(function () {
             $(this).attr('id', tocHeading + (++i));
         });
 
@@ -1540,7 +1540,7 @@ x^{(0)}(k+1)=x^{(1)}(k+1)-x^{(1)}(k),\qquad k=1,2,\cdots,n-1</script></li>
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">587.9k</span>
+                        class="white-color">600k</span>
             
             
             

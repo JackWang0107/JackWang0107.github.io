@@ -1681,8 +1681,8 @@ sem_t lock<span class="token punctuation">;</span>
             tocSelector: '#toc-content',
             contentSelector: '#articleContent',
             headingsOffset: -($(window).height() * 0.4 - 45),
-            collapseDepth: Number('1'),
-            headingSelector: 'h2, h3, h4, h5, h6'
+            collapseDepth: Number('2'),
+            headingSelector: 'h1, h2, h3, h4, h5, h6'
         });
 
         // modify the toc link href to support Chinese.
@@ -1694,7 +1694,7 @@ sem_t lock<span class="token punctuation">;</span>
 
         // modify the heading title id to support Chinese.
         i = 0;
-        $('#articleContent').children('h2, h3, h4, h5, h6').each(function () {
+        $('#articleContent').children('h1, h2, h3, h4, h5, h6').each(function () {
             $(this).attr('id', tocHeading + (++i));
         });
 
@@ -1773,7 +1773,7 @@ sem_t lock<span class="token punctuation">;</span>
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">587.9k</span>
+                        class="white-color">600k</span>
             
             
             
